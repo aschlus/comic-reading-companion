@@ -25,7 +25,8 @@ import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    viewModel: HomeViewModel
+    viewModel: HomeViewModel,
+    onReadingListClick: (Long) -> Unit
 ) {
     val readingLists by viewModel.readingLists.collectAsState()
 
@@ -57,7 +58,10 @@ fun HomeScreen(
             } else {
                 readingLists.forEach { readingList ->
                     ReadingListCard(
-                        readingList = readingList
+                        readingList = readingList,
+                        onClick = {
+                            onReadingListClick(readingList.id)
+                        }
                     )
                 }
             }
@@ -67,9 +71,11 @@ fun HomeScreen(
 
 @Composable
 private fun ReadingListCard(
-    readingList: ReadingList
+    readingList: ReadingList,
+    onClick: () -> Unit
 ) {
     Card(
+        onClick = onClick,
         modifier = Modifier.fillMaxWidth(),
         elevation = CardDefaults.cardElevation(
             defaultElevation = 2.dp
