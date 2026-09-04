@@ -3,6 +3,7 @@ package com.aschlus.comicreadingcompanion.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
+import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListIssue
 import com.aschlus.comicreadingcompanion.data.repository.ComicRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -33,6 +34,28 @@ class ReadingListDetailViewModel(
 
             _issues.value =
                 repository.getReadingListIssues(readingListId)
+        }
+    }
+
+    fun toggleIssueRead(
+        readingListId: Long,
+        issue: ReadingListIssue
+    ) {
+        viewModelScope.launch {
+            if (issue.readingStatus == ReadingStatus.READ) {
+                repository.markIssueAsUnread(issue.issueId)
+            } else {
+                repository.markIssueAsRead(issue.issueId)
+            }
+
+            _issues.value =
+                repository.getReadingListIssues(readingListId)
+        }
+    }
+
+    fun getReadCount(): Int {
+        return _issues.value.count {
+            it.readingStatus == ReadingStatus.READ
         }
     }
 }

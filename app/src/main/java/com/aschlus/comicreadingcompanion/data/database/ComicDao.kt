@@ -192,12 +192,15 @@ interface ComicDao {
             issues.publicationDate AS publicationDate,
             issues.coverUrl AS coverUrl,
             series.title AS seriesTitle,
-            series.volume AS seriesVolume
+            series.volume AS seriesVolume,
+            reading_progress.status AS readingStatus
         FROM reading_list_items
         INNER JOIN issues
             ON reading_list_items.issueId = issues.id
         INNER JOIN series
             ON issues.seriesId = series.id
+        LEFT JOIN reading_progress
+            ON issues.id = reading_progress.issueId
         WHERE reading_list_items.readingListId = :readingListId
         ORDER BY reading_list_items.position ASC
     """)

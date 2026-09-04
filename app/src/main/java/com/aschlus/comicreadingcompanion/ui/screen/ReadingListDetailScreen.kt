@@ -3,8 +3,11 @@ package com.aschlus.comicreadingcompanion.ui.screen
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
@@ -14,8 +17,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ReadingListDetailViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -67,6 +72,24 @@ fun ReadingListDetailScreen(
                         Text(description)
                     }
 
+                val readCount = issues.count {
+                    it.readingStatus == ReadingStatus.READ
+                }
+
+                val totalCount = issues.size
+
+                val completionPercentage =
+                    if (totalCount == 0) {
+                        0
+                    } else {
+                        (readCount * 100) / totalCount
+                    }
+
+                Text(
+                    text = "$readCount of $totalCount read • " +
+                        "$completionPercentage% complete"
+                )
+
                 Text("Issues")
 
                 if (issues.isEmpty()) {
@@ -74,10 +97,27 @@ fun ReadingListDetailScreen(
                 } else {
                     issues.forEach { issue ->
 
-                        Text(
-                            text = "${issue.position}. " +
-                            "${issue.seriesTitle} #${issue.issueNumber}"
-                        )
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Checkbox(
+                                checked =
+                                    issue.readingStatus == ReadingStatus.READ,
+                                onCheckedChange = {
+                                    viewModel.toggleIssueRead(
+                                        readingListId = readingListId,
+                                        issue = issue
+                                    )
+                                }
+                            )
+
+                            Text(
+                                text = "${issue.position}. " +
+                                        "${issue.seriesTitle} #${issue.issueNumber}",
+                                modifier = Modifier.weight(1f)
+                            )
+                        }
 
                         HorizontalDivider()
                     }

@@ -1,5 +1,7 @@
 package com.aschlus.comicreadingcompanion.data.database.models
 
+import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
+
 data class ReadingListIssue(
     val readingListItemId: Long,
     val issueId: Long,
@@ -11,5 +13,6 @@ data class ReadingListIssue(
     val publicationDate: String?,
     val coverUrl: String?,
     val seriesTitle: String,
-    val seriesVolume: Int?
+    val seriesVolume: Int?,
+    val readingStatus: ReadingStatus?
 )
