@@ -60,6 +60,16 @@ class ReadingListDetailViewModel(
         }
     }
 
+    fun markIssueAsReading(
+        issue: ReadingListIssue
+    ) {
+        viewModelScope.launch {
+            repository.markIssueAsReading(
+                issue.issueId
+            )
+        }
+    }
+
     fun markAllBeforeAsRead(
         selectedIssue: ReadingListIssue
     ) {

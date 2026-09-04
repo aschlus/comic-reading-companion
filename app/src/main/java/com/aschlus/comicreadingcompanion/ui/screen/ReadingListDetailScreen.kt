@@ -11,6 +11,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
@@ -199,6 +201,11 @@ fun ReadingListDetailScreen(
                                         issue = issue
                                     )
                                 },
+                                onMarkAsReading = {
+                                    viewModel.markIssueAsReading(
+                                        issue = issue
+                                    )
+                                },
                                 onMarkAllBeforeRead = {
                                     viewModel.markAllBeforeAsRead(
                                         selectedIssue = issue
@@ -217,8 +224,14 @@ fun ReadingListDetailScreen(
 private fun ReadingListIssueRow(
     issue: ReadingListIssue,
     onToggleRead: () -> Unit,
+    onMarkAsReading: () -> Unit,
     onMarkAllBeforeRead: () -> Unit
 ) {
+
+    var menuExpanded by remember {
+        mutableStateOf(false)
+    }
+
     Row(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
@@ -271,18 +284,55 @@ private fun ReadingListIssueRow(
                 style = MaterialTheme.typography.bodySmall
             )
 
+            if (issue.readingStatus == ReadingStatus.READING) {
+                Text(
+                    text = "Currently reading",
+                    style = MaterialTheme.typography.labelMedium
+                )
+            }
+
             issue.notes?.let { notes ->
                 Text(
                     text = notes,
                     style = MaterialTheme.typography.bodySmall
                 )
             }
+        }
 
-            if (issue.position > 1) {
-                TextButton(
-                    onClick = onMarkAllBeforeRead
+        if (issue.position > 1) {
+            Column {
+                IconButton(
+                    onClick = {
+                        menuExpanded = true
+                    }
                 ) {
-                    Text("Mark all before as read")
+                    Text("⋮")
+                }
+
+                DropdownMenu(
+                    expanded = menuExpanded,
+                    onDismissRequest = {
+                        menuExpanded = false
+                    }
+                ) {
+                    DropdownMenuItem(
+                        text = {
+                            Text("Mark as reading")
+                        },
+                        onClick = {
+                            menuExpanded = false
+                            onMarkAsReading()
+                        }
+                    )
+                    DropdownMenuItem(
+                        text = {
+                            Text("Mark all before as read")
+                        },
+                        onClick = {
+                            menuExpanded = false
+                            onMarkAllBeforeRead()
+                        }
+                    )
                 }
             }
         }
