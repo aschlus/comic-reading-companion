@@ -25,7 +25,7 @@ class ComicReadingCompanionApplication : Application() {
 
             val importedList =
                 container.readingListAssetParser.parse(
-                    "reading_lists/spider_man_test.json"
+                    "reading_lists/spider_man_volume_2.json"
                 )
 
             container.readingListImporter.import(

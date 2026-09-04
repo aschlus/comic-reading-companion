@@ -1,0 +1,4172 @@
+{
+  "title": "Spider-Man Volume 2",
+  "description": "Earth-616 Spider-Man reading order from September 1998 through September 2003",
+  "publisher": "Marvel Comics",
+  "universe": {
+    "name": "Marvel Universe",
+    "designation": "Earth-616"
+  },
+  "items": [
+    {
+      "position": 1,
+      "series": {
+        "title": "Slingers",
+        "volume": 1,
+        "startYear": 1998,
+        "endYear": 1999
+      },
+      "issue": {
+        "number": "0",
+        "title": null,
+        "publicationDate": "1998-09",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Four of a Kind / introduction — Standalone; start of Slingers"
+    },
+    {
+      "position": 2,
+      "series": {
+        "title": "Slingers",
+        "volume": 1,
+        "startYear": 1998,
+        "endYear": 1999
+      },
+      "issue": {
+        "number": "1",
+        "title": null,
+        "publicationDate": "1998-12",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Four Aces — Continue Slingers"
+    },
+    {
+      "position": 3,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "1",
+        "title": null,
+        "publicationDate": "1998-12",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "The Gathering of Five — Start main 1999 era"
+    },
+    {
+      "position": 4,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "2",
+        "title": null,
+        "publicationDate": "1999-01",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Gathering of Five — After ASM #1"
+    },
+    {
+      "position": 5,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "1",
+        "title": null,
+        "publicationDate": "1999-01",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Relaunch / new status quo — After ASM #1–2"
+    },
+    {
+      "position": 6,
+      "series": {
+        "title": "Webspinners",
+        "volume": 1,
+        "startYear": 1999,
+        "endYear": 2000
+      },
+      "issue": {
+        "number": "1",
+        "title": null,
+        "publicationDate": "1999-01",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Standalone"
+    },
+    {
+      "position": 7,
+      "series": {
+        "title": "Slingers",
+        "volume": 1,
+        "startYear": 1998,
+        "endYear": 1999
+      },
+      "issue": {
+        "number": "2",
+        "title": null,
+        "publicationDate": "1999-01",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Slingers — After #1"
+    },
+    {
+      "position": 8,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "3",
+        "title": null,
+        "publicationDate": "1999-02",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Gathering of Five — Continue"
+    },
+    {
+      "position": 9,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "2",
+        "title": null,
+        "publicationDate": "1999-02",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 10,
+      "series": {
+        "title": "Webspinners",
+        "volume": 1,
+        "startYear": 1999,
+        "endYear": 2000
+      },
+      "issue": {
+        "number": "2",
+        "title": null,
+        "publicationDate": "1999-02",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Standalone"
+    },
+    {
+      "position": 11,
+      "series": {
+        "title": "Slingers",
+        "volume": 1,
+        "startYear": 1998,
+        "endYear": 1999
+      },
+      "issue": {
+        "number": "3",
+        "title": null,
+        "publicationDate": "1999-02",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Slingers — Continue"
+    },
+    {
+      "position": 12,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "4",
+        "title": null,
+        "publicationDate": "1999-03",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Gathering of Five — Continue"
+    },
+    {
+      "position": 13,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "3",
+        "title": null,
+        "publicationDate": "1999-03",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 14,
+      "series": {
+        "title": "Webspinners",
+        "volume": 1,
+        "startYear": 1999,
+        "endYear": 2000
+      },
+      "issue": {
+        "number": "3",
+        "title": null,
+        "publicationDate": "1999-03",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Standalone"
+    },
+    {
+      "position": 15,
+      "series": {
+        "title": "Slingers",
+        "volume": 1,
+        "startYear": 1998,
+        "endYear": 1999
+      },
+      "issue": {
+        "number": "4",
+        "title": null,
+        "publicationDate": "1999-03",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Slingers — Continue"
+    },
+    {
+      "position": 16,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "5",
+        "title": null,
+        "publicationDate": "1999-04",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Gathering of Five — Continue"
+    },
+    {
+      "position": 17,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "4",
+        "title": null,
+        "publicationDate": "1999-04",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 18,
+      "series": {
+        "title": "Amazing Spider-Man Annual",
+        "volume": null,
+        "startYear": 1999,
+        "endYear": 2001
+      },
+      "issue": {
+        "number": "1999",
+        "title": null,
+        "publicationDate": "1999-04",
+        "coverUrl": null,
+        "description": null,
+        "type": "ANNUAL"
+      },
+      "required": true,
+      "notes": "Annual stories — Around ASM #5–6"
+    },
+    {
+      "position": 19,
+      "series": {
+        "title": "Webspinners",
+        "volume": 1,
+        "startYear": 1999,
+        "endYear": 2000
+      },
+      "issue": {
+        "number": "4",
+        "title": null,
+        "publicationDate": "1999-04",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Standalone"
+    },
+    {
+      "position": 20,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "6",
+        "title": null,
+        "publicationDate": "1999-05",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Gathering of Five conclusion — Finish opening arc"
+    },
+    {
+      "position": 21,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "5",
+        "title": null,
+        "publicationDate": "1999-05",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 22,
+      "series": {
+        "title": "Webspinners",
+        "volume": 1,
+        "startYear": 1999,
+        "endYear": 2000
+      },
+      "issue": {
+        "number": "5",
+        "title": null,
+        "publicationDate": "1999-05",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Standalone"
+    },
+    {
+      "position": 23,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "7",
+        "title": null,
+        "publicationDate": "1999-06",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Post–Gathering of Five — Continue"
+    },
+    {
+      "position": 24,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "6",
+        "title": null,
+        "publicationDate": "1999-06",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 25,
+      "series": {
+        "title": "Webspinners",
+        "volume": 1,
+        "startYear": 1999,
+        "endYear": 2000
+      },
+      "issue": {
+        "number": "6",
+        "title": null,
+        "publicationDate": "1999-06",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Standalone"
+    },
+    {
+      "position": 26,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "8",
+        "title": null,
+        "publicationDate": "1999-07",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 27,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "7",
+        "title": null,
+        "publicationDate": "1999-07",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 28,
+      "series": {
+        "title": "Webspinners",
+        "volume": 1,
+        "startYear": 1999,
+        "endYear": 2000
+      },
+      "issue": {
+        "number": "7",
+        "title": null,
+        "publicationDate": "1999-07",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Standalone"
+    },
+    {
+      "position": 29,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "9",
+        "title": null,
+        "publicationDate": "1999-08",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 30,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "8",
+        "title": null,
+        "publicationDate": "1999-08",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 31,
+      "series": {
+        "title": "Peter Parker: Spider-Man Annual",
+        "volume": null,
+        "startYear": 1999,
+        "endYear": 2001
+      },
+      "issue": {
+        "number": "1999",
+        "title": null,
+        "publicationDate": "1999-08",
+        "coverUrl": null,
+        "description": null,
+        "type": "ANNUAL"
+      },
+      "required": true,
+      "notes": "Annual stories — Around PP #8"
+    },
+    {
+      "position": 32,
+      "series": {
+        "title": "Webspinners",
+        "volume": 1,
+        "startYear": 1999,
+        "endYear": 2000
+      },
+      "issue": {
+        "number": "8",
+        "title": null,
+        "publicationDate": "1999-08",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Standalone"
+    },
+    {
+      "position": 33,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "10",
+        "title": null,
+        "publicationDate": "1999-09",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 34,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "9",
+        "title": null,
+        "publicationDate": "1999-09",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 35,
+      "series": {
+        "title": "Webspinners",
+        "volume": 1,
+        "startYear": 1999,
+        "endYear": 2000
+      },
+      "issue": {
+        "number": "9",
+        "title": null,
+        "publicationDate": "1999-09",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Standalone"
+    },
+    {
+      "position": 36,
+      "series": {
+        "title": "Slingers",
+        "volume": 1,
+        "startYear": 1998,
+        "endYear": 1999
+      },
+      "issue": {
+        "number": "10",
+        "title": null,
+        "publicationDate": "1999-09",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Slingers — Continue"
+    },
+    {
+      "position": 37,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "11",
+        "title": null,
+        "publicationDate": "1999-10",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 38,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "10",
+        "title": null,
+        "publicationDate": "1999-10",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 39,
+      "series": {
+        "title": "Webspinners",
+        "volume": 1,
+        "startYear": 1999,
+        "endYear": 2000
+      },
+      "issue": {
+        "number": "10",
+        "title": null,
+        "publicationDate": "1999-10",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Standalone"
+    },
+    {
+      "position": 40,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "12",
+        "title": null,
+        "publicationDate": "1999-11",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 41,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "11",
+        "title": null,
+        "publicationDate": "1999-11",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 42,
+      "series": {
+        "title": "Webspinners",
+        "volume": 1,
+        "startYear": 1999,
+        "endYear": 2000
+      },
+      "issue": {
+        "number": "11",
+        "title": null,
+        "publicationDate": "1999-11",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Standalone"
+    },
+    {
+      "position": 43,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "13",
+        "title": null,
+        "publicationDate": "1999-12",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 44,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "12",
+        "title": null,
+        "publicationDate": "1999-12",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 45,
+      "series": {
+        "title": "Webspinners",
+        "volume": 1,
+        "startYear": 1999,
+        "endYear": 2000
+      },
+      "issue": {
+        "number": "12",
+        "title": null,
+        "publicationDate": "1999-12",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Standalone"
+    },
+    {
+      "position": 46,
+      "series": {
+        "title": "Spider-Man Unlimited",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2000
+      },
+      "issue": {
+        "number": "½",
+        "title": null,
+        "publicationDate": "1999-12",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Standalone — Supplemental"
+    },
+    {
+      "position": 47,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "14",
+        "title": null,
+        "publicationDate": "2000-01",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 48,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "13",
+        "title": null,
+        "publicationDate": "2000-01",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 49,
+      "series": {
+        "title": "Webspinners",
+        "volume": 1,
+        "startYear": 1999,
+        "endYear": 2000
+      },
+      "issue": {
+        "number": "13",
+        "title": null,
+        "publicationDate": "2000-01",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Standalone"
+    },
+    {
+      "position": 50,
+      "series": {
+        "title": "Spider-Man Unlimited",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2000
+      },
+      "issue": {
+        "number": "1",
+        "title": null,
+        "publicationDate": "2000-01",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Supplemental"
+    },
+    {
+      "position": 51,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "15",
+        "title": null,
+        "publicationDate": "2000-02",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 52,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "14",
+        "title": null,
+        "publicationDate": "2000-02",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 53,
+      "series": {
+        "title": "Webspinners",
+        "volume": 1,
+        "startYear": 1999,
+        "endYear": 2000
+      },
+      "issue": {
+        "number": "14",
+        "title": null,
+        "publicationDate": "2000-02",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Standalone"
+    },
+    {
+      "position": 54,
+      "series": {
+        "title": "Spider-Man Unlimited",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2000
+      },
+      "issue": {
+        "number": "2",
+        "title": null,
+        "publicationDate": "2000-02",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Supplemental"
+    },
+    {
+      "position": 55,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "16",
+        "title": null,
+        "publicationDate": "2000-03",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 56,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "15",
+        "title": null,
+        "publicationDate": "2000-03",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 57,
+      "series": {
+        "title": "Webspinners",
+        "volume": 1,
+        "startYear": 1999,
+        "endYear": 2000
+      },
+      "issue": {
+        "number": "15",
+        "title": null,
+        "publicationDate": "2000-03",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Standalone"
+    },
+    {
+      "position": 58,
+      "series": {
+        "title": "Spider-Man Unlimited",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2000
+      },
+      "issue": {
+        "number": "3",
+        "title": null,
+        "publicationDate": "2000-03",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Supplemental"
+    },
+    {
+      "position": 59,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "17",
+        "title": null,
+        "publicationDate": "2000-04",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 60,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "16",
+        "title": null,
+        "publicationDate": "2000-04",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 61,
+      "series": {
+        "title": "Webspinners",
+        "volume": 1,
+        "startYear": 1999,
+        "endYear": 2000
+      },
+      "issue": {
+        "number": "16",
+        "title": null,
+        "publicationDate": "2000-04",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Standalone"
+    },
+    {
+      "position": 62,
+      "series": {
+        "title": "Spider-Man Unlimited",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2000
+      },
+      "issue": {
+        "number": "4",
+        "title": null,
+        "publicationDate": "2000-04",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Supplemental"
+    },
+    {
+      "position": 63,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "18",
+        "title": null,
+        "publicationDate": "2000-05",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 64,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "17",
+        "title": null,
+        "publicationDate": "2000-05",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 65,
+      "series": {
+        "title": "Amazing Spider-Man Annual",
+        "volume": null,
+        "startYear": 1999,
+        "endYear": 2001
+      },
+      "issue": {
+        "number": "2000",
+        "title": null,
+        "publicationDate": "2000-05",
+        "coverUrl": null,
+        "description": null,
+        "type": "ANNUAL"
+      },
+      "required": true,
+      "notes": "Annual stories — Around ASM #18–19"
+    },
+    {
+      "position": 66,
+      "series": {
+        "title": "Webspinners",
+        "volume": 1,
+        "startYear": 1999,
+        "endYear": 2000
+      },
+      "issue": {
+        "number": "17",
+        "title": null,
+        "publicationDate": "2000-05",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Standalone"
+    },
+    {
+      "position": 67,
+      "series": {
+        "title": "Spider-Man Unlimited",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2000
+      },
+      "issue": {
+        "number": "5",
+        "title": null,
+        "publicationDate": "2000-05",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Finish series"
+    },
+    {
+      "position": 68,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "19",
+        "title": null,
+        "publicationDate": "2000-06",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 69,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "18",
+        "title": null,
+        "publicationDate": "2000-06",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 70,
+      "series": {
+        "title": "Webspinners",
+        "volume": 1,
+        "startYear": 1999,
+        "endYear": 2000
+      },
+      "issue": {
+        "number": "18",
+        "title": null,
+        "publicationDate": "2000-06",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Final anthology issue — Finish Webspinners"
+    },
+    {
+      "position": 71,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "20",
+        "title": null,
+        "publicationDate": "2000-07",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 72,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "19",
+        "title": null,
+        "publicationDate": "2000-07",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 73,
+      "series": {
+        "title": "Spider-Man vs. The Punisher",
+        "volume": 1,
+        "startYear": 2000,
+        "endYear": 2000
+      },
+      "issue": {
+        "number": "1",
+        "title": null,
+        "publicationDate": "2000-07",
+        "coverUrl": null,
+        "description": null,
+        "type": "ONE_SHOT"
+      },
+      "required": true,
+      "notes": "Spider-Man/Punisher — Standalone"
+    },
+    {
+      "position": 74,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "21",
+        "title": null,
+        "publicationDate": "2000-08",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 75,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "20",
+        "title": null,
+        "publicationDate": "2000-08",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 76,
+      "series": {
+        "title": "Spider-Man: Death and Destiny",
+        "volume": 1,
+        "startYear": 2000,
+        "endYear": 2000
+      },
+      "issue": {
+        "number": "1",
+        "title": null,
+        "publicationDate": "2000-08",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Death and Destiny — Start mini"
+    },
+    {
+      "position": 77,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "22",
+        "title": null,
+        "publicationDate": "2000-09",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 78,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "21",
+        "title": null,
+        "publicationDate": "2000-09",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 79,
+      "series": {
+        "title": "Spider-Man: Death and Destiny",
+        "volume": 1,
+        "startYear": 2000,
+        "endYear": 2000
+      },
+      "issue": {
+        "number": "2",
+        "title": null,
+        "publicationDate": "2000-09",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Death and Destiny — Continue"
+    },
+    {
+      "position": 80,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "23",
+        "title": null,
+        "publicationDate": "2000-10",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 81,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "22",
+        "title": null,
+        "publicationDate": "2000-10",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 82,
+      "series": {
+        "title": "Spider-Man: Death and Destiny",
+        "volume": 1,
+        "startYear": 2000,
+        "endYear": 2000
+      },
+      "issue": {
+        "number": "3",
+        "title": null,
+        "publicationDate": "2000-10",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Death and Destiny — Finish mini"
+    },
+    {
+      "position": 83,
+      "series": {
+        "title": "Spider-Man: Revenge of the Green Goblin",
+        "volume": 1,
+        "startYear": 2000,
+        "endYear": 2000
+      },
+      "issue": {
+        "number": "1",
+        "title": null,
+        "publicationDate": "2000-10",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Revenge of Green Goblin — Start mini"
+    },
+    {
+      "position": 84,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "24",
+        "title": null,
+        "publicationDate": "2000-11",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 85,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "23",
+        "title": null,
+        "publicationDate": "2000-11",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 86,
+      "series": {
+        "title": "Spider-Man: Revenge of the Green Goblin",
+        "volume": 1,
+        "startYear": 2000,
+        "endYear": 2000
+      },
+      "issue": {
+        "number": "2",
+        "title": null,
+        "publicationDate": "2000-11",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Revenge of Green Goblin — Continue"
+    },
+    {
+      "position": 87,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "25",
+        "title": null,
+        "publicationDate": "2000-12",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 88,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "24",
+        "title": null,
+        "publicationDate": "2000-12",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 89,
+      "series": {
+        "title": "Peter Parker: Spider-Man Annual",
+        "volume": null,
+        "startYear": 1999,
+        "endYear": 2001
+      },
+      "issue": {
+        "number": "2000",
+        "title": null,
+        "publicationDate": "2000-12",
+        "coverUrl": null,
+        "description": null,
+        "type": "ANNUAL"
+      },
+      "required": true,
+      "notes": "Annual stories — Around PP #24–25"
+    },
+    {
+      "position": 90,
+      "series": {
+        "title": "Spider-Man: Revenge of the Green Goblin",
+        "volume": 1,
+        "startYear": 2000,
+        "endYear": 2000
+      },
+      "issue": {
+        "number": "3",
+        "title": null,
+        "publicationDate": "2000-12",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Revenge of Green Goblin — Finish mini"
+    },
+    {
+      "position": 91,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "26",
+        "title": null,
+        "publicationDate": "2001-01",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 92,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "25",
+        "title": null,
+        "publicationDate": "2001-01",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 93,
+      "series": {
+        "title": "Spider-Man: The Mysterio Manifesto",
+        "volume": 1,
+        "startYear": 2001,
+        "endYear": 2001
+      },
+      "issue": {
+        "number": "1",
+        "title": null,
+        "publicationDate": "2001-01",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Mysterio Manifesto — Start mini"
+    },
+    {
+      "position": 94,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "27",
+        "title": null,
+        "publicationDate": "2001-02",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 95,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "26",
+        "title": null,
+        "publicationDate": "2001-02",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 96,
+      "series": {
+        "title": "Spider-Man: The Mysterio Manifesto",
+        "volume": 1,
+        "startYear": 2001,
+        "endYear": 2001
+      },
+      "issue": {
+        "number": "2",
+        "title": null,
+        "publicationDate": "2001-02",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Mysterio Manifesto — Continue"
+    },
+    {
+      "position": 97,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "28",
+        "title": null,
+        "publicationDate": "2001-03",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 98,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "27",
+        "title": null,
+        "publicationDate": "2001-03",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 99,
+      "series": {
+        "title": "Spider-Man: The Mysterio Manifesto",
+        "volume": 1,
+        "startYear": 2001,
+        "endYear": 2001
+      },
+      "issue": {
+        "number": "3",
+        "title": null,
+        "publicationDate": "2001-03",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Mysterio Manifesto — Finish mini"
+    },
+    {
+      "position": 100,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "29",
+        "title": null,
+        "publicationDate": "2001-04",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 101,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "28",
+        "title": null,
+        "publicationDate": "2001-04",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 102,
+      "series": {
+        "title": "Daredevil/Spider-Man",
+        "volume": 1,
+        "startYear": 2001,
+        "endYear": 2001
+      },
+      "issue": {
+        "number": "1",
+        "title": null,
+        "publicationDate": "2001-04",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Team-up — Start mini"
+    },
+    {
+      "position": 103,
+      "series": {
+        "title": "Spider-Man: Lifeline",
+        "volume": 1,
+        "startYear": 2001,
+        "endYear": 2001
+      },
+      "issue": {
+        "number": "1",
+        "title": null,
+        "publicationDate": "2001-04",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Lifeline — Start mini"
+    },
+    {
+      "position": 104,
+      "series": {
+        "title": "Amazing Spider-Man Annual",
+        "volume": null,
+        "startYear": 1999,
+        "endYear": 2001
+      },
+      "issue": {
+        "number": "2001",
+        "title": null,
+        "publicationDate": "2001-05",
+        "coverUrl": null,
+        "description": null,
+        "type": "ANNUAL"
+      },
+      "required": true,
+      "notes": "Annual stories — Around ASM #29–30"
+    },
+    {
+      "position": 105,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "30",
+        "title": null,
+        "publicationDate": "2001-05",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 106,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "29",
+        "title": null,
+        "publicationDate": "2001-05",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 107,
+      "series": {
+        "title": "Daredevil/Spider-Man",
+        "volume": 1,
+        "startYear": 2001,
+        "endYear": 2001
+      },
+      "issue": {
+        "number": "2",
+        "title": null,
+        "publicationDate": "2001-05",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Team-up — Continue"
+    },
+    {
+      "position": 108,
+      "series": {
+        "title": "Spider-Man: Lifeline",
+        "volume": 1,
+        "startYear": 2001,
+        "endYear": 2001
+      },
+      "issue": {
+        "number": "2",
+        "title": null,
+        "publicationDate": "2001-05",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Lifeline — Continue"
+    },
+    {
+      "position": 109,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "31",
+        "title": null,
+        "publicationDate": "2001-06",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 110,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "30",
+        "title": null,
+        "publicationDate": "2001-06",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 111,
+      "series": {
+        "title": "Daredevil/Spider-Man",
+        "volume": 1,
+        "startYear": 2001,
+        "endYear": 2001
+      },
+      "issue": {
+        "number": "3",
+        "title": null,
+        "publicationDate": "2001-06",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Team-up — Continue"
+    },
+    {
+      "position": 112,
+      "series": {
+        "title": "Spider-Man: Lifeline",
+        "volume": 1,
+        "startYear": 2001,
+        "endYear": 2001
+      },
+      "issue": {
+        "number": "3",
+        "title": null,
+        "publicationDate": "2001-06",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Lifeline — Finish mini"
+    },
+    {
+      "position": 113,
+      "series": {
+        "title": "Spider-Man's Tangled Web",
+        "volume": 1,
+        "startYear": 2001,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "1",
+        "title": null,
+        "publicationDate": "2001-06",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "The Thousand — Start anthology"
+    },
+    {
+      "position": 114,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "32",
+        "title": null,
+        "publicationDate": "2001-07",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 115,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "31",
+        "title": null,
+        "publicationDate": "2001-07",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 116,
+      "series": {
+        "title": "Daredevil/Spider-Man",
+        "volume": 1,
+        "startYear": 2001,
+        "endYear": 2001
+      },
+      "issue": {
+        "number": "4",
+        "title": null,
+        "publicationDate": "2001-07",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Team-up — Finish mini"
+    },
+    {
+      "position": 117,
+      "series": {
+        "title": "Spider-Man's Tangled Web",
+        "volume": 1,
+        "startYear": 2001,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "2",
+        "title": null,
+        "publicationDate": "2001-07",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "The Thousand — Continue"
+    },
+    {
+      "position": 118,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "33",
+        "title": null,
+        "publicationDate": "2001-08",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 119,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "32",
+        "title": null,
+        "publicationDate": "2001-08",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 120,
+      "series": {
+        "title": "Spider-Man's Tangled Web",
+        "volume": 1,
+        "startYear": 2001,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "3",
+        "title": null,
+        "publicationDate": "2001-08",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "The Thousand — Continue"
+    },
+    {
+      "position": 121,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "34",
+        "title": null,
+        "publicationDate": "2001-09",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 122,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "33",
+        "title": null,
+        "publicationDate": "2001-09",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 123,
+      "series": {
+        "title": "Spider-Man's Tangled Web",
+        "volume": 1,
+        "startYear": 2001,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "4",
+        "title": null,
+        "publicationDate": "2001-09",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "The Thousand conclusion — Finish first arc"
+    },
+    {
+      "position": 124,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "35",
+        "title": null,
+        "publicationDate": "2001-10",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 125,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "34",
+        "title": null,
+        "publicationDate": "2001-10",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 126,
+      "series": {
+        "title": "Spider-Man's Tangled Web",
+        "volume": 1,
+        "startYear": 2001,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "5",
+        "title": null,
+        "publicationDate": "2001-10",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "New anthology story — Continue Tangled Web"
+    },
+    {
+      "position": 127,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "36",
+        "title": null,
+        "publicationDate": "2001-11",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Post-9/11 story — Important standalone"
+    },
+    {
+      "position": 128,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "35",
+        "title": null,
+        "publicationDate": "2001-11",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 129,
+      "series": {
+        "title": "Spider-Man's Tangled Web",
+        "volume": 1,
+        "startYear": 2001,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "6",
+        "title": null,
+        "publicationDate": "2001-11",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Standalone"
+    },
+    {
+      "position": 130,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "37",
+        "title": null,
+        "publicationDate": "2001-12",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 131,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "36",
+        "title": null,
+        "publicationDate": "2001-12",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 132,
+      "series": {
+        "title": "Spider-Man's Tangled Web",
+        "volume": 1,
+        "startYear": 2001,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "7",
+        "title": null,
+        "publicationDate": "2001-12",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Standalone"
+    },
+    {
+      "position": 133,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "38",
+        "title": null,
+        "publicationDate": "2002-01",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 134,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "37",
+        "title": null,
+        "publicationDate": "2002-01",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 135,
+      "series": {
+        "title": "Spider-Man's Tangled Web",
+        "volume": 1,
+        "startYear": 2001,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "8",
+        "title": null,
+        "publicationDate": "2002-01",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Standalone"
+    },
+    {
+      "position": 136,
+      "series": {
+        "title": "Peter Parker: Spider-Man Annual",
+        "volume": null,
+        "startYear": 1999,
+        "endYear": 2001
+      },
+      "issue": {
+        "number": "2001",
+        "title": null,
+        "publicationDate": "2002-01",
+        "coverUrl": null,
+        "description": null,
+        "type": "ANNUAL"
+      },
+      "required": true,
+      "notes": "Annual — Around PP #37–38"
+    },
+    {
+      "position": 137,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "39",
+        "title": null,
+        "publicationDate": "2002-02",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 138,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "38",
+        "title": null,
+        "publicationDate": "2002-02",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 139,
+      "series": {
+        "title": "Spider-Man's Tangled Web",
+        "volume": 1,
+        "startYear": 2001,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "9",
+        "title": null,
+        "publicationDate": "2002-02",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Standalone"
+    },
+    {
+      "position": 140,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "40",
+        "title": null,
+        "publicationDate": "2002-03",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 141,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "39",
+        "title": null,
+        "publicationDate": "2002-03",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 142,
+      "series": {
+        "title": "Spider-Man's Tangled Web",
+        "volume": 1,
+        "startYear": 2001,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "10",
+        "title": null,
+        "publicationDate": "2002-03",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Standalone"
+    },
+    {
+      "position": 143,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "41",
+        "title": null,
+        "publicationDate": "2002-04",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 144,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "40",
+        "title": null,
+        "publicationDate": "2002-04",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 145,
+      "series": {
+        "title": "Spider-Man's Tangled Web",
+        "volume": 1,
+        "startYear": 2001,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "11",
+        "title": null,
+        "publicationDate": "2002-04",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Standalone"
+    },
+    {
+      "position": 146,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "42",
+        "title": null,
+        "publicationDate": "2002-05",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 147,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "41",
+        "title": null,
+        "publicationDate": "2002-05",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 148,
+      "series": {
+        "title": "Spider-Man's Tangled Web",
+        "volume": 1,
+        "startYear": 2001,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "12",
+        "title": null,
+        "publicationDate": "2002-05",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Standalone"
+    },
+    {
+      "position": 149,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "43",
+        "title": null,
+        "publicationDate": "2002-06",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 150,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "42",
+        "title": null,
+        "publicationDate": "2002-06",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 151,
+      "series": {
+        "title": "Spider-Man's Tangled Web",
+        "volume": 1,
+        "startYear": 2001,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "13",
+        "title": null,
+        "publicationDate": "2002-06",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Standalone"
+    },
+    {
+      "position": 152,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "44",
+        "title": null,
+        "publicationDate": "2002-07",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 153,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "43",
+        "title": null,
+        "publicationDate": "2002-07",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 154,
+      "series": {
+        "title": "Spider-Man: Quality of Life",
+        "volume": 1,
+        "startYear": 2002,
+        "endYear": 2002
+      },
+      "issue": {
+        "number": "1",
+        "title": null,
+        "publicationDate": "2002-07",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Quality of Life — Start mini"
+    },
+    {
+      "position": 155,
+      "series": {
+        "title": "Spider-Man: Blue",
+        "volume": 1,
+        "startYear": 2002,
+        "endYear": 2002
+      },
+      "issue": {
+        "number": "1",
+        "title": null,
+        "publicationDate": "2002-07",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Blue — Start prestige mini"
+    },
+    {
+      "position": 156,
+      "series": {
+        "title": "Spider-Man's Tangled Web",
+        "volume": 1,
+        "startYear": 2001,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "14",
+        "title": null,
+        "publicationDate": "2002-07",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Standalone"
+    },
+    {
+      "position": 157,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "45",
+        "title": null,
+        "publicationDate": "2002-08",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 158,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "44",
+        "title": null,
+        "publicationDate": "2002-08",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 159,
+      "series": {
+        "title": "Spider-Man: Quality of Life",
+        "volume": 1,
+        "startYear": 2002,
+        "endYear": 2002
+      },
+      "issue": {
+        "number": "2",
+        "title": null,
+        "publicationDate": "2002-08",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Quality of Life — Continue"
+    },
+    {
+      "position": 160,
+      "series": {
+        "title": "Spider-Man: Blue",
+        "volume": 1,
+        "startYear": 2002,
+        "endYear": 2002
+      },
+      "issue": {
+        "number": "2",
+        "title": null,
+        "publicationDate": "2002-08",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Blue — Continue"
+    },
+    {
+      "position": 161,
+      "series": {
+        "title": "Spider-Man: Get Kraven",
+        "volume": 1,
+        "startYear": 2002,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "1",
+        "title": null,
+        "publicationDate": "2002-08",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Get Kraven — Start mini"
+    },
+    {
+      "position": 162,
+      "series": {
+        "title": "Spider-Man/Black Cat: The Evil That Men Do",
+        "volume": 1,
+        "startYear": 2002,
+        "endYear": 2002
+      },
+      "issue": {
+        "number": "1",
+        "title": null,
+        "publicationDate": "2002-08",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Evil That Men Do — Start mini"
+    },
+    {
+      "position": 163,
+      "series": {
+        "title": "Spider-Man's Tangled Web",
+        "volume": 1,
+        "startYear": 2001,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "15",
+        "title": null,
+        "publicationDate": "2002-08",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Standalone"
+    },
+    {
+      "position": 164,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "46",
+        "title": null,
+        "publicationDate": "2002-09",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 165,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "45",
+        "title": null,
+        "publicationDate": "2002-09",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 166,
+      "series": {
+        "title": "Spider-Man: Quality of Life",
+        "volume": 1,
+        "startYear": 2002,
+        "endYear": 2002
+      },
+      "issue": {
+        "number": "3",
+        "title": null,
+        "publicationDate": "2002-09",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Quality of Life — Continue"
+    },
+    {
+      "position": 167,
+      "series": {
+        "title": "Spider-Man: Blue",
+        "volume": 1,
+        "startYear": 2002,
+        "endYear": 2002
+      },
+      "issue": {
+        "number": "3",
+        "title": null,
+        "publicationDate": "2002-09",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Blue — Continue"
+    },
+    {
+      "position": 168,
+      "series": {
+        "title": "Spider-Man: Get Kraven",
+        "volume": 1,
+        "startYear": 2002,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "2",
+        "title": null,
+        "publicationDate": "2002-09",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Get Kraven — Continue"
+    },
+    {
+      "position": 169,
+      "series": {
+        "title": "Spider-Man/Black Cat: The Evil That Men Do",
+        "volume": 1,
+        "startYear": 2002,
+        "endYear": 2002
+      },
+      "issue": {
+        "number": "2",
+        "title": null,
+        "publicationDate": "2002-09",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Evil That Men Do — Continue"
+    },
+    {
+      "position": 170,
+      "series": {
+        "title": "Spider-Man's Tangled Web",
+        "volume": 1,
+        "startYear": 2001,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "16",
+        "title": null,
+        "publicationDate": "2002-09",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Standalone"
+    },
+    {
+      "position": 171,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "47",
+        "title": null,
+        "publicationDate": "2002-10",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 172,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "46",
+        "title": null,
+        "publicationDate": "2002-10",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 173,
+      "series": {
+        "title": "Spider-Man: Quality of Life",
+        "volume": 1,
+        "startYear": 2002,
+        "endYear": 2002
+      },
+      "issue": {
+        "number": "4",
+        "title": null,
+        "publicationDate": "2002-10",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Quality of Life — Finish mini"
+    },
+    {
+      "position": 174,
+      "series": {
+        "title": "Spider-Man: Blue",
+        "volume": 1,
+        "startYear": 2002,
+        "endYear": 2002
+      },
+      "issue": {
+        "number": "4",
+        "title": null,
+        "publicationDate": "2002-10",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Blue — Continue"
+    },
+    {
+      "position": 175,
+      "series": {
+        "title": "Spider-Man: Get Kraven",
+        "volume": 1,
+        "startYear": 2002,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "3",
+        "title": null,
+        "publicationDate": "2002-10",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Get Kraven — Continue"
+    },
+    {
+      "position": 176,
+      "series": {
+        "title": "Spider-Man/Black Cat: The Evil That Men Do",
+        "volume": 1,
+        "startYear": 2002,
+        "endYear": 2002
+      },
+      "issue": {
+        "number": "3",
+        "title": null,
+        "publicationDate": "2002-10",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Evil That Men Do — Finish currently published portion"
+    },
+    {
+      "position": 177,
+      "series": {
+        "title": "Spider-Man/Daredevil",
+        "volume": 1,
+        "startYear": 2002,
+        "endYear": 2002
+      },
+      "issue": {
+        "number": "1",
+        "title": null,
+        "publicationDate": "2002-10",
+        "coverUrl": null,
+        "description": null,
+        "type": "ONE_SHOT"
+      },
+      "required": true,
+      "notes": "Team-up — Standalone"
+    },
+    {
+      "position": 178,
+      "series": {
+        "title": "Spider-Man's Tangled Web",
+        "volume": 1,
+        "startYear": 2001,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "17",
+        "title": null,
+        "publicationDate": "2002-10",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Standalone"
+    },
+    {
+      "position": 179,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "48",
+        "title": null,
+        "publicationDate": "2002-11",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 180,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "47",
+        "title": null,
+        "publicationDate": "2002-11",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 181,
+      "series": {
+        "title": "Spider-Man: Blue",
+        "volume": 1,
+        "startYear": 2002,
+        "endYear": 2002
+      },
+      "issue": {
+        "number": "5",
+        "title": null,
+        "publicationDate": "2002-11",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Blue — Continue"
+    },
+    {
+      "position": 182,
+      "series": {
+        "title": "Spider-Man: Get Kraven",
+        "volume": 1,
+        "startYear": 2002,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "4",
+        "title": null,
+        "publicationDate": "2002-11",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Get Kraven — Continue"
+    },
+    {
+      "position": 183,
+      "series": {
+        "title": "Spider-Man's Tangled Web",
+        "volume": 1,
+        "startYear": 2001,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "18",
+        "title": null,
+        "publicationDate": "2002-11",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Standalone"
+    },
+    {
+      "position": 184,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "49",
+        "title": null,
+        "publicationDate": "2002-12",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 185,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "48",
+        "title": null,
+        "publicationDate": "2002-12",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 186,
+      "series": {
+        "title": "Spider-Man: Blue",
+        "volume": 1,
+        "startYear": 2002,
+        "endYear": 2002
+      },
+      "issue": {
+        "number": "6",
+        "title": null,
+        "publicationDate": "2002-12",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Blue conclusion — Finish mini"
+    },
+    {
+      "position": 187,
+      "series": {
+        "title": "Spider-Man: Get Kraven",
+        "volume": 1,
+        "startYear": 2002,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "5",
+        "title": null,
+        "publicationDate": "2002-12",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Get Kraven — Continue"
+    },
+    {
+      "position": 188,
+      "series": {
+        "title": "Spider-Man's Tangled Web",
+        "volume": 1,
+        "startYear": 2001,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "19",
+        "title": null,
+        "publicationDate": "2002-12",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Standalone"
+    },
+    {
+      "position": 189,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "50",
+        "title": null,
+        "publicationDate": "2003-01",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 190,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "49",
+        "title": null,
+        "publicationDate": "2003-01",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 191,
+      "series": {
+        "title": "Spider-Man: Get Kraven",
+        "volume": 1,
+        "startYear": 2002,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "6",
+        "title": null,
+        "publicationDate": "2003-01",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Get Kraven conclusion — Finish mini"
+    },
+    {
+      "position": 192,
+      "series": {
+        "title": "Spider-Man's Tangled Web",
+        "volume": 1,
+        "startYear": 2001,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "20",
+        "title": null,
+        "publicationDate": "2003-01",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Standalone"
+    },
+    {
+      "position": 193,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "51",
+        "title": null,
+        "publicationDate": "2003-02",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 194,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "50",
+        "title": null,
+        "publicationDate": "2003-02",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 195,
+      "series": {
+        "title": "Spider-Man's Tangled Web",
+        "volume": 1,
+        "startYear": 2001,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "21",
+        "title": null,
+        "publicationDate": "2003-02",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Anthology — Standalone"
+    },
+    {
+      "position": 196,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "52",
+        "title": null,
+        "publicationDate": "2003-03",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 197,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "51",
+        "title": null,
+        "publicationDate": "2003-03",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 198,
+      "series": {
+        "title": "Spider-Man's Tangled Web",
+        "volume": 1,
+        "startYear": 2001,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "22",
+        "title": null,
+        "publicationDate": "2003-03",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Final issue — Finish Tangled Web"
+    },
+    {
+      "position": 199,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "53",
+        "title": null,
+        "publicationDate": "2003-04",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 200,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "52",
+        "title": null,
+        "publicationDate": "2003-04",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 201,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "54",
+        "title": null,
+        "publicationDate": "2003-05",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 202,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "53",
+        "title": null,
+        "publicationDate": "2003-05",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 203,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "55",
+        "title": null,
+        "publicationDate": "2003-06",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 204,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "54",
+        "title": null,
+        "publicationDate": "2003-06",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 205,
+      "series": {
+        "title": "Venom",
+        "volume": null,
+        "startYear": 2003,
+        "endYear": null
+      },
+      "issue": {
+        "number": "1",
+        "title": null,
+        "publicationDate": "2003-06",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "New Venom series — Supplemental"
+    },
+    {
+      "position": 206,
+      "series": {
+        "title": "Spider-Man & Wolverine",
+        "volume": 1,
+        "startYear": 2003,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "1",
+        "title": null,
+        "publicationDate": "2003-06",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Team-up — Start mini"
+    },
+    {
+      "position": 207,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "56",
+        "title": null,
+        "publicationDate": "2003-07",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 208,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "55",
+        "title": null,
+        "publicationDate": "2003-07",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 209,
+      "series": {
+        "title": "Venom",
+        "volume": null,
+        "startYear": 2003,
+        "endYear": null
+      },
+      "issue": {
+        "number": "2",
+        "title": null,
+        "publicationDate": "2003-07",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Venom — Continue"
+    },
+    {
+      "position": 210,
+      "series": {
+        "title": "Spider-Man & Wolverine",
+        "volume": 1,
+        "startYear": 2003,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "2",
+        "title": null,
+        "publicationDate": "2003-07",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Team-up — Continue"
+    },
+    {
+      "position": 211,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "57",
+        "title": null,
+        "publicationDate": "2003-08",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 212,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "56",
+        "title": null,
+        "publicationDate": "2003-08",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Ongoing — Continue"
+    },
+    {
+      "position": 213,
+      "series": {
+        "title": "Venom",
+        "volume": null,
+        "startYear": 2003,
+        "endYear": null
+      },
+      "issue": {
+        "number": "3",
+        "title": null,
+        "publicationDate": "2003-08",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Venom — Continue"
+    },
+    {
+      "position": 214,
+      "series": {
+        "title": "Spider-Man & Wolverine",
+        "volume": 1,
+        "startYear": 2003,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "3",
+        "title": null,
+        "publicationDate": "2003-08",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Team-up — Continue"
+    },
+    {
+      "position": 215,
+      "series": {
+        "title": "The Spectacular Spider-Man",
+        "volume": 2,
+        "startYear": 2003,
+        "endYear": 2005
+      },
+      "issue": {
+        "number": "1",
+        "title": null,
+        "publicationDate": "2003-08",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "New series — Start new Spectacular"
+    },
+    {
+      "position": 216,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1998,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "58",
+        "title": null,
+        "publicationDate": "2003-09",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Final Vol. 2 issue — End of Vol. 2"
+    },
+    {
+      "position": 217,
+      "series": {
+        "title": "Peter Parker: Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "57",
+        "title": null,
+        "publicationDate": "2003-09",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Final issue — End of Peter Parker Vol. 2"
+    },
+    {
+      "position": 218,
+      "series": {
+        "title": "Venom",
+        "volume": null,
+        "startYear": 2003,
+        "endYear": null
+      },
+      "issue": {
+        "number": "4",
+        "title": null,
+        "publicationDate": "2003-09",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Venom — Supplemental"
+    },
+    {
+      "position": 219,
+      "series": {
+        "title": "Spider-Man & Wolverine",
+        "volume": 1,
+        "startYear": 2003,
+        "endYear": 2003
+      },
+      "issue": {
+        "number": "4",
+        "title": null,
+        "publicationDate": "2003-09",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": "Team-up conclusion — Finish mini"
+    }
+  ]
+}

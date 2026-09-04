@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -117,49 +119,59 @@ fun ReadingListDetailScreen(
                 if (issues.isEmpty()) {
                     Text("No issues in this reading list")
                 } else {
-                    issues.forEach { issue ->
-
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Checkbox(
-                                checked =
-                                    issue.readingStatus == ReadingStatus.READ,
-                                onCheckedChange = {
-                                    viewModel.toggleIssueRead(
-                                        issue = issue
-                                    )
-                                }
-                            )
-
-                            Column(
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .padding(
-                                        vertical = 8.dp
-                                    )
-                            ) {
-                                Text(
-                                    text = "${issue.seriesTitle} #${issue.issueNumber}",
-                                    style = MaterialTheme.typography.titleMedium
-                                )
-
-                                issue.issueTitle?.let { title ->
-                                    Text(
-                                        text = title,
-                                        style = MaterialTheme.typography.bodyMedium
-                                    )
-                                }
-
-                                Text(
-                                    text = "Reading Order #${issue.position}",
-                                    style = MaterialTheme.typography.bodySmall
-                                )
+                    LazyColumn(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1f)
+                    ) {
+                        items(
+                            items = issues,
+                            key = { issue ->
+                                issue.readingListItemId
                             }
-                        }
+                        ) { issue ->
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Checkbox(
+                                    checked =
+                                        issue.readingStatus == ReadingStatus.READ,
+                                    onCheckedChange = {
+                                        viewModel.toggleIssueRead(
+                                            issue = issue
+                                        )
+                                    }
+                                )
 
-                        HorizontalDivider()
+                                Column(
+                                    modifier = Modifier
+                                        .weight(1f)
+                                        .padding(
+                                            vertical = 8.dp
+                                        )
+                                ) {
+                                    Text(
+                                        text = "${issue.seriesTitle} #${issue.issueNumber}",
+                                        style = MaterialTheme.typography.titleMedium
+                                    )
+
+                                    issue.issueTitle?.let { title ->
+                                        Text(
+                                            text = title,
+                                            style = MaterialTheme.typography.bodyMedium
+                                        )
+                                    }
+
+                                    Text(
+                                        text = "Reading Order #${issue.position}",
+                                        style = MaterialTheme.typography.bodySmall
+                                    )
+                                }
+                            }
+
+                            HorizontalDivider()
+                        }
                     }
                 }
             }
