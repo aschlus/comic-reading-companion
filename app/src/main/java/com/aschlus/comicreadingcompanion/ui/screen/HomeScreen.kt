@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -55,19 +57,32 @@ fun HomeScreen(
             if (readingLists.isEmpty()) {
                 Text("No reading lists yet")
             } else {
-                readingLists.forEach { readingList ->
-                    val summary = readingListSummaries.firstOrNull {
-                        it.readingListId == readingList.id
-                    }
-
-                    ReadingListCard(
-                        readingList = readingList,
-                        readCount = summary?.readCount ?: 0,
-                        totalCount = summary?.totalCount ?: 0,
-                        onClick = {
-                            onReadingListClick(readingList.id)
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    items(
+                        items = readingLists,
+                        key = { readingList ->
+                            readingList.id
                         }
-                    )
+                    ) { readingList ->
+
+                        val summary = readingListSummaries.firstOrNull {
+                            it.readingListId == readingList.id
+                        }
+
+                        ReadingListCard(
+                            readingList = readingList,
+                            readCount = summary?.readCount ?: 0,
+                            totalCount = summary?.totalCount ?: 0,
+                            onClick = {
+                                onReadingListClick(readingList.id)
+                            }
+                        )
+                    }
                 }
             }
         }
