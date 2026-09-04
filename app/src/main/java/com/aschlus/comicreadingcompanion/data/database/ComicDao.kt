@@ -110,7 +110,7 @@ interface ComicDao {
         SELECT * FROM reading_lists
         ORDER BY updatedAt DESC
     """)
-    suspend fun getAllReadingLists(): List<ReadingList>
+    fun getAllReadingLists(): Flow<List<ReadingList>>
 
     @Query("""
         SELECT * FROM reading_lists

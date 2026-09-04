@@ -7,6 +7,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListItem
 import com.aschlus.comicreadingcompanion.data.database.entities.Series
 import com.aschlus.comicreadingcompanion.data.database.entities.Universe
+import kotlinx.coroutines.flow.first
 
 class DatabaseSeeder(
     private val comicDao: ComicDao
@@ -56,7 +57,8 @@ class DatabaseSeeder(
             it.designation == "Earth-616"
         }
 
-        val readingLists = comicDao.getAllReadingLists()
+        val readingLists =
+            comicDao.getAllReadingLists().first()
 
         val spiderManListExists = readingLists.any {
             it.title == "Spider-Man Reading Order"
@@ -133,7 +135,7 @@ class DatabaseSeeder(
         }
 
         val updatedReadingLists =
-            comicDao.getAllReadingLists()
+            comicDao.getAllReadingLists().first()
 
         val spiderManReadingList =
             updatedReadingLists.find {

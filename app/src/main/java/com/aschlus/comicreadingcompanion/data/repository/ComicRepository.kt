@@ -67,7 +67,7 @@ class ComicRepository(
         return comicDao.insertReadingList(readingList)
     }
 
-    suspend fun getReadingLists(): List<ReadingList> {
+    fun getReadingLists(): Flow<List<ReadingList>> {
         return comicDao.getAllReadingLists()
     }
 
