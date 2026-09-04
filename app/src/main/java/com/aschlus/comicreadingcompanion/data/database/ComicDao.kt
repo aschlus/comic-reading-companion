@@ -17,6 +17,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSecti
 import com.aschlus.comicreadingcompanion.data.database.entities.ExternalId
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingProgress
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListIssue
+import com.aschlus.comicreadingcompanion.data.database.models.ReadingListSummary
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -141,6 +142,26 @@ interface ComicDao {
         LIMIT 1
     """)
     suspend fun getReadingListById(readingListId: Long): ReadingList?
+
+    @Query("""
+        SELECT
+            reading_lists.id AS readingListId,
+            COUNT(reading_list_items.id) AS totalCount,
+            SUM(
+                CASE
+                    WHEN reading_progress.status = 'READ' THEN 1
+                    ELSE 0
+                END
+            ) AS readCount
+        FROM reading_lists
+        LEFT JOIN reading_list_items
+            ON reading_lists.id = reading_list_items.readingListId
+        LEFT JOIN reading_progress
+            ON reading_list_items.issueId = reading_progress.issueId
+        GROUP BY reading_lists.id
+        ORDER BY reading_lists.updatedAt DESC
+    """)
+    fun getReadingListSummaries(): Flow<List<ReadingListSummary>>
 
 
     // Reading list sections

@@ -3,6 +3,7 @@ package com.aschlus.comicreadingcompanion.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
+import com.aschlus.comicreadingcompanion.data.database.models.ReadingListSummary
 import com.aschlus.comicreadingcompanion.data.repository.ComicRepository
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -15,6 +16,15 @@ class HomeViewModel(
     val readingLists: StateFlow<List<ReadingList>> =
         repository
             .getReadingLists()
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5_000),
+                initialValue = emptyList()
+            )
+
+    val readingListSummaries: StateFlow<List<ReadingListSummary>> =
+        repository
+            .getReadingListSummaries()
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5_000),

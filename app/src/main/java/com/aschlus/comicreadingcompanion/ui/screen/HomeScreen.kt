@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -28,6 +29,9 @@ fun HomeScreen(
     onReadingListClick: (Long) -> Unit
 ) {
     val readingLists by viewModel.readingLists.collectAsState()
+
+    val readingListSummaries by
+        viewModel.readingListSummaries.collectAsState()
 
     Scaffold(
         topBar = {
@@ -52,8 +56,14 @@ fun HomeScreen(
                 Text("No reading lists yet")
             } else {
                 readingLists.forEach { readingList ->
+                    val summary = readingListSummaries.firstOrNull {
+                        it.readingListId == readingList.id
+                    }
+
                     ReadingListCard(
                         readingList = readingList,
+                        readCount = summary?.readCount ?: 0,
+                        totalCount = summary?.totalCount ?: 0,
                         onClick = {
                             onReadingListClick(readingList.id)
                         }
@@ -67,6 +77,8 @@ fun HomeScreen(
 @Composable
 private fun ReadingListCard(
     readingList: ReadingList,
+    readCount: Int,
+    totalCount: Int,
     onClick: () -> Unit
 ) {
     Card(
@@ -91,6 +103,31 @@ private fun ReadingListCard(
                     style = MaterialTheme.typography.bodyMedium
                 )
             }
+
+            val progress =
+                if (totalCount == 0) {
+                    0f
+                } else {
+                    readCount.toFloat() / totalCount.toFloat()
+                }
+
+            val completionPercentage =
+                if (totalCount == 0) {
+                    0f
+                } else {
+                    (readCount * 100) / totalCount
+                }
+
+            Text(
+                text = "$readCount of $totalCount read • " +
+                    "$completionPercentage% complete",
+                style = MaterialTheme.typography.bodySmall
+            )
+
+            LinearProgressIndicator(
+                progress = { progress },
+                modifier = Modifier.fillMaxWidth()
+            )
         }
     }
 }

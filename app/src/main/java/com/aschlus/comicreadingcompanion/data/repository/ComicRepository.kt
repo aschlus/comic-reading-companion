@@ -12,6 +12,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.Series
 import com.aschlus.comicreadingcompanion.data.database.entities.Universe
 import com.aschlus.comicreadingcompanion.data.database.entities.ExternalId
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListIssue
+import com.aschlus.comicreadingcompanion.data.database.models.ReadingListSummary
 import kotlinx.coroutines.flow.Flow
 
 class ComicRepository(
@@ -91,6 +92,10 @@ class ComicRepository(
 
     suspend fun deleteReadingList(readingList: ReadingList) {
         comicDao.deleteReadingList(readingList)
+    }
+
+    fun getReadingListSummaries(): Flow<List<ReadingListSummary>> {
+        return comicDao.getReadingListSummaries()
     }
 
 

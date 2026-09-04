@@ -40,8 +40,8 @@ building, following, and tracking comic-book reading orders.
 - [x] Show each issue's reading-order position
 - [x] Support required / optional items in the data model
 - [x] Support notes on reading-list items in the data model
-- [ ] Display required / optional status in the UI
-- [ ] Display reading-list item notes in the UI
+- [x] Display required / optional status in the UI
+- [x] Display reading-list item notes in the UI
 - [ ] Reading-list sections / story arcs
 - [ ] Collapsible reading-list sections
 - [ ] Create custom reading lists
@@ -151,8 +151,8 @@ building, following, and tracking comic-book reading orders.
 
 - [x] Reading-list cards
 - [x] Navigate from a card to its reading list
-- [ ] Show progress on each reading-list card
-- [ ] Show issue count on each card
+- [x] Show progress on each reading-list card
+- [x] Show issue count on each card
 - [ ] Show current / next issue on each card
 - [ ] Sort reading lists
 - [ ] Search reading lists
@@ -175,7 +175,7 @@ building, following, and tracking comic-book reading orders.
 - [ ] Issue cover thumbnails
 - [ ] Required / optional indicators
 - [ ] Story / arc information
-- [ ] Publication date
+- [x] Publication date
 - [ ] Expandable notes
 - [ ] Tap issue to open issue details
 - [ ] Sticky reading-progress header
