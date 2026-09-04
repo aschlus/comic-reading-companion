@@ -212,6 +212,13 @@ private fun ReadingListIssueRow(
                 )
             }
 
+            if (!issue.required) {
+                Text(
+                    text = "Optional",
+                    style = MaterialTheme.typography.labelMedium
+                )
+            }
+
             issue.publicationDate?.let { publicationDate ->
                 Text(
                     text = formatPublicationDate(
