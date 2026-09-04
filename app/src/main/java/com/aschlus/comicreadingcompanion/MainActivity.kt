@@ -77,7 +77,10 @@ class MainActivity : ComponentActivity() {
 
                         ReadingListDetailScreen(
                             readingListId = readingListId,
-                            viewModel = detailViewModel
+                            viewModel = detailViewModel,
+                            onBackClick = {
+                                navController.popBackStack()
+                            }
                         )
                     }
                 }

@@ -10,6 +10,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -27,7 +30,8 @@ import com.aschlus.comicreadingcompanion.ui.viewmodel.ReadingListDetailViewModel
 @Composable
 fun ReadingListDetailScreen(
     readingListId: Long,
-    viewModel: ReadingListDetailViewModel
+    viewModel: ReadingListDetailViewModel,
+    onBackClick: () -> Unit
 ) {
     val readingList by
         viewModel.readingList.collectAsState()
@@ -44,9 +48,15 @@ fun ReadingListDetailScreen(
             TopAppBar(
                 title = {
                     Text(
-                        readingList?.title
-                            ?: "Reading List"
+                        readingList?.title ?: "Reading List"
                     )
+                },
+                navigationIcon = {
+                    IconButton(
+                        onClick = onBackClick
+                    ) {
+                        Text("←")
+                    }
                 }
             )
         }
@@ -78,6 +88,13 @@ fun ReadingListDetailScreen(
 
                 val totalCount = issues.size
 
+                val progress =
+                    if (totalCount == 0) {
+                        0f
+                    } else {
+                        readCount.toFloat() / totalCount.toFloat()
+                    }
+
                 val completionPercentage =
                     if (totalCount == 0) {
                         0
@@ -88,6 +105,11 @@ fun ReadingListDetailScreen(
                 Text(
                     text = "$readCount of $totalCount read • " +
                         "$completionPercentage% complete"
+                )
+
+                LinearProgressIndicator(
+                    progress = { progress },
+                    modifier = Modifier.fillMaxWidth()
                 )
 
                 Text("Issues")
@@ -112,11 +134,30 @@ fun ReadingListDetailScreen(
                                 }
                             )
 
-                            Text(
-                                text = "${issue.position}. " +
-                                        "${issue.seriesTitle} #${issue.issueNumber}",
-                                modifier = Modifier.weight(1f)
-                            )
+                            Column(
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .padding(
+                                        vertical = 8.dp
+                                    )
+                            ) {
+                                Text(
+                                    text = "${issue.seriesTitle} #${issue.issueNumber}",
+                                    style = MaterialTheme.typography.titleMedium
+                                )
+
+                                issue.issueTitle?.let { title ->
+                                    Text(
+                                        text = title,
+                                        style = MaterialTheme.typography.bodyMedium
+                                    )
+                                }
+
+                                Text(
+                                    text = "Reading Order #${issue.position}",
+                                    style = MaterialTheme.typography.bodySmall
+                                )
+                            }
                         }
 
                         HorizontalDivider()
