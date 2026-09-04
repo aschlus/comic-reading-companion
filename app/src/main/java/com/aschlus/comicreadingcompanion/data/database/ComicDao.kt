@@ -30,6 +30,15 @@ interface ComicDao {
     @Query("SELECT * FROM publishers ORDER BY name ASC")
     suspend fun getAllPublishers(): List<Publisher>
 
+    @Query("""
+        SELECT * FROM publishers
+        WHERE name = :name
+        LIMIT 1
+    """)
+    suspend fun getPublisherByName(
+        name: String
+    ): Publisher?
+
 
     // Universes
 
@@ -42,6 +51,17 @@ interface ComicDao {
         ORDER BY name ASC
     """)
     suspend fun getUniversesForPublisher(publisherId: Long): List<Universe>
+
+    @Query("""
+        SELECT * FROM universes
+        WHERE publisherId = :publisherId
+          AND designation = :designation
+        LIMIT 1
+    """)
+    suspend fun getUniverseByDesignation(
+        publisherId: Long,
+        designation: String
+    ): Universe?
 
 
     // Series
@@ -60,13 +80,16 @@ interface ComicDao {
         SELECT * FROM series
         WHERE publisherId = :publisherId
           AND title = :title
-          AND volume = :volume
+          AND (
+              volume = :volume
+              OR (volume IS NULL AND :volume IS NULL)
+          )
         LIMIT 1
     """)
     suspend fun getSeries(
         publisherId: Long,
         title: String,
-        volume: Int
+        volume: Int?
     ): Series?
 
 

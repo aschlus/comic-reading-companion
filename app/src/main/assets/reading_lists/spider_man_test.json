@@ -1,0 +1,106 @@
+{
+  "title": "Spider-Man Reading Order",
+  "description": "A development reading list for Spider-Man comics",
+  "publisher": "Marvel Comics",
+  "universe": {
+    "name": "Marvel Universe",
+    "designation": "Earth-616"
+  },
+  "items": [
+    {
+      "position": 1,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2013
+      },
+      "issue": {
+        "number": "1",
+        "title": null,
+        "publicationDate": null,
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": null
+    },
+    {
+      "position": 2,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2013
+      },
+      "issue": {
+        "number": "2",
+        "title": null,
+        "publicationDate": null,
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": null
+    },
+    {
+      "position": 3,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2013
+      },
+      "issue": {
+        "number": "3",
+        "title": null,
+        "publicationDate": null,
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": null
+    },
+    {
+      "position": 4,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2013
+      },
+      "issue": {
+        "number": "4",
+        "title": null,
+        "publicationDate": null,
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": null
+    },
+    {
+      "position": 5,
+      "series": {
+        "title": "Amazing Spider-Man",
+        "volume": 2,
+        "startYear": 1999,
+        "endYear": 2013
+      },
+      "issue": {
+        "number": "5",
+        "title": null,
+        "publicationDate": null,
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": null
+    }
+  ]
+}
