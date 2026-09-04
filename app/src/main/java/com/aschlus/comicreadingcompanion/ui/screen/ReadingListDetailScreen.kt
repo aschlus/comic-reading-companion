@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -25,6 +26,9 @@ fun ReadingListDetailScreen(
 ) {
     val readingList by
         viewModel.readingList.collectAsState()
+
+    val issues by
+        viewModel.issues.collectAsState()
 
     LaunchedEffect(readingListId) {
         viewModel.loadReadingList(readingListId)
@@ -57,10 +61,27 @@ fun ReadingListDetailScreen(
             if (currentReadingList == null) {
                 Text("Loading...")
             } else {
+
                 currentReadingList.description
                     ?.let { description ->
                         Text(description)
                     }
+
+                Text("Issues")
+
+                if (issues.isEmpty()) {
+                    Text("No issues in this reading list")
+                } else {
+                    issues.forEach { issue ->
+
+                        Text(
+                            text = "${issue.position}. " +
+                            "${issue.seriesTitle} #${issue.issueNumber}"
+                        )
+
+                        HorizontalDivider()
+                    }
+                }
             }
         }
     }

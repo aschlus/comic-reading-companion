@@ -16,6 +16,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListItem
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSection
 import com.aschlus.comicreadingcompanion.data.database.entities.ExternalId
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingProgress
+import com.aschlus.comicreadingcompanion.data.database.models.ReadingListIssue
 
 @Dao
 interface ComicDao {
@@ -54,6 +55,19 @@ interface ComicDao {
     """)
     suspend fun getSeriesForPublisher(publisherId: Long): List<Series>
 
+    @Query("""
+        SELECT * FROM series
+        WHERE publisherId = :publisherId
+          AND title = :title
+          AND volume = :volume
+        LIMIT 1
+    """)
+    suspend fun getSeries(
+        publisherId: Long,
+        title: String,
+        volume: Int
+    ): Series?
+
 
     // Issues
 
@@ -73,6 +87,17 @@ interface ComicDao {
         LIMIT 1
     """)
     suspend fun getIssueById(issueId: Long): Issue?
+
+    @Query("""
+        SELECT * FROM issues
+        WHERE seriesId = :seriesId
+          AND issueNumber = :issueNumber
+        LIMIT 1
+    """)
+    suspend fun getIssue(
+        seriesId: Long,
+        issueNumber: String
+    ): Issue?
 
 
     // Reading lists
@@ -143,6 +168,42 @@ interface ComicDao {
     suspend fun getUnsectionedItemsForReadingList(
         readingListId: Long
     ): List<ReadingListItem>
+
+    @Query("""
+        SELECT * FROM reading_list_items
+        WHERE readingListId = :readingListId
+          AND issueId = :issueId
+        LIMIT 1
+    """)
+    suspend fun getReadingListItem(
+        readingListId: Long,
+        issueId: Long
+    ): ReadingListItem?
+
+    @Query("""
+        SELECT
+            reading_list_items.id AS readingListItemId,
+            issues.id AS issueId,
+            reading_list_items.position AS position,
+            reading_list_items.required AS required,
+            reading_list_items.notes AS notes,
+            issues.issueNumber AS issueNumber,
+            issues.title AS issueTitle,
+            issues.publicationDate AS publicationDate,
+            issues.coverUrl AS coverUrl,
+            series.title AS seriesTitle,
+            series.volume AS seriesVolume
+        FROM reading_list_items
+        INNER JOIN issues
+            ON reading_list_items.issueId = issues.id
+        INNER JOIN series
+            ON issues.seriesId = series.id
+        WHERE reading_list_items.readingListId = :readingListId
+        ORDER BY reading_list_items.position ASC
+    """)
+    suspend fun getReadingListIssues(
+        readingListId: Long
+    ): List<ReadingListIssue>
 
 
     // External IDs

@@ -11,6 +11,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.database.entities.Series
 import com.aschlus.comicreadingcompanion.data.database.entities.Universe
 import com.aschlus.comicreadingcompanion.data.database.entities.ExternalId
+import com.aschlus.comicreadingcompanion.data.database.models.ReadingListIssue
 
 class ComicRepository(
     private val comicDao: ComicDao
@@ -48,7 +49,7 @@ class ComicRepository(
         return comicDao.insertIssue(issue)
     }
 
-    suspend fun getIssuesForSeriew(
+    suspend fun getIssuesForSeries(
         seriesId: Long
     ): List<Issue> {
         return comicDao.getIssuesForSeries(seriesId)
@@ -73,6 +74,14 @@ class ComicRepository(
         readingListId: Long
     ): ReadingList? {
         return comicDao.getReadingListById(readingListId)
+    }
+
+    suspend fun getReadingListIssues(
+        readingListId: Long
+    ): List<ReadingListIssue> {
+        return comicDao.getReadingListIssues(
+            readingListId
+        )
     }
 
     suspend fun updateReadingList(readingList: ReadingList) {
