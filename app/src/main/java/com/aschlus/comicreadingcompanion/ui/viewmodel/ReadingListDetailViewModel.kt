@@ -60,6 +60,27 @@ class ReadingListDetailViewModel(
         }
     }
 
+    fun markAllBeforeAsRead(
+        selectedIssue: ReadingListIssue
+    ) {
+        viewModelScope.launch {
+            val issueIdsToMark = _issues.value
+                .filter { issue ->
+                    issue.position < selectedIssue.position
+                }
+                .filter { issue ->
+                    issue.readingStatus != ReadingStatus.READ
+                }
+                .map { issue ->
+                    issue.issueId
+                }
+
+            repository.markIssuesAsRead(
+                issueIdsToMark
+            )
+        }
+    }
+
     fun getReadCount(): Int {
         return _issues.value.count {
             it.readingStatus == ReadingStatus.READ

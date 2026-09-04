@@ -230,6 +230,14 @@ class ComicRepository(
         comicDao.upsertReadingProgress(updatedProgress)
     }
 
+    suspend fun markIssuesAsRead(
+        issueIds: List<Long>
+    ) {
+        issueIds.forEach { issueId ->
+            markIssueAsRead(issueId)
+        }
+    }
+
     suspend fun markIssueAsUnread(issueId: Long) {
         val existingProgress = comicDao.getReadingProgressForIssue(issueId)
 

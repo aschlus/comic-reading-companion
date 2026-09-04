@@ -198,6 +198,11 @@ fun ReadingListDetailScreen(
                                     viewModel.toggleIssueRead(
                                         issue = issue
                                     )
+                                },
+                                onMarkAllBeforeRead = {
+                                    viewModel.markAllBeforeAsRead(
+                                        selectedIssue = issue
+                                    )
                                 }
                             )
                         }
@@ -211,7 +216,8 @@ fun ReadingListDetailScreen(
 @Composable
 private fun ReadingListIssueRow(
     issue: ReadingListIssue,
-    onToggleRead: () -> Unit
+    onToggleRead: () -> Unit,
+    onMarkAllBeforeRead: () -> Unit
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -270,6 +276,14 @@ private fun ReadingListIssueRow(
                     text = notes,
                     style = MaterialTheme.typography.bodySmall
                 )
+            }
+
+            if (issue.position > 1) {
+                TextButton(
+                    onClick = onMarkAllBeforeRead
+                ) {
+                    Text("Mark all before as read")
+                }
             }
         }
     }
