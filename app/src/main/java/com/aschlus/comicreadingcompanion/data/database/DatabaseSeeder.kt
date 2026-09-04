@@ -1,6 +1,7 @@
 package com.aschlus.comicreadingcompanion.data.database
 
 import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
+import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.data.database.entities.Universe
 
 class DatabaseSeeder(
@@ -40,6 +41,34 @@ class DatabaseSeeder(
                     name = "Marvel Universe",
                     designation = "Earth-616",
                     description = "The primary Marvel Comics universe."
+                )
+            )
+        }
+
+        val updatedUniverses =
+            comicDao.getUniversesForPublisher(marvel.id)
+
+        val earth616 = updatedUniverses.find {
+            it.designation == "Earth-616"
+        }
+
+        val readingLists = comicDao.getAllReadingLists()
+
+        val spiderManListExists = readingLists.any {
+            it.title == "Spider-Man Reading Order"
+        }
+
+        if (!spiderManListExists && earth616 != null) {
+            val currentTime = System.currentTimeMillis()
+
+            comicDao.insertReadingList(
+                ReadingList(
+                    title = "Spider-Man Reading Order",
+                    description = "A development reading list for Spider-Man comics.",
+                    publisherId = marvel.id,
+                    universeId = earth616.id,
+                    createdAt = currentTime,
+                    updatedAt = currentTime
                 )
             )
         }
