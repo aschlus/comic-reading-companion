@@ -29,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
+import com.aschlus.comicreadingcompanion.data.database.models.ReadingListIssue
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ReadingListDetailViewModel
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
@@ -159,58 +160,71 @@ fun ReadingListDetailScreen(
                                 issue.readingListItemId
                             }
                         ) { issue ->
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Checkbox(
-                                    checked =
-                                        issue.readingStatus == ReadingStatus.READ,
-                                    onCheckedChange = {
-                                        viewModel.toggleIssueRead(
-                                            issue = issue
-                                        )
-                                    }
-                                )
-
-                                Column(
-                                    modifier = Modifier
-                                        .weight(1f)
-                                        .padding(
-                                            vertical = 8.dp
-                                        )
-                                ) {
-                                    Text(
-                                        text = "${issue.seriesTitle} #${issue.issueNumber}",
-                                        style = MaterialTheme.typography.titleMedium
-                                    )
-
-                                    issue.issueTitle?.let { title ->
-                                        Text(
-                                            text = title,
-                                            style = MaterialTheme.typography.bodyMedium
-                                        )
-                                    }
-
-                                    issue.publicationDate?.let { publicationDate ->
-                                        Text(
-                                            text = formatPublicationDate(publicationDate),
-                                            style = MaterialTheme.typography.bodySmall
-                                        )
-                                    }
-
-                                    Text(
-                                        text = "Reading Order #${issue.position}",
-                                        style = MaterialTheme.typography.bodySmall
+                            ReadingListIssueRow(
+                                issue = issue,
+                                onToggleRead = {
+                                    viewModel.toggleIssueRead(
+                                        issue = issue
                                     )
                                 }
-                            }
-
-                            HorizontalDivider()
+                            )
                         }
                     }
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun ReadingListIssueRow(
+    issue: ReadingListIssue,
+    onToggleRead: () -> Unit
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Checkbox(
+            checked =
+                issue.readingStatus == ReadingStatus.READ,
+            onCheckedChange = {
+                onToggleRead()
+            }
+        )
+
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .padding(
+                    vertical = 8.dp
+                )
+        ) {
+            Text(
+                text = "${issue.seriesTitle} #${issue.issueNumber}",
+                style = MaterialTheme.typography.titleMedium
+            )
+
+            issue.issueTitle?.let { title ->
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
+
+            issue.publicationDate?.let { publicationDate ->
+                Text(
+                    text = formatPublicationDate(
+                        publicationDate
+                    ),
+                    style = MaterialTheme.typography.bodySmall
+                )
+            }
+
+            Text(
+                text = "Reading Order #${issue.position}",
+                style = MaterialTheme.typography.bodySmall
+            )
         }
     }
 }
