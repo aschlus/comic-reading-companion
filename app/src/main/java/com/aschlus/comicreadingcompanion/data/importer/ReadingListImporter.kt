@@ -115,6 +115,21 @@ class ReadingListImporter(
                 }
 
         if (existing != null) {
+            val updated =
+                existing.copy(
+                    description = importData.description,
+                    universeId = universe.id,
+                    updatedAt = System.currentTimeMillis()
+                )
+
+            if (
+                existing.description != updated.description ||
+                existing.universeId != updated.universeId
+            ) {
+                comicDao.updateReadingList(updated)
+                return updated
+            }
+
             return existing
         }
 
@@ -149,6 +164,9 @@ class ReadingListImporter(
         universe: Universe,
         readingList: ReadingList
     ) {
+        val importedIssueIds =
+            mutableSetOf<Long>()
+
         importData.items.forEach { itemData ->
 
             val series =
@@ -163,6 +181,8 @@ class ReadingListImporter(
                     series = series,
                     universe = universe
                 )
+
+            importedIssueIds.add(issue.id)
 
             val existingItem =
                 comicDao.getReadingListItem(
@@ -181,8 +201,36 @@ class ReadingListImporter(
                         notes = itemData.notes
                     )
                 )
+            } else {
+                val updatedItem =
+                    existingItem.copy(
+                        position = itemData.position,
+                        required = itemData.required,
+                        notes = itemData.notes
+                    )
+
+                if (updatedItem != existingItem) {
+                    comicDao.updateReadingListItem(
+                        updatedItem
+                    )
+                }
             }
         }
+
+        val existingItems =
+            comicDao.getItemsForReadingList(
+                readingListId = readingList.id
+            )
+
+        existingItems
+            .filter { existingItem ->
+                existingItem.issueId !in importedIssueIds
+            }
+            .forEach { staleItem ->
+                comicDao.deleteReadingListItem(
+                    staleItem
+                )
+            }
     }
 
     private suspend fun getOrCreateSeries(
@@ -199,7 +247,17 @@ class ReadingListImporter(
             )
 
         if (existing != null) {
-            return existing
+            val updated =
+                existing.copy(
+                    startYear = seriesData.startYear,
+                    endYear = seriesData.endYear
+                )
+
+            if (updated != existing) {
+                comicDao.updateSeries(updated)
+            }
+
+            return updated
         }
 
         val id = comicDao.insertSeries(
@@ -229,16 +287,6 @@ class ReadingListImporter(
     ): Issue {
         val issueData = itemData.issue
 
-        val existing =
-            comicDao.getIssue(
-                seriesId = series.id,
-                issueNumber = issueData.number
-            )
-
-        if (existing != null) {
-            return existing
-        }
-
         val issueType =
             try {
                 IssueType.valueOf(
@@ -247,10 +295,34 @@ class ReadingListImporter(
             } catch (exception: IllegalArgumentException) {
                 throw IllegalArgumentException(
                     "Unknown issue type '${issueData.type}' " +
-                        "for ${series.title} #${issueData.number}",
+                            "for ${series.title} #${issueData.number}",
                     exception
                 )
             }
+
+        val existing =
+            comicDao.getIssue(
+                seriesId = series.id,
+                issueNumber = issueData.number
+            )
+
+        if (existing != null) {
+            val updated =
+                existing.copy(
+                    universeId = universe.id,
+                    title = issueData.title,
+                    publicationDate = issueData.publicationDate,
+                    coverUrl = issueData.coverUrl,
+                    description = issueData.description,
+                    issueType = issueType
+                )
+
+            if (updated != existing) {
+                comicDao.updateIssue(updated)
+            }
+
+            return updated
+        }
 
         val id = comicDao.insertIssue(
             Issue(

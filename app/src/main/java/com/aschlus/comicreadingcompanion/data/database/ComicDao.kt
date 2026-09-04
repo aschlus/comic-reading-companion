@@ -290,6 +290,12 @@ interface ComicDao {
     @Delete
     suspend fun deleteReadingListItem(item: ReadingListItem)
 
+    @Update
+    suspend fun updateSeries(series: Series)
+
+    @Update
+    suspend fun updateIssue(issue: Issue)
+
 
     // Reading progress
 
