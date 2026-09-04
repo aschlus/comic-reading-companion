@@ -221,6 +221,13 @@ private fun ReadingListIssueRow(
                 )
             }
 
+            issue.notes?.let { notes ->
+                Text(
+                    text = notes,
+                    style = MaterialTheme.typography.bodySmall
+                )
+            }
+
             Text(
                 text = "Reading Order #${issue.position}",
                 style = MaterialTheme.typography.bodySmall
