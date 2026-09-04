@@ -22,6 +22,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
+import com.aschlus.comicreadingcompanion.data.database.models.ReadingListContinueItem
 import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -34,6 +35,9 @@ fun HomeScreen(
 
     val readingListSummaries by
         viewModel.readingListSummaries.collectAsState()
+
+    val continueItems by
+        viewModel.continueItems.collectAsState()
 
     Scaffold(
         topBar = {
@@ -74,10 +78,14 @@ fun HomeScreen(
                             it.readingListId == readingList.id
                         }
 
+                        val continueItem =
+                            continueItems[readingList.id]
+
                         ReadingListCard(
                             readingList = readingList,
                             readCount = summary?.readCount ?: 0,
                             totalCount = summary?.totalCount ?: 0,
+                            continueItem = continueItem,
                             onClick = {
                                 onReadingListClick(readingList.id)
                             }
@@ -94,6 +102,7 @@ private fun ReadingListCard(
     readingList: ReadingList,
     readCount: Int,
     totalCount: Int,
+    continueItem: ReadingListContinueItem?,
     onClick: () -> Unit
 ) {
     Card(
@@ -143,6 +152,15 @@ private fun ReadingListCard(
                 progress = { progress },
                 modifier = Modifier.fillMaxWidth()
             )
+
+            if (continueItem != null) {
+                Text(
+                    text = "Continue: " +
+                        "${continueItem.seriesTitle} " +
+                        "#${continueItem.issueNumber}",
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
         }
     }
 }
