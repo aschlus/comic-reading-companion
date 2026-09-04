@@ -3,45 +3,58 @@ package com.aschlus.comicreadingcompanion
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.activity.viewModels
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.aschlus.comicreadingcompanion.ui.theme.ComicReadingCompanionTheme
+import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeViewModel
+import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeViewModelFactory
 
 class MainActivity : ComponentActivity() {
+
+    private val homeViewModel: HomeViewModel by viewModels {
+        HomeViewModelFactory(
+            (application as ComicReadingCompanionApplication)
+                .container
+                .comicRepository
+        )
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+
         setContent {
             ComicReadingCompanionTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+
+                val publishers by homeViewModel.publishers.collectAsState()
+
+                LaunchedEffect(Unit) {
+                    homeViewModel.loadPublishers()
                 }
+
+                Scaffold { innerPadding ->
+                    Column(
+                        modifier = Modifier.padding(innerPadding)
+                    ) {
+                        Text("Comic Reading Companion")
+
+                        if (publishers.isEmpty()) {
+                            Text("No publishers yet")
+                        } else {
+                            publishers.forEach { publisher ->
+                                Text(publisher.name)
+                            }
+                        }
+                    }
+                }
+
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ComicReadingCompanionTheme {
-        Greeting("Android")
     }
 }
