@@ -43,19 +43,23 @@ class MainActivity : ComponentActivity() {
                     composable("home") {
                         HomeScreen(
                             viewModel = homeViewModel,
-                            onReadingListClick = { readingListId ->
+                            onReadingListClick = { readingListId, startPosition ->
                                 navController.navigate(
-                                    "readingList/$readingListId"
+                                    "readingList/$readingListId?startPosition=$startPosition"
                                 )
                             }
                         )
                     }
 
                     composable(
-                        route = "readingList/{readingListId}",
+                        route = "readingList/{readingListId}?startPosition={startPosition}",
                         arguments = listOf(
                             navArgument("readingListId") {
                                 type = NavType.LongType
+                            },
+                            navArgument("startPosition") {
+                                type = NavType.IntType
+                                defaultValue = -1
                             }
                         )
                     ) { backStackEntry ->
@@ -64,6 +68,11 @@ class MainActivity : ComponentActivity() {
                             backStackEntry.arguments
                                 ?.getLong("readingListId")
                                 ?: return@composable
+
+                        val startPosition =
+                            backStackEntry.arguments
+                                ?.getInt("startPosition")
+                                ?: -1
 
                         val detailViewModel:
                                 ReadingListDetailViewModel = viewModel(
@@ -77,6 +86,7 @@ class MainActivity : ComponentActivity() {
 
                         ReadingListDetailScreen(
                             readingListId = readingListId,
+                            startPosition = startPosition,
                             viewModel = detailViewModel,
                             onBackClick = {
                                 navController.popBackStack()

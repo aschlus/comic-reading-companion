@@ -29,7 +29,7 @@ import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeViewModel
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel,
-    onReadingListClick: (Long) -> Unit
+    onReadingListClick: (Long, Int) -> Unit
 ) {
     val readingLists by viewModel.readingLists.collectAsState()
 
@@ -87,7 +87,10 @@ fun HomeScreen(
                             totalCount = summary?.totalCount ?: 0,
                             continueItem = continueItem,
                             onClick = {
-                                onReadingListClick(readingList.id)
+                                onReadingListClick(
+                                    readingList.id,
+                                    continueItem?.position ?: -1
+                                )
                             }
                         )
                     }
