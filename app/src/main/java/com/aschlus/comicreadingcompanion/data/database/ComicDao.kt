@@ -17,6 +17,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSecti
 import com.aschlus.comicreadingcompanion.data.database.entities.ExternalId
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingProgress
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListIssue
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ComicDao {
@@ -204,9 +205,9 @@ interface ComicDao {
         WHERE reading_list_items.readingListId = :readingListId
         ORDER BY reading_list_items.position ASC
     """)
-    suspend fun getReadingListIssues(
+    fun getReadingListIssues(
         readingListId: Long
-    ): List<ReadingListIssue>
+    ): Flow<List<ReadingListIssue>>
 
 
     // External IDs

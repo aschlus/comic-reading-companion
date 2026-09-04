@@ -128,7 +128,6 @@ fun ReadingListDetailScreen(
                                     issue.readingStatus == ReadingStatus.READ,
                                 onCheckedChange = {
                                     viewModel.toggleIssueRead(
-                                        readingListId = readingListId,
                                         issue = issue
                                     )
                                 }

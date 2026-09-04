@@ -9,11 +9,15 @@ import com.aschlus.comicreadingcompanion.data.repository.ComicRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class ReadingListDetailViewModel(
     private val repository: ComicRepository
 ) : ViewModel() {
+
+    private var issuesJob: Job? = null
 
     private val _readingList =
         MutableStateFlow<ReadingList?>(null)
@@ -31,14 +35,20 @@ class ReadingListDetailViewModel(
         viewModelScope.launch {
             _readingList.value =
                 repository.getReadingListById(readingListId)
+        }
 
-            _issues.value =
-                repository.getReadingListIssues(readingListId)
+        issuesJob?.cancel()
+
+        issuesJob = viewModelScope.launch {
+            repository
+                .getReadingListIssues(readingListId)
+                .collect { updatedIssues ->
+                    _issues.value = updatedIssues
+                }
         }
     }
 
     fun toggleIssueRead(
-        readingListId: Long,
         issue: ReadingListIssue
     ) {
         viewModelScope.launch {
@@ -47,9 +57,6 @@ class ReadingListDetailViewModel(
             } else {
                 repository.markIssueAsRead(issue.issueId)
             }
-
-            _issues.value =
-                repository.getReadingListIssues(readingListId)
         }
     }
 

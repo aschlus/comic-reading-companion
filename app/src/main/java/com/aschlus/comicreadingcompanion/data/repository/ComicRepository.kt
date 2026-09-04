@@ -12,6 +12,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.Series
 import com.aschlus.comicreadingcompanion.data.database.entities.Universe
 import com.aschlus.comicreadingcompanion.data.database.entities.ExternalId
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListIssue
+import kotlinx.coroutines.flow.Flow
 
 class ComicRepository(
     private val comicDao: ComicDao
@@ -76,9 +77,9 @@ class ComicRepository(
         return comicDao.getReadingListById(readingListId)
     }
 
-    suspend fun getReadingListIssues(
+    fun getReadingListIssues(
         readingListId: Long
-    ): List<ReadingListIssue> {
+    ): Flow<List<ReadingListIssue>> {
         return comicDao.getReadingListIssues(
             readingListId
         )
