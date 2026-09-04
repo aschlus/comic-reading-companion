@@ -212,21 +212,26 @@ private fun ReadingListIssueRow(
                 )
             }
 
-            if (!issue.required) {
-                Text(
-                    text = "Optional",
-                    style = MaterialTheme.typography.labelMedium
-                )
+            val metadata = buildList {
+                issue.publicationDate?.let { publicationDate ->
+                    add(
+                        formatPublicationDate(
+                            publicationDate
+                        )
+                    )
+                }
+
+                add("Order #${issue.position}")
+
+                if (!issue.required) {
+                    add("Optional")
+                }
             }
 
-            issue.publicationDate?.let { publicationDate ->
-                Text(
-                    text = formatPublicationDate(
-                        publicationDate
-                    ),
-                    style = MaterialTheme.typography.bodySmall
-                )
-            }
+            Text(
+                text = metadata.joinToString(" • "),
+                style = MaterialTheme.typography.bodySmall
+            )
 
             issue.notes?.let { notes ->
                 Text(
@@ -234,11 +239,6 @@ private fun ReadingListIssueRow(
                     style = MaterialTheme.typography.bodySmall
                 )
             }
-
-            Text(
-                text = "Reading Order #${issue.position}",
-                style = MaterialTheme.typography.bodySmall
-            )
         }
     }
 }
