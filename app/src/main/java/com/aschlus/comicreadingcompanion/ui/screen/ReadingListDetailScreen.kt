@@ -30,6 +30,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ReadingListDetailViewModel
+import java.time.YearMonth
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -189,6 +192,13 @@ fun ReadingListDetailScreen(
                                         )
                                     }
 
+                                    issue.publicationDate?.let { publicationDate ->
+                                        Text(
+                                            text = formatPublicationDate(publicationDate),
+                                            style = MaterialTheme.typography.bodySmall
+                                        )
+                                    }
+
                                     Text(
                                         text = "Reading Order #${issue.position}",
                                         style = MaterialTheme.typography.bodySmall
@@ -202,5 +212,22 @@ fun ReadingListDetailScreen(
                 }
             }
         }
+    }
+}
+
+private fun formatPublicationDate(
+    publicationDate: String
+): String {
+    return try {
+        YearMonth
+            .parse(publicationDate)
+            .format(
+                DateTimeFormatter.ofPattern(
+                    "MMM yyyy",
+                    Locale.getDefault()
+                )
+            )
+    } catch (_: Exception) {
+        publicationDate
     }
 }
