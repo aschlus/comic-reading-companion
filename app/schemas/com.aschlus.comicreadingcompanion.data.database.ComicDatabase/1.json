@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "fcc3201c6cc3e1c814629c4a1187f978",
+    "identityHash": "dedc0e601625831a1ebb4104205dc578",
     "entities": [
       {
         "tableName": "publishers",
@@ -30,7 +30,7 @@
       },
       {
         "tableName": "universes",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `publisherId` INTEGER NOT NULL, `name` TEXT NOT NULL, `destination` TEXT, `description` TEXT, FOREIGN KEY(`publisherId`) REFERENCES `publishers`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `publisherId` INTEGER NOT NULL, `name` TEXT NOT NULL, `designation` TEXT, `description` TEXT, FOREIGN KEY(`publisherId`) REFERENCES `publishers`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -51,8 +51,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "destination",
-            "columnName": "destination",
+            "fieldPath": "designation",
+            "columnName": "designation",
             "affinity": "TEXT"
           },
           {
@@ -690,7 +690,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'fcc3201c6cc3e1c814629c4a1187f978')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'dedc0e601625831a1ebb4104205dc578')"
     ]
   }
 }

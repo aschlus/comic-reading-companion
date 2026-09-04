@@ -25,6 +25,6 @@ data class Universe(
     val id: Long = 0,
     val publisherId: Long,
     val name: String,
-    val destination: String?,
+    val designation: String?,
     val description: String?
 )
