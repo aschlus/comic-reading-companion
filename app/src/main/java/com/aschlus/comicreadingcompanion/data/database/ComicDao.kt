@@ -347,6 +347,14 @@ interface ComicDao {
     """)
     suspend fun getReadingProgressForIssue(issueId: Long): ReadingProgress?
 
+    @Query("""
+        SELECT * FROM reading_progress
+        WHERE issueId IN (:issueIds)
+    """)
+    suspend fun getReadingProgressForIssues(
+        issueIds: List<Long>
+    ): List<ReadingProgress>
+
 
     // Updates and deletes
 
@@ -380,6 +388,17 @@ interface ComicDao {
     @Upsert
     suspend fun upsertReadingProgress(progress: ReadingProgress)
 
+    @Upsert
+    suspend fun upsertReadingProgress(progress: List<ReadingProgress>)
+
     @Delete
     suspend fun deleteReadingProgress(progress: ReadingProgress)
+
+    @Query("""
+        DELETE FROM reading_progress
+        WHERE issueId IN (:issueIds)
+    """)
+    suspend fun deleteReadingProgressForIssues(
+        issueIds: List<Long>
+    )
 }

@@ -12,7 +12,8 @@ class AppContainer(context: Context) {
     private val database = ComicDatabase.getDatabase(context)
 
     val comicRepository = ComicRepository(
-        comicDao = database.comicDao()
+        comicDao = database.comicDao(),
+        database = database
     )
 
     val databaseSeeder = DatabaseSeeder(

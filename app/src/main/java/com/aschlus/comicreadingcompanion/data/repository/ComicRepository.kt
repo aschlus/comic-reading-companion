@@ -1,6 +1,8 @@
 package com.aschlus.comicreadingcompanion.data.repository
 
+import androidx.room3.withWriteTransaction
 import com.aschlus.comicreadingcompanion.data.database.ComicDao
+import com.aschlus.comicreadingcompanion.data.database.ComicDatabase
 import com.aschlus.comicreadingcompanion.data.database.entities.Issue
 import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
@@ -18,7 +20,8 @@ import com.aschlus.comicreadingcompanion.data.database.models.ReadingListSummary
 import kotlinx.coroutines.flow.Flow
 
 class ComicRepository(
-    private val comicDao: ComicDao
+    private val comicDao: ComicDao,
+    private val database: ComicDatabase
 ) {
 
     suspend fun addPublisher(publisher: Publisher): Long {
@@ -242,8 +245,54 @@ class ComicRepository(
     suspend fun markIssuesAsRead(
         issueIds: List<Long>
     ) {
-        issueIds.forEach { issueId ->
-            markIssueAsRead(issueId)
+        val distinctIssueIds = issueIds.distinct()
+
+        if(distinctIssueIds.isEmpty()) {
+            return
+        }
+
+        database.withWriteTransaction {
+            val existingProgress =
+                comicDao.getReadingProgressForIssues(
+                    distinctIssueIds
+                )
+
+            val progressByIssueId =
+                existingProgress.associateBy { progress ->
+                    progress.issueId
+                }
+
+            val currentTime =
+                System.currentTimeMillis()
+
+            val updateProgress =
+                distinctIssueIds.map { issueId ->
+
+                    val existing =
+                        progressByIssueId[issueId]
+
+                    if (existing == null) {
+                        ReadingProgress(
+                            issueId = issueId,
+                            status = ReadingStatus.READ,
+                            startedAt = currentTime,
+                            completedAt = currentTime,
+                            notes = null
+                        )
+                    } else {
+                        existing.copy(
+                            status = ReadingStatus.READ,
+                            startedAt =
+                                existing.startedAt
+                                    ?: currentTime,
+                            completedAt = currentTime
+                        )
+                    }
+                }
+
+            comicDao.upsertReadingProgress(
+                updateProgress
+            )
         }
     }
 
@@ -258,9 +307,15 @@ class ComicRepository(
     suspend fun markIssuesAsUnread(
         issueIds: List<Long>
     ) {
-        issueIds.forEach { issueId ->
-            markIssueAsUnread(issueId)
+        val distinctIssueIds = issueIds.distinct()
+
+        if (distinctIssueIds.isEmpty()) {
+            return
         }
+
+        comicDao.deleteReadingProgressForIssues(
+            distinctIssueIds
+        )
     }
 
 
