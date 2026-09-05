@@ -231,4 +231,3 @@ building, following, and tracking comic-book reading orders.
 - [ ] Completed reading-list archive
 - [ ] Shareable reading lists
 - [ ] Import community-created reading orders
-- [ ] Archive of completed reading orders
