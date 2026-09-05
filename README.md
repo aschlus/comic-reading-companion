@@ -73,7 +73,8 @@ building, following, and tracking comic-book reading orders.
 - [ ] Bulk mark issues as read
 - [ ] Bulk mark issues as unread
 - [x] Mark everything before a selected issue as read
-- [ ] Reset reading-list progress
+- [x] Reset reading-list progress
+- [x] Mark entire reading-list as read
 - [ ] Display date started
 - [ ] Display date completed
 - [ ] User notes on reading progress
@@ -81,14 +82,14 @@ building, following, and tracking comic-book reading orders.
 
 ### Issue and Series Browsing
 
-- [ ] Issue detail screen
+- [x] Issue detail screen
 - [ ] Series detail screen
 - [ ] Display issue cover artwork
-- [ ] Display issue title
-- [ ] Display publication / cover date
-- [ ] Display issue description
-- [ ] Display issue type
-- [ ] Display universe / continuity
+- [x] Display issue title
+- [x] Display publication / cover date
+- [x] Display issue description
+- [x] Display issue type
+- [x] Display universe / continuity
 - [ ] Browse issues by series
 - [ ] Browse series by publisher
 - [ ] Search issues and series
@@ -153,7 +154,7 @@ building, following, and tracking comic-book reading orders.
 - [x] Navigate from a card to its reading list
 - [x] Show progress on each reading-list card
 - [x] Show issue count on each card
-- [ ] Show current / next issue on each card
+- [x] Show current / next issue on each card
 - [ ] Sort reading lists
 - [ ] Search reading lists
 - [ ] Reading-list cover / hero artwork

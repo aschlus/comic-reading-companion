@@ -91,6 +91,40 @@ class ReadingListDetailViewModel(
         }
     }
 
+    fun markAllAsRead() {
+        viewModelScope.launch {
+            val issueIdsToMark = _issues.value
+                .filter { issue ->
+                    issue.readingStatus != ReadingStatus.READ
+                }
+                .map { issue ->
+                    issue.issueId
+                }
+                .distinct()
+
+            repository.markIssuesAsRead(
+                issueIdsToMark
+            )
+        }
+    }
+
+    fun resetProgress() {
+        viewModelScope.launch {
+            val issueIdsToReset = _issues.value
+                .filter { issue ->
+                    issue.readingStatus != null
+                }
+                .map { issue ->
+                    issue.issueId
+                }
+                .distinct()
+
+            repository.markIssuesAsUnread(
+                issueIdsToReset
+            )
+        }
+    }
+
     fun getReadCount(): Int {
         return _issues.value.count {
             it.readingStatus == ReadingStatus.READ

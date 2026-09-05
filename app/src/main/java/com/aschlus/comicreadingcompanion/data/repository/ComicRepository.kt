@@ -255,6 +255,14 @@ class ComicRepository(
         }
     }
 
+    suspend fun markIssuesAsUnread(
+        issueIds: List<Long>
+    ) {
+        issueIds.forEach { issueId ->
+            markIssueAsUnread(issueId)
+        }
+    }
+
 
     // External IDs
 

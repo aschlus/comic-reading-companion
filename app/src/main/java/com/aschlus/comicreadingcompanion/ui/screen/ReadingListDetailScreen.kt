@@ -2,6 +2,7 @@ package com.aschlus.comicreadingcompanion.ui.screen
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,6 +15,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -71,6 +73,14 @@ fun ReadingListDetailScreen(
         mutableStateOf(false)
     }
 
+    var listMenuExpanded by remember {
+        mutableStateOf(false)
+    }
+
+    var showResetProgressDialog by remember {
+        mutableStateOf(false)
+    }
+
     LaunchedEffect(readingListId) {
         viewModel.loadReadingList(readingListId)
     }
@@ -97,6 +107,14 @@ fun ReadingListDetailScreen(
         }
     }
 
+    val hasUnreadIssues = issues.any { issue ->
+        issue.readingStatus != ReadingStatus.READ
+    }
+
+    val hasAnyProgress = issues.any { issue ->
+        issue.readingStatus != null
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -114,10 +132,55 @@ fun ReadingListDetailScreen(
                             contentDescription = "Back"
                         )
                     }
+                },
+                actions = {
+                    Box {
+                        IconButton(
+                            onClick = {
+                                listMenuExpanded = true
+                            }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.MoreVert,
+                                contentDescription =
+                                    "Reading list options"
+                            )
+                        }
+
+                        DropdownMenu(
+                            expanded = listMenuExpanded,
+                            onDismissRequest = {
+                                listMenuExpanded = false
+                            }
+                        ) {
+                            DropdownMenuItem(
+                                text = {
+                                    Text("Mark all as read")
+                                },
+                                enabled = hasUnreadIssues,
+                                onClick = {
+                                    listMenuExpanded = false
+                                    viewModel.markAllAsRead()
+                                }
+                            )
+
+                            DropdownMenuItem(
+                                text = {
+                                    Text("Reset reading progress")
+                                },
+                                enabled = hasAnyProgress,
+                                onClick = {
+                                    listMenuExpanded = false
+                                    showResetProgressDialog = true
+                                }
+                            )
+                        }
+                    }
                 }
             )
         }
-    ) { innerPadding: PaddingValues ->
+    )
+    { innerPadding: PaddingValues ->
 
         Column(
             modifier = Modifier
@@ -230,6 +293,46 @@ fun ReadingListDetailScreen(
                 }
             }
         }
+    }
+
+    if (showResetProgressDialog) {
+        AlertDialog(
+            onDismissRequest = {
+                showResetProgressDialog = false
+            },
+            title = {
+                Text("Reset reading progress?")
+            },
+            text = {
+                Text(
+                    "This will mark every issue in this " +
+                    "reading list as unread. Issue " +
+                    "progress is shared across reading " +
+                    "lists, so these issues will also " +
+                    "appear unread in any other lists " +
+                    "that contain them."
+                )
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        showResetProgressDialog = false
+                        viewModel.resetProgress()
+                    }
+                ) {
+                    Text("Reset")
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = {
+                        showResetProgressDialog = false
+                    }
+                ) {
+                    Text("Cancel")
+                }
+            }
+        )
     }
 }
 
