@@ -12,6 +12,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.aschlus.comicreadingcompanion.ui.screen.HomeScreen
 import com.aschlus.comicreadingcompanion.ui.screen.IssueDetailScreen
+import com.aschlus.comicreadingcompanion.ui.screen.PublisherDetailScreen
 import com.aschlus.comicreadingcompanion.ui.screen.ReadingListDetailScreen
 import com.aschlus.comicreadingcompanion.ui.screen.SeriesDetailScreen
 import com.aschlus.comicreadingcompanion.ui.theme.ComicReadingCompanionTheme
@@ -19,6 +20,8 @@ import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeViewModelFactory
 import com.aschlus.comicreadingcompanion.ui.viewmodel.IssueDetailViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.IssueDetailViewModelFactory
+import com.aschlus.comicreadingcompanion.ui.viewmodel.PublisherDetailViewModel
+import com.aschlus.comicreadingcompanion.ui.viewmodel.PublisherDetailViewModelFactory
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ReadingListDetailViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ReadingListDetailViewModelFactory
 import com.aschlus.comicreadingcompanion.ui.viewmodel.SeriesDetailViewModel
@@ -110,6 +113,42 @@ class MainActivity : ComponentActivity() {
                     }
 
                     composable(
+                        route = "publisher/{publisherId}",
+                        arguments = listOf(
+                            navArgument("publisherId") {
+                                type = NavType.LongType
+                            }
+                        )
+                    ) { backStackEntry ->
+
+                        val publisherId =
+                            backStackEntry.arguments
+                                ?.getLong("publisherId")
+                                ?: return@composable
+
+                        val publisherDetailViewModel:
+                                PublisherDetailViewModel = viewModel(
+                                    factory =
+                                        PublisherDetailViewModelFactory(
+                                            (application as ComicReadingCompanionApplication)
+                                                .container
+                                                .comicRepository
+                                        )
+                                )
+
+                        PublisherDetailScreen(
+                            publisherId = publisherId,
+                            viewModel = publisherDetailViewModel,
+                            onSeriesClick = { seriesId ->
+                                navController.navigate(
+                                    "series/$seriesId"
+                                )
+                            },
+                            onBackClick = safeNavigateBack
+                        )
+                    }
+
+                    composable(
                         route = "series/{seriesId}",
                         arguments = listOf(
                             navArgument("seriesId") {
@@ -136,6 +175,11 @@ class MainActivity : ComponentActivity() {
                         SeriesDetailScreen(
                             seriesId = seriesId,
                             viewModel = seriesDetailViewModel,
+                            onPublisherClick = { publisherId ->
+                                navController.navigate(
+                                    "publisher/$publisherId"
+                                )
+                            },
                             onIssueClick = { issueId ->
                                 navController.navigate(
                                     "issue/$issueId"

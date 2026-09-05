@@ -1,11 +1,11 @@
 package com.aschlus.comicreadingcompanion.data.database.models
 
-data class SeriesDetail(
+data class PublisherSeries(
     val seriesId: Long,
     val title: String,
     val volume: Int?,
     val startYear: Int?,
     val endYear: Int?,
-    val publisherId: Long,
-    val publisherName: String
+    val totalCount: Int,
+    val readCount: Int
 )

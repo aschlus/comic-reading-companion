@@ -42,6 +42,7 @@ import java.util.Locale
 fun SeriesDetailScreen(
     seriesId: Long,
     viewModel: SeriesDetailViewModel,
+    onPublisherClick: (Long) -> Unit,
     onIssueClick: (Long) -> Unit,
     onBackClick: () -> Unit
 ) {
@@ -121,14 +122,23 @@ fun SeriesDetailScreen(
                             )
                         }
                     }
-
-                    add(currentSeries.publisherName)
                 }
 
                 Text(
                     text = seriesMetadata.joinToString(" • "),
                     style =
                         MaterialTheme.typography.bodyMedium
+                )
+
+                Text(
+                    text = currentSeries.publisherName,
+                    style =
+                        MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.clickable {
+                        onPublisherClick(
+                            currentSeries.publisherId
+                        )
+                    }
                 )
 
                 val readCount = issues.count { issue ->

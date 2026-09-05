@@ -91,7 +91,7 @@ building, following, and tracking comic-book reading orders.
 - [x] Display issue type
 - [x] Display universe / continuity
 - [x] Browse issues by series
-- [ ] Browse series by publisher
+- [x] Browse series by publisher
 - [ ] Search issues and series
 - [ ] Filter by publisher
 - [ ] Filter by universe / continuity

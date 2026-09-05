@@ -17,6 +17,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSecti
 import com.aschlus.comicreadingcompanion.data.database.entities.ExternalId
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingProgress
 import com.aschlus.comicreadingcompanion.data.database.models.IssueDetail
+import com.aschlus.comicreadingcompanion.data.database.models.PublisherSeries
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListContinueItem
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListIssue
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListSummary
@@ -43,6 +44,15 @@ interface ComicDao {
     suspend fun getPublisherByName(
         name: String
     ): Publisher?
+
+    @Query("""
+        SELECT * FROM publishers
+        WHERE id = :publisherId
+        LIMIT 1
+    """)
+    fun getPublisherById(
+        publisherId: Long
+    ): Flow<Publisher?>
 
 
     // Universes
@@ -104,6 +114,7 @@ interface ComicDao {
             series.volume AS volume,
             series.startYear AS startYear,
             series.endYear AS endYear,
+            publishers.id AS publisherId,
             publishers.name AS publisherName
         FROM series
         INNER JOIN publishers
@@ -135,6 +146,37 @@ interface ComicDao {
     fun getSeriesIssues(
         seriesId: Long
     ): Flow<List<SeriesIssue>>
+
+    @Query("""
+        SELECT
+            series.id AS seriesId,
+            series.title AS title,
+            series.volume AS volume,
+            series.startYear AS startYear,
+            series.endYear AS endYear,
+            COUNT(issues.id) AS totalCount,
+            SUM(
+                CASE
+                    WHEN reading_progress.status = 'READ'
+                        THEN 1
+                    ELSE 0
+                END
+            ) AS readCount
+        FROM series
+        LEFT JOIN issues
+            ON series.id = issues.seriesId
+        LEFT JOIN reading_progress
+            ON issues.id = reading_progress.issueId
+        WHERE series.publisherId = :publisherId
+        GROUP By series.id
+        ORDER BY
+            series.startYear ASC,
+            series.title ASC,
+            series.volume ASC
+    """)
+    fun getPublisherSeries(
+        publisherId: Long
+    ): Flow<List<PublisherSeries>>
 
 
     // Issues

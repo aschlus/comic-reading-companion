@@ -14,6 +14,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.Series
 import com.aschlus.comicreadingcompanion.data.database.entities.Universe
 import com.aschlus.comicreadingcompanion.data.database.entities.ExternalId
 import com.aschlus.comicreadingcompanion.data.database.models.IssueDetail
+import com.aschlus.comicreadingcompanion.data.database.models.PublisherSeries
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListContinueItem
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListIssue
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListSummary
@@ -32,6 +33,22 @@ class ComicRepository(
 
     suspend fun getPublishers(): List<Publisher> {
         return comicDao.getAllPublishers()
+    }
+
+    fun getPublisherById(
+        publisherId: Long
+    ): Flow<Publisher?> {
+        return comicDao.getPublisherById(
+            publisherId = publisherId
+        )
+    }
+
+    fun getPublisherSeries(
+        publisherId: Long
+    ): Flow<List<PublisherSeries>> {
+        return comicDao.getPublisherSeries(
+            publisherId = publisherId
+        )
     }
 
     suspend fun addUniverse(universe: Universe): Long {
