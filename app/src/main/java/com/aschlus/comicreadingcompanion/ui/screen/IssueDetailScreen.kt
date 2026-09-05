@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -28,6 +29,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
+import com.aschlus.comicreadingcompanion.ui.component.ComicCoverImage
 import com.aschlus.comicreadingcompanion.ui.viewmodel.IssueDetailViewModel
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
@@ -92,6 +94,16 @@ fun IssueDetailScreen(
                 verticalArrangement =
                     Arrangement.spacedBy(12.dp)
             ) {
+
+                ComicCoverImage(
+                    coverUrl = currentIssue.coverUrl,
+                    contentDescription =
+                        "${currentIssue.seriesTitle} #${currentIssue.issueNumber} cover",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(2f / 3f)
+                )
+
                 Text(
                     text = currentIssue.seriesTitle,
                     style =

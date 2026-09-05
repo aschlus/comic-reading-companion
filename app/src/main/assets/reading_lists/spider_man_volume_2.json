@@ -19,9 +19,16 @@
         "number": "0",
         "title": null,
         "publicationDate": "1998-09",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/787/139327-11305-110960-1-slingers.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "110960",
+            "url": "https://comicvine.gamespot.com/slingers-0-the-learning-curve/4000-110960/"
+          }
+        ]
       },
       "required": true,
       "notes": "Four of a Kind / introduction — Standalone; start of Slingers"
@@ -38,9 +45,16 @@
         "number": "1",
         "title": null,
         "publicationDate": "1998-12",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/15776/670831-slingers1c.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "99239",
+            "url": "https://comicvine.gamespot.com/slingers-1-so-whose-idea-was-this-anyway/4000-99239/"
+          }
+        ]
       },
       "required": true,
       "notes": "Four Aces — Continue Slingers"
@@ -57,9 +71,16 @@
         "number": "1",
         "title": null,
         "publicationDate": "1998-12",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171180-2127-113432-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113432",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-1-where-r-u-spider-man-rebi/4000-113432/"
+          }
+        ]
       },
       "required": true,
       "notes": "The Gathering of Five — Start main 1999 era"
@@ -76,9 +97,16 @@
         "number": "2",
         "title": null,
         "publicationDate": "1999-01",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171185-2127-113433-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113433",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-2-i-can-t-and-i-don-t-want-/4000-113433/"
+          }
+        ]
       },
       "required": true,
       "notes": "Gathering of Five — After ASM #1"
@@ -95,9 +123,16 @@
         "number": "1",
         "title": null,
         "publicationDate": "1999-01",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51585-9142-68478-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68478",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-1-power-without-responsibi/4000-68478/"
+          }
+        ]
       },
       "required": true,
       "notes": "Relaunch / new status quo — After ASM #1–2"
@@ -114,9 +149,16 @@
         "number": "1",
         "title": null,
         "publicationDate": "1999-01",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/54590-9375-75623-1-webspinners-tales-o.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "75623",
+            "url": "https://comicvine.gamespot.com/webspinners-tales-of-spider-man-1-crash-and-burn-t/4000-75623/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Standalone"
@@ -133,9 +175,16 @@
         "number": "2",
         "title": null,
         "publicationDate": "1999-01",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/66243-11305-99240-1-slingers.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "99240",
+            "url": "https://comicvine.gamespot.com/slingers-2-hooligans/4000-99240/"
+          }
+        ]
       },
       "required": true,
       "notes": "Slingers — After #1"
@@ -152,9 +201,16 @@
         "number": "3",
         "title": null,
         "publicationDate": "1999-02",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171187-2127-113434-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113434",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-3-off-to-a-flying-start/4000-113434/"
+          }
+        ]
       },
       "required": true,
       "notes": "Gathering of Five — Continue"
@@ -171,9 +227,16 @@
         "number": "2",
         "title": null,
         "publicationDate": "1999-02",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51587-9142-68479-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68479",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-2-plaything-of-the-gods/4000-68479/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -190,9 +253,16 @@
         "number": "2",
         "title": null,
         "publicationDate": "1999-02",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/227578-9375-75624-2-webspinners-tales-o.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "75624",
+            "url": "https://comicvine.gamespot.com/webspinners-tales-of-spider-man-2-in-the-nightmare/4000-75624/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Standalone"
@@ -209,9 +279,16 @@
         "number": "3",
         "title": null,
         "publicationDate": "1999-02",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/66244-11305-99241-1-slingers.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "99241",
+            "url": "https://comicvine.gamespot.com/slingers-3-with-friends-like-these/4000-99241/"
+          }
+        ]
       },
       "required": true,
       "notes": "Slingers — Continue"
@@ -228,9 +305,16 @@
         "number": "4",
         "title": null,
         "publicationDate": "1999-03",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171188-2127-113435-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113435",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-4-betrayals/4000-113435/"
+          }
+        ]
       },
       "required": true,
       "notes": "Gathering of Five — Continue"
@@ -247,9 +331,16 @@
         "number": "3",
         "title": null,
         "publicationDate": "1999-03",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51589-9142-68480-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68480",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-3-eyewitness/4000-68480/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -266,9 +357,16 @@
         "number": "3",
         "title": null,
         "publicationDate": "1999-03",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/54592-9375-75625-1-webspinners-tales-o.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "75625",
+            "url": "https://comicvine.gamespot.com/webspinners-tales-of-spider-man-3-wake-up-call/4000-75625/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Standalone"
@@ -285,9 +383,16 @@
         "number": "4",
         "title": null,
         "publicationDate": "1999-03",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/66245-11305-99242-1-slingers.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "99242",
+            "url": "https://comicvine.gamespot.com/slingers-4-the-black-marvel-strikes/4000-99242/"
+          }
+        ]
       },
       "required": true,
       "notes": "Slingers — Continue"
@@ -304,9 +409,16 @@
         "number": "5",
         "title": null,
         "publicationDate": "1999-04",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171189-2127-113436-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113436",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-5-and-then-there-was-one/4000-113436/"
+          }
+        ]
       },
       "required": true,
       "notes": "Gathering of Five — Continue"
@@ -323,9 +435,16 @@
         "number": "4",
         "title": null,
         "publicationDate": "1999-04",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51592-9142-68481-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68481",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-4-beneath-it-all/4000-68481/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -342,9 +461,16 @@
         "number": "1999",
         "title": null,
         "publicationDate": "1999-04",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/5586/623647-99.jpg",
         "description": null,
-        "type": "ANNUAL"
+        "type": "ANNUAL",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "143311",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-annual-99-1-world-enough-ti/4000-143311/"
+          }
+        ]
       },
       "required": true,
       "notes": "Annual stories — Around ASM #5–6"
@@ -361,9 +487,16 @@
         "number": "4",
         "title": null,
         "publicationDate": "1999-04",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/54593-9375-75626-1-webspinners-tales-o.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "75626",
+            "url": "https://comicvine.gamespot.com/webspinners-tales-of-spider-man-4-out-of-the-blue-/4000-75626/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Standalone"
@@ -380,9 +513,16 @@
         "number": "6",
         "title": null,
         "publicationDate": "1999-05",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171190-2127-113437-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113437",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-6-truth-be-told-or-not/4000-113437/"
+          }
+        ]
       },
       "required": true,
       "notes": "Gathering of Five conclusion — Finish opening arc"
@@ -399,9 +539,16 @@
         "number": "5",
         "title": null,
         "publicationDate": "1999-05",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51591-9142-68482-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68482",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-5-the-trouble-with-girls/4000-68482/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -418,9 +565,16 @@
         "number": "5",
         "title": null,
         "publicationDate": "1999-05",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/54594-9375-75627-1-webspinners-tales-o.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "75627",
+            "url": "https://comicvine.gamespot.com/webspinners-tales-of-spider-man-5-broken/4000-75627/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Standalone"
@@ -437,9 +591,16 @@
         "number": "7",
         "title": null,
         "publicationDate": "1999-06",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171191-2127-113438-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113438",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-7-the-perfect-world-part-1-/4000-113438/"
+          }
+        ]
       },
       "required": true,
       "notes": "Post–Gathering of Five — Continue"
@@ -456,9 +617,16 @@
         "number": "6",
         "title": null,
         "publicationDate": "1999-06",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51594-9142-68483-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68483",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-6-the-whys-have-it/4000-68483/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -475,9 +643,16 @@
         "number": "6",
         "title": null,
         "publicationDate": "1999-06",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/74400-9375-75628-1-webspinners-tales-o.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "75628",
+            "url": "https://comicvine.gamespot.com/webspinners-tales-of-spider-man-6-with-everything-/4000-75628/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Standalone"
@@ -494,9 +669,16 @@
         "number": "8",
         "title": null,
         "publicationDate": "1999-07",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171192-2127-113439-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113439",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-8-the-man-behind-the-curtai/4000-113439/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -513,9 +695,16 @@
         "number": "7",
         "title": null,
         "publicationDate": "1999-07",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51596-9142-68484-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68484",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-7-creatures-of-the-night/4000-68484/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -532,9 +721,16 @@
         "number": "7",
         "title": null,
         "publicationDate": "1999-07",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/74401-9375-75629-1-webspinners-tales-o.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "75629",
+            "url": "https://comicvine.gamespot.com/webspinners-tales-of-spider-man-7-the-bridge/4000-75629/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Standalone"
@@ -551,9 +747,16 @@
         "number": "9",
         "title": null,
         "publicationDate": "1999-08",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171193-2127-113440-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113440",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-9-the-list/4000-113440/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -570,9 +773,16 @@
         "number": "8",
         "title": null,
         "publicationDate": "1999-08",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51598-9142-68485-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68485",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-8-blood-feud/4000-68485/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -589,9 +799,16 @@
         "number": "1999",
         "title": null,
         "publicationDate": "1999-08",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/38919/1791981-peter_parker_spider_man_99.jpg",
         "description": null,
-        "type": "ANNUAL"
+        "type": "ANNUAL",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "269238",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-annual-1999-1-song-of-the-/4000-269238/"
+          }
+        ]
       },
       "required": true,
       "notes": "Annual stories — Around PP #8"
@@ -608,9 +825,16 @@
         "number": "8",
         "title": null,
         "publicationDate": "1999-08",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/74402-9375-75630-1-webspinners-tales-o.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "75630",
+            "url": "https://comicvine.gamespot.com/webspinners-tales-of-spider-man-8-the-bridge-part-/4000-75630/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Standalone"
@@ -627,9 +851,16 @@
         "number": "10",
         "title": null,
         "publicationDate": "1999-09",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171194-2127-113441-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113441",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-10-and-then-there-were/4000-113441/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -646,9 +877,16 @@
         "number": "9",
         "title": null,
         "publicationDate": "1999-09",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51600-9142-68486-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68486",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-9-shadows-of-the-past/4000-68486/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -665,9 +903,16 @@
         "number": "9",
         "title": null,
         "publicationDate": "1999-09",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/74403-9375-75631-1-webspinners-tales-o.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "75631",
+            "url": "https://comicvine.gamespot.com/webspinners-tales-of-spider-man-9-the-bridge-part-/4000-75631/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Standalone"
@@ -684,9 +929,16 @@
         "number": "10",
         "title": null,
         "publicationDate": "1999-09",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/66251-11305-99248-1-slingers.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "99248",
+            "url": "https://comicvine.gamespot.com/slingers-10-raising-hells-children-part-1-the-devi/4000-99248/"
+          }
+        ]
       },
       "required": true,
       "notes": "Slingers — Continue"
@@ -703,9 +955,16 @@
         "number": "11",
         "title": null,
         "publicationDate": "1999-10",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171195-2127-113442-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113442",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-11-bright-lights-bigger-cit/4000-113442/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -722,9 +981,16 @@
         "number": "10",
         "title": null,
         "publicationDate": "1999-10",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51602-9142-68487-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68487",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-10-venom-triumphant/4000-68487/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -741,9 +1007,16 @@
         "number": "10",
         "title": null,
         "publicationDate": "1999-10",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/74404-9375-75632-1-webspinners-tales-o.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "75632",
+            "url": "https://comicvine.gamespot.com/webspinners-tales-of-spider-man-10-the-show-must-g/4000-75632/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Standalone"
@@ -760,9 +1033,16 @@
         "number": "12",
         "title": null,
         "publicationDate": "1999-11",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171196-2127-113443-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113443",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-12-another-return-of-the-si/4000-113443/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -779,9 +1059,16 @@
         "number": "11",
         "title": null,
         "publicationDate": "1999-11",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51604-9142-68488-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68488",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-11-an-exemplary-day/4000-68488/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -798,9 +1085,16 @@
         "number": "11",
         "title": null,
         "publicationDate": "1999-11",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/227654-9375-117427-1-webspinners-tales-o.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "117427",
+            "url": "https://comicvine.gamespot.com/webspinners-tales-of-spider-man-11-off-the-deep-en/4000-117427/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Standalone"
@@ -817,9 +1111,16 @@
         "number": "13",
         "title": null,
         "publicationDate": "1999-12",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171197-2127-113444-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113444",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-13-time-enough/4000-113444/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -836,9 +1137,16 @@
         "number": "12",
         "title": null,
         "publicationDate": "1999-12",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51606-9142-68489-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68489",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-12-another-return-of-the-s/4000-68489/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -855,9 +1163,16 @@
         "number": "12",
         "title": null,
         "publicationDate": "1999-12",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/227749-9375-117429-1-webspinners-tales-o.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "117429",
+            "url": "https://comicvine.gamespot.com/webspinners-tales-of-spider-man-12-perchance-to-dr/4000-117429/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Standalone"
@@ -874,9 +1189,16 @@
         "number": "½",
         "title": null,
         "publicationDate": "1999-12",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/9/98094/1785079-spider_man_unlimited_00___01_.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "268921",
+            "url": "https://comicvine.gamespot.com/spider-man-unlimited-12-good-intentions/4000-268921/"
+          }
+        ]
       },
       "required": true,
       "notes": "Standalone — Supplemental"
@@ -893,9 +1215,16 @@
         "number": "14",
         "title": null,
         "publicationDate": "2000-01",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171198-2127-113445-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113445",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-14-a-surfeit-of-spiders/4000-113445/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -912,9 +1241,16 @@
         "number": "13",
         "title": null,
         "publicationDate": "2000-01",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51608-9142-68490-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68490",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-13-living-in-oblivion/4000-68490/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -931,9 +1267,16 @@
         "number": "13",
         "title": null,
         "publicationDate": "2000-01",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/227750-9375-117430-1-webspinners-tales-o.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "117430",
+            "url": "https://comicvine.gamespot.com/webspinners-tales-of-spider-man-13-the-time-before/4000-117430/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Standalone"
@@ -950,9 +1293,16 @@
         "number": "1",
         "title": null,
         "publicationDate": "2000-01",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/4404586-01.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "91358",
+            "url": "https://comicvine.gamespot.com/spider-man-unlimited-1-worlds-apart/4000-91358/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Supplemental"
@@ -969,9 +1319,16 @@
         "number": "15",
         "title": null,
         "publicationDate": "2000-02",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171199-2127-113446-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113446",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-15-we-re-all-doomed-again/4000-113446/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -988,9 +1345,16 @@
         "number": "14",
         "title": null,
         "publicationDate": "2000-02",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51610-9142-68491-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68491",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-14-denial/4000-68491/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -1007,9 +1371,16 @@
         "number": "14",
         "title": null,
         "publicationDate": "2000-02",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/227779-9375-117431-1-webspinners-tales-o.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "117431",
+            "url": "https://comicvine.gamespot.com/webspinners-tales-of-spider-man-14-the-time-before/4000-117431/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Standalone"
@@ -1026,9 +1397,16 @@
         "number": "2",
         "title": null,
         "publicationDate": "2000-02",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/4404587-02.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "91359",
+            "url": "https://comicvine.gamespot.com/spider-man-unlimited-2-where-evil-nests/4000-91359/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Supplemental"
@@ -1045,9 +1423,16 @@
         "number": "16",
         "title": null,
         "publicationDate": "2000-03",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171200-2127-113447-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113447",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-16-coming-home/4000-113447/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -1064,9 +1449,16 @@
         "number": "15",
         "title": null,
         "publicationDate": "2000-03",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51612-9142-68492-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68492",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-15-bring-me-the-head-of-sp/4000-68492/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -1083,9 +1475,16 @@
         "number": "15",
         "title": null,
         "publicationDate": "2000-03",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/227786-9375-117432-1-webspinners-tales-o.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "117432",
+            "url": "https://comicvine.gamespot.com/webspinners-tales-of-spider-man-15-blackout/4000-117432/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Standalone"
@@ -1102,9 +1501,16 @@
         "number": "3",
         "title": null,
         "publicationDate": "2000-03",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/4404588-03.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "91360",
+            "url": "https://comicvine.gamespot.com/spider-man-unlimited-3-the-brute/4000-91360/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Supplemental"
@@ -1121,9 +1527,16 @@
         "number": "17",
         "title": null,
         "publicationDate": "2000-04",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171201-2127-113448-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113448",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-17-dust-in-the-wind/4000-113448/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -1140,9 +1553,16 @@
         "number": "16",
         "title": null,
         "publicationDate": "2000-04",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51614-9142-68493-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68493",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-16-venom-vs-sandman/4000-68493/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -1159,9 +1579,16 @@
         "number": "16",
         "title": null,
         "publicationDate": "2000-04",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/227788-9375-117433-1-webspinners-tales-o.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "117433",
+            "url": "https://comicvine.gamespot.com/webspinners-tales-of-spider-man-16-blackout-part-2/4000-117433/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Standalone"
@@ -1178,9 +1605,16 @@
         "number": "4",
         "title": null,
         "publicationDate": "2000-04",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/4404589-04.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "91361",
+            "url": "https://comicvine.gamespot.com/spider-man-unlimited-4-what-lies-beyond-the-edge-o/4000-91361/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Supplemental"
@@ -1197,9 +1631,16 @@
         "number": "18",
         "title": null,
         "publicationDate": "2000-05",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171202-2127-113449-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113449",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-18-homeward-bound/4000-113449/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -1216,9 +1657,16 @@
         "number": "17",
         "title": null,
         "publicationDate": "2000-05",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51616-9142-68494-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68494",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-17-night-of-the-hunters/4000-68494/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -1235,9 +1683,16 @@
         "number": "2000",
         "title": null,
         "publicationDate": "2000-05",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/5586/623648-2000.jpg",
         "description": null,
-        "type": "ANNUAL"
+        "type": "ANNUAL",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "143312",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-annual-2000-1-old-aquaintan/4000-143312/"
+          }
+        ]
       },
       "required": true,
       "notes": "Annual stories — Around ASM #18–19"
@@ -1254,9 +1709,16 @@
         "number": "17",
         "title": null,
         "publicationDate": "2000-05",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/227789-9375-117434-1-webspinners-tales-o.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "117434",
+            "url": "https://comicvine.gamespot.com/webspinners-tales-of-spider-man-17-hero-of-the-peo/4000-117434/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Standalone"
@@ -1273,9 +1735,16 @@
         "number": "5",
         "title": null,
         "publicationDate": "2000-05",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/4404590-05.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "91362",
+            "url": "https://comicvine.gamespot.com/spider-man-unlimited-5-claws-on-counter-earth/4000-91362/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Finish series"
@@ -1292,9 +1761,16 @@
         "number": "19",
         "title": null,
         "publicationDate": "2000-06",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171203-2127-113450-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113450",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-19-mirror-mirror/4000-113450/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -1311,9 +1787,16 @@
         "number": "18",
         "title": null,
         "publicationDate": "2000-06",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51618-9142-68495-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68495",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-18-the-curse-of-spider-man/4000-68495/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -1330,9 +1813,16 @@
         "number": "18",
         "title": null,
         "publicationDate": "2000-06",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/227794-9375-117435-1-webspinners-tales-o.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "117435",
+            "url": "https://comicvine.gamespot.com/webspinners-tales-of-spider-man-18-hero-of-the-peo/4000-117435/"
+          }
+        ]
       },
       "required": true,
       "notes": "Final anthology issue — Finish Webspinners"
@@ -1349,9 +1839,16 @@
         "number": "20",
         "title": null,
         "publicationDate": "2000-07",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171204-2127-113451-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113451",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-20-set-up/4000-113451/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -1368,9 +1865,16 @@
         "number": "19",
         "title": null,
         "publicationDate": "2000-07",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51620-9142-68496-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68496",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-19-the-box/4000-68496/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -1387,9 +1891,16 @@
         "number": "1",
         "title": null,
         "publicationDate": "2000-07",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/24227/424963-Spider-Man%20vs%20The%20Punisher%20-%20No%20one%20Here%20gets%20Out%20Alive%20-%2000%20-%20FC.jpg",
         "description": null,
-        "type": "ONE_SHOT"
+        "type": "ONE_SHOT",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "131863",
+            "url": "https://comicvine.gamespot.com/spider-man-vs-punisher-1-no-one-here-gets-out-aliv/4000-131863/"
+          }
+        ]
       },
       "required": true,
       "notes": "Spider-Man/Punisher — Standalone"
@@ -1406,9 +1917,16 @@
         "number": "21",
         "title": null,
         "publicationDate": "2000-08",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171205-2127-113452-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113452",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-21-slayers-to-the-left-of-m/4000-113452/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -1425,9 +1943,16 @@
         "number": "20",
         "title": null,
         "publicationDate": "2000-08",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51622-9142-68497-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68497",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-20-the-best-medicine/4000-68497/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -1444,9 +1969,16 @@
         "number": "1",
         "title": null,
         "publicationDate": "2000-08",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/50638/1117808-cover.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "195911",
+            "url": "https://comicvine.gamespot.com/spider-man-death-and-destiny-1-focus/4000-195911/"
+          }
+        ]
       },
       "required": true,
       "notes": "Death and Destiny — Start mini"
@@ -1463,9 +1995,16 @@
         "number": "22",
         "title": null,
         "publicationDate": "2000-09",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171206-2127-113453-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113453",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-22-the-distinguished-gentle/4000-113453/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -1482,9 +2021,16 @@
         "number": "21",
         "title": null,
         "publicationDate": "2000-09",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51624-9142-68498-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68498",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-21-a-day-in-the-life/4000-68498/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -1501,9 +2047,16 @@
         "number": "2",
         "title": null,
         "publicationDate": "2000-09",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/50638/1117809-cover.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "195913",
+            "url": "https://comicvine.gamespot.com/spider-man-death-and-destiny-2-the-camera-doesnt-l/4000-195913/"
+          }
+        ]
       },
       "required": true,
       "notes": "Death and Destiny — Continue"
@@ -1520,9 +2073,16 @@
         "number": "23",
         "title": null,
         "publicationDate": "2000-10",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171207-2127-113454-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113454",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-23-how-many-times/4000-113454/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -1539,9 +2099,16 @@
         "number": "22",
         "title": null,
         "publicationDate": "2000-10",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51626-9142-68499-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68499",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-22-days-of-our-lives/4000-68499/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -1558,9 +2125,16 @@
         "number": "3",
         "title": null,
         "publicationDate": "2000-10",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/50638/1117813-cover.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "195914",
+            "url": "https://comicvine.gamespot.com/spider-man-death-and-destiny-3-deja-vu-all-over-ag/4000-195914/"
+          }
+        ]
       },
       "required": true,
       "notes": "Death and Destiny — Finish mini"
@@ -1577,9 +2151,16 @@
         "number": "1",
         "title": null,
         "publicationDate": "2000-10",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/317210-20677-124017-1-spider-man-revenge.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "124017",
+            "url": "https://comicvine.gamespot.com/spider-man-revenge-of-the-green-goblin-1-madness-t/4000-124017/"
+          }
+        ]
       },
       "required": true,
       "notes": "Revenge of Green Goblin — Start mini"
@@ -1596,9 +2177,16 @@
         "number": "24",
         "title": null,
         "publicationDate": "2000-11",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171208-2127-113455-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113455",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-24-distinguished-gentleman-/4000-113455/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -1615,9 +2203,16 @@
         "number": "23",
         "title": null,
         "publicationDate": "2000-11",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51628-9142-68500-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68500",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-23-read-em-and-weep/4000-68500/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -1634,9 +2229,16 @@
         "number": "2",
         "title": null,
         "publicationDate": "2000-11",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/317600-20677-124045-1-spider-man-revenge.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "124045",
+            "url": "https://comicvine.gamespot.com/spider-man-revenge-of-the-green-goblin-2-lives-in-/4000-124045/"
+          }
+        ]
       },
       "required": true,
       "notes": "Revenge of Green Goblin — Continue"
@@ -1653,9 +2255,16 @@
         "number": "25",
         "title": null,
         "publicationDate": "2000-12",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171209-2127-113456-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113456",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-25-darkness-calling/4000-113456/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -1672,9 +2281,16 @@
         "number": "24",
         "title": null,
         "publicationDate": "2000-12",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51630-9142-68501-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68501",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-24-warning-signs/4000-68501/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -1691,9 +2307,16 @@
         "number": "2000",
         "title": null,
         "publicationDate": "2000-12",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/38919/1791996-peter_parker_spider_man_2000.jpg",
         "description": null,
-        "type": "ANNUAL"
+        "type": "ANNUAL",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "269239",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-annual-2000-1-no-sleep-til/4000-269239/"
+          }
+        ]
       },
       "required": true,
       "notes": "Annual stories — Around PP #24–25"
@@ -1710,9 +2333,16 @@
         "number": "3",
         "title": null,
         "publicationDate": "2000-12",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/318399-20677-124157-1-spider-man-revenge.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "124157",
+            "url": "https://comicvine.gamespot.com/spider-man-revenge-of-the-green-goblin-3-surrender/4000-124157/"
+          }
+        ]
       },
       "required": true,
       "notes": "Revenge of Green Goblin — Finish mini"
@@ -1729,9 +2359,16 @@
         "number": "26",
         "title": null,
         "publicationDate": "2001-01",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171210-2127-113457-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113457",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-26-the-mask/4000-113457/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -1748,9 +2385,16 @@
         "number": "25",
         "title": null,
         "publicationDate": "2001-01",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51632-9142-68502-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68502",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-25-trick-of-the-light/4000-68502/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -1767,9 +2411,16 @@
         "number": "1",
         "title": null,
         "publicationDate": "2001-01",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/14661/436264-spider_manthemysteriomanifesto1.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "132391",
+            "url": "https://comicvine.gamespot.com/spider-man-the-mysterio-manifesto-1-jacks-back/4000-132391/"
+          }
+        ]
       },
       "required": true,
       "notes": "Mysterio Manifesto — Start mini"
@@ -1786,9 +2437,16 @@
         "number": "27",
         "title": null,
         "publicationDate": "2001-02",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171211-2127-113458-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113458",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-27-the-stray/4000-113458/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -1805,9 +2463,16 @@
         "number": "26",
         "title": null,
         "publicationDate": "2001-02",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51634-9142-68503-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68503",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-26-police-story/4000-68503/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -1824,9 +2489,16 @@
         "number": "2",
         "title": null,
         "publicationDate": "2001-02",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/14661/436265-spider_manthemysteriomanifesto2.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "132392",
+            "url": "https://comicvine.gamespot.com/spider-man-the-mysterio-manifesto-2-even-the-dead-/4000-132392/"
+          }
+        ]
       },
       "required": true,
       "notes": "Mysterio Manifesto — Continue"
@@ -1843,9 +2515,16 @@
         "number": "28",
         "title": null,
         "publicationDate": "2001-03",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171212-2127-113459-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113459",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-28-distractions/4000-113459/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -1862,9 +2541,16 @@
         "number": "27",
         "title": null,
         "publicationDate": "2001-03",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51636-9142-68504-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68504",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-27-getting-ahead/4000-68504/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -1881,9 +2567,16 @@
         "number": "3",
         "title": null,
         "publicationDate": "2001-03",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/14661/436266-spider_manthemysteriomanifesto3.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "132393",
+            "url": "https://comicvine.gamespot.com/spider-man-the-mysterio-manifesto-3-false-truths/4000-132393/"
+          }
+        ]
       },
       "required": true,
       "notes": "Mysterio Manifesto — Finish mini"
@@ -1900,9 +2593,16 @@
         "number": "29",
         "title": null,
         "publicationDate": "2001-04",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171213-2127-113460-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113460",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-29-mary-jane/4000-113460/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -1919,9 +2619,16 @@
         "number": "28",
         "title": null,
         "publicationDate": "2001-04",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51638-9142-68505-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68505",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-28-field-of-dream/4000-68505/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -1938,9 +2645,16 @@
         "number": "1",
         "title": null,
         "publicationDate": "2001-04",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/6740885-5489356803-73943.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "169132",
+            "url": "https://comicvine.gamespot.com/daredevilspider-man-1-unusual-suspects/4000-169132/"
+          }
+        ]
       },
       "required": true,
       "notes": "Team-up — Start mini"
@@ -1957,9 +2671,16 @@
         "number": "1",
         "title": null,
         "publicationDate": "2001-04",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/13923/844889-spm_lifeline1.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "160824",
+            "url": "https://comicvine.gamespot.com/spider-man-lifeline-1-pieces-of-fate/4000-160824/"
+          }
+        ]
       },
       "required": true,
       "notes": "Lifeline — Start mini"
@@ -1976,9 +2697,16 @@
         "number": "2001",
         "title": null,
         "publicationDate": "2001-05",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/5586/623649-2001.jpg",
         "description": null,
-        "type": "ANNUAL"
+        "type": "ANNUAL",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "143313",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-annual-2001-1-passages/4000-143313/"
+          }
+        ]
       },
       "required": true,
       "notes": "Annual stories — Around ASM #29–30"
@@ -1995,9 +2723,16 @@
         "number": "30",
         "title": null,
         "publicationDate": "2001-05",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/56044/1715461-amazing_spider_man__1998__2nd_series__030_.jpeg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113461",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-30-transformations-literal-/4000-113461/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -2014,9 +2749,16 @@
         "number": "29",
         "title": null,
         "publicationDate": "2001-05",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51640-9142-68506-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68506",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-29-destinations/4000-68506/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -2033,9 +2775,16 @@
         "number": "2",
         "title": null,
         "publicationDate": "2001-05",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/6740886-0290749952-73944.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "169136",
+            "url": "https://comicvine.gamespot.com/daredevilspider-man-2-unusual-suspects-part-two-th/4000-169136/"
+          }
+        ]
       },
       "required": true,
       "notes": "Team-up — Continue"
@@ -2052,9 +2801,16 @@
         "number": "2",
         "title": null,
         "publicationDate": "2001-05",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/13923/844890-spm_lifeline2.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "160825",
+            "url": "https://comicvine.gamespot.com/spider-man-lifeline-2-snakes-in-the-grass/4000-160825/"
+          }
+        ]
       },
       "required": true,
       "notes": "Lifeline — Continue"
@@ -2071,9 +2827,16 @@
         "number": "31",
         "title": null,
         "publicationDate": "2001-06",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171215-2127-113462-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113462",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-31-coming-home/4000-113462/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -2090,9 +2853,16 @@
         "number": "30",
         "title": null,
         "publicationDate": "2001-06",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51642-9142-68507-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68507",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-30-three-hundred/4000-68507/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -2109,9 +2879,16 @@
         "number": "3",
         "title": null,
         "publicationDate": "2001-06",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/6740888-9234629639-73944.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "169135",
+            "url": "https://comicvine.gamespot.com/daredevilspider-man-3-bad-boys-dont-cry/4000-169135/"
+          }
+        ]
       },
       "required": true,
       "notes": "Team-up — Continue"
@@ -2128,9 +2905,16 @@
         "number": "3",
         "title": null,
         "publicationDate": "2001-06",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/13923/844891-spm_lifeline3.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "160826",
+            "url": "https://comicvine.gamespot.com/spider-man-lifeline-3-a-taste-of-infinity/4000-160826/"
+          }
+        ]
       },
       "required": true,
       "notes": "Lifeline — Finish mini"
@@ -2147,9 +2931,16 @@
         "number": "1",
         "title": null,
         "publicationDate": "2001-06",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183817-01.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "51614",
+            "url": "https://comicvine.gamespot.com/spider-mans-tangled-web-1-the-coming-of-the-thousa/4000-51614/"
+          }
+        ]
       },
       "required": true,
       "notes": "The Thousand — Start anthology"
@@ -2166,9 +2957,16 @@
         "number": "32",
         "title": null,
         "publicationDate": "2001-07",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171216-2127-113463-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113463",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-32-the-long-dark-pizza-of-t/4000-113463/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -2185,9 +2983,16 @@
         "number": "31",
         "title": null,
         "publicationDate": "2001-07",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51644-9142-68508-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68508",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-31-one-small-break/4000-68508/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -2204,9 +3009,16 @@
         "number": "4",
         "title": null,
         "publicationDate": "2001-07",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/6740889-9368686145-73945.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "169134",
+            "url": "https://comicvine.gamespot.com/daredevilspider-man-4-things-get-worse/4000-169134/"
+          }
+        ]
       },
       "required": true,
       "notes": "Team-up — Finish mini"
@@ -2223,9 +3035,16 @@
         "number": "2",
         "title": null,
         "publicationDate": "2001-07",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183818-02.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "51615",
+            "url": "https://comicvine.gamespot.com/spider-mans-tangled-web-2-the-coming-of-the-thousa/4000-51615/"
+          }
+        ]
       },
       "required": true,
       "notes": "The Thousand — Continue"
@@ -2242,9 +3061,16 @@
         "number": "33",
         "title": null,
         "publicationDate": "2001-08",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171217-2127-113464-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113464",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-33-all-fall-down/4000-113464/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -2261,9 +3087,16 @@
         "number": "32",
         "title": null,
         "publicationDate": "2001-08",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51646-9142-68509-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68509",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-32-never-forever/4000-68509/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -2280,9 +3113,16 @@
         "number": "3",
         "title": null,
         "publicationDate": "2001-08",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183831-03.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "51616",
+            "url": "https://comicvine.gamespot.com/spider-mans-tangled-web-3-the-coming-of-the-thousa/4000-51616/"
+          }
+        ]
       },
       "required": true,
       "notes": "The Thousand — Continue"
@@ -2299,9 +3139,16 @@
         "number": "34",
         "title": null,
         "publicationDate": "2001-09",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171218-2127-113465-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113465",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-34-meltdown/4000-113465/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -2318,9 +3165,16 @@
         "number": "33",
         "title": null,
         "publicationDate": "2001-09",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51648-9142-68510-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68510",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-33-maybe-next-year/4000-68510/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -2337,9 +3191,16 @@
         "number": "4",
         "title": null,
         "publicationDate": "2001-09",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183826-04.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "51617",
+            "url": "https://comicvine.gamespot.com/spider-mans-tangled-web-4-severance-package/4000-51617/"
+          }
+        ]
       },
       "required": true,
       "notes": "The Thousand conclusion — Finish first arc"
@@ -2356,9 +3217,16 @@
         "number": "35",
         "title": null,
         "publicationDate": "2001-10",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171219-2127-113466-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113466",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-35-coming-out/4000-113466/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -2375,9 +3243,16 @@
         "number": "34",
         "title": null,
         "publicationDate": "2001-10",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51650-9142-68511-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68511",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-34-if-thine-eyes-offend-th/4000-68511/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -2394,9 +3269,16 @@
         "number": "5",
         "title": null,
         "publicationDate": "2001-10",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183833-05.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "114254",
+            "url": "https://comicvine.gamespot.com/spider-mans-tangled-web-5-rhinoplasty/4000-114254/"
+          }
+        ]
       },
       "required": true,
       "notes": "New anthology story — Continue Tangled Web"
@@ -2413,9 +3295,16 @@
         "number": "36",
         "title": null,
         "publicationDate": "2001-11",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171220-2127-113467-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113467",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-36-the-black-issue/4000-113467/"
+          }
+        ]
       },
       "required": true,
       "notes": "Post-9/11 story — Important standalone"
@@ -2432,9 +3321,16 @@
         "number": "35",
         "title": null,
         "publicationDate": "2001-11",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51652-9142-68512-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68512",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-35-heroes-dont-cry/4000-68512/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -2451,9 +3347,16 @@
         "number": "6",
         "title": null,
         "publicationDate": "2001-11",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183823-06.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "114255",
+            "url": "https://comicvine.gamespot.com/spider-mans-tangled-web-6-cornucopia/4000-114255/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Standalone"
@@ -2470,9 +3373,16 @@
         "number": "37",
         "title": null,
         "publicationDate": "2001-12",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171221-2127-113468-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113468",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-37-interlude/4000-113468/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -2489,9 +3399,16 @@
         "number": "36",
         "title": null,
         "publicationDate": "2001-12",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51654-9142-68513-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68513",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-36-the-big-score/4000-68513/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -2508,9 +3425,16 @@
         "number": "7",
         "title": null,
         "publicationDate": "2001-12",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183819-07.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "114256",
+            "url": "https://comicvine.gamespot.com/spider-mans-tangled-web-7-gentlemens-agreement-par/4000-114256/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Standalone"
@@ -2527,9 +3451,16 @@
         "number": "38",
         "title": null,
         "publicationDate": "2002-01",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171222-2127-113469-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113469",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-38-the-conversation/4000-113469/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -2546,9 +3477,16 @@
         "number": "37",
         "title": null,
         "publicationDate": "2002-01",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51656-9142-68514-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68514",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-37-snow-day/4000-68514/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -2565,9 +3503,16 @@
         "number": "8",
         "title": null,
         "publicationDate": "2002-01",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183827-08.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "114257",
+            "url": "https://comicvine.gamespot.com/spider-mans-tangled-web-8-gentlemens-agreement-par/4000-114257/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Standalone"
@@ -2584,9 +3529,16 @@
         "number": "2001",
         "title": null,
         "publicationDate": "2002-01",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/38919/1792053-peter_parker_spider_man_2001.jpg",
         "description": null,
-        "type": "ANNUAL"
+        "type": "ANNUAL",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "269240",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-2001-1-its-good-to-be-king/4000-269240/"
+          }
+        ]
       },
       "required": true,
       "notes": "Annual — Around PP #37–38"
@@ -2603,9 +3555,16 @@
         "number": "39",
         "title": null,
         "publicationDate": "2002-02",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171223-2127-113470-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113470",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-39-meanwhile/4000-113470/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -2622,9 +3581,16 @@
         "number": "38",
         "title": null,
         "publicationDate": "2002-02",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51658-9142-68515-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68515",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-38-make-mime-marvel/4000-68515/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -2641,9 +3607,16 @@
         "number": "9",
         "title": null,
         "publicationDate": "2002-02",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183820-09.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "114258",
+            "url": "https://comicvine.gamespot.com/spider-mans-tangled-web-9-gentlemens-agreement-par/4000-114258/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Standalone"
@@ -2660,9 +3633,16 @@
         "number": "40",
         "title": null,
         "publicationDate": "2002-03",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171224-2127-113471-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113471",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-40-sensitive-issues/4000-113471/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -2679,9 +3659,16 @@
         "number": "39",
         "title": null,
         "publicationDate": "2002-03",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51661-9142-68516-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68516",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-39-operation-octopus/4000-68516/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -2698,9 +3685,16 @@
         "number": "10",
         "title": null,
         "publicationDate": "2002-03",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183822-10.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "114259",
+            "url": "https://comicvine.gamespot.com/spider-mans-tangled-web-10-ray-of-light/4000-114259/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Standalone"
@@ -2717,9 +3711,16 @@
         "number": "41",
         "title": null,
         "publicationDate": "2002-04",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171225-2127-113472-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113472",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-41-looking-back/4000-113472/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -2736,9 +3737,16 @@
         "number": "40",
         "title": null,
         "publicationDate": "2002-04",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51660-9142-68517-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68517",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-40-codename-john-hancock/4000-68517/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -2755,9 +3763,16 @@
         "number": "11",
         "title": null,
         "publicationDate": "2002-04",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183839-11.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "114260",
+            "url": "https://comicvine.gamespot.com/spider-mans-tangled-web-11-open-all-night/4000-114260/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Standalone"
@@ -2774,9 +3789,16 @@
         "number": "42",
         "title": null,
         "publicationDate": "2002-05",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171226-2127-113473-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113473",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-42-a-strange-turn-of-events/4000-113473/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -2793,9 +3815,16 @@
         "number": "41",
         "title": null,
         "publicationDate": "2002-05",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51663-9142-68518-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68518",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-41-mission-uncomfortable/4000-68518/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -2812,9 +3841,16 @@
         "number": "12",
         "title": null,
         "publicationDate": "2002-05",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183825-12.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "114261",
+            "url": "https://comicvine.gamespot.com/spider-mans-tangled-web-12-i-was-a-teenage-frog-ma/4000-114261/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Standalone"
@@ -2831,9 +3867,16 @@
         "number": "43",
         "title": null,
         "publicationDate": "2002-06",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171230-2127-113474-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113474",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-43-cold-arms/4000-113474/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -2850,9 +3893,16 @@
         "number": "42",
         "title": null,
         "publicationDate": "2002-06",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51665-9142-68519-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68519",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-42-fifteen-minutes-of-sham/4000-68519/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -2869,9 +3919,16 @@
         "number": "13",
         "title": null,
         "publicationDate": "2002-06",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183845-13.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "114262",
+            "url": "https://comicvine.gamespot.com/spider-mans-tangled-web-13-double-shots/4000-114262/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Standalone"
@@ -2888,9 +3945,16 @@
         "number": "44",
         "title": null,
         "publicationDate": "2002-07",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171233-2127-113475-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113475",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-44-arms-and-the-men/4000-113475/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -2907,9 +3971,16 @@
         "number": "43",
         "title": null,
         "publicationDate": "2002-07",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51667-9142-68520-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "68520",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-43-fifteen-minutes-of-sham/4000-68520/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -2926,9 +3997,16 @@
         "number": "1",
         "title": null,
         "publicationDate": "2002-07",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/72780-9470-77961-1-spider-man-quality.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "77961",
+            "url": "https://comicvine.gamespot.com/spider-man-quality-of-life-1-untitled/4000-77961/"
+          }
+        ]
       },
       "required": true,
       "notes": "Quality of Life — Start mini"
@@ -2945,9 +4023,16 @@
         "number": "1",
         "title": null,
         "publicationDate": "2002-07",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/191812-9376-114345-1-spider-man-blue.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "114345",
+            "url": "https://comicvine.gamespot.com/spider-man-blue-1-my-funny-valentine/4000-114345/"
+          }
+        ]
       },
       "required": true,
       "notes": "Blue — Start prestige mini"
@@ -2964,9 +4049,16 @@
         "number": "14",
         "title": null,
         "publicationDate": "2002-07",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183828-14.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "114263",
+            "url": "https://comicvine.gamespot.com/spider-mans-tangled-web-14-the-last-shoot/4000-114263/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Standalone"
@@ -2983,9 +4075,16 @@
         "number": "45",
         "title": null,
         "publicationDate": "2002-08",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171236-2127-113476-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113476",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-45-until-the-stars-turn-col/4000-113476/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -3002,9 +4101,16 @@
         "number": "44",
         "title": null,
         "publicationDate": "2002-08",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/74997-9142-80609-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "80609",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-44-a-death-in-the-family-p/4000-80609/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -3021,9 +4127,16 @@
         "number": "2",
         "title": null,
         "publicationDate": "2002-08",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/72783-9470-77962-1-spider-man-quality.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "77962",
+            "url": "https://comicvine.gamespot.com/spider-man-quality-of-life-2-untitled/4000-77962/"
+          }
+        ]
       },
       "required": true,
       "notes": "Quality of Life — Continue"
@@ -3040,9 +4153,16 @@
         "number": "2",
         "title": null,
         "publicationDate": "2002-08",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/191813-9376-114347-1-spider-man-blue.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "114347",
+            "url": "https://comicvine.gamespot.com/spider-man-blue-2-lets-fall-in-love/4000-114347/"
+          }
+        ]
       },
       "required": true,
       "notes": "Blue — Continue"
@@ -3059,9 +4179,16 @@
         "number": "1",
         "title": null,
         "publicationDate": "2002-08",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/11307/347120-21106-126734-1-spider-man-s-get-kra.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "126734",
+            "url": "https://comicvine.gamespot.com/spider-mans-get-kraven-1/4000-126734/"
+          }
+        ]
       },
       "required": true,
       "notes": "Get Kraven — Start mini"
@@ -3078,9 +4205,16 @@
         "number": "1",
         "title": null,
         "publicationDate": "2002-08",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/11307/442428-spider_man_black_cat_the_evil_that_men_do_1_00.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "77953",
+            "url": "https://comicvine.gamespot.com/spider-manblack-cat-the-evil-that-men-do-1-whats-n/4000-77953/"
+          }
+        ]
       },
       "required": true,
       "notes": "Evil That Men Do — Start mini"
@@ -3097,9 +4231,16 @@
         "number": "15",
         "title": null,
         "publicationDate": "2002-08",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183830-15.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "114264",
+            "url": "https://comicvine.gamespot.com/spider-mans-tangled-web-15-the-collaborator/4000-114264/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Standalone"
@@ -3116,9 +4257,16 @@
         "number": "46",
         "title": null,
         "publicationDate": "2002-09",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171238-2127-113477-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113477",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-46-unnatural-enemies/4000-113477/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -3135,9 +4283,16 @@
         "number": "45",
         "title": null,
         "publicationDate": "2002-09",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/74998-9142-80610-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "80610",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-45-a-death-in-the-family-p/4000-80610/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -3154,9 +4309,16 @@
         "number": "3",
         "title": null,
         "publicationDate": "2002-09",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/72786-9470-77963-1-spider-man-quality.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "77963",
+            "url": "https://comicvine.gamespot.com/spider-man-quality-of-life-3-untitled/4000-77963/"
+          }
+        ]
       },
       "required": true,
       "notes": "Quality of Life — Continue"
@@ -3173,9 +4335,16 @@
         "number": "3",
         "title": null,
         "publicationDate": "2002-09",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/72777-9376-77957-1-spider-man-blue.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "77957",
+            "url": "https://comicvine.gamespot.com/spider-man-blue-3-anything-goes/4000-77957/"
+          }
+        ]
       },
       "required": true,
       "notes": "Blue — Continue"
@@ -3192,9 +4361,16 @@
         "number": "2",
         "title": null,
         "publicationDate": "2002-09",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/11307/347758-21106-126860-1-spider-man-s-get-kra.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "126860",
+            "url": "https://comicvine.gamespot.com/spider-mans-get-kraven-2/4000-126860/"
+          }
+        ]
       },
       "required": true,
       "notes": "Get Kraven — Continue"
@@ -3211,9 +4387,16 @@
         "number": "2",
         "title": null,
         "publicationDate": "2002-09",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/11307/442432-spider_man_black_cat_the_evil_that_men_do_2_00.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "77954",
+            "url": "https://comicvine.gamespot.com/spider-manblack-cat-the-evil-that-men-do-2-a-ruse-/4000-77954/"
+          }
+        ]
       },
       "required": true,
       "notes": "Evil That Men Do — Continue"
@@ -3230,9 +4413,16 @@
         "number": "16",
         "title": null,
         "publicationDate": "2002-09",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183829-16.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "114265",
+            "url": "https://comicvine.gamespot.com/spider-mans-tangled-web-16-heartbreaker-part-1/4000-114265/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Standalone"
@@ -3249,9 +4439,16 @@
         "number": "47",
         "title": null,
         "publicationDate": "2002-10",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171243-2127-113478-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113478",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-47-the-life-death-of-spider/4000-113478/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -3268,9 +4465,16 @@
         "number": "46",
         "title": null,
         "publicationDate": "2002-10",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/173875-9142-113657-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113657",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-46-a-death-in-the-family-p/4000-113657/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -3287,9 +4491,16 @@
         "number": "4",
         "title": null,
         "publicationDate": "2002-10",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/72766-9470-77964-1-spider-man-quality.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "77964",
+            "url": "https://comicvine.gamespot.com/spider-man-quality-of-life-4-untitled/4000-77964/"
+          }
+        ]
       },
       "required": true,
       "notes": "Quality of Life — Finish mini"
@@ -3306,9 +4517,16 @@
         "number": "4",
         "title": null,
         "publicationDate": "2002-10",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/72749-9376-77958-1-spider-man-blue.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "77958",
+            "url": "https://comicvine.gamespot.com/spider-man-blue-4-autumn-in-new-york/4000-77958/"
+          }
+        ]
       },
       "required": true,
       "notes": "Blue — Continue"
@@ -3325,9 +4543,16 @@
         "number": "3",
         "title": null,
         "publicationDate": "2002-10",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/11307/347760-21106-126861-1-spider-man-s-get-kra.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "126861",
+            "url": "https://comicvine.gamespot.com/spider-mans-get-kraven-3/4000-126861/"
+          }
+        ]
       },
       "required": true,
       "notes": "Get Kraven — Continue"
@@ -3344,9 +4569,16 @@
         "number": "3",
         "title": null,
         "publicationDate": "2002-10",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/56044/1703494-spider_man_black_cat_the_evil_men_do__2002__3.jpeg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "77955",
+            "url": "https://comicvine.gamespot.com/spider-manblack-cat-the-evil-that-men-do-3-hate-cr/4000-77955/"
+          }
+        ]
       },
       "required": true,
       "notes": "Evil That Men Do — Finish currently published portion"
@@ -3363,9 +4595,16 @@
         "number": "1",
         "title": null,
         "publicationDate": "2002-10",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37540/939761-spidermanddmk1_small.jpg",
         "description": null,
-        "type": "ONE_SHOT"
+        "type": "ONE_SHOT",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "169131",
+            "url": "https://comicvine.gamespot.com/spider-mandaredevil-1-neighbors/4000-169131/"
+          }
+        ]
       },
       "required": true,
       "notes": "Team-up — Standalone"
@@ -3382,9 +4621,16 @@
         "number": "17",
         "title": null,
         "publicationDate": "2002-10",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183837-17.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "114266",
+            "url": "https://comicvine.gamespot.com/spider-mans-tangled-web-17-heartbreaker-part-2/4000-114266/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Standalone"
@@ -3401,9 +4647,16 @@
         "number": "48",
         "title": null,
         "publicationDate": "2002-11",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171246-2127-113479-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113479",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-48-a-spider-s-tale/4000-113479/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -3420,9 +4673,16 @@
         "number": "47",
         "title": null,
         "publicationDate": "2002-11",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/173876-9142-113658-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113658",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-47-a-death-in-the-family-p/4000-113658/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -3439,9 +4699,16 @@
         "number": "5",
         "title": null,
         "publicationDate": "2002-11",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/72752-9376-77959-1-spider-man-blue.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "77959",
+            "url": "https://comicvine.gamespot.com/spider-man-blue-5-if-i-had-you/4000-77959/"
+          }
+        ]
       },
       "required": true,
       "notes": "Blue — Continue"
@@ -3458,9 +4725,16 @@
         "number": "4",
         "title": null,
         "publicationDate": "2002-11",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/11307/347761-21106-126862-1-spider-man-s-get-kra.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "126862",
+            "url": "https://comicvine.gamespot.com/spider-mans-get-kraven-4/4000-126862/"
+          }
+        ]
       },
       "required": true,
       "notes": "Get Kraven — Continue"
@@ -3477,9 +4751,16 @@
         "number": "18",
         "title": null,
         "publicationDate": "2002-11",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183835-18.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "114267",
+            "url": "https://comicvine.gamespot.com/spider-mans-tangled-web-18-alphabet-city/4000-114267/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Standalone"
@@ -3496,9 +4777,16 @@
         "number": "49",
         "title": null,
         "publicationDate": "2002-12",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171249-2127-113480-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113480",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-49-bad-connections/4000-113480/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -3515,9 +4803,16 @@
         "number": "48",
         "title": null,
         "publicationDate": "2002-12",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/173877-9142-113659-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113659",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-48-the-big-question/4000-113659/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -3534,9 +4829,16 @@
         "number": "6",
         "title": null,
         "publicationDate": "2002-12",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/72755-9376-77960-1-spider-man-blue.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "77960",
+            "url": "https://comicvine.gamespot.com/spider-man-blue-6-all-of-me/4000-77960/"
+          }
+        ]
       },
       "required": true,
       "notes": "Blue conclusion — Finish mini"
@@ -3553,9 +4855,16 @@
         "number": "5",
         "title": null,
         "publicationDate": "2002-12",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/11307/347762-21106-126863-1-spider-man-s-get-kra.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "126863",
+            "url": "https://comicvine.gamespot.com/spider-mans-get-kraven-5/4000-126863/"
+          }
+        ]
       },
       "required": true,
       "notes": "Get Kraven — Continue"
@@ -3572,9 +4881,16 @@
         "number": "19",
         "title": null,
         "publicationDate": "2002-12",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183832-19.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "114268",
+            "url": "https://comicvine.gamespot.com/spider-mans-tangled-web-19-call-of-the-wild/4000-114268/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Standalone"
@@ -3591,9 +4907,16 @@
         "number": "50",
         "title": null,
         "publicationDate": "2003-01",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171252-2127-113481-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113481",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-50-doomed-affairs/4000-113481/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -3610,9 +4933,16 @@
         "number": "49",
         "title": null,
         "publicationDate": "2003-01",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/173878-9142-113660-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113660",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-49-the-big-answer/4000-113660/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -3629,9 +4959,16 @@
         "number": "6",
         "title": null,
         "publicationDate": "2003-01",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/11307/347764-21106-126864-1-spider-man-s-get-kra.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "126864",
+            "url": "https://comicvine.gamespot.com/spider-mans-get-kraven-6/4000-126864/"
+          }
+        ]
       },
       "required": true,
       "notes": "Get Kraven conclusion — Finish mini"
@@ -3648,9 +4985,16 @@
         "number": "20",
         "title": null,
         "publicationDate": "2003-01",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183836-20.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "114269",
+            "url": "https://comicvine.gamespot.com/spider-mans-tangled-web-20-behind-the-mustache/4000-114269/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Standalone"
@@ -3667,9 +5011,16 @@
         "number": "51",
         "title": null,
         "publicationDate": "2003-02",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/56044/1667470-amazing_spider_man__1998__2nd_series__051a.jpeg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113482",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-51-digger/4000-113482/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -3686,9 +5037,16 @@
         "number": "50",
         "title": null,
         "publicationDate": "2003-02",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/173879-9142-113661-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113661",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-50-and-here-my-troubles-be/4000-113661/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -3705,9 +5063,16 @@
         "number": "21",
         "title": null,
         "publicationDate": "2003-02",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183843-21.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "114270",
+            "url": "https://comicvine.gamespot.com/spider-mans-tangled-web-21-twas-the-fight-before-c/4000-114270/"
+          }
+        ]
       },
       "required": true,
       "notes": "Anthology — Standalone"
@@ -3724,9 +5089,16 @@
         "number": "52",
         "title": null,
         "publicationDate": "2003-03",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171254-2127-113483-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113483",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-52-dig-this/4000-113483/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -3743,9 +5115,16 @@
         "number": "51",
         "title": null,
         "publicationDate": "2003-03",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/57350-9142-90345-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "90345",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-51-just-another-manic-mond/4000-90345/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -3762,9 +5141,16 @@
         "number": "22",
         "title": null,
         "publicationDate": "2003-03",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183844-22.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "114271",
+            "url": "https://comicvine.gamespot.com/spider-mans-tangled-web-22-the-system/4000-114271/"
+          }
+        ]
       },
       "required": true,
       "notes": "Final issue — Finish Tangled Web"
@@ -3781,9 +5167,16 @@
         "number": "53",
         "title": null,
         "publicationDate": "2003-04",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171255-2127-113484-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113484",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-53-parts-and-pieces/4000-113484/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -3800,9 +5193,16 @@
         "number": "52",
         "title": null,
         "publicationDate": "2003-04",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/57351-9142-90346-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "90346",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-52-everybodys-workin-for-t/4000-90346/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -3819,9 +5219,16 @@
         "number": "54",
         "title": null,
         "publicationDate": "2003-05",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171256-2127-113485-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113485",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-54-the-balancing-of-karmic-/4000-113485/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -3838,9 +5245,16 @@
         "number": "53",
         "title": null,
         "publicationDate": "2003-05",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/57352-9142-90347-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "90347",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-53-rules-of-the-game/4000-90347/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -3857,9 +5271,16 @@
         "number": "55",
         "title": null,
         "publicationDate": "2003-06",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171257-2127-113486-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113486",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-55-unintended-consequences/4000-113486/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -3876,9 +5297,16 @@
         "number": "54",
         "title": null,
         "publicationDate": "2003-06",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/57353-9142-90348-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "90348",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-54-rules-of-the-game-part-/4000-90348/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -3895,9 +5323,16 @@
         "number": "1",
         "title": null,
         "publicationDate": "2003-06",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/63944-11068-96940-1-venom.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "96940",
+            "url": "https://comicvine.gamespot.com/venom-1-shiver-part-1/4000-96940/"
+          }
+        ]
       },
       "required": true,
       "notes": "New Venom series — Supplemental"
@@ -3914,9 +5349,16 @@
         "number": "1",
         "title": null,
         "publicationDate": "2003-06",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/50638/985175-61593_20060904125738_large.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "175541",
+            "url": "https://comicvine.gamespot.com/marvel-knights-spider-man-wolverine-1-stuff-of-leg/4000-175541/"
+          }
+        ]
       },
       "required": true,
       "notes": "Team-up — Start mini"
@@ -3933,9 +5375,16 @@
         "number": "56",
         "title": null,
         "publicationDate": "2003-07",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171258-2127-113487-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113487",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-56-the-revolution-within/4000-113487/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -3952,9 +5401,16 @@
         "number": "55",
         "title": null,
         "publicationDate": "2003-07",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/57354-9142-90349-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "90349",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-55-rules-of-the-game-part-/4000-90349/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -3971,9 +5427,16 @@
         "number": "2",
         "title": null,
         "publicationDate": "2003-07",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/63945-11068-96941-1-venom.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "96941",
+            "url": "https://comicvine.gamespot.com/venom-2-shiver-part-2/4000-96941/"
+          }
+        ]
       },
       "required": true,
       "notes": "Venom — Continue"
@@ -3990,9 +5453,16 @@
         "number": "2",
         "title": null,
         "publicationDate": "2003-07",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/50638/985179-61593_20060904125738_large.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "175543",
+            "url": "https://comicvine.gamespot.com/marvel-knights-spider-man-wolverine-2/4000-175543/"
+          }
+        ]
       },
       "required": true,
       "notes": "Team-up — Continue"
@@ -4009,9 +5479,16 @@
         "number": "57",
         "title": null,
         "publicationDate": "2003-08",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171259-2127-113488-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113488",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-57-happy-birthday-part-1/4000-113488/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -4028,9 +5505,16 @@
         "number": "56",
         "title": null,
         "publicationDate": "2003-08",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/57355-9142-90350-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "90350",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-56-reborn/4000-90350/"
+          }
+        ]
       },
       "required": true,
       "notes": "Ongoing — Continue"
@@ -4047,9 +5531,16 @@
         "number": "3",
         "title": null,
         "publicationDate": "2003-08",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/63946-11068-96942-1-venom.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "96942",
+            "url": "https://comicvine.gamespot.com/venom-3-shiver-part-3/4000-96942/"
+          }
+        ]
       },
       "required": true,
       "notes": "Venom — Continue"
@@ -4066,9 +5557,16 @@
         "number": "3",
         "title": null,
         "publicationDate": "2003-08",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/50638/985189-61593_20060904125738_large.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "175546",
+            "url": "https://comicvine.gamespot.com/marvel-knights-spider-man-wolverine-3/4000-175546/"
+          }
+        ]
       },
       "required": true,
       "notes": "Team-up — Continue"
@@ -4085,9 +5583,16 @@
         "number": "1",
         "title": null,
         "publicationDate": "2003-08",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11112/111121983/5750975-8720034072-1FHOSG-SDe1ZPTJtJvwByr6zfCTz3BcDuVyxJJ6Rf6M6AfdgwPgrvz2NAkmvZYqk_dLv-wDUbmrL%3Ds0",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "96971",
+            "url": "https://comicvine.gamespot.com/spectacular-spider-man-1-the-hunger-part-1-of-5/4000-96971/"
+          }
+        ]
       },
       "required": true,
       "notes": "New series — Start new Spectacular"
@@ -4104,9 +5609,16 @@
         "number": "58",
         "title": null,
         "publicationDate": "2003-09",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171260-2127-113489-1-amazing-spider-man.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "113489",
+            "url": "https://comicvine.gamespot.com/the-amazing-spider-man-58-happy-birthday-part-2/4000-113489/"
+          }
+        ]
       },
       "required": true,
       "notes": "Final Vol. 2 issue — End of Vol. 2"
@@ -4123,9 +5635,16 @@
         "number": "57",
         "title": null,
         "publicationDate": "2003-09",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/57356-9142-90351-1-peter-parker-spider.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "90351",
+            "url": "https://comicvine.gamespot.com/peter-parker-spider-man-57-reborn-part-2/4000-90351/"
+          }
+        ]
       },
       "required": true,
       "notes": "Final issue — End of Peter Parker Vol. 2"
@@ -4142,9 +5661,16 @@
         "number": "4",
         "title": null,
         "publicationDate": "2003-09",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/63947-11068-96943-1-venom.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "96943",
+            "url": "https://comicvine.gamespot.com/venom-4-shiver-part-4/4000-96943/"
+          }
+        ]
       },
       "required": true,
       "notes": "Venom — Supplemental"
@@ -4161,9 +5687,16 @@
         "number": "4",
         "title": null,
         "publicationDate": "2003-09",
-        "coverUrl": null,
+        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/50638/985207-61593_20060904125738_large.jpg",
         "description": null,
-        "type": "REGULAR"
+        "type": "REGULAR",
+        "externalIds": [
+          {
+            "source": "COMIC_VINE",
+            "externalId": "175548",
+            "url": "https://comicvine.gamespot.com/marvel-knights-spider-man-wolverine-4/4000-175548/"
+          }
+        ]
       },
       "required": true,
       "notes": "Team-up conclusion — Finish mini"

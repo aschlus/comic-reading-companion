@@ -5,9 +5,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -32,6 +35,7 @@ import androidx.room3.Update
 import com.aschlus.comicreadingcompanion.data.database.entities.ExternalId
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.database.models.SeriesIssue
+import com.aschlus.comicreadingcompanion.ui.component.ComicCoverImage
 import com.aschlus.comicreadingcompanion.ui.viewmodel.SeriesDetailViewModel
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
@@ -227,6 +231,19 @@ private fun SeriesIssueRow(
             ),
         verticalAlignment = Alignment.CenterVertically
     ) {
+        ComicCoverImage(
+            coverUrl = issue.coverUrl,
+            contentDescription = "#${issue.issueNumber} cover",
+            modifier = Modifier
+                .width(56.dp)
+                .aspectRatio(2f / 3f),
+            placeholderText = "No Cover"
+        )
+
+        Spacer(
+            modifier = Modifier.width(12.dp)
+        )
+
         Column(
             modifier = Modifier.weight(1f),
             verticalArrangement =

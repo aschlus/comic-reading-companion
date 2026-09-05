@@ -1,6 +1,7 @@
 package com.aschlus.comicreadingcompanion.data.importer
 
 import com.aschlus.comicreadingcompanion.data.database.ComicDao
+import com.aschlus.comicreadingcompanion.data.database.entities.ExternalId
 import com.aschlus.comicreadingcompanion.data.database.entities.Issue
 import com.aschlus.comicreadingcompanion.data.database.entities.IssueType
 import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
@@ -182,6 +183,11 @@ class ReadingListImporter(
                     universe = universe
                 )
 
+            importExternalIds(
+                itemData = itemData,
+                issue = issue
+            )
+
             importedIssueIds.add(issue.id)
 
             val existingItem =
@@ -231,6 +237,54 @@ class ReadingListImporter(
                     staleItem
                 )
             }
+    }
+
+    private suspend fun importExternalIds(
+        itemData: ReadingListItemImportDto,
+        issue: Issue
+    ) {
+        itemData.issue.externalIds.forEach { externalIdData ->
+
+            val existing =
+                comicDao.getExternalId(
+                    source = externalIdData.source,
+                    externalId = externalIdData.externalId
+                )
+
+            if (existing == null) {
+                comicDao.insertExternalId(
+                    ExternalId(
+                        issueId = issue.id,
+                        source = externalIdData.source,
+                        externalId =
+                            externalIdData.externalId,
+                        url = externalIdData.url
+                    )
+                )
+
+                return@forEach
+            }
+
+            if (existing.issueId != issue.id) {
+                throw IllegalStateException(
+                    "External ID " +
+                        "'${externalIdData.source}:" +
+                        "${externalIdData.externalId}' " +
+                        "is already assigned to " +
+                        "issue ${existing.issueId}, " +
+                        "but import attempted to assign " +
+                        "it to issue ${issue.id}"
+                )
+            }
+
+            if (existing.url != externalIdData.url) {
+                comicDao.updateExternalId(
+                    existing.copy(
+                        url = externalIdData.url
+                    )
+                )
+            }
+        }
     }
 
     private suspend fun getOrCreateSeries(

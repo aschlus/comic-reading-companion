@@ -1,0 +1,4 @@
+.comicvine_api_key
+cache/
+output/
+__pycache__/

@@ -41,5 +41,14 @@ data class IssueImportDto(
     val publicationDate: String?,
     val coverUrl: String?,
     val description: String?,
-    val type: String
+    val type: String,
+    val externalIds: List<ExternalIdImportDto> =
+        emptyList()
+)
+
+@Serializable
+data class ExternalIdImportDto(
+    val source: String,
+    val externalId: String,
+    val url: String?
 )

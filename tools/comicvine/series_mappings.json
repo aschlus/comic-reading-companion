@@ -1,0 +1,160 @@
+[
+  {
+    "localTitle": "Amazing Spider-Man",
+    "localVolume": 2,
+    "localStartYear": 1998,
+    "comicVineVolumeId": 78701
+  },
+  {
+    "localTitle": "Slingers",
+    "localVolume": 1,
+    "localStartYear": 1998,
+    "comicVineVolumeId": 11305
+  },
+  {
+    "localTitle": "Peter Parker: Spider-Man",
+    "localVolume": 2,
+    "localStartYear": 1999,
+    "comicVineVolumeId": 9142
+  },
+  {
+    "localTitle": "Spider-Man Unlimited",
+    "localVolume": 2,
+    "localStartYear": 1999,
+    "comicVineVolumeId": 10760
+  },
+  {
+    "localTitle": "Webspinners",
+    "localVolume": 1,
+    "localStartYear": 1999,
+    "comicVineVolumeId": 9375
+  },
+  {
+    "localTitle": "Spider-Man: Death and Destiny",
+    "localVolume": 1,
+    "localStartYear": 2000,
+    "comicVineVolumeId": 31431
+  },
+  {
+    "localTitle": "Spider-Man: Revenge of the Green Goblin",
+    "localVolume": 1,
+    "localStartYear": 2000,
+    "comicVineVolumeId": 20677
+  },
+  {
+    "localTitle": "Daredevil/Spider-Man",
+    "localVolume": 1,
+    "localStartYear": 2001,
+    "comicVineVolumeId": 27657
+  },
+  {
+    "localTitle": "Spider-Man's Tangled Web",
+    "localVolume": 1,
+    "localStartYear": 2001,
+    "comicVineVolumeId": 7255
+  },
+  {
+    "localTitle": "Spider-Man: Lifeline",
+    "localVolume": 1,
+    "localStartYear": 2001,
+    "comicVineVolumeId": 26788
+  },
+  {
+    "localTitle": "Spider-Man/Black Cat: The Evil That Men Do",
+    "localVolume": 1,
+    "localStartYear": 2002,
+    "comicVineVolumeId": 9469
+  },
+  {
+    "localTitle": "Spider-Man/Daredevil",
+    "localVolume": 1,
+    "localStartYear": 2002,
+    "comicVineVolumeId": 27656
+  },
+  {
+    "localTitle": "Spider-Man: Blue",
+    "localVolume": 1,
+    "localStartYear": 2002,
+    "comicVineVolumeId": 9376
+  },
+  {
+    "localTitle": "Spider-Man: Get Kraven",
+    "localVolume": 1,
+    "localStartYear": 2002,
+    "comicVineVolumeId": 21106
+  },
+  {
+    "localTitle": "Spider-Man: Quality of Life",
+    "localVolume": 1,
+    "localStartYear": 2002,
+    "comicVineVolumeId": 9470
+  },
+  {
+    "localTitle": "The Spectacular Spider-Man",
+    "localVolume": 2,
+    "localStartYear": 2003,
+    "comicVineVolumeId": 11069
+  },
+  {
+    "localTitle": "Venom",
+    "localVolume": null,
+    "localStartYear": 2003,
+    "comicVineVolumeId": 11068
+  },
+  {
+    "localTitle": "Spider-Man vs. The Punisher",
+    "localVolume": 1,
+    "localStartYear": 2000,
+    "comicVineVolumeId": 21887
+  },
+  {
+    "localTitle": "Spider-Man: The Mysterio Manifesto",
+    "localVolume": 1,
+    "localStartYear": 2001,
+    "comicVineVolumeId": 21938
+  },
+  {
+    "localTitle": "Spider-Man & Wolverine",
+    "localVolume": 1,
+    "localStartYear": 2003,
+    "comicVineVolumeId": 28491
+  },
+  {
+    "localTitle": "Amazing Spider-Man Annual",
+    "localVolume": null,
+    "localStartYear": 1999,
+    "issueMappings": {
+      "1999": {
+        "comicVineVolumeId": 60440,
+        "comicVineIssueNumber": "1"
+      },
+      "2000": {
+        "comicVineVolumeId": 60441,
+        "comicVineIssueNumber": "1"
+      },
+      "2001": {
+        "comicVineVolumeId": 60442,
+        "comicVineIssueNumber": "1"
+      }
+    }
+  },
+  {
+    "localTitle": "Peter Parker: Spider-Man Annual",
+    "localVolume": null,
+    "localStartYear": 1999,
+    "issueMappings": {
+      "1999": {
+        "comicVineVolumeId": 39919,
+        "comicVineIssueNumber": "1"
+      },
+      "2000": {
+        "comicVineVolumeId": 39920,
+        "comicVineIssueNumber": "1"
+      },
+      "2001": {
+        "comicVineVolumeId": 39921,
+        "comicVineIssueNumber": "1"
+      }
+    }
+  }
+]

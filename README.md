@@ -84,7 +84,7 @@ building, following, and tracking comic-book reading orders.
 
 - [x] Issue detail screen
 - [x] Series detail screen
-- [ ] Display issue cover artwork
+- [x] Display issue cover artwork
 - [x] Display issue title
 - [x] Display publication / cover date
 - [x] Display issue description
@@ -119,7 +119,7 @@ building, following, and tracking comic-book reading orders.
 - [ ] Validate missing / invalid series metadata
 - [ ] Support optional reading-list sections in JSON
 - [ ] Support per-item universe / continuity for multiverse reading lists
-- [ ] Support external IDs in reading-list JSON
+- [x] Support external IDs in reading-list JSON
 - [ ] Support importing user-provided reading-list files
 - [ ] Export reading lists to JSON
 
@@ -137,6 +137,8 @@ building, following, and tracking comic-book reading orders.
 ### External Comic-Service Integration
 
 - [x] External ID database architecture
+- [x] Store Comic Vine identifiers for issues
+- [x] Development-time Comic Vine metadata / cover enrichment
 - [ ] Store Marvel Unlimited identifiers for issues
 - [ ] "Read in Marvel Unlimited" action
 - [ ] Deep-link to an issue in Marvel Unlimited where possible

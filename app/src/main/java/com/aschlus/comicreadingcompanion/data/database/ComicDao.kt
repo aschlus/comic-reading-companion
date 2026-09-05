@@ -541,6 +541,9 @@ interface ComicDao {
     @Update
     suspend fun updateIssue(issue: Issue)
 
+    @Update
+    suspend fun updateExternalId(externalId: ExternalId)
+
 
     // Reading progress
 

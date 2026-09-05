@@ -169,7 +169,7 @@ private fun PublisherSeriesRow(
                 }
 
                 when {
-                    series.seriesId != null &&
+                    series.startYear != null &&
                         series.endYear != null &&
                         series.startYear !=
                         series.endYear -> {
