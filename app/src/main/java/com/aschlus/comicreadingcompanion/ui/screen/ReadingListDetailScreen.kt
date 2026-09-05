@@ -34,6 +34,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -63,7 +64,7 @@ fun ReadingListDetailScreen(
     val listState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
 
-    var hasAutoScrolled by remember(
+    var hasAutoScrolled by rememberSaveable(
         readingListId,
         startPosition
     ) {
@@ -246,11 +247,7 @@ private fun ReadingListIssueRow(
     }
 
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable(
-                onClick = onIssueClick
-            ),
+        modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Checkbox(
@@ -264,6 +261,9 @@ private fun ReadingListIssueRow(
         Column(
             modifier = Modifier
                 .weight(1f)
+                .clickable(
+                    onClick = onIssueClick
+                )
                 .padding(
                     vertical = 8.dp
                 )
@@ -316,34 +316,35 @@ private fun ReadingListIssueRow(
             }
         }
 
-        if (issue.position > 1) {
-            Column {
-                IconButton(
-                    onClick = {
-                        menuExpanded = true
-                    }
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.MoreVert,
-                        contentDescription = "More options"
-                    )
+        Column {
+            IconButton(
+                onClick = {
+                    menuExpanded = true
                 }
+            ) {
+                Icon(
+                    imageVector = Icons.Default.MoreVert,
+                    contentDescription = "More options"
+                )
+            }
 
-                DropdownMenu(
-                    expanded = menuExpanded,
-                    onDismissRequest = {
+            DropdownMenu(
+                expanded = menuExpanded,
+                onDismissRequest = {
+                    menuExpanded = false
+                }
+            ) {
+                DropdownMenuItem(
+                    text = {
+                        Text("Mark as reading")
+                    },
+                    onClick = {
                         menuExpanded = false
+                        onMarkAsReading()
                     }
-                ) {
-                    DropdownMenuItem(
-                        text = {
-                            Text("Mark as reading")
-                        },
-                        onClick = {
-                            menuExpanded = false
-                            onMarkAsReading()
-                        }
-                    )
+                )
+
+                if (issue.position > 1) {
                     DropdownMenuItem(
                         text = {
                             Text("Mark all before as read")

@@ -36,4 +36,37 @@ class IssueDetailViewModel(
                 }
         }
     }
+
+    fun markAsUnread() {
+        val currentIssue = _issue.value
+            ?: return
+
+        viewModelScope.launch {
+            repository.markIssueAsUnread(
+                currentIssue.issueId
+            )
+        }
+    }
+
+    fun markAsReading() {
+        val currentIssue = _issue.value
+            ?: return
+
+        viewModelScope.launch {
+            repository.markIssueAsReading(
+                currentIssue.issueId
+            )
+        }
+    }
+
+    fun markAsRead() {
+        val currentIssue = _issue.value
+            ?: return
+
+        viewModelScope.launch {
+            repository.markIssueAsRead(
+                currentIssue.issueId
+            )
+        }
+    }
 }
