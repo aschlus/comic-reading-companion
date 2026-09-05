@@ -111,8 +111,8 @@ building, following, and tracking comic-book reading orders.
 - [x] Remove stale reading-list entries when JSON changes
 - [x] Preserve issue reading progress when reading-list JSON changes
 - [x] Make imports idempotent
-- [ ] Import all bundled reading-list files automatically
-- [ ] Add importer transactions
+- [x] Import all bundled reading-list files automatically
+- [x] Add importer transactions
 - [ ] Add stronger JSON validation and useful error reporting
 - [ ] Detect duplicate reading-list positions
 - [ ] Detect duplicate issues within a reading list

@@ -24,6 +24,7 @@ class AppContainer(context: Context) {
         ReadingListAssetParser(context)
 
     val readingListImporter = ReadingListImporter(
-        comicDao = database.comicDao()
+        comicDao = database.comicDao(),
+        database = database
     )
 }

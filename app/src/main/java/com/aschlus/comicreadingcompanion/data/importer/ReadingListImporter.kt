@@ -1,5 +1,7 @@
 package com.aschlus.comicreadingcompanion.data.importer
 
+import androidx.room3.withWriteTransaction
+import com.aschlus.comicreadingcompanion.data.database.ComicDatabase
 import com.aschlus.comicreadingcompanion.data.database.ComicDao
 import com.aschlus.comicreadingcompanion.data.database.entities.ExternalId
 import com.aschlus.comicreadingcompanion.data.database.entities.Issue
@@ -15,10 +17,21 @@ import com.aschlus.comicreadingcompanion.data.importer.models.ReadingListItemImp
 import kotlinx.coroutines.flow.first
 
 class ReadingListImporter(
-    private val comicDao: ComicDao
+    private val comicDao: ComicDao,
+    private val database: ComicDatabase
 ) {
 
     suspend fun import(
+        importData: ReadingListImportDto
+    ) {
+        database.withWriteTransaction {
+            importReadingList(
+                importData = importData
+            )
+        }
+    }
+
+    private suspend fun importReadingList(
         importData: ReadingListImportDto
     ) {
         val publisher =

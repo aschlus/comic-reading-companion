@@ -26,4 +26,20 @@ class ReadingListAssetParser(
             jsonText
         )
     }
+
+    fun listReadingListAssets(): List<String> {
+        return context.assets
+            .list("reading_lists")
+            ?.filter { fileName ->
+                fileName.endsWith(
+                    ".json",
+                    ignoreCase = true
+                )
+            }
+            ?.sorted()
+            ?.map { fileName ->
+                "reading_lists/$fileName"
+            }
+            ?: emptyList()
+    }
 }

@@ -23,14 +23,21 @@ class ComicReadingCompanionApplication : Application() {
         applicationScope.launch {
             container.databaseSeeder.seed()
 
-            val importedList =
-                container.readingListAssetParser.parse(
-                    "reading_lists/spider_man_volume_2.json"
-                )
+            val readingListAssets =
+                container.readingListAssetParser
+                    .listReadingListAssets()
 
-            container.readingListImporter.import(
-                importedList
-            )
+            readingListAssets.forEach { assetPath ->
+
+                val importedList =
+                    container.readingListAssetParser.parse(
+                        assetPath
+                    )
+
+                container.readingListImporter.import(
+                    importedList
+                )
+            }
         }
     }
 }
