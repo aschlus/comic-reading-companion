@@ -43,7 +43,7 @@ building, following, and tracking comic-book reading orders.
 - [x] Display required / optional status in the UI
 - [x] Display reading-list item notes in the UI
 - [x] Reading-list sections / story arcs
-- [ ] Collapsible reading-list sections
+- [x] Collapsible reading-list sections
 - [ ] Create custom reading lists
 - [ ] Edit reading-list title and description
 - [ ] Add issues to a reading list

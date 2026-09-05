@@ -17,6 +17,8 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ExpandLess
+import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Checkbox
@@ -40,6 +42,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -85,6 +88,12 @@ fun ReadingListDetailScreen(
         mutableStateOf(false)
     }
 
+    var collapsedSectionIds by rememberSaveable(
+        readingListId
+    ) {
+        mutableStateOf(longArrayOf())
+    }
+
     LaunchedEffect(readingListId) {
         viewModel.loadReadingList(readingListId)
     }
@@ -104,6 +113,27 @@ fun ReadingListDetailScreen(
             }
 
             if (targetIndex >= 0) {
+                val targetIssue = issues[targetIndex]
+                val targetSectionId = targetIssue.sectionId
+                val sectionWasCollapsed =
+                    targetSectionId != null &&
+                            collapsedSectionIds.contains(
+                                targetSectionId
+                            )
+
+                if (
+                    targetSectionId != null &&
+                    sectionWasCollapsed
+                ) {
+                    collapsedSectionIds =
+                        collapsedSectionIds.filter { sectionId ->
+                            sectionId != targetSectionId
+                        }
+                        .toLongArray()
+
+                    withFrameNanos {  }
+                }
+
                 listState.scrollToItem(targetIndex)
             }
 
@@ -246,6 +276,27 @@ fun ReadingListDetailScreen(
                     TextButton(
                         onClick = {
                             coroutineScope.launch {
+                                val targetIssue = issues[firstUnreadIndex]
+                                val targetSectionId = targetIssue.sectionId
+                                val sectionWasCollapsed =
+                                    targetSectionId != null &&
+                                            collapsedSectionIds.contains(
+                                                targetSectionId
+                                            )
+
+                                if (
+                                    targetSectionId != null &&
+                                    sectionWasCollapsed
+                                ) {
+                                    collapsedSectionIds =
+                                        collapsedSectionIds.filter { sectionId ->
+                                            sectionId != targetSectionId
+                                        }
+                                            .toLongArray()
+
+                                    withFrameNanos { }
+                                }
+
                                 listState.animateScrollToItem(
                                     firstUnreadIndex
                                 )
@@ -255,7 +306,6 @@ fun ReadingListDetailScreen(
                         Text("Jump to first unread")
                     }
                 }
-
                 if (issues.isEmpty()) {
                     Text("No issues in this reading list")
                 } else {
@@ -279,40 +329,74 @@ fun ReadingListDetailScreen(
                                     null
                                 }
 
+                            val sectionId =
+                                issue.sectionId
+
+                            val isFirstIssueInSection =
+                                sectionId != null &&
+                                        sectionId != previousSectionId
+
+                            val isSectionCollapsed =
+                                sectionId != null &&
+                                        collapsedSectionIds.contains(
+                                            sectionId
+                                        )
+
                             if (
-                                issue.sectionId != null &&
-                                issue.sectionId != previousSectionId
+                                isFirstIssueInSection &&
+                                sectionId != null
                             ) {
                                 ReadingListSectionHeader(
                                     title =
                                         issue.sectionTitle
                                             ?: "Section",
                                     description =
-                                        issue.sectionDescription
+                                        issue.sectionDescription,
+                                    isCollapsed =
+                                        isSectionCollapsed,
+                                    onToggleCollapsed = {
+                                        collapsedSectionIds =
+                                            if (
+                                                collapsedSectionIds.contains(
+                                                    sectionId
+                                                )
+                                            ) {
+                                                collapsedSectionIds
+                                                    .filter {
+                                                        it != sectionId
+                                                    }
+                                                    .toLongArray()
+                                            } else {
+                                                collapsedSectionIds +
+                                                    sectionId
+                                            }
+                                    }
                                 )
                             }
 
-                            ReadingListIssueRow(
-                                issue = issue,
-                                onIssueClick = {
-                                    onIssueClick(issue.issueId)
-                                },
-                                onToggleRead = {
-                                    viewModel.toggleIssueRead(
-                                        issue = issue
-                                    )
-                                },
-                                onMarkAsReading = {
-                                    viewModel.markIssueAsReading(
-                                        issue = issue
-                                    )
-                                },
-                                onMarkAllBeforeRead = {
-                                    viewModel.markAllBeforeAsRead(
-                                        selectedIssue = issue
-                                    )
-                                }
-                            )
+                            if (!isSectionCollapsed) {
+                                ReadingListIssueRow(
+                                    issue = issue,
+                                    onIssueClick = {
+                                        onIssueClick(issue.issueId)
+                                    },
+                                    onToggleRead = {
+                                        viewModel.toggleIssueRead(
+                                            issue = issue
+                                        )
+                                    },
+                                    onMarkAsReading = {
+                                        viewModel.markIssueAsReading(
+                                            issue = issue
+                                        )
+                                    },
+                                    onMarkAllBeforeRead = {
+                                        viewModel.markAllBeforeAsRead(
+                                            selectedIssue = issue
+                                        )
+                                    }
+                                )
+                            }
                         }
                     }
                 }
@@ -364,31 +448,65 @@ fun ReadingListDetailScreen(
 @Composable
 private fun ReadingListSectionHeader(
     title: String,
-    description: String?
+    description: String?,
+    isCollapsed: Boolean,
+    onToggleCollapsed: () -> Unit
 ) {
-    Column(
+    Row(
         modifier = Modifier
             .fillMaxWidth()
+            .clickable(
+                onClick =
+                    onToggleCollapsed
+            )
             .padding(
                 top = 16.dp,
                 bottom = 8.dp
-            )
+            ),
+        verticalAlignment =
+            Alignment.CenterVertically
     ) {
-        Text(
-            text = title,
-            style =
-                MaterialTheme.typography.headlineSmall
-        )
-
-        description?.let { sectionDescription ->
+        Column(
+            modifier =
+                Modifier.weight(1f)
+        ) {
             Text(
-                text = sectionDescription,
+                text = title,
                 style =
-                    MaterialTheme.typography.bodyMedium,
-                modifier =
-                    Modifier.padding(top = 4.dp)
+                    MaterialTheme.typography
+                        .headlineSmall
             )
+
+            description?.let {
+                    sectionDescription ->
+                Text(
+                    text =
+                        sectionDescription,
+                    style =
+                        MaterialTheme.typography
+                            .bodyMedium,
+                    modifier =
+                        Modifier.padding(
+                            top = 4.dp
+                        )
+                )
+            }
         }
+
+        Icon(
+            imageVector =
+                if (isCollapsed) {
+                    Icons.Default.ExpandMore
+                } else {
+                    Icons.Default.ExpandLess
+                },
+            contentDescription =
+                if (isCollapsed) {
+                    "Expand section"
+                } else {
+                    "Collapse section"
+                }
+        )
     }
 }
 
