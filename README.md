@@ -175,7 +175,7 @@ building, following, and tracking comic-book reading orders.
 - [x] Reading-order numbers
 - [x] Jump to first unread
 - [ ] Better issue-row visual design
-- [ ] Issue cover thumbnails
+- [x] Issue cover thumbnails
 - [x] Required / optional indicators
 - [ ] Story / arc information
 - [x] Publication date

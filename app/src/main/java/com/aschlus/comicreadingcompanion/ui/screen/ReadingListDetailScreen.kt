@@ -9,6 +9,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -42,6 +45,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListIssue
+import com.aschlus.comicreadingcompanion.ui.component.ComicCoverImage
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ReadingListDetailViewModel
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
@@ -361,7 +365,7 @@ private fun ReadingListIssueRow(
             }
         )
 
-        Column(
+        Row(
             modifier = Modifier
                 .weight(1f)
                 .clickable(
@@ -369,53 +373,77 @@ private fun ReadingListIssueRow(
                 )
                 .padding(
                     vertical = 8.dp
-                )
+                ),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(
-                text = "${issue.seriesTitle} #${issue.issueNumber}",
-                style = MaterialTheme.typography.titleMedium
+            ComicCoverImage(
+                coverUrl = issue.coverUrl,
+                contentDescription =
+                    "${issue.seriesTitle} #${issue.issueNumber} cover",
+                modifier = Modifier
+                    .width(56.dp)
+                    .aspectRatio(2f / 3f),
+                placeholderText = "No Cover"
             )
 
-            issue.issueTitle?.let { title ->
-                Text(
-                    text = title,
-                    style = MaterialTheme.typography.bodyMedium
-                )
-            }
+            Spacer(
+                modifier = Modifier.width(12.dp)
+            )
 
-            val metadata = buildList {
-                issue.publicationDate?.let { publicationDate ->
-                    add(
-                        formatPublicationDate(
-                            publicationDate
-                        )
+            Column(
+                modifier = Modifier.weight(1f)
+            ) {
+                Text(
+                    text =
+                        "${issue.seriesTitle} #${issue.issueNumber}",
+                    style =
+                        MaterialTheme.typography.titleMedium
+                )
+
+                issue.issueTitle?.let { title ->
+                    Text(
+                        text = title,
+                        style =
+                            MaterialTheme.typography.bodyMedium
                     )
                 }
 
-                add("Order #${issue.position}")
+                val metadata = buildList {
+                    issue.publicationDate?.let { publicationDate ->
+                        add(formatPublicationDate(publicationDate))
+                    }
 
-                if (!issue.required) {
-                    add("Optional")
+                    add("Order #${issue.position}")
+
+                    if (!issue.required) {
+                        add("Optional")
+                    }
                 }
-            }
 
-            Text(
-                text = metadata.joinToString(" • "),
-                style = MaterialTheme.typography.bodySmall
-            )
-
-            if (issue.readingStatus == ReadingStatus.READING) {
                 Text(
-                    text = "Currently reading",
-                    style = MaterialTheme.typography.labelMedium
+                    text = metadata.joinToString(" • "),
+                    style =
+                        MaterialTheme.typography.bodySmall
                 )
-            }
 
-            issue.notes?.let { notes ->
-                Text(
-                    text = notes,
-                    style = MaterialTheme.typography.bodySmall
-                )
+                if (
+                    issue.readingStatus ==
+                    ReadingStatus.READING
+                ) {
+                    Text(
+                        text = "Currently reading",
+                        style =
+                            MaterialTheme.typography.labelMedium
+                    )
+                }
+
+                issue.notes?.let { notes ->
+                    Text(
+                        text = notes,
+                        style =
+                            MaterialTheme.typography.bodySmall
+                    )
+                }
             }
         }
 
