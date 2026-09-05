@@ -1,6 +1,7 @@
 package com.aschlus.comicreadingcompanion
 
 import android.app.Application
+import android.util.Log
 import com.aschlus.comicreadingcompanion.app.AppContainer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -39,7 +40,8 @@ class ComicReadingCompanionApplication : Application() {
                         importedList
                     )
                 } catch (exception: Exception) {
-                    throw IllegalArgumentException(
+                    Log.e(
+                        "ReadingListImport",
                         "Failed to import reading-list asset " +
                         "'$assetPath': " +
                         "${exception.message}",
