@@ -210,7 +210,7 @@ building, following, and tracking comic-book reading orders.
 - [ ] DAO tests
 - [ ] Repository tests
 - [ ] JSON parser tests
-- [ ] Reading-list importer tests
+- [x] Reading-list importer tests
 - [ ] Progress-tracking tests
 - [ ] ViewModel tests
 - [ ] Compose UI tests
