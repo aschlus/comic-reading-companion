@@ -11,6 +11,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.database.entities.Series
 import com.aschlus.comicreadingcompanion.data.database.entities.Universe
 import com.aschlus.comicreadingcompanion.data.database.entities.ExternalId
+import com.aschlus.comicreadingcompanion.data.database.models.IssueDetail
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListContinueItem
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListIssue
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListSummary
@@ -60,6 +61,14 @@ class ComicRepository(
 
     suspend fun getIssueById(issueId: Long): Issue? {
         return comicDao.getIssueById(issueId)
+    }
+
+    fun getIssueDetail(
+        issueId: Long
+    ): Flow<IssueDetail?> {
+        return comicDao.getIssueDetail(
+            issueId = issueId
+        )
     }
 
 

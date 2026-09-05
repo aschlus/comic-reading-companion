@@ -67,12 +67,12 @@ building, following, and tracking comic-book reading orders.
 - [x] Display a reading-list progress bar
 - [x] Automatically update progress through Room Flow
 - [x] Jump to the first unread issue
-- [ ] Expose the "Reading" status in the UI
+- [x] Expose the "Reading" status in the UI
 - [x] "Continue Reading" action
 - [x] Automatically open / scroll to the current reading position
 - [ ] Bulk mark issues as read
 - [ ] Bulk mark issues as unread
-- [ ] Mark everything before a selected issue as read
+- [x] Mark everything before a selected issue as read
 - [ ] Reset reading-list progress
 - [ ] Display date started
 - [ ] Display date completed
@@ -173,12 +173,12 @@ building, following, and tracking comic-book reading orders.
 - [x] Jump to first unread
 - [ ] Better issue-row visual design
 - [ ] Issue cover thumbnails
-- [ ] Required / optional indicators
-- [ ] Story / arc information
+- [x] Required / optional indicators
+- [x] Story / arc information
 - [x] Publication date
 - [ ] Expandable notes
-- [ ] Tap issue to open issue details
-- [ ] Sticky reading-progress header
+- [x] Tap issue to open issue details
+- [x] Sticky reading-progress header
 - [ ] Scroll-to-top action
 - [ ] Jump to a specific issue / reading-order number
 

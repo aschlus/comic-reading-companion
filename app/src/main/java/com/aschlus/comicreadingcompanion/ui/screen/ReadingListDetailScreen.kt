@@ -1,5 +1,6 @@
 package com.aschlus.comicreadingcompanion.ui.screen
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -46,6 +47,7 @@ fun ReadingListDetailScreen(
     readingListId: Long,
     startPosition: Int,
     viewModel: ReadingListDetailViewModel,
+    onIssueClick: (Long) -> Unit,
     onBackClick: () -> Unit
 ) {
     val readingList by
@@ -196,6 +198,9 @@ fun ReadingListDetailScreen(
                         ) { issue ->
                             ReadingListIssueRow(
                                 issue = issue,
+                                onIssueClick = {
+                                    onIssueClick(issue.issueId)
+                                },
                                 onToggleRead = {
                                     viewModel.toggleIssueRead(
                                         issue = issue
@@ -223,6 +228,7 @@ fun ReadingListDetailScreen(
 @Composable
 private fun ReadingListIssueRow(
     issue: ReadingListIssue,
+    onIssueClick: () -> Unit,
     onToggleRead: () -> Unit,
     onMarkAsReading: () -> Unit,
     onMarkAllBeforeRead: () -> Unit
@@ -233,7 +239,11 @@ private fun ReadingListIssueRow(
     }
 
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(
+                onClick = onIssueClick
+            ),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Checkbox(

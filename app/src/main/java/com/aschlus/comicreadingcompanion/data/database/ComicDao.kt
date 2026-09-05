@@ -16,6 +16,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListItem
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSection
 import com.aschlus.comicreadingcompanion.data.database.entities.ExternalId
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingProgress
+import com.aschlus.comicreadingcompanion.data.database.models.IssueDetail
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListContinueItem
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListIssue
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListSummary
@@ -124,6 +125,37 @@ interface ComicDao {
         seriesId: Long,
         issueNumber: String
     ): Issue?
+
+    @Query("""
+        SELECT
+            issues.id AS issueId,
+            series.title AS seriesTitle,
+            series.volume AS seriesVolume,
+            issues.issueNumber AS issueNumber,
+            issues.title AS issueTitle,
+            issues.publicationDate AS publicationDate,
+            issues.coverUrl AS coverUrl,
+            issues.description AS description,
+            issues.issueType AS issueType,
+            publishers.name AS publisherName,
+            universes.name AS universeName,
+            universes.designation AS universeDesignation,
+            reading_progress.status AS readingStatus
+        FROM issues
+        INNER JOIN series
+            ON issues.seriesId = series.id
+        INNER JOIN publishers
+            ON series.publisherId = publishers.id
+        LEFT JOIN universes
+            ON issues.universeId = universes.id
+        LEFT JOIN reading_progress
+            ON issues.id = reading_progress.issueId
+        WHERE issues.id = :issueId
+        LIMIT 1
+    """)
+    fun getIssueDetail(
+        issueId: Long
+    ): Flow<IssueDetail>
 
 
     // Reading lists
