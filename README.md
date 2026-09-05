@@ -70,8 +70,8 @@ building, following, and tracking comic-book reading orders.
 - [x] Expose the "Reading" status in the UI
 - [x] "Continue Reading" action
 - [x] Automatically open / scroll to the current reading position
-- [ ] Bulk mark issues as read
-- [ ] Bulk mark issues as unread
+- [ ] Select multiple issues and mark as read
+- [ ] Select multiple issues and mark as unread
 - [x] Mark everything before a selected issue as read
 - [x] Reset reading-list progress
 - [x] Mark entire reading-list as read
@@ -159,7 +159,7 @@ building, following, and tracking comic-book reading orders.
 - [ ] Search reading lists
 - [ ] Reading-list cover / hero artwork
 - [ ] Recently opened reading lists
-- [x] Continue Reading section
+- [ ] Dedicated Continue Reading section
 
 ### Reading-List Detail UI
 
@@ -175,11 +175,11 @@ building, following, and tracking comic-book reading orders.
 - [ ] Better issue-row visual design
 - [ ] Issue cover thumbnails
 - [x] Required / optional indicators
-- [x] Story / arc information
+- [ ] Story / arc information
 - [x] Publication date
 - [ ] Expandable notes
 - [x] Tap issue to open issue details
-- [x] Sticky reading-progress header
+- [x] Persistent reading-progress header
 - [ ] Scroll-to-top action
 - [ ] Jump to a specific issue / reading-order number
 
