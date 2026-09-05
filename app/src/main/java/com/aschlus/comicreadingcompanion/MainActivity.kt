@@ -13,6 +13,7 @@ import androidx.navigation.navArgument
 import com.aschlus.comicreadingcompanion.ui.screen.HomeScreen
 import com.aschlus.comicreadingcompanion.ui.screen.IssueDetailScreen
 import com.aschlus.comicreadingcompanion.ui.screen.ReadingListDetailScreen
+import com.aschlus.comicreadingcompanion.ui.screen.SeriesDetailScreen
 import com.aschlus.comicreadingcompanion.ui.theme.ComicReadingCompanionTheme
 import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeViewModelFactory
@@ -20,6 +21,8 @@ import com.aschlus.comicreadingcompanion.ui.viewmodel.IssueDetailViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.IssueDetailViewModelFactory
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ReadingListDetailViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ReadingListDetailViewModelFactory
+import com.aschlus.comicreadingcompanion.ui.viewmodel.SeriesDetailViewModel
+import com.aschlus.comicreadingcompanion.ui.viewmodel.SeriesDetailViewModelFactory
 
 class MainActivity : ComponentActivity() {
 
@@ -38,6 +41,12 @@ class MainActivity : ComponentActivity() {
             ComicReadingCompanionTheme {
 
                 val navController = rememberNavController()
+
+                val safeNavigateBack: () -> Unit = {
+                    if (navController.previousBackStackEntry != null) {
+                        navController.popBackStack()
+                    }
+                }
 
                 NavHost(
                     navController = navController,
@@ -96,9 +105,43 @@ class MainActivity : ComponentActivity() {
                                     "issue/$issueId"
                                 )
                             },
-                            onBackClick = {
-                                navController.popBackStack()
+                            onBackClick = safeNavigateBack
+                        )
+                    }
+
+                    composable(
+                        route = "series/{seriesId}",
+                        arguments = listOf(
+                            navArgument("seriesId") {
+                                type = NavType.LongType
                             }
+                        )
+                    ) { backStackEntry ->
+
+                        val seriesId =
+                            backStackEntry.arguments
+                                ?.getLong("seriesId")
+                                ?: return@composable
+
+                        val seriesDetailViewModel:
+                                SeriesDetailViewModel = viewModel(
+                                    factory =
+                                        SeriesDetailViewModelFactory(
+                                            (application as ComicReadingCompanionApplication)
+                                                .container
+                                                .comicRepository
+                                        )
+                                )
+
+                        SeriesDetailScreen(
+                            seriesId = seriesId,
+                            viewModel = seriesDetailViewModel,
+                            onIssueClick = { issueId ->
+                                navController.navigate(
+                                    "issue/$issueId"
+                                )
+                            },
+                            onBackClick = safeNavigateBack
                         )
                     }
 
@@ -129,9 +172,12 @@ class MainActivity : ComponentActivity() {
                         IssueDetailScreen(
                             issueId = issueId,
                             viewModel = issueDetailViewModel,
-                            onBackClick = {
-                                navController.popBackStack()
-                            }
+                            onSeriesClick = {seriesId ->
+                                navController.navigate(
+                                    "series/$seriesId"
+                                )
+                            },
+                            onBackClick = safeNavigateBack
                         )
                     }
                 }

@@ -20,6 +20,8 @@ import com.aschlus.comicreadingcompanion.data.database.models.IssueDetail
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListContinueItem
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListIssue
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListSummary
+import com.aschlus.comicreadingcompanion.data.database.models.SeriesDetail
+import com.aschlus.comicreadingcompanion.data.database.models.SeriesIssue
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -95,6 +97,45 @@ interface ComicDao {
         volume: Int?
     ): Series?
 
+    @Query("""
+        SELECT
+            series.id AS seriesId,
+            series.title AS title,
+            series.volume AS volume,
+            series.startYear AS startYear,
+            series.endYear AS endYear,
+            publishers.name AS publisherName
+        FROM series
+        INNER JOIN publishers
+            ON series.publisherId = publishers.id
+        WHERE series.id = :seriesId
+        LIMIT 1
+    """)
+    fun getSeriesDetail(
+        seriesId: Long
+    ): Flow<SeriesDetail?>
+
+    @Query("""
+        SELECT
+            issues.id AS issueId,
+            issues.issueNumber AS issueNumber,
+            issues.title AS issueTitle,
+            issues.publicationDate AS publicationDate,
+            issues.coverUrl AS coverUrl,
+            issues.issueType AS issueType,
+            reading_progress.status AS readingStatus
+        FROM issues
+        LEFT JOIN reading_progress
+            ON issues.id = reading_progress.issueId
+        WHERE issues.seriesId = :seriesId
+        ORDER BY
+            issues.publicationDate ASC,
+            issues.issueNumber ASC
+    """)
+    fun getSeriesIssues(
+        seriesId: Long
+    ): Flow<List<SeriesIssue>>
+
 
     // Issues
 
@@ -129,6 +170,7 @@ interface ComicDao {
     @Query("""
         SELECT
             issues.id AS issueId,
+            series.id AS seriesId,
             series.title AS seriesTitle,
             series.volume AS seriesVolume,
             issues.issueNumber AS issueNumber,

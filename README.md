@@ -83,14 +83,14 @@ building, following, and tracking comic-book reading orders.
 ### Issue and Series Browsing
 
 - [x] Issue detail screen
-- [ ] Series detail screen
+- [x] Series detail screen
 - [ ] Display issue cover artwork
 - [x] Display issue title
 - [x] Display publication / cover date
 - [x] Display issue description
 - [x] Display issue type
 - [x] Display universe / continuity
-- [ ] Browse issues by series
+- [x] Browse issues by series
 - [ ] Browse series by publisher
 - [ ] Search issues and series
 - [ ] Filter by publisher

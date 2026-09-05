@@ -17,6 +17,8 @@ import com.aschlus.comicreadingcompanion.data.database.models.IssueDetail
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListContinueItem
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListIssue
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListSummary
+import com.aschlus.comicreadingcompanion.data.database.models.SeriesDetail
+import com.aschlus.comicreadingcompanion.data.database.models.SeriesIssue
 import kotlinx.coroutines.flow.Flow
 
 class ComicRepository(
@@ -50,6 +52,22 @@ class ComicRepository(
         publisherId: Long
     ): List<Series> {
         return comicDao.getSeriesForPublisher(publisherId)
+    }
+
+    fun getSeriesDetail(
+        seriesId: Long
+    ): Flow<SeriesDetail?> {
+        return comicDao.getSeriesDetail(
+            seriesId = seriesId
+        )
+    }
+
+    fun getSeriesIssues(
+        seriesId: Long
+    ): Flow<List<SeriesIssue>> {
+        return comicDao.getSeriesIssues(
+            seriesId = seriesId
+        )
     }
 
     suspend fun addIssue(issue: Issue): Long {

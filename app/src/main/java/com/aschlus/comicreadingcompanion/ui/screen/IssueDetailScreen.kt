@@ -1,5 +1,6 @@
 package com.aschlus.comicreadingcompanion.ui.screen
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -25,7 +26,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
 import androidx.compose.ui.unit.dp
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.ui.viewmodel.IssueDetailViewModel
@@ -38,6 +38,7 @@ import java.util.Locale
 fun IssueDetailScreen(
     issueId: Long,
     viewModel: IssueDetailViewModel,
+    onSeriesClick: (Long) -> Unit,
     onBackClick: () -> Unit
 ) {
     val issue by viewModel.issue.collectAsState()
@@ -92,10 +93,20 @@ fun IssueDetailScreen(
                     Arrangement.spacedBy(12.dp)
             ) {
                 Text(
-                    text = "${currentIssue.seriesTitle} " +
-                                "#${currentIssue.issueNumber}",
+                    text = currentIssue.seriesTitle,
                     style =
-                        MaterialTheme.typography.headlineMedium
+                        MaterialTheme.typography.headlineMedium,
+                    modifier = Modifier.clickable {
+                        onSeriesClick(
+                            currentIssue.seriesId
+                        )
+                    }
+                )
+
+                Text(
+                    text = "#${currentIssue.issueNumber}",
+                    style =
+                        MaterialTheme.typography.titleLarge
                 )
 
                 currentIssue.issueTitle?.let { title ->
