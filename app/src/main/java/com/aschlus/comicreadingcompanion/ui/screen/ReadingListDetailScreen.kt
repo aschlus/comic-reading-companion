@@ -22,9 +22,11 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
+import androidx.compose.material.icons.filled.FilterList
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -34,12 +36,14 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -127,6 +131,15 @@ fun ReadingListDetailScreen(
         mutableStateOf(false)
     }
 
+    var showFilterSheet by remember {
+        mutableStateOf(false)
+    }
+
+    var filterSheetState =
+        rememberModalBottomSheetState (
+            skipPartiallyExpanded = true
+        )
+
     LaunchedEffect(readingListId) {
         viewModel.loadReadingList(readingListId)
     }
@@ -181,6 +194,115 @@ fun ReadingListDetailScreen(
     val hasAnyProgress = issues.any { issue ->
         issue.readingStatus != null
     }
+
+    val seriesOptions =
+        issues
+            .map { issue ->
+                SeriesFilterOption(
+                    title = issue.seriesTitle,
+                    volume = issue.seriesVolume
+                )
+            }
+            .distinct()
+            .sortedWith(
+                compareBy<SeriesFilterOption> {
+                    it.title
+                }.thenBy {
+                    it.volume ?: 0
+                }
+            )
+
+    val selectedSeries =
+        seriesOptions.find { option ->
+            option.key == selectedSeriesKey
+        }
+
+    val trimmedSearchQuery = searchQuery.trim()
+
+    val isSearching = trimmedSearchQuery.isNotEmpty()
+
+    val matchingSectionIds =
+        if (!isSearching) {
+            emptySet()
+        } else {
+            issues
+                .filter { issue ->
+                    sectionMatchesSearch(
+                        issue = issue,
+                        query = trimmedSearchQuery
+                    )
+                }
+                .mapNotNull { issue ->
+                    issue.sectionId
+                }
+                .toSet()
+        }
+
+    val searchMatchedIssues =
+        if (!isSearching) {
+            issues
+        } else {
+            issues.filter { issue ->
+                issue.sectionId in matchingSectionIds ||
+                        issueMatchesSearch(
+                            issue = issue,
+                            query = trimmedSearchQuery
+                        )
+            }
+        }
+
+    val hasActiveFilters =
+        readingStatusFilter != "ALL" ||
+                requiredFilter != "ALL" ||
+                selectedSeriesKey != null
+
+    var activeFilterCount =
+        listOf(
+            readingStatusFilter != "ALL",
+            requiredFilter != "ALL",
+            selectedSeriesKey != null
+        ).count { it}
+
+    val visibleIssues =
+        searchMatchedIssues.filter { issue ->
+
+            val matchesReadingStatus =
+                when (readingStatusFilter) {
+                    "UNREAD" ->
+                        issue.readingStatus == null ||
+                                issue.readingStatus == ReadingStatus.UNREAD
+
+                    "READING" ->
+                        issue.readingStatus == ReadingStatus.READING
+
+                    "READ" ->
+                        issue.readingStatus == ReadingStatus.READ
+
+                    else ->
+                        true
+                }
+
+            val matchesRequiredStatus =
+                when (requiredFilter) {
+                    "REQUIRED" ->
+                        issue.required
+
+                    "OPTIONAL" ->
+                        !issue.required
+
+                    else ->
+                        true
+                }
+
+            val matchesSeries =
+                selectedSeriesKey == null ||
+                        SeriesFilterOption(
+                            title = issue.seriesTitle,
+                            volume = issue.seriesVolume
+                        ).key == selectedSeriesKey
+
+            matchesReadingStatus && matchesRequiredStatus && matchesSeries
+        }
 
     Scaffold(
         topBar = {
@@ -255,7 +377,7 @@ fun ReadingListDetailScreen(
                 .padding(innerPadding)
                 .padding(16.dp),
             verticalArrangement =
-                Arrangement.spacedBy(12.dp)
+                Arrangement.spacedBy(8.dp)
         ) {
 
             val currentReadingList = readingList
@@ -263,104 +385,6 @@ fun ReadingListDetailScreen(
             if (currentReadingList == null) {
                 Text("Loading...")
             } else {
-                val seriesOptions =
-                    issues
-                        .map { issue ->
-                            SeriesFilterOption(
-                                title = issue.seriesTitle,
-                                volume = issue.seriesVolume
-                            )
-                        }
-                        .distinct()
-                        .sortedWith(
-                            compareBy<SeriesFilterOption> {
-                                it.title
-                            }.thenBy {
-                                it.volume ?: 0
-                            }
-                        )
-                val selectedSeries =
-                    seriesOptions.find { option ->
-                        option.key == selectedSeriesKey
-                    }
-                val trimmedSearchQuery = searchQuery.trim()
-                val isSearching = trimmedSearchQuery.isNotEmpty()
-
-                val matchingSectionIds =
-                    if (!isSearching) {
-                        emptySet()
-                    } else {
-                        issues
-                            .filter { issue ->
-                                sectionMatchesSearch(
-                                    issue = issue,
-                                    query = trimmedSearchQuery
-                                )
-                            }
-                            .mapNotNull { issue ->
-                                issue.sectionId
-                            }
-                            .toSet()
-                    }
-
-                val searchMatchedIssues =
-                    if (!isSearching) {
-                        issues
-                    } else {
-                        issues.filter { issue ->
-                            issue.sectionId in matchingSectionIds ||
-                                issueMatchesSearch(
-                                    issue = issue,
-                                    query = trimmedSearchQuery
-                                )
-                        }
-                    }
-
-                val hasActiveFilters =
-                    readingStatusFilter != "ALL" ||
-                        requiredFilter != "ALL" ||
-                        selectedSeriesKey != null
-
-                val visibleIssues =
-                    searchMatchedIssues.filter { issue ->
-
-                        val matchesReadingStatus =
-                            when (readingStatusFilter) {
-                                "UNREAD" ->
-                                    issue.readingStatus == null ||
-                                        issue.readingStatus == ReadingStatus.UNREAD
-
-                                "READING" ->
-                                    issue.readingStatus == ReadingStatus.READING
-
-                                "READ" ->
-                                    issue.readingStatus == ReadingStatus.READ
-
-                                else ->
-                                    true
-                            }
-
-                        val matchesRequiredStatus =
-                            when (requiredFilter) {
-                                "REQUIRED" ->
-                                    issue.required
-
-                                "OPTIONAL" ->
-                                    !issue.required
-
-                                else ->
-                                    true
-                            }
-
-                        val matchesSeries =
-                            selectedSeriesKey == null ||
-                                SeriesFilterOption(
-                                    title = issue.seriesTitle,
-                                    volume = issue.seriesVolume
-                                ).key == selectedSeriesKey
-
-                        matchesReadingStatus && matchesRequiredStatus && matchesSeries
-                    }
 
                 currentReadingList.description
                     ?.let { description ->
@@ -431,167 +455,41 @@ fun ReadingListDetailScreen(
                     }
                 )
 
-                Text(
-                    text = "Reading status",
-                    style =
-                        MaterialTheme.typography.labelLarge
-                )
-
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .horizontalScroll(
-                            rememberScrollState()
-                        ),
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement =
-                        Arrangement.spacedBy(8.dp)
+                        Arrangement.SpaceBetween
                 ) {
-                    FilterChip(
-                        selected =
-                            readingStatusFilter == "UNREAD",
-                        onClick = {
-                            readingStatusFilter =
-                                if (readingStatusFilter == "UNREAD") {
-                                    "ALL"
-                                } else {
-                                    "UNREAD"
-                                }
-                        },
-                        label = {
-                            Text("Unread")
-                        }
-                    )
-
-                    FilterChip(
-                        selected =
-                            readingStatusFilter == "READING",
-                        onClick = {
-                            readingStatusFilter =
-                                if (readingStatusFilter == "READING") {
-                                    "ALL"
-                                } else {
-                                    "READING"
-                                }
-                        },
-                        label = {
-                            Text("Reading")
-                        }
-                    )
-
-                    FilterChip(
-                        selected =
-                            readingStatusFilter == "READ",
-                        onClick = {
-                            readingStatusFilter =
-                                if (readingStatusFilter == "READ") {
-                                    "ALL"
-                                } else {
-                                    "READ"
-                                }
-                        },
-                        label = {
-                            Text("Read")
-                        }
-                    )
-                }
-
-                Text(
-                    text = "List status",
-                    style =
-                        MaterialTheme.typography.labelLarge
-                )
-
-                Row(
-                    horizontalArrangement =
-                        Arrangement.spacedBy(8.dp)
-                ) {
-                    FilterChip(
-                        selected =
-                            requiredFilter == "REQUIRED",
-                        onClick = {
-                            requiredFilter =
-                                if (requiredFilter == "REQUIRED") {
-                                    "ALL"
-                                } else {
-                                    "REQUIRED"
-                                }
-                        },
-                        label = {
-                            Text("Required")
-                        }
-                    )
-
-                    FilterChip(
-                        selected =
-                            requiredFilter == "OPTIONAL",
-                        onClick = {
-                            requiredFilter =
-                                if (requiredFilter == "OPTIONAL") {
-                                    "ALL"
-                                } else {
-                                    "OPTIONAL"
-                                }
-                        },
-                        label = {
-                            Text("Optional")
-                        }
-                    )
-                }
-
-                Text(
-                    text = "Series",
-                    style =
-                        MaterialTheme.typography.labelLarge
-                )
-
-                Box {
                     OutlinedButton(
                         onClick = {
-                            seriesMenuExpanded = true
+                            showFilterSheet = true
                         }
                     ) {
+                        Icon(
+                            imageVector = Icons.Default.FilterList,
+                            contentDescription = null
+                        )
+
+                        Spacer(modifier = Modifier.width(8.dp))
+
                         Text(
                             text =
-                                selectedSeries?.displayName
-                                    ?: "All series"
-                        )
-                    }
-
-                    DropdownMenu(
-                        expanded = seriesMenuExpanded,
-                        onDismissRequest = {
-                            seriesMenuExpanded = false
-                        }
-                    ) {
-                        DropdownMenuItem(
-                            text = {
-                                Text("All series")
-                            },
-                            onClick = {
-                                selectedSeriesKey = null
-                                seriesMenuExpanded = false
-                            }
-                        )
-
-                        seriesOptions.forEach { option ->
-                            DropdownMenuItem(
-                                text = {
-                                    Text(option.displayName)
-                                },
-                                onClick = {
-                                    selectedSeriesKey = option.key
-                                    seriesMenuExpanded = false
+                                if (activeFilterCount == 0) {
+                                    "Filters"
+                                } else {
+                                    "Filters ($activeFilterCount)"
                                 }
-                            )
-                        }
+                        )
                     }
-                }
 
-                if (isSearching || hasActiveFilters) {
                     Text(
                         text =
-                            "${visibleIssues.size} of " +
-                                "${issues.size} issues shown",
+                            if (isSearching || hasActiveFilters) {
+                                "${visibleIssues.size} of ${issues.size} issues"
+                            } else {
+                                "${issues.size} issues"
+                            },
                         style =
                             MaterialTheme.typography.bodySmall
                     )
@@ -744,6 +642,206 @@ fun ReadingListDetailScreen(
                             }
                         }
                     }
+                }
+            }
+        }
+    }
+
+    if (showFilterSheet) {
+        ModalBottomSheet(
+            onDismissRequest = {
+                showFilterSheet = false
+            },
+            sheetState = filterSheetState
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        start = 24.dp,
+                        end = 24.dp,
+                        bottom = 32.dp
+                    ),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                Text(
+                    text = "Filter issues",
+                    style = MaterialTheme.typography.headlineSmall
+                )
+                Text(
+                    text = "Reading status",
+                    style = MaterialTheme.typography.labelLarge
+                )
+
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    FilterChip(
+                        selected =
+                            readingStatusFilter == "UNREAD",
+                        onClick = {
+                            readingStatusFilter =
+                                if (readingStatusFilter == "UNREAD") {
+                                    "ALL"
+                                } else {
+                                    "UNREAD"
+                                }
+                        },
+                        label = {
+                            Text("Unread")
+                        }
+                    )
+
+                    FilterChip(
+                        selected =
+                            readingStatusFilter == "READING",
+                        onClick = {
+                            readingStatusFilter =
+                                if (readingStatusFilter == "READING") {
+                                    "ALL"
+                                } else {
+                                    "READING"
+                                }
+                        },
+                        label = {
+                            Text("Reading")
+                        }
+                    )
+
+                    FilterChip(
+                        selected =
+                            readingStatusFilter == "READ",
+                        onClick = {
+                            readingStatusFilter =
+                                if (readingStatusFilter == "READ"
+                                ) {
+                                    "ALL"
+                                } else {
+                                    "READ"
+                                }
+                        },
+                        label = {
+                            Text("Read")
+                        }
+                    )
+                }
+
+                Text(
+                    text = "List status",
+                    style = MaterialTheme.typography.labelLarge
+                )
+
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    FilterChip(
+                        selected =
+                            requiredFilter == "REQUIRED",
+                        onClick = {
+                            requiredFilter =
+                                if (requiredFilter == "REQUIRED") {
+                                    "ALL"
+                                } else {
+                                    "REQUIRED"
+                                }
+                        },
+                        label = {
+                            Text("Required")
+                        }
+                    )
+
+                    FilterChip(
+                        selected =
+                            requiredFilter == "OPTIONAL",
+                        onClick = {
+                            requiredFilter =
+                                if (requiredFilter == "OPTIONAL") {
+                                    "ALL"
+                                } else {
+                                    "OPTIONAL"
+                                }
+                        },
+                        label = {
+                            Text("Optional")
+                        }
+                    )
+                }
+
+                Text(
+                    text = "Series",
+                    style = MaterialTheme.typography.labelLarge
+                )
+
+                Box {
+                    OutlinedButton(
+                        onClick = {
+                            seriesMenuExpanded = true
+                        }
+                    ) {
+                        Text(
+                            text =
+                                selectedSeries
+                                    ?.displayName
+                                    ?: "All series"
+                        )
+                    }
+
+                    DropdownMenu(
+                        expanded = seriesMenuExpanded,
+                        onDismissRequest = {
+                            seriesMenuExpanded = false
+                        }
+                    ) {
+                        DropdownMenuItem(
+                            text = {
+                                Text("All series")
+                            },
+                            onClick = {
+                                selectedSeriesKey = null
+                                seriesMenuExpanded = false
+                            }
+                        )
+
+                        seriesOptions.forEach {option ->
+                            DropdownMenuItem(
+                                text = {
+                                    Text(option.displayName)
+                                },
+                                onClick = {
+                                    selectedSeriesKey = option.key
+                                    seriesMenuExpanded = false
+                                }
+                            )
+                        }
+                    }
+                }
+
+                if (hasActiveFilters) {
+                    TextButton(
+                        onClick = {
+                            readingStatusFilter = "ALL"
+                            requiredFilter = "ALL"
+                            selectedSeriesKey = null
+                        }
+                    ) {
+                        Text("Clear all filters")
+                    }
+                }
+
+                Button(
+                    onClick = {
+                        showFilterSheet = false
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(
+                        text =
+                            if (hasActiveFilters) {
+                                "Show ${visibleIssues.size} issues"
+                            } else {
+                                "Done"
+                            }
+                    )
                 }
             }
         }
