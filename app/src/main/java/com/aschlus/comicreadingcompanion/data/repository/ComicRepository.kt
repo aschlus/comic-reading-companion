@@ -35,6 +35,10 @@ class ComicRepository(
         return comicDao.getAllPublishers()
     }
 
+    fun getPublishersFlow(): Flow<List<Publisher>> {
+        return comicDao.getAllPublishersFlow()
+    }
+
     fun getPublisherById(
         publisherId: Long
     ): Flow<Publisher?> {

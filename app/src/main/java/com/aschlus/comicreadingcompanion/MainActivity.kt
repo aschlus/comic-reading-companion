@@ -10,12 +10,15 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.aschlus.comicreadingcompanion.ui.screen.BrowseScreen
 import com.aschlus.comicreadingcompanion.ui.screen.HomeScreen
 import com.aschlus.comicreadingcompanion.ui.screen.IssueDetailScreen
 import com.aschlus.comicreadingcompanion.ui.screen.PublisherDetailScreen
 import com.aschlus.comicreadingcompanion.ui.screen.ReadingListDetailScreen
 import com.aschlus.comicreadingcompanion.ui.screen.SeriesDetailScreen
 import com.aschlus.comicreadingcompanion.ui.theme.ComicReadingCompanionTheme
+import com.aschlus.comicreadingcompanion.ui.viewmodel.BrowseViewModel
+import com.aschlus.comicreadingcompanion.ui.viewmodel.BrowseViewModelFactory
 import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeViewModelFactory
 import com.aschlus.comicreadingcompanion.ui.viewmodel.IssueDetailViewModel
@@ -58,11 +61,36 @@ class MainActivity : ComponentActivity() {
                     composable("home") {
                         HomeScreen(
                             viewModel = homeViewModel,
+                            onBrowseClick = {
+                                navController.navigate("browse")
+                            },
                             onReadingListClick = { readingListId, startPosition ->
                                 navController.navigate(
                                     "readingList/$readingListId?startPosition=$startPosition"
                                 )
                             }
+                        )
+                    }
+
+                    composable("browse") {
+                        val browseViewModel:
+                                BrowseViewModel = viewModel(
+                                    factory =
+                                        BrowseViewModelFactory(
+                                            (application as ComicReadingCompanionApplication)
+                                                .container
+                                                .comicRepository
+                                        )
+                                )
+
+                        BrowseScreen(
+                            viewModel = browseViewModel,
+                            onPublisherClick = { publisherId ->
+                                navController.navigate(
+                                    "publisher/$publisherId"
+                                )
+                            },
+                            onBackClick = safeNavigateBack
                         )
                     }
 

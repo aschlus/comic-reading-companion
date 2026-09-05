@@ -36,6 +36,9 @@ interface ComicDao {
     @Query("SELECT * FROM publishers ORDER BY name ASC")
     suspend fun getAllPublishers(): List<Publisher>
 
+    @Query("SELECT * FROM publishers ORDER BY name ASC")
+    fun getAllPublishersFlow(): Flow<List<Publisher>>
+
     @Query("""
         SELECT * FROM publishers
         WHERE name = :name

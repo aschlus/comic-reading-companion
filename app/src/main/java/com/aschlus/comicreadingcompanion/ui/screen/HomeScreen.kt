@@ -13,6 +13,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -29,6 +30,7 @@ import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeViewModel
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel,
+    onBrowseClick: () -> Unit,
     onReadingListClick: (Long, Int) -> Unit
 ) {
     val readingLists by viewModel.readingLists.collectAsState()
@@ -56,6 +58,13 @@ fun HomeScreen(
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
+            OutlinedButton(
+                onClick = onBrowseClick,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Browse Comics")
+            }
+
             Text("My Reading Lists")
 
             if (readingLists.isEmpty()) {
