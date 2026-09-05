@@ -29,14 +29,23 @@ class ComicReadingCompanionApplication : Application() {
 
             readingListAssets.forEach { assetPath ->
 
-                val importedList =
-                    container.readingListAssetParser.parse(
-                        assetPath
-                    )
+                try {
+                    val importedList =
+                        container.readingListAssetParser.parse(
+                            assetPath
+                        )
 
-                container.readingListImporter.import(
-                    importedList
-                )
+                    container.readingListImporter.import(
+                        importedList
+                    )
+                } catch (exception: Exception) {
+                    throw IllegalArgumentException(
+                        "Failed to import reading-list asset " +
+                        "'$assetPath': " +
+                        "${exception.message}",
+                        exception
+                    )
+                }
             }
         }
     }

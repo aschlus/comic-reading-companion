@@ -113,10 +113,10 @@ building, following, and tracking comic-book reading orders.
 - [x] Make imports idempotent
 - [x] Import all bundled reading-list files automatically
 - [x] Add importer transactions
-- [ ] Add stronger JSON validation and useful error reporting
-- [ ] Detect duplicate reading-list positions
-- [ ] Detect duplicate issues within a reading list
-- [ ] Validate missing / invalid series metadata
+- [x] Add stronger JSON validation and useful error reporting
+- [x] Detect duplicate reading-list positions
+- [x] Detect duplicate issues within a reading list
+- [x] Validate missing / invalid series metadata
 - [x] Support optional reading-list sections in JSON
 - [ ] Support per-item universe / continuity for multiverse reading lists
 - [x] Support external IDs in reading-list JSON
@@ -216,8 +216,8 @@ building, following, and tracking comic-book reading orders.
 - [ ] Compose UI tests
 - [ ] Test database migrations
 - [ ] Handle malformed reading-list files gracefully
-- [ ] Handle importer failures without partially updating a list
-- [ ] Improve error reporting / logging
+- [x] Handle importer failures without partially updating a list
+- [x] Improve error reporting / logging
 
 ### Longer-Term Ideas
 

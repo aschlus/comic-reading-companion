@@ -14,6 +14,8 @@ import com.aschlus.comicreadingcompanion.data.database.entities.Series
 import com.aschlus.comicreadingcompanion.data.database.entities.Universe
 import com.aschlus.comicreadingcompanion.data.importer.models.ReadingListImportDto
 import com.aschlus.comicreadingcompanion.data.importer.models.ReadingListItemImportDto
+import java.time.YearMonth
+import java.time.format.DateTimeParseException
 import kotlinx.coroutines.flow.first
 
 class ReadingListImporter(
@@ -24,9 +26,445 @@ class ReadingListImporter(
     suspend fun import(
         importData: ReadingListImportDto
     ) {
+
+        validateRequiredMetadata(
+            importData = importData
+        )
+
+        validateItemPositions(
+            importData = importData
+        )
+
+        validateSections(
+            importData = importData
+        )
+
+        validateSeriesMetadata(
+            importData = importData
+        )
+
+        validateIssueMetadata(
+            importData = importData
+        )
+
+        validateExternalIds(
+            importData = importData
+        )
+
+        validateDuplicateIssues(
+            importData = importData
+        )
+
         database.withWriteTransaction {
             importReadingList(
                 importData = importData
+            )
+        }
+    }
+
+    private fun validateRequiredMetadata(
+        importData: ReadingListImportDto
+    ) {
+        if (importData.title.isBlank()) {
+            throw IllegalArgumentException(
+                "Reading-list title cannot be blank"
+            )
+        }
+
+        if (importData.publisher.isBlank()) {
+            throw IllegalArgumentException(
+                "Reading list '${importData.title}' " +
+                "has a blank publisher"
+            )
+        }
+
+        if (importData.universe.name.isBlank()) {
+            throw IllegalArgumentException(
+                "Reading list '${importData.title}' " +
+                "has a blank universe name"
+            )
+        }
+
+        if (importData.universe.designation.isBlank()) {
+            throw IllegalArgumentException(
+                "Reading list '${importData.title}' " +
+                "has a blank universe designation"
+            )
+        }
+
+        importData.items.forEach { item ->
+            if (item.position <= 0) {
+                throw IllegalArgumentException(
+                    "Reading list '${importData.title}' " +
+                    "has invalid item position " +
+                    "${item.position}"
+                )
+            }
+
+            if (item.issue.number.isBlank()) {
+                throw IllegalArgumentException(
+                    "Reading list '${importData.title}' " +
+                    "has a blank issue number at " +
+                    "item position ${item.position}"
+                )
+            }
+
+            if (item.issue.type.isBlank()) {
+                throw IllegalArgumentException(
+                    "Reading list '${importData.title}' " +
+                    "has a blank issue type for " +
+                    "${item.series.title} " +
+                    "#${item.issue.number} at item " +
+                    "position ${item.position}"
+                )
+            }
+        }
+
+    }
+
+    private fun validateItemPositions(
+        importData: ReadingListImportDto
+    ) {
+        val duplicatePositions =
+            importData.items
+                .groupBy { item ->
+                    item.position
+                }
+                .filterValues { items ->
+                    items.size >1
+                }
+                .keys
+                .sorted()
+
+        if (duplicatePositions.isNotEmpty()) {
+            throw IllegalArgumentException(
+                "Reading list '${importData.title} " +
+                "contains duplicate item positions: " +
+                duplicatePositions.joinToString(", ")
+            )
+        }
+    }
+
+    private fun validateSections(
+        importData: ReadingListImportDto
+    ) {
+        val duplicatePositions =
+            importData.sections
+                .groupBy { section ->
+                    section.position
+                }
+                .filterValues { sections ->
+                    sections.size > 1
+                }
+                .keys
+                .sorted()
+
+        if (duplicatePositions.isNotEmpty()) {
+            throw IllegalArgumentException(
+                "Reading list '${importData.title}' " +
+                "contains duplicate section positions: " +
+                duplicatePositions.joinToString(", ")
+            )
+        }
+
+        importData.sections.forEach { section ->
+            if (section.position <= 0) {
+                throw IllegalArgumentException(
+                    "Reading list '${importData.title}' " +
+                    "has invalid section position " +
+                    "${section.position}"
+                )
+            }
+
+            if (section.title.isBlank()) {
+                throw IllegalArgumentException(
+                    "Reading list '${importData.title}' " +
+                    "has a blank section title at " +
+                    "section position ${section.position}"
+                )
+            }
+        }
+
+        val validSectionPositions =
+            importData.sections
+                .map { section->
+                    section.position
+                }
+                .toSet()
+
+        importData.items.forEach { item ->
+            val sectionPosition =
+                item.sectionPosition
+                    ?: return@forEach
+
+            if (sectionPosition <= 0) {
+                throw IllegalArgumentException(
+                    "Reading list '${importData.title}' " +
+                    "has invalid section position " +
+                    "$sectionPosition referenced by " +
+                    "item position ${item.position}"
+                )
+            }
+
+            if (sectionPosition !in validSectionPositions) {
+                throw IllegalArgumentException(
+                    "Reading list '${importData.title}' " +
+                    "item at position ${item.position} " +
+                    "references unknown section " +
+                    "position $sectionPosition"
+                )
+            }
+        }
+    }
+
+    private fun validateSeriesMetadata(
+        importData: ReadingListImportDto
+    ) {
+        importData.items.forEach { item ->
+            val series = item.series
+
+            if (series.title.isBlank()) {
+                throw IllegalArgumentException(
+                    "Reading list '${importData.title}' " +
+                            "has a blank series title at " +
+                            "item position ${item.position}"
+                )
+            }
+
+            if (series.volume != null && series.volume <= 0) {
+                throw IllegalArgumentException(
+                    "Reading list '${importData.title}' " +
+                            "has invalid series volume " +
+                            "${series.volume} for " +
+                            "'${series.title}' at item " +
+                            "position ${item.position}"
+                )
+            }
+
+            if (series.startYear != null && series.startYear <= 0) {
+                throw IllegalArgumentException(
+                    "Reading list '${importData.title}' " +
+                            "has invalid start year " +
+                            "${series.startYear} for " +
+                            "'${series.title}' at item " +
+                            "position ${item.position}"
+                )
+            }
+
+            if (series.endYear != null && series.endYear <= 0) {
+                throw IllegalArgumentException(
+                    "Reading list '${importData.title}' " +
+                            "has invalid end year " +
+                            "${series.endYear} for " +
+                            "'${series.title}' at item " +
+                            "position ${item.position}"
+                )
+            }
+
+            if (
+                series.startYear != null &&
+                series.endYear != null &&
+                series.endYear < series.startYear
+            ) {
+                throw IllegalArgumentException(
+                    "Reading list '${importData.title}' " +
+                            "has series '${series.title}' " +
+                            "ending in ${series.endYear} " +
+                            "before it starts in " +
+                            "${series.startYear} at item " +
+                            "position ${item.position}"
+                )
+            }
+        }
+    }
+
+    private fun validateIssueMetadata(
+        importData: ReadingListImportDto
+    ) {
+        importData.items.forEach { item ->
+            val issue = item.issue
+
+            try {
+                IssueType.valueOf(
+                    issue.type.uppercase()
+                )
+            } catch (exception: IllegalArgumentException) {
+                throw IllegalArgumentException(
+                    "Reading list '${importData.title}' " +
+                    "has unknown issue type " +
+                    "'${issue.type}' for " +
+                    "${item.series.title} " +
+                    "#${issue.number} at item " +
+                    "position ${item.position}",
+                    exception
+                )
+            }
+
+            issue.publicationDate?.let { publicationDate ->
+                if (publicationDate.isBlank()) {
+                    throw IllegalArgumentException(
+                        "Reading list '${importData.title}' " +
+                        "has a blank publication date for " +
+                        "${item.series.title} " +
+                        "#${issue.number} at item " +
+                        "position ${item.position}"
+                    )
+                }
+
+                try {
+                    YearMonth.parse(publicationDate)
+                } catch (exception: DateTimeParseException) {
+                    throw IllegalArgumentException(
+                        "Reading list '${importData.title}' " +
+                        "has invalid publication date " +
+                        "'$publicationDate' for " +
+                        "${item.series.title} " +
+                        "#${issue.number} at item " +
+                        "position ${item.position}. " +
+                        "Expected YYYY-MM.",
+                        exception
+                    )
+                }
+            }
+        }
+    }
+
+    private fun validateExternalIds(
+        importData: ReadingListImportDto
+    ) {
+        data class ExternalIdOccurrence(
+            val source: String,
+            val externalId: String,
+            val itemPosition: Int
+        )
+
+        val occurrences =
+            mutableListOf<ExternalIdOccurrence>()
+
+        importData.items.forEach { item ->
+            item.issue.externalIds.forEach { externalId ->
+                if (externalId.source.isBlank()) {
+                    throw IllegalArgumentException(
+                        "Reading list '${importData.title}' " +
+                        "has an external ID with a blank " +
+                        "source at item position " +
+                        "${item.position}"
+                    )
+                }
+
+                if (externalId.externalId.isBlank()) {
+                    throw IllegalArgumentException(
+                        "Reading list '${importData.title}' " +
+                        "has a blank external ID for " +
+                        "source '${externalId.source}' " +
+                        "at item position ${item.position}"
+                    )
+                }
+
+                if (externalId.url != null && externalId.url.isBlank()) {
+                    throw IllegalArgumentException(
+                        "Reading list '${importData.title}' " +
+                        "has a blank external-ID URL for " +
+                        "'${externalId.source}:" +
+                        "${externalId.externalId}' at " +
+                        "item position ${item.position}"
+                    )
+                }
+
+                occurrences.add(
+                    ExternalIdOccurrence(
+                        source = externalId.source,
+                        externalId = externalId.externalId,
+                        itemPosition = item.position
+                    )
+                )
+            }
+        }
+
+        val duplicates =
+            occurrences
+                .groupBy { occurrence ->
+                    occurrence.source to occurrence.externalId
+                }
+                .filterValues { matching ->
+                    matching.size > 1
+                }
+
+        if (duplicates.isNotEmpty()) {
+            val descriptions =
+                duplicates.entries
+                    .sortedWith(
+                        compareBy {
+                            it.key.first
+                        }
+                    )
+                    .joinToString(", ") { entry ->
+                        val positions =
+                            entry.value
+                                .map { occurrence ->
+                                    occurrence.itemPosition
+                                }
+                                .sorted()
+                                .joinToString(", ")
+
+                        "'${entry.key.first}:" +
+                        "${entry.key.second}' " +
+                        "at item positions $positions"
+                    }
+
+            throw IllegalArgumentException(
+                "Reading list '${importData.title}' " +
+                "contains duplicate external IDs: " +
+                descriptions
+            )
+        }
+    }
+
+    private fun validateDuplicateIssues(
+        importData: ReadingListImportDto
+    ) {
+        val duplicateIssues =
+            importData.items
+                .groupBy { item ->
+                    Triple(
+                        item.series.title,
+                        item.series.volume,
+                        item.issue.number
+                    )
+                }
+                .filterValues { items ->
+                    items.size > 1
+                }
+                .keys
+
+        if (duplicateIssues.isNotEmpty()) {
+            val duplicateDescriptions =
+                duplicateIssues
+                    .sortedWith(
+                        compareBy<Triple<String, Int?, String>> {
+                            it.first
+                        }.thenBy {
+                            it.second ?: 0
+                        }.thenBy {
+                            it.third
+                        }
+                    )
+                    .joinToString(", ") { issueKey ->
+                        val seriesTitle = issueKey.first
+                        val volume = issueKey.second
+                        val issueNumber = issueKey.third
+
+                        if (volume == null) {
+                            "$seriesTitle #$issueNumber"
+                        } else {
+                            "$seriesTitle Vol. $volume #$issueNumber"
+                        }
+                    }
+
+            throw IllegalArgumentException(
+                "Reading list '${importData.title}' " +
+                        "contains duplicate issues: " +
+                        duplicateDescriptions
             )
         }
     }
@@ -184,26 +622,6 @@ class ReadingListImporter(
         importData: ReadingListImportDto,
         readingList: ReadingList
     ): Map<Int, ReadingListSection> {
-
-        val duplicatePositions =
-            importData.sections
-                .groupBy { section ->
-                    section.position
-                }
-                .filterValues { sections ->
-                    sections.size > 1
-                }
-                .keys
-
-        if (duplicatePositions.isNotEmpty()) {
-            throw IllegalArgumentException(
-                "Duplicate reading-list section " +
-                    "positions: " +
-                    duplicatePositions
-                        .sorted()
-                        .joinToString(", ")
-            )
-        }
 
         val existingSections =
             comicDao.getSectionsForReadingList(
