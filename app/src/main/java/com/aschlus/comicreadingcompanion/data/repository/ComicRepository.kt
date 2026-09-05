@@ -14,12 +14,14 @@ import com.aschlus.comicreadingcompanion.data.database.entities.Series
 import com.aschlus.comicreadingcompanion.data.database.entities.Universe
 import com.aschlus.comicreadingcompanion.data.database.entities.ExternalId
 import com.aschlus.comicreadingcompanion.data.database.models.IssueDetail
+import com.aschlus.comicreadingcompanion.data.database.models.IssueSearchResult
 import com.aschlus.comicreadingcompanion.data.database.models.PublisherSeries
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListContinueItem
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListIssue
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListSummary
 import com.aschlus.comicreadingcompanion.data.database.models.SeriesDetail
 import com.aschlus.comicreadingcompanion.data.database.models.SeriesIssue
+import com.aschlus.comicreadingcompanion.data.database.models.SeriesSearchResult
 import kotlinx.coroutines.flow.Flow
 
 class ComicRepository(
@@ -354,6 +356,25 @@ class ComicRepository(
 
         comicDao.deleteReadingProgressForIssues(
             distinctIssueIds
+        )
+    }
+
+
+    // Browsing
+
+    fun searchSeries(
+        query: String
+    ): Flow<List<SeriesSearchResult>> {
+        return comicDao.searchSeries(
+            query = query
+        )
+    }
+
+    fun searchIssues(
+        query: String
+    ): Flow<List<IssueSearchResult>> {
+        return comicDao.searchIssues(
+            query = query
         )
     }
 

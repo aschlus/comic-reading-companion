@@ -17,12 +17,14 @@ import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSecti
 import com.aschlus.comicreadingcompanion.data.database.entities.ExternalId
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingProgress
 import com.aschlus.comicreadingcompanion.data.database.models.IssueDetail
+import com.aschlus.comicreadingcompanion.data.database.models.IssueSearchResult
 import com.aschlus.comicreadingcompanion.data.database.models.PublisherSeries
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListContinueItem
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListIssue
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListSummary
 import com.aschlus.comicreadingcompanion.data.database.models.SeriesDetail
 import com.aschlus.comicreadingcompanion.data.database.models.SeriesIssue
+import com.aschlus.comicreadingcompanion.data.database.models.SeriesSearchResult
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -181,6 +183,41 @@ interface ComicDao {
         publisherId: Long
     ): Flow<List<PublisherSeries>>
 
+    @Query("""
+        SELECT
+            series.id AS seriesId,
+            series.title AS title,
+            series.volume AS volume,
+            series.startYear AS startYear,
+            series.endYear AS endYear,
+            publishers.name AS publisherName,
+            COUNT(issues.id) AS totalCount,
+            SUM(
+                CASE
+                    WHEN reading_progress.status = 'READ'
+                        THEN 1
+                    ELSE 0
+                END
+            ) AS readCount
+        FROM series
+        INNER JOIN publishers
+            ON series.publisherId = publishers.id
+        LEFT JOIN issues
+            ON series.id = issues.seriesId
+        LEFT JOIN reading_progress
+            ON issues.id = reading_progress.issueId
+        WHERE LOWER(series.title)
+            LIKE '%' || LOWER(:query) || '%'
+        GROUP BY series.id
+        ORDER BY
+            series.title ASC,
+            series.startYear ASC
+        LIMIT 50
+    """)
+    fun searchSeries(
+        query: String
+    ): Flow<List<SeriesSearchResult>>
+
 
     // Issues
 
@@ -243,6 +280,41 @@ interface ComicDao {
     fun getIssueDetail(
         issueId: Long
     ): Flow<IssueDetail>
+
+    @Query("""
+        SELECT
+            issues.id AS issueId,
+            series.id AS seriesId,
+            series.title AS seriesTitle,
+            series.volume AS seriesVolume,
+            issues.issueNumber AS issueNumber,
+            issues.title AS issueTitle,
+            issues.publicationDate AS publicationDate,
+            publishers.name AS publisherName,
+            reading_progress.status AS readingStatus
+        FROM issues
+        INNER JOIN series
+            ON issues.seriesId = series.id
+        INNER JOIN publishers
+            ON series.publisherId = publishers.id
+        LEFT JOIN reading_progress
+            ON issues.id = reading_progress.issueId
+        WHERE
+            LOWER(series.title)
+                LIKE '%' || LOWER(:query) || '%'
+            OR LOWER(COALESCE(issues.title, ''))
+                LIKE '%' || LOWER(:query) || '%'
+            OR LOWER(issues.issueNumber)
+                LIKE '%' || LOWER(:query) || '%'
+        ORDER BY
+            series.title ASC,
+            issues.publicationDate ASC,
+            issues.issueNumber ASC
+        LIMIT 75
+    """)
+    fun searchIssues(
+        query: String
+    ): Flow<List<IssueSearchResult>>
 
 
     // Reading lists

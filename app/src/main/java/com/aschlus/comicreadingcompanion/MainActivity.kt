@@ -90,6 +90,16 @@ class MainActivity : ComponentActivity() {
                                     "publisher/$publisherId"
                                 )
                             },
+                            onSeriesClick = { seriesId ->
+                                navController.navigate(
+                                    "series/$seriesId"
+                                )
+                            },
+                            onIssueClick = { issueId ->
+                                navController.navigate(
+                                    "issue/$issueId"
+                                )
+                            },
                             onBackClick = safeNavigateBack
                         )
                     }
