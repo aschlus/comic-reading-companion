@@ -1,6 +1,7 @@
 package com.aschlus.comicreadingcompanion.ui.screen
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,6 +16,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Close
@@ -27,10 +29,12 @@ import androidx.compose.material3.Checkbox
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -101,6 +105,26 @@ fun ReadingListDetailScreen(
         readingListId
     ) {
         mutableStateOf("")
+    }
+
+    var readingStatusFilter by rememberSaveable(
+        readingListId
+    ) {
+        mutableStateOf("ALL")
+    }
+
+    var requiredFilter by rememberSaveable(
+        readingListId
+    ) { mutableStateOf("ALL")}
+
+    var selectedSeriesKey by rememberSaveable(
+        readingListId
+    ) {
+        mutableStateOf<String?>(null)
+    }
+
+    var seriesMenuExpanded by remember {
+        mutableStateOf(false)
     }
 
     LaunchedEffect(readingListId) {
@@ -239,7 +263,26 @@ fun ReadingListDetailScreen(
             if (currentReadingList == null) {
                 Text("Loading...")
             } else {
-
+                val seriesOptions =
+                    issues
+                        .map { issue ->
+                            SeriesFilterOption(
+                                title = issue.seriesTitle,
+                                volume = issue.seriesVolume
+                            )
+                        }
+                        .distinct()
+                        .sortedWith(
+                            compareBy<SeriesFilterOption> {
+                                it.title
+                            }.thenBy {
+                                it.volume ?: 0
+                            }
+                        )
+                val selectedSeries =
+                    seriesOptions.find { option ->
+                        option.key == selectedSeriesKey
+                    }
                 val trimmedSearchQuery = searchQuery.trim()
                 val isSearching = trimmedSearchQuery.isNotEmpty()
 
@@ -260,7 +303,7 @@ fun ReadingListDetailScreen(
                             .toSet()
                     }
 
-                val visibleIssues =
+                val searchMatchedIssues =
                     if (!isSearching) {
                         issues
                     } else {
@@ -271,6 +314,52 @@ fun ReadingListDetailScreen(
                                     query = trimmedSearchQuery
                                 )
                         }
+                    }
+
+                val hasActiveFilters =
+                    readingStatusFilter != "ALL" ||
+                        requiredFilter != "ALL" ||
+                        selectedSeriesKey != null
+
+                val visibleIssues =
+                    searchMatchedIssues.filter { issue ->
+
+                        val matchesReadingStatus =
+                            when (readingStatusFilter) {
+                                "UNREAD" ->
+                                    issue.readingStatus == null ||
+                                        issue.readingStatus == ReadingStatus.UNREAD
+
+                                "READING" ->
+                                    issue.readingStatus == ReadingStatus.READING
+
+                                "READ" ->
+                                    issue.readingStatus == ReadingStatus.READ
+
+                                else ->
+                                    true
+                            }
+
+                        val matchesRequiredStatus =
+                            when (requiredFilter) {
+                                "REQUIRED" ->
+                                    issue.required
+
+                                "OPTIONAL" ->
+                                    !issue.required
+
+                                else ->
+                                    true
+                            }
+
+                        val matchesSeries =
+                            selectedSeriesKey == null ||
+                                SeriesFilterOption(
+                                    title = issue.seriesTitle,
+                                    volume = issue.seriesVolume
+                                ).key == selectedSeriesKey
+
+                        matchesReadingStatus && matchesRequiredStatus && matchesSeries
                     }
 
                 currentReadingList.description
@@ -342,15 +431,167 @@ fun ReadingListDetailScreen(
                     }
                 )
 
-                if (isSearching) {
+                Text(
+                    text = "Reading status",
+                    style =
+                        MaterialTheme.typography.labelLarge
+                )
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .horizontalScroll(
+                            rememberScrollState()
+                        ),
+                    horizontalArrangement =
+                        Arrangement.spacedBy(8.dp)
+                ) {
+                    FilterChip(
+                        selected =
+                            readingStatusFilter == "UNREAD",
+                        onClick = {
+                            readingStatusFilter =
+                                if (readingStatusFilter == "UNREAD") {
+                                    "ALL"
+                                } else {
+                                    "UNREAD"
+                                }
+                        },
+                        label = {
+                            Text("Unread")
+                        }
+                    )
+
+                    FilterChip(
+                        selected =
+                            readingStatusFilter == "READING",
+                        onClick = {
+                            readingStatusFilter =
+                                if (readingStatusFilter == "READING") {
+                                    "ALL"
+                                } else {
+                                    "READING"
+                                }
+                        },
+                        label = {
+                            Text("Reading")
+                        }
+                    )
+
+                    FilterChip(
+                        selected =
+                            readingStatusFilter == "READ",
+                        onClick = {
+                            readingStatusFilter =
+                                if (readingStatusFilter == "READ") {
+                                    "ALL"
+                                } else {
+                                    "READ"
+                                }
+                        },
+                        label = {
+                            Text("Read")
+                        }
+                    )
+                }
+
+                Text(
+                    text = "List status",
+                    style =
+                        MaterialTheme.typography.labelLarge
+                )
+
+                Row(
+                    horizontalArrangement =
+                        Arrangement.spacedBy(8.dp)
+                ) {
+                    FilterChip(
+                        selected =
+                            requiredFilter == "REQUIRED",
+                        onClick = {
+                            requiredFilter =
+                                if(requiredFilter == "REQUIRED") {
+                                    "ALL"
+                                } else {
+                                    "REQUIRED"
+                                }
+                        },
+                        label = {
+                            Text("Required")
+                        }
+                    )
+
+                    FilterChip(
+                        selected =
+                            requiredFilter == "OPTIONAL",
+                        onClick = {
+                            requiredFilter =
+                                if (requiredFilter == "OPTIONAL") {
+                                    "ALL"
+                                } else {
+                                    "OPTIONAL"
+                                }
+                        },
+                        label = {
+                            Text("Optional")
+                        }
+                    )
+
+                    Text(
+                        text = "Series",
+                        style =
+                            MaterialTheme.typography.labelLarge
+                    )
+
+                    Box {
+                        OutlinedButton(
+                            onClick = {
+                                seriesMenuExpanded = true
+                            }
+                        ) {
+                            Text(
+                                text =
+                                    selectedSeries?.displayName
+                                        ?: "All series"
+                            )
+                        }
+
+                        DropdownMenu(
+                            expanded = seriesMenuExpanded,
+                            onDismissRequest = {
+                                seriesMenuExpanded = false
+                            }
+                        ) {
+                            DropdownMenuItem(
+                                text = {
+                                    Text("All series")
+                                },
+                                onClick = {
+                                    selectedSeriesKey = null
+                                    seriesMenuExpanded = false
+                                }
+                            )
+
+                            seriesOptions.forEach { option ->
+                                DropdownMenuItem(
+                                    text = {
+                                        Text(option.displayName)
+                                    },
+                                    onClick = {
+                                        selectedSeriesKey = option.key
+                                        seriesMenuExpanded = false
+                                    }
+                                )
+                            }
+                        }
+                    }
+                }
+
+                if (isSearching || hasActiveFilters) {
                     Text(
                         text =
-                            "${visibleIssues.size} " +
-                                if (visibleIssues.size == 1) {
-                                    "result"
-                                } else {
-                                    "results"
-                                },
+                            "${visibleIssues.size} of " +
+                                "${issues.size} issues shown",
                         style =
                             MaterialTheme.typography.bodySmall
                     )
@@ -362,7 +603,8 @@ fun ReadingListDetailScreen(
 
                 if (
                     firstUnreadIndex >= 0 &&
-                    !isSearching
+                    !isSearching &&
+                    !hasActiveFilters
                 ) {
                     TextButton(
                         onClick = {
@@ -400,13 +642,17 @@ fun ReadingListDetailScreen(
                 if (issues.isEmpty()) {
                     Text("No issues in this reading list")
                 } else if (
-                    isSearching &&
-                    visibleIssues.isEmpty()
+                    (isSearching || hasActiveFilters) && visibleIssues.isEmpty()
                 ) {
                     Text(
                         text =
-                            "No issues match " +
-                                "\"$trimmedSearchQuery\"."
+                            if (isSearching) {
+                                "No issues match " +
+                                    "\"$trimmedSearchQuery\" " +
+                                    "with the current filters."
+                            } else {
+                                "No issues match the current filters."
+                            }
                     )
                 } else {
                     LazyColumn(
@@ -438,6 +684,7 @@ fun ReadingListDetailScreen(
 
                             val isSectionCollapsed =
                                 !isSearching &&
+                                    !hasActiveFilters &&
                                     sectionId != null &&
                                     collapsedSectionIds.contains(
                                         sectionId
@@ -757,6 +1004,22 @@ private fun ReadingListIssueRow(
             }
         }
     }
+}
+
+private data class SeriesFilterOption(
+    val title: String,
+    val volume: Int?
+) {
+    val key: String
+        get() = "$title|${volume ?: "none"}"
+
+    val displayName: String
+        get() =
+            if (volume == null) {
+                title
+            } else {
+                "$title (Vol. $volume)"
+            }
 }
 
 private fun issueMatchesSearch(
