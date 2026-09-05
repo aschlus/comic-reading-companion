@@ -17,9 +17,11 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.DropdownMenu
@@ -29,6 +31,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -92,6 +95,12 @@ fun ReadingListDetailScreen(
         readingListId
     ) {
         mutableStateOf(longArrayOf())
+    }
+
+    var searchQuery by rememberSaveable(
+        readingListId
+    ) {
+        mutableStateOf("")
     }
 
     LaunchedEffect(readingListId) {
@@ -231,6 +240,39 @@ fun ReadingListDetailScreen(
                 Text("Loading...")
             } else {
 
+                val trimmedSearchQuery = searchQuery.trim()
+                val isSearching = trimmedSearchQuery.isNotEmpty()
+
+                val matchingSectionIds =
+                    if (!isSearching) {
+                        emptySet()
+                    } else {
+                        issues
+                            .filter { issue ->
+                                sectionMatchesSearch(
+                                    issue = issue,
+                                    query = trimmedSearchQuery
+                                )
+                            }
+                            .mapNotNull { issue ->
+                                issue.sectionId
+                            }
+                            .toSet()
+                    }
+
+                val visibleIssues =
+                    if (!isSearching) {
+                        issues
+                    } else {
+                        issues.filter { issue ->
+                            issue.sectionId in matchingSectionIds ||
+                                issueMatchesSearch(
+                                    issue = issue,
+                                    query = trimmedSearchQuery
+                                )
+                        }
+                    }
+
                 currentReadingList.description
                     ?.let { description ->
                         Text(description)
@@ -268,11 +310,60 @@ fun ReadingListDetailScreen(
 
                 Text("Issues")
 
+                OutlinedTextField(
+                    value = searchQuery,
+                    onValueChange = { newQuery ->
+                        searchQuery = newQuery
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    singleLine = true,
+                    label = {
+                        Text("Search this reading list")
+                    },
+                    leadingIcon = {
+                        Icon(
+                            imageVector = Icons.Default.Search,
+                            contentDescription = null
+                        )
+                    },
+                    trailingIcon = {
+                        if (searchQuery.isNotEmpty()) {
+                            IconButton(
+                                onClick = {
+                                    searchQuery = ""
+                                }
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Close,
+                                    contentDescription = "Clear search"
+                                )
+                            }
+                        }
+                    }
+                )
+
+                if (isSearching) {
+                    Text(
+                        text =
+                            "${visibleIssues.size} " +
+                                if (visibleIssues.size == 1) {
+                                    "result"
+                                } else {
+                                    "results"
+                                },
+                        style =
+                            MaterialTheme.typography.bodySmall
+                    )
+                }
+
                 val firstUnreadIndex = issues.indexOfFirst { issue ->
                     issue.readingStatus != ReadingStatus.READ
                 }
 
-                if (firstUnreadIndex >= 0) {
+                if (
+                    firstUnreadIndex >= 0 &&
+                    !isSearching
+                ) {
                     TextButton(
                         onClick = {
                             coroutineScope.launch {
@@ -308,6 +399,15 @@ fun ReadingListDetailScreen(
                 }
                 if (issues.isEmpty()) {
                     Text("No issues in this reading list")
+                } else if (
+                    isSearching &&
+                    visibleIssues.isEmpty()
+                ) {
+                    Text(
+                        text =
+                            "No issues match " +
+                                "\"$trimmedSearchQuery\"."
+                    )
                 } else {
                     LazyColumn(
                         modifier = Modifier
@@ -316,7 +416,7 @@ fun ReadingListDetailScreen(
                         state = listState
                     ) {
                         itemsIndexed(
-                            items = issues,
+                            items = visibleIssues,
                             key = { _, issue ->
                                 issue.readingListItemId
                             }
@@ -324,7 +424,7 @@ fun ReadingListDetailScreen(
 
                             val previousSectionId =
                                 if (index > 0) {
-                                    issues[index - 1].sectionId
+                                    visibleIssues[index - 1].sectionId
                                 } else {
                                     null
                                 }
@@ -334,18 +434,16 @@ fun ReadingListDetailScreen(
 
                             val isFirstIssueInSection =
                                 sectionId != null &&
-                                        sectionId != previousSectionId
+                                    sectionId != previousSectionId
 
                             val isSectionCollapsed =
-                                sectionId != null &&
-                                        collapsedSectionIds.contains(
-                                            sectionId
-                                        )
+                                !isSearching &&
+                                    sectionId != null &&
+                                    collapsedSectionIds.contains(
+                                        sectionId
+                                    )
 
-                            if (
-                                isFirstIssueInSection &&
-                                sectionId != null
-                            ) {
+                            if (isFirstIssueInSection) {
                                 ReadingListSectionHeader(
                                     title =
                                         issue.sectionTitle
@@ -659,6 +757,48 @@ private fun ReadingListIssueRow(
             }
         }
     }
+}
+
+private fun issueMatchesSearch(
+    issue: ReadingListIssue,
+    query: String
+): Boolean {
+    val searchText = buildString {
+        append(issue.seriesTitle)
+        append(" #")
+        append(issue.issueNumber)
+
+        issue.issueTitle?.let { notes ->
+            append(' ')
+            append(notes)
+        }
+    }
+
+    return searchText.contains(
+        other = query,
+        ignoreCase = true
+    )
+}
+
+private fun sectionMatchesSearch(
+    issue: ReadingListIssue,
+    query: String
+): Boolean {
+    val searchText = buildString {
+        issue.seriesTitle?.let { title ->
+            append(title)
+        }
+
+        issue.sectionDescription?.let { description ->
+            append(' ')
+            append(description)
+        }
+    }
+
+    return searchText.contains(
+        other = query,
+        ignoreCase = true
+    )
 }
 
 private fun formatPublicationDate(

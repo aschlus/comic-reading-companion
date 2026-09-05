@@ -52,7 +52,7 @@ building, following, and tracking comic-book reading orders.
 - [ ] Move issues between reading-list sections
 - [ ] Delete reading lists
 - [ ] Duplicate / copy a reading list
-- [ ] Search within a reading list
+- [x] Search within a reading list
 - [ ] Filter reading lists by read status, series, or required status
 
 ### Reading Progress
