@@ -42,7 +42,7 @@ building, following, and tracking comic-book reading orders.
 - [x] Support notes on reading-list items in the data model
 - [x] Display required / optional status in the UI
 - [x] Display reading-list item notes in the UI
-- [ ] Reading-list sections / story arcs
+- [x] Reading-list sections / story arcs
 - [ ] Collapsible reading-list sections
 - [ ] Create custom reading lists
 - [ ] Edit reading-list title and description
@@ -117,7 +117,7 @@ building, following, and tracking comic-book reading orders.
 - [ ] Detect duplicate reading-list positions
 - [ ] Detect duplicate issues within a reading list
 - [ ] Validate missing / invalid series metadata
-- [ ] Support optional reading-list sections in JSON
+- [x] Support optional reading-list sections in JSON
 - [ ] Support per-item universe / continuity for multiverse reading lists
 - [x] Support external IDs in reading-list JSON
 - [ ] Support importing user-provided reading-list files
@@ -177,7 +177,7 @@ building, following, and tracking comic-book reading orders.
 - [ ] Better issue-row visual design
 - [x] Issue cover thumbnails
 - [x] Required / optional indicators
-- [ ] Story / arc information
+- [x] Story / arc information
 - [x] Publication date
 - [ ] Expandable notes
 - [x] Tap issue to open issue details

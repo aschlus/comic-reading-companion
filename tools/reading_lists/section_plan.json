@@ -1,0 +1,86 @@
+[
+  {
+    "position": 1,
+    "title": "Relaunch and the Gathering of Five",
+    "description": "The opening of the Volume 2 era, including the launch of Slingers, the Spider-Man relaunch, and the Gathering of Five storyline.",
+    "startPosition": 1,
+    "endPosition": 20
+  },
+  {
+    "position": 2,
+    "title": "The New Status Quo",
+    "description": "The Spider-Man titles settle into their new status quo through the rest of 1999, alongside Webspinners, Slingers, and supplemental stories.",
+    "startPosition": 21,
+    "endPosition": 46
+  },
+  {
+    "position": 3,
+    "title": "Turn of the Millennium",
+    "description": "The main Spider-Man titles continue into 2000 as Webspinners and Spider-Man Unlimited reach the end of their runs.",
+    "startPosition": 47,
+    "endPosition": 70
+  },
+  {
+    "position": 4,
+    "title": "Death and Destiny",
+    "description": "Summer and fall 2000, centered around the Spider-Man: Death and Destiny miniseries and the continuing Amazing Spider-Man and Peter Parker titles.",
+    "startPosition": 71,
+    "endPosition": 82
+  },
+  {
+    "position": 5,
+    "title": "Green Goblin and Mysterio",
+    "description": "Revenge of the Green Goblin leads into The Mysterio Manifesto as the ongoing Spider-Man titles move into 2001.",
+    "startPosition": 83,
+    "endPosition": 99
+  },
+  {
+    "position": 6,
+    "title": "Lifeline and Daredevil",
+    "description": "Spring and early summer 2001, featuring Spider-Man: Lifeline and the Daredevil/Spider-Man miniseries alongside the main titles.",
+    "startPosition": 100,
+    "endPosition": 112
+  },
+  {
+    "position": 7,
+    "title": "The Thousand",
+    "description": "The launch of Spider-Man's Tangled Web and its opening storyline, The Thousand.",
+    "startPosition": 113,
+    "endPosition": 123
+  },
+  {
+    "position": 8,
+    "title": "Tangled Web",
+    "description": "The anthology era continues through late 2001 and the first half of 2002 alongside Amazing Spider-Man and Peter Parker: Spider-Man.",
+    "startPosition": 124,
+    "endPosition": 153
+  },
+  {
+    "position": 9,
+    "title": "A Summer of Spider-Man",
+    "description": "A dense wave of 2002 miniseries including Quality of Life, Spider-Man: Blue, Get Kraven, and The Evil That Men Do.",
+    "startPosition": 154,
+    "endPosition": 178
+  },
+  {
+    "position": 10,
+    "title": "Conclusions",
+    "description": "Spider-Man: Blue and Get Kraven reach their conclusions while Spider-Man's Tangled Web approaches its final issue.",
+    "startPosition": 179,
+    "endPosition": 198
+  },
+  {
+    "position": 11,
+    "title": "The Final Stretch",
+    "description": "The final uninterrupted stretch of Amazing Spider-Man and Peter Parker: Spider-Man before the closing months of the Volume 2 era.",
+    "startPosition": 199,
+    "endPosition": 204
+  },
+  {
+    "position": 12,
+    "title": "End of an Era",
+    "description": "The final Volume 2 issues arrive alongside Venom, Spider-Man & Wolverine, and the launch of a new Spectacular Spider-Man series.",
+    "startPosition": 205,
+    "endPosition": 219
+  }
+]

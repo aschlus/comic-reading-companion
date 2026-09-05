@@ -8,7 +8,16 @@ data class ReadingListImportDto(
     val description: String?,
     val publisher: String,
     val universe: UniverseImportDto,
+    val sections: List<ReadingListSectionImportDto> =
+        emptyList(),
     val items: List<ReadingListItemImportDto>
+)
+
+@Serializable
+data class ReadingListSectionImportDto(
+    val position: Int,
+    val title: String,
+    val description: String?
 )
 
 @Serializable
@@ -20,6 +29,7 @@ data class UniverseImportDto(
 @Serializable
 data class ReadingListItemImportDto(
     val position: Int,
+    val sectionPosition: Int? = null,
     val series: SeriesImportDto,
     val issue: IssueImportDto,
     val required: Boolean,

@@ -7,6 +7,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.IssueType
 import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListItem
+import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSection
 import com.aschlus.comicreadingcompanion.data.database.entities.Series
 import com.aschlus.comicreadingcompanion.data.database.entities.Universe
 import com.aschlus.comicreadingcompanion.data.importer.models.ReadingListImportDto
@@ -36,11 +37,18 @@ class ReadingListImporter(
                 universe = universe
             )
 
+        val sectionsByPosition =
+            importSections(
+                importData = importData,
+                readingList = readingList
+            )
+
         importItems(
             importData = importData,
             publisher = publisher,
             universe = universe,
-            readingList = readingList
+            readingList = readingList,
+            sectionsByPosition = sectionsByPosition
         )
     }
 
@@ -159,11 +167,119 @@ class ReadingListImporter(
         )
     }
 
+    private suspend fun importSections(
+        importData: ReadingListImportDto,
+        readingList: ReadingList
+    ): Map<Int, ReadingListSection> {
+
+        val duplicatePositions =
+            importData.sections
+                .groupBy { section ->
+                    section.position
+                }
+                .filterValues { sections ->
+                    sections.size > 1
+                }
+                .keys
+
+        if (duplicatePositions.isNotEmpty()) {
+            throw IllegalArgumentException(
+                "Duplicate reading-list section " +
+                    "positions: " +
+                    duplicatePositions
+                        .sorted()
+                        .joinToString(", ")
+            )
+        }
+
+        val existingSections =
+            comicDao.getSectionsForReadingList(
+                readingListId = readingList.id
+            )
+
+        val importedSections =
+            mutableMapOf<Int, ReadingListSection>()
+
+        importData.sections.forEach { sectionData ->
+
+            val existing =
+                existingSections.find { section ->
+                    section.position == sectionData.position
+                }
+
+            val section =
+                if (existing == null) {
+                    val id =
+                        comicDao.insertReadingListSection(
+                            ReadingListSection(
+                                readingListId =
+                                    readingList.id,
+                                title =
+                                    sectionData.title,
+                                description =
+                                    sectionData.description,
+                                position =
+                                    sectionData.position
+                            )
+                        )
+
+                    ReadingListSection(
+                        id = id,
+                        readingListId =
+                            readingList.id,
+                        title =
+                            sectionData.title,
+                        description =
+                            sectionData.description,
+                        position =
+                            sectionData.position
+                    )
+                } else {
+                    val updated =
+                        existing.copy(
+                            title =
+                                sectionData.title,
+                            description =
+                                sectionData.description
+                        )
+
+                    if (updated != existing) {
+                        comicDao.updateReadingListSection(
+                            updated
+                        )
+                    }
+
+                    updated
+                }
+
+            importedSections[section.position] = section
+        }
+
+        val importedPositions =
+            importData.sections.map { section ->
+                section.position
+            }
+            .toSet()
+
+        existingSections
+            .filter { section ->
+                section.position !in importedPositions
+            }
+            .forEach { staleSection ->
+                comicDao.deleteReadingListSection(
+                    staleSection
+                )
+            }
+
+        return importedSections
+    }
+
     private suspend fun importItems(
         importData: ReadingListImportDto,
         publisher: Publisher,
         universe: Universe,
-        readingList: ReadingList
+        readingList: ReadingList,
+        sectionsByPosition: Map<Int, ReadingListSection>
     ) {
         val importedIssueIds =
             mutableSetOf<Long>()
@@ -190,6 +306,18 @@ class ReadingListImporter(
 
             importedIssueIds.add(issue.id)
 
+            val sectionId =
+                itemData.sectionPosition?.let { sectionPosition ->
+
+                    sectionsByPosition[sectionPosition]?.id
+                        ?: throw IllegalArgumentException(
+                            "Reading-list item at position " +
+                                "${itemData.position} references " +
+                                "unknown section position " +
+                            sectionPosition
+                        )
+                }
+
             val existingItem =
                 comicDao.getReadingListItem(
                     readingListId = readingList.id,
@@ -200,7 +328,7 @@ class ReadingListImporter(
                 comicDao.insertReadingListItem(
                     ReadingListItem(
                         readingListId = readingList.id,
-                        sectionId = null,
+                        sectionId = sectionId,
                         issueId = issue.id,
                         position = itemData.position,
                         required = itemData.required,
@@ -210,6 +338,7 @@ class ReadingListImporter(
             } else {
                 val updatedItem =
                     existingItem.copy(
+                        sectionId = sectionId,
                         position = itemData.position,
                         required = itemData.required,
                         notes = itemData.notes

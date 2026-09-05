@@ -448,6 +448,10 @@ interface ComicDao {
             reading_list_items.position AS position,
             reading_list_items.required AS required,
             reading_list_items.notes AS notes,
+            reading_list_sections.id AS sectionId,
+            reading_list_sections.title AS sectionTitle,
+            reading_list_sections.description AS sectionDescription,
+            reading_list_sections.position AS sectionPosition,
             issues.issueNumber AS issueNumber,
             issues.title AS issueTitle,
             issues.publicationDate AS publicationDate,
@@ -460,6 +464,8 @@ interface ComicDao {
             ON reading_list_items.issueId = issues.id
         INNER JOIN series
             ON issues.seriesId = series.id
+        LEFT JOIN reading_list_sections
+            ON reading_list_items.sectionId = reading_list_sections.id
         LEFT JOIN reading_progress
             ON issues.id = reading_progress.issueId
         WHERE reading_list_items.readingListId = :readingListId

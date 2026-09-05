@@ -13,7 +13,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -265,12 +265,33 @@ fun ReadingListDetailScreen(
                             .weight(1f),
                         state = listState
                     ) {
-                        items(
+                        itemsIndexed(
                             items = issues,
-                            key = { issue ->
+                            key = { _, issue ->
                                 issue.readingListItemId
                             }
-                        ) { issue ->
+                        ) { index, issue ->
+
+                            val previousSectionId =
+                                if (index > 0) {
+                                    issues[index - 1].sectionId
+                                } else {
+                                    null
+                                }
+
+                            if (
+                                issue.sectionId != null &&
+                                issue.sectionId != previousSectionId
+                            ) {
+                                ReadingListSectionHeader(
+                                    title =
+                                        issue.sectionTitle
+                                            ?: "Section",
+                                    description =
+                                        issue.sectionDescription
+                                )
+                            }
+
                             ReadingListIssueRow(
                                 issue = issue,
                                 onIssueClick = {
@@ -337,6 +358,37 @@ fun ReadingListDetailScreen(
                 }
             }
         )
+    }
+}
+
+@Composable
+private fun ReadingListSectionHeader(
+    title: String,
+    description: String?
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                top = 16.dp,
+                bottom = 8.dp
+            )
+    ) {
+        Text(
+            text = title,
+            style =
+                MaterialTheme.typography.headlineSmall
+        )
+
+        description?.let { sectionDescription ->
+            Text(
+                text = sectionDescription,
+                style =
+                    MaterialTheme.typography.bodyMedium,
+                modifier =
+                    Modifier.padding(top = 4.dp)
+            )
+        }
     }
 }
 
