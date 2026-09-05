@@ -510,7 +510,7 @@ fun ReadingListDetailScreen(
                             requiredFilter == "REQUIRED",
                         onClick = {
                             requiredFilter =
-                                if(requiredFilter == "REQUIRED") {
+                                if (requiredFilter == "REQUIRED") {
                                     "ALL"
                                 } else {
                                     "REQUIRED"
@@ -536,53 +536,53 @@ fun ReadingListDetailScreen(
                             Text("Optional")
                         }
                     )
+                }
 
-                    Text(
-                        text = "Series",
-                        style =
-                            MaterialTheme.typography.labelLarge
-                    )
+                Text(
+                    text = "Series",
+                    style =
+                        MaterialTheme.typography.labelLarge
+                )
 
-                    Box {
-                        OutlinedButton(
-                            onClick = {
-                                seriesMenuExpanded = true
-                            }
-                        ) {
-                            Text(
-                                text =
-                                    selectedSeries?.displayName
-                                        ?: "All series"
-                            )
+                Box {
+                    OutlinedButton(
+                        onClick = {
+                            seriesMenuExpanded = true
                         }
+                    ) {
+                        Text(
+                            text =
+                                selectedSeries?.displayName
+                                    ?: "All series"
+                        )
+                    }
 
-                        DropdownMenu(
-                            expanded = seriesMenuExpanded,
-                            onDismissRequest = {
+                    DropdownMenu(
+                        expanded = seriesMenuExpanded,
+                        onDismissRequest = {
+                            seriesMenuExpanded = false
+                        }
+                    ) {
+                        DropdownMenuItem(
+                            text = {
+                                Text("All series")
+                            },
+                            onClick = {
+                                selectedSeriesKey = null
                                 seriesMenuExpanded = false
                             }
-                        ) {
+                        )
+
+                        seriesOptions.forEach { option ->
                             DropdownMenuItem(
                                 text = {
-                                    Text("All series")
+                                    Text(option.displayName)
                                 },
                                 onClick = {
-                                    selectedSeriesKey = null
+                                    selectedSeriesKey = option.key
                                     seriesMenuExpanded = false
                                 }
                             )
-
-                            seriesOptions.forEach { option ->
-                                DropdownMenuItem(
-                                    text = {
-                                        Text(option.displayName)
-                                    },
-                                    onClick = {
-                                        selectedSeriesKey = option.key
-                                        seriesMenuExpanded = false
-                                    }
-                                )
-                            }
                         }
                     }
                 }
