@@ -1,0 +1,30 @@
+{
+  "title": "Parser Test",
+  "description": "Valid parser test asset",
+  "publisher": "Test Publisher",
+  "universe": {
+    "name": "Test Universe",
+    "designation": "Earth-Test"
+  },
+  "items": [
+    {
+      "position": 1,
+      "series": {
+        "title": "Test Series",
+        "volume": 1,
+        "startYear": 2000,
+        "endYear": 2001
+      },
+      "issue": {
+        "number": "1",
+        "title": "Test Issue",
+        "publicationDate": "2000-01",
+        "coverUrl": null,
+        "description": "Test description",
+        "type": "REGULAR"
+      },
+      "required": true,
+      "notes": null
+    }
+  ]
+}

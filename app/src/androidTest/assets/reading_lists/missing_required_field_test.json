@@ -1,0 +1,9 @@
+{
+  "title": "Missing Required Field Test",
+  "description": "This intentionally omits publisher",
+  "universe": {
+    "name": "Test Universe",
+    "designation": "Earth-Test"
+  },
+  "items": []
+}

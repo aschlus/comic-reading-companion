@@ -1,0 +1,12 @@
+{
+  "title": "Unknown Fields Test",
+  "description": "Parser should ignore unknown fields",
+  "publisher": "Test Publisher",
+  "unexpectedTopLevelField": "ignore me",
+  "universe": {
+    "name": "Test Universe",
+    "designation": "Earth-Test",
+    "unexpectedUniverseField": 123
+  },
+  "items": []
+}
