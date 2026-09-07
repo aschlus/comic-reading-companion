@@ -212,7 +212,7 @@ building, following, and tracking comic-book reading orders.
 - [x] JSON parser tests
 - [x] Reading-list importer tests
 - [x] Progress-tracking tests
-- [ ] ViewModel tests
+- [x] ViewModel tests
 - [ ] Compose UI tests
 - [ ] Test database migrations
 - [x] Handle malformed reading-list files gracefully
