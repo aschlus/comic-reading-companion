@@ -207,7 +207,7 @@ building, following, and tracking comic-book reading orders.
 
 ### Quality and Reliability
 
-- [ ] DAO tests
+- [x] DAO tests
 - [ ] Repository tests
 - [x] JSON parser tests
 - [x] Reading-list importer tests
