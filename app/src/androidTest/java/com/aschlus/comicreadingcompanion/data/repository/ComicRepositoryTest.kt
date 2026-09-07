@@ -1,0 +1,377 @@
+package com.aschlus.comicreadingcompanion.data.repository
+
+import android.content.Context
+import androidx.room3.Room
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.aschlus.comicreadingcompanion.data.database.ComicDao
+import com.aschlus.comicreadingcompanion.data.database.ComicDatabase
+import com.aschlus.comicreadingcompanion.data.database.entities.Issue
+import com.aschlus.comicreadingcompanion.data.database.entities.IssueType
+import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
+import com.aschlus.comicreadingcompanion.data.database.entities.ReadingProgress
+import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
+import com.aschlus.comicreadingcompanion.data.database.entities.Series
+import kotlinx.coroutines.runBlocking
+import org.junit.After
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
+
+@RunWith(AndroidJUnit4::class)
+class ComicRepositoryTest {
+
+    private lateinit var database: ComicDatabase
+    private lateinit var comicDao: ComicDao
+    private lateinit var repository: ComicRepository
+
+    @Before
+    fun setUp() {
+        val context = ApplicationProvider.getApplicationContext<Context>()
+
+        database =
+            Room.inMemoryDatabaseBuilder(
+                context,
+                ComicDatabase::class.java
+            )
+                .allowMainThreadQueries()
+                .build()
+
+        comicDao = database.comicDao()
+
+        repository =
+            ComicRepository(
+                comicDao = comicDao,
+                database = database
+            )
+    }
+
+    @After
+    fun tearDown() {
+        database.close()
+    }
+
+    private suspend fun createIssue(
+        issueNumber: String = "1"
+    ): Long {
+        val publisherId =
+            comicDao.insertPublisher(
+                Publisher(name = "Marvel")
+            )
+
+        val seriesId =
+            comicDao.insertSeries(
+                Series(
+                    publisherId = publisherId,
+                    title = "Repository Test Series",
+                    volume = 1,
+                    startYear = 2000,
+                    endYear = 2000
+                )
+            )
+
+        return comicDao.insertIssue(
+            Issue(
+                seriesId = seriesId,
+                universeId = null,
+                issueNumber = issueNumber,
+                title = "Test Issue",
+                publicationDate = "2000-01",
+                coverUrl = null,
+                description = null,
+                issueType = IssueType.REGULAR
+            )
+        )
+    }
+
+    @Test
+    fun markIssueAsReading_createsReadingProgressWithStartedAt() =
+        runBlocking {
+            val issueId = createIssue()
+            val before = System.currentTimeMillis()
+            repository.markIssueAsReading(issueId)
+            val after = System.currentTimeMillis()
+            val progress = repository.getReadingProgressForIssue(issueId)
+            assertNotNull(progress)
+            assertEquals(ReadingStatus.READING, progress?.status)
+            assertNotNull(progress?.startedAt)
+            assertTrue(progress!!.startedAt!! >= before)
+            assertTrue(progress.startedAt!! <= after)
+            assertNull(progress.completedAt)
+        }
+
+    @Test
+    fun markIssueAsReading_preservesStartedAtAndClearsCompletedAt() =
+        runBlocking {
+            val issueId = createIssue()
+            val progressId =
+                comicDao.insertReadingProgress(
+                    ReadingProgress(
+                        issueId = issueId,
+                        status = ReadingStatus.READ,
+                        startedAt = 1000L,
+                        completedAt = 2000L,
+                        notes = "Keep this note"
+                    )
+                )
+
+            repository.markIssueAsReading(issueId)
+            val progress = repository.getReadingProgressForIssue(issueId)
+            assertNotNull(progress)
+            assertEquals(progressId, progress?.id)
+            assertEquals(ReadingStatus.READING, progress?.status)
+            assertEquals(1000L, progress?.startedAt)
+            assertNull(progress?.completedAt)
+            assertEquals("Keep this note", progress?.notes)
+        }
+
+    @Test
+    fun markIssueAsRead_createsReadProgressWithTimestamps() =
+        runBlocking {
+            val issueId = createIssue()
+            val before = System.currentTimeMillis()
+            repository.markIssueAsRead(issueId)
+            val after = System.currentTimeMillis()
+            val progress = repository.getReadingProgressForIssue(issueId)
+            assertNotNull(progress)
+            assertEquals(ReadingStatus.READ, progress?.status)
+            assertNotNull(progress?.startedAt)
+            assertNotNull(progress?.completedAt)
+            assertTrue(progress!!.startedAt!! >= before)
+            assertTrue(progress.startedAt!! <= after)
+            assertTrue(progress.completedAt!! >= before)
+            assertTrue(progress.completedAt!! <= after)
+            assertEquals(progress.startedAt, progress.completedAt)
+        }
+
+    @Test
+    fun markIssueAsRead_preservesStartedAtAndExistingProgressData() =
+        runBlocking {
+            val issueId = createIssue()
+            val progressId =
+                comicDao.insertReadingProgress(
+                    ReadingProgress(
+                        issueId = issueId,
+                        status = ReadingStatus.READING,
+                        startedAt = 1000L,
+                        completedAt = null,
+                        notes = "Keep this note"
+                    )
+                )
+
+            val before = System.currentTimeMillis()
+            repository.markIssueAsRead(issueId)
+            val after = System.currentTimeMillis()
+            val progress = comicDao.getReadingProgressForIssue(issueId)
+            assertNotNull(progress)
+            assertEquals(progressId, progress?.id)
+            assertEquals(ReadingStatus.READ, progress?.status)
+            assertEquals(1000L, progress?.startedAt)
+            assertNotNull(progress?.completedAt)
+            assertTrue(progress!!.completedAt!! >= before)
+            assertTrue(progress.completedAt!! <= after)
+            assertEquals("Keep this note", progress.notes)
+        }
+
+    @Test
+    fun markIssuesAsUnread_removesExistingProgress() =
+        runBlocking {
+            val issueId = createIssue()
+            comicDao.insertReadingProgress(
+                ReadingProgress(
+                    issueId = issueId,
+                    status = ReadingStatus.READ,
+                    startedAt = 1000L,
+                    completedAt = 2000L,
+                    notes = "Existing note"
+                )
+            )
+            val before = repository.getReadingProgressForIssue(issueId)
+            assertNotNull(before)
+            repository.markIssueAsUnread(issueId)
+            val after = repository.getReadingProgressForIssue(issueId)
+            assertNull(after)
+        }
+
+    @Test
+    fun markIssuesAsRead_marksMultipleIssuesAsRead() =
+        runBlocking {
+            val firstIssueId = createIssue(issueNumber = "1")
+            val secondIssueId = createIssue(issueNumber = "2")
+            val before = System.currentTimeMillis()
+            repository.markIssuesAsRead(listOf(firstIssueId, secondIssueId))
+            val after = System.currentTimeMillis()
+            val firstProgress = repository.getReadingProgressForIssue(firstIssueId)
+            val secondProgress = repository.getReadingProgressForIssue(secondIssueId)
+
+            assertNotNull(firstProgress)
+            assertNotNull(secondProgress)
+            assertEquals(ReadingStatus.READ, firstProgress?.status)
+            assertEquals(ReadingStatus.READ, secondProgress?.status)
+            assertNotNull(firstProgress?.startedAt)
+            assertNotNull(firstProgress?.completedAt)
+            assertNotNull(secondProgress?.startedAt)
+            assertNotNull(secondProgress?.completedAt)
+            assertTrue(firstProgress!!.startedAt!! >= before)
+            assertTrue(firstProgress.startedAt!! <= after)
+            assertTrue(secondProgress!!.startedAt!! >= before)
+            assertTrue(secondProgress.startedAt!! <= after)
+            assertEquals(firstProgress.startedAt, firstProgress.completedAt)
+            assertEquals(secondProgress.startedAt, secondProgress.completedAt)
+        }
+
+    @Test
+    fun markIssuesAsRead_deduplicatesIssueIds() =
+        runBlocking {
+            val issueId = createIssue()
+            repository.markIssuesAsRead(listOf(issueId, issueId, issueId))
+            val progress = comicDao.getReadingProgressForIssues(listOf(issueId))
+            assertEquals(1, progress.size)
+            assertEquals(issueId, progress.first().issueId)
+            assertEquals(ReadingStatus.READ, progress.first().status)
+        }
+
+    @Test
+    fun markIssuesAsRead_preservesExistingStartedAt() =
+        runBlocking {
+            val firstIssueId = createIssue(issueNumber = "1")
+            val secondIssueId = createIssue(issueNumber = "2")
+            val firstProgressId =
+                comicDao.insertReadingProgress(
+                    ReadingProgress(
+                        issueId = firstIssueId,
+                        status = ReadingStatus.READING,
+                        startedAt = 1000L,
+                        completedAt = null,
+                        notes = "First note"
+                    )
+                )
+
+            comicDao.insertReadingProgress(
+                ReadingProgress(
+                    issueId = secondIssueId,
+                    status = ReadingStatus.READING,
+                    startedAt = null,
+                    completedAt = null,
+                    notes = "Second note"
+                )
+            )
+            val before = System.currentTimeMillis()
+            repository.markIssuesAsRead(listOf(firstIssueId, secondIssueId))
+            val after = System.currentTimeMillis()
+            val firstProgress = repository.getReadingProgressForIssue(firstIssueId)
+            val secondProgress = repository.getReadingProgressForIssue(secondIssueId)
+            assertNotNull(firstProgress)
+            assertNotNull(secondProgress)
+            assertEquals(firstIssueId, firstProgress?.id)
+            assertEquals(ReadingStatus.READ, firstProgress?.status)
+            assertEquals(1000L, firstProgress?.startedAt)
+            assertNotNull(firstProgress?.completedAt)
+            assertEquals("First note", firstProgress?.notes)
+            assertEquals(ReadingStatus.READ, secondProgress?.status)
+            assertNotNull(secondProgress?.startedAt)
+            assertTrue(secondProgress!!.startedAt!! >= before)
+            assertTrue(secondProgress.startedAt!! <= after)
+            assertNotNull(secondProgress.completedAt)
+            assertEquals("Second note", secondProgress.notes)
+        }
+
+    @Test
+    fun markIssuesAsUnread_removesOnlyRequestedProgress() =
+        runBlocking {
+            val firstIssueId = createIssue(issueNumber = "1")
+            val secondIssueId = createIssue(issueNumber = "2")
+            val thirdIssueId = createIssue(issueNumber = "3")
+            listOf(firstIssueId, secondIssueId, thirdIssueId).forEach { issueId ->
+                comicDao.insertReadingProgress(
+                    ReadingProgress(
+                        issueId = issueId,
+                        status = ReadingStatus.READ,
+                        startedAt = 1000L,
+                        completedAt = 2000L,
+                        notes = null
+                    )
+                )
+            }
+
+            repository.markIssuesAsUnread(listOf(firstIssueId, thirdIssueId))
+            val firstProgress = repository.getReadingProgressForIssue(firstIssueId)
+            val secondProgress = repository.getReadingProgressForIssue(secondIssueId)
+            val thirdProgress = repository.getReadingProgressForIssue(thirdIssueId)
+            assertNull(firstProgress)
+            assertNotNull(secondProgress)
+            assertEquals(ReadingStatus.READ, secondProgress?.status)
+            assertNull(thirdProgress)
+        }
+
+    @Test
+    fun markIssuesAsUnread_handlesDuplicateIssueIds() =
+        runBlocking {
+            val issueId = createIssue()
+            comicDao.insertReadingProgress(
+                ReadingProgress(
+                    issueId = issueId,
+                    status = ReadingStatus.READ,
+                    startedAt = 1000L,
+                    completedAt = 2000L,
+                    notes = null
+                )
+            )
+
+            repository.markIssuesAsUnread(listOf(issueId, issueId, issueId))
+            val progress = repository.getReadingProgressForIssue(issueId)
+            assertNull(progress)
+        }
+
+    @Test
+    fun markIssuesAsRead_withEmptyList_doesNothing() =
+        runBlocking {
+            val issueId = createIssue()
+            val progressId =
+                comicDao.insertReadingProgress(
+                    ReadingProgress(
+                        issueId = issueId,
+                        status = ReadingStatus.READING,
+                        startedAt = 1000L,
+                        completedAt = null,
+                        notes = "Keep this"
+                    )
+                )
+            repository.markIssuesAsRead(emptyList())
+            val progress = repository.getReadingProgressForIssue(issueId)
+            assertNotNull(progress)
+            assertEquals(progressId, progress?.id)
+            assertEquals(ReadingStatus.READING, progress?.status)
+            assertEquals(1000L, progress?.startedAt)
+            assertNull(progress?.completedAt)
+            assertEquals("Keep this", progress?.notes)
+        }
+
+    @Test
+    fun markIssuesAsUnread_withEmptyList_doesNothing() =
+        runBlocking {
+            val issueId = createIssue()
+            val progressId =
+                comicDao.insertReadingProgress(
+                    ReadingProgress(
+                        issueId = issueId,
+                        status = ReadingStatus.READ,
+                        startedAt = 1000L,
+                        completedAt = 2000L,
+                        notes = "Keep this"
+                    )
+                )
+            repository.markIssuesAsUnread(emptyList())
+            val progress = repository.getReadingProgressForIssue(issueId)
+            assertNotNull(progress)
+            assertEquals(progressId, progress?.id)
+            assertEquals(ReadingStatus.READ, progress?.status)
+            assertEquals(1000L, progress?.startedAt)
+            assertEquals(2000L, progress?.completedAt)
+            assertEquals("Keep this", progress?.notes)
+        }
+}
