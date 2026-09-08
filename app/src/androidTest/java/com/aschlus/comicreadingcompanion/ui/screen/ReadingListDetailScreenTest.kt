@@ -598,6 +598,8 @@ class ReadingListDetailScreenTest {
                             .fetchSemanticsNodes()
                             .isNotEmpty()
             }
+            composeRule.onNodeWithContentDescription("Search reading list").performClick()
+            composeRule.waitForIdle()
             composeRule.onNode(hasSetTextAction()).performTextInput("Daredevil")
             composeRule.waitUntil(timeoutMillis = 5000L) {
                 composeRule.onAllNodesWithText("1 of 2 issues")
@@ -607,6 +609,117 @@ class ReadingListDetailScreenTest {
             composeRule.onNodeWithText("Daredevil #16").assertIsDisplayed()
             composeRule.onNodeWithText("Amazing Spider-Man #30").assertDoesNotExist()
             composeRule.onNodeWithText("1 of 2 issues").assertIsDisplayed()
+        }
+    }
+
+    @Test
+    fun readingListDetailScreen_searchButtonOpensAndClosesSearch() {
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val readingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title = "Search Mode Test",
+                        description = null,
+                        publisherId = publisherId,
+                        universeId = null,
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    ReadingListDetailScreen(
+                        readingListId = readingListId,
+                        startPosition = -1,
+                        viewModel = viewModel,
+                        onIssueClick = {},
+                        onBackClick = {}
+                    )
+                }
+            }
+
+            composeRule.waitUntil(timeoutMillis = 5000L) {
+                composeRule.onAllNodesWithText("Search Mode Test")
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+            composeRule.onNodeWithContentDescription("Search reading list").performClick()
+            composeRule.waitForIdle()
+            composeRule.onNode(hasSetTextAction()).assertIsDisplayed()
+            composeRule.onNodeWithText("Search Mode Test").assertDoesNotExist()
+            composeRule.onNode(hasSetTextAction()).performTextInput("Spider")
+            composeRule.onNodeWithContentDescription("Close search").performClick()
+            composeRule.waitForIdle()
+            composeRule.onNodeWithText("Search Mode Test").assertIsDisplayed()
+            composeRule.onNode(hasSetTextAction()).assertDoesNotExist()
+            composeRule.onNodeWithContentDescription("Search reading list")
+                .assertIsDisplayed()
+        }
+    }
+
+    @Test
+    fun readingListDetailScreen_backButtonClosesSearchBeforeNavigatingBack() {
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val readingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title = "Search Back Test",
+                        description = null,
+                        publisherId = publisherId,
+                        universeId = null,
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            var backClicked = false
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    ReadingListDetailScreen(
+                        readingListId = readingListId,
+                        startPosition = -1,
+                        viewModel = viewModel,
+                        onIssueClick = {},
+                        onBackClick = {
+                            backClicked = true
+                        }
+                    )
+                }
+            }
+
+            composeRule.waitUntil(timeoutMillis = 5000L) {
+                composeRule.onAllNodesWithText("Search Back Test")
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+            composeRule.onNodeWithContentDescription("Search reading list").performClick()
+            composeRule.waitForIdle()
+            composeRule.onNodeWithContentDescription("Back").performClick()
+            composeRule.runOnIdle {
+                assertEquals(false, backClicked)
+            }
+            composeRule.onNodeWithText("Search Back Test").assertIsDisplayed()
+            composeRule.onNode(hasSetTextAction()).assertDoesNotExist()
+            composeRule.onNodeWithContentDescription("Back").performClick()
+            composeRule.runOnIdle {
+                assertEquals(true, backClicked)
+            }
         }
     }
 
@@ -1621,6 +1734,8 @@ class ReadingListDetailScreenTest {
                     .fetchSemanticsNodes()
                     .isNotEmpty()
             }
+            composeRule.onNodeWithContentDescription("Search reading list").performClick()
+            composeRule.waitForIdle()
             composeRule.onNode(hasSetTextAction()).performTextInput("Venom")
             composeRule.waitUntil(timeoutMillis = 5000L) {
                 composeRule

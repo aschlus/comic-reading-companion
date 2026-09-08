@@ -1,7 +1,6 @@
 package com.aschlus.comicreadingcompanion.ui.screen
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,7 +15,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Close
@@ -56,6 +54,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListIssue
@@ -111,6 +112,20 @@ fun ReadingListDetailScreen(
         mutableStateOf("")
     }
 
+    var isSearchActive by rememberSaveable(
+        readingListId
+    ) {
+        mutableStateOf(false)
+    }
+
+    val searchFocusRequester =
+        remember {
+            FocusRequester()
+        }
+
+    val keyboardController =
+        LocalSoftwareKeyboardController.current
+
     var readingStatusFilter by rememberSaveable(
         readingListId
     ) {
@@ -142,6 +157,14 @@ fun ReadingListDetailScreen(
 
     LaunchedEffect(readingListId) {
         viewModel.loadReadingList(readingListId)
+    }
+
+    LaunchedEffect(isSearchActive) {
+        if (isSearchActive) {
+            withFrameNanos {  }
+            searchFocusRequester.requestFocus()
+            keyboardController?.show()
+        }
     }
 
     LaunchedEffect(
@@ -308,13 +331,46 @@ fun ReadingListDetailScreen(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(
-                        readingList?.title ?: "Reading List"
-                    )
+                    if (isSearchActive) {
+                        OutlinedTextField(
+                            value = searchQuery,
+                            onValueChange = { newQuery ->
+                                searchQuery = newQuery
+                            },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .focusRequester(
+                                    searchFocusRequester
+                                ),
+                            singleLine = true,
+                            placeholder = {
+                                Text("Search reading list")
+                            },
+                            leadingIcon = {
+                                Icon(
+                                    imageVector = Icons.Default.Search,
+                                    contentDescription = null
+                                )
+                            }
+                        )
+                    } else {
+                        Text(
+                            readingList?.title
+                                ?: "Reading list"
+                        )
+                    }
                 },
                 navigationIcon = {
                     IconButton(
-                        onClick = onBackClick
+                        onClick = {
+                            if (isSearchActive) {
+                                searchQuery = ""
+                                isSearchActive = false
+                                keyboardController?.hide()
+                            } else {
+                                onBackClick()
+                            }
+                        }
                     ) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
@@ -323,46 +379,72 @@ fun ReadingListDetailScreen(
                     }
                 },
                 actions = {
-                    Box {
+                    if (isSearchActive) {
                         IconButton(
                             onClick = {
-                                listMenuExpanded = true
+                                searchQuery = ""
+                                isSearchActive = false
+                                keyboardController?.hide()
                             }
                         ) {
                             Icon(
-                                imageVector = Icons.Default.MoreVert,
-                                contentDescription =
-                                    "Reading list options"
+                                imageVector = Icons.Default.Close,
+                                contentDescription = "Close search"
+                            )
+                        }
+                    } else {
+                        IconButton(
+                            onClick = {
+                                isSearchActive = true
+                            }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Search,
+                                contentDescription = "Search reading list"
                             )
                         }
 
-                        DropdownMenu(
-                            expanded = listMenuExpanded,
-                            onDismissRequest = {
-                                listMenuExpanded = false
+                        Box {
+                            IconButton(
+                                onClick = {
+                                    listMenuExpanded = true
+                                }
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.MoreVert,
+                                    contentDescription =
+                                        "Reading list options"
+                                )
                             }
-                        ) {
-                            DropdownMenuItem(
-                                text = {
-                                    Text("Mark all as read")
-                                },
-                                enabled = hasUnreadIssues,
-                                onClick = {
-                                    listMenuExpanded = false
-                                    viewModel.markAllAsRead()
-                                }
-                            )
 
-                            DropdownMenuItem(
-                                text = {
-                                    Text("Reset reading progress")
-                                },
-                                enabled = hasAnyProgress,
-                                onClick = {
+                            DropdownMenu(
+                                expanded = listMenuExpanded,
+                                onDismissRequest = {
                                     listMenuExpanded = false
-                                    showResetProgressDialog = true
                                 }
-                            )
+                            ) {
+                                DropdownMenuItem(
+                                    text = {
+                                        Text("Mark all as read")
+                                    },
+                                    enabled = hasUnreadIssues,
+                                    onClick = {
+                                        listMenuExpanded = false
+                                        viewModel.markAllAsRead()
+                                    }
+                                )
+
+                                DropdownMenuItem(
+                                    text = {
+                                        Text("Reset reading progress")
+                                    },
+                                    enabled = hasAnyProgress,
+                                    onClick = {
+                                        listMenuExpanded = false
+                                        showResetProgressDialog = true
+                                    }
+                                )
+                            }
                         }
                     }
                 }
@@ -421,45 +503,13 @@ fun ReadingListDetailScreen(
                     modifier = Modifier.fillMaxWidth()
                 )
 
-                Text("Issues")
-
-                OutlinedTextField(
-                    value = searchQuery,
-                    onValueChange = { newQuery ->
-                        searchQuery = newQuery
-                    },
-                    modifier = Modifier.fillMaxWidth(),
-                    singleLine = true,
-                    label = {
-                        Text("Search this reading list")
-                    },
-                    leadingIcon = {
-                        Icon(
-                            imageVector = Icons.Default.Search,
-                            contentDescription = null
-                        )
-                    },
-                    trailingIcon = {
-                        if (searchQuery.isNotEmpty()) {
-                            IconButton(
-                                onClick = {
-                                    searchQuery = ""
-                                }
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.Close,
-                                    contentDescription = "Clear search"
-                                )
-                            }
-                        }
-                    }
-                )
+                val firstUnreadIndex = issues.indexOfFirst { issue ->
+                    issue.readingStatus != ReadingStatus.READ
+                }
 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement =
-                        Arrangement.SpaceBetween
                 ) {
                     OutlinedButton(
                         onClick = {
@@ -490,156 +540,157 @@ fun ReadingListDetailScreen(
                             } else {
                                 "${issues.size} issues"
                             },
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(
+                                horizontal = 8.dp
+                            ),
                         style =
                             MaterialTheme.typography.bodySmall
                     )
-                }
 
-                val firstUnreadIndex = issues.indexOfFirst { issue ->
-                    issue.readingStatus != ReadingStatus.READ
-                }
-
-                if (
-                    firstUnreadIndex >= 0 &&
-                    !isSearching &&
-                    !hasActiveFilters
-                ) {
-                    TextButton(
-                        onClick = {
-                            coroutineScope.launch {
-                                val targetIssue = issues[firstUnreadIndex]
-                                val targetSectionId = targetIssue.sectionId
-                                val sectionWasCollapsed =
-                                    targetSectionId != null &&
-                                            collapsedSectionIds.contains(
-                                                targetSectionId
-                                            )
-
-                                if (
-                                    targetSectionId != null &&
-                                    sectionWasCollapsed
-                                ) {
-                                    collapsedSectionIds =
-                                        collapsedSectionIds.filter { sectionId ->
-                                            sectionId != targetSectionId
-                                        }
-                                            .toLongArray()
-
-                                    withFrameNanos { }
-                                }
-
-                                listState.animateScrollToItem(
-                                    firstUnreadIndex
-                                )
-                            }
-                        }
+                    if (
+                        firstUnreadIndex >= 0 &&
+                        !isSearching &&
+                        !hasActiveFilters
                     ) {
-                        Text("Jump to first unread")
+                        TextButton(
+                            onClick = {
+                                coroutineScope.launch {
+                                    val targetIssue = issues[firstUnreadIndex]
+                                    val targetSectionId = targetIssue.sectionId
+                                    val sectionWasCollapsed =
+                                        targetSectionId != null &&
+                                                collapsedSectionIds.contains(
+                                                    targetSectionId
+                                                )
+
+                                    if (
+                                        targetSectionId != null &&
+                                        sectionWasCollapsed
+                                    ) {
+                                        collapsedSectionIds =
+                                            collapsedSectionIds.filter { sectionId ->
+                                                sectionId != targetSectionId
+                                            }
+                                                .toLongArray()
+
+                                        withFrameNanos { }
+                                    }
+
+                                    listState.animateScrollToItem(
+                                        firstUnreadIndex
+                                    )
+                                }
+                            }
+                        ) {
+                            Text("Jump to first unread")
+                        }
                     }
                 }
-                if (issues.isEmpty()) {
-                    Text("No issues in this reading list")
-                } else if (
-                    (isSearching || hasActiveFilters) && visibleIssues.isEmpty()
+            }
+            if (issues.isEmpty()) {
+                Text("No issues in this reading list")
+            } else if (
+                (isSearching || hasActiveFilters) && visibleIssues.isEmpty()
+            ) {
+                Text(
+                    text =
+                        if (isSearching) {
+                            "No issues match " +
+                                "\"$trimmedSearchQuery\" " +
+                                "with the current filters."
+                        } else {
+                            "No issues match the current filters."
+                        }
+                )
+            } else {
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f),
+                    state = listState
                 ) {
-                    Text(
-                        text =
-                            if (isSearching) {
-                                "No issues match " +
-                                    "\"$trimmedSearchQuery\" " +
-                                    "with the current filters."
+                    itemsIndexed(
+                        items = visibleIssues,
+                        key = { _, issue ->
+                            issue.readingListItemId
+                        }
+                    ) { index, issue ->
+
+                        val previousSectionId =
+                            if (index > 0) {
+                                visibleIssues[index - 1].sectionId
                             } else {
-                                "No issues match the current filters."
+                                null
                             }
-                    )
-                } else {
-                    LazyColumn(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .weight(1f),
-                        state = listState
-                    ) {
-                        itemsIndexed(
-                            items = visibleIssues,
-                            key = { _, issue ->
-                                issue.readingListItemId
-                            }
-                        ) { index, issue ->
 
-                            val previousSectionId =
-                                if (index > 0) {
-                                    visibleIssues[index - 1].sectionId
-                                } else {
-                                    null
-                                }
+                        val sectionId =
+                            issue.sectionId
 
-                            val sectionId =
-                                issue.sectionId
+                        val isFirstIssueInSection =
+                            sectionId != null &&
+                                sectionId != previousSectionId
 
-                            val isFirstIssueInSection =
+                        val isSectionCollapsed =
+                            !isSearching &&
+                                !hasActiveFilters &&
                                 sectionId != null &&
-                                    sectionId != previousSectionId
+                                collapsedSectionIds.contains(
+                                    sectionId
+                                )
 
-                            val isSectionCollapsed =
-                                !isSearching &&
-                                    !hasActiveFilters &&
-                                    sectionId != null &&
-                                    collapsedSectionIds.contains(
-                                        sectionId
+                        if (isFirstIssueInSection) {
+                            ReadingListSectionHeader(
+                                title =
+                                    issue.sectionTitle
+                                        ?: "Section",
+                                description =
+                                    issue.sectionDescription,
+                                isCollapsed =
+                                    isSectionCollapsed,
+                                onToggleCollapsed = {
+                                    collapsedSectionIds =
+                                        if (
+                                            collapsedSectionIds.contains(
+                                                sectionId
+                                            )
+                                        ) {
+                                            collapsedSectionIds
+                                                .filter {
+                                                    it != sectionId
+                                                }
+                                                .toLongArray()
+                                        } else {
+                                            collapsedSectionIds +
+                                                sectionId
+                                        }
+                                }
+                            )
+                        }
+
+                        if (!isSectionCollapsed) {
+                            ReadingListIssueRow(
+                                issue = issue,
+                                onIssueClick = {
+                                    onIssueClick(issue.issueId)
+                                },
+                                onToggleRead = {
+                                    viewModel.toggleIssueRead(
+                                        issue = issue
                                     )
-
-                            if (isFirstIssueInSection) {
-                                ReadingListSectionHeader(
-                                    title =
-                                        issue.sectionTitle
-                                            ?: "Section",
-                                    description =
-                                        issue.sectionDescription,
-                                    isCollapsed =
-                                        isSectionCollapsed,
-                                    onToggleCollapsed = {
-                                        collapsedSectionIds =
-                                            if (
-                                                collapsedSectionIds.contains(
-                                                    sectionId
-                                                )
-                                            ) {
-                                                collapsedSectionIds
-                                                    .filter {
-                                                        it != sectionId
-                                                    }
-                                                    .toLongArray()
-                                            } else {
-                                                collapsedSectionIds +
-                                                    sectionId
-                                            }
-                                    }
-                                )
-                            }
-
-                            if (!isSectionCollapsed) {
-                                ReadingListIssueRow(
-                                    issue = issue,
-                                    onIssueClick = {
-                                        onIssueClick(issue.issueId)
-                                    },
-                                    onToggleRead = {
-                                        viewModel.toggleIssueRead(
-                                            issue = issue
-                                        )
-                                    },
-                                    onMarkAsReading = {
-                                        viewModel.markIssueAsReading(
-                                            issue = issue
-                                        )
-                                    },
-                                    onMarkAllBeforeRead = {
-                                        viewModel.markAllBeforeAsRead(
-                                            selectedIssue = issue
-                                        )
-                                    }
-                                )
-                            }
+                                },
+                                onMarkAsReading = {
+                                    viewModel.markIssueAsReading(
+                                        issue = issue
+                                    )
+                                },
+                                onMarkAllBeforeRead = {
+                                    viewModel.markAllBeforeAsRead(
+                                        selectedIssue = issue
+                                    )
+                                }
+                            )
                         }
                     }
                 }
