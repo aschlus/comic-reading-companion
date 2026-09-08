@@ -1,5 +1,6 @@
 package com.aschlus.comicreadingcompanion.data.database.entities
 
+import androidx.room3.ColumnInfo
 import androidx.room3.Entity
 import androidx.room3.ForeignKey
 import androidx.room3.Index
@@ -23,7 +24,8 @@ import androidx.room3.PrimaryKey
     ],
     indices = [
         Index(value = ["publisherId"]),
-        Index(value = ["universeId"])
+        Index(value = ["universeId"]),
+        Index(value = ["sourceKey"], unique = true)
     ]
 )
 data class ReadingList(
@@ -33,6 +35,18 @@ data class ReadingList(
     val description: String?,
     val publisherId: Long,
     val universeId: Long?,
+    @ColumnInfo(
+        defaultValue = "'BUNDLED'"
+    )
+    val source: ReadingListSource =
+        ReadingListSource.BUNDLED,
+    val sourceKey: String? = null,
     val createdAt: Long,
     val updatedAt: Long
 )
+
+enum class ReadingListSource {
+    BUNDLED,
+    USER,
+    IMPORTED
+}

@@ -30,7 +30,21 @@ import androidx.room3.PrimaryKey
     indices = [
         Index(value = ["readingListId"]),
         Index(value = ["sectionId"]),
-        Index(value = ["issueId"])
+        Index(value = ["issueId"]),
+        Index(
+            value = [
+                "readingListId",
+                "position"
+            ],
+            unique = true
+        ),
+        Index(
+            value = [
+                "readingListId",
+                "issueId"
+            ],
+            unique = true
+        )
     ]
 )
 data class ReadingListItem(

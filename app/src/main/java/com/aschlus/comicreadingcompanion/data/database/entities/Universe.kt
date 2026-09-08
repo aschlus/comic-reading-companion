@@ -1,6 +1,5 @@
 package com.aschlus.comicreadingcompanion.data.database.entities
 
-import android.graphics.pdf.content.PdfPageGotoLinkContent
 import androidx.room3.Entity
 import androidx.room3.ForeignKey
 import androidx.room3.Index
@@ -17,7 +16,16 @@ import androidx.room3.PrimaryKey
         )
     ],
     indices = [
-        Index(value = ["publisherId"])
+        Index(
+            value = ["publisherId"]
+        ),
+        Index(
+            value = [
+                "publisherId",
+                "designation"
+            ],
+            unique = true
+        )
     ]
 )
 data class Universe(

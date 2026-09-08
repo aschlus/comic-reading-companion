@@ -25,8 +25,8 @@ building, following, and tracking comic-book reading orders.
 - [x] Reading-list section model
 - [x] Reading-progress model
 - [x] Global issue read status across reading lists
-- [ ] Add database uniqueness constraints where appropriate
-- [ ] Add proper Room migrations as the schema evolves
+- [x] Add database uniqueness constraints where appropriate
+- [x] Add proper Room migrations as the schema evolves
 - [ ] Add support for relationships between reading orders / events
 - [ ] Add collection / library concepts
 
@@ -215,7 +215,7 @@ building, following, and tracking comic-book reading orders.
 - [x] ViewModel tests
 - [x] Compose UI tests
 - [x] App navigation integration tests
-- [ ] Test database migrations
+- [x] Test database migrations
 - [x] Handle malformed reading-list files gracefully
 - [x] Handle importer failures without partially updating a list
 - [x] Improve error reporting / logging

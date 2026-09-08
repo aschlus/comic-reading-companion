@@ -26,7 +26,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.Universe
         ReadingListItem::class,
         ReadingProgress::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = true
 )
 abstract class ComicDatabase : RoomDatabase() {
@@ -43,7 +43,11 @@ abstract class ComicDatabase : RoomDatabase() {
                     context.applicationContext,
                     ComicDatabase::class.java,
                     "comic_reading_companion_database"
-                ).build()
+                )
+                    .addMigrations(
+                        MIGRATION_1_2
+                    )
+                    .build()
 
                 INSTANCE = instance
                 instance

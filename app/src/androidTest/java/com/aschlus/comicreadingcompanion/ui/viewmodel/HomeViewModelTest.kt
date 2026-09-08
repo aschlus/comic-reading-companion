@@ -299,7 +299,7 @@ class HomeViewModelTest {
                     readingListId = secondListId,
                     sectionId = null,
                     issueId = issueIds[3],
-                    position = 1,
+                    position = 2,
                     required = true,
                     notes = null
                 )

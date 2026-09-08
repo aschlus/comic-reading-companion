@@ -685,7 +685,7 @@ class ReadingListDetailScreenTest {
                     readingListId = readingListId,
                     sectionId = null,
                     issueId = secondIssueId,
-                    position = 1,
+                    position = 2,
                     required = true,
                     notes = null
                 )
@@ -811,7 +811,7 @@ class ReadingListDetailScreenTest {
                     readingListId = readingListId,
                     sectionId = null,
                     issueId = secondIssueId,
-                    position = 1,
+                    position = 2,
                     required = false,
                     notes = null
                 )
@@ -946,7 +946,7 @@ class ReadingListDetailScreenTest {
                     readingListId = readingListId,
                     sectionId = null,
                     issueId = secondIssueId,
-                    position = 1,
+                    position = 2,
                     required = true,
                     notes = null
                 )
@@ -1058,7 +1058,7 @@ class ReadingListDetailScreenTest {
                     readingListId = readingListId,
                     sectionId = null,
                     issueId = secondIssueId,
-                    position = 1,
+                    position = 2,
                     required = true,
                     notes = null
                 )

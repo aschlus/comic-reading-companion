@@ -58,20 +58,32 @@ class ComicRepositoryTest {
     private suspend fun createIssue(
         issueNumber: String = "1"
     ): Long {
+        val publisher =
+            comicDao.getPublisherByName("Marvel")
+
         val publisherId =
-            comicDao.insertPublisher(
-                Publisher(name = "Marvel")
+            publisher?.id
+                ?: comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+        val existingSeries =
+            comicDao.getSeries(
+                publisherId = publisherId,
+                title = "Repository Test Series",
+                volume = 1
             )
 
         val seriesId =
-            comicDao.insertSeries(
-                Series(
-                    publisherId = publisherId,
-                    title = "Repository Test Series",
-                    volume = 1,
-                    startYear = 2000,
-                    endYear = 2000
-                )
+            existingSeries?.id
+                ?: comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Repository Test Series",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2000
+                    )
             )
 
         return comicDao.insertIssue(
