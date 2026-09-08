@@ -115,7 +115,7 @@ fun SeriesDetailScreen(
                                 currentSeries.startYear !=
                                 currentSeries.endYear -> {
                                 add(
-                                    "${currentSeries.seriesId}-" +
+                                    "${currentSeries.startYear}-" +
                                         "${currentSeries.endYear}"
                                 )
                             }
@@ -167,7 +167,7 @@ fun SeriesDetailScreen(
 
                 Text(
                     text =
-                        "$readCount or $totalCount read • " +
+                        "$readCount of $totalCount read • " +
                             "$completionPercentage% complete"
                 )
 

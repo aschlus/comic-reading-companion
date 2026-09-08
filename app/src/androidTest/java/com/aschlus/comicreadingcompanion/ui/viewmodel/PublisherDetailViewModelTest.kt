@@ -1,6 +1,7 @@
 package com.aschlus.comicreadingcompanion.ui.viewmodel
 
 import android.content.Context
+import androidx.lifecycle.viewModelScope
 import androidx.room3.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -11,6 +12,8 @@ import com.aschlus.comicreadingcompanion.data.database.entities.IssueType
 import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
 import com.aschlus.comicreadingcompanion.data.database.entities.Series
 import com.aschlus.comicreadingcompanion.data.repository.ComicRepository
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withTimeout
@@ -55,6 +58,12 @@ class PublisherDetailViewModelTest {
 
     @After
     fun tearDown() {
+        runBlocking {
+            viewModel
+                .viewModelScope
+                .coroutineContext[Job]
+                ?.cancelAndJoin()
+        }
         database.close()
     }
 

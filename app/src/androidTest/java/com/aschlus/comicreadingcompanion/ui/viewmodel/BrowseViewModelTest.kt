@@ -1,6 +1,7 @@
 package com.aschlus.comicreadingcompanion.ui.viewmodel
 
 import android.content.Context
+import androidx.lifecycle.viewModelScope
 import androidx.room3.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +20,8 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancelAndJoin
 import kotlin.time.Duration.Companion.milliseconds
 
 @RunWith(AndroidJUnit4::class)
@@ -54,6 +57,12 @@ class BrowseViewModelTest {
 
     @After
     fun tearDown() {
+        runBlocking {
+            viewModel
+                .viewModelScope
+                .coroutineContext[Job]
+                ?.cancelAndJoin()
+        }
         database.close()
     }
 
