@@ -1,12 +1,15 @@
 package com.aschlus.comicreadingcompanion
 
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.hasClickAction
+import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onAllNodesWithContentDescription
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performTextInput
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -248,6 +251,96 @@ class AppNavigationTest {
                 .fetchSemanticsNodes()
                 .isNotEmpty()
         }
+        composeRule.onNodeWithText("My Reading Lists").assertIsDisplayed()
+    }
+
+    @Test
+    fun appNavigation_homeToCreateReadingList() {
+        composeRule.onNodeWithText("Create Reading List").performClick()
+        composeRule.waitUntil(timeoutMillis = 5000L) {
+            composeRule.onAllNodesWithText("Title")
+                .fetchSemanticsNodes()
+                .isNotEmpty()
+        }
+        composeRule.onNodeWithText("Title").assertIsDisplayed()
+        composeRule.onNodeWithText("Select publisher").assertIsDisplayed()
+        composeRule.onNodeWithContentDescription("Back").assertIsDisplayed()
+    }
+
+    @Test
+    fun appNavigation_createReadingListCreatesAndOpensDetail() {
+        val readingListTile = "Navigation Test List ${System.currentTimeMillis()}"
+        val application = composeRule.activity.application as ComicReadingCompanionApplication
+        val repository = application.container.comicRepository
+
+        runBlocking {
+            repository
+                .getPublishersFlow()
+                .first { publishers ->
+                    publishers.any { publisher ->
+                        publisher.name == "Marvel Comics"
+                    }
+                }
+
+            try {
+                composeRule.onNodeWithText("Create Reading List").performClick()
+                composeRule.waitUntil(timeoutMillis = 5000L) {
+                    composeRule.onAllNodesWithText("Title")
+                        .fetchSemanticsNodes()
+                        .isNotEmpty()
+                }
+                composeRule.onNodeWithText("Title").performTextInput(readingListTile)
+                composeRule.onNodeWithText("Select publisher").performClick()
+                composeRule.waitUntil(timeoutMillis = 5000L) {
+                    composeRule.onAllNodesWithText("Marvel Comics")
+                        .fetchSemanticsNodes()
+                        .isNotEmpty()
+                }
+                composeRule.onNodeWithText("Marvel Comics").performClick()
+                composeRule.waitForIdle()
+                composeRule.onNode(hasText("Create Reading List") and hasClickAction())
+                    .performClick()
+                composeRule.waitUntil(timeoutMillis = 5000L) {
+                    composeRule.onAllNodesWithText("No issues in this reading list")
+                        .fetchSemanticsNodes()
+                        .isNotEmpty()
+                }
+                composeRule.onNodeWithText(readingListTile).assertIsDisplayed()
+                composeRule.onNodeWithText("0 of 0 read • 0% complete").assertIsDisplayed()
+                composeRule.onNodeWithText("No issues in this reading list").assertIsDisplayed()
+            } finally {
+                runBlocking {
+                    val createdReadingList =
+                        repository
+                            .getReadingLists()
+                            .first()
+                            .firstOrNull { readingList ->
+                                readingList.title == readingListTile
+                            }
+
+                    if (createdReadingList != null) {
+                        repository.deleteReadingList(createdReadingList)
+                    }
+                }
+            }
+        }
+    }
+
+    @Test
+    fun appNavigate_createReadingListBackReturned() {
+        composeRule.onNodeWithText("Create Reading List").performClick()
+        composeRule.waitUntil(timeoutMillis = 5000L) {
+            composeRule.onAllNodesWithText("Title")
+                .fetchSemanticsNodes()
+                .isNotEmpty()
+        }
+        composeRule.onNodeWithContentDescription("Back").performClick()
+        composeRule.waitUntil(timeoutMillis = 5000L) {
+            composeRule.onAllNodesWithText("My Reading Lists")
+                .fetchSemanticsNodes()
+                .isNotEmpty()
+        }
+        composeRule.onNodeWithText("Comic Reading Companion").assertIsDisplayed()
         composeRule.onNodeWithText("My Reading Lists").assertIsDisplayed()
     }
 }

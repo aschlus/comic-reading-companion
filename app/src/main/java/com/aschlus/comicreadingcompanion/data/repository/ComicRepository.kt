@@ -8,6 +8,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListItem
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSection
+import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSource
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingProgress
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.database.entities.Series
@@ -120,6 +121,27 @@ class ComicRepository(
 
     suspend fun addReadingList(readingList: ReadingList): Long {
         return comicDao.insertReadingList(readingList)
+    }
+
+    suspend fun createUserReadingList(
+        title: String,
+        description: String?,
+        publisherId: Long,
+        universeId: Long?
+    ): Long {
+        val currentTime = System.currentTimeMillis()
+        return comicDao.insertReadingList(
+            ReadingList(
+                title = title,
+                description = description,
+                publisherId = publisherId,
+                universeId = universeId,
+                source = ReadingListSource.USER,
+                sourceKey = null,
+                createdAt = currentTime,
+                updatedAt = currentTime
+            )
+        )
     }
 
     fun getReadingLists(): Flow<List<ReadingList>> {

@@ -85,6 +85,7 @@ class HomeScreenTest {
                 HomeScreen(
                     viewModel = viewModel,
                     onBrowseClick = {},
+                    onCreateReadingListClick = {},
                     onReadingListClick = { _, _ -> }
                 )
             }
@@ -92,6 +93,7 @@ class HomeScreenTest {
 
         composeRule.onNodeWithText("Comic Reading Companion").assertIsDisplayed()
         composeRule.onNodeWithText("Browse Comics").assertIsDisplayed()
+        composeRule.onNodeWithText("Create Reading List").assertIsDisplayed()
         composeRule.onNodeWithText("My Reading Lists").assertIsDisplayed()
         composeRule.onNodeWithText("No reading lists yet").assertIsDisplayed()
     }
@@ -109,6 +111,7 @@ class HomeScreenTest {
                     onBrowseClick = {
                         browseClicked = true
                     },
+                    onCreateReadingListClick = {},
                     onReadingListClick = { _, _ -> }
                 )
             }
@@ -208,6 +211,7 @@ class HomeScreenTest {
                     HomeScreen(
                         viewModel = viewModel,
                         onBrowseClick = {},
+                        onCreateReadingListClick = {},
                         onReadingListClick = { _, _ -> }
                     )
                 }
@@ -318,6 +322,7 @@ class HomeScreenTest {
                     HomeScreen(
                         viewModel = viewModel,
                         onBrowseClick = {},
+                        onCreateReadingListClick = {},
                         onReadingListClick = { id, position ->
                             clickedReadingListId = id
                             clickedPosition = position
@@ -336,6 +341,31 @@ class HomeScreenTest {
                 assertEquals(readingListId, clickedReadingListId)
                 assertEquals(2, clickedPosition)
             }
+        }
+    }
+
+    @Test
+    fun homeScreen_createReadingListButtonInvokesCallback() {
+        var createClicked = false
+
+        composeRule.setContent {
+            ComicReadingCompanionTheme(
+                dynamicColor = false
+            ) {
+                HomeScreen(
+                    viewModel = viewModel,
+                    onBrowseClick = {},
+                    onCreateReadingListClick = {
+                        createClicked = true
+                    },
+                    onReadingListClick = { _, _ -> }
+                )
+            }
+        }
+
+        composeRule.onNodeWithText("Create Reading List").performClick()
+        composeRule.runOnIdle {
+            assert(createClicked)
         }
     }
 }

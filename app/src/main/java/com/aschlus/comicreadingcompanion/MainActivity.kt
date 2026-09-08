@@ -11,6 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.aschlus.comicreadingcompanion.ui.screen.BrowseScreen
+import com.aschlus.comicreadingcompanion.ui.screen.CreateReadingListScreen
 import com.aschlus.comicreadingcompanion.ui.screen.HomeScreen
 import com.aschlus.comicreadingcompanion.ui.screen.IssueDetailScreen
 import com.aschlus.comicreadingcompanion.ui.screen.PublisherDetailScreen
@@ -19,6 +20,8 @@ import com.aschlus.comicreadingcompanion.ui.screen.SeriesDetailScreen
 import com.aschlus.comicreadingcompanion.ui.theme.ComicReadingCompanionTheme
 import com.aschlus.comicreadingcompanion.ui.viewmodel.BrowseViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.BrowseViewModelFactory
+import com.aschlus.comicreadingcompanion.ui.viewmodel.CreateReadingListViewModel
+import com.aschlus.comicreadingcompanion.ui.viewmodel.CreateReadingListViewModelFactory
 import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeViewModelFactory
 import com.aschlus.comicreadingcompanion.ui.viewmodel.IssueDetailViewModel
@@ -64,10 +67,40 @@ class MainActivity : ComponentActivity() {
                             onBrowseClick = {
                                 navController.navigate("browse")
                             },
+                            onCreateReadingListClick = {
+                                navController.navigate(
+                                    "createReadingList"
+                                )
+                            },
                             onReadingListClick = { readingListId, startPosition ->
                                 navController.navigate(
                                     "readingList/$readingListId?startPosition=$startPosition"
                                 )
+                            }
+                        )
+                    }
+
+                    composable("createReadingList") {
+                        val createReadingListViewModel: CreateReadingListViewModel =
+                            viewModel(
+                                factory =
+                                    CreateReadingListViewModelFactory(
+                                        (application as ComicReadingCompanionApplication)
+                                            .container
+                                            .comicRepository
+                                    )
+                            )
+                        CreateReadingListScreen(
+                            viewModel = createReadingListViewModel,
+                            onBackClick = safeNavigateBack,
+                            onReadingListCreated = { readingListId ->
+                                navController.navigate(
+                                    "readingList/$readingListId?startPosition=-1"
+                                ) {
+                                    popUpTo("createReadingList") {
+                                        inclusive = true
+                                    }
+                                }
                             }
                         )
                     }

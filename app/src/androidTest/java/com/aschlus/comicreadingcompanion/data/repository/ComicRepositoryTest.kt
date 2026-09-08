@@ -10,6 +10,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.Issue
 import com.aschlus.comicreadingcompanion.data.database.entities.IssueType
 import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingProgress
+import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSource
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.database.entities.Series
 import kotlinx.coroutines.runBlocking
@@ -279,7 +280,7 @@ class ComicRepositoryTest {
             val secondProgress = repository.getReadingProgressForIssue(secondIssueId)
             assertNotNull(firstProgress)
             assertNotNull(secondProgress)
-            assertEquals(firstIssueId, firstProgress?.id)
+            assertEquals(firstProgressId, firstProgress?.id)
             assertEquals(ReadingStatus.READ, firstProgress?.status)
             assertEquals(1000L, firstProgress?.startedAt)
             assertNotNull(firstProgress?.completedAt)
@@ -385,5 +386,62 @@ class ComicRepositoryTest {
             assertEquals(1000L, progress?.startedAt)
             assertEquals(2000L, progress?.completedAt)
             assertEquals("Keep this", progress?.notes)
+        }
+
+    @Test
+    fun createUserReadingList_createsUserOwnedReadingList() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "My Spider-Man List",
+                    description = "My custom reading order",
+                    publisherId = publisherId,
+                    universeId = null
+                )
+
+            val readingList =
+                comicDao.getReadingListById(readingListId)
+
+            assertNotNull(readingList)
+            assertEquals("My Spider-Man List", readingList?.title)
+            assertEquals("My custom reading order", readingList?.description)
+            assertEquals(publisherId, readingList?.publisherId)
+            assertNull(readingList?.universeId)
+            assertEquals(ReadingListSource.USER, readingList?.source)
+            assertNull(readingList?.sourceKey)
+        }
+
+    @Test
+    fun createUserReadingList_setsCreationAndUpdateTimestamps() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val before = System.currentTimeMillis()
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Timestamp Test",
+                    description = null,
+                    publisherId = publisherId,
+                    universeId = null
+                )
+
+            val after = System.currentTimeMillis()
+
+            val readingList =
+                comicDao.getReadingListById(readingListId)
+
+            assertNotNull(readingList)
+            assertTrue(readingList!!.createdAt >= before)
+            assertTrue(readingList.createdAt <= after)
+            assertEquals(readingList.createdAt, readingList.updatedAt)
         }
 }

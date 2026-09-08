@@ -31,6 +31,7 @@ import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeViewModel
 fun HomeScreen(
     viewModel: HomeViewModel,
     onBrowseClick: () -> Unit,
+    onCreateReadingListClick: () -> Unit,
     onReadingListClick: (Long, Int) -> Unit
 ) {
     val readingLists by viewModel.readingLists.collectAsState()
@@ -63,6 +64,12 @@ fun HomeScreen(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text("Browse Comics")
+            }
+            OutlinedButton(
+                onClick = onCreateReadingListClick,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Create Reading List")
             }
 
             Text("My Reading Lists")
