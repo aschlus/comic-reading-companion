@@ -23,6 +23,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -421,16 +422,20 @@ class ComicCatalogImporterTest {
             val issuesAfter = seriesAfter.flatMap { series ->
                 comicDao.getIssuesForSeries(series.id)
             }
-            assertEquals(22, seriesAfter.size)
-            assertEquals(219, issuesAfter.size)
-            assertEquals(
-                seriesIdsBefore,
-                seriesAfter.map { issue -> issue.id }.toSet()
-            )
-            assertEquals(
-                issueIdsBefore,
-                issuesAfter.map { issue -> issue.id }.toSet()
-            )
+            val expectedCatalogIssueCount = catalog.series.sumOf { seriesData ->
+                seriesData.issues.size
+            }
+            val seriesIdsAfter = seriesAfter.map { series ->
+                series.id
+            }.toSet()
+            val issueIdsAfter = issuesAfter.map { issue ->
+                issue.id
+            }.toSet()
+
+            assertEquals(catalog.series.size, seriesAfter.size)
+            assertEquals(expectedCatalogIssueCount, issuesAfter.size)
+            assertTrue(seriesIdsAfter.containsAll(seriesIdsBefore))
+            assertTrue(issueIdsAfter.containsAll(issueIdsBefore))
         }
 
     @Test

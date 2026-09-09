@@ -23,8 +23,8 @@
       "issues": [
         {
           "number": "0",
-          "title": null,
-          "publicationDate": "1998-09",
+          "title": "The Learning Curve",
+          "publicationDate": "1998-01",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/787/139327-11305-110960-1-slingers.jpg",
           "description": null,
           "type": "REGULAR",
@@ -39,7 +39,7 @@
         },
         {
           "number": "1",
-          "title": null,
+          "title": "So Whose Idea Was This Anyway?",
           "publicationDate": "1998-12",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/15776/670831-slingers1c.jpg",
           "description": null,
@@ -55,7 +55,7 @@
         },
         {
           "number": "2",
-          "title": null,
+          "title": "Hooligans",
           "publicationDate": "1999-01",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/66243-11305-99240-1-slingers.jpg",
           "description": null,
@@ -71,7 +71,7 @@
         },
         {
           "number": "3",
-          "title": null,
+          "title": "With Friends Like These...",
           "publicationDate": "1999-02",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/66244-11305-99241-1-slingers.jpg",
           "description": null,
@@ -87,7 +87,7 @@
         },
         {
           "number": "4",
-          "title": null,
+          "title": "The Black Marvel Strikes!",
           "publicationDate": "1999-03",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/66245-11305-99242-1-slingers.jpg",
           "description": null,
@@ -102,8 +102,88 @@
           ]
         },
         {
+          "number": "5",
+          "title": "Good-Bye to the Golden Age",
+          "publicationDate": "1999-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/66246-11305-99243-1-slingers.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "99243",
+              "url": "https://comicvine.gamespot.com/slingers-5-good-bye-to-the-golden-age/4000-99243/"
+            }
+          ]
+        },
+        {
+          "number": "6",
+          "title": "Truth, Consequenses, Dares & Dysfunction",
+          "publicationDate": "1999-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/66247-11305-99244-1-slingers.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "99244",
+              "url": "https://comicvine.gamespot.com/slingers-6-truth-consequenses-dares-dysfunction/4000-99244/"
+            }
+          ]
+        },
+        {
+          "number": "7",
+          "title": "Revenge of The Griz, Part 1",
+          "publicationDate": "1999-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/66248-11305-99245-1-slingers.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "99245",
+              "url": "https://comicvine.gamespot.com/slingers-7-revenge-of-the-griz-part-1/4000-99245/"
+            }
+          ]
+        },
+        {
+          "number": "8",
+          "title": "Revenge of The Griz, Part 2",
+          "publicationDate": "1999-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/66249-11305-99246-1-slingers.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "99246",
+              "url": "https://comicvine.gamespot.com/slingers-8-revenge-of-the-griz-part-2/4000-99246/"
+            }
+          ]
+        },
+        {
+          "number": "9",
+          "title": "Looze Endz And Lozt Boyz",
+          "publicationDate": "1999-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/66250-11305-99247-1-slingers.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "99247",
+              "url": "https://comicvine.gamespot.com/slingers-9-looze-endz-and-lozt-boyz/4000-99247/"
+            }
+          ]
+        },
+        {
           "number": "10",
-          "title": null,
+          "title": "Raising Hell's Children, Part 1 - The Devil's Due",
           "publicationDate": "1999-09",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/66251-11305-99248-1-slingers.jpg",
           "description": null,
@@ -114,6 +194,38 @@
               "source": "COMIC_VINE",
               "externalId": "99248",
               "url": "https://comicvine.gamespot.com/slingers-10-raising-hells-children-part-1-the-devi/4000-99248/"
+            }
+          ]
+        },
+        {
+          "number": "11",
+          "title": "Raising Hell's Children, Part 2 - The Devil You Know",
+          "publicationDate": "1999-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/66252-11305-99249-1-slingers.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "99249",
+              "url": "https://comicvine.gamespot.com/slingers-11-raising-hells-children-part-2-the-devi/4000-99249/"
+            }
+          ]
+        },
+        {
+          "number": "12",
+          "title": "Raising Hell's Children, Part 3 - The Final Cut",
+          "publicationDate": "1999-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/66253-11305-99250-1-slingers.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "99250",
+              "url": "https://comicvine.gamespot.com/slingers-12-raising-hells-children-part-3-the-fina/4000-99250/"
             }
           ]
         }

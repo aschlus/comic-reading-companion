@@ -1,0 +1,21 @@
+{
+  "publisher": "Marvel Comics",
+  "universes": [
+    {
+      "name": "Marvel Universe",
+      "designation": "Earth-616",
+      "description": null
+    }
+  ],
+  "series": [
+    {
+      "title": "Slingers",
+      "volume": 1,
+      "startYear": 1998,
+      "endYear": 1999,
+      "comicVineVolumeId": 11305,
+      "defaultUniverseDesignation": "Earth-616",
+      "defaultIssueType": "REGULAR"
+    }
+  ]
+}
