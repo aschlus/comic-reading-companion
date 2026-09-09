@@ -51,4 +51,20 @@ class ComicCatalogAssetParser(
             )
         }
     }
+
+    fun listCatalogAssets(): List<String> {
+        return context.assets
+            .list("catalogs")
+            ?.filter { fileName ->
+                fileName.endsWith(
+                    ".json",
+                    ignoreCase = true
+                )
+            }
+            ?.sorted()
+            ?.map { filename ->
+                "catalogs/$filename"
+            }
+            ?: emptyList()
+    }
 }

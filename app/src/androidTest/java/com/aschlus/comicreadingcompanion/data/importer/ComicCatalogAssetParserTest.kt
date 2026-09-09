@@ -11,8 +11,11 @@ import org.junit.runner.RunWith
 class ComicCatalogAssetParserTest {
 
     private val testContext = InstrumentationRegistry.getInstrumentation().context
-
     private val parser = ComicCatalogAssetParser(context = testContext)
+    private val targetContext = InstrumentationRegistry.getInstrumentation().targetContext
+    private val productionCatalogParser = ComicCatalogAssetParser(context = targetContext)
+    private val productionReadingListParser =
+        ReadingListAssetParser(context = targetContext)
 
     @Test
     fun parseValidCatalog_returnsCatalogData() {
@@ -59,5 +62,151 @@ class ComicCatalogAssetParserTest {
                 ) == true
             )
         }
+    }
+
+    @Test
+    fun listCatalogAssets_returnsOnlyJsonFiles() {
+        val assets = parser.listCatalogAssets()
+        assertTrue(assets.isNotEmpty())
+        assertTrue(
+            assets.any { assetPath ->
+                assetPath.endsWith(
+                    ".json",
+                    ignoreCase = true
+                )
+            }
+        )
+        assertTrue("catalogs/ignore_me.txt" !in assets)
+    }
+
+    @Test
+    fun listCatalogAssets_returnsSortedPath() {
+        val assets = parser.listCatalogAssets()
+        assertEquals(assets.sorted(), assets)
+    }
+
+    @Test
+    fun productionSpiderManCatalog_containsEveryReadingListIssue() {
+        val readingList = productionReadingListParser.parse(
+            "reading_lists/spider_man_volume_2.json")
+        val catalog = productionCatalogParser.parse(
+            "catalogs/spider_man_volume_2_catalog.json")
+        val readingListIssueIds =
+            readingList.items
+                .flatMap { item ->
+                    item.issue.externalIds
+                }
+                .filter { externalId ->
+                    externalId.source == "COMIC_VINE"
+                }
+                .map { externalId ->
+                    externalId.externalId
+                }
+                .sorted()
+
+        val catalogIssues =
+            catalog.series
+                .flatMap { series ->
+                    series.issues
+                }
+        val catalogIssueIds =
+            catalogIssues
+                .flatMap { issue ->
+                    issue.externalIds
+                }
+                .filter { externalId ->
+                    externalId.source == "COMIC_VINE"
+                }
+                .map { externalId ->
+                    externalId.externalId
+                }
+                .sorted()
+
+        assertEquals(219, readingList.items.size)
+        assertEquals(readingList.items.size, catalogIssues.size)
+        assertEquals(readingListIssueIds, catalogIssueIds)
+    }
+
+    @Test
+    fun productionSpiderManCatalog_hasUniqueComicVineIssueIds() {
+        val catalog = productionCatalogParser.parse(
+            "catalogs/spider_man_volume_2_catalog.json")
+
+        val comicVineIds =
+            catalog.series
+                .flatMap { series ->
+                    series.issues
+                }
+                .flatMap { issue ->
+                    issue.externalIds
+                }
+                .filter { externalId ->
+                    externalId.source == "COMIC_VINE"
+                }
+                .map { externalId ->
+                    externalId.externalId
+                }
+
+        assertEquals(219, comicVineIds.size)
+        assertEquals(comicVineIds.size, comicVineIds.distinct().size)
+    }
+
+    @Test
+    fun productionSpiderManCatalog_hasCoreSeriesExternalIds() {
+        val catalog = productionCatalogParser.parse(
+            "catalogs/spider_man_volume_2_catalog.json")
+        val amazingSpiderMan =
+            catalog.series.first { series ->
+                series.title == "Amazing Spider-Man" && series.volume == 2
+            }
+        val amazingSpiderManComicVineId =
+            amazingSpiderMan.externalIds.first { externalId ->
+                externalId.source == "COMIC_VINE"
+            }
+        assertEquals("78701", amazingSpiderManComicVineId.externalId)
+
+        val peterParkerSpiderMan =
+            catalog.series.first { series ->
+                series.title == "Peter Parker: Spider-Man" && series.volume == 2
+            }
+        val peterParkerComicVineId =
+            peterParkerSpiderMan.externalIds.first { externalId ->
+                externalId.source == "COMIC_VINE"
+            }
+        assertEquals("9142", peterParkerComicVineId.externalId)
+    }
+
+    @Test
+    fun productionSpiderManCatalog_hasUniqueSeriesExternalIds() {
+        val catalog = productionCatalogParser.parse(
+            "catalogs/spider_man_volume_2_catalog.json")
+        val externalIdKeys =
+            catalog.series
+                .flatMap { series ->
+                    series.externalIds
+                }
+                .map { externalId ->
+                    "${externalId.source}:" +
+                            externalId.externalId
+                }
+
+        assertTrue(externalIdKeys.isNotEmpty())
+        assertEquals(externalIdKeys.size, externalIdKeys.distinct().size)
+    }
+
+    @Test
+    fun productionSpiderManCatalog_hasComicVineIdsForAllSeries() {
+        val catalog = productionCatalogParser.parse(
+            "catalogs/spider_man_volume_2_catalog.json")
+        val seriesWithoutComicVineId =
+            catalog.series.filter { series ->
+                series.externalIds.none { externalId ->
+                    externalId.source == "COMIC_VINE"
+                }
+            }
+        assertEquals(
+            emptyList<String>(),
+            seriesWithoutComicVineId.map { series -> series.title }
+        )
     }
 }

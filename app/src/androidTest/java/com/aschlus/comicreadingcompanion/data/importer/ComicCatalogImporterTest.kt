@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room3.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
 import com.aschlus.comicreadingcompanion.data.database.ComicDao
 import com.aschlus.comicreadingcompanion.data.database.ComicDatabase
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingProgress
@@ -77,7 +78,7 @@ class ComicCatalogImporterTest {
                             listOf(
                                 CatalogExternalIdImportDto(
                                     source = "COMIC_VINE",
-                                    externalId = "2127",
+                                    externalId = "78701",
                                     url = "https://example.com/series"
                                 )
                             ),
@@ -175,7 +176,7 @@ class ComicCatalogImporterTest {
             val seriesExternalId =
                 comicDao.getSeriesExternalId(
                     source = "COMIC_VINE",
-                    externalId = "2127"
+                    externalId = "78701"
                 )
 
             assertNotNull(seriesExternalId)
@@ -274,7 +275,7 @@ class ComicCatalogImporterTest {
 
             val seriesExternalId = comicDao.getSeriesExternalId(
                 source = "COMIC_VINE",
-                externalId = "2127"
+                externalId = "78701"
             )
             assertNotNull(seriesExternalId)
             assertEquals(seriesBefore.id, seriesExternalId?.seriesId)
@@ -347,7 +348,7 @@ class ComicCatalogImporterTest {
 
             val seriesExternalId = comicDao.getSeriesExternalId(
                 source = "COMIC_VINE",
-                externalId = "2127"
+                externalId = "78701"
             )
             assertNotNull(seriesExternalId)
 
@@ -381,5 +382,131 @@ class ComicCatalogImporterTest {
             assertEquals(1000L, progressAfter?.startedAt)
             assertEquals(2000L, progressAfter?.completedAt)
             assertEquals("Keep this progress", progressAfter?.notes)
+        }
+
+    @Test
+    fun productionCatalog_importsOverBundledReadingListWithoutDuplicates() =
+        runBlocking {
+            val context = InstrumentationRegistry.getInstrumentation().targetContext
+            val readingList = ReadingListAssetParser(context = context)
+                .parse("reading_lists/spider_man_volume_2.json")
+            val catalog = ComicCatalogAssetParser(context = context)
+                .parse("catalogs/spider_man_volume_2_catalog.json")
+            val readingListImporter =
+                ReadingListImporter(
+                    comicDao = comicDao,
+                    database = database
+                )
+
+            readingListImporter.import(readingList)
+
+            val publisher = comicDao.getPublisherByName("Marvel Comics")
+            assertNotNull(publisher)
+
+            val seriesBefore = comicDao.getSeriesForPublisher(publisher!!.id)
+            val issuesBefore = seriesBefore.flatMap { series ->
+                comicDao.getIssuesForSeries(series.id)
+            }
+            assertEquals(22, seriesBefore.size)
+            assertEquals(219, issuesBefore.size)
+
+            val seriesIdsBefore =
+                seriesBefore.map { series -> series.id }.toSet()
+            val issueIdsBefore =
+                issuesBefore.map { issue -> issue.id }.toSet()
+
+            importer.import(catalog)
+
+            val seriesAfter = comicDao.getSeriesForPublisher(publisher.id)
+            val issuesAfter = seriesAfter.flatMap { series ->
+                comicDao.getIssuesForSeries(series.id)
+            }
+            assertEquals(22, seriesAfter.size)
+            assertEquals(219, issuesAfter.size)
+            assertEquals(
+                seriesIdsBefore,
+                seriesAfter.map { issue -> issue.id }.toSet()
+            )
+            assertEquals(
+                issueIdsBefore,
+                issuesAfter.map { issue -> issue.id }.toSet()
+            )
+        }
+
+    @Test
+    fun productionCatalog_importsAllExternalIds() =
+        runBlocking {
+            val context = InstrumentationRegistry.getInstrumentation().targetContext
+            val readingList = ReadingListAssetParser(context = context)
+                .parse("reading_lists/spider_man_volume_2.json")
+            val catalog = ComicCatalogAssetParser(context = context)
+                .parse("catalogs/spider_man_volume_2_catalog.json")
+            val readingListImporter =
+                ReadingListImporter(
+                    comicDao = comicDao,
+                    database = database
+                )
+
+            readingListImporter.import(readingList)
+            importer.import(catalog)
+
+            val publisher = comicDao.getPublisherByName("Marvel Comics")
+            assertNotNull(publisher)
+
+            val series = comicDao.getSeriesForPublisher(publisher!!.id)
+            val issues = series.flatMap { storedSeries ->
+                comicDao.getIssuesForSeries(storedSeries.id)
+            }
+
+            val expectedSeriesExternalIds =
+                catalog.series
+                    .flatMap { seriesData ->
+                        seriesData.externalIds
+                    }
+                    .map { externalId ->
+                        "${externalId.source}:" +
+                                externalId.externalId
+                    }
+                    .toSet()
+
+            val actualSeriesExternalIds =
+                series
+                    .flatMap { storedSeries ->
+                        comicDao.getSeriesExternalIdsForSeries(storedSeries.id)
+                    }
+                    .map { externalId ->
+                        "${externalId.source}:" +
+                                externalId.externalId
+                    }
+                    .toSet()
+
+            assertEquals(expectedSeriesExternalIds, actualSeriesExternalIds)
+
+            val expectedIssueExternalIds =
+                catalog.series
+                    .flatMap { seriesData ->
+                        seriesData.issues
+                    }
+                    .flatMap { issueData ->
+                        issueData.externalIds
+                    }
+                    .map { externalId ->
+                        "${externalId.source}:" +
+                                externalId.externalId
+                    }
+                    .toSet()
+
+            val actualIssueExternalIds =
+                issues
+                    .flatMap { issue ->
+                        comicDao.getExternalIdsForIssue(issue.id)
+                    }
+                    .map { externalId ->
+                        "${externalId.source}:" +
+                                externalId.externalId
+                    }
+                    .toSet()
+
+            assertEquals(expectedIssueExternalIds, actualIssueExternalIds)
         }
 }

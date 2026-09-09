@@ -49,6 +49,32 @@ class ComicReadingCompanionApplication : Application() {
                     )
                 }
             }
+
+            val catalogAssets =
+                container.comicCatalogAssetParser
+                    .listCatalogAssets()
+
+            catalogAssets.forEach { assetPath ->
+
+                try {
+                    val importedCatalog =
+                        container.comicCatalogAssetParser.parse(
+                            assetPath
+                        )
+
+                    container.comicCatalogImporter.import(
+                        importedCatalog
+                    )
+                } catch (exception: Exception) {
+                    Log.e(
+                        "ComicCatalogImport",
+                        "Failed to import comic-catalog asset " +
+                        "'$assetPath': " +
+                        "${exception.message}",
+                        exception
+                    )
+                }
+            }
         }
     }
 }
