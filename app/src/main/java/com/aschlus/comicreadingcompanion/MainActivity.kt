@@ -18,6 +18,8 @@ import com.aschlus.comicreadingcompanion.ui.screen.PublisherDetailScreen
 import com.aschlus.comicreadingcompanion.ui.screen.ReadingListDetailScreen
 import com.aschlus.comicreadingcompanion.ui.screen.SeriesDetailScreen
 import com.aschlus.comicreadingcompanion.ui.theme.ComicReadingCompanionTheme
+import com.aschlus.comicreadingcompanion.ui.viewmodel.AddIssueToReadingListViewModel
+import com.aschlus.comicreadingcompanion.ui.viewmodel.AddIssueToReadingListViewModelFactory
 import com.aschlus.comicreadingcompanion.ui.viewmodel.BrowseViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.BrowseViewModelFactory
 import com.aschlus.comicreadingcompanion.ui.viewmodel.CreateReadingListViewModel
@@ -284,9 +286,24 @@ class MainActivity : ComponentActivity() {
                                         )
                                 )
 
+                        val addIssueToReadingListViewModel:
+                                AddIssueToReadingListViewModel =
+                            viewModel(
+                                factory =
+                                    AddIssueToReadingListViewModelFactory(
+                                        issueId = issueId,
+                                        repository =
+                                            (application as ComicReadingCompanionApplication)
+                                                .container
+                                                .comicRepository
+                                    )
+                            )
+
                         IssueDetailScreen(
                             issueId = issueId,
                             viewModel = issueDetailViewModel,
+                            addToReadingListViewModel =
+                                addIssueToReadingListViewModel,
                             onSeriesClick = {seriesId ->
                                 navController.navigate(
                                     "series/$seriesId"

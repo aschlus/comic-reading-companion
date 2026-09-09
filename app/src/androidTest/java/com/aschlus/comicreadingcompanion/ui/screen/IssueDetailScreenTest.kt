@@ -17,12 +17,10 @@ import com.aschlus.comicreadingcompanion.data.database.ComicDatabase
 import com.aschlus.comicreadingcompanion.data.database.entities.Issue
 import com.aschlus.comicreadingcompanion.data.database.entities.IssueType
 import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
-import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
-import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListItem
-import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSection
 import com.aschlus.comicreadingcompanion.data.database.entities.Series
 import com.aschlus.comicreadingcompanion.data.repository.ComicRepository
 import com.aschlus.comicreadingcompanion.ui.theme.ComicReadingCompanionTheme
+import com.aschlus.comicreadingcompanion.ui.viewmodel.AddIssueToReadingListViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.IssueDetailViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancelAndJoin
@@ -444,6 +442,163 @@ class IssueDetailScreenTest {
                             .size == 1
             }
             composeRule.onAllNodesWithText("Unread")[0].performScrollTo().assertIsDisplayed()
+        }
+    }
+
+    @Test
+    fun issueDetailScreen_addToReadingListButtonOpensSheet() {
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Amazing Spider-Man",
+                        volume = 2,
+                        startYear = 1999,
+                        endYear = 2003
+                    )
+                )
+
+            val issueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "30",
+                        title = "Coming Home",
+                        publicationDate = "2001-06",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            repository.createUserReadingList(
+                title = "My Spider-Man List",
+                description = null,
+                publisherId = publisherId,
+                universeId = null
+            )
+
+            val addViewModel =
+            AddIssueToReadingListViewModel(
+                issueId = issueId,
+                repository = repository
+            )
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    IssueDetailScreen(
+                        issueId = issueId,
+                        viewModel = viewModel,
+                        addToReadingListViewModel = addViewModel,
+                        onSeriesClick = {},
+                        onBackClick = {}
+                    )
+                }
+            }
+
+            composeRule.waitUntil(timeoutMillis = 5000L) {
+                composeRule.onAllNodesWithText("Add to Reading List")
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+            composeRule.onNodeWithText("Add to Reading List").performScrollTo().performClick()
+            composeRule.onNodeWithText("My Spider-Man List").assertIsDisplayed()
+            addViewModel
+                .viewModelScope
+                .coroutineContext[Job]
+                ?.cancelAndJoin()
+        }
+    }
+
+    @Test
+    fun issueDetailScreen_addsIssueToSelectedReadingList() {
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Amazing Spider-Man",
+                        volume = 2,
+                        startYear = 1999,
+                        endYear = 2003
+                    )
+                )
+
+            val issueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "30",
+                        title = "Coming Home",
+                        publicationDate = "2001-06",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "My List",
+                    description = null,
+                    publisherId = publisherId,
+                    universeId = null
+                )
+
+            val addViewModel =
+                AddIssueToReadingListViewModel(
+                    issueId = issueId,
+                    repository = repository
+                )
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    IssueDetailScreen(
+                        issueId = issueId,
+                        viewModel = viewModel,
+                        addToReadingListViewModel = addViewModel,
+                        onSeriesClick = {},
+                        onBackClick = {}
+                    )
+                }
+            }
+
+            composeRule.onNodeWithText("Add to Reading List").performScrollTo().performClick()
+            composeRule.waitUntil(timeoutMillis = 5000L) {
+                composeRule.onAllNodesWithText("My List")
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+            composeRule.onNodeWithText("My List").performClick()
+            composeRule.waitUntil(timeoutMillis = 5000L) {
+                runBlocking {
+                    comicDao.getItemsForReadingList(readingListId).size == 1
+                }
+            }
+            val items = comicDao.getItemsForReadingList(readingListId)
+            assertEquals(1, items.size)
+            assertEquals(issueId, items.first().issueId)
+            addViewModel
+                .viewModelScope
+                .coroutineContext[Job]
+                ?.cancelAndJoin()
         }
     }
 }

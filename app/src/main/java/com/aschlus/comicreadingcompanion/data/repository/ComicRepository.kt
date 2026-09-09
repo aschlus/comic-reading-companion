@@ -204,6 +204,100 @@ class ComicRepository(
 
     // Reading list items
 
+    suspend fun addIssueToUserReadingList(
+        readingListId: Long,
+        issueId: Long
+    ): Long {
+        var resultItemId: Long? = null
+
+        database.withWriteTransaction {
+            val readingList =
+                comicDao.getReadingListById(readingListId)
+                    ?: throw IllegalArgumentException(
+                        "Reading list " +
+                        "$readingListId does not exist"
+                    )
+
+            require(
+                readingList.source == ReadingListSource.USER
+            ) {
+                "Reading list $readingListId " +
+                "is not user-owned"
+            }
+
+            val issue = comicDao.getIssueById(issueId)
+                ?: throw IllegalArgumentException(
+                    "Issue $issueId does not exist"
+                )
+
+            val series = comicDao.getSeriesById(issue.seriesId)
+                ?: throw IllegalStateException(
+                    "Series ${issue.seriesId} does not exist"
+                )
+
+            require(
+                series.publisherId == readingList.publisherId
+            ) {
+                "Issue $issueId belongs to a " +
+                "different publisher"
+            }
+
+            if (readingList.universeId != null) {
+                require(
+                    issue.universeId == readingList.universeId
+                ) {
+                    "Issue $issueId belongs to a " +
+                    "different continuity"
+                }
+            }
+
+            val existingItem =
+                comicDao.getReadingListItem(
+                    readingListId = readingListId,
+                    issueId = issueId
+                )
+
+            if (existingItem != null) {
+                resultItemId = existingItem.id
+            } else {
+                val nextPosition =
+                    comicDao.getItemsForReadingList(readingListId)
+                        .maxOfOrNull { item ->
+                            item.position
+                        }
+                        ?.plus(1)
+                        ?: 1
+
+                val itemId =
+                    comicDao.insertReadingListItem(
+                        ReadingListItem(
+                            readingListId = readingListId,
+                            sectionId = null,
+                            issueId = issueId,
+                            position = nextPosition,
+                            required = true,
+                            notes = null
+                        )
+                    )
+
+                resultItemId = itemId
+
+                val updatedAt =
+                    maxOf(System.currentTimeMillis(), readingList.updatedAt + 1)
+
+                comicDao.updateReadingList(
+                    readingList.copy(
+                        updatedAt = updatedAt
+                    )
+                )
+            }
+        }
+
+        return checkNotNull(resultItemId) {
+            "Reading-list itemId was not set"
+        }
+    }
+
     suspend fun addReadingListItem(
         item: ReadingListItem
     ): Long {

@@ -10,9 +10,11 @@ import com.aschlus.comicreadingcompanion.data.database.entities.Issue
 import com.aschlus.comicreadingcompanion.data.database.entities.IssueType
 import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingProgress
+import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSource
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.database.entities.Series
+import com.aschlus.comicreadingcompanion.data.database.entities.Universe
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -443,5 +445,338 @@ class ComicRepositoryTest {
             assertTrue(readingList!!.createdAt >= before)
             assertTrue(readingList.createdAt <= after)
             assertEquals(readingList.createdAt, readingList.updatedAt)
+        }
+
+    @Test
+    fun addIssueToUserReadingList_appendsIssuesAndUpdatesReadingList() =
+        runBlocking {
+            val firstIssueId = createIssue(issueNumber = "1")
+            val secondIssueId = createIssue(issueNumber = "2")
+            val publisher = comicDao.getPublisherByName("Marvel")
+            assertNotNull(publisher)
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Custom List",
+                    description = null,
+                    publisherId = publisher!!.id,
+                    universeId = null
+                )
+
+            val readingListBefore = comicDao.getReadingListById(readingListId)
+            assertNotNull(readingListBefore)
+
+            val firstItemId =
+                repository.addIssueToUserReadingList(
+                    readingListId = readingListId,
+                    issueId = firstIssueId
+                )
+
+            val secondItemId =
+                repository.addIssueToUserReadingList(
+                    readingListId = readingListId,
+                    issueId = secondIssueId
+                )
+
+            val items = comicDao.getItemsForReadingList(readingListId)
+
+            assertEquals(2, items.size)
+            assertEquals(firstItemId, items[0].id)
+            assertEquals(firstIssueId, items[0].issueId)
+            assertEquals(1, items[0].position)
+            assertNull(items[0].sectionId)
+            assertTrue(items[0].required)
+            assertNull(items[0].notes)
+            assertEquals(secondItemId, items[1].id)
+            assertEquals(secondIssueId, items[1].issueId)
+            assertEquals(2, items[1].position)
+
+            val readingListAfter = comicDao.getReadingListById(readingListId)
+            assertNotNull(readingListAfter)
+            assertTrue(readingListAfter!!.updatedAt > readingListBefore!!.updatedAt)
+        }
+
+    @Test
+    fun addIssueToUserReadingList_existingIssueDoesNotCreateDuplicates() =
+        runBlocking {
+            val issueId = createIssue()
+            val publisher = comicDao.getPublisherByName("Marvel")
+            assertNotNull(publisher)
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Duplicate Test",
+                    description = null,
+                    publisherId = publisher!!.id,
+                    universeId = null
+                )
+
+            val firstItemId =
+                repository.addIssueToUserReadingList(
+                    readingListId = readingListId,
+                    issueId = issueId
+                )
+
+            val readingListAfterFirstAdd = comicDao.getReadingListById(readingListId)
+            val secondItemId =
+                repository.addIssueToUserReadingList(
+                    readingListId = readingListId,
+                    issueId = issueId
+                )
+            val items = comicDao.getItemsForReadingList(readingListId)
+            val readingListAfterSecondAdd = comicDao.getReadingListById(readingListId)
+
+            assertEquals(firstItemId, secondItemId)
+            assertEquals(1, items.size)
+            assertEquals(issueId, items.first().issueId)
+            assertEquals(
+                readingListAfterFirstAdd?.updatedAt,
+                readingListAfterSecondAdd?.updatedAt
+            )
+        }
+
+    @Test
+    fun addIssueToUserReadingList_rejectsBundledReadingList() =
+        runBlocking {
+            val issueId = createIssue()
+            val publisher = comicDao.getPublisherByName("Marvel")
+            assertNotNull(publisher)
+
+            val readingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title = "Bundled Test",
+                        description = null,
+                        publisherId = publisher!!.id,
+                        universeId = null,
+                        source = ReadingListSource.BUNDLED,
+                        sourceKey = "bundled-test",
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            var thrownException: IllegalArgumentException? = null
+
+            try {
+                repository.addIssueToUserReadingList(
+                    readingListId = readingListId,
+                    issueId = issueId
+                )
+            } catch (
+                exception: IllegalArgumentException
+            ) {
+                thrownException = exception
+            }
+
+            assertNotNull(thrownException)
+            assertEquals(
+                "Reading list $readingListId " +
+                "is not user-owned",
+                thrownException?.message
+            )
+
+            val items = comicDao.getItemsForReadingList(readingListId)
+            assertTrue(items.isEmpty())
+        }
+
+    @Test
+    fun addIssueToUserReadingList_rejectsMissingIssue() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Missing Issue Test",
+                    description = null,
+                    publisherId = publisherId,
+                    universeId = null
+                )
+
+            val missingIssueId = Long.MAX_VALUE
+
+            var thrownException: IllegalArgumentException? = null
+
+            try {
+                repository.addIssueToUserReadingList(
+                    readingListId = readingListId,
+                    issueId = missingIssueId
+                )
+            } catch (
+                exception: IllegalArgumentException
+            ) {
+                thrownException = exception
+            }
+
+            assertNotNull(thrownException)
+            assertEquals(
+                "Issue $missingIssueId does not exist",
+                thrownException?.message
+            )
+
+            val items = comicDao.getItemsForReadingList(readingListId)
+            assertTrue(items.isEmpty())
+        }
+
+    @Test
+    fun addIssueToUserReadingList_rejectsDifferentPublisher() =
+        runBlocking {
+            val marvelPublisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val dcPublisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "DC")
+                )
+
+            val dcSeriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = dcPublisherId,
+                        title = "Batman",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2000
+                    )
+                )
+
+            val dcIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = dcSeriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "Test Issue",
+                        publicationDate = "2000-01",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Marvel List",
+                    description = null,
+                    publisherId = marvelPublisherId,
+                    universeId = null
+                )
+
+            var thrownException: IllegalArgumentException? = null
+
+            try {
+                repository.addIssueToUserReadingList(
+                    readingListId = readingListId,
+                    issueId = dcIssueId
+                )
+            } catch (
+                exception: IllegalArgumentException
+            ) {
+                thrownException = exception
+            }
+
+            assertNotNull(
+                thrownException
+            )
+
+            assertEquals(
+                "Issue $dcIssueId belongs to a " +
+                        "different publisher",
+                thrownException?.message
+            )
+
+            assertTrue(comicDao.getItemsForReadingList(readingListId).isEmpty())
+        }
+
+    @Test
+    fun addIssueToUserReadingList_rejectsDifferentContinuity() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val earth616Id =
+                comicDao.insertUniverse(
+                    Universe(
+                        publisherId = publisherId,
+                        name = "Marvel Universe",
+                        designation = "Earth-616",
+                        description = null
+                    )
+                )
+
+            val earth1610Id =
+                comicDao.insertUniverse(
+                    Universe(
+                        publisherId = publisherId,
+                        name = "Ultimate Universe",
+                        designation = "Earth-1610",
+                        description = null
+                    )
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Ultimate Spider-Man",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2000
+                    )
+                )
+
+            val issueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = earth1610Id,
+                        issueNumber = "1",
+                        title = "Test Issue",
+                        publicationDate = "2000-01",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Earth-616 List",
+                    description = null,
+                    publisherId = publisherId,
+                    universeId = earth616Id
+                )
+
+            var thrownException:
+                    IllegalArgumentException? = null
+
+            try {
+                repository.addIssueToUserReadingList(
+                    readingListId = readingListId,
+                    issueId = issueId
+                )
+            } catch (
+                exception: IllegalArgumentException
+            ) {
+                thrownException = exception
+            }
+
+            assertNotNull(
+                thrownException
+            )
+
+            assertEquals(
+                "Issue $issueId belongs to a " +
+                        "different continuity",
+                thrownException?.message
+            )
+
+            assertTrue(comicDao.getItemsForReadingList(readingListId).isEmpty())
         }
 }

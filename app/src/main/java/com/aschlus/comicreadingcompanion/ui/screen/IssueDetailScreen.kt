@@ -26,10 +26,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
+import com.aschlus.comicreadingcompanion.ui.component.AddIssueToReadingListSheet
 import com.aschlus.comicreadingcompanion.ui.component.ComicCoverImage
+import com.aschlus.comicreadingcompanion.ui.viewmodel.AddIssueToReadingListViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.IssueDetailViewModel
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
@@ -40,10 +45,16 @@ import java.util.Locale
 fun IssueDetailScreen(
     issueId: Long,
     viewModel: IssueDetailViewModel,
+    addToReadingListViewModel:
+            AddIssueToReadingListViewModel? = null,
     onSeriesClick: (Long) -> Unit,
     onBackClick: () -> Unit
 ) {
     val issue by viewModel.issue.collectAsState()
+
+    var showAddToReadingListSheet by remember(issueId) {
+        mutableStateOf(false)
+    }
 
     LaunchedEffect(issueId) {
         viewModel.loadIssue(issueId)
@@ -261,6 +272,17 @@ fun IssueDetailScreen(
                     }
                 }
 
+                if (addToReadingListViewModel != null) {
+                    OutlinedButton(
+                        onClick = {
+                            showAddToReadingListSheet = true
+                        },
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text("Add to Reading List")
+                    }
+                }
+
                 currentIssue.description
                     ?.let { description ->
                         Text(
@@ -277,6 +299,18 @@ fun IssueDetailScreen(
                     }
             }
         }
+    }
+
+    if (
+        showAddToReadingListSheet &&
+        addToReadingListViewModel != null
+    ) {
+        AddIssueToReadingListSheet(
+            viewModel = addToReadingListViewModel,
+            onDismissRequest = {
+                showAddToReadingListSheet = false
+            }
+        )
     }
 }
 
