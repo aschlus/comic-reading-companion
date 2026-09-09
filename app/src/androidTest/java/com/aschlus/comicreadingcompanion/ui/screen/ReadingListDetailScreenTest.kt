@@ -26,6 +26,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListItem
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSection
+import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSource
 import com.aschlus.comicreadingcompanion.data.database.entities.Series
 import com.aschlus.comicreadingcompanion.data.repository.ComicRepository
 import com.aschlus.comicreadingcompanion.ui.theme.ComicReadingCompanionTheme
@@ -2083,6 +2084,169 @@ class ReadingListDetailScreenTest {
             }
             composeRule.onNodeWithText("Target Story").assertIsDisplayed()
             composeRule.onNodeWithContentDescription("Collapse section").assertIsDisplayed()
+        }
+    }
+
+    @Test
+    fun readingListDetailScreen_userListCanRemoveIssue() {
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Removal UI Series",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2000
+                    )
+                )
+
+            val issueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "Removal Issue",
+                        publicationDate = "2000-01",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val readingListId =
+                repository
+                    .createUserReadingList(
+                        title = "Removal UI List",
+                        description = null,
+                        publisherId = publisherId,
+                        universeId = null
+                    )
+
+            repository
+                .addIssueToUserReadingList(
+                    readingListId = readingListId,
+                    issueId = issueId
+                )
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    ReadingListDetailScreen(
+                        readingListId = readingListId,
+                        startPosition = -1,
+                        viewModel = viewModel,
+                        onIssueClick = {},
+                        onBackClick = {}
+                    )
+                }
+            }
+
+            composeRule.waitUntil(timeoutMillis = 5000L) {
+                composeRule.onAllNodesWithText("Removal UI Series #1")
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+            composeRule.onNodeWithContentDescription("More options").performClick()
+            composeRule.onNodeWithText("Remove from reading list").performClick()
+            composeRule.onNodeWithText("Remove issue?").assertIsDisplayed()
+            composeRule.onNodeWithText("Remove").performClick()
+            composeRule.waitUntil(timeoutMillis = 5000L) {
+                composeRule.onAllNodesWithText("No issues in this reading list")
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+            assertEquals(0, comicDao.getItemsForReadingList(readingListId).size)
+        }
+    }
+
+    @Test
+    fun readingListDetailScreen_bundledListDoesNotShowRemoveAction() {
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Bundled UI Series",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2000
+                    )
+                )
+
+            val issueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "Bundled Issue",
+                        publicationDate = "2000-01",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val readingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title = "Bundled UI List",
+                        description = null,
+                        publisherId = publisherId,
+                        universeId = null,
+                        source = ReadingListSource.BUNDLED,
+                        sourceKey = "bundled-removal-ui",
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            comicDao.insertReadingListItem(
+                ReadingListItem(
+                    readingListId = readingListId,
+                    sectionId = null,
+                    issueId = issueId,
+                    position = 1,
+                    required = true,
+                    notes = null
+                )
+            )
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    ReadingListDetailScreen(
+                        readingListId = readingListId,
+                        startPosition = -1,
+                        viewModel = viewModel,
+                        onIssueClick = {},
+                        onBackClick = {}
+                    )
+                }
+            }
+
+            composeRule.waitUntil(timeoutMillis = 5000L) {
+                composeRule.onAllNodesWithText("Bundled UI Series #1")
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+            composeRule.onNodeWithContentDescription("More options").performClick()
+            composeRule.onNodeWithText("Mark as reading").assertIsDisplayed()
+            composeRule.onNodeWithText("Remove from reading list").assertDoesNotExist()
         }
     }
 }

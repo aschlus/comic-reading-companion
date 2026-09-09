@@ -11,6 +11,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.IssueType
 import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingProgress
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
+import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListItem
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSource
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.database.entities.Series
@@ -778,5 +779,205 @@ class ComicRepositoryTest {
             )
 
             assertTrue(comicDao.getItemsForReadingList(readingListId).isEmpty())
+        }
+
+    @Test
+    fun removeIssuesFromUserReadingList_removesIssueAndCompactsPositions() =
+        runBlocking {
+            val firstIssueId = createIssue(issueNumber = "1")
+            val secondIssueId = createIssue(issueNumber = "2")
+            val thirdIssueId = createIssue(issueNumber = "3")
+            val publisher = comicDao.getPublisherByName("Marvel")
+            assertNotNull(publisher)
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Removal Test",
+                    description = null,
+                    publisherId = publisher!!.id,
+                    universeId = null
+                )
+
+            repository.addIssueToUserReadingList(
+                readingListId = readingListId,
+                issueId = firstIssueId
+            )
+
+            repository.addIssueToUserReadingList(
+                readingListId = readingListId,
+                issueId = secondIssueId
+            )
+
+            repository.addIssueToUserReadingList(
+                readingListId = readingListId,
+                issueId = thirdIssueId
+            )
+
+            val readingListBefore = comicDao.getReadingListById(readingListId)
+            assertNotNull(readingListBefore)
+
+            val wasRemoved =
+                repository
+                    .removeIssueFromUserReadingList(
+                        readingListId = readingListId,
+                        issueId = secondIssueId
+                    )
+
+            assertTrue(wasRemoved)
+
+            val items = comicDao.getItemsForReadingList(readingListId)
+
+            assertEquals(2, items.size)
+            assertEquals(firstIssueId, items[0].issueId)
+            assertEquals(1, items[0].position)
+            assertEquals(thirdIssueId, items[1].issueId)
+            assertEquals(2, items[1].position)
+            assertNotNull(comicDao.getIssueById(secondIssueId))
+
+            val readingListAfter = comicDao.getReadingListById(readingListId)
+
+            assertNotNull(readingListAfter)
+            assertTrue(readingListAfter!!.updatedAt > readingListBefore!!.updatedAt)
+        }
+
+    @Test
+    fun removeIssueFromUserReadingList_missingItemDoesNothing() =
+        runBlocking {
+            val firstIssueId = createIssue(issueNumber = "1")
+            val missingIssueId = createIssue(issueNumber = "2")
+            val publisher = comicDao.getPublisherByName("Marvel")
+            assertNotNull(publisher)
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "No-op Removal Test",
+                    description = null,
+                    publisherId = publisher!!.id,
+                    universeId = null
+                )
+
+            repository.addIssueToUserReadingList(
+                readingListId = readingListId,
+                issueId = firstIssueId
+            )
+
+            val readingListBefore = comicDao.getReadingListById(readingListId)
+            assertNotNull(readingListBefore)
+
+            val wasRemoved =
+                repository
+                    .removeIssueFromUserReadingList(
+                        readingListId =
+                            readingListId,
+                        issueId =
+                            missingIssueId
+                    )
+
+            assertEquals(false, wasRemoved)
+
+            val items = comicDao.getItemsForReadingList(readingListId)
+
+            assertEquals(1, items.size)
+            assertEquals(firstIssueId, items.first().issueId)
+            assertEquals(1, items.first().position)
+
+            val readingListAfter = comicDao.getReadingListById(readingListId)
+
+            assertEquals(
+                readingListBefore?.updatedAt,
+                readingListAfter?.updatedAt
+            )
+        }
+
+    @Test
+    fun removeIssueFromUserReadingList_rejectsBundledReadingList() =
+        runBlocking {
+            val issueId = createIssue()
+            val publisher = comicDao.getPublisherByName("Marvel")
+            assertNotNull(publisher)
+
+            val readingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title = "Bundled Removal Test",
+                        description = null,
+                        publisherId = publisher!!.id,
+                        universeId = null,
+                        source = ReadingListSource.BUNDLED,
+                        sourceKey = "bundled-removal-test",
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            comicDao.insertReadingListItem(
+                ReadingListItem(
+                    readingListId = readingListId,
+                    sectionId = null,
+                    issueId = issueId,
+                    position = 1,
+                    required = true,
+                    notes = null
+                )
+            )
+
+            var thrownException: IllegalArgumentException? = null
+
+            try {
+                repository
+                    .removeIssueFromUserReadingList(
+                        readingListId = readingListId,
+                        issueId = issueId
+                    )
+            } catch (
+                exception: IllegalArgumentException
+            ) {
+                thrownException = exception
+            }
+
+            assertNotNull(thrownException)
+            assertEquals(
+                "Reading list $readingListId " +
+                        "is not user-owned",
+                thrownException?.message
+            )
+
+            val items = comicDao.getItemsForReadingList(readingListId)
+
+            assertEquals(1, items.size)
+
+            assertEquals(issueId, items.first().issueId)
+
+            assertEquals(
+                1000L,
+                comicDao.getReadingListById(readingListId)?.updatedAt
+            )
+        }
+
+    @Test
+    fun removeIssueFromUserReadingList_rejectsMissingReadingList() =
+        runBlocking {
+            val issueId = createIssue()
+            val missingReadingListId = Long.MAX_VALUE
+            var thrownException: IllegalArgumentException? = null
+
+            try {
+                repository
+                    .removeIssueFromUserReadingList(
+                        readingListId = missingReadingListId,
+                        issueId = issueId
+                    )
+            } catch (
+                exception: IllegalArgumentException
+            ) {
+                thrownException = exception
+            }
+
+            assertNotNull(thrownException)
+            assertEquals(
+                "Reading list " +
+                        "$missingReadingListId does not exist",
+                thrownException?.message
+            )
+            assertNotNull(comicDao.getIssueById(issueId))
         }
 }

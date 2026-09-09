@@ -716,4 +716,125 @@ class ReadingListDetailViewModelTest {
                 viewModel.getReadCount()
             )
         }
+
+    @Test
+    fun removeIssue_removesIssueAndUpdatesLoadedList() =
+        runBlocking {
+            val publisherId = comicDao.insertPublisher(Publisher(name = "Marvel"))
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Remove Issue Test Series",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2000
+                    )
+                )
+            val issueIds =
+                (1..3).map { number ->
+                    comicDao.insertIssue(
+                        Issue(
+                            seriesId = seriesId,
+                            universeId = null,
+                            issueNumber = number.toString(),
+                            title = "Issue $number",
+                            publicationDate = "2000-0$number",
+                            coverUrl = null,
+                            description = null,
+                            issueType = IssueType.REGULAR
+                        )
+                    )
+                }
+            val readingListId =
+                repository
+                    .createUserReadingList(
+                        title = "Remove Issue Test List",
+                        description = null,
+                        publisherId = publisherId,
+                        universeId = null
+                    )
+            issueIds.forEach { issueId ->
+                repository
+                    .addIssueToUserReadingList(
+                        readingListId = readingListId,
+                        issueId = issueId
+                    )
+            }
+            viewModel.loadReadingList(readingListId)
+            val loadedIssues = withTimeout(5000L.milliseconds) {
+                    viewModel.issues.first { it.size == 3 }
+                }
+            val issueToRemove = loadedIssues.first { it.issueId == issueIds[1] }
+            viewModel.removeIssue(issueToRemove)
+            val updatedIssues = withTimeout(5000L.milliseconds) {
+                    viewModel.issues.first { it.size == 2 }
+                }
+            assertEquals(
+                listOf(issueIds[0], issueIds[2]),
+                updatedIssues.map { it.issueId }
+            )
+            assertEquals(
+                listOf(1, 2),
+                updatedIssues.map { it.position }
+            )
+        }
+
+    @Test
+    fun removeIssue_preservesGlobalReadingProgress() =
+        runBlocking {
+            val publisherId = comicDao.insertPublisher(Publisher(name = "Marvel"))
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Remove Progress Test Series",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2000
+                    )
+                )
+            val issueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "Read Issue",
+                        publicationDate = "2000-01",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+            val readingListId =
+                repository
+                    .createUserReadingList(
+                        title = "Remove Progress Test List",
+                        description = null,
+                        publisherId = publisherId,
+                        universeId = null
+                    )
+
+            repository.addIssueToUserReadingList(readingListId = readingListId, issueId = issueId)
+            repository.markIssueAsRead(issueId)
+            viewModel.loadReadingList(readingListId)
+
+            val loadedIssue = withTimeout(5000L.milliseconds) {
+                    viewModel.issues.first { it.size == 1 && it.first()
+                                    .readingStatus == ReadingStatus.READ
+                    }
+                }.first()
+
+            viewModel.removeIssue(loadedIssue)
+
+            withTimeout(5000L.milliseconds) {
+                viewModel.issues.first { it.isEmpty() }
+            }
+
+            val progress = repository.getReadingProgressForIssue(issueId)
+            assertNotNull(progress)
+            assertEquals(ReadingStatus.READ, progress?.status)
+            assertNotNull(comicDao.getIssueById(issueId))
+        }
 }

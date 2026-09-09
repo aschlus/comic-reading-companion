@@ -58,6 +58,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
+import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSource
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListIssue
 import com.aschlus.comicreadingcompanion.ui.component.ComicCoverImage
@@ -98,6 +99,11 @@ fun ReadingListDetailScreen(
 
     var showResetProgressDialog by remember {
         mutableStateOf(false)
+    }
+
+    var issuePendingRemoval by remember(
+        readingListId) {
+        mutableStateOf<ReadingListIssue?>(null)
     }
 
     var collapsedSectionIds by rememberSaveable(
@@ -689,7 +695,9 @@ fun ReadingListDetailScreen(
                                     viewModel.markAllBeforeAsRead(
                                         selectedIssue = issue
                                     )
-                                }
+                                },
+                                canRemove = readingList?.source == ReadingListSource.USER,
+                                onRemoveRequest = { issuePendingRemoval = issue }
                             )
                         }
                     }
@@ -937,6 +945,48 @@ fun ReadingListDetailScreen(
             }
         )
     }
+
+    issuePendingRemoval?.let { issue ->
+        AlertDialog(
+            onDismissRequest = {
+                issuePendingRemoval = null
+            },
+            title = {
+                Text("Remove issue?")
+            },
+            text = {
+                Text(
+                    "Remove " +
+                    "${issue.seriesTitle} " +
+                    "#${issue.issueNumber} " +
+                    "from this reading list? " +
+                    "The issue itself and its " +
+                    "reading status will not " +
+                    "be deleted."
+                )
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        issuePendingRemoval = null
+
+                        viewModel.removeIssue(issue)
+                    }
+                ) {
+                    Text("Remove")
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = {
+                        issuePendingRemoval = null
+                    }
+                ) {
+                    Text("Cancel")
+                }
+            }
+        )
+    }
 }
 
 @Composable
@@ -1010,7 +1060,9 @@ private fun ReadingListIssueRow(
     onIssueClick: () -> Unit,
     onToggleRead: () -> Unit,
     onMarkAsReading: () -> Unit,
-    onMarkAllBeforeRead: () -> Unit
+    onMarkAllBeforeRead: () -> Unit,
+    canRemove: Boolean,
+    onRemoveRequest: () -> Unit
 ) {
 
     var menuExpanded by remember {
@@ -1147,6 +1199,18 @@ private fun ReadingListIssueRow(
                         onClick = {
                             menuExpanded = false
                             onMarkAllBeforeRead()
+                        }
+                    )
+                }
+
+                if (canRemove) {
+                    DropdownMenuItem(
+                        text = {
+                            Text("Remove from reading list")
+                        },
+                        onClick = {
+                            menuExpanded = false
+                            onRemoveRequest()
                         }
                     )
                 }

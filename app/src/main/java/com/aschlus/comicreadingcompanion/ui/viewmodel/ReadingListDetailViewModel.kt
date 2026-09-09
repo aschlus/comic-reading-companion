@@ -70,6 +70,21 @@ class ReadingListDetailViewModel(
         }
     }
 
+    fun removeIssue(
+        issue: ReadingListIssue
+    ) {
+        val readingListId = _readingList.value?.id
+            ?: return
+
+        viewModelScope.launch {
+            repository
+                .removeIssueFromUserReadingList(
+                    readingListId = readingListId,
+                    issueId = issue.issueId
+                )
+        }
+    }
+
     fun markAllBeforeAsRead(
         selectedIssue: ReadingListIssue
     ) {

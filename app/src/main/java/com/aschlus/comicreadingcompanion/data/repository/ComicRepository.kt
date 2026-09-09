@@ -298,6 +298,68 @@ class ComicRepository(
         }
     }
 
+    suspend fun removeIssueFromUserReadingList(
+        readingListId: Long,
+        issueId: Long
+    ): Boolean {
+        var wasRemoved = false
+
+        database.withWriteTransaction {
+            val readingList =
+                comicDao.getReadingListById(readingListId)
+                    ?: throw IllegalArgumentException(
+                        "Reading list " +
+                        "$readingListId does not exist"
+                    )
+
+            require(
+                readingList.source == ReadingListSource.USER
+            ) {
+                "Reading list $readingListId " +
+                "is not user-owned"
+            }
+
+            val existingItem =
+                comicDao.getReadingListItem(
+                    readingListId = readingListId,
+                    issueId = issueId
+                )
+
+            if (existingItem != null) {
+                comicDao.deleteReadingListItem(existingItem)
+
+                val laterItems =
+                    comicDao.getItemsForReadingList(readingListId)
+                        .filter { item ->
+                            item.position > existingItem.position
+                        }
+                laterItems.forEach { item ->
+                    comicDao.updateReadingListItem(
+                        item.copy(
+                            position = item.position - 1
+                        )
+                    )
+                }
+
+                val updatedAt =
+                    maxOf(
+                        System.currentTimeMillis(),
+                        readingList.updatedAt + 1
+                    )
+
+                comicDao.updateReadingList(
+                    readingList.copy(
+                        updatedAt = updatedAt
+                    )
+                )
+
+                wasRemoved = true
+            }
+        }
+
+        return wasRemoved
+    }
+
     suspend fun addReadingListItem(
         item: ReadingListItem
     ): Long {
