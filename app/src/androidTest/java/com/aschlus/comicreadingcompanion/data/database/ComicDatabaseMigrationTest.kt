@@ -737,6 +737,343 @@ class ComicDatabaseMigrationTest {
         }
     }
 
+    @Test
+    fun migration2To3_addsSeriesExternalIdsAndPreservesExistingData() {
+        runBlocking {
+            val connection = migrationHelper.createDatabase(2)
+
+            connection.execSQL(
+                """
+                INSERT INTO publishers (
+                    id,
+                    name
+                )
+                VALUES (
+                    1,
+                    'Marvel Comics'
+                )
+                """.trimIndent()
+            )
+
+            connection.execSQL(
+                """
+                INSERT INTO series (
+                    id,
+                    publisherId,
+                    title,
+                    volume,
+                    startYear,
+                    endYear
+                )
+                VALUES (
+                    1,
+                    1,
+                    'Amazing Spider-Man',
+                    2,
+                    1999,
+                    2003
+                )
+                """.trimIndent()
+            )
+
+            connection.close()
+
+            val migrated =
+                migrationHelper
+                    .runMigrationsAndValidate(
+                        version = 3,
+                        migrations = listOf(
+                            MIGRATION_2_3
+                        )
+                    )
+
+            assertEquals(
+                1L,
+                queryCount(
+                    migrated,
+                    """
+                    SELECT COUNT(*)
+                    FROM publishers
+                    """.trimIndent()
+                )
+            )
+
+            assertEquals(
+                1L,
+                queryCount(
+                    migrated,
+                    """
+                    SELECT COUNT(*)
+                    FROM series
+                    """.trimIndent()
+                )
+            )
+
+            migrated.execSQL(
+                """
+                INSERT INTO series_external_ids (
+                    seriesId,
+                    source,
+                    externalId,
+                    url
+                )
+                VALUES (
+                    1,
+                    'COMIC_VINE',
+                    '2127',
+                    'https://example.com/series'
+                )
+                """.trimIndent()
+            )
+
+            assertEquals(
+                1L,
+                queryCount(
+                    migrated,
+                    """
+                    SELECT COUNT(*)
+                    FROM series_external_ids
+                    WHERE seriesId = 1
+                        AND source = 'COMIC_VINE'
+                        AND externalId = '2127'
+                    """.trimIndent()
+                )
+            )
+
+            migrated.close()
+        }
+    }
+
+    @Test
+    fun version3_enforcesUniqueSeriesExternalIds() {
+        runBlocking {
+            val database = migrationHelper.createDatabase(3)
+
+            database.execSQL(
+                """
+                INSERT INTO publishers (
+                    id,
+                    name
+                )
+                VALUES (
+                    1,
+                    'Marvel Comics'
+                )
+                """.trimIndent()
+            )
+
+            database.execSQL(
+                """
+                INSERT INTO series (
+                    id,
+                    publisherId,
+                    title,
+                    volume,
+                    startYear,
+                    endYear
+                )
+                VALUES (
+                    1,
+                    1,
+                    'Amazing Spider-Man',
+                    2,
+                    1999,
+                    2003
+                )
+                """.trimIndent()
+            )
+
+            database.execSQL(
+                """
+                INSERT INTO series (
+                    id,
+                    publisherId,
+                    title,
+                    volume,
+                    startYear,
+                    endYear
+                )
+                VALUES (
+                    2,
+                    1,
+                    'Peter Parker: Spider-Man',
+                    2,
+                    1999,
+                    2003
+                )
+                """.trimIndent()
+            )
+
+            database.execSQL(
+                """
+                INSERT INTO series_external_ids (
+                    seriesId,
+                    source,
+                    externalId,
+                    url
+                )
+                VALUES (
+                    1,
+                    'COMIC_VINE',
+                    '2127',
+                    NULL
+                )
+                """.trimIndent()
+            )
+
+            database.execSQL(
+                """
+                INSERT OR IGNORE INTO
+                series_external_ids (
+                    seriesId,
+                    source,
+                    externalId,
+                    url
+                )
+                VALUES (
+                    2,
+                    'COMIC_VINE',
+                    '2127',
+                    NULL
+                )
+                """.trimIndent()
+            )
+
+            assertEquals(
+                1L,
+                queryCount(
+                    database,
+                    """
+                    SELECT COUNT(*)
+                    FROM series_external_ids
+                    WHERE source = 'COMIC_VINE'
+                        AND externalId = '2127'
+                    """.trimIndent())
+            )
+
+            assertEquals(
+                1L,
+                queryCount(
+                    database,
+                    """
+                    SELECT COUNT(*)
+                    FROM series_external_ids
+                    WHERE seriesId = 1
+                    """.trimIndent()
+                )
+            )
+
+            assertEquals(
+                0L,
+                queryCount(
+                    database,
+                    """
+                    SELECT COUNT(*)
+                    FROM series_external_ids
+                    WHERE seriesId = 2
+                    """.trimIndent()
+                )
+            )
+
+            database.close()
+        }
+    }
+
+    @Test
+    fun version3_deletingSeriesCascadesSeriesExternalIds() {
+        runBlocking {
+            val database = migrationHelper.createDatabase(3)
+
+            database.execSQL(
+                "PRAGMA foreign_keys = ON"
+            )
+
+            database.execSQL(
+                """
+                INSERT INTO publishers (
+                    id,
+                    name
+                )
+                VALUES (
+                    1,
+                    'Marvel Comics'
+                )
+                """.trimIndent()
+            )
+
+            database.execSQL(
+                """
+                INSERT INTO series (
+                    id,
+                    publisherId,
+                    title,
+                    volume,
+                    startYear,
+                    endYear
+                )
+                VALUES (
+                    1,
+                    1,
+                    'Amazing Spider-Man',
+                    2,
+                    1999,
+                    2003
+                )
+                """.trimIndent()
+            )
+
+            database.execSQL(
+                """
+                INSERT INTO series_external_ids (
+                    seriesId,
+                    source,
+                    externalId,
+                    url
+                )
+                VALUES (
+                    1,
+                    'COMIC_VINE',
+                    '2127',
+                    NULL
+                )
+                """.trimIndent()
+            )
+
+            assertEquals(
+                1L,
+                queryCount(
+                    database,
+                    """
+                    SELECT COUNT(*)
+                    FROM series_external_ids
+                    WHERE seriesId = 1
+                    """.trimIndent()
+                )
+            )
+
+            database.execSQL(
+                """
+                DELETE FROM series
+                WHERE id = 1
+                """.trimIndent()
+            )
+
+            assertEquals(
+                0L,
+                queryCount(
+                    database,
+                    """
+                    SELECT COUNT(*)
+                    FROM series_external_ids
+                    WHERE seriesId = 1
+                    """.trimIndent()
+                )
+            )
+
+            database.close()
+        }
+    }
+
     private fun insertVersion1Fixture(
         connection: SQLiteConnection
     ) {

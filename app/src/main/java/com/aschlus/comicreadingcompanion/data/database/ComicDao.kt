@@ -10,6 +10,7 @@ import androidx.room3.Upsert
 import com.aschlus.comicreadingcompanion.data.database.entities.Issue
 import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
 import com.aschlus.comicreadingcompanion.data.database.entities.Series
+import com.aschlus.comicreadingcompanion.data.database.entities.SeriesExternalId
 import com.aschlus.comicreadingcompanion.data.database.entities.Universe
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListItem
@@ -217,6 +218,48 @@ interface ComicDao {
     fun searchSeries(
         query: String
     ): Flow<List<SeriesSearchResult>>
+
+    @Query("""
+        SELECT * FROM series
+        WHERE id = :seriesId
+        LIMIT 1
+    """)
+    suspend fun getSeriesById(
+        seriesId: Long
+    ): Series?
+
+
+    // Series external IDs
+
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    suspend fun insertSeriesExternalId(
+        externalId: SeriesExternalId
+    ): Long
+
+    @Query("""
+        SELECT * FROM series_external_ids
+        WHERE seriesId = :seriesId
+        ORDER BY source ASC
+    """)
+    suspend fun getSeriesExternalIdsForSeries(
+        seriesId: Long
+    ): List<SeriesExternalId>
+
+    @Query("""
+        SELECT * FROM series_external_ids
+        WHERE source = :source
+            AND externalId = :externalId
+        LIMIT 1
+    """)
+    suspend fun getSeriesExternalId(
+        source: String,
+        externalId: String
+    ): SeriesExternalId?
+
+    @Update
+    suspend fun updateSeriesExternalId(
+        externalId: SeriesExternalId
+    )
 
 
     // Issues

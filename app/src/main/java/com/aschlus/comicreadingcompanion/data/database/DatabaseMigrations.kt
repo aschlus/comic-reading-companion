@@ -85,3 +85,50 @@ val MIGRATION_1_2 =
             )
         }
     }
+
+val MIGRATION_2_3 =
+    object: Migration(
+        startVersion = 2,
+        endVersion = 3
+    ) {
+        override suspend fun migrate(
+            connection: SQLiteConnection
+        ) {
+            connection.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS
+                series_external_ids (
+                    id INTEGER PRIMARY KEY
+                        AUTOINCREMENT NOT NULL,
+                    seriesId INTEGER NOT NULL,
+                    source TEXT NOT NULL,
+                    externalId TEXT NOT NULL,
+                    url TEXT,
+                    FOREIGN KEY(seriesId)
+                        REFERENCES series(id)
+                        ON UPDATE NO ACTION
+                        ON DELETE CASCADE
+                )
+                """.trimIndent()
+            )
+
+            connection.execSQL(
+                """
+                CREATE INDEX IF NOT EXISTS
+                index_series_external_ids_seriesId
+                ON series_external_ids(seriesId)
+                """.trimIndent()
+            )
+
+            connection.execSQL(
+                """
+                CREATE UNIQUE INDEX IF NOT EXISTS
+                index_series_external_ids_source_externalId
+                ON series_external_ids(
+                    source,
+                    externalId
+                )
+                """.trimIndent()
+            )
+        }
+    }

@@ -14,6 +14,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSecti
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingProgress
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.database.entities.Series
+import com.aschlus.comicreadingcompanion.data.database.entities.SeriesExternalId
 import com.aschlus.comicreadingcompanion.data.database.entities.Universe
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -2186,4 +2187,45 @@ class ComicDaoTest {
             assertEquals(ReadingStatus.READING, detail.readingStatus)
         }
 
+    @Test
+    fun getSeriesExternalIds_returnsMatchingSourceAndExternalId() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Amazing Spider-Man",
+                        volume = 2,
+                        startYear = 1999,
+                        endYear = 2003
+                    )
+                )
+
+            val externalIdId =
+                comicDao.insertSeriesExternalId(
+                    SeriesExternalId(
+                        seriesId = seriesId,
+                        source = "COMIC_VINE",
+                        externalId = "2127",
+                        url = "https://example.com/series"
+                    )
+                )
+
+            val externalId =
+                comicDao.getSeriesExternalId(
+                    source = "COMIC_VINE",
+                    externalId = "2127"
+                )
+
+            assertNotNull(externalId)
+            assertEquals(externalIdId, externalId?.id)
+            assertEquals(seriesId, externalId?.seriesId)
+            assertEquals("COMIC_VINE", externalId?.source)
+            assertEquals("2127", externalId?.externalId)
+        }
 }
