@@ -694,6 +694,94 @@ class ReadingListImporterTest {
             )
         }
 
+    @Test
+    fun reimportWithoutMiddleIssue_compactsPositionsWithoutConstraintFailure() =
+        runBlocking {
+            val baseImport = createValidImportData()
+            val firstItem = baseImport.items.first()
+
+            val secondItem =
+                firstItem.copy(
+                    position = 2,
+                    issue = firstItem.issue.copy(
+                        number = "2",
+                        title = "Second Test Issue",
+                        publicationDate = "2000-02"
+                    )
+                )
+
+            val thirdItem =
+                firstItem.copy(
+                    position = 3,
+                    issue = firstItem.issue.copy(
+                        number = "3",
+                        title = "Third Test Issue",
+                        publicationDate = "2000-03"
+                    )
+                )
+
+            importer.import(
+                baseImport.copy(
+                    items = listOf(firstItem, secondItem, thirdItem)
+                )
+            )
+
+            importer.import(
+                baseImport.copy(
+                    items = listOf(firstItem, thirdItem.copy(position = 2))
+                )
+            )
+
+            val readingList = database.comicDao().getAllReadingLists().first().first()
+            val items = database.comicDao().getItemsForReadingList(readingList.id)
+
+            assertEquals(2, items.size)
+            assertEquals(
+                listOf(1, 2),
+                items.map { item -> item.position }
+            )
+        }
+
+    @Test
+    fun reimportReadingList_reordersExistingItemsWithoutConstraintFailure() =
+        runBlocking {
+            val baseImport = createValidImportData()
+            val firstItem = baseImport.items.first()
+
+            val secondItem =
+                firstItem.copy(
+                    position = 2,
+                    issue = firstItem.issue.copy(
+                        number = "2",
+                        title = "Second Test Issue",
+                        publicationDate = "2000-02"
+                    )
+                )
+
+            importer.import(
+                baseImport.copy(
+                    items = listOf(firstItem, secondItem)
+                )
+            )
+
+            importer.import(
+                baseImport.copy(
+                    items = listOf(secondItem.copy(position = 1), firstItem.copy(position = 2))
+                )
+            )
+
+            val readingList = database.comicDao().getAllReadingLists().first().first()
+            val items = database.comicDao().getItemsForReadingList(readingList.id)
+            val issueNumbers =
+                items.map { item ->
+                    database.comicDao().getIssueById(item.issueId)?.issueNumber
+                }
+
+            assertEquals(
+                listOf("2", "1"),
+                issueNumbers
+            )
+        }
 
     //Write tests above
 

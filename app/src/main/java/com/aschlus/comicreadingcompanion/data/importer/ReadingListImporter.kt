@@ -715,6 +715,19 @@ class ReadingListImporter(
         val importedIssueIds =
             mutableSetOf<Long>()
 
+        val existingItemsBeforeImport =
+            comicDao.getItemsForReadingList(
+                readingListId = readingList.id
+            )
+
+        existingItemsBeforeImport.forEachIndexed { index, existingItem ->
+            comicDao.updateReadingListItem(
+                existingItem.copy(
+                    position = -(index + 1)
+                )
+            )
+        }
+
         importData.items.forEach { itemData ->
 
             val series =
@@ -783,12 +796,12 @@ class ReadingListImporter(
             }
         }
 
-        val existingItems =
+        val existingItemsAfterImport =
             comicDao.getItemsForReadingList(
                 readingListId = readingList.id
             )
 
-        existingItems
+        existingItemsAfterImport
             .filter { existingItem ->
                 existingItem.issueId !in importedIssueIds
             }
