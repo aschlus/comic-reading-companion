@@ -122,7 +122,7 @@ class ComicCatalogAssetParserTest {
                 }
                 .sorted()
 
-        assertEquals(219, readingList.items.size)
+        assertEquals(213, readingList.items.size)
         assertTrue(catalogIssues.size >= readingList.items.size)
         assertTrue(catalogIssueIds.containsAll(readingListIssueIds))
     }

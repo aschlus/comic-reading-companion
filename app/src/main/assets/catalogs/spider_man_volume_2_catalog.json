@@ -5,6 +5,11 @@
       "name": "Marvel Universe",
       "designation": "Earth-616",
       "description": null
+    },
+    {
+      "name": "Spider-Man Unlimited Universe",
+      "designation": "Earth-7831",
+      "description": null
     }
   ],
   "series": [
@@ -1189,7 +1194,7 @@
       "issues": [
         {
           "number": "1",
-          "title": null,
+          "title": "Power Without Responsibility!; Memories",
           "publicationDate": "1999-01",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51585-9142-68478-1-peter-parker-spider.jpg",
           "description": null,
@@ -1205,7 +1210,7 @@
         },
         {
           "number": "2",
-          "title": null,
+          "title": "Plaything Of The Gods",
           "publicationDate": "1999-02",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51587-9142-68479-1-peter-parker-spider.jpg",
           "description": null,
@@ -1221,7 +1226,7 @@
         },
         {
           "number": "3",
-          "title": null,
+          "title": "Eyewitness",
           "publicationDate": "1999-03",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51589-9142-68480-1-peter-parker-spider.jpg",
           "description": null,
@@ -1237,7 +1242,7 @@
         },
         {
           "number": "4",
-          "title": null,
+          "title": "Beneath It All",
           "publicationDate": "1999-04",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51592-9142-68481-1-peter-parker-spider.jpg",
           "description": null,
@@ -1253,7 +1258,7 @@
         },
         {
           "number": "5",
-          "title": null,
+          "title": "The Trouble With Girls",
           "publicationDate": "1999-05",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51591-9142-68482-1-peter-parker-spider.jpg",
           "description": null,
@@ -1269,7 +1274,7 @@
         },
         {
           "number": "6",
-          "title": null,
+          "title": "The Whys Have It!",
           "publicationDate": "1999-06",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51594-9142-68483-1-peter-parker-spider.jpg",
           "description": null,
@@ -1285,7 +1290,7 @@
         },
         {
           "number": "7",
-          "title": null,
+          "title": "Creatures of the Night",
           "publicationDate": "1999-07",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51596-9142-68484-1-peter-parker-spider.jpg",
           "description": null,
@@ -1301,7 +1306,7 @@
         },
         {
           "number": "8",
-          "title": null,
+          "title": "Blood Feud",
           "publicationDate": "1999-08",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51598-9142-68485-1-peter-parker-spider.jpg",
           "description": null,
@@ -1317,7 +1322,7 @@
         },
         {
           "number": "9",
-          "title": null,
+          "title": "Shadows of the Past",
           "publicationDate": "1999-09",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51600-9142-68486-1-peter-parker-spider.jpg",
           "description": null,
@@ -1333,7 +1338,7 @@
         },
         {
           "number": "10",
-          "title": null,
+          "title": "Venom Triumphant!",
           "publicationDate": "1999-10",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51602-9142-68487-1-peter-parker-spider.jpg",
           "description": null,
@@ -1349,7 +1354,7 @@
         },
         {
           "number": "11",
-          "title": null,
+          "title": "An Exemplary Day!",
           "publicationDate": "1999-11",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51604-9142-68488-1-peter-parker-spider.jpg",
           "description": null,
@@ -1365,7 +1370,7 @@
         },
         {
           "number": "12",
-          "title": null,
+          "title": "Another Return of the Sinister Six/Each Day a Grain of Sand Through Life's Hourglass",
           "publicationDate": "1999-12",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51606-9142-68489-1-peter-parker-spider.jpg",
           "description": null,
@@ -1381,7 +1386,7 @@
         },
         {
           "number": "13",
-          "title": null,
+          "title": "Living in Oblivion!",
           "publicationDate": "2000-01",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51608-9142-68490-1-peter-parker-spider.jpg",
           "description": null,
@@ -1397,7 +1402,7 @@
         },
         {
           "number": "14",
-          "title": null,
+          "title": "Denial",
           "publicationDate": "2000-02",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51610-9142-68491-1-peter-parker-spider.jpg",
           "description": null,
@@ -1413,7 +1418,7 @@
         },
         {
           "number": "15",
-          "title": null,
+          "title": "Bring Me The Head Of Spider-Man!",
           "publicationDate": "2000-03",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51612-9142-68492-1-peter-parker-spider.jpg",
           "description": null,
@@ -1429,7 +1434,7 @@
         },
         {
           "number": "16",
-          "title": null,
+          "title": "Venom VS Sandman",
           "publicationDate": "2000-04",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51614-9142-68493-1-peter-parker-spider.jpg",
           "description": null,
@@ -1445,7 +1450,7 @@
         },
         {
           "number": "17",
-          "title": null,
+          "title": "Night of the Hunters",
           "publicationDate": "2000-05",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51616-9142-68494-1-peter-parker-spider.jpg",
           "description": null,
@@ -1461,7 +1466,7 @@
         },
         {
           "number": "18",
-          "title": null,
+          "title": "The Curse of Spider-Man?",
           "publicationDate": "2000-06",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51618-9142-68495-1-peter-parker-spider.jpg",
           "description": null,
@@ -1477,7 +1482,7 @@
         },
         {
           "number": "19",
-          "title": null,
+          "title": "The Box",
           "publicationDate": "2000-07",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51620-9142-68496-1-peter-parker-spider.jpg",
           "description": null,
@@ -1493,7 +1498,7 @@
         },
         {
           "number": "20",
-          "title": null,
+          "title": "The Best Medicine",
           "publicationDate": "2000-08",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51622-9142-68497-1-peter-parker-spider.jpg",
           "description": null,
@@ -1509,7 +1514,7 @@
         },
         {
           "number": "21",
-          "title": null,
+          "title": "A Day in the Life",
           "publicationDate": "2000-09",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51624-9142-68498-1-peter-parker-spider.jpg",
           "description": null,
@@ -1525,7 +1530,7 @@
         },
         {
           "number": "22",
-          "title": null,
+          "title": "Days of Our Lives",
           "publicationDate": "2000-10",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51626-9142-68499-1-peter-parker-spider.jpg",
           "description": null,
@@ -1541,7 +1546,7 @@
         },
         {
           "number": "23",
-          "title": null,
+          "title": "Read 'em and Weep",
           "publicationDate": "2000-11",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51628-9142-68500-1-peter-parker-spider.jpg",
           "description": null,
@@ -1557,7 +1562,7 @@
         },
         {
           "number": "24",
-          "title": null,
+          "title": "Warning Signs",
           "publicationDate": "2000-12",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51630-9142-68501-1-peter-parker-spider.jpg",
           "description": null,
@@ -1573,7 +1578,7 @@
         },
         {
           "number": "25",
-          "title": null,
+          "title": "Trick of the Light",
           "publicationDate": "2001-01",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51632-9142-68502-1-peter-parker-spider.jpg",
           "description": null,
@@ -1589,7 +1594,7 @@
         },
         {
           "number": "26",
-          "title": null,
+          "title": "Police Story",
           "publicationDate": "2001-02",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51634-9142-68503-1-peter-parker-spider.jpg",
           "description": null,
@@ -1605,7 +1610,7 @@
         },
         {
           "number": "27",
-          "title": null,
+          "title": "Getting Ahead",
           "publicationDate": "2001-03",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51636-9142-68504-1-peter-parker-spider.jpg",
           "description": null,
@@ -1621,7 +1626,7 @@
         },
         {
           "number": "28",
-          "title": null,
+          "title": "Field of Dream",
           "publicationDate": "2001-04",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51638-9142-68505-1-peter-parker-spider.jpg",
           "description": null,
@@ -1637,7 +1642,7 @@
         },
         {
           "number": "29",
-          "title": null,
+          "title": "Destinations",
           "publicationDate": "2001-05",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51640-9142-68506-1-peter-parker-spider.jpg",
           "description": null,
@@ -1653,7 +1658,7 @@
         },
         {
           "number": "30",
-          "title": null,
+          "title": "Three Hundred",
           "publicationDate": "2001-06",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51642-9142-68507-1-peter-parker-spider.jpg",
           "description": null,
@@ -1669,7 +1674,7 @@
         },
         {
           "number": "31",
-          "title": null,
+          "title": "One Small Break",
           "publicationDate": "2001-07",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51644-9142-68508-1-peter-parker-spider.jpg",
           "description": null,
@@ -1685,7 +1690,7 @@
         },
         {
           "number": "32",
-          "title": null,
+          "title": "Never Forever",
           "publicationDate": "2001-08",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51646-9142-68509-1-peter-parker-spider.jpg",
           "description": null,
@@ -1701,7 +1706,7 @@
         },
         {
           "number": "33",
-          "title": null,
+          "title": "Maybe Next Year",
           "publicationDate": "2001-09",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51648-9142-68510-1-peter-parker-spider.jpg",
           "description": null,
@@ -1717,7 +1722,7 @@
         },
         {
           "number": "34",
-          "title": null,
+          "title": "If Thine Eyes Offend Thee...",
           "publicationDate": "2001-10",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51650-9142-68511-1-peter-parker-spider.jpg",
           "description": null,
@@ -1733,7 +1738,7 @@
         },
         {
           "number": "35",
-          "title": null,
+          "title": "Heroes Don't Cry",
           "publicationDate": "2001-11",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51652-9142-68512-1-peter-parker-spider.jpg",
           "description": null,
@@ -1749,7 +1754,7 @@
         },
         {
           "number": "36",
-          "title": null,
+          "title": "The Big Score",
           "publicationDate": "2001-12",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51654-9142-68513-1-peter-parker-spider.jpg",
           "description": null,
@@ -1765,7 +1770,7 @@
         },
         {
           "number": "37",
-          "title": null,
+          "title": "Snow Day",
           "publicationDate": "2002-01",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51656-9142-68514-1-peter-parker-spider.jpg",
           "description": null,
@@ -1781,7 +1786,7 @@
         },
         {
           "number": "38",
-          "title": null,
+          "title": "Make Mime Marvel!",
           "publicationDate": "2002-02",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51658-9142-68515-1-peter-parker-spider.jpg",
           "description": null,
@@ -1797,7 +1802,7 @@
         },
         {
           "number": "39",
-          "title": null,
+          "title": "Operation: Octopus",
           "publicationDate": "2002-03",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51661-9142-68516-1-peter-parker-spider.jpg",
           "description": null,
@@ -1813,7 +1818,7 @@
         },
         {
           "number": "40",
-          "title": null,
+          "title": "Codename: John Hancock",
           "publicationDate": "2002-04",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51660-9142-68517-1-peter-parker-spider.jpg",
           "description": null,
@@ -1829,7 +1834,7 @@
         },
         {
           "number": "41",
-          "title": null,
+          "title": "Mission: Uncomfortable",
           "publicationDate": "2002-05",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51663-9142-68518-1-peter-parker-spider.jpg",
           "description": null,
@@ -1845,7 +1850,7 @@
         },
         {
           "number": "42",
-          "title": null,
+          "title": "Fifteen Minutes of Shame Part 1",
           "publicationDate": "2002-06",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51665-9142-68519-1-peter-parker-spider.jpg",
           "description": null,
@@ -1861,8 +1866,8 @@
         },
         {
           "number": "43",
-          "title": null,
-          "publicationDate": "2002-07",
+          "title": "Fifteen Minutes of Shame Part 2",
+          "publicationDate": "2002-06",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/51667-9142-68520-1-peter-parker-spider.jpg",
           "description": null,
           "type": "REGULAR",
@@ -1877,8 +1882,8 @@
         },
         {
           "number": "44",
-          "title": null,
-          "publicationDate": "2002-08",
+          "title": "A Death in the Family Part 1",
+          "publicationDate": "2002-07",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/74997-9142-80609-1-peter-parker-spider.jpg",
           "description": null,
           "type": "REGULAR",
@@ -1893,8 +1898,8 @@
         },
         {
           "number": "45",
-          "title": null,
-          "publicationDate": "2002-09",
+          "title": "A Death in the Family Part 2",
+          "publicationDate": "2002-08",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/74998-9142-80610-1-peter-parker-spider.jpg",
           "description": null,
           "type": "REGULAR",
@@ -1909,8 +1914,8 @@
         },
         {
           "number": "46",
-          "title": null,
-          "publicationDate": "2002-10",
+          "title": "A Death in the Family Part 3",
+          "publicationDate": "2002-09",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/173875-9142-113657-1-peter-parker-spider.jpg",
           "description": null,
           "type": "REGULAR",
@@ -1925,8 +1930,8 @@
         },
         {
           "number": "47",
-          "title": null,
-          "publicationDate": "2002-11",
+          "title": "A Death in the Family Part 4",
+          "publicationDate": "2002-10",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/173876-9142-113658-1-peter-parker-spider.jpg",
           "description": null,
           "type": "REGULAR",
@@ -1941,8 +1946,8 @@
         },
         {
           "number": "48",
-          "title": null,
-          "publicationDate": "2002-12",
+          "title": "The Big Question",
+          "publicationDate": "2002-11",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/173877-9142-113659-1-peter-parker-spider.jpg",
           "description": null,
           "type": "REGULAR",
@@ -1957,8 +1962,8 @@
         },
         {
           "number": "49",
-          "title": null,
-          "publicationDate": "2003-01",
+          "title": "The Big Answer",
+          "publicationDate": "2002-12",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/173878-9142-113660-1-peter-parker-spider.jpg",
           "description": null,
           "type": "REGULAR",
@@ -1973,8 +1978,8 @@
         },
         {
           "number": "50",
-          "title": null,
-          "publicationDate": "2003-02",
+          "title": "And Here My Troubles Begin...",
+          "publicationDate": "2003-01",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/173879-9142-113661-1-peter-parker-spider.jpg",
           "description": null,
           "type": "REGULAR",
@@ -1989,8 +1994,8 @@
         },
         {
           "number": "51",
-          "title": null,
-          "publicationDate": "2003-03",
+          "title": "Just Another Manic Monday",
+          "publicationDate": "2003-02",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/57350-9142-90345-1-peter-parker-spider.jpg",
           "description": null,
           "type": "REGULAR",
@@ -2005,8 +2010,8 @@
         },
         {
           "number": "52",
-          "title": null,
-          "publicationDate": "2003-04",
+          "title": "Everybody's Workin' for the Weekend",
+          "publicationDate": "2003-03",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/57351-9142-90346-1-peter-parker-spider.jpg",
           "description": null,
           "type": "REGULAR",
@@ -2021,8 +2026,8 @@
         },
         {
           "number": "53",
-          "title": null,
-          "publicationDate": "2003-05",
+          "title": "Rules of the Game",
+          "publicationDate": "2003-04",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/57352-9142-90347-1-peter-parker-spider.jpg",
           "description": null,
           "type": "REGULAR",
@@ -2037,8 +2042,8 @@
         },
         {
           "number": "54",
-          "title": null,
-          "publicationDate": "2003-06",
+          "title": "Rules of the Game: Part 2",
+          "publicationDate": "2003-05",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/57353-9142-90348-1-peter-parker-spider.jpg",
           "description": null,
           "type": "REGULAR",
@@ -2053,8 +2058,8 @@
         },
         {
           "number": "55",
-          "title": null,
-          "publicationDate": "2003-07",
+          "title": "Rules of the Game: Part 3",
+          "publicationDate": "2003-06",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/57354-9142-90349-1-peter-parker-spider.jpg",
           "description": null,
           "type": "REGULAR",
@@ -2069,8 +2074,8 @@
         },
         {
           "number": "56",
-          "title": null,
-          "publicationDate": "2003-08",
+          "title": "Reborn",
+          "publicationDate": "2003-07",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/57355-9142-90350-1-peter-parker-spider.jpg",
           "description": null,
           "type": "REGULAR",
@@ -2085,8 +2090,8 @@
         },
         {
           "number": "57",
-          "title": null,
-          "publicationDate": "2003-09",
+          "title": "Reborn: Part 2",
+          "publicationDate": "2003-08",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/57356-9142-90351-1-peter-parker-spider.jpg",
           "description": null,
           "type": "REGULAR",
@@ -2096,6 +2101,22 @@
               "source": "COMIC_VINE",
               "externalId": "90351",
               "url": "https://comicvine.gamespot.com/peter-parker-spider-man-57-reborn-part-2/4000-90351/"
+            }
+          ]
+        },
+        {
+          "number": "156.1",
+          "title": "Old Haunts",
+          "publicationDate": "2012-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/31666/2503044-prv13110_cov.jpg",
+          "description": null,
+          "type": "SPECIAL",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "348063",
+              "url": "https://comicvine.gamespot.com/peter-parker-spider-man-156-1-old-haunts/4000-348063/"
             }
           ]
         }
@@ -2565,12 +2586,12 @@
       "issues": [
         {
           "number": "½",
-          "title": null,
-          "publicationDate": "1999-12",
+          "title": "Good Intentions",
+          "publicationDate": "1999-10",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/9/98094/1785079-spider_man_unlimited_00___01_.jpg",
           "description": null,
-          "type": "REGULAR",
-          "universeDesignation": "Earth-616",
+          "type": "SPECIAL",
+          "universeDesignation": "Earth-7831",
           "externalIds": [
             {
               "source": "COMIC_VINE",
@@ -2581,12 +2602,12 @@
         },
         {
           "number": "1",
-          "title": null,
-          "publicationDate": "2000-01",
+          "title": "Worlds Apart",
+          "publicationDate": "1999-12",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/4404586-01.jpg",
           "description": null,
           "type": "REGULAR",
-          "universeDesignation": "Earth-616",
+          "universeDesignation": "Earth-7831",
           "externalIds": [
             {
               "source": "COMIC_VINE",
@@ -2597,12 +2618,12 @@
         },
         {
           "number": "2",
-          "title": null,
-          "publicationDate": "2000-02",
+          "title": "Where Evil Nests",
+          "publicationDate": "2000-01",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/4404587-02.jpg",
           "description": null,
           "type": "REGULAR",
-          "universeDesignation": "Earth-616",
+          "universeDesignation": "Earth-7831",
           "externalIds": [
             {
               "source": "COMIC_VINE",
@@ -2613,12 +2634,12 @@
         },
         {
           "number": "3",
-          "title": null,
-          "publicationDate": "2000-03",
+          "title": "The Brute",
+          "publicationDate": "2000-02",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/4404588-03.jpg",
           "description": null,
           "type": "REGULAR",
-          "universeDesignation": "Earth-616",
+          "universeDesignation": "Earth-7831",
           "externalIds": [
             {
               "source": "COMIC_VINE",
@@ -2629,12 +2650,12 @@
         },
         {
           "number": "4",
-          "title": null,
-          "publicationDate": "2000-04",
+          "title": "What Lies Beyond the Edge of Manhattan?",
+          "publicationDate": "2000-03",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/4404589-04.jpg",
           "description": null,
           "type": "REGULAR",
-          "universeDesignation": "Earth-616",
+          "universeDesignation": "Earth-7831",
           "externalIds": [
             {
               "source": "COMIC_VINE",
@@ -2645,12 +2666,12 @@
         },
         {
           "number": "5",
-          "title": null,
-          "publicationDate": "2000-05",
+          "title": "Claws on Counter-Earth",
+          "publicationDate": "2000-04",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/4404590-05.jpg",
           "description": null,
           "type": "REGULAR",
-          "universeDesignation": "Earth-616",
+          "universeDesignation": "Earth-7831",
           "externalIds": [
             {
               "source": "COMIC_VINE",

@@ -30,7 +30,7 @@ PREVIEW_FILE = (
         "spider_man_volume_2.enriched.preview.json"
 )
 
-EXPECTED_ISSUE_COUNT = 219
+EXPECTED_ISSUE_COUNT = 213
 
 
 def load_json(

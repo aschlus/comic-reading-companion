@@ -127,7 +127,7 @@ building, following, and tracking comic-book reading orders.
 
 - [x] Spider-Man Volume 2 Era — Earth-616
     - September 1998 through September 2003
-    - 219 issues
+    - 213 issues
 - [ ] Additional Spider-Man eras
 - [ ] Larger Spider-Man master chronology
 - [ ] Additional Marvel characters / events

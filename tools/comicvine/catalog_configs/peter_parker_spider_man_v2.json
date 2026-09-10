@@ -1,0 +1,26 @@
+{
+  "publisher": "Marvel Comics",
+  "universes": [
+    {
+      "name": "Marvel Universe",
+      "designation": "Earth-616",
+      "description": null
+    }
+  ],
+  "series": [
+    {
+      "title": "Peter Parker: Spider-Man",
+      "volume": 2,
+      "startYear": 1999,
+      "endYear": 2003,
+      "comicVineVolumeId": 9142,
+      "defaultUniverseDesignation": "Earth-616",
+      "defaultIssueType": "REGULAR",
+      "issueOverrides": {
+        "156.1": {
+          "type": "SPECIAL"
+        }
+      }
+    }
+  ]
+}

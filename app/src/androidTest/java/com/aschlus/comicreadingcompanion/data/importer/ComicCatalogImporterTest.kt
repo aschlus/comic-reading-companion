@@ -408,8 +408,8 @@ class ComicCatalogImporterTest {
             val issuesBefore = seriesBefore.flatMap { series ->
                 comicDao.getIssuesForSeries(series.id)
             }
-            assertEquals(22, seriesBefore.size)
-            assertEquals(219, issuesBefore.size)
+            assertEquals(21, seriesBefore.size)
+            assertEquals(213, issuesBefore.size)
 
             val seriesIdsBefore =
                 seriesBefore.map { series -> series.id }.toSet()

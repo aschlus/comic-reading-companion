@@ -442,5 +442,138 @@ class BuildCatalogTest(
             validate_catalog(catalog)
 
 
+    def test_build_catalog_applies_issue_type_override(self):
+        config = {
+                    "publisher": "Marvel Comics",
+                    "universes": [
+                        {
+                            "name": "Marvel Universe",
+                            "designation": "Earth-616",
+                            "description": None
+                        }
+                    ],
+                    "series": [
+                        {
+                            "title": "Peter Parker: Spider-Man",
+                            "volume": 2,
+                            "startYear": 1999,
+                            "endYear": 2003,
+                            "comicVineVolumeId": 9142,
+                            "defaultUniverseDesignation": "Earth-616",
+                            "defaultIssueType": "REGULAR",
+                            "issueOverrides": {
+                                "156.1": {
+                                    "type": "SPECIAL"
+                                }
+                            }
+                        }
+                    ]
+                }
+
+        cached_volumes = {
+            9142: {
+                "volume_id": 9142,
+                "results": [
+                    {
+                        "id": 100,
+                        "issue_number": "57",
+                        "name": "Regular Issue",
+                        "cover_date": "2003-08-01",
+                        "image": {},
+                        "site_detail_url": None,
+                        "volume": {}
+                    },
+                    {
+                        "id": 101,
+                        "issue_number": "156.1",
+                        "name": "Old Haunts",
+                        "cover_date": "2012-10-01",
+                        "image": {},
+                        "site_detail_url": None,
+                        "volume": {}
+                    }
+                ]
+            }
+        }
+
+        catalog = build_catalog(
+            config=config,
+            cached_volumes=cached_volumes
+        )
+
+        issues = catalog["series"][0]["issues"]
+        regular_issue = next(issue for issue in issues if issue["number"] == "57")
+        special_issue = next(issue for issue in issues if issue["number"] == "156.1")
+
+        self.assertEqual("REGULAR", regular_issue["type"])
+        self.assertEqual("SPECIAL", special_issue["type"])
+
+
+    def test_build_catalog_issue_override_only_affects_target_issue(self):
+        config = {
+                "publisher": "Marvel Comics",
+                "universes": [
+                    {
+                        "name": "Marvel Universe",
+                        "designation": "Earth-616",
+                        "description": None
+                    }
+                ],
+                "series": [
+                    {
+                        "title": "Test Series",
+                        "volume": 1,
+                        "startYear": 2000,
+                        "endYear": 2001,
+                        "comicVineVolumeId": 123,
+                        "defaultUniverseDesignation": "Earth-616",
+                        "defaultIssueType": "REGULAR",
+                        "issueOverrides": {
+                            "2": {
+                                "type": "SPECIAL"
+                            }
+                        }
+                    }
+                ]
+            }
+        
+        cached_volumes = {
+            123: {
+                "volume_id": 123,
+                "results": [
+                    {
+                        "id": 1,
+                        "issue_number": "1",
+                        "name": None,
+                        "cover_date": "2000-01-01",
+                        "image": {},
+                        "site_detail_url": None,
+                        "volume": {}
+                    },
+                    {
+                        "id": 2,
+                        "issue_number": "2",
+                        "name": None,
+                        "cover_date": "2000-02-01",
+                        "image": {},
+                        "site_detail_url": None,
+                        "volume": {}
+                    }
+                ]
+            }
+        }
+
+        catalog = build_catalog(
+                    config=config,
+                    cached_volumes=cached_volumes
+                )
+        
+        issues = catalog["series"][0]["issues"]
+
+        self.assertEqual("REGULAR", issues[0]["type"])
+        self.assertEqual("SPECIAL", issues[1]["type"])
+
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -20,7 +20,7 @@
     {
       "position": 3,
       "title": "Turn of the Millennium",
-      "description": "The main Spider-Man titles continue into 2000 as Webspinners and Spider-Man Unlimited reach the end of their runs."
+      "description": "The main Spider-Man titles continue into 2000 as Webspinners concludes its run."
     },
     {
       "position": 4,
@@ -1287,33 +1287,6 @@
     {
       "position": 46,
       "series": {
-        "title": "Spider-Man Unlimited",
-        "volume": 2,
-        "startYear": 1999,
-        "endYear": 2000
-      },
-      "issue": {
-        "number": "½",
-        "title": null,
-        "publicationDate": "1999-12",
-        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/9/98094/1785079-spider_man_unlimited_00___01_.jpg",
-        "description": null,
-        "type": "REGULAR",
-        "externalIds": [
-          {
-            "source": "COMIC_VINE",
-            "externalId": "268921",
-            "url": "https://comicvine.gamespot.com/spider-man-unlimited-12-good-intentions/4000-268921/"
-          }
-        ]
-      },
-      "required": true,
-      "notes": "Standalone — Supplemental",
-      "sectionPosition": 2
-    },
-    {
-      "position": 47,
-      "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
         "startYear": 1998,
@@ -1339,7 +1312,7 @@
       "sectionPosition": 3
     },
     {
-      "position": 48,
+      "position": 47,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -1366,7 +1339,7 @@
       "sectionPosition": 3
     },
     {
-      "position": 49,
+      "position": 48,
       "series": {
         "title": "Webspinners",
         "volume": 1,
@@ -1393,34 +1366,7 @@
       "sectionPosition": 3
     },
     {
-      "position": 50,
-      "series": {
-        "title": "Spider-Man Unlimited",
-        "volume": 2,
-        "startYear": 1999,
-        "endYear": 2000
-      },
-      "issue": {
-        "number": "1",
-        "title": null,
-        "publicationDate": "2000-01",
-        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/4404586-01.jpg",
-        "description": null,
-        "type": "REGULAR",
-        "externalIds": [
-          {
-            "source": "COMIC_VINE",
-            "externalId": "91358",
-            "url": "https://comicvine.gamespot.com/spider-man-unlimited-1-worlds-apart/4000-91358/"
-          }
-        ]
-      },
-      "required": true,
-      "notes": "Anthology — Supplemental",
-      "sectionPosition": 3
-    },
-    {
-      "position": 51,
+      "position": 49,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -1447,7 +1393,7 @@
       "sectionPosition": 3
     },
     {
-      "position": 52,
+      "position": 50,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -1474,7 +1420,7 @@
       "sectionPosition": 3
     },
     {
-      "position": 53,
+      "position": 51,
       "series": {
         "title": "Webspinners",
         "volume": 1,
@@ -1501,34 +1447,7 @@
       "sectionPosition": 3
     },
     {
-      "position": 54,
-      "series": {
-        "title": "Spider-Man Unlimited",
-        "volume": 2,
-        "startYear": 1999,
-        "endYear": 2000
-      },
-      "issue": {
-        "number": "2",
-        "title": null,
-        "publicationDate": "2000-02",
-        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/4404587-02.jpg",
-        "description": null,
-        "type": "REGULAR",
-        "externalIds": [
-          {
-            "source": "COMIC_VINE",
-            "externalId": "91359",
-            "url": "https://comicvine.gamespot.com/spider-man-unlimited-2-where-evil-nests/4000-91359/"
-          }
-        ]
-      },
-      "required": true,
-      "notes": "Anthology — Supplemental",
-      "sectionPosition": 3
-    },
-    {
-      "position": 55,
+      "position": 52,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -1555,7 +1474,7 @@
       "sectionPosition": 3
     },
     {
-      "position": 56,
+      "position": 53,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -1582,7 +1501,7 @@
       "sectionPosition": 3
     },
     {
-      "position": 57,
+      "position": 54,
       "series": {
         "title": "Webspinners",
         "volume": 1,
@@ -1609,34 +1528,7 @@
       "sectionPosition": 3
     },
     {
-      "position": 58,
-      "series": {
-        "title": "Spider-Man Unlimited",
-        "volume": 2,
-        "startYear": 1999,
-        "endYear": 2000
-      },
-      "issue": {
-        "number": "3",
-        "title": null,
-        "publicationDate": "2000-03",
-        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/4404588-03.jpg",
-        "description": null,
-        "type": "REGULAR",
-        "externalIds": [
-          {
-            "source": "COMIC_VINE",
-            "externalId": "91360",
-            "url": "https://comicvine.gamespot.com/spider-man-unlimited-3-the-brute/4000-91360/"
-          }
-        ]
-      },
-      "required": true,
-      "notes": "Anthology — Supplemental",
-      "sectionPosition": 3
-    },
-    {
-      "position": 59,
+      "position": 55,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -1663,7 +1555,7 @@
       "sectionPosition": 3
     },
     {
-      "position": 60,
+      "position": 56,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -1690,7 +1582,7 @@
       "sectionPosition": 3
     },
     {
-      "position": 61,
+      "position": 57,
       "series": {
         "title": "Webspinners",
         "volume": 1,
@@ -1717,34 +1609,7 @@
       "sectionPosition": 3
     },
     {
-      "position": 62,
-      "series": {
-        "title": "Spider-Man Unlimited",
-        "volume": 2,
-        "startYear": 1999,
-        "endYear": 2000
-      },
-      "issue": {
-        "number": "4",
-        "title": null,
-        "publicationDate": "2000-04",
-        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/4404589-04.jpg",
-        "description": null,
-        "type": "REGULAR",
-        "externalIds": [
-          {
-            "source": "COMIC_VINE",
-            "externalId": "91361",
-            "url": "https://comicvine.gamespot.com/spider-man-unlimited-4-what-lies-beyond-the-edge-o/4000-91361/"
-          }
-        ]
-      },
-      "required": true,
-      "notes": "Anthology — Supplemental",
-      "sectionPosition": 3
-    },
-    {
-      "position": 63,
+      "position": 58,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -1771,7 +1636,7 @@
       "sectionPosition": 3
     },
     {
-      "position": 64,
+      "position": 59,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -1798,7 +1663,7 @@
       "sectionPosition": 3
     },
     {
-      "position": 65,
+      "position": 60,
       "series": {
         "title": "Amazing Spider-Man Annual",
         "volume": null,
@@ -1825,7 +1690,7 @@
       "sectionPosition": 3
     },
     {
-      "position": 66,
+      "position": 61,
       "series": {
         "title": "Webspinners",
         "volume": 1,
@@ -1852,34 +1717,7 @@
       "sectionPosition": 3
     },
     {
-      "position": 67,
-      "series": {
-        "title": "Spider-Man Unlimited",
-        "volume": 2,
-        "startYear": 1999,
-        "endYear": 2000
-      },
-      "issue": {
-        "number": "5",
-        "title": null,
-        "publicationDate": "2000-05",
-        "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/4404590-05.jpg",
-        "description": null,
-        "type": "REGULAR",
-        "externalIds": [
-          {
-            "source": "COMIC_VINE",
-            "externalId": "91362",
-            "url": "https://comicvine.gamespot.com/spider-man-unlimited-5-claws-on-counter-earth/4000-91362/"
-          }
-        ]
-      },
-      "required": true,
-      "notes": "Anthology — Finish series",
-      "sectionPosition": 3
-    },
-    {
-      "position": 68,
+      "position": 62,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -1906,7 +1744,7 @@
       "sectionPosition": 3
     },
     {
-      "position": 69,
+      "position": 63,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -1933,7 +1771,7 @@
       "sectionPosition": 3
     },
     {
-      "position": 70,
+      "position": 64,
       "series": {
         "title": "Webspinners",
         "volume": 1,
@@ -1960,7 +1798,7 @@
       "sectionPosition": 3
     },
     {
-      "position": 71,
+      "position": 65,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -1987,7 +1825,7 @@
       "sectionPosition": 4
     },
     {
-      "position": 72,
+      "position": 66,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -2014,7 +1852,7 @@
       "sectionPosition": 4
     },
     {
-      "position": 73,
+      "position": 67,
       "series": {
         "title": "Spider-Man vs. The Punisher",
         "volume": 1,
@@ -2041,7 +1879,7 @@
       "sectionPosition": 4
     },
     {
-      "position": 74,
+      "position": 68,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -2068,7 +1906,7 @@
       "sectionPosition": 4
     },
     {
-      "position": 75,
+      "position": 69,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -2095,7 +1933,7 @@
       "sectionPosition": 4
     },
     {
-      "position": 76,
+      "position": 70,
       "series": {
         "title": "Spider-Man: Death and Destiny",
         "volume": 1,
@@ -2122,7 +1960,7 @@
       "sectionPosition": 4
     },
     {
-      "position": 77,
+      "position": 71,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -2149,7 +1987,7 @@
       "sectionPosition": 4
     },
     {
-      "position": 78,
+      "position": 72,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -2176,7 +2014,7 @@
       "sectionPosition": 4
     },
     {
-      "position": 79,
+      "position": 73,
       "series": {
         "title": "Spider-Man: Death and Destiny",
         "volume": 1,
@@ -2203,7 +2041,7 @@
       "sectionPosition": 4
     },
     {
-      "position": 80,
+      "position": 74,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -2230,7 +2068,7 @@
       "sectionPosition": 4
     },
     {
-      "position": 81,
+      "position": 75,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -2257,7 +2095,7 @@
       "sectionPosition": 4
     },
     {
-      "position": 82,
+      "position": 76,
       "series": {
         "title": "Spider-Man: Death and Destiny",
         "volume": 1,
@@ -2284,7 +2122,7 @@
       "sectionPosition": 4
     },
     {
-      "position": 83,
+      "position": 77,
       "series": {
         "title": "Spider-Man: Revenge of the Green Goblin",
         "volume": 1,
@@ -2311,7 +2149,7 @@
       "sectionPosition": 5
     },
     {
-      "position": 84,
+      "position": 78,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -2338,7 +2176,7 @@
       "sectionPosition": 5
     },
     {
-      "position": 85,
+      "position": 79,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -2365,7 +2203,7 @@
       "sectionPosition": 5
     },
     {
-      "position": 86,
+      "position": 80,
       "series": {
         "title": "Spider-Man: Revenge of the Green Goblin",
         "volume": 1,
@@ -2392,7 +2230,7 @@
       "sectionPosition": 5
     },
     {
-      "position": 87,
+      "position": 81,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -2419,7 +2257,7 @@
       "sectionPosition": 5
     },
     {
-      "position": 88,
+      "position": 82,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -2446,7 +2284,7 @@
       "sectionPosition": 5
     },
     {
-      "position": 89,
+      "position": 83,
       "series": {
         "title": "Peter Parker: Spider-Man Annual",
         "volume": null,
@@ -2473,7 +2311,7 @@
       "sectionPosition": 5
     },
     {
-      "position": 90,
+      "position": 84,
       "series": {
         "title": "Spider-Man: Revenge of the Green Goblin",
         "volume": 1,
@@ -2500,7 +2338,7 @@
       "sectionPosition": 5
     },
     {
-      "position": 91,
+      "position": 85,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -2527,7 +2365,7 @@
       "sectionPosition": 5
     },
     {
-      "position": 92,
+      "position": 86,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -2554,7 +2392,7 @@
       "sectionPosition": 5
     },
     {
-      "position": 93,
+      "position": 87,
       "series": {
         "title": "Spider-Man: The Mysterio Manifesto",
         "volume": 1,
@@ -2581,7 +2419,7 @@
       "sectionPosition": 5
     },
     {
-      "position": 94,
+      "position": 88,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -2608,7 +2446,7 @@
       "sectionPosition": 5
     },
     {
-      "position": 95,
+      "position": 89,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -2635,7 +2473,7 @@
       "sectionPosition": 5
     },
     {
-      "position": 96,
+      "position": 90,
       "series": {
         "title": "Spider-Man: The Mysterio Manifesto",
         "volume": 1,
@@ -2662,7 +2500,7 @@
       "sectionPosition": 5
     },
     {
-      "position": 97,
+      "position": 91,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -2689,7 +2527,7 @@
       "sectionPosition": 5
     },
     {
-      "position": 98,
+      "position": 92,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -2716,7 +2554,7 @@
       "sectionPosition": 5
     },
     {
-      "position": 99,
+      "position": 93,
       "series": {
         "title": "Spider-Man: The Mysterio Manifesto",
         "volume": 1,
@@ -2743,7 +2581,7 @@
       "sectionPosition": 5
     },
     {
-      "position": 100,
+      "position": 94,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -2770,7 +2608,7 @@
       "sectionPosition": 6
     },
     {
-      "position": 101,
+      "position": 95,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -2797,7 +2635,7 @@
       "sectionPosition": 6
     },
     {
-      "position": 102,
+      "position": 96,
       "series": {
         "title": "Daredevil/Spider-Man",
         "volume": 1,
@@ -2824,7 +2662,7 @@
       "sectionPosition": 6
     },
     {
-      "position": 103,
+      "position": 97,
       "series": {
         "title": "Spider-Man: Lifeline",
         "volume": 1,
@@ -2851,7 +2689,7 @@
       "sectionPosition": 6
     },
     {
-      "position": 104,
+      "position": 98,
       "series": {
         "title": "Amazing Spider-Man Annual",
         "volume": null,
@@ -2878,7 +2716,7 @@
       "sectionPosition": 6
     },
     {
-      "position": 105,
+      "position": 99,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -2905,7 +2743,7 @@
       "sectionPosition": 6
     },
     {
-      "position": 106,
+      "position": 100,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -2932,7 +2770,7 @@
       "sectionPosition": 6
     },
     {
-      "position": 107,
+      "position": 101,
       "series": {
         "title": "Daredevil/Spider-Man",
         "volume": 1,
@@ -2959,7 +2797,7 @@
       "sectionPosition": 6
     },
     {
-      "position": 108,
+      "position": 102,
       "series": {
         "title": "Spider-Man: Lifeline",
         "volume": 1,
@@ -2986,7 +2824,7 @@
       "sectionPosition": 6
     },
     {
-      "position": 109,
+      "position": 103,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -3013,7 +2851,7 @@
       "sectionPosition": 6
     },
     {
-      "position": 110,
+      "position": 104,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -3040,7 +2878,7 @@
       "sectionPosition": 6
     },
     {
-      "position": 111,
+      "position": 105,
       "series": {
         "title": "Daredevil/Spider-Man",
         "volume": 1,
@@ -3067,7 +2905,7 @@
       "sectionPosition": 6
     },
     {
-      "position": 112,
+      "position": 106,
       "series": {
         "title": "Spider-Man: Lifeline",
         "volume": 1,
@@ -3094,7 +2932,7 @@
       "sectionPosition": 6
     },
     {
-      "position": 113,
+      "position": 107,
       "series": {
         "title": "Spider-Man's Tangled Web",
         "volume": 1,
@@ -3121,7 +2959,7 @@
       "sectionPosition": 7
     },
     {
-      "position": 114,
+      "position": 108,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -3148,7 +2986,7 @@
       "sectionPosition": 7
     },
     {
-      "position": 115,
+      "position": 109,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -3175,7 +3013,7 @@
       "sectionPosition": 7
     },
     {
-      "position": 116,
+      "position": 110,
       "series": {
         "title": "Daredevil/Spider-Man",
         "volume": 1,
@@ -3202,7 +3040,7 @@
       "sectionPosition": 7
     },
     {
-      "position": 117,
+      "position": 111,
       "series": {
         "title": "Spider-Man's Tangled Web",
         "volume": 1,
@@ -3229,7 +3067,7 @@
       "sectionPosition": 7
     },
     {
-      "position": 118,
+      "position": 112,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -3256,7 +3094,7 @@
       "sectionPosition": 7
     },
     {
-      "position": 119,
+      "position": 113,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -3283,7 +3121,7 @@
       "sectionPosition": 7
     },
     {
-      "position": 120,
+      "position": 114,
       "series": {
         "title": "Spider-Man's Tangled Web",
         "volume": 1,
@@ -3310,7 +3148,7 @@
       "sectionPosition": 7
     },
     {
-      "position": 121,
+      "position": 115,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -3337,7 +3175,7 @@
       "sectionPosition": 7
     },
     {
-      "position": 122,
+      "position": 116,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -3364,7 +3202,7 @@
       "sectionPosition": 7
     },
     {
-      "position": 123,
+      "position": 117,
       "series": {
         "title": "Spider-Man's Tangled Web",
         "volume": 1,
@@ -3391,7 +3229,7 @@
       "sectionPosition": 7
     },
     {
-      "position": 124,
+      "position": 118,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -3418,7 +3256,7 @@
       "sectionPosition": 8
     },
     {
-      "position": 125,
+      "position": 119,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -3445,7 +3283,7 @@
       "sectionPosition": 8
     },
     {
-      "position": 126,
+      "position": 120,
       "series": {
         "title": "Spider-Man's Tangled Web",
         "volume": 1,
@@ -3472,7 +3310,7 @@
       "sectionPosition": 8
     },
     {
-      "position": 127,
+      "position": 121,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -3499,7 +3337,7 @@
       "sectionPosition": 8
     },
     {
-      "position": 128,
+      "position": 122,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -3526,7 +3364,7 @@
       "sectionPosition": 8
     },
     {
-      "position": 129,
+      "position": 123,
       "series": {
         "title": "Spider-Man's Tangled Web",
         "volume": 1,
@@ -3553,7 +3391,7 @@
       "sectionPosition": 8
     },
     {
-      "position": 130,
+      "position": 124,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -3580,7 +3418,7 @@
       "sectionPosition": 8
     },
     {
-      "position": 131,
+      "position": 125,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -3607,7 +3445,7 @@
       "sectionPosition": 8
     },
     {
-      "position": 132,
+      "position": 126,
       "series": {
         "title": "Spider-Man's Tangled Web",
         "volume": 1,
@@ -3634,7 +3472,7 @@
       "sectionPosition": 8
     },
     {
-      "position": 133,
+      "position": 127,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -3661,7 +3499,7 @@
       "sectionPosition": 8
     },
     {
-      "position": 134,
+      "position": 128,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -3688,7 +3526,7 @@
       "sectionPosition": 8
     },
     {
-      "position": 135,
+      "position": 129,
       "series": {
         "title": "Spider-Man's Tangled Web",
         "volume": 1,
@@ -3715,7 +3553,7 @@
       "sectionPosition": 8
     },
     {
-      "position": 136,
+      "position": 130,
       "series": {
         "title": "Peter Parker: Spider-Man Annual",
         "volume": null,
@@ -3742,7 +3580,7 @@
       "sectionPosition": 8
     },
     {
-      "position": 137,
+      "position": 131,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -3769,7 +3607,7 @@
       "sectionPosition": 8
     },
     {
-      "position": 138,
+      "position": 132,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -3796,7 +3634,7 @@
       "sectionPosition": 8
     },
     {
-      "position": 139,
+      "position": 133,
       "series": {
         "title": "Spider-Man's Tangled Web",
         "volume": 1,
@@ -3823,7 +3661,7 @@
       "sectionPosition": 8
     },
     {
-      "position": 140,
+      "position": 134,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -3850,7 +3688,7 @@
       "sectionPosition": 8
     },
     {
-      "position": 141,
+      "position": 135,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -3877,7 +3715,7 @@
       "sectionPosition": 8
     },
     {
-      "position": 142,
+      "position": 136,
       "series": {
         "title": "Spider-Man's Tangled Web",
         "volume": 1,
@@ -3904,7 +3742,7 @@
       "sectionPosition": 8
     },
     {
-      "position": 143,
+      "position": 137,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -3931,7 +3769,7 @@
       "sectionPosition": 8
     },
     {
-      "position": 144,
+      "position": 138,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -3958,7 +3796,7 @@
       "sectionPosition": 8
     },
     {
-      "position": 145,
+      "position": 139,
       "series": {
         "title": "Spider-Man's Tangled Web",
         "volume": 1,
@@ -3985,7 +3823,7 @@
       "sectionPosition": 8
     },
     {
-      "position": 146,
+      "position": 140,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -4012,7 +3850,7 @@
       "sectionPosition": 8
     },
     {
-      "position": 147,
+      "position": 141,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -4039,7 +3877,7 @@
       "sectionPosition": 8
     },
     {
-      "position": 148,
+      "position": 142,
       "series": {
         "title": "Spider-Man's Tangled Web",
         "volume": 1,
@@ -4066,7 +3904,7 @@
       "sectionPosition": 8
     },
     {
-      "position": 149,
+      "position": 143,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -4093,7 +3931,7 @@
       "sectionPosition": 8
     },
     {
-      "position": 150,
+      "position": 144,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -4120,7 +3958,7 @@
       "sectionPosition": 8
     },
     {
-      "position": 151,
+      "position": 145,
       "series": {
         "title": "Spider-Man's Tangled Web",
         "volume": 1,
@@ -4147,7 +3985,7 @@
       "sectionPosition": 8
     },
     {
-      "position": 152,
+      "position": 146,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -4174,7 +4012,7 @@
       "sectionPosition": 8
     },
     {
-      "position": 153,
+      "position": 147,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -4201,7 +4039,7 @@
       "sectionPosition": 8
     },
     {
-      "position": 154,
+      "position": 148,
       "series": {
         "title": "Spider-Man: Quality of Life",
         "volume": 1,
@@ -4228,7 +4066,7 @@
       "sectionPosition": 9
     },
     {
-      "position": 155,
+      "position": 149,
       "series": {
         "title": "Spider-Man: Blue",
         "volume": 1,
@@ -4255,7 +4093,7 @@
       "sectionPosition": 9
     },
     {
-      "position": 156,
+      "position": 150,
       "series": {
         "title": "Spider-Man's Tangled Web",
         "volume": 1,
@@ -4282,7 +4120,7 @@
       "sectionPosition": 9
     },
     {
-      "position": 157,
+      "position": 151,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -4309,7 +4147,7 @@
       "sectionPosition": 9
     },
     {
-      "position": 158,
+      "position": 152,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -4336,7 +4174,7 @@
       "sectionPosition": 9
     },
     {
-      "position": 159,
+      "position": 153,
       "series": {
         "title": "Spider-Man: Quality of Life",
         "volume": 1,
@@ -4363,7 +4201,7 @@
       "sectionPosition": 9
     },
     {
-      "position": 160,
+      "position": 154,
       "series": {
         "title": "Spider-Man: Blue",
         "volume": 1,
@@ -4390,7 +4228,7 @@
       "sectionPosition": 9
     },
     {
-      "position": 161,
+      "position": 155,
       "series": {
         "title": "Spider-Man: Get Kraven",
         "volume": 1,
@@ -4417,7 +4255,7 @@
       "sectionPosition": 9
     },
     {
-      "position": 162,
+      "position": 156,
       "series": {
         "title": "Spider-Man/Black Cat: The Evil That Men Do",
         "volume": 1,
@@ -4444,7 +4282,7 @@
       "sectionPosition": 9
     },
     {
-      "position": 163,
+      "position": 157,
       "series": {
         "title": "Spider-Man's Tangled Web",
         "volume": 1,
@@ -4471,7 +4309,7 @@
       "sectionPosition": 9
     },
     {
-      "position": 164,
+      "position": 158,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -4498,7 +4336,7 @@
       "sectionPosition": 9
     },
     {
-      "position": 165,
+      "position": 159,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -4525,7 +4363,7 @@
       "sectionPosition": 9
     },
     {
-      "position": 166,
+      "position": 160,
       "series": {
         "title": "Spider-Man: Quality of Life",
         "volume": 1,
@@ -4552,7 +4390,7 @@
       "sectionPosition": 9
     },
     {
-      "position": 167,
+      "position": 161,
       "series": {
         "title": "Spider-Man: Blue",
         "volume": 1,
@@ -4579,7 +4417,7 @@
       "sectionPosition": 9
     },
     {
-      "position": 168,
+      "position": 162,
       "series": {
         "title": "Spider-Man: Get Kraven",
         "volume": 1,
@@ -4606,7 +4444,7 @@
       "sectionPosition": 9
     },
     {
-      "position": 169,
+      "position": 163,
       "series": {
         "title": "Spider-Man/Black Cat: The Evil That Men Do",
         "volume": 1,
@@ -4633,7 +4471,7 @@
       "sectionPosition": 9
     },
     {
-      "position": 170,
+      "position": 164,
       "series": {
         "title": "Spider-Man's Tangled Web",
         "volume": 1,
@@ -4660,7 +4498,7 @@
       "sectionPosition": 9
     },
     {
-      "position": 171,
+      "position": 165,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -4687,7 +4525,7 @@
       "sectionPosition": 9
     },
     {
-      "position": 172,
+      "position": 166,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -4714,7 +4552,7 @@
       "sectionPosition": 9
     },
     {
-      "position": 173,
+      "position": 167,
       "series": {
         "title": "Spider-Man: Quality of Life",
         "volume": 1,
@@ -4741,7 +4579,7 @@
       "sectionPosition": 9
     },
     {
-      "position": 174,
+      "position": 168,
       "series": {
         "title": "Spider-Man: Blue",
         "volume": 1,
@@ -4768,7 +4606,7 @@
       "sectionPosition": 9
     },
     {
-      "position": 175,
+      "position": 169,
       "series": {
         "title": "Spider-Man: Get Kraven",
         "volume": 1,
@@ -4795,7 +4633,7 @@
       "sectionPosition": 9
     },
     {
-      "position": 176,
+      "position": 170,
       "series": {
         "title": "Spider-Man/Black Cat: The Evil That Men Do",
         "volume": 1,
@@ -4822,7 +4660,7 @@
       "sectionPosition": 9
     },
     {
-      "position": 177,
+      "position": 171,
       "series": {
         "title": "Spider-Man/Daredevil",
         "volume": 1,
@@ -4849,7 +4687,7 @@
       "sectionPosition": 9
     },
     {
-      "position": 178,
+      "position": 172,
       "series": {
         "title": "Spider-Man's Tangled Web",
         "volume": 1,
@@ -4876,7 +4714,7 @@
       "sectionPosition": 9
     },
     {
-      "position": 179,
+      "position": 173,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -4903,7 +4741,7 @@
       "sectionPosition": 10
     },
     {
-      "position": 180,
+      "position": 174,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -4930,7 +4768,7 @@
       "sectionPosition": 10
     },
     {
-      "position": 181,
+      "position": 175,
       "series": {
         "title": "Spider-Man: Blue",
         "volume": 1,
@@ -4957,7 +4795,7 @@
       "sectionPosition": 10
     },
     {
-      "position": 182,
+      "position": 176,
       "series": {
         "title": "Spider-Man: Get Kraven",
         "volume": 1,
@@ -4984,7 +4822,7 @@
       "sectionPosition": 10
     },
     {
-      "position": 183,
+      "position": 177,
       "series": {
         "title": "Spider-Man's Tangled Web",
         "volume": 1,
@@ -5011,7 +4849,7 @@
       "sectionPosition": 10
     },
     {
-      "position": 184,
+      "position": 178,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -5038,7 +4876,7 @@
       "sectionPosition": 10
     },
     {
-      "position": 185,
+      "position": 179,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -5065,7 +4903,7 @@
       "sectionPosition": 10
     },
     {
-      "position": 186,
+      "position": 180,
       "series": {
         "title": "Spider-Man: Blue",
         "volume": 1,
@@ -5092,7 +4930,7 @@
       "sectionPosition": 10
     },
     {
-      "position": 187,
+      "position": 181,
       "series": {
         "title": "Spider-Man: Get Kraven",
         "volume": 1,
@@ -5119,7 +4957,7 @@
       "sectionPosition": 10
     },
     {
-      "position": 188,
+      "position": 182,
       "series": {
         "title": "Spider-Man's Tangled Web",
         "volume": 1,
@@ -5146,7 +4984,7 @@
       "sectionPosition": 10
     },
     {
-      "position": 189,
+      "position": 183,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -5173,7 +5011,7 @@
       "sectionPosition": 10
     },
     {
-      "position": 190,
+      "position": 184,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -5200,7 +5038,7 @@
       "sectionPosition": 10
     },
     {
-      "position": 191,
+      "position": 185,
       "series": {
         "title": "Spider-Man: Get Kraven",
         "volume": 1,
@@ -5227,7 +5065,7 @@
       "sectionPosition": 10
     },
     {
-      "position": 192,
+      "position": 186,
       "series": {
         "title": "Spider-Man's Tangled Web",
         "volume": 1,
@@ -5254,7 +5092,7 @@
       "sectionPosition": 10
     },
     {
-      "position": 193,
+      "position": 187,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -5281,7 +5119,7 @@
       "sectionPosition": 10
     },
     {
-      "position": 194,
+      "position": 188,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -5308,7 +5146,7 @@
       "sectionPosition": 10
     },
     {
-      "position": 195,
+      "position": 189,
       "series": {
         "title": "Spider-Man's Tangled Web",
         "volume": 1,
@@ -5335,7 +5173,7 @@
       "sectionPosition": 10
     },
     {
-      "position": 196,
+      "position": 190,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -5362,7 +5200,7 @@
       "sectionPosition": 10
     },
     {
-      "position": 197,
+      "position": 191,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -5389,7 +5227,7 @@
       "sectionPosition": 10
     },
     {
-      "position": 198,
+      "position": 192,
       "series": {
         "title": "Spider-Man's Tangled Web",
         "volume": 1,
@@ -5416,7 +5254,7 @@
       "sectionPosition": 10
     },
     {
-      "position": 199,
+      "position": 193,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -5443,7 +5281,7 @@
       "sectionPosition": 11
     },
     {
-      "position": 200,
+      "position": 194,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -5470,7 +5308,7 @@
       "sectionPosition": 11
     },
     {
-      "position": 201,
+      "position": 195,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -5497,7 +5335,7 @@
       "sectionPosition": 11
     },
     {
-      "position": 202,
+      "position": 196,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -5524,7 +5362,7 @@
       "sectionPosition": 11
     },
     {
-      "position": 203,
+      "position": 197,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -5551,7 +5389,7 @@
       "sectionPosition": 11
     },
     {
-      "position": 204,
+      "position": 198,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -5578,7 +5416,7 @@
       "sectionPosition": 11
     },
     {
-      "position": 205,
+      "position": 199,
       "series": {
         "title": "Venom",
         "volume": null,
@@ -5605,7 +5443,7 @@
       "sectionPosition": 12
     },
     {
-      "position": 206,
+      "position": 200,
       "series": {
         "title": "Spider-Man & Wolverine",
         "volume": 1,
@@ -5632,7 +5470,7 @@
       "sectionPosition": 12
     },
     {
-      "position": 207,
+      "position": 201,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -5659,7 +5497,7 @@
       "sectionPosition": 12
     },
     {
-      "position": 208,
+      "position": 202,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -5686,7 +5524,7 @@
       "sectionPosition": 12
     },
     {
-      "position": 209,
+      "position": 203,
       "series": {
         "title": "Venom",
         "volume": null,
@@ -5713,7 +5551,7 @@
       "sectionPosition": 12
     },
     {
-      "position": 210,
+      "position": 204,
       "series": {
         "title": "Spider-Man & Wolverine",
         "volume": 1,
@@ -5740,7 +5578,7 @@
       "sectionPosition": 12
     },
     {
-      "position": 211,
+      "position": 205,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -5767,7 +5605,7 @@
       "sectionPosition": 12
     },
     {
-      "position": 212,
+      "position": 206,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -5794,7 +5632,7 @@
       "sectionPosition": 12
     },
     {
-      "position": 213,
+      "position": 207,
       "series": {
         "title": "Venom",
         "volume": null,
@@ -5821,7 +5659,7 @@
       "sectionPosition": 12
     },
     {
-      "position": 214,
+      "position": 208,
       "series": {
         "title": "Spider-Man & Wolverine",
         "volume": 1,
@@ -5848,7 +5686,7 @@
       "sectionPosition": 12
     },
     {
-      "position": 215,
+      "position": 209,
       "series": {
         "title": "The Spectacular Spider-Man",
         "volume": 2,
@@ -5875,7 +5713,7 @@
       "sectionPosition": 12
     },
     {
-      "position": 216,
+      "position": 210,
       "series": {
         "title": "Amazing Spider-Man",
         "volume": 2,
@@ -5902,7 +5740,7 @@
       "sectionPosition": 12
     },
     {
-      "position": 217,
+      "position": 211,
       "series": {
         "title": "Peter Parker: Spider-Man",
         "volume": 2,
@@ -5929,7 +5767,7 @@
       "sectionPosition": 12
     },
     {
-      "position": 218,
+      "position": 212,
       "series": {
         "title": "Venom",
         "volume": null,
@@ -5956,7 +5794,7 @@
       "sectionPosition": 12
     },
     {
-      "position": 219,
+      "position": 213,
       "series": {
         "title": "Spider-Man & Wolverine",
         "volume": 1,

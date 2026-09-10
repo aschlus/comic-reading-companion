@@ -145,14 +145,21 @@ def build_series(series_config: dict, cached_volume: dict) -> dict:
 
     issue_type = (series_config.get("defaultIssueType", "REGULAR"))
 
-    issues = [
-        build_issue(
-            comic_vine_issue=issue,
-            universe_designation=universe_designation,
-            issue_type=issue_type
+    issue_overrides = (series_config.get("issueOverrides", {}))
+
+    issues = []
+
+    for comic_vine_issue in cached_volume.get("results", []):
+        issue_number = str(comic_vine_issue.get("issue_number", "")).strip()
+        override = (issue_overrides.get(issue_number, {}))
+
+        issues.append(
+            build_issue(
+                        comic_vine_issue=comic_vine_issue,
+                        universe_designation=override.get("universeDesignation", universe_designation),
+                        issue_type=override.get("type", issue_type)
+                    )
         )
-        for issue in cached_volume.get("results", [])
-    ]
 
     issues.sort(key=issue_sort_key)
 

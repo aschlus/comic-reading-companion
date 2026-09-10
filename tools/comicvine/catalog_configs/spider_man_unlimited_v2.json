@@ -1,0 +1,26 @@
+{
+  "publisher": "Marvel Comics",
+  "universes": [
+    {
+      "name": "Spider-Man Unlimited Universe",
+      "designation": "Earth-7831",
+      "description": null
+    }
+  ],
+  "series": [
+    {
+      "title": "Spider-Man Unlimited",
+      "volume": 2,
+      "startYear": 1999,
+      "endYear": 2000,
+      "comicVineVolumeId": 10760,
+      "defaultUniverseDesignation": "Earth-7831",
+      "defaultIssueType": "REGULAR",
+      "issueOverrides": {
+        "½": {
+          "type": "SPECIAL"
+        }
+      }
+    }
+  ]
+}
