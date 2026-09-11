@@ -360,6 +360,79 @@ class ComicRepository(
         return wasRemoved
     }
 
+    suspend fun reorderUserReadingListItems(
+        readingListId: Long,
+        orderedItemIds: List<Long>
+    ) {
+        database.withWriteTransaction {
+            val readingList = comicDao.getReadingListById(readingListId)
+                ?: throw IllegalArgumentException(
+                    "Reading list $readingListId does not exist"
+                )
+
+            require(readingList.source == ReadingListSource.USER) {
+                "Reading list $readingListId is not user-owned"
+            }
+
+            val currentItems = comicDao.getItemsForReadingList(readingListId)
+
+            require(orderedItemIds.size == currentItems.size) {
+                "Reordered item count does not match reading list"
+            }
+
+            require(orderedItemIds.distinct().size == orderedItemIds.size) {
+                "Reordered item IDs contain duplicates"
+            }
+
+            val currentItemsById = currentItems.associateBy { item -> item.id }
+
+            require(orderedItemIds.toSet() == currentItemsById.keys) {
+                "Reordered item IDs do not match reading list"
+            }
+
+            val reorderedItems =
+                orderedItemIds.map { itemId -> checkNotNull(currentItemsById[itemId]) }
+
+            val currentSectionPattern =
+                currentItems.map { item -> item.sectionId }
+
+            val reorderedSectionPattern =
+                reorderedItems.map { item -> item.sectionId }
+
+            require(reorderedSectionPattern == currentSectionPattern) {
+                "Items cannot move between sections while reordering"
+            }
+
+            if (currentItems.map { item -> item.id } == orderedItemIds) {
+                return@withWriteTransaction
+            }
+
+            currentItems.forEachIndexed { index, item ->
+                comicDao.updateReadingListItem(
+                    item.copy(
+                        position = -(index + 1)
+                    )
+                )
+            }
+
+            reorderedItems.forEachIndexed { index, item ->
+                comicDao.updateReadingListItem(
+                    item.copy(
+                        position = index + 1
+                    )
+                )
+            }
+
+            val updatedAt = maxOf(System.currentTimeMillis(), readingList.updatedAt + 1)
+
+            comicDao.updateReadingList(
+                readingList.copy(
+                    updatedAt = updatedAt
+                )
+            )
+        }
+    }
+
     suspend fun addReadingListItem(
         item: ReadingListItem
     ): Long {

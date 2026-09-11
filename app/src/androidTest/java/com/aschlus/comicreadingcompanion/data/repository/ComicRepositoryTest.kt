@@ -12,6 +12,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingProgress
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListItem
+import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSection
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSource
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.database.entities.Series
@@ -979,5 +980,316 @@ class ComicRepositoryTest {
                 thrownException?.message
             )
             assertNotNull(comicDao.getIssueById(issueId))
+        }
+
+    @Test
+    fun reorderUserReadingListItems_reordersItemsWithContiguousPositions() =
+        runBlocking {
+            val firstIssueId = createIssue("1")
+            val secondIssueId = createIssue("2")
+            val thirdIssueId = createIssue("3")
+
+            val publisher = comicDao.getPublisherByName("Marvel")!!
+
+            val readingListId = repository.createUserReadingList(
+                    title = "Reorder Test",
+                    description = null,
+                    publisherId = publisher.id,
+                    universeId = null
+                )
+
+            val firstItemId = repository.addIssueToUserReadingList(
+                    readingListId,
+                    firstIssueId
+                )
+
+            val secondItemId = repository.addIssueToUserReadingList(
+                    readingListId,
+                    secondIssueId
+                )
+
+            val thirdItemId = repository.addIssueToUserReadingList(
+                    readingListId,
+                    thirdIssueId
+                )
+
+            repository.reorderUserReadingListItems(
+                readingListId = readingListId,
+                orderedItemIds = listOf(thirdItemId, firstItemId, secondItemId)
+            )
+
+            val items = comicDao.getItemsForReadingList(readingListId)
+
+            assertEquals(
+                listOf(thirdItemId, firstItemId, secondItemId),
+                items.map { it.id }
+            )
+
+            assertEquals(
+                listOf(1, 2, 3),
+                items.map { it.position }
+            )
+        }
+
+    @Test
+    fun reorderUserReadingListItems_rejectsMovingItemsBetweenSections() =
+        runBlocking {
+            val firstIssueId = createIssue("1")
+            val secondIssueId = createIssue("2")
+            val thirdIssueId = createIssue("3")
+
+            val publisher = comicDao.getPublisherByName("Marvel")!!
+
+            val readingListId = repository.createUserReadingList(
+                    title = "Section Reorder Test",
+                    description = null,
+                    publisherId = publisher.id,
+                    universeId = null
+                )
+
+            val firstSectionId = repository.addReadingListSection(
+                    ReadingListSection(
+                        readingListId = readingListId,
+                        title = "Section One",
+                        description = null,
+                        position = 1
+                    )
+                )
+
+            val secondSectionId = repository.addReadingListSection(
+                    ReadingListSection(
+                        readingListId = readingListId,
+                        title = "Section Two",
+                        description = null,
+                        position = 2
+                    )
+                )
+
+            val firstItemId = repository.addReadingListItem(
+                    ReadingListItem(
+                        readingListId = readingListId,
+                        sectionId = firstSectionId,
+                        issueId = firstIssueId,
+                        position = 1,
+                        required = true,
+                        notes = null
+                    )
+                )
+
+            val secondItemId = repository.addReadingListItem(
+                    ReadingListItem(
+                        readingListId = readingListId,
+                        sectionId = firstSectionId,
+                        issueId = secondIssueId,
+                        position = 2,
+                        required = true,
+                        notes = null
+                    )
+                )
+
+            val thirdItemId = repository.addReadingListItem(
+                    ReadingListItem(
+                        readingListId = readingListId,
+                        sectionId = secondSectionId,
+                        issueId = thirdIssueId,
+                        position = 3,
+                        required = true,
+                        notes = null
+                    )
+                )
+
+            var exception: IllegalArgumentException? = null
+
+            try {
+                repository.reorderUserReadingListItems(
+                    readingListId = readingListId,
+                    orderedItemIds = listOf(firstItemId, thirdItemId, secondItemId)
+                )
+            } catch (caught: IllegalArgumentException) {
+                exception = caught
+            }
+
+            assertNotNull(exception)
+
+            assertEquals(
+                "Items cannot move between sections while reordering",
+                exception?.message
+            )
+
+            val items = comicDao.getItemsForReadingList(readingListId)
+
+            assertEquals(
+                listOf(firstItemId, secondItemId, thirdItemId),
+                items.map { it.id }
+            )
+        }
+
+    @Test
+    fun reorderUserReadingListItems_rejectsMissingItemIds() =
+        runBlocking {
+            val firstIssueId = createIssue("1")
+            val secondIssueId = createIssue("2")
+
+            val publisher = comicDao.getPublisherByName("Marvel")!!
+
+            val readingListId = repository.createUserReadingList(
+                    title = "Missing Item Test",
+                    description = null,
+                    publisherId = publisher.id,
+                    universeId = null
+                )
+
+            val firstItemId = repository.addIssueToUserReadingList(
+                    readingListId,
+                    firstIssueId
+                )
+
+            repository.addIssueToUserReadingList(readingListId, secondIssueId)
+
+            var exception: IllegalArgumentException? = null
+
+            try {
+                repository.reorderUserReadingListItems(
+                    readingListId = readingListId,
+                    orderedItemIds = listOf(
+                        firstItemId
+                    )
+                )
+            } catch (caught: IllegalArgumentException) {
+                exception = caught
+            }
+
+            assertNotNull(exception)
+
+            assertEquals(
+                "Reordered item count does not match reading list",
+                exception?.message
+            )
+        }
+
+    @Test
+    fun reorderUserReadingListItems_rejectsDuplicateItemIds() =
+        runBlocking {
+            val firstIssueId = createIssue("1")
+            val secondIssueId = createIssue("2")
+
+            val publisher = comicDao.getPublisherByName("Marvel")!!
+
+            val readingListId = repository.createUserReadingList(
+                    title = "Duplicate Item Test",
+                    description = null,
+                    publisherId = publisher.id,
+                    universeId = null
+                )
+
+            val firstItemId = repository.addIssueToUserReadingList(
+                    readingListId,
+                    firstIssueId
+                )
+
+            repository.addIssueToUserReadingList(readingListId, secondIssueId)
+
+            var exception: IllegalArgumentException? = null
+
+            try {
+                repository.reorderUserReadingListItems(
+                    readingListId = readingListId,
+                    orderedItemIds = listOf(firstItemId, firstItemId)
+                )
+            } catch (caught: IllegalArgumentException) {
+                exception = caught
+            }
+
+            assertNotNull(exception)
+
+            assertEquals(
+                "Reordered item IDs contain duplicates",
+                exception?.message
+            )
+        }
+    @Test
+    fun reorderUserReadingListItems_rejectsNonUserOwnedList() =
+        runBlocking {
+            val issueId = createIssue("1")
+            val publisher = comicDao.getPublisherByName("Marvel")!!
+
+            val readingListId = comicDao.insertReadingList(
+                    ReadingList(
+                        title = "Bundled List",
+                        description = null,
+                        publisherId = publisher.id,
+                        universeId = null,
+                        source = ReadingListSource.BUNDLED,
+                        sourceKey = "bundled-test",
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            val itemId = repository.addReadingListItem(
+                    ReadingListItem(
+                        readingListId = readingListId,
+                        sectionId = null,
+                        issueId = issueId,
+                        position = 1,
+                        required = true,
+                        notes = null
+                    )
+                )
+
+            var exception: IllegalArgumentException? = null
+
+            try {
+                repository.reorderUserReadingListItems(
+                    readingListId = readingListId,
+                    orderedItemIds = listOf(itemId)
+                )
+            } catch (caught: IllegalArgumentException) {
+                exception = caught
+            }
+
+            assertNotNull(exception)
+
+            assertEquals(
+                "Reading list $readingListId is not user-owned",
+                exception?.message
+            )
+        }
+
+    @Test
+    fun reorderUserReadingListItems_updatesReadingListTimestamp() =
+        runBlocking {
+            val firstIssueId = createIssue("1")
+            val secondIssueId = createIssue("2")
+
+            val publisher = comicDao.getPublisherByName("Marvel")!!
+
+            val readingListId = repository.createUserReadingList(
+                    title = "Timestamp Reorder Test",
+                    description = null,
+                    publisherId = publisher.id,
+                    universeId = null
+                )
+
+            val firstItemId = repository.addIssueToUserReadingList(
+                    readingListId,
+                    firstIssueId
+                )
+
+            val secondItemId = repository.addIssueToUserReadingList(
+                    readingListId,
+                    secondIssueId
+                )
+
+            val before = comicDao.getReadingListById(readingListId)!!
+
+            repository.reorderUserReadingListItems(
+                readingListId = readingListId,
+                orderedItemIds = listOf(secondItemId, firstItemId)
+            )
+
+            val after = comicDao.getReadingListById(readingListId)!!
+
+            assertTrue(after.updatedAt > before.updatedAt)
         }
 }

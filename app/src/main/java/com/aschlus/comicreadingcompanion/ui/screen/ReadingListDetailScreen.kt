@@ -676,6 +676,22 @@ fun ReadingListDetailScreen(
                         }
 
                         if (!isSectionCollapsed) {
+                            val fullIssueIndex =
+                                issues.indexOfFirst { fullIssue ->
+                                    fullIssue.readingListItemId == issue.readingListItemId
+                                }
+
+                            val canReorder = readingList?.source == ReadingListSource.USER
+
+                            val canMoveUp = canReorder &&
+                                    fullIssueIndex > 0 &&
+                                    issues[fullIssueIndex - 1].sectionId == issue.sectionId
+
+                            val canMoveDown = canReorder &&
+                                    fullIssueIndex >= 0 &&
+                                    fullIssueIndex < issues.lastIndex &&
+                                    issues[fullIssueIndex + 1].sectionId == issue.sectionId
+
                             ReadingListIssueRow(
                                 issue = issue,
                                 onIssueClick = {
@@ -694,6 +710,19 @@ fun ReadingListDetailScreen(
                                 onMarkAllBeforeRead = {
                                     viewModel.markAllBeforeAsRead(
                                         selectedIssue = issue
+                                    )
+                                },
+                                canReorder = canReorder,
+                                canMoveUp = canMoveUp,
+                                canMoveDown = canMoveDown,
+                                onMoveUp = {
+                                    viewModel.moveIssueUp(
+                                        issue = issue
+                                    )
+                                },
+                                onMoveDown = {
+                                    viewModel.moveIssueDown(
+                                        issue = issue
                                     )
                                 },
                                 canRemove = readingList?.source == ReadingListSource.USER,
@@ -1061,6 +1090,11 @@ private fun ReadingListIssueRow(
     onToggleRead: () -> Unit,
     onMarkAsReading: () -> Unit,
     onMarkAllBeforeRead: () -> Unit,
+    canReorder: Boolean,
+    canMoveUp: Boolean,
+    canMoveDown: Boolean,
+    onMoveUp: () -> Unit,
+    onMoveDown: () -> Unit,
     canRemove: Boolean,
     onRemoveRequest: () -> Unit
 ) {
@@ -1199,6 +1233,30 @@ private fun ReadingListIssueRow(
                         onClick = {
                             menuExpanded = false
                             onMarkAllBeforeRead()
+                        }
+                    )
+                }
+
+                if (canReorder) {
+                    DropdownMenuItem(
+                        text = {
+                            Text("Move up")
+                        },
+                        enabled = canMoveUp,
+                        onClick = {
+                            menuExpanded = false
+                            onMoveUp()
+                        }
+                    )
+
+                    DropdownMenuItem(
+                        text = {
+                            Text("Move down")
+                        },
+                        enabled = canMoveDown,
+                        onClick = {
+                            menuExpanded = false
+                            onMoveDown()
                         }
                     )
                 }

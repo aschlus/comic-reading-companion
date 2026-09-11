@@ -3,6 +3,7 @@ package com.aschlus.comicreadingcompanion.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
+import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSource
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListIssue
 import com.aschlus.comicreadingcompanion.data.repository.ComicRepository
@@ -67,6 +68,76 @@ class ReadingListDetailViewModel(
             repository.markIssueAsReading(
                 issue.issueId
             )
+        }
+    }
+
+    fun moveIssueUp(
+        issue: ReadingListIssue
+    ) {
+        moveIssue(
+            issue = issue,
+            offset = -1
+        )
+    }
+
+    fun moveIssueDown(
+        issue: ReadingListIssue
+    ) {
+        moveIssue(
+            issue = issue,
+            offset = 1
+        )
+    }
+
+    private fun moveIssue(
+        issue: ReadingListIssue,
+        offset: Int
+    ) {
+        val readingList = _readingList.value
+            ?: return
+
+        if (readingList.source != ReadingListSource.USER) {
+            return
+        }
+
+        val currentIssues = _issues.value
+
+        val currentIndex =
+            currentIssues.indexOfFirst { currentIssue ->
+                currentIssue.readingListItemId == issue.readingListItemId
+            }
+
+        if (currentIndex < 0) {
+            return
+        }
+
+
+        val targetIndex = currentIndex + offset
+
+        if (targetIndex !in currentIssues.indices) {
+            return
+        }
+
+        val targetIssue = currentIssues[targetIndex]
+
+        if (targetIssue.sectionId != issue.sectionId) {
+            return
+        }
+
+        val orderedItemIds = currentIssues.map { currentIssue ->
+            currentIssue.readingListItemId
+        }.toMutableList()
+
+        val movedItemId = orderedItemIds.removeAt(currentIndex)
+
+        orderedItemIds.add(targetIndex, movedItemId)
+
+        viewModelScope.launch {
+            repository
+                .reorderUserReadingListItems(
+                    readingListId = readingList.id,
+                    orderedItemIds = orderedItemIds
+                )
         }
     }
 

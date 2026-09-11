@@ -3,6 +3,8 @@ package com.aschlus.comicreadingcompanion.ui.screen
 import android.content.Context
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsEnabled
+import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.assertIsOff
 import androidx.compose.ui.test.assertIsOn
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -2247,6 +2249,269 @@ class ReadingListDetailScreenTest {
             composeRule.onNodeWithContentDescription("More options").performClick()
             composeRule.onNodeWithText("Mark as reading").assertIsDisplayed()
             composeRule.onNodeWithText("Remove from reading list").assertDoesNotExist()
+        }
+    }
+
+    @Test
+    fun readingListDetailScreen_moveUpReordersUserList() {
+        runBlocking {
+            val publisherId = comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Reorder Screen Series",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2000
+                    )
+                )
+
+            val firstIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "First Issue",
+                        publicationDate = "2000-01",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val secondIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "2",
+                        title = "Second Issue",
+                        publicationDate = "2000-02",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Reorder Screen Test",
+                    description = null,
+                    publisherId = publisherId,
+                    universeId = null
+                )
+
+            repository.addIssueToUserReadingList(readingListId, firstIssueId)
+            repository.addIssueToUserReadingList(readingListId, secondIssueId)
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    ReadingListDetailScreen(
+                        readingListId = readingListId,
+                        startPosition = -1,
+                        viewModel = viewModel,
+                        onIssueClick = {},
+                        onBackClick = {}
+                    )
+                }
+            }
+
+            composeRule.waitUntil(timeoutMillis = 5000L) {
+                composeRule.onAllNodesWithText("Reorder Screen Series #2")
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            // Open the second issue's row menu.
+            composeRule.onAllNodesWithContentDescription("More options")[1].performClick()
+            composeRule.onNodeWithText("Move up").assertIsEnabled().performClick()
+            composeRule.waitUntil(timeoutMillis = 5000L) {
+                runBlocking {
+                    comicDao.getItemsForReadingList(readingListId)
+                        .map { item -> item.issueId } == listOf(secondIssueId, firstIssueId)
+                }
+            }
+
+            val reorderedItems = comicDao.getItemsForReadingList(readingListId)
+
+            assertEquals(
+                listOf(secondIssueId, firstIssueId),
+                reorderedItems.map { it.issueId }
+            )
+            assertEquals(
+                listOf(1, 2),
+                reorderedItems.map { it.position }
+            )
+        }
+    }
+
+    @Test
+    fun readingListDetailScreen_reorderMenuReflectsListBoundary() {
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Boundary Screen Series",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2000
+                    )
+                )
+
+            val issueIds =
+                (1..2).map { number ->
+                    comicDao.insertIssue(
+                        Issue(
+                            seriesId = seriesId,
+                            universeId = null,
+                            issueNumber =
+                                number.toString(),
+                            title = "Issue $number",
+                            publicationDate =
+                                "2000-0$number",
+                            coverUrl = null,
+                            description = null,
+                            issueType =
+                                IssueType.REGULAR
+                        )
+                    )
+                }
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Boundary Screen Test",
+                    description = null,
+                    publisherId = publisherId,
+                    universeId = null
+                )
+
+            issueIds.forEach { issueId ->
+                repository.addIssueToUserReadingList(readingListId, issueId)
+            }
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    ReadingListDetailScreen(
+                        readingListId =
+                            readingListId,
+                        startPosition = -1,
+                        viewModel = viewModel,
+                        onIssueClick = {},
+                        onBackClick = {}
+                    )
+                }
+            }
+
+            composeRule.waitUntil(timeoutMillis = 5000L) {
+                composeRule.onAllNodesWithText("Boundary Screen Series #1")
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+            composeRule.onAllNodesWithContentDescription("More options")[0].performClick()
+            composeRule.onNodeWithText("Move up").assertIsNotEnabled()
+            composeRule.onNodeWithText("Move down").assertIsEnabled()
+        }
+    }
+
+    @Test
+    fun readingListDetailScreen_bundledListDoesNotShowReorderActions() {
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Bundled Screen Series",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2000
+                    )
+                )
+
+            val issueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "Bundled Issue",
+                        publicationDate = "2000-01",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val readingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title = "Bundled Screen Test",
+                        description = null,
+                        publisherId = publisherId,
+                        universeId = null,
+                        source =
+                            ReadingListSource.BUNDLED,
+                        sourceKey =
+                            "screen-bundled-reorder-test",
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            comicDao.insertReadingListItem(
+                ReadingListItem(
+                    readingListId = readingListId,
+                    sectionId = null,
+                    issueId = issueId,
+                    position = 1,
+                    required = true,
+                    notes = null
+                )
+            )
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    ReadingListDetailScreen(
+                        readingListId =
+                            readingListId,
+                        startPosition = -1,
+                        viewModel = viewModel,
+                        onIssueClick = {},
+                        onBackClick = {}
+                    )
+                }
+            }
+
+            composeRule.waitUntil(timeoutMillis = 5000L) {
+                composeRule.onAllNodesWithText("Bundled Screen Series #1")
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule.onNodeWithContentDescription("More options").performClick()
+            composeRule.onNodeWithText("Move up").assertDoesNotExist()
+            composeRule.onNodeWithText("Move down").assertDoesNotExist()
         }
     }
 }
