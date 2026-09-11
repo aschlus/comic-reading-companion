@@ -1,0 +1,792 @@
+{
+  "publisher": "Marvel Comics",
+  "universes": [
+    {
+      "name": "Ultimate Marvel Universe",
+      "designation": "Earth-1610",
+      "description": "The original Ultimate Marvel universe."
+    }
+  ],
+  "series": [
+    {
+      "title": "Ultimate Spider-Man",
+      "volume": 1,
+      "startYear": 2000,
+      "endYear": 2009,
+      "comicVineVolumeId": 7257,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR",
+      "issueOverrides": {
+        "1/2": {
+          "type": "SPECIAL"
+        }
+      }
+    },
+    {
+      "title": "Ultimate Spider-Man Special",
+      "volume": 1,
+      "startYear": 2002,
+      "endYear": 2002,
+      "comicVineVolumeId": 19138,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "SPECIAL"
+    },
+    {
+      "title": "Ultimate Spider-Man Annual",
+      "volume": 1,
+      "startYear": 2005,
+      "endYear": 2008,
+      "comicVineVolumeId": 18223,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "ANNUAL"
+    },
+    {
+      "title": "Ultimate Marvel Team-Up",
+      "volume": 1,
+      "startYear": 2001,
+      "endYear": 2002,
+      "comicVineVolumeId": 7515,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate X-Men",
+      "volume": 1,
+      "startYear": 2001,
+      "endYear": 2009,
+      "comicVineVolumeId": 7258,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR",
+      "issueOverrides": {
+        "1/2": {
+          "type": "SPECIAL"
+        }
+      }
+    },
+    {
+      "title": "Ultimate X-Men Annual",
+      "volume": 1,
+      "startYear": 2005,
+      "endYear": 2006,
+      "comicVineVolumeId": 18892,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "ANNUAL"
+    },
+    {
+      "title": "The Ultimates",
+      "volume": 1,
+      "startYear": 2002,
+      "endYear": 2003,
+      "comicVineVolumeId": 18327,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "The Ultimates Annual",
+      "volume": 1,
+      "startYear": 2005,
+      "endYear": 2006,
+      "comicVineVolumeId": 18261,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "ANNUAL"
+    },
+    {
+      "title": "Ultimate Daredevil/Elektra",
+      "volume": 1,
+      "startYear": 2002,
+      "endYear": 2003,
+      "comicVineVolumeId": 23003,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Elektra",
+      "volume": 1,
+      "startYear": 2004,
+      "endYear": 2005,
+      "comicVineVolumeId": 20985,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Adventures",
+      "volume": 1,
+      "startYear": 2002,
+      "endYear": 2004,
+      "comicVineVolumeId": 23002,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate War",
+      "volume": 1,
+      "startYear": 2002,
+      "endYear": 2003,
+      "comicVineVolumeId": 20075,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Six",
+      "volume": 1,
+      "startYear": 2003,
+      "endYear": 2004,
+      "comicVineVolumeId": 19405,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Fantastic Four",
+      "volume": 1,
+      "startYear": 2004,
+      "endYear": 2009,
+      "comicVineVolumeId": 10379,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Fantastic Four Annual",
+      "volume": 1,
+      "startYear": 2005,
+      "endYear": 2006,
+      "comicVineVolumeId": 18254,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "ANNUAL"
+    },
+    {
+      "title": "Ultimate Nightmare",
+      "volume": 1,
+      "startYear": 2004,
+      "endYear": 2005,
+      "comicVineVolumeId": 18045,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Secret",
+      "volume": 1,
+      "startYear": 2005,
+      "endYear": 2005,
+      "comicVineVolumeId": 18046,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Extinction",
+      "volume": 1,
+      "startYear": 2006,
+      "endYear": 2006,
+      "comicVineVolumeId": 18067,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "The Ultimates 2",
+      "volume": 1,
+      "startYear": 2005,
+      "endYear": 2007,
+      "comicVineVolumeId": 18326,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Iron Man",
+      "volume": 1,
+      "startYear": 2005,
+      "endYear": 2006,
+      "comicVineVolumeId": 19644,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Iron Man II",
+      "volume": 1,
+      "startYear": 2007,
+      "endYear": 2008,
+      "comicVineVolumeId": 20084,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Wolverine vs. Hulk",
+      "volume": 1,
+      "startYear": 2005,
+      "endYear": 2009,
+      "comicVineVolumeId": 18408,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate X4",
+      "volume": 1,
+      "startYear": 2006,
+      "endYear": 2006,
+      "comicVineVolumeId": 18893,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Vision",
+      "volume": 1,
+      "startYear": 2006,
+      "endYear": 2007,
+      "comicVineVolumeId": 20149,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Power",
+      "volume": 1,
+      "startYear": 2006,
+      "endYear": 2008,
+      "comicVineVolumeId": 18310,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Human",
+      "volume": 1,
+      "startYear": 2008,
+      "endYear": 2008,
+      "comicVineVolumeId": 20251,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "The Ultimates 3",
+      "volume": 1,
+      "startYear": 2008,
+      "endYear": 2008,
+      "comicVineVolumeId": 19861,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Origins",
+      "volume": 1,
+      "startYear": 2008,
+      "endYear": 2008,
+      "comicVineVolumeId": 21778,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Fantastic Four/Ultimate X-Men Annual",
+      "volume": 1,
+      "startYear": 2008,
+      "endYear": 2008,
+      "comicVineVolumeId": 23137,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "ANNUAL"
+    },
+    {
+      "title": "Ultimate X-Men/Ultimate Fantastic Four Annual",
+      "volume": 1,
+      "startYear": 2008,
+      "endYear": 2008,
+      "comicVineVolumeId": 22965,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "ANNUAL"
+    },
+    {
+      "title": "Ultimate Captain America Annual",
+      "volume": 1,
+      "startYear": 2008,
+      "endYear": 2008,
+      "comicVineVolumeId": 23542,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "ANNUAL"
+    },
+    {
+      "title": "Ultimate Hulk Annual",
+      "volume": 1,
+      "startYear": 2008,
+      "endYear": 2008,
+      "comicVineVolumeId": 25407,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "ANNUAL"
+    },
+    {
+      "title": "Ultimatum",
+      "volume": 1,
+      "startYear": 2008,
+      "endYear": 2009,
+      "comicVineVolumeId": 23592,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimatum: Spider-Man Requiem",
+      "volume": 1,
+      "startYear": 2009,
+      "endYear": 2009,
+      "comicVineVolumeId": 26749,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimatum: Fantastic Four Requiem",
+      "volume": 1,
+      "startYear": 2009,
+      "endYear": 2009,
+      "comicVineVolumeId": 27281,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "ONE_SHOT"
+    },
+    {
+      "title": "Ultimatum: X-Men Requiem",
+      "volume": 1,
+      "startYear": 2009,
+      "endYear": 2009,
+      "comicVineVolumeId": 27283,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "ONE_SHOT"
+    },
+    {
+      "title": "Ultimate Spider-Man",
+      "volume": 2,
+      "startYear": 2009,
+      "endYear": 2011,
+      "comicVineVolumeId": 27381,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Comics Armor Wars",
+      "volume": 1,
+      "startYear": 2009,
+      "endYear": 2010,
+      "comicVineVolumeId": 28008,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Avengers",
+      "volume": 1,
+      "startYear": 2009,
+      "endYear": 2011,
+      "comicVineVolumeId": 27388,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Enemy",
+      "volume": 1,
+      "startYear": 2010,
+      "endYear": 2010,
+      "comicVineVolumeId": 31298,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Mystery",
+      "volume": 1,
+      "startYear": 2010,
+      "endYear": 2010,
+      "comicVineVolumeId": 34653,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Doom",
+      "volume": 1,
+      "startYear": 2010,
+      "endYear": 2011,
+      "comicVineVolumeId": 37823,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate X",
+      "volume": 1,
+      "startYear": 2010,
+      "endYear": 2011,
+      "comicVineVolumeId": 31375,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate New Ultimates",
+      "volume": 1,
+      "startYear": 2010,
+      "endYear": 2011,
+      "comicVineVolumeId": 31727,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Thor",
+      "volume": 1,
+      "startYear": 2010,
+      "endYear": 2011,
+      "comicVineVolumeId": 35919,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Captain America",
+      "volume": 1,
+      "startYear": 2011,
+      "endYear": 2011,
+      "comicVineVolumeId": 38088,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Avengers vs. New Ultimates",
+      "volume": 1,
+      "startYear": 2011,
+      "endYear": 2011,
+      "comicVineVolumeId": 38900,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Fallout",
+      "volume": 1,
+      "startYear": 2011,
+      "endYear": 2011,
+      "comicVineVolumeId": 41289,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Comics Ultimates",
+      "volume": 1,
+      "startYear": 2011,
+      "endYear": 2013,
+      "comicVineVolumeId": 42322,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Comics Hawkeye",
+      "volume": 1,
+      "startYear": 2011,
+      "endYear": 2012,
+      "comicVineVolumeId": 42462,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Comics Spider-Man",
+      "volume": 1,
+      "startYear": 2011,
+      "endYear": 2014,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR",
+      "issueMappings": {
+        "1": {
+          "comicVineVolumeId": 42821,
+          "comicVineIssueNumber": "1"
+        },
+        "2": {
+          "comicVineVolumeId": 42821,
+          "comicVineIssueNumber": "2"
+        },
+        "3": {
+          "comicVineVolumeId": 42821,
+          "comicVineIssueNumber": "3"
+        },
+        "4": {
+          "comicVineVolumeId": 42821,
+          "comicVineIssueNumber": "4"
+        },
+        "5": {
+          "comicVineVolumeId": 42821,
+          "comicVineIssueNumber": "5"
+        },
+        "6": {
+          "comicVineVolumeId": 42821,
+          "comicVineIssueNumber": "6"
+        },
+        "7": {
+          "comicVineVolumeId": 42821,
+          "comicVineIssueNumber": "7"
+        },
+        "8": {
+          "comicVineVolumeId": 42821,
+          "comicVineIssueNumber": "8"
+        },
+        "9": {
+          "comicVineVolumeId": 42821,
+          "comicVineIssueNumber": "9"
+        },
+        "10": {
+          "comicVineVolumeId": 42821,
+          "comicVineIssueNumber": "10"
+        },
+        "11": {
+          "comicVineVolumeId": 42821,
+          "comicVineIssueNumber": "11"
+        },
+        "12": {
+          "comicVineVolumeId": 42821,
+          "comicVineIssueNumber": "12"
+        },
+        "13": {
+          "comicVineVolumeId": 42821,
+          "comicVineIssueNumber": "13"
+        },
+        "14": {
+          "comicVineVolumeId": 42821,
+          "comicVineIssueNumber": "14"
+        },
+        "15": {
+          "comicVineVolumeId": 42821,
+          "comicVineIssueNumber": "15"
+        },
+        "16": {
+          "comicVineVolumeId": 42821,
+          "comicVineIssueNumber": "16"
+        },
+        "17": {
+          "comicVineVolumeId": 42821,
+          "comicVineIssueNumber": "17"
+        },
+        "18": {
+          "comicVineVolumeId": 42821,
+          "comicVineIssueNumber": "18"
+        },
+        "19": {
+          "comicVineVolumeId": 42821,
+          "comicVineIssueNumber": "19"
+        },
+        "20": {
+          "comicVineVolumeId": 42821,
+          "comicVineIssueNumber": "20"
+        },
+        "21": {
+          "comicVineVolumeId": 42821,
+          "comicVineIssueNumber": "21"
+        },
+        "22": {
+          "comicVineVolumeId": 42821,
+          "comicVineIssueNumber": "22"
+        },
+        "23": {
+          "comicVineVolumeId": 42821,
+          "comicVineIssueNumber": "23"
+        },
+        "24": {
+          "comicVineVolumeId": 42821,
+          "comicVineIssueNumber": "24"
+        },
+        "25": {
+          "comicVineVolumeId": 42821,
+          "comicVineIssueNumber": "25"
+        },
+        "26": {
+          "comicVineVolumeId": 42821,
+          "comicVineIssueNumber": "26"
+        },
+        "27": {
+          "comicVineVolumeId": 42821,
+          "comicVineIssueNumber": "27"
+        },
+        "28": {
+          "comicVineVolumeId": 42821,
+          "comicVineIssueNumber": "28"
+        },
+        "16.1": {
+          "comicVineVolumeId": 42821,
+          "comicVineIssueNumber": "16.1"
+        },
+        "200": {
+          "comicVineVolumeId": 42821,
+          "comicVineIssueNumber": "200"
+        }
+      }
+    },
+    {
+      "title": "Ultimate Comics X-Men",
+      "volume": 1,
+      "startYear": 2011,
+      "endYear": 2013,
+      "comicVineVolumeId": 42947,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Spider-Men",
+      "volume": 1,
+      "startYear": 2012,
+      "endYear": 2012,
+      "comicVineVolumeId": 49395,
+      "defaultUniverseDesignation": null,
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Comics Wolverine",
+      "volume": 1,
+      "startYear": 2013,
+      "endYear": 2013,
+      "comicVineVolumeId": 23238,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Comics Iron Man",
+      "volume": 1,
+      "startYear": 2012,
+      "endYear": 2013,
+      "comicVineVolumeId": 53117,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Hunger",
+      "volume": 1,
+      "startYear": 2013,
+      "endYear": 2013,
+      "comicVineVolumeId": 65628,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Cataclysm",
+      "volume": 1,
+      "startYear": 2013,
+      "endYear": 2013,
+      "comicVineVolumeId": 68720,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "ONE_SHOT"
+    },
+    {
+      "title": "Cataclysm: The Ultimates' Last Stand",
+      "volume": 1,
+      "startYear": 2013,
+      "endYear": 2014,
+      "comicVineVolumeId": 68921,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Cataclysm: Ultimate Spider-Man",
+      "volume": 1,
+      "startYear": 2013,
+      "endYear": 2014,
+      "comicVineVolumeId": 69122,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Cataclysm: The Ultimates",
+      "volume": 1,
+      "startYear": 2013,
+      "endYear": 2014,
+      "comicVineVolumeId": 69371,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Cataclysm: Ultimate X-Men",
+      "volume": 1,
+      "startYear": 2013,
+      "endYear": 2014,
+      "comicVineVolumeId": 69571,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Survive!",
+      "volume": 1,
+      "startYear": 2014,
+      "endYear": 2014,
+      "comicVineVolumeId": 72583,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "ONE_SHOT"
+    },
+    {
+      "title": "Ultimate FF",
+      "volume": 1,
+      "startYear": 2014,
+      "endYear": 2014,
+      "comicVineVolumeId": 73101,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "All-New Ultimates",
+      "volume": 1,
+      "startYear": 2014,
+      "endYear": 2015,
+      "comicVineVolumeId": 72932,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Miles Morales: Ultimate Spider-Man",
+      "volume": 1,
+      "startYear": 2014,
+      "endYear": 2015,
+      "comicVineVolumeId": 73678,
+      "defaultUniverseDesignation": "Earth-1610",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Secret Wars",
+      "volume": 1,
+      "startYear": 2015,
+      "endYear": 2016,
+      "defaultUniverseDesignation": null,
+      "defaultIssueType": "REGULAR",
+      "issueMappings": {
+        "0": {
+          "comicVineVolumeId": 81729,
+          "comicVineIssueNumber": "0"
+        },
+        "1": {
+          "comicVineVolumeId": 81833,
+          "comicVineIssueNumber": "1"
+        },
+        "2": {
+          "comicVineVolumeId": 81833,
+          "comicVineIssueNumber": "2"
+        },
+        "3": {
+          "comicVineVolumeId": 81833,
+          "comicVineIssueNumber": "3"
+        },
+        "4": {
+          "comicVineVolumeId": 81833,
+          "comicVineIssueNumber": "4"
+        },
+        "5": {
+          "comicVineVolumeId": 81833,
+          "comicVineIssueNumber": "5"
+        },
+        "6": {
+          "comicVineVolumeId": 81833,
+          "comicVineIssueNumber": "6"
+        },
+        "7": {
+          "comicVineVolumeId": 81833,
+          "comicVineIssueNumber": "7"
+        },
+        "8": {
+          "comicVineVolumeId": 81833,
+          "comicVineIssueNumber": "8"
+        },
+        "9": {
+          "comicVineVolumeId": 81833,
+          "comicVineIssueNumber": "9"
+        }
+      },
+      "issueOverrides": {
+        "0": {
+          "type": "PREVIEW"
+        }
+      }
+    },
+    {
+      "title": "Ultimate End",
+      "volume": 1,
+      "startYear": 2015,
+      "endYear": 2016,
+      "comicVineVolumeId": 82109,
+      "defaultUniverseDesignation": null,
+      "defaultIssueType": "REGULAR"
+    }
+  ]
+}

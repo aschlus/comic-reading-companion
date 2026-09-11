@@ -1,6 +1,6 @@
 {
   "publisher": "Marvel Comics",
-  "description": "Series/volume candidates required for the original Ultimate Marvel reading-order catalog import. Comic Vine volume IDs are intentionally absent until candidate matching is reviewed.",
+  "description": "Normalized series/volume manifest for the original Ultimate Marvel catalog import. Naming has been aligned with verified Comic Vine volumes where known. Comic Vine IDs are intentionally not included yet; Ultimate Fantastic Four/X-Men remains a manual-review exception.",
   "series": [
     {
       "title": "Ultimate Spider-Man",
@@ -12,7 +12,7 @@
       "defaultUniverseDesignation": "Earth-1610"
     },
     {
-      "title": "Ultimate Spider-Man Super Special",
+      "title": "Ultimate Spider-Man Special",
       "volume": 1,
       "startYear": 2002,
       "endYear": 2002,
@@ -75,7 +75,7 @@
       "defaultUniverseDesignation": "Earth-1610"
     },
     {
-      "title": "Ultimate Daredevil and Elektra",
+      "title": "Ultimate Daredevil/Elektra",
       "volume": 1,
       "startYear": 2002,
       "endYear": 2003,
@@ -216,7 +216,9 @@
       "endYear": 2006,
       "expectedIssueCount": 1,
       "issueScope": "#1",
-      "defaultUniverseDesignation": "Earth-1610"
+      "defaultUniverseDesignation": "Earth-1610",
+      "mappingStatus": "MANUAL_REVIEW_REQUIRED",
+      "mappingNotes": "No verified single-issue Comic Vine source volume was identified from the candidate search. Do not map to a collected edition."
     },
     {
       "title": "Ultimate Vision",
@@ -264,7 +266,7 @@
       "defaultUniverseDesignation": "Earth-1610"
     },
     {
-      "title": "Ultimate Fantastic Four/X-Men Annual",
+      "title": "Ultimate Fantastic Four/Ultimate X-Men Annual",
       "volume": 1,
       "startYear": 2008,
       "endYear": 2008,
@@ -273,7 +275,7 @@
       "defaultUniverseDesignation": "Earth-1610"
     },
     {
-      "title": "Ultimate X-Men/Fantastic Four Annual",
+      "title": "Ultimate X-Men/Ultimate Fantastic Four Annual",
       "volume": 1,
       "startYear": 2008,
       "endYear": 2008,
@@ -345,7 +347,7 @@
       "defaultUniverseDesignation": "Earth-1610"
     },
     {
-      "title": "Ultimate Armor Wars",
+      "title": "Ultimate Comics Armor Wars",
       "volume": 1,
       "startYear": 2009,
       "endYear": 2010,
@@ -354,30 +356,12 @@
       "defaultUniverseDesignation": "Earth-1610"
     },
     {
-      "title": "Ultimate Comics Avengers",
+      "title": "Ultimate Avengers",
       "volume": 1,
       "startYear": 2009,
-      "endYear": 2010,
-      "expectedIssueCount": 6,
-      "issueScope": "#1-6",
-      "defaultUniverseDesignation": "Earth-1610"
-    },
-    {
-      "title": "Ultimate Comics Avengers 2",
-      "volume": 1,
-      "startYear": 2010,
-      "endYear": 2010,
-      "expectedIssueCount": 6,
-      "issueScope": "#1-6",
-      "defaultUniverseDesignation": "Earth-1610"
-    },
-    {
-      "title": "Ultimate Comics Avengers 3",
-      "volume": 1,
-      "startYear": 2010,
       "endYear": 2011,
-      "expectedIssueCount": 6,
-      "issueScope": "#1-6",
+      "expectedIssueCount": 18,
+      "issueScope": "#1-18",
       "defaultUniverseDesignation": "Earth-1610"
     },
     {
@@ -408,7 +392,7 @@
       "defaultUniverseDesignation": "Earth-1610"
     },
     {
-      "title": "Ultimate Comics X",
+      "title": "Ultimate X",
       "volume": 1,
       "startYear": 2010,
       "endYear": 2011,
@@ -417,7 +401,7 @@
       "defaultUniverseDesignation": "Earth-1610"
     },
     {
-      "title": "Ultimate Comics New Ultimates",
+      "title": "Ultimate New Ultimates",
       "volume": 1,
       "startYear": 2010,
       "endYear": 2011,
@@ -426,7 +410,7 @@
       "defaultUniverseDesignation": "Earth-1610"
     },
     {
-      "title": "Ultimate Comics Thor",
+      "title": "Ultimate Thor",
       "volume": 1,
       "startYear": 2010,
       "endYear": 2011,
@@ -435,7 +419,7 @@
       "defaultUniverseDesignation": "Earth-1610"
     },
     {
-      "title": "Ultimate Comics Captain America",
+      "title": "Ultimate Captain America",
       "volume": 1,
       "startYear": 2011,
       "endYear": 2011,
@@ -485,7 +469,7 @@
       "startYear": 2011,
       "endYear": 2014,
       "expectedIssueCount": 30,
-      "issueScope": "#1-28, #16.1, #200",
+      "issueScope": "#1-28, #16.1, #200; exclude Comic Vine #00",
       "defaultUniverseDesignation": "Earth-1610"
     },
     {
@@ -561,7 +545,7 @@
       "defaultUniverseDesignation": "Earth-1610"
     },
     {
-      "title": "Cataclysm: Ultimates",
+      "title": "Cataclysm: The Ultimates",
       "volume": 1,
       "startYear": 2013,
       "endYear": 2014,
@@ -620,7 +604,7 @@
       "startYear": 2015,
       "endYear": 2016,
       "expectedIssueCount": 10,
-      "issueScope": "#0-9",
+      "issueScope": "#0-9; #0 is stored by Comic Vine in a separate FCBD volume",
       "defaultUniverseDesignation": null
     },
     {

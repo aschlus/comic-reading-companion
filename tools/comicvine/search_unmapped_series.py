@@ -43,8 +43,8 @@ def load_api_key() -> str:
     if API_KEY_FILE.exists():
         api_key = API_KEY_FILE.read_text(encoding="utf-8").strip()
 
-    if api_key:
-        return api_key
+        if api_key:
+            return api_key
 
     raise RuntimeError(
         "Comic Vine API key not found."

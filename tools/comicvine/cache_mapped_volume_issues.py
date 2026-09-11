@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import os
 import time
+import argparse
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
@@ -229,15 +230,16 @@ def cache_volume(
     )
 
 
-def main() -> None:
-    mappings = load_json(
-        MAPPINGS_FILE
-    )
-
+def get_volume_ids_from_config(
+        config: dict
+) -> list[int]:
     volume_ids = []
 
-    for mapping in mappings:
-        volume_id = mapping.get(
+    for series in config.get(
+            "series",
+            []
+    ):
+        volume_id = series.get(
             "comicVineVolumeId"
         )
 
@@ -249,7 +251,7 @@ def main() -> None:
                 volume_id
             )
 
-        issue_mappings = mapping.get(
+        issue_mappings = series.get(
             "issueMappings",
             {}
         )
@@ -271,32 +273,82 @@ def main() -> None:
                     issue_volume_id
                 )
 
-    print(
-        f"{len(volume_ids)} mapped "
-        "Comic Vine volume(s)"
+    return volume_ids
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Cache Comic Vine issue metadata "
+            "for mapped volumes."
+        )
     )
 
-    for index, volume_id in enumerate(
-            volume_ids,
-            start=1
-    ):
-        print()
-        print(
-            f"[{index}/{len(volume_ids)}] "
-            f"Volume {volume_id}"
+    parser.add_argument(
+        "--config",
+        type=Path,
+        default=None,
+        help=(
+            "Optional catalog config. "
+            "When omitted, uses "
+            "series_mappings.json."
+        )
+    )
+
+    arguments = parser.parse_args()
+
+    if arguments.config is None:
+        mappings = load_json(
+            MAPPINGS_FILE
         )
 
-        cache_volume(
-            volume_id
-        )
+        volume_ids = []
 
-        if index < len(volume_ids):
-            next_cache = get_cache_file(
-                volume_ids[index]
+        for mapping in mappings:
+            volume_id = mapping.get(
+                "comicVineVolumeId"
             )
 
-            if not next_cache.exists():
-                time.sleep(1.5)
+            if (
+                    volume_id is not None
+                    and volume_id not in volume_ids
+            ):
+                volume_ids.append(
+                    volume_id
+                )
+
+            issue_mappings = mapping.get(
+                "issueMappings",
+                {}
+            )
+
+            for issue_mapping in (
+                    issue_mappings.values()
+            ):
+                issue_volume_id = (
+                    issue_mapping[
+                        "comicVineVolumeId"
+                    ]
+                )
+
+                if (
+                        issue_volume_id
+                        not in volume_ids
+                ):
+                    volume_ids.append(
+                        issue_volume_id
+                    )
+
+    else:
+        config = load_json(
+            arguments.config
+        )
+
+        volume_ids = (
+            get_volume_ids_from_config(
+                config
+            )
+        )
 
     print()
     print("Done.")
