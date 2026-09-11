@@ -1,0 +1,636 @@
+{
+  "publisher": "Marvel Comics",
+  "description": "Series/volume candidates required for the original Ultimate Marvel reading-order catalog import. Comic Vine volume IDs are intentionally absent until candidate matching is reviewed.",
+  "series": [
+    {
+      "title": "Ultimate Spider-Man",
+      "volume": 1,
+      "startYear": 2000,
+      "endYear": 2009,
+      "expectedIssueCount": 134,
+      "issueScope": "#1-133 plus #1/2",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Spider-Man Super Special",
+      "volume": 1,
+      "startYear": 2002,
+      "endYear": 2002,
+      "expectedIssueCount": 1,
+      "issueScope": "#1",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Spider-Man Annual",
+      "volume": 1,
+      "startYear": 2005,
+      "endYear": 2008,
+      "expectedIssueCount": 3,
+      "issueScope": "#1-3",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Marvel Team-Up",
+      "volume": 1,
+      "startYear": 2001,
+      "endYear": 2002,
+      "expectedIssueCount": 16,
+      "issueScope": "#1-16",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate X-Men",
+      "volume": 1,
+      "startYear": 2001,
+      "endYear": 2009,
+      "expectedIssueCount": 101,
+      "issueScope": "#1-100 plus #1/2",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate X-Men Annual",
+      "volume": 1,
+      "startYear": 2005,
+      "endYear": 2006,
+      "expectedIssueCount": 2,
+      "issueScope": "#1-2",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "The Ultimates",
+      "volume": 1,
+      "startYear": 2002,
+      "endYear": 2003,
+      "expectedIssueCount": 13,
+      "issueScope": "#1-13",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "The Ultimates Annual",
+      "volume": 1,
+      "startYear": 2005,
+      "endYear": 2006,
+      "expectedIssueCount": 2,
+      "issueScope": "#1-2",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Daredevil and Elektra",
+      "volume": 1,
+      "startYear": 2002,
+      "endYear": 2003,
+      "expectedIssueCount": 4,
+      "issueScope": "#1-4",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Elektra",
+      "volume": 1,
+      "startYear": 2004,
+      "endYear": 2005,
+      "expectedIssueCount": 5,
+      "issueScope": "#1-5",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Adventures",
+      "volume": 1,
+      "startYear": 2002,
+      "endYear": 2004,
+      "expectedIssueCount": 6,
+      "issueScope": "#1-6",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate War",
+      "volume": 1,
+      "startYear": 2002,
+      "endYear": 2003,
+      "expectedIssueCount": 4,
+      "issueScope": "#1-4",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Six",
+      "volume": 1,
+      "startYear": 2003,
+      "endYear": 2004,
+      "expectedIssueCount": 7,
+      "issueScope": "#1-7",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Fantastic Four",
+      "volume": 1,
+      "startYear": 2004,
+      "endYear": 2009,
+      "expectedIssueCount": 60,
+      "issueScope": "#1-60",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Fantastic Four Annual",
+      "volume": 1,
+      "startYear": 2005,
+      "endYear": 2006,
+      "expectedIssueCount": 2,
+      "issueScope": "#1-2",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Nightmare",
+      "volume": 1,
+      "startYear": 2004,
+      "endYear": 2005,
+      "expectedIssueCount": 5,
+      "issueScope": "#1-5",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Secret",
+      "volume": 1,
+      "startYear": 2005,
+      "endYear": 2005,
+      "expectedIssueCount": 4,
+      "issueScope": "#1-4",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Extinction",
+      "volume": 1,
+      "startYear": 2006,
+      "endYear": 2006,
+      "expectedIssueCount": 5,
+      "issueScope": "#1-5",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "The Ultimates 2",
+      "volume": 1,
+      "startYear": 2005,
+      "endYear": 2007,
+      "expectedIssueCount": 13,
+      "issueScope": "#1-13",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Iron Man",
+      "volume": 1,
+      "startYear": 2005,
+      "endYear": 2006,
+      "expectedIssueCount": 5,
+      "issueScope": "#1-5",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Iron Man II",
+      "volume": 1,
+      "startYear": 2007,
+      "endYear": 2008,
+      "expectedIssueCount": 5,
+      "issueScope": "#1-5",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Wolverine vs. Hulk",
+      "volume": 1,
+      "startYear": 2005,
+      "endYear": 2009,
+      "expectedIssueCount": 6,
+      "issueScope": "#1-6",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate X-Men/Fantastic Four",
+      "volume": 1,
+      "startYear": 2005,
+      "endYear": 2005,
+      "expectedIssueCount": 1,
+      "issueScope": "#1",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Fantastic Four/X-Men",
+      "volume": 1,
+      "startYear": 2006,
+      "endYear": 2006,
+      "expectedIssueCount": 1,
+      "issueScope": "#1",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Vision",
+      "volume": 1,
+      "startYear": 2006,
+      "endYear": 2007,
+      "expectedIssueCount": 6,
+      "issueScope": "#0-5",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Power",
+      "volume": 1,
+      "startYear": 2006,
+      "endYear": 2008,
+      "expectedIssueCount": 9,
+      "issueScope": "#1-9",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Human",
+      "volume": 1,
+      "startYear": 2008,
+      "endYear": 2008,
+      "expectedIssueCount": 4,
+      "issueScope": "#1-4",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "The Ultimates 3",
+      "volume": 1,
+      "startYear": 2008,
+      "endYear": 2008,
+      "expectedIssueCount": 5,
+      "issueScope": "#1-5",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Origins",
+      "volume": 1,
+      "startYear": 2008,
+      "endYear": 2008,
+      "expectedIssueCount": 5,
+      "issueScope": "#1-5",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Fantastic Four/X-Men Annual",
+      "volume": 1,
+      "startYear": 2008,
+      "endYear": 2008,
+      "expectedIssueCount": 1,
+      "issueScope": "#1",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate X-Men/Fantastic Four Annual",
+      "volume": 1,
+      "startYear": 2008,
+      "endYear": 2008,
+      "expectedIssueCount": 1,
+      "issueScope": "#1",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Captain America Annual",
+      "volume": 1,
+      "startYear": 2008,
+      "endYear": 2008,
+      "expectedIssueCount": 1,
+      "issueScope": "#1",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Hulk Annual",
+      "volume": 1,
+      "startYear": 2008,
+      "endYear": 2008,
+      "expectedIssueCount": 1,
+      "issueScope": "#1",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimatum",
+      "volume": 1,
+      "startYear": 2008,
+      "endYear": 2009,
+      "expectedIssueCount": 5,
+      "issueScope": "#1-5",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimatum: Spider-Man Requiem",
+      "volume": 1,
+      "startYear": 2009,
+      "endYear": 2009,
+      "expectedIssueCount": 2,
+      "issueScope": "#1-2",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimatum: Fantastic Four Requiem",
+      "volume": 1,
+      "startYear": 2009,
+      "endYear": 2009,
+      "expectedIssueCount": 1,
+      "issueScope": "#1",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimatum: X-Men Requiem",
+      "volume": 1,
+      "startYear": 2009,
+      "endYear": 2009,
+      "expectedIssueCount": 1,
+      "issueScope": "#1",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Spider-Man",
+      "volume": 2,
+      "startYear": 2009,
+      "endYear": 2011,
+      "expectedIssueCount": 26,
+      "issueScope": "#1-15 and #150-160",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Armor Wars",
+      "volume": 1,
+      "startYear": 2009,
+      "endYear": 2010,
+      "expectedIssueCount": 4,
+      "issueScope": "#1-4",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Comics Avengers",
+      "volume": 1,
+      "startYear": 2009,
+      "endYear": 2010,
+      "expectedIssueCount": 6,
+      "issueScope": "#1-6",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Comics Avengers 2",
+      "volume": 1,
+      "startYear": 2010,
+      "endYear": 2010,
+      "expectedIssueCount": 6,
+      "issueScope": "#1-6",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Comics Avengers 3",
+      "volume": 1,
+      "startYear": 2010,
+      "endYear": 2011,
+      "expectedIssueCount": 6,
+      "issueScope": "#1-6",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Enemy",
+      "volume": 1,
+      "startYear": 2010,
+      "endYear": 2010,
+      "expectedIssueCount": 4,
+      "issueScope": "#1-4",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Mystery",
+      "volume": 1,
+      "startYear": 2010,
+      "endYear": 2010,
+      "expectedIssueCount": 4,
+      "issueScope": "#1-4",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Doom",
+      "volume": 1,
+      "startYear": 2010,
+      "endYear": 2011,
+      "expectedIssueCount": 4,
+      "issueScope": "#1-4",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Comics X",
+      "volume": 1,
+      "startYear": 2010,
+      "endYear": 2011,
+      "expectedIssueCount": 5,
+      "issueScope": "#1-5",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Comics New Ultimates",
+      "volume": 1,
+      "startYear": 2010,
+      "endYear": 2011,
+      "expectedIssueCount": 5,
+      "issueScope": "#1-5",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Comics Thor",
+      "volume": 1,
+      "startYear": 2010,
+      "endYear": 2011,
+      "expectedIssueCount": 4,
+      "issueScope": "#1-4",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Comics Captain America",
+      "volume": 1,
+      "startYear": 2011,
+      "endYear": 2011,
+      "expectedIssueCount": 4,
+      "issueScope": "#1-4",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Avengers vs. New Ultimates",
+      "volume": 1,
+      "startYear": 2011,
+      "endYear": 2011,
+      "expectedIssueCount": 6,
+      "issueScope": "#1-6",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Fallout",
+      "volume": 1,
+      "startYear": 2011,
+      "endYear": 2011,
+      "expectedIssueCount": 6,
+      "issueScope": "#1-6",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Comics Ultimates",
+      "volume": 1,
+      "startYear": 2011,
+      "endYear": 2013,
+      "expectedIssueCount": 31,
+      "issueScope": "#1-30 plus #18.1",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Comics Hawkeye",
+      "volume": 1,
+      "startYear": 2011,
+      "endYear": 2012,
+      "expectedIssueCount": 4,
+      "issueScope": "#1-4",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Comics Spider-Man",
+      "volume": 1,
+      "startYear": 2011,
+      "endYear": 2014,
+      "expectedIssueCount": 30,
+      "issueScope": "#1-28, #16.1, #200",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Comics X-Men",
+      "volume": 1,
+      "startYear": 2011,
+      "endYear": 2013,
+      "expectedIssueCount": 34,
+      "issueScope": "#1-33 plus #18.1",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Spider-Men",
+      "volume": 1,
+      "startYear": 2012,
+      "endYear": 2012,
+      "expectedIssueCount": 5,
+      "issueScope": "#1-5",
+      "defaultUniverseDesignation": null
+    },
+    {
+      "title": "Ultimate Comics Wolverine",
+      "volume": 1,
+      "startYear": 2013,
+      "endYear": 2013,
+      "expectedIssueCount": 4,
+      "issueScope": "#1-4",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate Comics Iron Man",
+      "volume": 1,
+      "startYear": 2012,
+      "endYear": 2013,
+      "expectedIssueCount": 4,
+      "issueScope": "#1-4",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Hunger",
+      "volume": 1,
+      "startYear": 2013,
+      "endYear": 2013,
+      "expectedIssueCount": 4,
+      "issueScope": "#1-4",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Cataclysm",
+      "volume": 1,
+      "startYear": 2013,
+      "endYear": 2013,
+      "expectedIssueCount": 1,
+      "issueScope": "#0.1",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Cataclysm: The Ultimates' Last Stand",
+      "volume": 1,
+      "startYear": 2013,
+      "endYear": 2014,
+      "expectedIssueCount": 5,
+      "issueScope": "#1-5",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Cataclysm: Ultimate Spider-Man",
+      "volume": 1,
+      "startYear": 2013,
+      "endYear": 2014,
+      "expectedIssueCount": 3,
+      "issueScope": "#1-3",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Cataclysm: Ultimates",
+      "volume": 1,
+      "startYear": 2013,
+      "endYear": 2014,
+      "expectedIssueCount": 3,
+      "issueScope": "#1-3",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Cataclysm: Ultimate X-Men",
+      "volume": 1,
+      "startYear": 2013,
+      "endYear": 2014,
+      "expectedIssueCount": 3,
+      "issueScope": "#1-3",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Survive!",
+      "volume": 1,
+      "startYear": 2014,
+      "endYear": 2014,
+      "expectedIssueCount": 1,
+      "issueScope": "#1",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Ultimate FF",
+      "volume": 1,
+      "startYear": 2014,
+      "endYear": 2014,
+      "expectedIssueCount": 6,
+      "issueScope": "#1-6",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "All-New Ultimates",
+      "volume": 1,
+      "startYear": 2014,
+      "endYear": 2015,
+      "expectedIssueCount": 12,
+      "issueScope": "#1-12",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Miles Morales: Ultimate Spider-Man",
+      "volume": 1,
+      "startYear": 2014,
+      "endYear": 2015,
+      "expectedIssueCount": 12,
+      "issueScope": "#1-12",
+      "defaultUniverseDesignation": "Earth-1610"
+    },
+    {
+      "title": "Secret Wars",
+      "volume": 1,
+      "startYear": 2015,
+      "endYear": 2016,
+      "expectedIssueCount": 10,
+      "issueScope": "#0-9",
+      "defaultUniverseDesignation": null
+    },
+    {
+      "title": "Ultimate End",
+      "volume": 1,
+      "startYear": 2015,
+      "endYear": 2016,
+      "expectedIssueCount": 5,
+      "issueScope": "#1-5",
+      "defaultUniverseDesignation": null
+    }
+  ]
+}
