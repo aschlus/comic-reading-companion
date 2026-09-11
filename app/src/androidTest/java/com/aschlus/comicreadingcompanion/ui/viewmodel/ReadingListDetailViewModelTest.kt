@@ -1247,4 +1247,210 @@ class ReadingListDetailViewModelTest {
                 storedItems.map { it.issueId }
             )
         }
+
+    @Test
+    fun loadReadingList_loadsSections() =
+        runBlocking {
+            val publisherId = comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Section Load Test",
+                    description = null,
+                    publisherId = publisherId,
+                    universeId = null
+                )
+
+            val firstSectionId =
+                repository.createUserReadingListSection(
+                    readingListId,
+                    "First Arc",
+                    null
+                )
+
+            val secondSectionId =
+                repository.createUserReadingListSection(
+                    readingListId,
+                    "Second Arc",
+                    null
+                )
+
+            viewModel.loadReadingList(readingListId)
+
+            val loadedSections = withTimeout(5000L.milliseconds) {
+                    viewModel.sections.first { it.size == 2 }
+                }
+
+            assertEquals(
+                listOf(firstSectionId, secondSectionId),
+                loadedSections.map { it.id }
+            )
+
+            assertEquals(
+                listOf("First Arc", "Second Arc"),
+                loadedSections.map { it.title }
+            )
+        }
+
+    @Test
+    fun createSection_createsAndRefreshesSectionState() =
+        runBlocking {
+            val publisherId = comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Create Section Test",
+                    description = null,
+                    publisherId = publisherId,
+                    universeId = null
+                )
+
+            viewModel.loadReadingList(readingListId)
+
+            withTimeout(5000L.milliseconds) {
+                viewModel.readingList.first {
+                    it?.id == readingListId
+                }
+            }
+
+            viewModel.createSection(title = "New Arc", description = "Test description")
+
+            val sections = withTimeout(5000L.milliseconds) {
+                    viewModel.sections.first { it.size == 1 }
+                }
+
+            assertEquals("New Arc", sections.single().title)
+
+            assertEquals("Test description", sections.single().description)
+        }
+
+    @Test
+    fun moveIssueToSection_updatesIssueSection() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Move Section VM Series",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2000
+                    )
+                )
+
+            val issueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "Move Me",
+                        publicationDate = "2000-01",
+                        coverUrl = null,
+                        description = null,
+                        issueType =
+                            IssueType.REGULAR
+                    )
+                )
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Move Section VM Test",
+                    description = null,
+                    publisherId = publisherId,
+                    universeId = null
+                )
+
+            repository.addIssueToUserReadingList(
+                readingListId,
+                issueId
+            )
+
+            val sectionId =
+                repository.createUserReadingListSection(
+                    readingListId,
+                    "Destination Arc",
+                    null
+                )
+
+            viewModel.loadReadingList(readingListId)
+
+            val issue = withTimeout(5000L.milliseconds) {
+                    viewModel.issues.first {
+                        it.size == 1
+                    }
+                }.single()
+
+            assertEquals(null, issue.sectionId)
+
+            viewModel.moveIssueToSection(issue = issue, targetSectionId = sectionId)
+
+            val movedIssue = withTimeout(5000L.milliseconds) {
+                    viewModel.issues.first {
+                        it.singleOrNull()
+                            ?.sectionId == sectionId
+                    }
+                }.single()
+
+            assertEquals(sectionId, movedIssue.sectionId)
+            assertEquals("Destination Arc", movedIssue.sectionTitle)
+        }
+
+    @Test
+    fun createSection_doesNothingForNonUserReadingList() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val readingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title = "Bundled Section Test",
+                        description = null,
+                        publisherId = publisherId,
+                        universeId = null,
+                        source =
+                            ReadingListSource.BUNDLED,
+                        sourceKey =
+                            "bundled-section-test",
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            viewModel.loadReadingList(readingListId)
+
+            withTimeout(5000L.milliseconds) {
+                viewModel.readingList.first {
+                    it?.id == readingListId
+                }
+            }
+
+            viewModel.createSection(title = "Should Not Exist", description = null)
+
+            kotlinx.coroutines.delay(100)
+
+            assertEquals(
+                emptyList<ReadingListSection>(),
+                comicDao.getSectionsForReadingList(
+                    readingListId
+                )
+            )
+
+            assertEquals(
+                emptyList<ReadingListSection>(),
+                viewModel.sections.value
+            )
+        }
 }

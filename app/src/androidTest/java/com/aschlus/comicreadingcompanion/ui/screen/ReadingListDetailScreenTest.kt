@@ -2514,4 +2514,251 @@ class ReadingListDetailScreenTest {
             composeRule.onNodeWithText("Move down").assertDoesNotExist()
         }
     }
+
+    @Test
+    fun readingListDetailScreen_addSectionCreatesSection() {
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Add Section UI Test",
+                    description = null,
+                    publisherId = publisherId,
+                    universeId = null
+                )
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    ReadingListDetailScreen(
+                        readingListId = readingListId,
+                        startPosition = -1,
+                        viewModel = viewModel,
+                        onIssueClick = {},
+                        onBackClick = {}
+                    )
+                }
+            }
+
+            composeRule.waitUntil(timeoutMillis = 5000L) {
+                composeRule.onAllNodesWithText("Add Section UI Test")
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+            composeRule.onNodeWithContentDescription("Reading list options").performClick()
+            composeRule.onNodeWithText("Add section").performClick()
+            composeRule.onAllNodes(hasSetTextAction())[0]
+                .performTextInput("Opening Arc")
+            composeRule.onAllNodes(hasSetTextAction())[1]
+                .performTextInput("First story arc")
+            composeRule.onNodeWithText("Add").performClick()
+            composeRule.waitUntil(timeoutMillis = 5000L) {
+                runBlocking {
+                    comicDao.getSectionsForReadingList(readingListId).size == 1
+                }
+            }
+
+            val section = comicDao.getSectionsForReadingList(readingListId).single()
+            assertEquals("Opening Arc", section.title)
+            assertEquals("First story arc", section.description)
+        }
+    }
+
+    @Test
+    fun readingListDetailScreen_moveIssueToSectionUpdatesIssue() {
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Section UI Series",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2000
+                    )
+                )
+
+            val issueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "Move Me",
+                        publicationDate = "2000-01",
+                        coverUrl = null,
+                        description = null,
+                        issueType =
+                            IssueType.REGULAR
+                    )
+                )
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Move Section UI Test",
+                    description = null,
+                    publisherId = publisherId,
+                    universeId = null
+                )
+
+            repository.addIssueToUserReadingList(
+                readingListId,
+                issueId
+            )
+
+            val sectionId =
+                repository.createUserReadingListSection(
+                    readingListId,
+                    "Destination Arc",
+                    null
+                )
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    ReadingListDetailScreen(
+                        readingListId =
+                            readingListId,
+                        startPosition = -1,
+                        viewModel = viewModel,
+                        onIssueClick = {},
+                        onBackClick = {}
+                    )
+                }
+            }
+
+            composeRule.waitUntil(timeoutMillis = 5000L) {
+                composeRule.onAllNodesWithText("Section UI Series #1")
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+            composeRule.onNodeWithContentDescription("More options").performClick()
+            composeRule.onNodeWithText("Move to section").performClick()
+            composeRule.onNodeWithText("Destination Arc").performClick()
+            composeRule.waitUntil(timeoutMillis = 5000L) {
+                runBlocking {
+                    comicDao.getItemsForReadingList(readingListId).single()
+                        .sectionId == sectionId
+                }
+            }
+
+            val item = comicDao.getItemsForReadingList(readingListId).single()
+            assertEquals(sectionId, item.sectionId)
+            composeRule.onNodeWithText("Destination Arc").assertIsDisplayed()
+        }
+    }
+
+    @Test
+    fun readingListDetailScreen_bundledListDoesNotShowSectionEditingActions() {
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Bundled Section Series",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2000
+                    )
+                )
+
+            val issueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "Bundled Issue",
+                        publicationDate = "2000-01",
+                        coverUrl = null,
+                        description = null,
+                        issueType =
+                            IssueType.REGULAR
+                    )
+                )
+
+            val readingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title =
+                            "Bundled Section UI Test",
+                        description = null,
+                        publisherId = publisherId,
+                        universeId = null,
+                        source =
+                            ReadingListSource.BUNDLED,
+                        sourceKey =
+                            "bundled-section-ui-test",
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            val sectionId =
+                comicDao.insertReadingListSection(
+                    ReadingListSection(
+                        readingListId =
+                            readingListId,
+                        title = "Bundled Arc",
+                        description = null,
+                        position = 1
+                    )
+                )
+
+            comicDao.insertReadingListItem(
+                ReadingListItem(
+                    readingListId =
+                        readingListId,
+                    sectionId = sectionId,
+                    issueId = issueId,
+                    position = 1,
+                    required = true,
+                    notes = null
+                )
+            )
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    ReadingListDetailScreen(
+                        readingListId =
+                            readingListId,
+                        startPosition = -1,
+                        viewModel = viewModel,
+                        onIssueClick = {},
+                        onBackClick = {}
+                    )
+                }
+            }
+
+            composeRule.waitUntil(timeoutMillis = 5000L) {
+                composeRule.onAllNodesWithText("Bundled Section Series #1")
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule.onNodeWithContentDescription("Reading list options").performClick()
+            composeRule.onNodeWithText("Add section").assertDoesNotExist()
+            composeRule.onNodeWithContentDescription("Reading list options").performClick()
+            composeRule.onNodeWithContentDescription("More options").performClick()
+            composeRule.onNodeWithText("Move to section").assertDoesNotExist()
+        }
+    }
 }

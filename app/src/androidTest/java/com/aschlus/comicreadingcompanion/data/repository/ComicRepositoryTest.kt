@@ -1292,4 +1292,425 @@ class ComicRepositoryTest {
 
             assertTrue(after.updatedAt > before.updatedAt)
         }
+
+    @Test
+    fun createUserReadingListSection_createsSequentialTrimmedSections() =
+        runBlocking {
+            createIssue("1")
+
+            val publisher = comicDao.getPublisherByName("Marvel")!!
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Section Creation Test",
+                    description = null,
+                    publisherId = publisher.id,
+                    universeId = null
+                )
+
+            val before = comicDao.getReadingListById(readingListId)!!
+
+            val firstSectionId =
+                repository.createUserReadingListSection(
+                    readingListId = readingListId,
+                    title = "  First Arc  ",
+                    description = "  Opening story  "
+                )
+
+            val secondSectionId =
+                repository.createUserReadingListSection(
+                    readingListId = readingListId,
+                    title = "Second Arc",
+                    description = "   "
+                )
+
+            val sections = comicDao.getSectionsForReadingList(readingListId)
+            assertEquals(
+                listOf(firstSectionId, secondSectionId),
+                sections.map { it.id }
+            )
+            assertEquals(
+                listOf(1, 2),
+                sections.map { it.position }
+            )
+            assertEquals("First Arc", sections[0].title)
+            assertEquals("Opening story", sections[0].description)
+            assertNull(sections[1].description)
+
+            val after = comicDao.getReadingListById(readingListId)!!
+            assertTrue(after.updatedAt > before.updatedAt)
+        }
+
+    @Test
+    fun createUserReadingListSection_rejectsBlankTitle() =
+        runBlocking {
+            createIssue("1")
+
+            val publisher = comicDao.getPublisherByName("Marvel")!!
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Blank Section Test",
+                    description = null,
+                    publisherId = publisher.id,
+                    universeId = null
+                )
+
+            var exception: IllegalArgumentException? = null
+
+            try {
+                repository
+                    .createUserReadingListSection(
+                        readingListId = readingListId,
+                        title = "   ",
+                        description = null
+                    )
+            } catch (
+                caught: IllegalArgumentException
+            ) {
+                exception = caught
+            }
+
+            assertNotNull(exception)
+            assertEquals(
+                "Section title cannot be blank",
+                exception?.message
+            )
+            assertTrue(comicDao.getSectionsForReadingList(readingListId).isEmpty())
+        }
+
+    @Test
+    fun moveUserReadingListItemToSection_movesItemToEndOfTargetSection() =
+        runBlocking {
+            val firstIssueId = createIssue("1")
+            val secondIssueId = createIssue("2")
+            val thirdIssueId = createIssue("3")
+
+            val publisher = comicDao.getPublisherByName("Marvel")!!
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Move Section Test",
+                    description = null,
+                    publisherId = publisher.id,
+                    universeId = null
+                )
+
+            val firstSectionId =
+                repository.createUserReadingListSection(
+                    readingListId,
+                    "First Arc",
+                    null
+                )
+
+            val secondSectionId =
+                repository.createUserReadingListSection(
+                    readingListId,
+                    "Second Arc",
+                    null
+                )
+
+            val firstItemId =
+                repository.addReadingListItem(
+                    ReadingListItem(
+                        readingListId = readingListId,
+                        sectionId = firstSectionId,
+                        issueId = firstIssueId,
+                        position = 1,
+                        required = true,
+                        notes = null
+                    )
+                )
+
+            repository.addReadingListItem(
+                ReadingListItem(
+                    readingListId = readingListId,
+                    sectionId = firstSectionId,
+                    issueId = secondIssueId,
+                    position = 2,
+                    required = true,
+                    notes = null
+                )
+            )
+
+            repository.addReadingListItem(
+                ReadingListItem(
+                    readingListId = readingListId,
+                    sectionId = secondSectionId,
+                    issueId = thirdIssueId,
+                    position = 3,
+                    required = true,
+                    notes = null
+                )
+            )
+
+            repository.moveUserReadingListItemToSection(
+                    readingListId = readingListId,
+                    readingListItemId = firstItemId,
+                    targetSectionId = secondSectionId
+                )
+
+            val items = comicDao.getItemsForReadingList(readingListId)
+
+            assertEquals(
+                listOf(secondIssueId, thirdIssueId, firstIssueId),
+                items.map { it.issueId }
+            )
+
+            assertEquals(
+                listOf(firstSectionId, secondSectionId, secondSectionId),
+                items.map { it.sectionId }
+            )
+            assertEquals(
+                listOf(1, 2, 3),
+                items.map { it.position }
+            )
+        }
+
+    @Test
+    fun moveUserReadingListItemToSection_placesItemInEmptySectionOrder() =
+        runBlocking {
+            val firstIssueId = createIssue("1")
+            val secondIssueId = createIssue("2")
+            val movedIssueId = createIssue("3")
+
+            val publisher = comicDao.getPublisherByName("Marvel")!!
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Empty Section Test",
+                    description = null,
+                    publisherId = publisher.id,
+                    universeId = null
+                )
+
+            val firstSectionId =
+                repository.createUserReadingListSection(
+                    readingListId,
+                    "First",
+                    null
+                )
+
+            val emptySectionId =
+                repository.createUserReadingListSection(
+                    readingListId,
+                    "Middle",
+                    null
+                )
+
+            val thirdSectionId =
+                repository.createUserReadingListSection(
+                    readingListId,
+                    "Third",
+                    null
+                )
+
+            repository.addReadingListItem(
+                ReadingListItem(
+                    readingListId = readingListId,
+                    sectionId = firstSectionId,
+                    issueId = firstIssueId,
+                    position = 1,
+                    required = true,
+                    notes = null
+                )
+            )
+
+            repository.addReadingListItem(
+                ReadingListItem(
+                    readingListId = readingListId,
+                    sectionId = thirdSectionId,
+                    issueId = secondIssueId,
+                    position = 2,
+                    required = true,
+                    notes = null
+                )
+            )
+
+            val movedItemId =
+                repository.addReadingListItem(
+                    ReadingListItem(
+                        readingListId = readingListId,
+                        sectionId = null,
+                        issueId = movedIssueId,
+                        position = 3,
+                        required = true,
+                        notes = null
+                    )
+                )
+
+            repository.moveUserReadingListItemToSection(
+                    readingListId = readingListId,
+                    readingListItemId = movedItemId,
+                    targetSectionId = emptySectionId
+                )
+
+            val items = comicDao.getItemsForReadingList(readingListId)
+
+            assertEquals(
+                listOf(firstIssueId, movedIssueId, secondIssueId),
+                items.map { it.issueId }
+            )
+
+            assertEquals(
+                listOf(firstSectionId, emptySectionId, thirdSectionId),
+                items.map { it.sectionId }
+            )
+
+            assertEquals(
+                listOf(1, 2, 3),
+                items.map { it.position }
+            )
+        }
+
+    @Test
+    fun moveUserReadingListItemToSection_nullMovesItemToEndUnsectioned() =
+        runBlocking {
+            val firstIssueId = createIssue("1")
+            val secondIssueId = createIssue("2")
+            val thirdIssueId = createIssue("3")
+
+            val publisher = comicDao.getPublisherByName("Marvel")!!
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Unsection Test",
+                    description = null,
+                    publisherId = publisher.id,
+                    universeId = null
+                )
+
+            val sectionId =
+                repository.createUserReadingListSection(
+                    readingListId,
+                    "Arc",
+                    null
+                )
+
+            repository.addReadingListItem(
+                ReadingListItem(
+                    readingListId = readingListId,
+                    sectionId = sectionId,
+                    issueId = firstIssueId,
+                    position = 1,
+                    required = true,
+                    notes = null
+                )
+            )
+
+            val movedItemId =
+                repository.addReadingListItem(
+                    ReadingListItem(
+                        readingListId = readingListId,
+                        sectionId = sectionId,
+                        issueId = secondIssueId,
+                        position = 2,
+                        required = true,
+                        notes = null
+                    )
+                )
+
+            repository.addReadingListItem(
+                ReadingListItem(
+                    readingListId = readingListId,
+                    sectionId = null,
+                    issueId = thirdIssueId,
+                    position = 3,
+                    required = true,
+                    notes = null
+                )
+            )
+
+            repository.moveUserReadingListItemToSection(
+                    readingListId = readingListId,
+                    readingListItemId = movedItemId,
+                    targetSectionId = null
+                )
+
+            val items = comicDao.getItemsForReadingList(readingListId)
+
+            assertEquals(
+                listOf(firstIssueId, thirdIssueId, secondIssueId),
+                items.map { it.issueId }
+            )
+
+            assertEquals(
+                listOf(sectionId, null, null),
+                items.map { it.sectionId }
+            )
+
+            assertEquals(
+                listOf(1, 2, 3),
+                items.map { it.position }
+            )
+        }
+
+    @Test
+    fun moveUserReadingListItemToSection_rejectsSectionFromAnotherList() =
+        runBlocking {
+            val issueId = createIssue("1")
+
+            val publisher = comicDao.getPublisherByName("Marvel")!!
+
+            val firstReadingListId =
+                repository.createUserReadingList(
+                    title = "First List",
+                    description = null,
+                    publisherId = publisher.id,
+                    universeId = null
+                )
+
+            val secondReadingListId =
+                repository.createUserReadingList(
+                    title = "Second List",
+                    description = null,
+                    publisherId = publisher.id,
+                    universeId = null
+                )
+
+            val itemId =
+                repository.addIssueToUserReadingList(
+                    firstReadingListId,
+                    issueId
+                )
+
+            val foreignSectionId =
+                repository.createUserReadingListSection(
+                    secondReadingListId,
+                    "Foreign Section",
+                    null
+                )
+
+            var exception: IllegalArgumentException? = null
+
+            try {
+                repository
+                    .moveUserReadingListItemToSection(
+                        readingListId =
+                            firstReadingListId,
+                        readingListItemId =
+                            itemId,
+                        targetSectionId =
+                            foreignSectionId
+                    )
+            } catch (
+                caught: IllegalArgumentException
+            ) {
+                exception = caught
+            }
+
+            assertNotNull(exception)
+
+            assertEquals(
+                "Section $foreignSectionId does not " +
+                        "belong to reading list " +
+                        "$firstReadingListId",
+                exception?.message
+            )
+
+            val item = comicDao.getItemsForReadingList(firstReadingListId).single()
+
+            assertNull(item.sectionId)
+            assertEquals(1, item.position)
+        }
 }

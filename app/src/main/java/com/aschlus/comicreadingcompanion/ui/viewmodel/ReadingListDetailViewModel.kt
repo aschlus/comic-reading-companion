@@ -3,6 +3,7 @@ package com.aschlus.comicreadingcompanion.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
+import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSection
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSource
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListIssue
@@ -26,6 +27,11 @@ class ReadingListDetailViewModel(
     val readingList: StateFlow<ReadingList?> =
         _readingList.asStateFlow()
 
+    private val _sections =
+        MutableStateFlow<List<ReadingListSection>>(emptyList())
+
+    val sections: StateFlow<List<ReadingListSection>> = _sections.asStateFlow()
+
     private val _issues =
         MutableStateFlow<List<ReadingListIssue>>(emptyList())
 
@@ -36,6 +42,9 @@ class ReadingListDetailViewModel(
         viewModelScope.launch {
             _readingList.value =
                 repository.getReadingListById(readingListId)
+
+            _sections.value =
+                repository.getSectionsForReadingList(readingListId)
         }
 
         issuesJob?.cancel()
@@ -68,6 +77,54 @@ class ReadingListDetailViewModel(
             repository.markIssueAsReading(
                 issue.issueId
             )
+        }
+    }
+
+    fun createSection(
+        title: String,
+        description: String?
+    ) {
+        val readingList = _readingList.value
+            ?: return
+
+        if (readingList.source != ReadingListSource.USER) {
+            return
+        }
+
+        viewModelScope.launch {
+            repository
+                .createUserReadingListSection(
+                    readingListId = readingList.id,
+                    title = title,
+                    description = description
+                )
+
+            _sections.value = repository.getSectionsForReadingList(readingList.id)
+        }
+    }
+
+    fun moveIssueToSection(
+        issue: ReadingListIssue,
+        targetSectionId: Long?
+    ) {
+        val readingList = _readingList.value
+            ?: return
+
+        if (readingList.source != ReadingListSource.USER) {
+            return
+        }
+
+        if (issue.sectionId == targetSectionId) {
+            return
+        }
+
+        viewModelScope.launch {
+            repository
+                .moveUserReadingListItemToSection(
+                    readingListId = readingList.id,
+                    readingListItemId = issue.readingListItemId,
+                    targetSectionId = targetSectionId
+                )
         }
     }
 

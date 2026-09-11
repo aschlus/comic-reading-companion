@@ -183,6 +183,61 @@ class ComicRepository(
         return comicDao.insertReadingListSection(section)
     }
 
+    suspend fun createUserReadingListSection(
+        readingListId: Long,
+        title: String,
+        description: String?
+    ): Long {
+        var resultSectionId: Long? = null
+
+        database.withWriteTransaction {
+            val readingList = comicDao.getReadingListById(readingListId)
+                ?: throw IllegalArgumentException(
+                    "Reading list $readingListId does not exist"
+                )
+
+            require(readingList.source == ReadingListSource.USER) {
+                "Reading list $readingListId is not user-owned"
+            }
+
+            val trimmedTitle = title.trim()
+
+            require(trimmedTitle.isNotEmpty()) {
+                "Section title cannot be blank"
+            }
+
+            val sections = comicDao.getSectionsForReadingList(readingListId)
+            val nextPosition = sections.maxOfOrNull { section ->
+                section.position
+            }
+                ?.plus(1)
+                ?: 1
+
+            resultSectionId =
+                comicDao.insertReadingListSection(
+                    ReadingListSection(
+                        readingListId = readingListId,
+                        title = trimmedTitle,
+                        description = description?.trim()
+                            ?.takeIf { it.isNotEmpty() },
+                        position = nextPosition
+                    )
+                )
+
+            val updatedAt = maxOf(System.currentTimeMillis(), readingList.updatedAt + 1)
+
+            comicDao.updateReadingList(
+                readingList.copy(
+                    updatedAt = updatedAt
+                )
+            )
+        }
+
+        return checkNotNull(resultSectionId) {
+            "Reading-list section ID was not set"
+        }
+    }
+
     suspend fun getSectionsForReadingList(
         readingListId: Long
     ): List<ReadingListSection> {
@@ -358,6 +413,113 @@ class ComicRepository(
         }
 
         return wasRemoved
+    }
+
+    suspend fun moveUserReadingListItemToSection(
+        readingListId: Long,
+        readingListItemId: Long,
+        targetSectionId: Long?
+    ) {
+        database.withWriteTransaction {
+            val readingList = comicDao.getReadingListById(readingListId)
+                ?: throw IllegalArgumentException(
+                    "Reading list $readingListId does not exist"
+                )
+
+            require(readingList.source == ReadingListSource.USER) {
+                "Reading list $readingListId is not user-owned"
+            }
+
+            val currentItems = comicDao.getItemsForReadingList(readingListId)
+            val movedItem = currentItems.firstOrNull { item ->
+                item.id == readingListItemId
+            }
+                ?: throw IllegalArgumentException(
+                    "Reading-list item $readingListItemId does " +
+                    "not exist in reading list $readingListId"
+                )
+
+            val sections = comicDao.getSectionsForReadingList(readingListId)
+            val targetSection =
+                if (targetSectionId == null) {
+                    null
+                } else {
+                    sections.firstOrNull {section ->
+                        section.id == targetSectionId
+                    }
+                        ?: throw IllegalArgumentException(
+                            "Section $targetSectionId does not " +
+                            "belong to reading list " +
+                            "$readingListId"
+                        )
+                }
+
+            if (movedItem.sectionId == targetSectionId) {
+                return@withWriteTransaction
+            }
+
+            val remainingItems = currentItems.filter { item -> item.id != readingListItemId }
+            val insertionIndex =
+                if (targetSection == null) {
+                    remainingItems.size
+                } else {
+                    val lastTargetIndex = remainingItems.indexOfLast { item ->
+                            item.sectionId == targetSection.id
+                        }
+
+                    if (lastTargetIndex >= 0) {
+                        lastTargetIndex + 1
+                    } else {
+                        val targetSectionIndex =
+                            sections.indexOfFirst { section ->
+                                section.id == targetSection.id
+                            }
+
+                        check(targetSectionIndex >= 0)
+
+                        val earlierSectionIds =
+                            sections.take(targetSectionIndex).map { section -> section.id }
+                                .toSet()
+
+                        val firstItemNotInEarlierSection =
+                            remainingItems.indexOfFirst { item ->
+                                item.sectionId == null || item.sectionId !in earlierSectionIds
+                            }
+
+                        if (
+                            firstItemNotInEarlierSection >= 0
+                        ) {
+                            firstItemNotInEarlierSection
+                        } else {
+                            remainingItems.size
+                        }
+                    }
+                }
+
+            val reorderedItems = remainingItems.toMutableList()
+
+            reorderedItems.add(
+                insertionIndex,
+                movedItem.copy(sectionId = targetSectionId)
+            )
+
+            // Temporarily vacate all positive positions to avoid the unique
+            // (readingListId, position) constraint.
+            currentItems.forEachIndexed { index, item ->
+                comicDao.updateReadingListItem(
+                    item.copy(position = -(index + 1))
+                )
+            }
+
+            reorderedItems.forEachIndexed { index, item ->
+                comicDao.updateReadingListItem(
+                    item.copy(position = index + 1)
+                )
+            }
+
+            val updatedAt = maxOf(System.currentTimeMillis(), readingList.updatedAt + 1)
+            comicDao.updateReadingList(readingList.copy(updatedAt = updatedAt))
+        }
     }
 
     suspend fun reorderUserReadingListItems(

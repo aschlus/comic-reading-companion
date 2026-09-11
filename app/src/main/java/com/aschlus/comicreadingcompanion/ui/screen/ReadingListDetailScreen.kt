@@ -83,6 +83,9 @@ fun ReadingListDetailScreen(
     val issues by
         viewModel.issues.collectAsState()
 
+    val sections by
+        viewModel.sections.collectAsState()
+
     val listState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
 
@@ -99,6 +102,30 @@ fun ReadingListDetailScreen(
 
     var showResetProgressDialog by remember {
         mutableStateOf(false)
+    }
+
+    var showCreateSectionDialog by remember(
+        readingListId
+    ) {
+        mutableStateOf(false)
+    }
+
+    var newSectionTitle by remember(
+        readingListId
+    ) {
+        mutableStateOf("")
+    }
+
+    var newSectionDescription by remember(
+        readingListId
+    ) {
+        mutableStateOf("")
+    }
+
+    var issuePendingSectionMove by remember(
+        readingListId
+    ) {
+        mutableStateOf<ReadingListIssue?>(null)
     }
 
     var issuePendingRemoval by remember(
@@ -429,6 +456,18 @@ fun ReadingListDetailScreen(
                                     listMenuExpanded = false
                                 }
                             ) {
+                                if (readingList?.source == ReadingListSource.USER) {
+                                    DropdownMenuItem(
+                                        text = {
+                                            Text("Add section")
+                                        },
+                                        onClick = {
+                                            listMenuExpanded = false
+                                            showCreateSectionDialog = true
+                                        }
+                                    )
+                                }
+
                                 DropdownMenuItem(
                                     text = {
                                         Text("Mark all as read")
@@ -725,6 +764,10 @@ fun ReadingListDetailScreen(
                                         issue = issue
                                     )
                                 },
+                                canChangeSection = canReorder && sections.isNotEmpty(),
+                                onMoveToSectionRequest = {
+                                    issuePendingSectionMove = issue
+                                },
                                 canRemove = readingList?.source == ReadingListSource.USER,
                                 onRemoveRequest = { issuePendingRemoval = issue }
                             )
@@ -975,6 +1018,131 @@ fun ReadingListDetailScreen(
         )
     }
 
+    if (showCreateSectionDialog) {
+        AlertDialog(
+            onDismissRequest = {
+                showCreateSectionDialog = false
+                newSectionTitle = ""
+                newSectionDescription = ""
+            },
+            title = {
+                Text("Add section")
+            },
+            text = {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    OutlinedTextField(
+                        value = newSectionTitle,
+                        onValueChange = {
+                            newSectionTitle = it
+                        },
+                        label = {
+                            Text("Section title")
+                        },
+                        singleLine = true
+                    )
+
+                    OutlinedTextField(
+                        value = newSectionDescription,
+                        onValueChange = {
+                            newSectionDescription = it
+                        },
+                        label = {
+                            Text("Description (optional)")
+                        }
+                    )
+                }
+            },
+            confirmButton = {
+                TextButton(
+                    enabled = newSectionTitle.trim().isNotEmpty(),
+                    onClick = {
+                        viewModel.createSection(
+                            title = newSectionTitle,
+                            description = newSectionDescription.takeIf { it.isNotBlank() }
+                        )
+
+                        showCreateSectionDialog = false
+                        newSectionTitle = ""
+                        newSectionDescription = ""
+                    }
+                ) {
+                    Text("Add")
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = {
+                        showCreateSectionDialog = false
+                        newSectionTitle = ""
+                        newSectionDescription = ""
+                    }
+                ) {
+                    Text("Cancel")
+                }
+            }
+        )
+    }
+
+    issuePendingSectionMove?.let { issue ->
+        AlertDialog(
+            onDismissRequest = {
+                issuePendingSectionMove = null
+            },
+            title = {
+                Text("Move to section")
+            },
+            text = {
+                Column {
+                    TextButton(
+                        enabled = issue.sectionId != null,
+                        onClick = {
+                            issuePendingSectionMove = null
+
+                            viewModel
+                                .moveIssueToSection(
+                                    issue = issue,
+                                    targetSectionId = null
+                                )
+                        },
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text("No section")
+                    }
+
+                    sections.forEach { section ->
+                        TextButton(
+                            enabled = issue.sectionId != section.id,
+                            onClick = {
+                                issuePendingSectionMove = null
+
+                                viewModel
+                                    .moveIssueToSection(
+                                        issue = issue,
+                                        targetSectionId = section.id
+                                    )
+                            },
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text(section.title)
+                        }
+                    }
+                }
+            },
+            confirmButton = {},
+            dismissButton = {
+                TextButton(
+                    onClick = {
+                        issuePendingSectionMove = null
+                    }
+                ) {
+                    Text("Cancel")
+                }
+            }
+        )
+    }
+
     issuePendingRemoval?.let { issue ->
         AlertDialog(
             onDismissRequest = {
@@ -1095,6 +1263,8 @@ private fun ReadingListIssueRow(
     canMoveDown: Boolean,
     onMoveUp: () -> Unit,
     onMoveDown: () -> Unit,
+    canChangeSection: Boolean,
+    onMoveToSectionRequest: () -> Unit,
     canRemove: Boolean,
     onRemoveRequest: () -> Unit
 ) {
@@ -1257,6 +1427,18 @@ private fun ReadingListIssueRow(
                         onClick = {
                             menuExpanded = false
                             onMoveDown()
+                        }
+                    )
+                }
+
+                if (canChangeSection) {
+                    DropdownMenuItem(
+                        text = {
+                            Text("Move to section")
+                        },
+                        onClick = {
+                            menuExpanded = false
+                            onMoveToSectionRequest()
                         }
                     )
                 }
