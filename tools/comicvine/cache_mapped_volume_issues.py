@@ -350,6 +350,33 @@ def main() -> None:
             )
         )
 
+    print(
+        f"{len(volume_ids)} mapped "
+        "Comic Vine volume(s)"
+    )
+
+    for index, volume_id in enumerate(
+            volume_ids,
+            start=1
+    ):
+        print()
+        print(
+            f"[{index}/{len(volume_ids)}] "
+            f"Volume {volume_id}"
+        )
+
+        cache_volume(
+            volume_id
+        )
+
+        if index < len(volume_ids):
+            next_cache = get_cache_file(
+                volume_ids[index]
+            )
+
+            if not next_cache.exists():
+                time.sleep(1.5)
+                
     print()
     print("Done.")
 

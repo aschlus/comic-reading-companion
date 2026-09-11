@@ -17,7 +17,7 @@
       "defaultUniverseDesignation": "Earth-1610",
       "defaultIssueType": "REGULAR",
       "issueOverrides": {
-        "1/2": {
+        "½": {
           "type": "SPECIAL"
         }
       }
@@ -58,7 +58,7 @@
       "defaultUniverseDesignation": "Earth-1610",
       "defaultIssueType": "REGULAR",
       "issueOverrides": {
-        "1/2": {
+        "½": {
           "type": "SPECIAL"
         }
       }
