@@ -133,7 +133,7 @@ class IssueDetailScreenTest {
             composeRule.onNodeWithText("#30").assertIsDisplayed()
             composeRule.onNodeWithText("Coming Home").assertIsDisplayed()
             composeRule.onNodeWithText("Jun 2001 • Regular").assertIsDisplayed()
-            composeRule.onNodeWithText("Marvel").assertIsDisplayed()
+            composeRule.onNodeWithText("Marvel").performScrollTo().assertIsDisplayed()
             composeRule.onNodeWithText("Description").performScrollTo().assertIsDisplayed()
             composeRule.onNodeWithText("Spider-Man faces a dangerous new enemy.").performScrollTo().assertIsDisplayed()
         }
