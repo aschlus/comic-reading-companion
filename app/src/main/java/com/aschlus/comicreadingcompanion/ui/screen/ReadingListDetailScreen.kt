@@ -87,7 +87,13 @@ fun ReadingListDetailScreen(
         viewModel.sections.collectAsState()
 
     val readingListDeleted by
-            viewModel.readingListDeleted.collectAsState()
+        viewModel.readingListDeleted.collectAsState()
+
+    val collapsedSectionIds by
+        viewModel.collapsedSectionIds.collectAsState()
+
+    val collapsedSectionsLoaded by
+        viewModel.collapsedSectionsLoaded.collectAsState()
 
     val listState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
@@ -160,12 +166,6 @@ fun ReadingListDetailScreen(
         mutableStateOf<ReadingListIssue?>(null)
     }
 
-    var collapsedSectionIds by rememberSaveable(
-        readingListId
-    ) {
-        mutableStateOf(longArrayOf())
-    }
-
     var searchQuery by rememberSaveable(
         readingListId
     ) {
@@ -236,8 +236,13 @@ fun ReadingListDetailScreen(
     LaunchedEffect(
         issues,
         startPosition,
-        hasAutoScrolled
+        hasAutoScrolled,
+        collapsedSectionsLoaded
     ) {
+        if (!collapsedSectionsLoaded) {
+            return@LaunchedEffect
+        }
+
         if (
             !hasAutoScrolled &&
             startPosition >= 0 &&
@@ -260,11 +265,7 @@ fun ReadingListDetailScreen(
                     targetSectionId != null &&
                     sectionWasCollapsed
                 ) {
-                    collapsedSectionIds =
-                        collapsedSectionIds.filter { sectionId ->
-                            sectionId != targetSectionId
-                        }
-                        .toLongArray()
+                    viewModel.expandSection(targetSectionId)
 
                     withFrameNanos {  }
                 }
@@ -679,11 +680,7 @@ fun ReadingListDetailScreen(
                                         targetSectionId != null &&
                                         sectionWasCollapsed
                                     ) {
-                                        collapsedSectionIds =
-                                            collapsedSectionIds.filter { sectionId ->
-                                                sectionId != targetSectionId
-                                            }
-                                                .toLongArray()
+                                        viewModel.expandSection(targetSectionId)
 
                                         withFrameNanos { }
                                     }
@@ -760,21 +757,7 @@ fun ReadingListDetailScreen(
                                 isCollapsed =
                                     isSectionCollapsed,
                                 onToggleCollapsed = {
-                                    collapsedSectionIds =
-                                        if (
-                                            collapsedSectionIds.contains(
-                                                sectionId
-                                            )
-                                        ) {
-                                            collapsedSectionIds
-                                                .filter {
-                                                    it != sectionId
-                                                }
-                                                .toLongArray()
-                                        } else {
-                                            collapsedSectionIds +
-                                                sectionId
-                                        }
+                                    viewModel.toggleSectionCollapsed(sectionId)
                                 }
                             )
                         }

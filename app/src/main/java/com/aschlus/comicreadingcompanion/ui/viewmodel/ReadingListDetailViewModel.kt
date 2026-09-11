@@ -7,6 +7,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSecti
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSource
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListIssue
+import com.aschlus.comicreadingcompanion.data.preferences.ReadingListUiPreferences
 import com.aschlus.comicreadingcompanion.data.repository.ComicRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,10 +17,14 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class ReadingListDetailViewModel(
-    private val repository: ComicRepository
+    private val repository: ComicRepository,
+    private val readingListUiPreferences: ReadingListUiPreferences
 ) : ViewModel() {
 
     private var issuesJob: Job? = null
+    private var collapsedSectionsJob: Job? = null
+
+    private var activeReadingListId: Long? = null
 
     private val _readingList =
         MutableStateFlow<ReadingList?>(null)
@@ -44,7 +49,34 @@ class ReadingListDetailViewModel(
     val readingListDeleted: StateFlow<Boolean> =
         _readingListDeleted.asStateFlow()
 
+    private val _collapsedSectionIds =
+        MutableStateFlow<Set<Long>>(emptySet())
+
+    val collapsedSectionIds: StateFlow<Set<Long>> =
+        _collapsedSectionIds.asStateFlow()
+
+    private val _collapsedSectionsLoaded =
+        MutableStateFlow(false)
+
+    val collapsedSectionsLoaded: StateFlow<Boolean> =
+        _collapsedSectionsLoaded.asStateFlow()
+
     fun loadReadingList(readingListId: Long) {
+        activeReadingListId = readingListId
+        _collapsedSectionsLoaded.value = false
+
+        collapsedSectionsJob?.cancel()
+
+        collapsedSectionsJob =
+            viewModelScope.launch {
+                readingListUiPreferences
+                    .getCollapsedSectionIds(readingListId)
+                    .collect { collapsedIds ->
+                        _collapsedSectionIds.value = collapsedIds
+                        _collapsedSectionsLoaded.value = true
+                    }
+            }
+
         viewModelScope.launch {
             _readingList.value =
                 repository.getReadingListById(readingListId)
@@ -61,6 +93,37 @@ class ReadingListDetailViewModel(
                 .collect { updatedIssues ->
                     _issues.value = updatedIssues
                 }
+        }
+    }
+
+    fun toggleSectionCollapsed(
+        sectionId: Long
+    ) {
+        val readingListId = activeReadingListId
+            ?: return
+
+        viewModelScope.launch {
+            readingListUiPreferences
+                .toggleSectionCollapsed(
+                    readingListId = readingListId,
+                    sectionId = sectionId
+                )
+        }
+    }
+
+    fun expandSection(
+        sectionId: Long
+    ) {
+        val readingListId = activeReadingListId
+            ?: return
+
+        viewModelScope.launch {
+            readingListUiPreferences
+                .setSectionCollapsed(
+                    readingListId = readingListId,
+                    sectionId = sectionId,
+                    collapsed = false
+                )
         }
     }
 

@@ -55,6 +55,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
     implementation("androidx.compose.material:material-icons-extended")
+    implementation(libs.androidx.datastore.preferences)
     implementation("io.coil-kt.coil3:coil-compose:3.3.0")
     implementation("io.coil-kt.coil3:coil-network-okhttp:3.3.0")
     ksp(libs.androidx.room.compiler)

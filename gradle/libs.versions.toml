@@ -12,6 +12,7 @@ room = "3.0.2"
 ksp = "2.3.9"
 navigation = "2.10.0"
 serialization = "1.9.0"
+datastore = "1.2.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -28,6 +29,7 @@ androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "u
 androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
 androidx-room-runtime = { module = "androidx.room3:room3-runtime", version.ref = "room" }
 androidx-room-compiler = { module = "androidx.room3:room3-compiler", version.ref = "room" }
 androidx-room-testing = { module = "androidx.room3:room3-testing", version.ref = "room"}

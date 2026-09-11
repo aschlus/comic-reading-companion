@@ -166,9 +166,14 @@ class MainActivity : ComponentActivity() {
                                 ReadingListDetailViewModel = viewModel(
                                     factory =
                                         ReadingListDetailViewModelFactory(
-                                            (application as ComicReadingCompanionApplication)
-                                                .container
-                                                .comicRepository
+                                            repository =
+                                                (application as ComicReadingCompanionApplication)
+                                                    .container
+                                                    .comicRepository,
+                                            readingListUiPreferences =
+                                                (application as ComicReadingCompanionApplication)
+                                                    .container
+                                                    .readingListUiPreferences
                                         )
                                 )
 

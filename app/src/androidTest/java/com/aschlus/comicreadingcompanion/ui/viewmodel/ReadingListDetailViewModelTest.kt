@@ -16,6 +16,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSecti
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSource
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.database.entities.Series
+import com.aschlus.comicreadingcompanion.data.preferences.ReadingListUiPreferences
 import com.aschlus.comicreadingcompanion.data.repository.ComicRepository
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancelAndJoin
@@ -38,6 +39,7 @@ class ReadingListDetailViewModelTest {
     private lateinit var comicDao: ComicDao
     private lateinit var repository: ComicRepository
     private lateinit var viewModel: ReadingListDetailViewModel
+    private lateinit var readingListUiPreferences: ReadingListUiPreferences
 
     @Before
     fun setUp() {
@@ -57,9 +59,15 @@ class ReadingListDetailViewModelTest {
                 database = database
             )
 
+        readingListUiPreferences =
+            ReadingListUiPreferences(
+                context
+            )
+
         viewModel =
             ReadingListDetailViewModel(
-                repository = repository
+                repository = repository,
+                readingListUiPreferences = readingListUiPreferences
             )
     }
 
@@ -147,6 +155,199 @@ class ReadingListDetailViewModelTest {
             assertEquals(1, loadedIssues.size)
             assertEquals(issueId, loadedIssues.first().issueId)
             assertEquals(1, loadedIssues.first().position)
+        }
+
+    @Test
+    fun loadReadingList_restoresCollapsedSections() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name = "Collapse Restore Publisher"
+                    )
+                )
+
+            val readingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title = "Collapse Restore List",
+                        description = null,
+                        publisherId = publisherId,
+                        universeId = null,
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            val sectionId = 41L
+
+            try {
+                readingListUiPreferences
+                    .setSectionCollapsed(
+                        readingListId =
+                            readingListId,
+                        sectionId =
+                            sectionId,
+                        collapsed =
+                            true
+                    )
+
+                viewModel.loadReadingList(
+                    readingListId
+                )
+
+                withTimeout(
+                    5000L.milliseconds
+                ) {
+                    viewModel
+                        .collapsedSectionsLoaded
+                        .first { loaded ->
+                            loaded
+                        }
+                }
+
+                assertEquals(
+                    setOf(sectionId),
+                    viewModel
+                        .collapsedSectionIds
+                        .value
+                )
+            } finally {
+                readingListUiPreferences
+                    .setSectionCollapsed(
+                        readingListId =
+                            readingListId,
+                        sectionId =
+                            sectionId,
+                        collapsed =
+                            false
+                    )
+            }
+        }
+
+    @Test
+    fun toggleSectionCollapsed_updatesAndPersistsState() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name = "Collapse Toggle Publisher"
+                    )
+                )
+
+            val readingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title = "Collapse Toggle List",
+                        description = null,
+                        publisherId = publisherId,
+                        universeId = null,
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            val sectionId = 42L
+
+            try {
+                readingListUiPreferences
+                    .setSectionCollapsed(
+                        readingListId =
+                            readingListId,
+                        sectionId =
+                            sectionId,
+                        collapsed =
+                            false
+                    )
+
+                viewModel.loadReadingList(
+                    readingListId
+                )
+
+                withTimeout(
+                    5000L.milliseconds
+                ) {
+                    viewModel
+                        .collapsedSectionsLoaded
+                        .first { loaded ->
+                            loaded
+                        }
+                }
+
+                viewModel.toggleSectionCollapsed(
+                    sectionId
+                )
+
+                val collapsedState =
+                    withTimeout(
+                        5000L.milliseconds
+                    ) {
+                        viewModel
+                            .collapsedSectionIds
+                            .first { ids ->
+                                sectionId in ids
+                            }
+                    }
+
+                assertEquals(
+                    true,
+                    sectionId in collapsedState
+                )
+
+                val persistedCollapsedIds =
+                    readingListUiPreferences
+                        .getCollapsedSectionIds(
+                            readingListId
+                        )
+                        .first()
+
+                assertEquals(
+                    true,
+                    sectionId in persistedCollapsedIds
+                )
+
+                viewModel.toggleSectionCollapsed(
+                    sectionId
+                )
+
+                val expandedState =
+                    withTimeout(
+                        5000L.milliseconds
+                    ) {
+                        viewModel
+                            .collapsedSectionIds
+                            .first { ids ->
+                                sectionId !in ids
+                            }
+                    }
+
+                assertEquals(
+                    false,
+                    sectionId in expandedState
+                )
+
+                val persistedExpandedIds =
+                    readingListUiPreferences
+                        .getCollapsedSectionIds(
+                            readingListId
+                        )
+                        .first()
+
+                assertEquals(
+                    false,
+                    sectionId in persistedExpandedIds
+                )
+            } finally {
+                readingListUiPreferences
+                    .setSectionCollapsed(
+                        readingListId =
+                            readingListId,
+                        sectionId =
+                            sectionId,
+                        collapsed =
+                            false
+                    )
+            }
         }
 
     @Test

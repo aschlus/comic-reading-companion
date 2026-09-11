@@ -31,6 +31,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListItem
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSection
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSource
 import com.aschlus.comicreadingcompanion.data.database.entities.Series
+import com.aschlus.comicreadingcompanion.data.preferences.ReadingListUiPreferences
 import com.aschlus.comicreadingcompanion.data.repository.ComicRepository
 import com.aschlus.comicreadingcompanion.ui.theme.ComicReadingCompanionTheme
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ReadingListDetailViewModel
@@ -54,6 +55,7 @@ class ReadingListDetailScreenTest {
     private lateinit var comicDao: ComicDao
     private lateinit var repository: ComicRepository
     private lateinit var viewModel: ReadingListDetailViewModel
+    private lateinit var readingListUiPreferences: ReadingListUiPreferences
 
     @Before
     fun setUp() {
@@ -75,7 +77,16 @@ class ReadingListDetailScreenTest {
                 database = database
             )
 
-        viewModel = ReadingListDetailViewModel(repository = repository)
+        readingListUiPreferences =
+            ReadingListUiPreferences(
+                context
+            )
+
+        viewModel =
+            ReadingListDetailViewModel(
+                repository = repository,
+                readingListUiPreferences = readingListUiPreferences
+            )
     }
 
     @After
