@@ -156,6 +156,71 @@ def expand_issue_numbers(
     return expanded
 
 
+def expand_manifest_entries(entries: list[dict]) -> list[tuple[tuple[str, int | None, str], dict]]:
+    expanded: list[tuple[tuple[str, int | None, str], dict]] = []
+
+    for entry in entries:
+        title = entry["series"]
+        volume = entry.get("volume")
+        issue_numbers = expand_issue_numbers(entry.get("issues", []))
+
+        if not issue_numbers:
+            raise ValueError(
+                f"Entry contains no issues: {title} Vol, {volume}"
+            )
+
+        for issue_number in issue_numbers:
+            expanded.append(((title, volume, issue_number), entry))
+
+    return expanded
+
+
+def resolve_arc_issue_order(arc_title: str, entries: list[dict], internal_reading_order: list[dict] | None) -> list[tuple[tuple[str, int | None, str], dict]]:
+    membership_entries = expand_manifest_entries(entries)
+    membership_by_identity: dict[tuple[str, int | None, str], dict] = {}
+
+    for identity, entry in membership_entries:
+        if identity in membership_by_identity:
+            raise ValueError(
+                f"Duplicate issue within arc '{arc_title}': {identity[0]} Vol. {identity[1]} #{identity[2]}"
+            )
+
+        membership_by_identity[identity] = entry
+
+    if internal_reading_order is None:
+        return membership_entries
+
+    ordered_entries = expand_manifest_entries(internal_reading_order)
+
+    ordered_identities = [
+        identity
+        for identity, _
+        in ordered_entries
+    ]
+
+    if len(ordered_identities) != len(set(ordered_identities)):
+        raise ValueError(
+            f"Arc '{arc_title}' contains duplicate issues in internalReadingOrder"
+        )
+
+    membership_identities = set(membership_by_identity)
+    ordered_identity_set = set(ordered_identities)
+
+    if membership_identities != ordered_identity_set:
+        missing = membership_identities - ordered_identity_set
+        extra = ordered_identity_set - membership_identities
+
+        raise ValueError(
+            f"Arc '{arc_title}' internalReadingOrder does not match its entries. "
+            f"Missing: {sorted(missing)}; Extra: {sorted(extra)}"
+        )
+
+    return [(identity, membership_by_identity[identity])
+            for identity
+            in ordered_identities
+            ]
+
+
 def catalog_issue_identities(
         catalog: dict
 ) -> set[
@@ -261,6 +326,14 @@ def build_reading_list(
                 "contains no entries"
             )
 
+        ordered_arc_entries = (
+            resolve_arc_issue_order(
+                arc_title=arc_title,
+                entries=entries,
+                internal_reading_order=arc.get("internalReadingOrder")
+            )
+        )
+
         sections.append(
             {
                 "position":
@@ -274,144 +347,59 @@ def build_reading_list(
             }
         )
 
-        for entry in entries:
-            title = entry["series"]
-            volume = entry.get(
-                "volume"
-            )
-
+        for identity, entry in ordered_arc_entries:
+            (title, volume, issue_number) = identity
             key = series_key(
                 title=title,
                 volume=volume
             )
-
-            series = (
-                series_index.get(
-                    key
-                )
-            )
+            series = series_index.get(key)
 
             if series is None:
                 raise ValueError(
-                    "Series not found in catalog: "
-                    f"{title} "
-                    f"Vol. {volume}"
+                    f"Series not found in catalog: {title} Vol. {volume}"
                 )
 
-            issue_index = (
-                build_issue_index(
-                    series
-                )
-            )
+            issue_index = build_issue_index(series)
+            issue = issue_index.get(issue_number)
 
-            issue_numbers = (
-                expand_issue_numbers(
-                    entry.get(
-                        "issues",
-                        []
-                    )
-                )
-            )
-
-            if not issue_numbers:
+            if issue is None:
                 raise ValueError(
-                    "Entry contains no issues: "
-                    f"{title} Vol. {volume}"
+                    f"Issue not found in catalog: {title} Vol. {volume} #{issue_number}"
                 )
 
-            for issue_number in issue_numbers:
-                issue = issue_index.get(
-                    issue_number
+            if identity in seen_issues:
+                raise ValueError(
+                    f"Duplicate reading-list issue: {title} Vol. {volume} #{issue_number}"
                 )
 
-                if issue is None:
-                    raise ValueError(
-                        "Issue not found in catalog: "
-                        f"{title} "
-                        f"Vol. {volume} "
-                        f"#{issue_number}"
-                    )
+            seen_issues.add(identity)
 
-                identity = (
-                    title,
-                    volume,
-                    issue_number
-                )
+            items.append(
+                {
+                    "position": item_position,
+                    "sectionPosition": section_position,
+                    "series": {
+                        "title": series["title"],
+                        "volume": series.get("volume"),
+                        "startYear": series.get("startYear"),
+                        "endYear": series.get("endYear")
+                    },
+                    "issue": {
+                        "number": issue["number"],
+                        "title": issue.get("title"),
+                        "publicationDate": issue.get("publicationDate"),
+                        "coverUrl": issue.get("coverUrl"),
+                        "description": issue.get("description"),
+                        "type": issue["type"],
+                        "externalIds": issue.get("externalIds", [])
+                    },
+                    "required": entry.get("required", True),
+                    "notes": entry.get("notes")
+                }
+            )
 
-                if identity in seen_issues:
-                    raise ValueError(
-                        "Duplicate reading-list issue: "
-                        f"{title} "
-                        f"Vol. {volume} "
-                        f"#{issue_number}"
-                    )
-
-                seen_issues.add(
-                    identity
-                )
-
-                items.append(
-                    {
-                        "position":
-                            item_position,
-                        "sectionPosition":
-                            section_position,
-                        "series": {
-                            "title":
-                                series["title"],
-                            "volume":
-                                series.get(
-                                    "volume"
-                                ),
-                            "startYear":
-                                series.get(
-                                    "startYear"
-                                ),
-                            "endYear":
-                                series.get(
-                                    "endYear"
-                                )
-                        },
-                        "issue": {
-                            "number":
-                                issue["number"],
-                            "title":
-                                issue.get(
-                                    "title"
-                                ),
-                            "publicationDate":
-                                issue.get(
-                                    "publicationDate"
-                                ),
-                            "coverUrl":
-                                issue.get(
-                                    "coverUrl"
-                                ),
-                            "description":
-                                issue.get(
-                                    "description"
-                                ),
-                            "type":
-                                issue["type"],
-                            "externalIds":
-                                issue.get(
-                                    "externalIds",
-                                    []
-                                )
-                        },
-                        "required":
-                            entry.get(
-                                "required",
-                                True
-                            ),
-                        "notes":
-                            entry.get(
-                                "notes"
-                            )
-                    }
-                )
-
-                item_position += 1
+            item_position += 1
 
     expected_issue_count = (
         manifest.get(

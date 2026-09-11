@@ -886,6 +886,43 @@
         {
           "series": "Ultimate Spider-Man",
           "volume": 1,
+          "issues": ["129-133"]
+        },
+        {
+          "series": "Ultimate X-Men",
+          "volume": 1,
+          "issues": ["98-100"]
+        },
+        {
+          "series": "Ultimate Fantastic Four",
+          "volume": 1,
+          "issues": ["58-60"]
+        },
+        {
+          "series": "Ultimatum",
+          "volume": 1,
+          "issues": ["1-5"]
+        },
+        {
+          "series": "Ultimatum: Spider-Man Requiem",
+          "volume": 1,
+          "issues": ["1-2"]
+        },
+        {
+          "series": "Ultimatum: Fantastic Four Requiem",
+          "volume": 1,
+          "issues": ["1"]
+        },
+        {
+          "series": "Ultimatum: X-Men Requiem",
+          "volume": 1,
+          "issues": ["1"]
+        }
+      ],
+      "internalReadingOrder": [
+        {
+          "series": "Ultimate Spider-Man",
+          "volume": 1,
           "issues": ["129"]
         },
         {
@@ -1226,6 +1263,23 @@
         {
           "series": "Ultimate Comics X-Men",
           "volume": 1,
+          "issues": ["14-18", "18.1"]
+        },
+        {
+          "series": "Ultimate Comics Ultimates",
+          "volume": 1,
+          "issues": ["13-18", "18.1"]
+        },
+        {
+          "series": "Ultimate Comics Spider-Man",
+          "volume": 1,
+          "issues": ["13-18"]
+        }
+      ],
+      "internalReadingOrder": [
+        {
+          "series": "Ultimate Comics X-Men",
+          "volume": 1,
           "issues": ["14"]
         },
         {
@@ -1401,6 +1455,38 @@
         {
           "series": "Cataclysm: Ultimate Spider-Man",
           "volume": 1,
+          "issues": ["1-3"]
+        },
+        {
+          "series": "Cataclysm: Ultimate X-Men",
+          "volume": 1,
+          "issues": ["1-3"]
+        },
+        {
+          "series": "Cataclysm: The Ultimates' Last Stand",
+          "volume": 1,
+          "issues": ["1-5"]
+        },
+        {
+          "series": "Cataclysm: The Ultimates",
+          "volume": 1,
+          "issues": ["1-3"]
+        },
+        {
+          "series": "Survive!",
+          "volume": 1,
+          "issues": ["1"]
+        }
+      ],
+      "internalReadingOrder": [
+        {
+          "series": "Cataclysm",
+          "volume": 1,
+          "issues": ["0.1"]
+        },
+        {
+          "series": "Cataclysm: Ultimate Spider-Man",
+          "volume": 1,
           "issues": ["1"]
         },
         {
@@ -1488,6 +1574,18 @@
     {
       "title": "Secret Wars / Ultimate End",
       "entries": [
+        {
+          "series": "Secret Wars",
+          "volume": 1,
+          "issues": ["0-9"]
+        },
+        {
+          "series": "Ultimate End",
+          "volume": 1,
+          "issues": ["1-5"]
+        }
+      ],
+      "internalReadingOrder": [
         {
           "series": "Secret Wars",
           "volume": 1,
