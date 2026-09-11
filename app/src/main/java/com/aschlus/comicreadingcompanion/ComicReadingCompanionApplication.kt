@@ -24,38 +24,11 @@ class ComicReadingCompanionApplication : Application() {
         applicationScope.launch {
             container.databaseSeeder.seed()
 
-            val readingListAssets =
-                container.readingListAssetParser
-                    .listReadingListAssets()
-
-            readingListAssets.forEach { assetPath ->
-
-                try {
-                    val importedList =
-                        container.readingListAssetParser.parse(
-                            assetPath
-                        )
-
-                    container.readingListImporter.import(
-                        importedList
-                    )
-                } catch (exception: Exception) {
-                    Log.e(
-                        "ReadingListImport",
-                        "Failed to import reading-list asset " +
-                        "'$assetPath': " +
-                        "${exception.message}",
-                        exception
-                    )
-                }
-            }
-
             val catalogAssets =
                 container.comicCatalogAssetParser
                     .listCatalogAssets()
 
             catalogAssets.forEach { assetPath ->
-
                 try {
                     val importedCatalog =
                         container.comicCatalogAssetParser.parse(
@@ -69,6 +42,31 @@ class ComicReadingCompanionApplication : Application() {
                     Log.e(
                         "ComicCatalogImport",
                         "Failed to import comic-catalog asset " +
+                                "'$assetPath': " +
+                                "${exception.message}",
+                        exception
+                    )
+                }
+            }
+
+            val readingListAssets =
+                container.readingListAssetParser
+                    .listReadingListAssets()
+
+            readingListAssets.forEach { assetPath ->
+                try {
+                    val importedList =
+                        container.readingListAssetParser.parse(
+                            assetPath
+                        )
+
+                    container.readingListImporter.import(
+                        importedList
+                    )
+                } catch (exception: Exception) {
+                    Log.e(
+                        "ReadingListImport",
+                        "Failed to import reading-list asset " +
                         "'$assetPath': " +
                         "${exception.message}",
                         exception

@@ -128,6 +128,10 @@ building, following, and tracking comic-book reading orders.
 - [x] Spider-Man Volume 2 Era — Earth-616
     - September 1998 through September 2003
     - 213 issues
+- [x] Ultimate Marvel (2000–2015) — Earth-1610
+    - Complete original Ultimate Universe
+    - 127 story arcs / sections
+    - 714 issues
 - [ ] Additional Spider-Man eras
 - [ ] Larger Spider-Man master chronology
 - [ ] Additional Marvel characters / events
@@ -190,6 +194,7 @@ building, following, and tracking comic-book reading orders.
 - [x] Publisher-independent database design
 - [x] Universe / continuity stored separately from publisher
 - [x] Marvel Earth-616 support
+- [x] Marvel Earth-1610 support
 - [ ] Multi-universe reading lists
 - [ ] DC universe / continuity support
 - [ ] Image and independent publisher support

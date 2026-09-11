@@ -1,0 +1,1514 @@
+{
+  "title": "Ultimate Marvel (2000–2015)",
+  "description": "Complete arc-based reading order for the original Ultimate Marvel universe, from Ultimate Spider-Man through Ultimate End.",
+  "publisher": "Marvel Comics",
+  "universe": {
+    "name": "Ultimate Marvel Universe",
+    "designation": "Earth-1610"
+  },
+  "expectedArcCount": 127,
+  "expectedIssueCount": 714,
+  "requireFullCatalogCoverage": true,
+  "arcs": [
+    {
+      "title": "Power and Responsibility",
+      "entries": [
+        {
+          "series": "Ultimate Spider-Man",
+          "volume": 1,
+          "issues": ["1-7"]
+        }
+      ]
+    },
+    {
+      "title": "Learning Curve",
+      "entries": [
+        {
+          "series": "Ultimate Spider-Man",
+          "volume": 1,
+          "issues": ["8-13"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Daredevil & Elektra",
+      "entries": [
+        {
+          "series": "Ultimate Daredevil/Elektra",
+          "volume": 1,
+          "issues": ["1-4"]
+        }
+      ]
+    },
+    {
+      "title": "Devil's Due",
+      "entries": [
+        {
+          "series": "Ultimate Elektra",
+          "volume": 1,
+          "issues": ["1-5"]
+        }
+      ]
+    },
+    {
+      "title": "The Tomorrow People",
+      "entries": [
+        {
+          "series": "Ultimate X-Men",
+          "volume": 1,
+          "issues": ["1-6"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate X-Men Special",
+      "entries": [
+        {
+          "series": "Ultimate X-Men",
+          "volume": 1,
+          "issues": ["½"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Iron Man",
+      "entries": [
+        {
+          "series": "Ultimate Iron Man",
+          "volume": 1,
+          "issues": ["1-5"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Iron Man II",
+      "entries": [
+        {
+          "series": "Ultimate Iron Man II",
+          "volume": 1,
+          "issues": ["1-5"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Marvel Team-Up",
+      "entries": [
+        {
+          "series": "Ultimate Marvel Team-Up",
+          "volume": 1,
+          "issues": ["1-16"]
+        },
+        {
+          "series": "Ultimate Spider-Man Special",
+          "volume": 1,
+          "issues": ["1"]
+        }
+      ]
+    },
+    {
+      "title": "Return to Weapon X",
+      "entries": [
+        {
+          "series": "Ultimate X-Men",
+          "volume": 1,
+          "issues": ["7-12"]
+        }
+      ]
+    },
+    {
+      "title": "World Tour",
+      "entries": [
+        {
+          "series": "Ultimate X-Men",
+          "volume": 1,
+          "issues": ["13-20"]
+        }
+      ]
+    },
+    {
+      "title": "Super-Human",
+      "entries": [
+        {
+          "series": "The Ultimates",
+          "volume": 1,
+          "issues": ["1-6"]
+        }
+      ]
+    },
+    {
+      "title": "Homeland Security",
+      "entries": [
+        {
+          "series": "The Ultimates",
+          "volume": 1,
+          "issues": ["7-13"]
+        }
+      ]
+    },
+    {
+      "title": "Double Trouble",
+      "entries": [
+        {
+          "series": "Ultimate Spider-Man",
+          "volume": 1,
+          "issues": ["14-21"]
+        }
+      ]
+    },
+    {
+      "title": "Legacy",
+      "entries": [
+        {
+          "series": "Ultimate Spider-Man",
+          "volume": 1,
+          "issues": ["22-27"]
+        }
+      ]
+    },
+    {
+      "title": "Public Scrutiny",
+      "entries": [
+        {
+          "series": "Ultimate Spider-Man",
+          "volume": 1,
+          "issues": ["28-32"]
+        }
+      ]
+    },
+    {
+      "title": "Venom",
+      "entries": [
+        {
+          "series": "Ultimate Spider-Man",
+          "volume": 1,
+          "issues": ["33-39"]
+        }
+      ]
+    },
+    {
+      "title": "Hellfire & Brimstone",
+      "entries": [
+        {
+          "series": "Ultimate X-Men",
+          "volume": 1,
+          "issues": ["21-25"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate War",
+      "entries": [
+        {
+          "series": "Ultimate War",
+          "volume": 1,
+          "issues": ["1-4"]
+        }
+      ]
+    },
+    {
+      "title": "Return of the King",
+      "entries": [
+        {
+          "series": "Ultimate X-Men",
+          "volume": 1,
+          "issues": ["26-33"]
+        }
+      ]
+    },
+    {
+      "title": "Irresponsible",
+      "entries": [
+        {
+          "series": "Ultimate Spider-Man",
+          "volume": 1,
+          "issues": ["40-45"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Spider-Man Special",
+      "entries": [
+        {
+          "series": "Ultimate Spider-Man",
+          "volume": 1,
+          "issues": ["½"]
+        }
+      ]
+    },
+    {
+      "title": "Blockbuster",
+      "entries": [
+        {
+          "series": "Ultimate X-Men",
+          "volume": 1,
+          "issues": ["34-39"]
+        }
+      ]
+    },
+    {
+      "title": "Cats & Kings",
+      "entries": [
+        {
+          "series": "Ultimate Spider-Man",
+          "volume": 1,
+          "issues": ["47-53"]
+        }
+      ]
+    },
+    {
+      "title": "One Tin Soldier",
+      "entries": [
+        {
+          "series": "Ultimate Adventures",
+          "volume": 1,
+          "issues": ["1-6"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Six",
+      "entries": [
+        {
+          "series": "Ultimate Spider-Man",
+          "volume": 1,
+          "issues": ["46"]
+        },
+        {
+          "series": "Ultimate Six",
+          "volume": 1,
+          "issues": ["1-7"]
+        }
+      ]
+    },
+    {
+      "title": "The Fantastic",
+      "entries": [
+        {
+          "series": "Ultimate Fantastic Four",
+          "volume": 1,
+          "issues": ["1-6"]
+        }
+      ]
+    },
+    {
+      "title": "Hollywood",
+      "entries": [
+        {
+          "series": "Ultimate Spider-Man",
+          "volume": 1,
+          "issues": ["54-59"]
+        }
+      ]
+    },
+    {
+      "title": "New Mutants",
+      "entries": [
+        {
+          "series": "Ultimate X-Men",
+          "volume": 1,
+          "issues": ["40-45"]
+        }
+      ]
+    },
+    {
+      "title": "Doom",
+      "entries": [
+        {
+          "series": "Ultimate Fantastic Four",
+          "volume": 1,
+          "issues": ["7-12"]
+        }
+      ]
+    },
+    {
+      "title": "The Tempest",
+      "entries": [
+        {
+          "series": "Ultimate X-Men",
+          "volume": 1,
+          "issues": ["46-49"]
+        }
+      ]
+    },
+    {
+      "title": "Carnage",
+      "entries": [
+        {
+          "series": "Ultimate Spider-Man",
+          "volume": 1,
+          "issues": ["60-65"]
+        }
+      ]
+    },
+    {
+      "title": "N-Zone",
+      "entries": [
+        {
+          "series": "Ultimate Fantastic Four",
+          "volume": 1,
+          "issues": ["13-18"]
+        }
+      ]
+    },
+    {
+      "title": "Superstars",
+      "entries": [
+        {
+          "series": "Ultimate Spider-Man",
+          "volume": 1,
+          "issues": ["66-71"]
+        }
+      ]
+    },
+    {
+      "title": "Inhuman",
+      "entries": [
+        {
+          "series": "Ultimate Fantastic Four",
+          "volume": 1,
+          "issues": ["19-20"]
+        }
+      ]
+    },
+    {
+      "title": "Cry Wolf",
+      "entries": [
+        {
+          "series": "Ultimate X-Men",
+          "volume": 1,
+          "issues": ["50-53"]
+        }
+      ]
+    },
+    {
+      "title": "Crossover",
+      "entries": [
+        {
+          "series": "Ultimate Fantastic Four",
+          "volume": 1,
+          "issues": ["21-26"]
+        }
+      ]
+    },
+    {
+      "title": "Hobgoblin",
+      "entries": [
+        {
+          "series": "Ultimate Spider-Man",
+          "volume": 1,
+          "issues": ["72-78"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Fantastic Four Annual #1",
+      "entries": [
+        {
+          "series": "Ultimate Fantastic Four Annual",
+          "volume": 1,
+          "issues": ["1"]
+        }
+      ]
+    },
+    {
+      "title": "Frightful",
+      "entries": [
+        {
+          "series": "Ultimate Fantastic Four",
+          "volume": 1,
+          "issues": ["27-32"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Fantastic Four Annual #2",
+      "entries": [
+        {
+          "series": "Ultimate Fantastic Four Annual",
+          "volume": 1,
+          "issues": ["2"]
+        }
+      ]
+    },
+    {
+      "title": "Warriors",
+      "entries": [
+        {
+          "series": "Ultimate Spider-Man",
+          "volume": 1,
+          "issues": ["79-85"]
+        }
+      ]
+    },
+    {
+      "title": "The Most Dangerous Game",
+      "entries": [
+        {
+          "series": "Ultimate X-Men",
+          "volume": 1,
+          "issues": ["54-57"]
+        }
+      ]
+    },
+    {
+      "title": "Hard Lessons",
+      "entries": [
+        {
+          "series": "Ultimate X-Men",
+          "volume": 1,
+          "issues": ["58-60"]
+        },
+        {
+          "series": "Ultimate X-Men Annual",
+          "volume": 1,
+          "issues": ["1"]
+        }
+      ]
+    },
+    {
+      "title": "Gah Lak Tus: Nightmare",
+      "entries": [
+        {
+          "series": "Ultimate Nightmare",
+          "volume": 1,
+          "issues": ["1-5"]
+        }
+      ]
+    },
+    {
+      "title": "Gah Lak Tus: Secret",
+      "entries": [
+        {
+          "series": "Ultimate Secret",
+          "volume": 1,
+          "issues": ["1-4"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Vision — Prologue",
+      "entries": [
+        {
+          "series": "Ultimate Vision",
+          "volume": 1,
+          "issues": ["0"]
+        }
+      ]
+    },
+    {
+      "title": "Gah Lak Tus: Extinction",
+      "entries": [
+        {
+          "series": "Ultimate Extinction",
+          "volume": 1,
+          "issues": ["1-5"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Vision",
+      "entries": [
+        {
+          "series": "Ultimate Vision",
+          "volume": 1,
+          "issues": ["1-5"]
+        }
+      ]
+    },
+    {
+      "title": "Gods and Monsters",
+      "entries": [
+        {
+          "series": "The Ultimates 2",
+          "volume": 1,
+          "issues": ["1-6"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimates Annual #1",
+      "entries": [
+        {
+          "series": "The Ultimates Annual",
+          "volume": 1,
+          "issues": ["1"]
+        }
+      ]
+    },
+    {
+      "title": "Magnetic North",
+      "entries": [
+        {
+          "series": "Ultimate X-Men",
+          "volume": 1,
+          "issues": ["61-65"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate X4",
+      "entries": [
+        {
+          "series": "Ultimate X4",
+          "volume": 1,
+          "issues": ["1-2"]
+        }
+      ]
+    },
+    {
+      "title": "Silver Sable",
+      "entries": [
+        {
+          "series": "Ultimate Spider-Man Annual",
+          "volume": 1,
+          "issues": ["1"]
+        },
+        {
+          "series": "Ultimate Spider-Man",
+          "volume": 1,
+          "issues": ["86-90"]
+        }
+      ]
+    },
+    {
+      "title": "Phoenix?",
+      "entries": [
+        {
+          "series": "Ultimate X-Men",
+          "volume": 1,
+          "issues": ["66-71"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Wolverine vs. Hulk",
+      "entries": [
+        {
+          "series": "Ultimate Wolverine vs. Hulk",
+          "volume": 1,
+          "issues": ["1-6"]
+        }
+      ]
+    },
+    {
+      "title": "Grand Theft America",
+      "entries": [
+        {
+          "series": "The Ultimates 2",
+          "volume": 1,
+          "issues": ["7-13"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimates Annual #2",
+      "entries": [
+        {
+          "series": "The Ultimates Annual",
+          "volume": 1,
+          "issues": ["2"]
+        }
+      ]
+    },
+    {
+      "title": "Deadpool",
+      "entries": [
+        {
+          "series": "Ultimate Spider-Man",
+          "volume": 1,
+          "issues": ["91-96"]
+        },
+        {
+          "series": "Ultimate Spider-Man Annual",
+          "volume": 1,
+          "issues": ["2"]
+        }
+      ]
+    },
+    {
+      "title": "Magical",
+      "entries": [
+        {
+          "series": "Ultimate X-Men",
+          "volume": 1,
+          "issues": ["72-74"]
+        },
+        {
+          "series": "Ultimate X-Men Annual",
+          "volume": 1,
+          "issues": ["2"]
+        }
+      ]
+    },
+    {
+      "title": "God War",
+      "entries": [
+        {
+          "series": "Ultimate Fantastic Four",
+          "volume": 1,
+          "issues": ["33-38"]
+        }
+      ]
+    },
+    {
+      "title": "Devils",
+      "entries": [
+        {
+          "series": "Ultimate Fantastic Four",
+          "volume": 1,
+          "issues": ["39-41"]
+        }
+      ]
+    },
+    {
+      "title": "Silver Surfer",
+      "entries": [
+        {
+          "series": "Ultimate Fantastic Four",
+          "volume": 1,
+          "issues": ["42-46"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Power",
+      "entries": [
+        {
+          "series": "Ultimate Power",
+          "volume": 1,
+          "issues": ["1-9"]
+        }
+      ]
+    },
+    {
+      "title": "Cable",
+      "entries": [
+        {
+          "series": "Ultimate X-Men",
+          "volume": 1,
+          "issues": ["75-80"]
+        }
+      ]
+    },
+    {
+      "title": "Clone Saga",
+      "entries": [
+        {
+          "series": "Ultimate Spider-Man",
+          "volume": 1,
+          "issues": ["97-105"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Knights",
+      "entries": [
+        {
+          "series": "Ultimate Spider-Man",
+          "volume": 1,
+          "issues": ["106-111"]
+        }
+      ]
+    },
+    {
+      "title": "Sentinels",
+      "entries": [
+        {
+          "series": "Ultimate X-Men",
+          "volume": 1,
+          "issues": ["81-88"]
+        }
+      ]
+    },
+    {
+      "title": "Ghosts",
+      "entries": [
+        {
+          "series": "Ultimate Fantastic Four",
+          "volume": 1,
+          "issues": ["47-53"]
+        }
+      ]
+    },
+    {
+      "title": "Death of a Goblin",
+      "entries": [
+        {
+          "series": "Ultimate Spider-Man",
+          "volume": 1,
+          "issues": ["112-117"]
+        }
+      ]
+    },
+    {
+      "title": "Shadow King",
+      "entries": [
+        {
+          "series": "Ultimate X-Men",
+          "volume": 1,
+          "issues": ["89"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Spider-Man Annual #3",
+      "entries": [
+        {
+          "series": "Ultimate Spider-Man Annual",
+          "volume": 1,
+          "issues": ["3"]
+        }
+      ]
+    },
+    {
+      "title": "And His Amazing Friends",
+      "entries": [
+        {
+          "series": "Ultimate Spider-Man",
+          "volume": 1,
+          "issues": ["118-122"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Human",
+      "entries": [
+        {
+          "series": "Ultimate Human",
+          "volume": 1,
+          "issues": ["1-4"]
+        }
+      ]
+    },
+    {
+      "title": "Apocalypse",
+      "entries": [
+        {
+          "series": "Ultimate X-Men",
+          "volume": 1,
+          "issues": ["90-93"]
+        }
+      ]
+    },
+    {
+      "title": "Salem's Seven",
+      "entries": [
+        {
+          "series": "Ultimate Fantastic Four",
+          "volume": 1,
+          "issues": ["54-57"]
+        }
+      ]
+    },
+    {
+      "title": "War of the Symbiotes",
+      "entries": [
+        {
+          "series": "Ultimate Spider-Man",
+          "volume": 1,
+          "issues": ["123-128"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Hulk Annual",
+      "entries": [
+        {
+          "series": "Ultimate Hulk Annual",
+          "volume": 1,
+          "issues": ["1"]
+        }
+      ]
+    },
+    {
+      "title": "Absolute Power",
+      "entries": [
+        {
+          "series": "Ultimate X-Men",
+          "volume": 1,
+          "issues": ["94-97"]
+        }
+      ]
+    },
+    {
+      "title": "Who Killed the Scarlet Witch?",
+      "entries": [
+        {
+          "series": "The Ultimates 3",
+          "volume": 1,
+          "issues": ["1-5"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Captain America Annual",
+      "entries": [
+        {
+          "series": "Ultimate Captain America Annual",
+          "volume": 1,
+          "issues": ["1"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Origins",
+      "entries": [
+        {
+          "series": "Ultimate Origins",
+          "volume": 1,
+          "issues": ["1-5"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate X-Men/Ultimate Fantastic Four Annual",
+      "entries": [
+        {
+          "series": "Ultimate X-Men/Ultimate Fantastic Four Annual",
+          "volume": 1,
+          "issues": ["1"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Fantastic Four/Ultimate X-Men Annual",
+      "entries": [
+        {
+          "series": "Ultimate Fantastic Four/Ultimate X-Men Annual",
+          "volume": 1,
+          "issues": ["1"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimatum",
+      "entries": [
+        {
+          "series": "Ultimate Spider-Man",
+          "volume": 1,
+          "issues": ["129"]
+        },
+        {
+          "series": "Ultimatum",
+          "volume": 1,
+          "issues": ["1"]
+        },
+        {
+          "series": "Ultimate Spider-Man",
+          "volume": 1,
+          "issues": ["130"]
+        },
+        {
+          "series": "Ultimate X-Men",
+          "volume": 1,
+          "issues": ["98"]
+        },
+        {
+          "series": "Ultimatum",
+          "volume": 1,
+          "issues": ["2"]
+        },
+        {
+          "series": "Ultimate Fantastic Four",
+          "volume": 1,
+          "issues": ["58"]
+        },
+        {
+          "series": "Ultimate X-Men",
+          "volume": 1,
+          "issues": ["99"]
+        },
+        {
+          "series": "Ultimatum",
+          "volume": 1,
+          "issues": ["3"]
+        },
+        {
+          "series": "Ultimate X-Men",
+          "volume": 1,
+          "issues": ["100"]
+        },
+        {
+          "series": "Ultimate Fantastic Four",
+          "volume": 1,
+          "issues": ["59-60"]
+        },
+        {
+          "series": "Ultimate Spider-Man",
+          "volume": 1,
+          "issues": ["131-132"]
+        },
+        {
+          "series": "Ultimatum",
+          "volume": 1,
+          "issues": ["4"]
+        },
+        {
+          "series": "Ultimate Spider-Man",
+          "volume": 1,
+          "issues": ["133"]
+        },
+        {
+          "series": "Ultimatum",
+          "volume": 1,
+          "issues": ["5"]
+        },
+        {
+          "series": "Ultimatum: Spider-Man Requiem",
+          "volume": 1,
+          "issues": ["1-2"]
+        },
+        {
+          "series": "Ultimatum: Fantastic Four Requiem",
+          "volume": 1,
+          "issues": ["1"]
+        },
+        {
+          "series": "Ultimatum: X-Men Requiem",
+          "volume": 1,
+          "issues": ["1"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate X",
+      "entries": [
+        {
+          "series": "Ultimate X",
+          "volume": 1,
+          "issues": ["1-5"]
+        }
+      ]
+    },
+    {
+      "title": "Armor Wars",
+      "entries": [
+        {
+          "series": "Ultimate Comics Armor Wars",
+          "volume": 1,
+          "issues": ["1-4"]
+        }
+      ]
+    },
+    {
+      "title": "The World According to Peter Parker",
+      "entries": [
+        {
+          "series": "Ultimate Spider-Man",
+          "volume": 2,
+          "issues": ["1-6"]
+        }
+      ]
+    },
+    {
+      "title": "The Next Generation",
+      "entries": [
+        {
+          "series": "Ultimate Avengers",
+          "volume": 1,
+          "issues": ["1-6"]
+        }
+      ]
+    },
+    {
+      "title": "Crossroads",
+      "entries": [
+        {
+          "series": "Ultimate Spider-Man",
+          "volume": 2,
+          "issues": ["7-8"]
+        }
+      ]
+    },
+    {
+      "title": "Tainted Love",
+      "entries": [
+        {
+          "series": "Ultimate Spider-Man",
+          "volume": 2,
+          "issues": ["9-14"]
+        }
+      ]
+    },
+    {
+      "title": "Crime & Punishment",
+      "entries": [
+        {
+          "series": "Ultimate Avengers",
+          "volume": 1,
+          "issues": ["7-12"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Enemy",
+      "entries": [
+        {
+          "series": "Ultimate Enemy",
+          "volume": 1,
+          "issues": ["1-4"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Mystery",
+      "entries": [
+        {
+          "series": "Ultimate Mystery",
+          "volume": 1,
+          "issues": ["1-4"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Doom",
+      "entries": [
+        {
+          "series": "Ultimate Doom",
+          "volume": 1,
+          "issues": ["1-4"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Captain America",
+      "entries": [
+        {
+          "series": "Ultimate Captain America",
+          "volume": 1,
+          "issues": ["1-4"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate New Ultimates",
+      "entries": [
+        {
+          "series": "Ultimate New Ultimates",
+          "volume": 1,
+          "issues": ["1-5"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Thor",
+      "entries": [
+        {
+          "series": "Ultimate Thor",
+          "volume": 1,
+          "issues": ["1-4"]
+        }
+      ]
+    },
+    {
+      "title": "Blade vs. the Avengers",
+      "entries": [
+        {
+          "series": "Ultimate Avengers",
+          "volume": 1,
+          "issues": ["13-18"]
+        }
+      ]
+    },
+    {
+      "title": "Death of Spider-Man Prelude",
+      "entries": [
+        {
+          "series": "Ultimate Spider-Man",
+          "volume": 2,
+          "issues": ["15", "150-155"]
+        }
+      ]
+    },
+    {
+      "title": "Death of Spider-Man",
+      "entries": [
+        {
+          "series": "Ultimate Spider-Man",
+          "volume": 2,
+          "issues": ["156-160"]
+        }
+      ]
+    },
+    {
+      "title": "Avengers vs. New Ultimates: Death of Spider-Man",
+      "entries": [
+        {
+          "series": "Ultimate Avengers vs. New Ultimates",
+          "volume": 1,
+          "issues": ["1-6"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Fallout",
+      "entries": [
+        {
+          "series": "Ultimate Fallout",
+          "volume": 1,
+          "issues": ["1-6"]
+        }
+      ]
+    },
+    {
+      "title": "Who Is Miles Morales?",
+      "entries": [
+        {
+          "series": "Ultimate Comics Spider-Man",
+          "volume": 1,
+          "issues": ["1-5"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Comics Hawkeye",
+      "entries": [
+        {
+          "series": "Ultimate Comics Hawkeye",
+          "volume": 1,
+          "issues": ["1-4"]
+        }
+      ]
+    },
+    {
+      "title": "The Republic Is Burning / The World",
+      "entries": [
+        {
+          "series": "Ultimate Comics Ultimates",
+          "volume": 1,
+          "issues": ["1-6"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Comics X-Men — Before Divided We Fall",
+      "entries": [
+        {
+          "series": "Ultimate Comics X-Men",
+          "volume": 1,
+          "issues": ["1-13"]
+        }
+      ]
+    },
+    {
+      "title": "Scorpion",
+      "entries": [
+        {
+          "series": "Ultimate Comics Spider-Man",
+          "volume": 1,
+          "issues": ["6-12"]
+        }
+      ]
+    },
+    {
+      "title": "Two Cities, Two Worlds",
+      "entries": [
+        {
+          "series": "Ultimate Comics Ultimates",
+          "volume": 1,
+          "issues": ["7-12"]
+        }
+      ]
+    },
+    {
+      "title": "Spider-Men",
+      "entries": [
+        {
+          "series": "Spider-Men",
+          "volume": 1,
+          "issues": ["1-5"]
+        }
+      ]
+    },
+    {
+      "title": "Divided We Fall / United We Stand",
+      "entries": [
+        {
+          "series": "Ultimate Comics X-Men",
+          "volume": 1,
+          "issues": ["14"]
+        },
+        {
+          "series": "Ultimate Comics Ultimates",
+          "volume": 1,
+          "issues": ["13-14"]
+        },
+        {
+          "series": "Ultimate Comics Spider-Man",
+          "volume": 1,
+          "issues": ["13-14"]
+        },
+        {
+          "series": "Ultimate Comics X-Men",
+          "volume": 1,
+          "issues": ["15"]
+        },
+        {
+          "series": "Ultimate Comics Ultimates",
+          "volume": 1,
+          "issues": ["15"]
+        },
+        {
+          "series": "Ultimate Comics Spider-Man",
+          "volume": 1,
+          "issues": ["15-16"]
+        },
+        {
+          "series": "Ultimate Comics Ultimates",
+          "volume": 1,
+          "issues": ["16"]
+        },
+        {
+          "series": "Ultimate Comics X-Men",
+          "volume": 1,
+          "issues": ["16-17"]
+        },
+        {
+          "series": "Ultimate Comics Spider-Man",
+          "volume": 1,
+          "issues": ["17"]
+        },
+        {
+          "series": "Ultimate Comics Ultimates",
+          "volume": 1,
+          "issues": ["17-18"]
+        },
+        {
+          "series": "Ultimate Comics X-Men",
+          "volume": 1,
+          "issues": ["18", "18.1"]
+        },
+        {
+          "series": "Ultimate Comics Spider-Man",
+          "volume": 1,
+          "issues": ["18"]
+        },
+        {
+          "series": "Ultimate Comics Ultimates",
+          "volume": 1,
+          "issues": ["18.1"]
+        }
+      ]
+    },
+    {
+      "title": "Venom War",
+      "entries": [
+        {
+          "series": "Ultimate Comics Spider-Man",
+          "volume": 1,
+          "issues": ["16.1", "19-22"]
+        }
+      ]
+    },
+    {
+      "title": "Reconstruction",
+      "entries": [
+        {
+          "series": "Ultimate Comics Ultimates",
+          "volume": 1,
+          "issues": ["19-24"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Comics X-Men Vol. 1",
+      "entries": [
+        {
+          "series": "Ultimate Comics X-Men",
+          "volume": 1,
+          "issues": ["19-23"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Comics Wolverine: Legacies",
+      "entries": [
+        {
+          "series": "Ultimate Comics Wolverine",
+          "volume": 1,
+          "issues": ["1-4"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Comics X-Men Vol. 2",
+      "entries": [
+        {
+          "series": "Ultimate Comics X-Men",
+          "volume": 1,
+          "issues": ["24-28"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Comics Iron Man",
+      "entries": [
+        {
+          "series": "Ultimate Comics Iron Man",
+          "volume": 1,
+          "issues": ["1-4"]
+        }
+      ]
+    },
+    {
+      "title": "World War X",
+      "entries": [
+        {
+          "series": "Ultimate Comics X-Men",
+          "volume": 1,
+          "issues": ["29-33"]
+        }
+      ]
+    },
+    {
+      "title": "Disassembled",
+      "entries": [
+        {
+          "series": "Ultimate Comics Ultimates",
+          "volume": 1,
+          "issues": ["25-30"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Comics Spider-Man — Final Arc",
+      "entries": [
+        {
+          "series": "Ultimate Comics Spider-Man",
+          "volume": 1,
+          "issues": ["23-28"]
+        }
+      ]
+    },
+    {
+      "title": "Hunger",
+      "entries": [
+        {
+          "series": "Hunger",
+          "volume": 1,
+          "issues": ["1-4"]
+        }
+      ]
+    },
+    {
+      "title": "Cataclysm",
+      "entries": [
+        {
+          "series": "Cataclysm",
+          "volume": 1,
+          "issues": ["0.1"]
+        },
+        {
+          "series": "Cataclysm: Ultimate Spider-Man",
+          "volume": 1,
+          "issues": ["1"]
+        },
+        {
+          "series": "Cataclysm: Ultimate X-Men",
+          "volume": 1,
+          "issues": ["1-3"]
+        },
+        {
+          "series": "Cataclysm: The Ultimates' Last Stand",
+          "volume": 1,
+          "issues": ["1"]
+        },
+        {
+          "series": "Cataclysm: The Ultimates",
+          "volume": 1,
+          "issues": ["1"]
+        },
+        {
+          "series": "Cataclysm: The Ultimates' Last Stand",
+          "volume": 1,
+          "issues": ["2"]
+        },
+        {
+          "series": "Cataclysm: The Ultimates",
+          "volume": 1,
+          "issues": ["2-3"]
+        },
+        {
+          "series": "Cataclysm: Ultimate Spider-Man",
+          "volume": 1,
+          "issues": ["2-3"]
+        },
+        {
+          "series": "Cataclysm: The Ultimates' Last Stand",
+          "volume": 1,
+          "issues": ["3-5"]
+        },
+        {
+          "series": "Survive!",
+          "volume": 1,
+          "issues": ["1"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Spider-Man #200",
+      "entries": [
+        {
+          "series": "Ultimate Comics Spider-Man",
+          "volume": 1,
+          "issues": ["200"]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate FF",
+      "entries": [
+        {
+          "series": "Ultimate FF",
+          "volume": 1,
+          "issues": ["1-6"]
+        }
+      ]
+    },
+    {
+      "title": "All-New Ultimates",
+      "entries": [
+        {
+          "series": "All-New Ultimates",
+          "volume": 1,
+          "issues": ["1-12"]
+        }
+      ]
+    },
+    {
+      "title": "Miles Morales: Ultimate Spider-Man",
+      "entries": [
+        {
+          "series": "Miles Morales: Ultimate Spider-Man",
+          "volume": 1,
+          "issues": ["1-12"]
+        }
+      ]
+    },
+    {
+      "title": "Secret Wars / Ultimate End",
+      "entries": [
+        {
+          "series": "Secret Wars",
+          "volume": 1,
+          "issues": ["0-4"]
+        },
+        {
+          "series": "Ultimate End",
+          "volume": 1,
+          "issues": ["1-4"]
+        },
+        {
+          "series": "Secret Wars",
+          "volume": 1,
+          "issues": ["5-9"]
+        },
+        {
+          "series": "Ultimate End",
+          "volume": 1,
+          "issues": ["5"]
+        }
+      ]
+    }
+  ]
+}

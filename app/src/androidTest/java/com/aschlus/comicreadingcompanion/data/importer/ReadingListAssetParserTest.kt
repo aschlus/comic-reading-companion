@@ -15,6 +15,16 @@ class ReadingListAssetParserTest {
             .getInstrumentation()
             .context
 
+    private val targetContext =
+        InstrumentationRegistry
+            .getInstrumentation()
+            .targetContext
+
+    private val productionParser =
+        ReadingListAssetParser(
+            context = targetContext
+        )
+
     private val parser =
         ReadingListAssetParser(
             context = testContext
@@ -153,6 +163,59 @@ class ReadingListAssetParserTest {
         assertEquals(
             assets.sorted(),
             assets
+        )
+    }
+
+    @Test
+    fun parseUltimateMarvelProductionAsset_hasExpectedStructure() {
+        val result =
+            productionParser.parse(
+                "reading_lists/ultimate_marvel_2000_2015.json"
+            )
+
+        assertEquals(
+            "Ultimate Marvel (2000–2015)",
+            result.title
+        )
+
+        assertEquals(
+            "Marvel Comics",
+            result.publisher
+        )
+
+        assertEquals(
+            "Earth-1610",
+            result.universe.designation
+        )
+
+        assertEquals(
+            127,
+            result.sections.size
+        )
+
+        assertEquals(
+            714,
+            result.items.size
+        )
+
+        assertEquals(
+            1,
+            result.sections.first().position
+        )
+
+        assertEquals(
+            127,
+            result.sections.last().position
+        )
+
+        assertEquals(
+            1,
+            result.items.first().position
+        )
+
+        assertEquals(
+            714,
+            result.items.last().position
         )
     }
 }

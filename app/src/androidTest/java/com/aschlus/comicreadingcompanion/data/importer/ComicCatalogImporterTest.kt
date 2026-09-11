@@ -20,6 +20,7 @@ import com.aschlus.comicreadingcompanion.data.importer.models.ReadingListItemImp
 import com.aschlus.comicreadingcompanion.data.importer.models.SeriesImportDto
 import com.aschlus.comicreadingcompanion.data.importer.models.UniverseImportDto
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.flow.first
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -513,5 +514,216 @@ class ComicCatalogImporterTest {
                     .toSet()
 
             assertEquals(expectedIssueExternalIds, actualIssueExternalIds)
+        }
+
+    @Test
+    fun productionUltimateCatalogThenReadingList_reusesCatalogIssuesAndPreservesUniverses() =
+        runBlocking {
+            val context =
+                InstrumentationRegistry
+                    .getInstrumentation()
+                    .targetContext
+
+            val catalog =
+                ComicCatalogAssetParser(
+                    context = context
+                ).parse(
+                    "catalogs/ultimate_marvel_2000_2015_catalog.json"
+                )
+
+            val readingList =
+                ReadingListAssetParser(
+                    context = context
+                ).parse(
+                    "reading_lists/ultimate_marvel_2000_2015.json"
+                )
+
+            val readingListImporter =
+                ReadingListImporter(
+                    comicDao = comicDao,
+                    database = database
+                )
+
+            // Startup order: catalog first.
+            importer.import(catalog)
+
+            val publisher =
+                comicDao.getPublisherByName(
+                    "Marvel Comics"
+                )
+
+            assertNotNull(publisher)
+
+            val seriesBefore =
+                comicDao.getSeriesForPublisher(
+                    publisher!!.id
+                )
+
+            val issuesBefore =
+                seriesBefore.flatMap { series ->
+                    comicDao.getIssuesForSeries(
+                        series.id
+                    )
+                }
+
+            assertEquals(
+                67,
+                seriesBefore.size
+            )
+
+            assertEquals(
+                714,
+                issuesBefore.size
+            )
+
+            val seriesIdsBefore =
+                seriesBefore
+                    .map { series ->
+                        series.id
+                    }
+                    .toSet()
+
+            val issueIdsBefore =
+                issuesBefore
+                    .map { issue ->
+                        issue.id
+                    }
+                    .toSet()
+
+            val secretWars =
+                comicDao.getSeries(
+                    publisherId = publisher.id,
+                    title = "Secret Wars",
+                    volume = 1
+                )
+
+            assertNotNull(secretWars)
+
+            val secretWarsZeroBefore =
+                comicDao.getIssue(
+                    seriesId = secretWars!!.id,
+                    issueNumber = "0"
+                )
+
+            assertNotNull(secretWarsZeroBefore)
+            assertEquals(
+                null,
+                secretWarsZeroBefore?.universeId
+            )
+
+            val ultimateEnd =
+                comicDao.getSeries(
+                    publisherId = publisher.id,
+                    title = "Ultimate End",
+                    volume = 1
+                )
+
+            assertNotNull(ultimateEnd)
+
+            val ultimateEndOneBefore =
+                comicDao.getIssue(
+                    seriesId = ultimateEnd!!.id,
+                    issueNumber = "1"
+                )
+
+            assertNotNull(ultimateEndOneBefore)
+            assertEquals(
+                null,
+                ultimateEndOneBefore?.universeId
+            )
+
+            // Then import the bundled reading order.
+            readingListImporter.import(
+                readingList
+            )
+
+            val seriesAfter =
+                comicDao.getSeriesForPublisher(
+                    publisher.id
+                )
+
+            val issuesAfter =
+                seriesAfter.flatMap { series ->
+                    comicDao.getIssuesForSeries(
+                        series.id
+                    )
+                }
+
+            assertEquals(
+                67,
+                seriesAfter.size
+            )
+
+            assertEquals(
+                714,
+                issuesAfter.size
+            )
+
+            assertEquals(
+                seriesIdsBefore,
+                seriesAfter
+                    .map { series ->
+                        series.id
+                    }
+                    .toSet()
+            )
+
+            assertEquals(
+                issueIdsBefore,
+                issuesAfter
+                    .map { issue ->
+                        issue.id
+                    }
+                    .toSet()
+            )
+
+            val importedReadingList =
+                comicDao
+                    .getAllReadingLists()
+                    .first()
+                    .first { storedList ->
+                        storedList.title ==
+                                "Ultimate Marvel (2000–2015)"
+                    }
+
+            val sections =
+                comicDao.getSectionsForReadingList(
+                    importedReadingList.id
+                )
+
+            val items =
+                comicDao.getItemsForReadingList(
+                    importedReadingList.id
+                )
+
+            assertEquals(
+                127,
+                sections.size
+            )
+
+            assertEquals(
+                714,
+                items.size
+            )
+
+            val secretWarsZeroAfter =
+                comicDao.getIssueById(
+                    secretWarsZeroBefore!!.id
+                )
+
+            val ultimateEndOneAfter =
+                comicDao.getIssueById(
+                    ultimateEndOneBefore!!.id
+                )
+
+            assertEquals(
+                null,
+                secretWarsZeroAfter?.universeId
+            )
+
+            assertEquals(
+                null,
+                ultimateEndOneAfter?.universeId
+            )
         }
 }

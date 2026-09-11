@@ -7,6 +7,10 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.aschlus.comicreadingcompanion.data.database.ComicDatabase
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingProgress
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
+import com.aschlus.comicreadingcompanion.data.database.entities.Issue
+import com.aschlus.comicreadingcompanion.data.database.entities.IssueType
+import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
+import com.aschlus.comicreadingcompanion.data.database.entities.Series
 import com.aschlus.comicreadingcompanion.data.importer.models.ExternalIdImportDto
 import com.aschlus.comicreadingcompanion.data.importer.models.IssueImportDto
 import com.aschlus.comicreadingcompanion.data.importer.models.ReadingListImportDto
@@ -780,6 +784,66 @@ class ReadingListImporterTest {
             assertEquals(
                 listOf("2", "1"),
                 issueNumbers
+            )
+        }
+
+    @Test
+    fun importReadingList_preservesExistingIssueUniverse() =
+        runBlocking {
+            val comicDao =
+                database.comicDao()
+
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name = "Test Publisher"
+                    )
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Test Series",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2001
+                    )
+                )
+
+            val issueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "Catalog Issue",
+                        publicationDate = "2000-01",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            importer.import(
+                createValidImportData(
+                    publisher = "Test Publisher",
+                    seriesTitle = "Test Series",
+                    issueNumber = "1"
+                )
+            )
+
+            val issueAfterImport =
+                comicDao.getIssueById(
+                    issueId
+                )
+
+            assertNotNull(
+                issueAfterImport
+            )
+
+            assertNull(
+                issueAfterImport?.universeId
             )
         }
 

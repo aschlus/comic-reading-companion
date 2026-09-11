@@ -936,7 +936,6 @@ class ReadingListImporter(
         if (existing != null) {
             val updated =
                 existing.copy(
-                    universeId = universe.id,
                     title = issueData.title,
                     publicationDate = issueData.publicationDate,
                     coverUrl = issueData.coverUrl,
