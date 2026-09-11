@@ -58,6 +58,28 @@ class ReadingListDetailViewModel(
         }
     }
 
+    fun updateReadingListDetails(
+        title: String,
+        description: String?
+    ) {
+        val readingList = _readingList.value
+            ?: return
+
+        if (readingList.source != ReadingListSource.USER) {
+            return
+        }
+
+        viewModelScope.launch {
+            repository.updateUserReadingListDetails(
+                readingListId = readingList.id,
+                title = title,
+                description = description
+            )
+
+            _readingList.value = repository.getReadingListById(readingList.id)
+        }
+    }
+
     fun toggleIssueRead(
         issue: ReadingListIssue
     ) {

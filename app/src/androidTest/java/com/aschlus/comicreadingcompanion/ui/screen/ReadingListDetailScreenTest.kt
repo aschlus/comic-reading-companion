@@ -16,6 +16,7 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
+import androidx.compose.ui.test.performTextClearance
 import androidx.lifecycle.viewModelScope
 import androidx.room3.Room
 import androidx.test.core.app.ApplicationProvider
@@ -2759,6 +2760,189 @@ class ReadingListDetailScreenTest {
             composeRule.onNodeWithContentDescription("Reading list options").performClick()
             composeRule.onNodeWithContentDescription("More options").performClick()
             composeRule.onNodeWithText("Move to section").assertDoesNotExist()
+        }
+    }
+
+    @Test
+    fun readingListDetailScreen_editReadingListUpdatesTitleAndDescription() {
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Original Title",
+                    description = "Original description",
+                    publisherId = publisherId,
+                    universeId = null
+                )
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    ReadingListDetailScreen(
+                        readingListId = readingListId,
+                        startPosition = -1,
+                        viewModel = viewModel,
+                        onIssueClick = {},
+                        onBackClick = {}
+                    )
+                }
+            }
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        "Original Title"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule
+                .onNodeWithContentDescription(
+                    "Reading list options"
+                )
+                .performClick()
+
+            composeRule
+                .onNodeWithText(
+                    "Edit reading list"
+                )
+                .performClick()
+
+            val textFields =
+                composeRule.onAllNodes(
+                    hasSetTextAction()
+                )
+
+            textFields[0]
+                .performTextClearance()
+
+            textFields[0]
+                .performTextInput(
+                    "Updated Reading List"
+                )
+
+            textFields[1]
+                .performTextClearance()
+
+            textFields[1]
+                .performTextInput(
+                    "Updated description"
+                )
+
+            composeRule
+                .onNodeWithText("Save")
+                .performClick()
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                runBlocking {
+                    comicDao
+                        .getReadingListById(
+                            readingListId
+                        )
+                        ?.title ==
+                            "Updated Reading List"
+                }
+            }
+
+            val updated =
+                comicDao.getReadingListById(
+                    readingListId
+                )!!
+
+            assertEquals(
+                "Updated Reading List",
+                updated.title
+            )
+
+            assertEquals(
+                "Updated description",
+                updated.description
+            )
+
+            composeRule
+                .onNodeWithText(
+                    "Updated Reading List"
+                )
+                .assertIsDisplayed()
+
+            composeRule
+                .onNodeWithText(
+                    "Updated description"
+                )
+                .assertIsDisplayed()
+        }
+    }
+
+    @Test
+    fun readingListDetailScreen_bundledListDoesNotShowEditAction() {
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val readingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title = "Bundled Edit Test",
+                        description = null,
+                        publisherId = publisherId,
+                        universeId = null,
+                        source =
+                            ReadingListSource.BUNDLED,
+                        sourceKey =
+                            "bundled-edit-ui-test",
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    ReadingListDetailScreen(
+                        readingListId = readingListId,
+                        startPosition = -1,
+                        viewModel = viewModel,
+                        onIssueClick = {},
+                        onBackClick = {}
+                    )
+                }
+            }
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        "Bundled Edit Test"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule
+                .onNodeWithContentDescription(
+                    "Reading list options"
+                )
+                .performClick()
+
+            composeRule
+                .onNodeWithText(
+                    "Edit reading list"
+                )
+                .assertDoesNotExist()
         }
     }
 }

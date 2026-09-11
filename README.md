@@ -45,7 +45,7 @@ building, following, and tracking comic-book reading orders.
 - [x] Reading-list sections / story arcs
 - [x] Collapsible reading-list sections
 - [x] Create custom reading lists
-- [ ] Edit reading-list title and description
+- [x] Edit reading-list title and description
 - [x] Add issues to a reading list
 - [x] Remove issues from a reading list
 - [x] Reorder reading-list items

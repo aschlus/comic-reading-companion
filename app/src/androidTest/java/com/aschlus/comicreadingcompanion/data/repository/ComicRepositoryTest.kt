@@ -1713,4 +1713,189 @@ class ComicRepositoryTest {
             assertNull(item.sectionId)
             assertEquals(1, item.position)
         }
+
+    @Test
+    fun updateUserReadingListDetails_updatesTitleDescriptionAndTimestamp() =
+        runBlocking {
+            createIssue("1")
+
+            val publisher =
+                comicDao.getPublisherByName("Marvel")!!
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Original Title",
+                    description = "Original description",
+                    publisherId = publisher.id,
+                    universeId = null
+                )
+
+            val before =
+                comicDao.getReadingListById(
+                    readingListId
+                )!!
+
+            repository.updateUserReadingListDetails(
+                readingListId = readingListId,
+                title = "  Updated Title  ",
+                description = "  Updated description  "
+            )
+
+            val after =
+                comicDao.getReadingListById(
+                    readingListId
+                )!!
+
+            assertEquals(
+                "Updated Title",
+                after.title
+            )
+
+            assertEquals(
+                "Updated description",
+                after.description
+            )
+
+            assertTrue(
+                after.updatedAt > before.updatedAt
+            )
+        }
+
+    @Test
+    fun updateUserReadingListDetails_blankDescriptionBecomesNull() =
+        runBlocking {
+            createIssue("1")
+
+            val publisher =
+                comicDao.getPublisherByName("Marvel")!!
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Description Test",
+                    description = "Existing description",
+                    publisherId = publisher.id,
+                    universeId = null
+                )
+
+            repository.updateUserReadingListDetails(
+                readingListId = readingListId,
+                title = "Description Test",
+                description = "   "
+            )
+
+            val updated =
+                comicDao.getReadingListById(
+                    readingListId
+                )!!
+
+            assertNull(
+                updated.description
+            )
+        }
+
+    @Test
+    fun updateUserReadingListDetails_rejectsBlankTitle() =
+        runBlocking {
+            createIssue("1")
+
+            val publisher =
+                comicDao.getPublisherByName("Marvel")!!
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Valid Title",
+                    description = null,
+                    publisherId = publisher.id,
+                    universeId = null
+                )
+
+            var exception:
+                    IllegalArgumentException? = null
+
+            try {
+                repository.updateUserReadingListDetails(
+                    readingListId = readingListId,
+                    title = "   ",
+                    description = null
+                )
+            } catch (
+                caught: IllegalArgumentException
+            ) {
+                exception = caught
+            }
+
+            assertNotNull(exception)
+
+            assertEquals(
+                "Reading-list title cannot be blank",
+                exception?.message
+            )
+
+            val unchanged =
+                comicDao.getReadingListById(
+                    readingListId
+                )!!
+
+            assertEquals(
+                "Valid Title",
+                unchanged.title
+            )
+        }
+
+    @Test
+    fun updateUserReadingListDetails_rejectsNonUserOwnedList() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val readingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title = "Bundled List",
+                        description = null,
+                        publisherId = publisherId,
+                        universeId = null,
+                        source =
+                            ReadingListSource.BUNDLED,
+                        sourceKey =
+                            "bundled-edit-test",
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            var exception:
+                    IllegalArgumentException? = null
+
+            try {
+                repository.updateUserReadingListDetails(
+                    readingListId = readingListId,
+                    title = "Changed",
+                    description = null
+                )
+            } catch (
+                caught: IllegalArgumentException
+            ) {
+                exception = caught
+            }
+
+            assertNotNull(exception)
+
+            assertEquals(
+                "Reading list $readingListId is not user-owned",
+                exception?.message
+            )
+
+            val unchanged =
+                comicDao.getReadingListById(
+                    readingListId
+                )!!
+
+            assertEquals(
+                "Bundled List",
+                unchanged.title
+            )
+        }
 }

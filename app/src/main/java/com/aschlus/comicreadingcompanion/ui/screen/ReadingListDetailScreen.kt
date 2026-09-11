@@ -104,6 +104,24 @@ fun ReadingListDetailScreen(
         mutableStateOf(false)
     }
 
+    var showEditReadingListDialog by remember(
+        readingListId
+    ) {
+        mutableStateOf(false)
+    }
+
+    var editReadingListTitle by remember(
+        readingListId
+    ) {
+        mutableStateOf("")
+    }
+
+    var editReadingListDescription by remember(
+        readingListId
+    ) {
+        mutableStateOf("")
+    }
+
     var showCreateSectionDialog by remember(
         readingListId
     ) {
@@ -456,6 +474,23 @@ fun ReadingListDetailScreen(
                                     listMenuExpanded = false
                                 }
                             ) {
+                                if (readingList?.source == ReadingListSource.USER) {
+                                    DropdownMenuItem(
+                                        text = {
+                                            Text("Edit reading list")
+                                        },
+                                        onClick = {
+                                            listMenuExpanded = false
+
+                                            editReadingListTitle =
+                                                readingList?.title.orEmpty()
+                                            editReadingListDescription =
+                                                readingList?.description.orEmpty()
+                                            showEditReadingListDialog = true
+                                        }
+                                    )
+                                }
+
                                 if (readingList?.source == ReadingListSource.USER) {
                                     DropdownMenuItem(
                                         text = {
@@ -1010,6 +1045,67 @@ fun ReadingListDetailScreen(
                 TextButton(
                     onClick = {
                         showResetProgressDialog = false
+                    }
+                ) {
+                    Text("Cancel")
+                }
+            }
+        )
+    }
+
+    if (showEditReadingListDialog) {
+        AlertDialog(
+            onDismissRequest = {
+                showEditReadingListDialog = false
+            },
+            title = {
+                Text("Edit reading list")
+            },
+            text = {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    OutlinedTextField(
+                        value = editReadingListTitle,
+                        onValueChange = {
+                            editReadingListTitle = it
+                        },
+                        label = {
+                            Text("Title")
+                        },
+                        singleLine = true
+                    )
+
+                    OutlinedTextField(
+                        value = editReadingListDescription,
+                        onValueChange = {
+                            editReadingListDescription = it
+                        },
+                        label = {
+                            Text("Description (optional")
+                        }
+                    )
+                }
+            },
+            confirmButton = {
+                TextButton(
+                    enabled = editReadingListTitle.trim().isNotEmpty(),
+                    onClick = {
+                        viewModel.updateReadingListDetails(
+                            title = editReadingListTitle,
+                            description = editReadingListDescription.takeIf { it.isNotBlank() }
+                        )
+
+                        showEditReadingListDialog = false
+                    }
+                ) {
+                    Text("Save")
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = {
+                        showEditReadingListDialog = false
                     }
                 ) {
                     Text("Cancel")

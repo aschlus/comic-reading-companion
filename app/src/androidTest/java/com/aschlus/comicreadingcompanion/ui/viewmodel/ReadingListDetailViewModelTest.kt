@@ -1453,4 +1453,111 @@ class ReadingListDetailViewModelTest {
                 viewModel.sections.value
             )
         }
+
+    @Test
+    fun updateReadingListDetails_updatesLoadedUserList() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Original Title",
+                    description = "Original description",
+                    publisherId = publisherId,
+                    universeId = null
+                )
+
+            viewModel.loadReadingList(
+                readingListId
+            )
+
+            withTimeout(5000L.milliseconds) {
+                viewModel.readingList.first {
+                    it?.id == readingListId
+                }
+            }
+
+            viewModel.updateReadingListDetails(
+                title = "Updated Title",
+                description = "Updated description"
+            )
+
+            val updated =
+                withTimeout(5000L.milliseconds) {
+                    viewModel.readingList.first {
+                        it?.title ==
+                                "Updated Title"
+                    }
+                }
+
+            assertEquals(
+                "Updated Title",
+                updated?.title
+            )
+
+            assertEquals(
+                "Updated description",
+                updated?.description
+            )
+        }
+
+    @Test
+    fun updateReadingListDetails_doesNothingForNonUserList() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val readingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title = "Bundled Title",
+                        description = null,
+                        publisherId = publisherId,
+                        universeId = null,
+                        source =
+                            ReadingListSource.BUNDLED,
+                        sourceKey =
+                            "bundled-edit-vm-test",
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            viewModel.loadReadingList(
+                readingListId
+            )
+
+            withTimeout(5000L.milliseconds) {
+                viewModel.readingList.first {
+                    it?.id == readingListId
+                }
+            }
+
+            viewModel.updateReadingListDetails(
+                title = "Changed Title",
+                description = "Changed"
+            )
+
+            kotlinx.coroutines.delay(100)
+
+            val unchanged =
+                comicDao.getReadingListById(
+                    readingListId
+                )!!
+
+            assertEquals(
+                "Bundled Title",
+                unchanged.title
+            )
+
+            assertEquals(
+                "Bundled Title",
+                viewModel.readingList.value?.title
+            )
+        }
 }

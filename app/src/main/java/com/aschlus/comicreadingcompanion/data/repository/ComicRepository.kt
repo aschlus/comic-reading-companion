@@ -174,6 +174,39 @@ class ComicRepository(
         return comicDao.getReadingListSummaries()
     }
 
+    suspend fun updateUserReadingListDetails(
+        readingListId: Long,
+        title: String,
+        description: String?
+    ) {
+        val readingList =
+            comicDao.getReadingListById(readingListId)
+                ?: throw IllegalArgumentException(
+                    "Reading list $readingListId does not exist"
+                )
+
+        require(readingList.source == ReadingListSource.USER) {
+            "Reading list $readingListId is not user-owned"
+        }
+
+        val trimmedTitle = title.trim()
+
+        require(trimmedTitle.isNotEmpty()) {
+            "Reading-list title cannot be blank"
+        }
+
+        val trimmedDescription = description?.trim()?.takeIf { it.isNotEmpty() }
+        val updatedAt = maxOf(System.currentTimeMillis(), readingList.updatedAt + 1)
+
+        comicDao.updateReadingList(
+            readingList.copy(
+                title = trimmedTitle,
+                description = trimmedDescription,
+                updatedAt = updatedAt
+            )
+        )
+    }
+
 
     // Reading list sections
 
