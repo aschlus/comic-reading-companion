@@ -2945,4 +2945,247 @@ class ReadingListDetailScreenTest {
                 .assertDoesNotExist()
         }
     }
+
+    @Test
+    fun readingListDetailScreen_deleteReadingListCancelKeepsList() {
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Cancel Delete Test",
+                    description = null,
+                    publisherId = publisherId,
+                    universeId = null
+                )
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    ReadingListDetailScreen(
+                        readingListId = readingListId,
+                        startPosition = -1,
+                        viewModel = viewModel,
+                        onIssueClick = {},
+                        onBackClick = {}
+                    )
+                }
+            }
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        "Cancel Delete Test"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule
+                .onNodeWithContentDescription(
+                    "Reading list options"
+                )
+                .performClick()
+
+            composeRule
+                .onNodeWithText(
+                    "Delete reading list"
+                )
+                .performClick()
+
+            composeRule
+                .onNodeWithText(
+                    "Delete reading list?"
+                )
+                .assertIsDisplayed()
+
+            composeRule
+                .onNodeWithText("Cancel")
+                .performClick()
+
+            composeRule
+                .onNodeWithText(
+                    "Delete reading list?"
+                )
+                .assertDoesNotExist()
+
+            assertEquals(
+                readingListId,
+                comicDao
+                    .getReadingListById(
+                        readingListId
+                    )
+                    ?.id
+            )
+        }
+    }
+
+    @Test
+    fun readingListDetailScreen_deleteReadingListDeletesAndNavigatesBack() {
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Confirm Delete Test",
+                    description = null,
+                    publisherId = publisherId,
+                    universeId = null
+                )
+
+            val backClicked =
+                mutableStateOf(false)
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    ReadingListDetailScreen(
+                        readingListId = readingListId,
+                        startPosition = -1,
+                        viewModel = viewModel,
+                        onIssueClick = {},
+                        onBackClick = {
+                            backClicked.value = true
+                        }
+                    )
+                }
+            }
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        "Confirm Delete Test"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule
+                .onNodeWithContentDescription(
+                    "Reading list options"
+                )
+                .performClick()
+
+            composeRule
+                .onNodeWithText(
+                    "Delete reading list"
+                )
+                .performClick()
+
+            composeRule
+                .onNodeWithText(
+                    "Delete reading list?"
+                )
+                .assertIsDisplayed()
+
+            composeRule
+                .onNodeWithText("Delete")
+                .performClick()
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                runBlocking {
+                    comicDao
+                        .getReadingListById(
+                            readingListId
+                        ) == null
+                }
+            }
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                backClicked.value
+            }
+
+            assertEquals(
+                null,
+                comicDao.getReadingListById(
+                    readingListId
+                )
+            )
+
+            assertEquals(
+                true,
+                backClicked.value
+            )
+        }
+    }
+
+    @Test
+    fun readingListDetailScreen_bundledListDoesNotShowDeleteAction() {
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val readingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title =
+                            "Bundled Delete UI Test",
+                        description = null,
+                        publisherId = publisherId,
+                        universeId = null,
+                        source =
+                            ReadingListSource.BUNDLED,
+                        sourceKey =
+                            "bundled-delete-ui-test",
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    ReadingListDetailScreen(
+                        readingListId = readingListId,
+                        startPosition = -1,
+                        viewModel = viewModel,
+                        onIssueClick = {},
+                        onBackClick = {}
+                    )
+                }
+            }
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        "Bundled Delete UI Test"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule
+                .onNodeWithContentDescription(
+                    "Reading list options"
+                )
+                .performClick()
+
+            composeRule
+                .onNodeWithText(
+                    "Delete reading list"
+                )
+                .assertDoesNotExist()
+        }
+    }
 }

@@ -1898,4 +1898,121 @@ class ComicRepositoryTest {
                 unchanged.title
             )
         }
+
+    @Test
+    fun deleteUserReadingList_deletesUserOwnedReadingList() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Delete Test",
+                    description = null,
+                    publisherId = publisherId,
+                    universeId = null
+                )
+
+            assertNotNull(
+                comicDao.getReadingListById(
+                    readingListId
+                )
+            )
+
+            repository.deleteUserReadingList(
+                readingListId
+            )
+
+            assertNull(
+                comicDao.getReadingListById(
+                    readingListId
+                )
+            )
+        }
+
+    @Test
+    fun deleteUserReadingList_rejectsNonUserOwnedReadingList() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val readingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title = "Bundled Delete Test",
+                        description = null,
+                        publisherId = publisherId,
+                        universeId = null,
+                        source =
+                            ReadingListSource.BUNDLED,
+                        sourceKey =
+                            "bundled-delete-test",
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            var thrownException:
+                    IllegalArgumentException? = null
+
+            try {
+                repository.deleteUserReadingList(
+                    readingListId
+                )
+            } catch (
+                exception: IllegalArgumentException
+            ) {
+                thrownException = exception
+            }
+
+            assertNotNull(
+                thrownException
+            )
+
+            assertEquals(
+                "Reading list $readingListId " +
+                        "is not user-owned",
+                thrownException?.message
+            )
+
+            assertNotNull(
+                comicDao.getReadingListById(
+                    readingListId
+                )
+            )
+        }
+
+    @Test
+    fun deleteUserReadingList_rejectsMissingReadingList() =
+        runBlocking {
+            val missingReadingListId =
+                Long.MAX_VALUE
+
+            var thrownException:
+                    IllegalArgumentException? = null
+
+            try {
+                repository.deleteUserReadingList(
+                    missingReadingListId
+                )
+            } catch (
+                exception: IllegalArgumentException
+            ) {
+                thrownException = exception
+            }
+
+            assertNotNull(
+                thrownException
+            )
+
+            assertEquals(
+                "Reading list " +
+                        "$missingReadingListId does not exist",
+                thrownException?.message
+            )
+        }
 }

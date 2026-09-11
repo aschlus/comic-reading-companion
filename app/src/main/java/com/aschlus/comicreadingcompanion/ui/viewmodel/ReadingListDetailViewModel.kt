@@ -38,6 +38,12 @@ class ReadingListDetailViewModel(
     val issues: StateFlow<List<ReadingListIssue>> =
         _issues.asStateFlow()
 
+    private val _readingListDeleted =
+        MutableStateFlow(false)
+
+    val readingListDeleted: StateFlow<Boolean> =
+        _readingListDeleted.asStateFlow()
+
     fun loadReadingList(readingListId: Long) {
         viewModelScope.launch {
             _readingList.value =
@@ -77,6 +83,21 @@ class ReadingListDetailViewModel(
             )
 
             _readingList.value = repository.getReadingListById(readingList.id)
+        }
+    }
+
+    fun deleteReadingList() {
+        val readingList = _readingList.value
+            ?: return
+
+        if (readingList.source != ReadingListSource.USER) {
+            return
+        }
+
+        viewModelScope.launch {
+            repository.deleteUserReadingList(readingList.id)
+            issuesJob?.cancel()
+            _readingListDeleted.value = true
         }
     }
 

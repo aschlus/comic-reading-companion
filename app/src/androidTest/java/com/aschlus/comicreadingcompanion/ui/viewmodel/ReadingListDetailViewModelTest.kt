@@ -25,6 +25,7 @@ import kotlinx.coroutines.withTimeout
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -1558,6 +1559,107 @@ class ReadingListDetailViewModelTest {
             assertEquals(
                 "Bundled Title",
                 viewModel.readingList.value?.title
+            )
+        }
+
+    @Test
+    fun deleteReadingList_deletesUserListAndSignalsCompletion() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Delete ViewModel Test",
+                    description = null,
+                    publisherId = publisherId,
+                    universeId = null
+                )
+
+            viewModel.loadReadingList(
+                readingListId
+            )
+
+            withTimeout(5000L.milliseconds) {
+                viewModel.readingList.first {
+                    it?.id == readingListId
+                }
+            }
+
+            assertEquals(
+                false,
+                viewModel.readingListDeleted.value
+            )
+
+            viewModel.deleteReadingList()
+
+            withTimeout(5000L.milliseconds) {
+                viewModel.readingListDeleted.first {
+                    it
+                }
+            }
+
+            assertNull(
+                comicDao.getReadingListById(
+                    readingListId
+                )
+            )
+
+            assertEquals(
+                true,
+                viewModel.readingListDeleted.value
+            )
+        }
+
+    @Test
+    fun deleteReadingList_doesNothingForNonUserList() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val readingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title = "Bundled Delete VM Test",
+                        description = null,
+                        publisherId = publisherId,
+                        universeId = null,
+                        source =
+                            ReadingListSource.BUNDLED,
+                        sourceKey =
+                            "bundled-delete-vm-test",
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            viewModel.loadReadingList(
+                readingListId
+            )
+
+            withTimeout(5000L.milliseconds) {
+                viewModel.readingList.first {
+                    it?.id == readingListId
+                }
+            }
+
+            viewModel.deleteReadingList()
+
+            kotlinx.coroutines.delay(100)
+
+            assertNotNull(
+                comicDao.getReadingListById(
+                    readingListId
+                )
+            )
+
+            assertEquals(
+                false,
+                viewModel.readingListDeleted.value
             )
         }
 }

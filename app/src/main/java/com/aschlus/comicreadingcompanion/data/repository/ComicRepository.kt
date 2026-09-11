@@ -170,6 +170,22 @@ class ComicRepository(
         comicDao.deleteReadingList(readingList)
     }
 
+    suspend fun deleteUserReadingList(
+        readingListId: Long
+    ) {
+        val readingList =
+            comicDao.getReadingListById(readingListId)
+                ?: throw IllegalArgumentException(
+                    "Reading list $readingListId does not exist"
+                )
+
+        require(readingList.source == ReadingListSource.USER) {
+            "Reading list $readingListId is not user-owned"
+        }
+
+        comicDao.deleteReadingList(readingList)
+    }
+
     fun getReadingListSummaries(): Flow<List<ReadingListSummary>> {
         return comicDao.getReadingListSummaries()
     }

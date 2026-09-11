@@ -13,6 +13,7 @@ import androidx.compose.ui.test.performTextInput
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
+import org.junit.Assert.assertNull
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -342,5 +343,125 @@ class AppNavigationTest {
         }
         composeRule.onNodeWithText("Comic Reading Companion").assertIsDisplayed()
         composeRule.onNodeWithText("My Reading Lists").assertIsDisplayed()
+    }
+
+    @Test
+    fun appNavigation_deleteReadingListReturnsHomeAndRemovesList() {
+        val application =
+            composeRule.activity.application
+                    as ComicReadingCompanionApplication
+
+        val repository =
+            application.container.comicRepository
+
+        val readingListTitle =
+            "Navigation Delete Test " +
+                    System.currentTimeMillis()
+
+        var readingListId = 0L
+
+        runBlocking {
+            val publisher =
+                repository
+                    .getPublishersFlow()
+                    .first { publishers ->
+                        publishers.isNotEmpty()
+                    }
+                    .first()
+
+            readingListId =
+                repository.createUserReadingList(
+                    title = readingListTitle,
+                    description = null,
+                    publisherId = publisher.id,
+                    universeId = null
+                )
+        }
+
+        composeRule.waitUntil(
+            timeoutMillis = 5000L
+        ) {
+            composeRule
+                .onAllNodesWithText(
+                    readingListTitle
+                )
+                .fetchSemanticsNodes()
+                .isNotEmpty()
+        }
+
+        composeRule
+            .onNodeWithText(
+                readingListTitle
+            )
+            .performClick()
+
+        composeRule.waitUntil(
+            timeoutMillis = 5000L
+        ) {
+            composeRule
+                .onAllNodesWithText(
+                    "0 of 0 read • 0% complete"
+                )
+                .fetchSemanticsNodes()
+                .isNotEmpty()
+        }
+
+        composeRule
+            .onNodeWithContentDescription(
+                "Reading list options"
+            )
+            .performClick()
+
+        composeRule
+            .onNodeWithText(
+                "Delete reading list"
+            )
+            .performClick()
+
+        composeRule
+            .onNodeWithText(
+                "Delete reading list?"
+            )
+            .assertIsDisplayed()
+
+        composeRule
+            .onNodeWithText("Delete")
+            .performClick()
+
+        composeRule.waitUntil(
+            timeoutMillis = 5000L
+        ) {
+            composeRule
+                .onAllNodesWithText(
+                    "My Reading Lists"
+                )
+                .fetchSemanticsNodes()
+                .isNotEmpty()
+        }
+
+        composeRule
+            .onNodeWithText(
+                "Comic Reading Companion"
+            )
+            .assertIsDisplayed()
+
+        composeRule.waitUntil(
+            timeoutMillis = 5000L
+        ) {
+            composeRule
+                .onAllNodesWithText(
+                    readingListTitle
+                )
+                .fetchSemanticsNodes()
+                .isEmpty()
+        }
+
+        runBlocking {
+            assertNull(
+                repository.getReadingListById(
+                    readingListId
+                )
+            )
+        }
     }
 }

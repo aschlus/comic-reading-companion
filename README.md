@@ -50,7 +50,7 @@ building, following, and tracking comic-book reading orders.
 - [x] Remove issues from a reading list
 - [x] Reorder reading-list items
 - [x] Move issues between reading-list sections
-- [ ] Delete reading lists
+- [x] Delete reading lists
 - [ ] Duplicate / copy a reading list
 - [x] Search within a reading list
 - [x] Filter reading lists by read status, series, or required status

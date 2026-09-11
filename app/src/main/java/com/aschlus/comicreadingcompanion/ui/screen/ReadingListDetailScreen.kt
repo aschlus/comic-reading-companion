@@ -86,6 +86,9 @@ fun ReadingListDetailScreen(
     val sections by
         viewModel.sections.collectAsState()
 
+    val readingListDeleted by
+            viewModel.readingListDeleted.collectAsState()
+
     val listState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
 
@@ -123,6 +126,12 @@ fun ReadingListDetailScreen(
     }
 
     var showCreateSectionDialog by remember(
+        readingListId
+    ) {
+        mutableStateOf(false)
+    }
+
+    var showDeleteReadingListDialog by remember(
         readingListId
     ) {
         mutableStateOf(false)
@@ -208,6 +217,12 @@ fun ReadingListDetailScreen(
 
     LaunchedEffect(readingListId) {
         viewModel.loadReadingList(readingListId)
+    }
+
+    LaunchedEffect(readingListDeleted) {
+        if (readingListDeleted) {
+            onBackClick()
+        }
     }
 
     LaunchedEffect(isSearchActive) {
@@ -499,6 +514,21 @@ fun ReadingListDetailScreen(
                                         onClick = {
                                             listMenuExpanded = false
                                             showCreateSectionDialog = true
+                                        }
+                                    )
+                                }
+
+                                if (readingList?.source == ReadingListSource.USER) {
+                                    DropdownMenuItem(
+                                        text = {
+                                            Text(
+                                                text = "Delete reading list",
+                                                color = MaterialTheme.colorScheme.error
+                                            )
+                                        },
+                                        onClick = {
+                                            listMenuExpanded = false
+                                            showDeleteReadingListDialog = true
                                         }
                                     )
                                 }
@@ -1082,7 +1112,7 @@ fun ReadingListDetailScreen(
                             editReadingListDescription = it
                         },
                         label = {
-                            Text("Description (optional")
+                            Text("Description (optional)")
                         }
                     )
                 }
@@ -1173,6 +1203,48 @@ fun ReadingListDetailScreen(
                         showCreateSectionDialog = false
                         newSectionTitle = ""
                         newSectionDescription = ""
+                    }
+                ) {
+                    Text("Cancel")
+                }
+            }
+        )
+    }
+
+    if (showDeleteReadingListDialog) {
+        AlertDialog(
+            onDismissRequest = {
+                showDeleteReadingListDialog = false
+            },
+            title = {
+                Text("Delete reading list?")
+            },
+            text = {
+                Text(
+                    "Delete \"${readingList?.title.orEmpty()}\"? " +
+                    "This will permanently delete the " +
+                    "reading list and its sections. " +
+                    "Your comics and reading progress " +
+                    "will not be deleted."
+                )
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        showEditReadingListDialog = false
+                        viewModel.deleteReadingList()
+                    }
+                ) {
+                    Text(
+                        text = "Delete",
+                        color = MaterialTheme.colorScheme.error
+                    )
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = {
+                        showDeleteReadingListDialog = false
                     }
                 ) {
                     Text("Cancel")
