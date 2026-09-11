@@ -574,6 +574,152 @@ class BuildCatalogTest(
         self.assertEqual("SPECIAL", issues[1]["type"])
 
 
+    def test_build_catalog_supports_per_issue_volume_mappings(self):
+        config = {
+                "publisher": "Marvel Comics",
+                "universes": [
+                    {
+                        "name": "Marvel Universe",
+                        "designation": "Earth-616",
+                        "description": None
+                    }
+                ],
+                "series": [
+                    {
+                        "title": "Amazing Spider-Man Annual",
+                        "volume": None,
+                        "startYear": 1999,
+                        "endYear": 2001,
+                        "defaultUniverseDesignation": "Earth-616",
+                        "defaultIssueType": "ANNUAL",
+                        "issueMappings": {
+                            "1999": {
+                                "comicVineVolumeId": 60440,
+                                "comicVineIssueNumber": "1"
+                            },
+                            "2000": {
+                                "comicVineVolumeId": 60441,
+                                "comicVineIssueNumber": "1"
+                            },
+                            "2001": {
+                                "comicVineVolumeId": 60442,
+                                "comicVineIssueNumber": "1"
+                            }
+                        }
+                    }
+                ]
+            }
+        
+        cached_volumes = {
+            60440: {
+                "volume_id": 60440,
+                "results": [
+                    {
+                        "id": 1001,
+                        "issue_number": "1",
+                        "name": "Annual 1999",
+                        "cover_date": "1999-06-01",
+                        "store_date": None,
+                        "image": {
+                            "super_url": "https://example.com/1999.jpg"
+                        },
+                        "site_detail_url": "https://example.com/issues/1001",
+                        "volume": {
+                            "site_detail_url": "https://example.com/volumes/60440"
+                        }
+                    }
+                ]
+            },
+            60441: {
+                "volume_id": 60441,
+                "results": [
+                    {
+                        "id": 1002,
+                        "issue_number": "1",
+                        "name": "Annual 2000",
+                        "cover_date": "2000-06-01",
+                        "store_date": None,
+                        "image": {
+                            "super_url": "https://example.com/2000.jpg"
+                        },
+                        "site_detail_url": "https://example.com/issues/1002",
+                        "volume": {
+                            "site_detail_url": "https://example.com/volumes/60441"
+                        }
+                    }
+                ]
+            },
+            60442: {
+                "volume_id": 60442,
+                "results": [
+                    {
+                        "id": 1003,
+                        "issue_number": "1",
+                        "name": "Annual 2001",
+                        "cover_date": "2001-06-01",
+                        "store_date": None,
+                        "image": {
+                            "super_url": "https://example.com/2001.jpg"
+                        },
+                        "site_detail_url": "https://example.com/issues/1003",
+                        "volume": {
+                            "site_detail_url": "https://example.com/volumes/60442"
+                        }
+                    }
+                ]
+            }
+        }
+
+        catalog = build_catalog(
+            config=config,
+            cached_volumes=cached_volumes
+        )
+
+        series = catalog["series"][0]
+
+        self.assertEqual("Amazing Spider-Man Annual", series["title"])
+        self.assertIsNone(series["volume"])
+        self.assertEqual(
+            ["60440", "60441", "60442"],
+            [
+                external_id["externalId"]
+                for external_id
+                in series["externalIds"]
+            ]
+        )
+        self.assertEqual(
+            ["1999", "2000", "2001"],
+            [
+                issue["number"]
+                for issue
+                in series["issues"]
+            ]
+        )
+        self.assertEqual(
+            ["1001", "1002", "1003"],
+            [
+                issue["externalIds"][0]["externalId"]
+                for issue
+                in series["issues"]
+            ]
+        )
+        self.assertEqual(
+            ["ANNUAL", "ANNUAL", "ANNUAL"],
+            [
+                issue["type"]
+                for issue
+                in series["issues"]
+            ]
+        )
+        self.assertEqual(
+            ["Earth-616", "Earth-616", "Earth-616"],
+            [
+                issue["universeDesignation"]
+                for issue
+                in series["issues"]
+            ]
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

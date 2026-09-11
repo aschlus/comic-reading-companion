@@ -1,0 +1,57 @@
+{
+  "publisher": "Marvel Comics",
+  "universes": [
+    {
+      "name": "Marvel Universe",
+      "designation": "Earth-616",
+      "description": null
+    }
+  ],
+  "series": [
+    {
+      "title": "Daredevil/Spider-Man",
+      "volume": 1,
+      "startYear": 2001,
+      "endYear": 2001,
+      "comicVineVolumeId": 27657,
+      "defaultUniverseDesignation": "Earth-616",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Spider-Man's Tangled Web",
+      "volume": 1,
+      "startYear": 2001,
+      "endYear": 2003,
+      "comicVineVolumeId": 7255,
+      "defaultUniverseDesignation": "Earth-616",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Spider-Man: Lifeline",
+      "volume": 1,
+      "startYear": 2001,
+      "endYear": 2001,
+      "comicVineVolumeId": 26788,
+      "defaultUniverseDesignation": "Earth-616",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Spider-Man: The Mysterio Manifesto",
+      "volume": 1,
+      "startYear": 2001,
+      "endYear": 2001,
+      "comicVineVolumeId": 21938,
+      "defaultUniverseDesignation": "Earth-616",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Spider-Man: Quality of Life",
+      "volume": 1,
+      "startYear": 2002,
+      "endYear": 2002,
+      "comicVineVolumeId": 9470,
+      "defaultUniverseDesignation": "Earth-616",
+      "defaultIssueType": "REGULAR"
+    }
+  ]
+}

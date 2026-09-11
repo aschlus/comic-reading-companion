@@ -1,0 +1,21 @@
+{
+  "publisher": "Marvel Comics",
+  "universes": [
+    {
+      "name": "Marvel Universe",
+      "designation": "Earth-616",
+      "description": null
+    }
+  ],
+  "series": [
+    {
+      "title": "Spider-Man: Revenge of the Green Goblin",
+      "volume": 1,
+      "startYear": 2000,
+      "endYear": 2000,
+      "comicVineVolumeId": 20677,
+      "defaultUniverseDesignation": "Earth-616",
+      "defaultIssueType": "REGULAR"
+    }
+  ]
+}

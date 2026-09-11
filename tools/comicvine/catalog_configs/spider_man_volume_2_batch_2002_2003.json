@@ -1,0 +1,57 @@
+{
+  "publisher": "Marvel Comics",
+  "universes": [
+    {
+      "name": "Marvel Universe",
+      "designation": "Earth-616",
+      "description": null
+    }
+  ],
+  "series": [
+    {
+      "title": "Spider-Man: Blue",
+      "volume": 1,
+      "startYear": 2002,
+      "endYear": 2003,
+      "comicVineVolumeId": 9376,
+      "defaultUniverseDesignation": "Earth-616",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Spider-Man: Get Kraven",
+      "volume": 1,
+      "startYear": 2002,
+      "endYear": 2003,
+      "comicVineVolumeId": 21106,
+      "defaultUniverseDesignation": "Earth-616",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "The Spectacular Spider-Man",
+      "volume": 2,
+      "startYear": 2003,
+      "endYear": 2005,
+      "comicVineVolumeId": 11069,
+      "defaultUniverseDesignation": "Earth-616",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Venom",
+      "volume": null,
+      "startYear": 2003,
+      "endYear": 2004,
+      "comicVineVolumeId": 11068,
+      "defaultUniverseDesignation": "Earth-616",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Spider-Man & Wolverine",
+      "volume": 1,
+      "startYear": 2003,
+      "endYear": 2003,
+      "comicVineVolumeId": 28491,
+      "defaultUniverseDesignation": "Earth-616",
+      "defaultIssueType": "REGULAR"
+    }
+  ]
+}

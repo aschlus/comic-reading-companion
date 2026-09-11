@@ -1,0 +1,21 @@
+{
+  "publisher": "Marvel Comics",
+  "universes": [
+    {
+      "name": "Marvel Universe",
+      "designation": "Earth-616",
+      "description": null
+    }
+  ],
+  "series": [
+    {
+      "title": "Webspinners",
+      "volume": 1,
+      "startYear": 1999,
+      "endYear": 2000,
+      "comicVineVolumeId": 9375,
+      "defaultUniverseDesignation": "Earth-616",
+      "defaultIssueType": "REGULAR"
+    }
+  ]
+}

@@ -68,7 +68,7 @@ def choose_series_url(cached_volume: dict) -> str | None:
     return None
 
 
-def build_issue(comic_vine_issue: dict, universe_designation: str | None, issue_type: str) -> dict:
+def build_issue(comic_vine_issue: dict, universe_designation: str | None, issue_type: str, output_number: str | None = None) -> dict:
     issue_number = str(comic_vine_issue.get("issue_number", "")).strip()
 
     if not issue_number:
@@ -92,7 +92,7 @@ def build_issue(comic_vine_issue: dict, universe_designation: str | None, issue_
             title = None
 
     return {
-        "number": issue_number,
+        "number": output_number or issue_number,
         "title": title,
         "publicationDate": choose_publication_month(comic_vine_issue),
         "coverUrl": choose_cover_url(comic_vine_issue),
@@ -179,6 +179,100 @@ def build_series(series_config: dict, cached_volume: dict) -> dict:
     }
 
 
+def get_configured_volume_ids(series_config: dict) -> list[int]:
+    issue_mappings = series_config.get("issueMappings")
+
+    if issue_mappings is None:
+        return [int(series_config["comicVineVolumeId"])]
+
+    volume_ids = []
+
+    for issue_mapping in issue_mappings.values():
+        volume_id = int(issue_mapping["comicVineVolumeId"])
+
+        if volume_id not in volume_ids:
+            volume_ids.append(volume_id)
+
+    if not volume_ids:
+        raise ValueError(
+            "issueMappings must contain at least one issue"
+        )
+
+    return volume_ids
+
+
+def build_mapped_series(series_config: dict, cached_volumes: dict[int, dict]) -> dict:
+    issue_mappings = series_config["issueMappings"]
+    universe_designation = series_config.get("defaultUniverseDesignation")
+    default_issue_type = series_config.get("defaultIssueType", "REGULAR")
+    issue_overrides = series_config.get("issueOverrides", {})
+
+    issues = []
+    series_external_ids = []
+
+    for local_number, issue_mapping in issue_mappings.items():
+        volume_id = int(issue_mapping["comicVineVolumeId"])
+        cached_volume = cached_volumes.get(volume_id)
+
+        if cached_volume is None:
+            raise ValueError(
+                f"No cached Comic Vine volume found for {volume_id}"
+            )
+
+        cached_volume_id = cached_volume.get("volume_id")
+
+        if cached_volume_id != volume_id:
+            raise ValueError(
+                f"Cached volume ID {cached_volume_id} does not match configured volume {volume_id}"
+            )
+
+        if not any(external_id["externalId"] == str(volume_id) for external_id in series_external_ids):
+            series_external_ids.append(
+                {
+                    "source": COMIC_VINE_SOURCE,
+                    "externalId": str(volume_id),
+                    "url": choose_series_url(cached_volume)
+                }
+            )
+
+        comic_vine_number = str(issue_mapping.get("comicVineIssueNumber", local_number)).strip()
+
+        matches = [comic_vine_issue for comic_vine_issue in cached_volume.get("results", [])
+                   if str(comic_vine_issue.get("issue_number", "")).strip().casefold() == comic_vine_number.casefold()]
+
+        if not matches:
+            raise ValueError(
+                f"Comic Vine issue #{comic_vine_number} not found in volume {volume_id}"
+            )
+
+        if len(matches) > 1:
+            raise ValueError(
+                f"Multiple Comic Vine issues #{comic_vine_number} found in volume {volume_id}"
+            )
+
+        override = issue_overrides.get(str(local_number), {})
+
+        issues.append(
+            build_issue(
+                comic_vine_issue=matches[0],
+                universe_designation=override.get("universeDesignation", universe_designation),
+                issue_type=override.get("type", default_issue_type),
+                output_number=str(local_number)
+            )
+        )
+
+    issues.sort(key=issue_sort_key)
+
+    return {
+        "title": series_config["title"],
+        "volume": series_config.get("volume"),
+        "startYear": series_config.get("startYear"),
+        "endYear": series_config.get("endYear"),
+        "externalIds": series_external_ids,
+        "issues": issues
+    }
+
+
 def validate_catalog(catalog: dict) -> None:
     declared_universes = { universe["designation"] for universe in catalog.get("universes", []) }
 
@@ -239,6 +333,16 @@ def build_catalog(config: dict, cached_volumes: dict[int, dict]) -> dict:
     built_series = []
 
     for series_config in config.get("series", []):
+        if series_config.get("issueMappings") is not None:
+            built_series.append(
+                build_mapped_series(
+                    series_config=series_config,
+                    cached_volumes=cached_volumes
+                )
+            )
+
+            continue
+
         volume_id = int(series_config["comicVineVolumeId"])
         cached_volume = (cached_volumes.get(volume_id))
 
@@ -305,15 +409,15 @@ def load_cached_volumes(config: dict, cache_dir: Path = CACHE_DIR) -> dict[int, 
     cached_volumes = {}
 
     for series_config in config.get("series", []):
-        volume_id = int(series_config["comicVineVolumeId"])
+        for volume_id in get_configured_volume_ids(series_config):
 
-        if volume_id in cached_volumes:
-            continue
+            if volume_id in cached_volumes:
+                continue
 
-        cached_volumes[volume_id] = load_cached_volume(
-            volume_id=volume_id,
-            cache_dir=cache_dir
-        )
+            cached_volumes[volume_id] = load_cached_volume(
+                volume_id=volume_id,
+                cache_dir=cache_dir
+            )
 
     return cached_volumes
 

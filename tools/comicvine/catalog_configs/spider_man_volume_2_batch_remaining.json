@@ -1,0 +1,39 @@
+{
+  "publisher": "Marvel Comics",
+  "universes": [
+    {
+      "name": "Marvel Universe",
+      "designation": "Earth-616",
+      "description": null
+    }
+  ],
+  "series": [
+    {
+      "title": "Spider-Man vs. The Punisher",
+      "volume": 1,
+      "startYear": 2000,
+      "endYear": 2000,
+      "comicVineVolumeId": 21887,
+      "defaultUniverseDesignation": "Earth-616",
+      "defaultIssueType": "ONE_SHOT"
+    },
+    {
+      "title": "Spider-Man/Daredevil",
+      "volume": 1,
+      "startYear": 2002,
+      "endYear": 2002,
+      "comicVineVolumeId": 27656,
+      "defaultUniverseDesignation": "Earth-616",
+      "defaultIssueType": "ONE_SHOT"
+    },
+    {
+      "title": "Spider-Man/Black Cat: The Evil That Men Do",
+      "volume": 1,
+      "startYear": 2002,
+      "endYear": 2006,
+      "comicVineVolumeId": 9469,
+      "defaultUniverseDesignation": "Earth-616",
+      "defaultIssueType": "REGULAR"
+    }
+  ]
+}

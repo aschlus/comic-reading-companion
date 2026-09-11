@@ -1,0 +1,56 @@
+{
+  "publisher": "Marvel Comics",
+  "universes": [
+    {
+      "name": "Marvel Universe",
+      "designation": "Earth-616",
+      "description": null
+    }
+  ],
+  "series": [
+    {
+      "title": "Amazing Spider-Man Annual",
+      "volume": null,
+      "startYear": 1999,
+      "endYear": 2001,
+      "defaultUniverseDesignation": "Earth-616",
+      "defaultIssueType": "ANNUAL",
+      "issueMappings": {
+        "1999": {
+          "comicVineVolumeId": 60440,
+          "comicVineIssueNumber": "1"
+        },
+        "2000": {
+          "comicVineVolumeId": 60441,
+          "comicVineIssueNumber": "1"
+        },
+        "2001": {
+          "comicVineVolumeId": 60442,
+          "comicVineIssueNumber": "1"
+        }
+      }
+    },
+    {
+      "title": "Peter Parker: Spider-Man Annual",
+      "volume": null,
+      "startYear": 1999,
+      "endYear": 2001,
+      "defaultUniverseDesignation": "Earth-616",
+      "defaultIssueType": "ANNUAL",
+      "issueMappings": {
+        "1999": {
+          "comicVineVolumeId": 39919,
+          "comicVineIssueNumber": "1"
+        },
+        "2000": {
+          "comicVineVolumeId": 39920,
+          "comicVineIssueNumber": "1"
+        },
+        "2001": {
+          "comicVineVolumeId": 39921,
+          "comicVineIssueNumber": "1"
+        }
+      }
+    }
+  ]
+}

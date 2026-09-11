@@ -245,14 +245,14 @@
         {
           "source": "COMIC_VINE",
           "externalId": "78701",
-          "url": "https://comicvine.gamespot.com/the-amazing-spider-man/4050-2127/"
+          "url": "https://comicvine.gamespot.com/the-amazing-spider-man/4050-78701/"
         }
       ],
       "issues": [
         {
           "number": "1",
-          "title": null,
-          "publicationDate": "1998-12",
+          "title": "Where R U Spider-Man???; Rebirth",
+          "publicationDate": "1999-01",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171180-2127-113432-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -267,8 +267,8 @@
         },
         {
           "number": "2",
-          "title": null,
-          "publicationDate": "1999-01",
+          "title": "I Can't... (and I Don't Want To) ...But I Must!",
+          "publicationDate": "1999-02",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171185-2127-113433-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -283,8 +283,8 @@
         },
         {
           "number": "3",
-          "title": null,
-          "publicationDate": "1999-02",
+          "title": "Off to a Flying Start!",
+          "publicationDate": "1999-03",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171187-2127-113434-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -299,8 +299,8 @@
         },
         {
           "number": "4",
-          "title": null,
-          "publicationDate": "1999-03",
+          "title": "Betrayals",
+          "publicationDate": "1999-04",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171188-2127-113435-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -315,8 +315,8 @@
         },
         {
           "number": "5",
-          "title": null,
-          "publicationDate": "1999-04",
+          "title": "...And Then There Was One!",
+          "publicationDate": "1999-05",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171189-2127-113436-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -331,8 +331,8 @@
         },
         {
           "number": "6",
-          "title": null,
-          "publicationDate": "1999-05",
+          "title": "Truth be Told (...or not)",
+          "publicationDate": "1999-06",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171190-2127-113437-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -347,8 +347,8 @@
         },
         {
           "number": "7",
-          "title": null,
-          "publicationDate": "1999-06",
+          "title": "The Perfect World Part 1 Heroes and Villains",
+          "publicationDate": "1999-07",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171191-2127-113438-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -363,8 +363,8 @@
         },
         {
           "number": "8",
-          "title": null,
-          "publicationDate": "1999-07",
+          "title": "The Man Behind the Curtain!",
+          "publicationDate": "1999-08",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171192-2127-113439-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -379,8 +379,8 @@
         },
         {
           "number": "9",
-          "title": null,
-          "publicationDate": "1999-08",
+          "title": "The List",
+          "publicationDate": "1999-09",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171193-2127-113440-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -395,8 +395,8 @@
         },
         {
           "number": "10",
-          "title": null,
-          "publicationDate": "1999-09",
+          "title": "And Then There Were...",
+          "publicationDate": "1999-10",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171194-2127-113441-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -411,8 +411,8 @@
         },
         {
           "number": "11",
-          "title": null,
-          "publicationDate": "1999-10",
+          "title": "Bright Lights... Bigger City",
+          "publicationDate": "1999-11",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171195-2127-113442-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -427,8 +427,8 @@
         },
         {
           "number": "12",
-          "title": null,
-          "publicationDate": "1999-11",
+          "title": "Another Return of the Sinister Six!; Let There Be Light!",
+          "publicationDate": "1999-12",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171196-2127-113443-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -443,8 +443,8 @@
         },
         {
           "number": "13",
-          "title": null,
-          "publicationDate": "1999-12",
+          "title": "Time Enough..?",
+          "publicationDate": "2000-01",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171197-2127-113444-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -459,8 +459,8 @@
         },
         {
           "number": "14",
-          "title": null,
-          "publicationDate": "2000-01",
+          "title": "A Surfeit of Spiders",
+          "publicationDate": "2000-02",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171198-2127-113445-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -475,8 +475,8 @@
         },
         {
           "number": "15",
-          "title": null,
-          "publicationDate": "2000-02",
+          "title": "We're All Doomed... Again!",
+          "publicationDate": "2000-03",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171199-2127-113446-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -491,8 +491,8 @@
         },
         {
           "number": "16",
-          "title": null,
-          "publicationDate": "2000-03",
+          "title": "Coming Home",
+          "publicationDate": "2000-04",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171200-2127-113447-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -507,8 +507,8 @@
         },
         {
           "number": "17",
-          "title": null,
-          "publicationDate": "2000-04",
+          "title": "Dust in the Wind",
+          "publicationDate": "2000-05",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171201-2127-113448-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -523,8 +523,8 @@
         },
         {
           "number": "18",
-          "title": null,
-          "publicationDate": "2000-05",
+          "title": "Homeward Bound",
+          "publicationDate": "2000-06",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171202-2127-113449-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -539,8 +539,8 @@
         },
         {
           "number": "19",
-          "title": null,
-          "publicationDate": "2000-06",
+          "title": "Mirror Mirror",
+          "publicationDate": "2000-07",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171203-2127-113450-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -555,8 +555,8 @@
         },
         {
           "number": "20",
-          "title": null,
-          "publicationDate": "2000-07",
+          "title": "Set Up!",
+          "publicationDate": "2000-08",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171204-2127-113451-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -571,8 +571,8 @@
         },
         {
           "number": "21",
-          "title": null,
-          "publicationDate": "2000-08",
+          "title": "Slayers to the Left of Me...",
+          "publicationDate": "2000-09",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171205-2127-113452-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -587,8 +587,8 @@
         },
         {
           "number": "22",
-          "title": null,
-          "publicationDate": "2000-09",
+          "title": "The Distinguished Gentlemen from New York",
+          "publicationDate": "2000-10",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171206-2127-113453-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -603,8 +603,8 @@
         },
         {
           "number": "23",
-          "title": null,
-          "publicationDate": "2000-10",
+          "title": "How Many Times?",
+          "publicationDate": "2000-11",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171207-2127-113454-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -619,8 +619,8 @@
         },
         {
           "number": "24",
-          "title": null,
-          "publicationDate": "2000-11",
+          "title": "Distinguished Gentleman from New York Part Three: Failure is Not an Option",
+          "publicationDate": "2000-12",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171208-2127-113455-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -635,8 +635,8 @@
         },
         {
           "number": "25",
-          "title": null,
-          "publicationDate": "2000-12",
+          "title": "Darkness Calling",
+          "publicationDate": "2001-01",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171209-2127-113456-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -651,8 +651,8 @@
         },
         {
           "number": "26",
-          "title": null,
-          "publicationDate": "2001-01",
+          "title": "The Mask",
+          "publicationDate": "2001-02",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171210-2127-113457-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -667,8 +667,8 @@
         },
         {
           "number": "27",
-          "title": null,
-          "publicationDate": "2001-02",
+          "title": "The Stray",
+          "publicationDate": "2001-03",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171211-2127-113458-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -683,8 +683,8 @@
         },
         {
           "number": "28",
-          "title": null,
-          "publicationDate": "2001-03",
+          "title": "Distractions",
+          "publicationDate": "2001-04",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171212-2127-113459-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -699,8 +699,8 @@
         },
         {
           "number": "29",
-          "title": null,
-          "publicationDate": "2001-04",
+          "title": "Mary Jane",
+          "publicationDate": "2001-05",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171213-2127-113460-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -715,8 +715,8 @@
         },
         {
           "number": "30",
-          "title": null,
-          "publicationDate": "2001-05",
+          "title": "Transformations, Literal & Otherwise",
+          "publicationDate": "2001-06",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/56044/1715461-amazing_spider_man__1998__2nd_series__030_.jpeg",
           "description": null,
           "type": "REGULAR",
@@ -731,8 +731,8 @@
         },
         {
           "number": "31",
-          "title": null,
-          "publicationDate": "2001-06",
+          "title": "Coming Home",
+          "publicationDate": "2001-07",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171215-2127-113462-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -747,8 +747,8 @@
         },
         {
           "number": "32",
-          "title": null,
-          "publicationDate": "2001-07",
+          "title": "The Long, Dark Pizza of the Soul",
+          "publicationDate": "2001-08",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171216-2127-113463-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -763,8 +763,8 @@
         },
         {
           "number": "33",
-          "title": null,
-          "publicationDate": "2001-08",
+          "title": "All Fall Down",
+          "publicationDate": "2001-09",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171217-2127-113464-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -779,8 +779,8 @@
         },
         {
           "number": "34",
-          "title": null,
-          "publicationDate": "2001-09",
+          "title": "Meltdown",
+          "publicationDate": "2001-10",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171218-2127-113465-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -795,8 +795,8 @@
         },
         {
           "number": "35",
-          "title": null,
-          "publicationDate": "2001-10",
+          "title": "Coming Out",
+          "publicationDate": "2001-11",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171219-2127-113466-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -811,8 +811,8 @@
         },
         {
           "number": "36",
-          "title": null,
-          "publicationDate": "2001-11",
+          "title": "\"The Black Issue\"",
+          "publicationDate": "2001-12",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171220-2127-113467-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -827,8 +827,8 @@
         },
         {
           "number": "37",
-          "title": null,
-          "publicationDate": "2001-12",
+          "title": "Interlude",
+          "publicationDate": "2002-01",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171221-2127-113468-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -843,8 +843,8 @@
         },
         {
           "number": "38",
-          "title": null,
-          "publicationDate": "2002-01",
+          "title": "The Conversation",
+          "publicationDate": "2002-02",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171222-2127-113469-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -859,8 +859,8 @@
         },
         {
           "number": "39",
-          "title": null,
-          "publicationDate": "2002-02",
+          "title": "Meanwhile...",
+          "publicationDate": "2002-05",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171223-2127-113470-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -875,8 +875,8 @@
         },
         {
           "number": "40",
-          "title": null,
-          "publicationDate": "2002-03",
+          "title": "Sensitive Issues",
+          "publicationDate": "2002-06",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171224-2127-113471-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -891,8 +891,8 @@
         },
         {
           "number": "41",
-          "title": null,
-          "publicationDate": "2002-04",
+          "title": "Looking Back",
+          "publicationDate": "2002-07",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171225-2127-113472-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -907,8 +907,8 @@
         },
         {
           "number": "42",
-          "title": null,
-          "publicationDate": "2002-05",
+          "title": "A Strange Turn of Events",
+          "publicationDate": "2002-08",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171226-2127-113473-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -923,8 +923,8 @@
         },
         {
           "number": "43",
-          "title": null,
-          "publicationDate": "2002-06",
+          "title": "Cold Arms",
+          "publicationDate": "2002-09",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171230-2127-113474-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -939,8 +939,8 @@
         },
         {
           "number": "44",
-          "title": null,
-          "publicationDate": "2002-07",
+          "title": "Arms And The Men",
+          "publicationDate": "2002-10",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171233-2127-113475-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -955,8 +955,8 @@
         },
         {
           "number": "45",
-          "title": null,
-          "publicationDate": "2002-08",
+          "title": "Until The Stars Turn Cold",
+          "publicationDate": "2002-11",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171236-2127-113476-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -971,8 +971,8 @@
         },
         {
           "number": "46",
-          "title": null,
-          "publicationDate": "2002-09",
+          "title": "Unnatural Enemies",
+          "publicationDate": "2002-12",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171238-2127-113477-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -987,8 +987,8 @@
         },
         {
           "number": "47",
-          "title": null,
-          "publicationDate": "2002-10",
+          "title": "The Life & Death Of Spiders",
+          "publicationDate": "2003-01",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171243-2127-113478-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -1003,8 +1003,8 @@
         },
         {
           "number": "48",
-          "title": null,
-          "publicationDate": "2002-11",
+          "title": "A Spider's Tale",
+          "publicationDate": "2003-02",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171246-2127-113479-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -1019,8 +1019,8 @@
         },
         {
           "number": "49",
-          "title": null,
-          "publicationDate": "2002-12",
+          "title": "Bad Connections",
+          "publicationDate": "2003-03",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171249-2127-113480-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -1035,8 +1035,8 @@
         },
         {
           "number": "50",
-          "title": null,
-          "publicationDate": "2003-01",
+          "title": "Doomed Affairs",
+          "publicationDate": "2003-04",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171252-2127-113481-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -1051,8 +1051,8 @@
         },
         {
           "number": "51",
-          "title": null,
-          "publicationDate": "2003-02",
+          "title": "Digger",
+          "publicationDate": "2003-05",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/56044/1667470-amazing_spider_man__1998__2nd_series__051a.jpeg",
           "description": null,
           "type": "REGULAR",
@@ -1067,8 +1067,8 @@
         },
         {
           "number": "52",
-          "title": null,
-          "publicationDate": "2003-03",
+          "title": "Dig This",
+          "publicationDate": "2003-06",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171254-2127-113483-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -1083,8 +1083,8 @@
         },
         {
           "number": "53",
-          "title": null,
-          "publicationDate": "2003-04",
+          "title": "Parts And Pieces",
+          "publicationDate": "2003-07",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171255-2127-113484-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -1099,8 +1099,8 @@
         },
         {
           "number": "54",
-          "title": null,
-          "publicationDate": "2003-05",
+          "title": "The Balancing Of Karmic Accounts",
+          "publicationDate": "2003-08",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171256-2127-113485-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -1115,8 +1115,8 @@
         },
         {
           "number": "55",
-          "title": null,
-          "publicationDate": "2003-06",
+          "title": "Unintended Consequences",
+          "publicationDate": "2003-09",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171257-2127-113486-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -1131,8 +1131,8 @@
         },
         {
           "number": "56",
-          "title": null,
-          "publicationDate": "2003-07",
+          "title": "The Revolution Within",
+          "publicationDate": "2003-10",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171258-2127-113487-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -1147,8 +1147,8 @@
         },
         {
           "number": "57",
-          "title": null,
-          "publicationDate": "2003-08",
+          "title": "Happy Birthday, Part 1",
+          "publicationDate": "2003-11",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171259-2127-113488-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -1163,8 +1163,8 @@
         },
         {
           "number": "58",
-          "title": null,
-          "publicationDate": "2003-09",
+          "title": "Happy Birthday, Part 2",
+          "publicationDate": "2003-12",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6060/171260-2127-113489-1-amazing-spider-man.jpg",
           "description": null,
           "type": "REGULAR",
@@ -2137,7 +2137,7 @@
       "issues": [
         {
           "number": "1",
-          "title": null,
+          "title": "Crash and Burn; The Kiss",
           "publicationDate": "1999-01",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/54590-9375-75623-1-webspinners-tales-o.jpg",
           "description": null,
@@ -2153,7 +2153,7 @@
         },
         {
           "number": "2",
-          "title": null,
+          "title": "In the Nightmare Factory",
           "publicationDate": "1999-02",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/227578-9375-75624-2-webspinners-tales-o.jpg",
           "description": null,
@@ -2169,7 +2169,7 @@
         },
         {
           "number": "3",
-          "title": null,
+          "title": "Wake Up Call!",
           "publicationDate": "1999-03",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/54592-9375-75625-1-webspinners-tales-o.jpg",
           "description": null,
@@ -2185,7 +2185,7 @@
         },
         {
           "number": "4",
-          "title": null,
+          "title": "Out of the Blue (Into the Fire)",
           "publicationDate": "1999-04",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/54593-9375-75626-1-webspinners-tales-o.jpg",
           "description": null,
@@ -2201,7 +2201,7 @@
         },
         {
           "number": "5",
-          "title": null,
+          "title": "Broken!",
           "publicationDate": "1999-05",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/54594-9375-75627-1-webspinners-tales-o.jpg",
           "description": null,
@@ -2217,7 +2217,7 @@
         },
         {
           "number": "6",
-          "title": null,
+          "title": "With Everything to Lose",
           "publicationDate": "1999-06",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/74400-9375-75628-1-webspinners-tales-o.jpg",
           "description": null,
@@ -2233,7 +2233,7 @@
         },
         {
           "number": "7",
-          "title": null,
+          "title": "The Bridge",
           "publicationDate": "1999-07",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/74401-9375-75629-1-webspinners-tales-o.jpg",
           "description": null,
@@ -2249,7 +2249,7 @@
         },
         {
           "number": "8",
-          "title": null,
+          "title": "The Bridge: Part 2",
           "publicationDate": "1999-08",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/74402-9375-75630-1-webspinners-tales-o.jpg",
           "description": null,
@@ -2265,7 +2265,7 @@
         },
         {
           "number": "9",
-          "title": null,
+          "title": "The Bridge: Part 3",
           "publicationDate": "1999-09",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/74403-9375-75631-1-webspinners-tales-o.jpg",
           "description": null,
@@ -2281,7 +2281,7 @@
         },
         {
           "number": "10",
-          "title": null,
+          "title": "The Show Must Go On",
           "publicationDate": "1999-10",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/74404-9375-75632-1-webspinners-tales-o.jpg",
           "description": null,
@@ -2297,7 +2297,7 @@
         },
         {
           "number": "11",
-          "title": null,
+          "title": "Off The Deep End",
           "publicationDate": "1999-11",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/227654-9375-117427-1-webspinners-tales-o.jpg",
           "description": null,
@@ -2313,7 +2313,7 @@
         },
         {
           "number": "12",
-          "title": null,
+          "title": "Perchance To Dream",
           "publicationDate": "1999-12",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/227749-9375-117429-1-webspinners-tales-o.jpg",
           "description": null,
@@ -2329,7 +2329,7 @@
         },
         {
           "number": "13",
-          "title": null,
+          "title": "The Time Before",
           "publicationDate": "2000-01",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/227750-9375-117430-1-webspinners-tales-o.jpg",
           "description": null,
@@ -2345,8 +2345,8 @@
         },
         {
           "number": "14",
-          "title": null,
-          "publicationDate": "2000-02",
+          "title": "The Time Before: Part 2",
+          "publicationDate": "2000-03",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/227779-9375-117431-1-webspinners-tales-o.jpg",
           "description": null,
           "type": "REGULAR",
@@ -2361,7 +2361,7 @@
         },
         {
           "number": "15",
-          "title": null,
+          "title": "Blackout",
           "publicationDate": "2000-03",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/227786-9375-117432-1-webspinners-tales-o.jpg",
           "description": null,
@@ -2377,7 +2377,7 @@
         },
         {
           "number": "16",
-          "title": null,
+          "title": "Blackout: Part 2",
           "publicationDate": "2000-04",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/227788-9375-117433-1-webspinners-tales-o.jpg",
           "description": null,
@@ -2393,7 +2393,7 @@
         },
         {
           "number": "17",
-          "title": null,
+          "title": "Hero of the People",
           "publicationDate": "2000-05",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/227789-9375-117434-1-webspinners-tales-o.jpg",
           "description": null,
@@ -2409,7 +2409,7 @@
         },
         {
           "number": "18",
-          "title": null,
+          "title": "Hero of the People! Part 2",
           "publicationDate": "2000-06",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/227794-9375-117435-1-webspinners-tales-o.jpg",
           "description": null,
@@ -2434,24 +2434,24 @@
         {
           "source": "COMIC_VINE",
           "externalId": "60440",
-          "url": null
+          "url": "https://comicvine.gamespot.com/the-amazing-spider-man-1999/4050-60440/"
         },
         {
           "source": "COMIC_VINE",
           "externalId": "60441",
-          "url": null
+          "url": "https://comicvine.gamespot.com/the-amazing-spider-man-2000/4050-60441/"
         },
         {
           "source": "COMIC_VINE",
           "externalId": "60442",
-          "url": null
+          "url": "https://comicvine.gamespot.com/the-amazing-spider-man-2001/4050-60442/"
         }
       ],
       "issues": [
         {
           "number": "1999",
-          "title": null,
-          "publicationDate": "1999-04",
+          "title": "World Enough & Time",
+          "publicationDate": "1999-06",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/5586/623647-99.jpg",
           "description": null,
           "type": "ANNUAL",
@@ -2466,8 +2466,8 @@
         },
         {
           "number": "2000",
-          "title": null,
-          "publicationDate": "2000-05",
+          "title": "Old Aquaintances",
+          "publicationDate": "2000-03",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/5586/623648-2000.jpg",
           "description": null,
           "type": "ANNUAL",
@@ -2482,7 +2482,7 @@
         },
         {
           "number": "2001",
-          "title": null,
+          "title": "Passages",
           "publicationDate": "2001-05",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/5586/623649-2001.jpg",
           "description": null,
@@ -2507,23 +2507,23 @@
         {
           "source": "COMIC_VINE",
           "externalId": "39919",
-          "url": null
+          "url": "https://comicvine.gamespot.com/peter-parker-spider-man-1999/4050-39919/"
         },
         {
           "source": "COMIC_VINE",
           "externalId": "39920",
-          "url": null
+          "url": "https://comicvine.gamespot.com/peter-parker-spider-man-2000/4050-39920/"
         },
         {
           "source": "COMIC_VINE",
           "externalId": "39921",
-          "url": null
+          "url": "https://comicvine.gamespot.com/peter-parker-spider-man-2001/4050-39921/"
         }
       ],
       "issues": [
         {
           "number": "1999",
-          "title": null,
+          "title": "Song of the Man-Thing",
           "publicationDate": "1999-08",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/38919/1791981-peter_parker_spider_man_99.jpg",
           "description": null,
@@ -2539,7 +2539,7 @@
         },
         {
           "number": "2000",
-          "title": null,
+          "title": "No Sleep 'Til Brooklyn!",
           "publicationDate": "2000-12",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/38919/1791996-peter_parker_spider_man_2000.jpg",
           "description": null,
@@ -2555,7 +2555,7 @@
         },
         {
           "number": "2001",
-          "title": null,
+          "title": "It's Good To Be King",
           "publicationDate": "2002-01",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/38919/1792053-peter_parker_spider_man_2001.jpg",
           "description": null,
@@ -2697,7 +2697,7 @@
       "issues": [
         {
           "number": "1",
-          "title": null,
+          "title": "No One Here Gets Out Alive",
           "publicationDate": "2000-07",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/24227/424963-Spider-Man%20vs%20The%20Punisher%20-%20No%20one%20Here%20gets%20Out%20Alive%20-%2000%20-%20FC.jpg",
           "description": null,
@@ -2728,7 +2728,7 @@
       "issues": [
         {
           "number": "1",
-          "title": null,
+          "title": "Focus",
           "publicationDate": "2000-08",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/50638/1117808-cover.jpg",
           "description": null,
@@ -2744,7 +2744,7 @@
         },
         {
           "number": "2",
-          "title": null,
+          "title": "The Camera Doesn't Lie",
           "publicationDate": "2000-09",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/50638/1117809-cover.jpg",
           "description": null,
@@ -2760,7 +2760,7 @@
         },
         {
           "number": "3",
-          "title": null,
+          "title": "Deja Vu All Over Again",
           "publicationDate": "2000-10",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/50638/1117813-cover.jpg",
           "description": null,
@@ -2791,7 +2791,7 @@
       "issues": [
         {
           "number": "1",
-          "title": null,
+          "title": "Madness Takes Its Toll!",
           "publicationDate": "2000-10",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/317210-20677-124017-1-spider-man-revenge.jpg",
           "description": null,
@@ -2807,7 +2807,7 @@
         },
         {
           "number": "2",
-          "title": null,
+          "title": "Lives in the Balance!",
           "publicationDate": "2000-11",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/317600-20677-124045-1-spider-man-revenge.jpg",
           "description": null,
@@ -2823,7 +2823,7 @@
         },
         {
           "number": "3",
-          "title": null,
+          "title": "Surrender to the Dark!",
           "publicationDate": "2000-12",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/318399-20677-124157-1-spider-man-revenge.jpg",
           "description": null,
@@ -2854,7 +2854,7 @@
       "issues": [
         {
           "number": "1",
-          "title": null,
+          "title": "Jack's Back",
           "publicationDate": "2001-01",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/14661/436264-spider_manthemysteriomanifesto1.jpg",
           "description": null,
@@ -2870,7 +2870,7 @@
         },
         {
           "number": "2",
-          "title": null,
+          "title": "Even the Dead can lie!",
           "publicationDate": "2001-02",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/14661/436265-spider_manthemysteriomanifesto2.jpg",
           "description": null,
@@ -2886,7 +2886,7 @@
         },
         {
           "number": "3",
-          "title": null,
+          "title": "False Truths!",
           "publicationDate": "2001-03",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/14661/436266-spider_manthemysteriomanifesto3.jpg",
           "description": null,
@@ -2917,8 +2917,8 @@
       "issues": [
         {
           "number": "1",
-          "title": null,
-          "publicationDate": "2001-04",
+          "title": "Unusual Suspects",
+          "publicationDate": "2001-01",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/6740885-5489356803-73943.jpg",
           "description": null,
           "type": "REGULAR",
@@ -2933,8 +2933,8 @@
         },
         {
           "number": "2",
-          "title": null,
-          "publicationDate": "2001-05",
+          "title": "Unusual Suspects, Part Two: The Sting",
+          "publicationDate": "2001-02",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/6740886-0290749952-73944.jpg",
           "description": null,
           "type": "REGULAR",
@@ -2949,8 +2949,8 @@
         },
         {
           "number": "3",
-          "title": null,
-          "publicationDate": "2001-06",
+          "title": "Bad Boys Don't Cry",
+          "publicationDate": "2001-03",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/6740888-9234629639-73944.jpg",
           "description": null,
           "type": "REGULAR",
@@ -2965,8 +2965,8 @@
         },
         {
           "number": "4",
-          "title": null,
-          "publicationDate": "2001-07",
+          "title": "Things Get Worse",
+          "publicationDate": "2001-04",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/6740889-9368686145-73945.jpg",
           "description": null,
           "type": "REGULAR",
@@ -2996,7 +2996,7 @@
       "issues": [
         {
           "number": "1",
-          "title": null,
+          "title": "Pieces Of Fate",
           "publicationDate": "2001-04",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/13923/844889-spm_lifeline1.jpg",
           "description": null,
@@ -3012,8 +3012,8 @@
         },
         {
           "number": "2",
-          "title": null,
-          "publicationDate": "2001-05",
+          "title": "Snakes In The Grass",
+          "publicationDate": "2001-04",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/13923/844890-spm_lifeline2.jpg",
           "description": null,
           "type": "REGULAR",
@@ -3028,8 +3028,8 @@
         },
         {
           "number": "3",
-          "title": null,
-          "publicationDate": "2001-06",
+          "title": "A Taste Of Infinity",
+          "publicationDate": "2001-05",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/13923/844891-spm_lifeline3.jpg",
           "description": null,
           "type": "REGULAR",
@@ -3059,8 +3059,8 @@
       "issues": [
         {
           "number": "1",
-          "title": null,
-          "publicationDate": "2001-06",
+          "title": "The Coming of the Thousand",
+          "publicationDate": "2001-05",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183817-01.jpg",
           "description": null,
           "type": "REGULAR",
@@ -3075,7 +3075,7 @@
         },
         {
           "number": "2",
-          "title": null,
+          "title": "The Coming of the Thousand: Part 2",
           "publicationDate": "2001-07",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183818-02.jpg",
           "description": null,
@@ -3091,7 +3091,7 @@
         },
         {
           "number": "3",
-          "title": null,
+          "title": "The Coming of the Thousand: Part 3",
           "publicationDate": "2001-08",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183831-03.jpg",
           "description": null,
@@ -3107,7 +3107,7 @@
         },
         {
           "number": "4",
-          "title": null,
+          "title": "Severance Package",
           "publicationDate": "2001-09",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183826-04.jpg",
           "description": null,
@@ -3123,7 +3123,7 @@
         },
         {
           "number": "5",
-          "title": null,
+          "title": "Rhinoplasty",
           "publicationDate": "2001-10",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183833-05.jpg",
           "description": null,
@@ -3139,7 +3139,7 @@
         },
         {
           "number": "6",
-          "title": null,
+          "title": "Cornucopia",
           "publicationDate": "2001-11",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183823-06.jpg",
           "description": null,
@@ -3155,7 +3155,7 @@
         },
         {
           "number": "7",
-          "title": null,
+          "title": "Gentlemen's Agreement: Part 1",
           "publicationDate": "2001-12",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183819-07.jpg",
           "description": null,
@@ -3171,7 +3171,7 @@
         },
         {
           "number": "8",
-          "title": null,
+          "title": "Gentlemen's Agreement: Part 2",
           "publicationDate": "2002-01",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183827-08.jpg",
           "description": null,
@@ -3187,7 +3187,7 @@
         },
         {
           "number": "9",
-          "title": null,
+          "title": "Gentlemen's Agreement: Part 3",
           "publicationDate": "2002-02",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183820-09.jpg",
           "description": null,
@@ -3203,7 +3203,7 @@
         },
         {
           "number": "10",
-          "title": null,
+          "title": "Ray of Light",
           "publicationDate": "2002-03",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183822-10.jpg",
           "description": null,
@@ -3219,7 +3219,7 @@
         },
         {
           "number": "11",
-          "title": null,
+          "title": "Open All Night",
           "publicationDate": "2002-04",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183839-11.jpg",
           "description": null,
@@ -3235,7 +3235,7 @@
         },
         {
           "number": "12",
-          "title": null,
+          "title": "I was a Teenage Frog-Man",
           "publicationDate": "2002-05",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183825-12.jpg",
           "description": null,
@@ -3251,7 +3251,7 @@
         },
         {
           "number": "13",
-          "title": null,
+          "title": "Double Shots",
           "publicationDate": "2002-06",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183845-13.jpg",
           "description": null,
@@ -3267,7 +3267,7 @@
         },
         {
           "number": "14",
-          "title": null,
+          "title": "The Last Shoot",
           "publicationDate": "2002-07",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183828-14.jpg",
           "description": null,
@@ -3283,7 +3283,7 @@
         },
         {
           "number": "15",
-          "title": null,
+          "title": "The Collaborator",
           "publicationDate": "2002-08",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183830-15.jpg",
           "description": null,
@@ -3299,7 +3299,7 @@
         },
         {
           "number": "16",
-          "title": null,
+          "title": "Heartbreaker: Part 1",
           "publicationDate": "2002-09",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183829-16.jpg",
           "description": null,
@@ -3315,7 +3315,7 @@
         },
         {
           "number": "17",
-          "title": null,
+          "title": "Heartbreaker: Part 2",
           "publicationDate": "2002-10",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183837-17.jpg",
           "description": null,
@@ -3331,7 +3331,7 @@
         },
         {
           "number": "18",
-          "title": null,
+          "title": "Alphabet City",
           "publicationDate": "2002-11",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183835-18.jpg",
           "description": null,
@@ -3347,7 +3347,7 @@
         },
         {
           "number": "19",
-          "title": null,
+          "title": "Call of the Wild",
           "publicationDate": "2002-12",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183832-19.jpg",
           "description": null,
@@ -3363,7 +3363,7 @@
         },
         {
           "number": "20",
-          "title": null,
+          "title": "Behind the Mustache",
           "publicationDate": "2003-01",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183836-20.jpg",
           "description": null,
@@ -3379,7 +3379,7 @@
         },
         {
           "number": "21",
-          "title": null,
+          "title": "T'was the Fight Before Christmas",
           "publicationDate": "2003-02",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183843-21.jpg",
           "description": null,
@@ -3395,7 +3395,7 @@
         },
         {
           "number": "22",
-          "title": null,
+          "title": "The System",
           "publicationDate": "2003-03",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3183844-22.jpg",
           "description": null,
@@ -3426,7 +3426,7 @@
       "issues": [
         {
           "number": "1",
-          "title": null,
+          "title": "[untitled]",
           "publicationDate": "2002-07",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/72780-9470-77961-1-spider-man-quality.jpg",
           "description": null,
@@ -3442,7 +3442,7 @@
         },
         {
           "number": "2",
-          "title": null,
+          "title": "[untitled]",
           "publicationDate": "2002-08",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/72783-9470-77962-1-spider-man-quality.jpg",
           "description": null,
@@ -3458,7 +3458,7 @@
         },
         {
           "number": "3",
-          "title": null,
+          "title": "[untitled]",
           "publicationDate": "2002-09",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/72786-9470-77963-1-spider-man-quality.jpg",
           "description": null,
@@ -3474,7 +3474,7 @@
         },
         {
           "number": "4",
-          "title": null,
+          "title": "[untitled]",
           "publicationDate": "2002-10",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/72766-9470-77964-1-spider-man-quality.jpg",
           "description": null,
@@ -3494,7 +3494,7 @@
       "title": "Spider-Man: Blue",
       "volume": 1,
       "startYear": 2002,
-      "endYear": 2002,
+      "endYear": 2003,
       "externalIds": [
         {
           "source": "COMIC_VINE",
@@ -3505,7 +3505,7 @@
       "issues": [
         {
           "number": "1",
-          "title": null,
+          "title": "My Funny Valentine",
           "publicationDate": "2002-07",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/191812-9376-114345-1-spider-man-blue.jpg",
           "description": null,
@@ -3521,7 +3521,7 @@
         },
         {
           "number": "2",
-          "title": null,
+          "title": "Let's Fall in Love",
           "publicationDate": "2002-08",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/191813-9376-114347-1-spider-man-blue.jpg",
           "description": null,
@@ -3537,7 +3537,7 @@
         },
         {
           "number": "3",
-          "title": null,
+          "title": "Anything Goes",
           "publicationDate": "2002-09",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/72777-9376-77957-1-spider-man-blue.jpg",
           "description": null,
@@ -3553,7 +3553,7 @@
         },
         {
           "number": "4",
-          "title": null,
+          "title": "Autumn in New York",
           "publicationDate": "2002-10",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/72749-9376-77958-1-spider-man-blue.jpg",
           "description": null,
@@ -3569,7 +3569,7 @@
         },
         {
           "number": "5",
-          "title": null,
+          "title": "If I Had You",
           "publicationDate": "2002-11",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/72752-9376-77959-1-spider-man-blue.jpg",
           "description": null,
@@ -3585,8 +3585,8 @@
         },
         {
           "number": "6",
-          "title": null,
-          "publicationDate": "2002-12",
+          "title": "All of Me",
+          "publicationDate": "2003-04",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/72755-9376-77960-1-spider-man-blue.jpg",
           "description": null,
           "type": "REGULAR",
@@ -3716,7 +3716,7 @@
       "title": "Spider-Man/Black Cat: The Evil That Men Do",
       "volume": 1,
       "startYear": 2002,
-      "endYear": 2002,
+      "endYear": 2006,
       "externalIds": [
         {
           "source": "COMIC_VINE",
@@ -3727,7 +3727,7 @@
       "issues": [
         {
           "number": "1",
-          "title": null,
+          "title": "What's New Pussy Cat?",
           "publicationDate": "2002-08",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/11307/442428-spider_man_black_cat_the_evil_that_men_do_1_00.jpg",
           "description": null,
@@ -3743,7 +3743,7 @@
         },
         {
           "number": "2",
-          "title": null,
+          "title": "A Ruse By Any Other Name...",
           "publicationDate": "2002-09",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/11307/442432-spider_man_black_cat_the_evil_that_men_do_2_00.jpg",
           "description": null,
@@ -3759,7 +3759,7 @@
         },
         {
           "number": "3",
-          "title": null,
+          "title": "Hate Crimes",
           "publicationDate": "2002-10",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/56044/1703494-spider_man_black_cat_the_evil_men_do__2002__3.jpeg",
           "description": null,
@@ -3770,6 +3770,54 @@
               "source": "COMIC_VINE",
               "externalId": "77955",
               "url": "https://comicvine.gamespot.com/spider-manblack-cat-the-evil-that-men-do-3-hate-cr/4000-77955/"
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "title": "A Study In Scarlet",
+          "publicationDate": "2006-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/11307/442435-spider_man_black_cat_the_evil_that_men_do_4_00.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "77956",
+              "url": "https://comicvine.gamespot.com/spider-manblack-cat-the-evil-that-men-do-4-a-study/4000-77956/"
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "title": "Trickle Down",
+          "publicationDate": "2006-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/11307/442438-spider_man_black_cat_the_evil_that_men_do_5_00.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "103301",
+              "url": "https://comicvine.gamespot.com/spider-manblack-cat-the-evil-that-men-do-5-trickle/4000-103301/"
+            }
+          ]
+        },
+        {
+          "number": "6",
+          "title": "One In Four",
+          "publicationDate": "2006-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/12878/260545-9469-120327-1-spider-man--black-c.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120327",
+              "url": "https://comicvine.gamespot.com/spider-manblack-cat-the-evil-that-men-do-6-one-in-/4000-120327/"
             }
           ]
         }
@@ -3790,7 +3838,7 @@
       "issues": [
         {
           "number": "1",
-          "title": null,
+          "title": "Neighbors",
           "publicationDate": "2002-10",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37540/939761-spidermanddmk1_small.jpg",
           "description": null,
@@ -3810,7 +3858,7 @@
       "title": "Venom",
       "volume": null,
       "startYear": 2003,
-      "endYear": null,
+      "endYear": 2004,
       "externalIds": [
         {
           "source": "COMIC_VINE",
@@ -3821,7 +3869,7 @@
       "issues": [
         {
           "number": "1",
-          "title": null,
+          "title": "Shiver Part 1",
           "publicationDate": "2003-06",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/63944-11068-96940-1-venom.jpg",
           "description": null,
@@ -3837,7 +3885,7 @@
         },
         {
           "number": "2",
-          "title": null,
+          "title": "Shiver Part 2",
           "publicationDate": "2003-07",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/63945-11068-96941-1-venom.jpg",
           "description": null,
@@ -3853,7 +3901,7 @@
         },
         {
           "number": "3",
-          "title": null,
+          "title": "Shiver Part 3",
           "publicationDate": "2003-08",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/63946-11068-96942-1-venom.jpg",
           "description": null,
@@ -3869,7 +3917,7 @@
         },
         {
           "number": "4",
-          "title": null,
+          "title": "Shiver Part 4",
           "publicationDate": "2003-09",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/63947-11068-96943-1-venom.jpg",
           "description": null,
@@ -3880,6 +3928,230 @@
               "source": "COMIC_VINE",
               "externalId": "96943",
               "url": "https://comicvine.gamespot.com/venom-4-shiver-part-4/4000-96943/"
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "title": "Shiver Part 5",
+          "publicationDate": "2003-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/63948-11068-96944-1-venom.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "96944",
+              "url": "https://comicvine.gamespot.com/venom-5-shiver-part-5/4000-96944/"
+            }
+          ]
+        },
+        {
+          "number": "6",
+          "title": "Run Part One",
+          "publicationDate": "2003-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/63949-11068-96945-1-venom.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "96945",
+              "url": "https://comicvine.gamespot.com/venom-6-run-part-one/4000-96945/"
+            }
+          ]
+        },
+        {
+          "number": "7",
+          "title": "Run Part Two",
+          "publicationDate": "2003-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/63950-11068-96946-1-venom.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "96946",
+              "url": "https://comicvine.gamespot.com/venom-7-run-part-two/4000-96946/"
+            }
+          ]
+        },
+        {
+          "number": "8",
+          "title": "Run Part Three",
+          "publicationDate": "2004-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/63951-11068-96947-1-venom.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "96947",
+              "url": "https://comicvine.gamespot.com/venom-8-run-part-three/4000-96947/"
+            }
+          ]
+        },
+        {
+          "number": "9",
+          "title": "Run Part Four",
+          "publicationDate": "2004-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/63952-11068-96948-1-venom.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "96948",
+              "url": "https://comicvine.gamespot.com/venom-9-run-part-four/4000-96948/"
+            }
+          ]
+        },
+        {
+          "number": "10",
+          "title": "Run Part Five",
+          "publicationDate": "2004-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/63953-11068-96949-1-venom.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "96949",
+              "url": "https://comicvine.gamespot.com/venom-10-run-part-five/4000-96949/"
+            }
+          ]
+        },
+        {
+          "number": "11",
+          "title": "Patterns, Part 1",
+          "publicationDate": "2004-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/63954-11068-96950-1-venom.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "96950",
+              "url": "https://comicvine.gamespot.com/venom-11-patterns-part-1/4000-96950/"
+            }
+          ]
+        },
+        {
+          "number": "12",
+          "title": "Patterns, Part 2",
+          "publicationDate": "2004-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/63955-11068-96951-1-venom.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "96951",
+              "url": "https://comicvine.gamespot.com/venom-12-patterns-part-2/4000-96951/"
+            }
+          ]
+        },
+        {
+          "number": "13",
+          "title": "Patterns, Part 3",
+          "publicationDate": "2004-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/63956-11068-96952-1-venom.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "96952",
+              "url": "https://comicvine.gamespot.com/venom-13-patterns-part-3/4000-96952/"
+            }
+          ]
+        },
+        {
+          "number": "14",
+          "title": "Twist, Part 1",
+          "publicationDate": "2004-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/2767725-venom_14___001.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "96953",
+              "url": "https://comicvine.gamespot.com/venom-14-twist-part-1/4000-96953/"
+            }
+          ]
+        },
+        {
+          "number": "15",
+          "title": "Twist, Part 2",
+          "publicationDate": "2004-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/2767727-venom_015___01.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "96954",
+              "url": "https://comicvine.gamespot.com/venom-15-twist-part-2/4000-96954/"
+            }
+          ]
+        },
+        {
+          "number": "16",
+          "title": "Twist, Part 3",
+          "publicationDate": "2004-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/68773-11068-101771-1-venom.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "101771",
+              "url": "https://comicvine.gamespot.com/venom-16-twist-part-3/4000-101771/"
+            }
+          ]
+        },
+        {
+          "number": "17",
+          "title": "Twist, Part 4",
+          "publicationDate": "2004-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/68774-11068-101772-1-venom.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "101772",
+              "url": "https://comicvine.gamespot.com/venom-17-twist-part-4/4000-101772/"
+            }
+          ]
+        },
+        {
+          "number": "18",
+          "title": "Twist, Part 5",
+          "publicationDate": "2004-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/68775-11068-101773-1-venom.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "101773",
+              "url": "https://comicvine.gamespot.com/venom-18-twist-part-5/4000-101773/"
             }
           ]
         }
@@ -3900,8 +4172,8 @@
       "issues": [
         {
           "number": "1",
-          "title": null,
-          "publicationDate": "2003-06",
+          "title": "Stuff of Legends",
+          "publicationDate": "2003-08",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/50638/985175-61593_20060904125738_large.jpg",
           "description": null,
           "type": "REGULAR",
@@ -3917,7 +4189,7 @@
         {
           "number": "2",
           "title": null,
-          "publicationDate": "2003-07",
+          "publicationDate": "2003-09",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/50638/985179-61593_20060904125738_large.jpg",
           "description": null,
           "type": "REGULAR",
@@ -3933,7 +4205,7 @@
         {
           "number": "3",
           "title": null,
-          "publicationDate": "2003-08",
+          "publicationDate": "2003-10",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/50638/985189-61593_20060904125738_large.jpg",
           "description": null,
           "type": "REGULAR",
@@ -3949,7 +4221,7 @@
         {
           "number": "4",
           "title": null,
-          "publicationDate": "2003-09",
+          "publicationDate": "2003-11",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/50638/985207-61593_20060904125738_large.jpg",
           "description": null,
           "type": "REGULAR",
@@ -3979,8 +4251,8 @@
       "issues": [
         {
           "number": "1",
-          "title": null,
-          "publicationDate": "2003-08",
+          "title": "The Hunger Part 1 of 5",
+          "publicationDate": "2003-09",
           "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11112/111121983/5750975-8720034072-1FHOSG-SDe1ZPTJtJvwByr6zfCTz3BcDuVyxJJ6Rf6M6AfdgwPgrvz2NAkmvZYqk_dLv-wDUbmrL%3Ds0",
           "description": null,
           "type": "REGULAR",
@@ -3990,6 +4262,422 @@
               "source": "COMIC_VINE",
               "externalId": "96971",
               "url": "https://comicvine.gamespot.com/spectacular-spider-man-1-the-hunger-part-1-of-5/4000-96971/"
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "title": "The Hunger Part 2 of 5",
+          "publicationDate": "2003-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11112/111121983/5750988-6030123878-2wbHoTepyG8ERRt8sl-ufJUaPWKODKL52EQP1B1vI7xZG4Mx8x128V3E8tIBO0IAv1i8bbBY4e7U%3Ds0",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "96972",
+              "url": "https://comicvine.gamespot.com/spectacular-spider-man-2-the-hunger-part-2-of-5/4000-96972/"
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "title": "The Hunger Part 3 of 5",
+          "publicationDate": "2003-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11112/111121983/5750992-0819539331-X11gSJZy3xAgWn1NzQR5x2d8jtfMXAonI1AIHSSGXPi5cpklHATt3lRIBSzU8QWFVF2iHgaoOmnq%3Ds0",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "96973",
+              "url": "https://comicvine.gamespot.com/spectacular-spider-man-3-the-hunger-part-3-of-5/4000-96973/"
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "title": "The Hunger Part 4 of 5",
+          "publicationDate": "2003-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/63978-11069-96974-1-spectacular-spider-m.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "96974",
+              "url": "https://comicvine.gamespot.com/spectacular-spider-man-4-the-hunger-part-4-of-5/4000-96974/"
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "title": "The Hunger Part 5 of 5",
+          "publicationDate": "2003-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11112/111121983/5750997-4732325259-u-OP8vsb3eLw0dkzwWjIm0hPGTXaZlnaa9ss5I-QqIFnziLZubDgOJ5GBdVnukz9wzv1T80eQLA5%3Ds0",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "96975",
+              "url": "https://comicvine.gamespot.com/spectacular-spider-man-5-the-hunger-part-5-of-5/4000-96975/"
+            }
+          ]
+        },
+        {
+          "number": "6",
+          "title": "Countdown Part 1 of 5",
+          "publicationDate": "2004-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/63980-11069-96976-1-spectacular-spider-m.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "96976",
+              "url": "https://comicvine.gamespot.com/spectacular-spider-man-6-countdown-part-1-of-5/4000-96976/"
+            }
+          ]
+        },
+        {
+          "number": "7",
+          "title": "Countdown Part 2 of 5",
+          "publicationDate": "2004-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11112/111121983/5751006-2426094778-kGh8LjG-yctJBV3cjAD0yfmUhN4Gltw5f1Q4kSKb5oFZ7GhqlkWLMFmbnKosC1uGj2_YKLqt2o48%3Ds0",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "96977",
+              "url": "https://comicvine.gamespot.com/spectacular-spider-man-7-countdown-part-2-of-5/4000-96977/"
+            }
+          ]
+        },
+        {
+          "number": "8",
+          "title": "Countdown Part 3 of 5",
+          "publicationDate": "2004-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11112/111121983/5751010-8524129839-UQUafu2krQLDvv5JvUZwhfZQNlCiwLtiGGrhYi_pApQCicCEOOdS6GyVYY-v7l_EW0mqJ4WQevqI%3Ds0",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "96978",
+              "url": "https://comicvine.gamespot.com/spectacular-spider-man-8-countdown-part-3-of-5/4000-96978/"
+            }
+          ]
+        },
+        {
+          "number": "9",
+          "title": "Countdown Part 4 of 5",
+          "publicationDate": "2004-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/63983-11069-96979-1-spectacular-spider-m.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "96979",
+              "url": "https://comicvine.gamespot.com/spectacular-spider-man-9-countdown-part-4-of-5/4000-96979/"
+            }
+          ]
+        },
+        {
+          "number": "10",
+          "title": "Countdown Part 5 of 5",
+          "publicationDate": "2004-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11112/111121983/5751026-2060291171-_TrqjLl95aolZS-W0jNFrEgAroY3zZkWCI2BbpiLk3_BMmLGMpj2MlYNPkZ5Q2RR4bCoHtctG2M1%3Ds0",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "96980",
+              "url": "https://comicvine.gamespot.com/spectacular-spider-man-10-countdown-part-5-of-5/4000-96980/"
+            }
+          ]
+        },
+        {
+          "number": "11",
+          "title": "The Lizard's Tale Part 1",
+          "publicationDate": "2004-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/63985-11069-96981-1-spectacular-spider-m.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "96981",
+              "url": "https://comicvine.gamespot.com/spectacular-spider-man-11-the-lizards-tale-part-1/4000-96981/"
+            }
+          ]
+        },
+        {
+          "number": "12",
+          "title": "The Lizard's Tale Part 2",
+          "publicationDate": "2004-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/63986-11069-96982-1-spectacular-spider-m.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "96982",
+              "url": "https://comicvine.gamespot.com/spectacular-spider-man-12-the-lizards-tale-part-2/4000-96982/"
+            }
+          ]
+        },
+        {
+          "number": "13",
+          "title": "The Lizard's Tale Part 3",
+          "publicationDate": "2004-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11112/111121983/5751326-8409125213-X8EkcEZ0VsxZrM4w3y-OcRzuR4-uuW7uY9VdRFq3nN5TkkHG7uQo7Gk1GlewGvFe7L4N9PTy5cnS%3Ds0",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "96983",
+              "url": "https://comicvine.gamespot.com/spectacular-spider-man-13-the-lizards-tale-part-3/4000-96983/"
+            }
+          ]
+        },
+        {
+          "number": "14",
+          "title": "Here There Be Monsters",
+          "publicationDate": "2004-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11112/111121983/5751328-7128565280-Iv1PvswxrUw1jFWGuxo29r9yPZkcJ6Ruv8MngTCBL3-hs4IO5y1on2bNrbhv7Dft2cNIZX8CtCup%3Ds0",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "96984",
+              "url": "https://comicvine.gamespot.com/spectacular-spider-man-14-here-there-be-monsters/4000-96984/"
+            }
+          ]
+        },
+        {
+          "number": "15",
+          "title": "Under My Skin, Part 1",
+          "publicationDate": "2004-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/63989-11069-96985-1-spectacular-spider-m.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "96985",
+              "url": "https://comicvine.gamespot.com/spectacular-spider-man-15-under-my-skin-part-1/4000-96985/"
+            }
+          ]
+        },
+        {
+          "number": "16",
+          "title": "Under My Skin, Part 2",
+          "publicationDate": "2004-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11112/111121983/5751329-1793203622-PPNr9SMQxSLvtcIzFQzkv3XHSpSicjS-sabQ_evyMb-FXxpr_mXvye1FlbEwOAkGzcAVOIzEm1Gy%3Ds0",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "97334",
+              "url": "https://comicvine.gamespot.com/spectacular-spider-man-16-under-my-skin-part-2/4000-97334/"
+            }
+          ]
+        },
+        {
+          "number": "17",
+          "title": "Changes, Part 1",
+          "publicationDate": "2004-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/64338-11069-97335-1-spectacular-spider-m.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "97335",
+              "url": "https://comicvine.gamespot.com/spectacular-spider-man-17-changes-part-1/4000-97335/"
+            }
+          ]
+        },
+        {
+          "number": "18",
+          "title": "Changes, Part 2",
+          "publicationDate": "2004-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/64339-11069-97336-1-spectacular-spider-m.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "97336",
+              "url": "https://comicvine.gamespot.com/spectacular-spider-man-18-changes-part-2/4000-97336/"
+            }
+          ]
+        },
+        {
+          "number": "19",
+          "title": "Changes, Part 3",
+          "publicationDate": "2004-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11112/111121983/5751330-4674196130-etKQya7vv2X8h9GJaCY548Yu9tjPJYnhfW7LuiqWSJSLIwmb9MDdTsrRuX-TOxYV92j3A7UlDQNU%3Ds0",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "97337",
+              "url": "https://comicvine.gamespot.com/spectacular-spider-man-19-changes-part-3/4000-97337/"
+            }
+          ]
+        },
+        {
+          "number": "20",
+          "title": "Changes, Part 4",
+          "publicationDate": "2004-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/64341-11069-97338-1-spectacular-spider-m.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "97338",
+              "url": "https://comicvine.gamespot.com/spectacular-spider-man-20-changes-part-4/4000-97338/"
+            }
+          ]
+        },
+        {
+          "number": "21",
+          "title": "Read 'Em an' Weep",
+          "publicationDate": "2005-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/64342-11069-97339-1-spectacular-spider-m.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "97339",
+              "url": "https://comicvine.gamespot.com/spectacular-spider-man-21-read-em-an-weep/4000-97339/"
+            }
+          ]
+        },
+        {
+          "number": "22",
+          "title": "The Infernal Triangle",
+          "publicationDate": "2005-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/68140-11069-101138-1-spectacular-spider-m.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "101138",
+              "url": "https://comicvine.gamespot.com/spectacular-spider-man-22-the-infernal-triangle/4000-101138/"
+            }
+          ]
+        },
+        {
+          "number": "23",
+          "title": "Sins Remembered: Sarah's Story, Part 1",
+          "publicationDate": "2005-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11112/111121983/5751331-2417550672-ZNgFt2Zj7bq7fohjrTbR05PTJfoX50yVGIDGgUCMBWgq6x499RRIktIE9_CruCpLIf6nEDr5Pf5F%3Ds0",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "101139",
+              "url": "https://comicvine.gamespot.com/spectacular-spider-man-23-sins-remembered-sarahs-s/4000-101139/"
+            }
+          ]
+        },
+        {
+          "number": "24",
+          "title": "Sins Remembered: Sarah's Story, Part 2",
+          "publicationDate": "2005-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11112/111121983/5751332-2029257910-YA5RxXbjQ8gLzv4EjOJqd8wjwQnKAwlUIPLG2n_GnH3jLOK43us0xy8Nh25ej7fudMeqpJ7cU0B0%3Ds0",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "101140",
+              "url": "https://comicvine.gamespot.com/spectacular-spider-man-24-sins-remembered-sarahs-s/4000-101140/"
+            }
+          ]
+        },
+        {
+          "number": "25",
+          "title": "Sins Remembered: Sarah's Story, Part 3",
+          "publicationDate": "2005-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11112/111121983/5751333-9063143052-nboID7ewaQy-hZYv1oWAxnmAkt8-7RQTTr4ZLdopAvHWPifHDcpRoNPPPgGeW-wpiXMSi2ys2HvJ%3Ds0",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "101141",
+              "url": "https://comicvine.gamespot.com/spectacular-spider-man-25-sins-remembered-sarahs-s/4000-101141/"
+            }
+          ]
+        },
+        {
+          "number": "26",
+          "title": "Sins Remembered: Sarah's Story, Part 4",
+          "publicationDate": "2005-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11112/111121983/5751354-0750611854-9GeUKRZlgu-N0KNuq66xL6ip-1I4NOnsqNQcIdjMfoBIV67LtDChQoLHQ4fcuAv_e_ghnUdoXG5e%3Ds0",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "101142",
+              "url": "https://comicvine.gamespot.com/spectacular-spider-man-26-sins-remembered-sarahs-s/4000-101142/"
+            }
+          ]
+        },
+        {
+          "number": "27",
+          "title": "The Final Curtain",
+          "publicationDate": "2005-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11112/111121983/5751356-5017963321-_CbpfGxAsbguC2Depjm_U3vXJp4UjWE4NGLZgs3f_ZOsfBgfpovUMF4LYohxb0ZCaHrI5-CXW2PX%3Ds0",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-616",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "101143",
+              "url": "https://comicvine.gamespot.com/spectacular-spider-man-27-the-final-curtain/4000-101143/"
             }
           ]
         }
