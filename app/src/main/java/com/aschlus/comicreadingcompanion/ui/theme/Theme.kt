@@ -1,6 +1,5 @@
 package com.aschlus.comicreadingcompanion.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -11,48 +10,100 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
-private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
-)
+private val ComicLightColorScheme =
+    lightColorScheme(
+        primary = ComicBlue,
+        onPrimary = ComicInk,
+        primaryContainer = ComicBlueLight,
+        onPrimaryContainer = ComicInk,
 
-private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+        secondary = ComicYellow,
+        onSecondary = ComicInk,
+        secondaryContainer = ComicYellow,
+        onSecondaryContainer = ComicInk,
 
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
-)
+        tertiary = ComicRed,
+        onTertiary = ComicPaper,
+        tertiaryContainer = ComicRedLight,
+        onTertiaryContainer = ComicInk,
+
+        background = ComicPaper,
+        onBackground = ComicInk,
+
+        surface = ComicPaper,
+        onSurface = ComicInk,
+
+        surfaceVariant = ComicPaperDeep,
+        onSurfaceVariant = ComicMutedInk,
+
+        outline = ComicInk,
+        outlineVariant = ComicMutedInk,
+
+        error = ComicRed,
+        onError = ComicPaper
+    )
+
+private val ComicDarkColorScheme =
+    darkColorScheme(
+        primary = ComicBlueLight,
+        onPrimary = ComicInk,
+        primaryContainer = ComicBlueDark,
+        onPrimaryContainer = ComicInk,
+
+        secondary = ComicYellow,
+        onSecondary = ComicInk,
+
+        tertiary = ComicRedLight,
+        onTertiary = ComicInk,
+
+        background = ComicDarkBackground,
+        onBackground = ComicPaper,
+
+        surface = ComicDarkSurface,
+        onSurface = ComicPaper,
+
+        surfaceVariant = ComicDarkSurfaceVariant,
+        onSurfaceVariant = ComicPaperDeep,
+
+        outline = ComicPaperDeep,
+        outlineVariant = ComicMutedInk,
+
+        error = ComicRedLight,
+        onError = ComicInk
+    )
 
 @Composable
 fun ComicReadingCompanionTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
+    val colorScheme =
+        when {
+            dynamicColor &&
+                Build.VERSION.SDK_INT >=
+                Build.VERSION_CODES.S -> {
 
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
-    }
+                val context = LocalContext.current
+
+                if (darkTheme) {
+                    dynamicDarkColorScheme(context)
+                } else {
+                    dynamicLightColorScheme(context)
+                }
+            }
+
+            darkTheme ->
+                ComicDarkColorScheme
+
+            else ->
+                ComicLightColorScheme
+        }
 
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,
+        shapes = ComicShapes,
         content = content
     )
 }

@@ -48,6 +48,12 @@ import com.aschlus.comicreadingcompanion.ui.viewmodel.SeriesDetailViewModelFacto
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
+import androidx.compose.ui.Modifier
+import androidx.navigation.compose.currentBackStackEntryAsState
+import com.aschlus.comicreadingcompanion.ui.component.ComicBottomNavigation
+import com.aschlus.comicreadingcompanion.ui.screen.LibraryScreen
 
 class MainActivity : ComponentActivity() {
 
@@ -228,290 +234,365 @@ class MainActivity : ComponentActivity() {
                     }
                 }
 
-                NavHost(
-                    navController = navController,
-                    startDestination = "home"
-                ) {
-                    composable("home") {
-                        val importState by importReadingListViewModel.state.collectAsState()
+                val navBackStackEntry by navController
+                    .currentBackStackEntryAsState()
 
-                        HomeScreen(
-                            viewModel = homeViewModel,
-                            onBrowseClick = {
-                                navController.navigate("browse")
-                            },
-                            onCreateReadingListClick = {
-                                navController.navigate(
-                                    "createReadingList"
-                                )
-                            },
-                            onImportReadingListClick = {
-                                importReadingListLauncher.launch(
-                                    arrayOf("application/json", "text/plain")
-                                )
-                            },
-                            importState = importState,
-                            onImportResultConsumed = {
-                                importReadingListViewModel.clearResult()
-                            },
-                            onReadingListClick = { readingListId, startPosition ->
-                                navController.navigate(
-                                    "readingList/$readingListId?startPosition=$startPosition"
-                                )
+                val currentRoute =
+                    navBackStackEntry
+                        ?.destination
+                        ?.route
+
+                val topLevelRoutes =
+                    setOf(
+                        "home",
+                        "browse",
+                        "library"
+                    )
+
+                val navigateTopLevel:
+                        (String) -> Unit = { route ->
+
+                            navController.navigate(route) {
+                                popUpTo("home") {
+                                    saveState = true
+                                }
+
+                                launchSingleTop = true
+                                restoreState = true
                             }
-                        )
-                    }
+                }
 
-                    composable("createReadingList") {
-                        val createReadingListViewModel: CreateReadingListViewModel =
-                            viewModel(
+                Scaffold(
+                    bottomBar = {
+                        if (currentRoute in topLevelRoutes) {
+                            ComicBottomNavigation(
+                                currentRoute = currentRoute,
+                                onHomeClick = {
+                                    navigateTopLevel("home")
+                                },
+                                onBrowseClick = {
+                                    navigateTopLevel("browse")
+                                },
+                                onLibraryClick = {
+                                    navigateTopLevel("library")
+                                }
+                            )
+                        }
+                    }
+                ) { appPadding ->
+
+                    NavHost(
+                        navController = navController,
+                        startDestination = "home",
+                        modifier = Modifier.padding(appPadding)
+                    ) {
+                        composable("home") {
+                            HomeScreen(
+                                viewModel = homeViewModel,
+                                onBrowseClick = {
+                                    navigateTopLevel("browse")
+                                },
+                                onCreateReadingListClick = {
+                                    navController.navigate(
+                                        "createReadingList"
+                                    )
+                                },
+                                onReadingListClick = { readingListId, startPosition ->
+                                    navController.navigate(
+                                        "readingList/$readingListId?startPosition=$startPosition"
+                                    )
+                                }
+                            )
+                        }
+
+                        composable("createReadingList") {
+                            val createReadingListViewModel: CreateReadingListViewModel =
+                                viewModel(
+                                    factory =
+                                        CreateReadingListViewModelFactory(
+                                            (application as ComicReadingCompanionApplication)
+                                                .container
+                                                .comicRepository
+                                        )
+                                )
+                            CreateReadingListScreen(
+                                viewModel = createReadingListViewModel,
+                                onBackClick = safeNavigateBack,
+                                onReadingListCreated = { readingListId ->
+                                    navController.navigate(
+                                        "readingList/$readingListId?startPosition=-1"
+                                    ) {
+                                        popUpTo("createReadingList") {
+                                            inclusive = true
+                                        }
+                                    }
+                                }
+                            )
+                        }
+
+                        composable("browse") {
+                            val browseViewModel:
+                                    BrowseViewModel = viewModel(
                                 factory =
-                                    CreateReadingListViewModelFactory(
+                                    BrowseViewModelFactory(
                                         (application as ComicReadingCompanionApplication)
                                             .container
                                             .comicRepository
                                     )
                             )
-                        CreateReadingListScreen(
-                            viewModel = createReadingListViewModel,
-                            onBackClick = safeNavigateBack,
-                            onReadingListCreated = { readingListId ->
-                                navController.navigate(
-                                    "readingList/$readingListId?startPosition=-1"
-                                ) {
-                                    popUpTo("createReadingList") {
-                                        inclusive = true
-                                    }
-                                }
-                            }
-                        )
-                    }
 
-                    composable("browse") {
-                        val browseViewModel:
-                                BrowseViewModel = viewModel(
-                                    factory =
-                                        BrowseViewModelFactory(
-                                            (application as ComicReadingCompanionApplication)
-                                                .container
-                                                .comicRepository
-                                        )
-                                )
-
-                        BrowseScreen(
-                            viewModel = browseViewModel,
-                            onPublisherClick = { publisherId ->
-                                navController.navigate(
-                                    "publisher/$publisherId"
-                                )
-                            },
-                            onSeriesClick = { seriesId ->
-                                navController.navigate(
-                                    "series/$seriesId"
-                                )
-                            },
-                            onIssueClick = { issueId ->
-                                navController.navigate(
-                                    "issue/$issueId"
-                                )
-                            },
-                            onBackClick = safeNavigateBack
-                        )
-                    }
-
-                    composable(
-                        route = "readingList/{readingListId}?startPosition={startPosition}",
-                        arguments = listOf(
-                            navArgument("readingListId") {
-                                type = NavType.LongType
-                            },
-                            navArgument("startPosition") {
-                                type = NavType.IntType
-                                defaultValue = -1
-                            }
-                        )
-                    ) { backStackEntry ->
-
-                        val readingListId =
-                            backStackEntry.arguments
-                                ?.getLong("readingListId")
-                                ?: return@composable
-
-                        val startPosition =
-                            backStackEntry.arguments
-                                ?.getInt("startPosition")
-                                ?: -1
-
-                        LaunchedEffect(readingListId) {
-                            homeViewModel.recordReadingListOpened((readingListId))
+                            BrowseScreen(
+                                viewModel = browseViewModel,
+                                onPublisherClick = { publisherId ->
+                                    navController.navigate(
+                                        "publisher/$publisherId"
+                                    )
+                                },
+                                onSeriesClick = { seriesId ->
+                                    navController.navigate(
+                                        "series/$seriesId"
+                                    )
+                                },
+                                onIssueClick = { issueId ->
+                                    navController.navigate(
+                                        "issue/$issueId"
+                                    )
+                                },
+                                onBackClick = null
+                            )
                         }
 
-                        val detailViewModel:
-                                ReadingListDetailViewModel = viewModel(
-                                    factory =
-                                        ReadingListDetailViewModelFactory(
-                                            repository =
-                                                (application as ComicReadingCompanionApplication)
-                                                    .container
-                                                    .comicRepository,
-                                            readingListUiPreferences =
-                                                (application as ComicReadingCompanionApplication)
-                                                    .container
-                                                    .readingListUiPreferences
+                        composable("library") {
+                            val importState by
+                                    importReadingListViewModel
+                                        .state
+                                        .collectAsState()
+
+                            LibraryScreen(
+                                viewModel = homeViewModel,
+                                onCreateReadingListClick = {
+                                    navController.navigate(
+                                        "createReadingList"
+                                    )
+                                },
+                                onImportReadingListClick = {
+                                    importReadingListLauncher
+                                        .launch(
+                                            arrayOf(
+                                                "application/json",
+                                                "text/plain"
+                                            )
                                         )
-                                )
+                                },
+                                importState = importState,
+                                onImportResultConsumed = {
+                                    importReadingListViewModel
+                                        .clearResult()
+                                },
+                                onReadingListClick = {
+                                    readingListId, startPosition ->
 
-                        ReadingListDetailScreen(
-                            readingListId = readingListId,
-                            startPosition = startPosition,
-                            viewModel = detailViewModel,
-                            onIssueClick = { issueId ->
-                                navController.navigate(
-                                    "issue/$issueId"
-                                )
-                            },
-                            onBackClick = safeNavigateBack,
-                            onExportReadingListClick = { id, title ->
-                                pendingExportReadingListId = id
+                                    navController.navigate(
+                                        "readingList/$readingListId?startPosition=$startPosition"
+                                    )
+                                }
+                            )
+                        }
 
-                                exportReadingListLauncher.launch(
-                                    readingListExportFileName(title)
-                                )
-                            },
-                            onReadingListDuplicated = { duplicatedReadingListId ->
-                                navController.navigate(
-                                    "readingList/$duplicatedReadingListId?startPosition=-1"
-                                )
+                        composable(
+                            route = "readingList/{readingListId}?startPosition={startPosition}",
+                            arguments = listOf(
+                                navArgument("readingListId") {
+                                    type = NavType.LongType
+                                },
+                                navArgument("startPosition") {
+                                    type = NavType.IntType
+                                    defaultValue = -1
+                                }
+                            )
+                        ) { backStackEntry ->
+
+                            val readingListId =
+                                backStackEntry.arguments
+                                    ?.getLong("readingListId")
+                                    ?: return@composable
+
+                            val startPosition =
+                                backStackEntry.arguments
+                                    ?.getInt("startPosition")
+                                    ?: -1
+
+                            LaunchedEffect(readingListId) {
+                                homeViewModel.recordReadingListOpened((readingListId))
                             }
-                        )
-                    }
 
-                    composable(
-                        route = "publisher/{publisherId}",
-                        arguments = listOf(
-                            navArgument("publisherId") {
-                                type = NavType.LongType
-                            }
-                        )
-                    ) { backStackEntry ->
-
-                        val publisherId =
-                            backStackEntry.arguments
-                                ?.getLong("publisherId")
-                                ?: return@composable
-
-                        val publisherDetailViewModel:
-                                PublisherDetailViewModel = viewModel(
-                                    factory =
-                                        PublisherDetailViewModelFactory(
-                                            (application as ComicReadingCompanionApplication)
-                                                .container
-                                                .comicRepository
-                                        )
-                                )
-
-                        PublisherDetailScreen(
-                            publisherId = publisherId,
-                            viewModel = publisherDetailViewModel,
-                            onSeriesClick = { seriesId ->
-                                navController.navigate(
-                                    "series/$seriesId"
-                                )
-                            },
-                            onBackClick = safeNavigateBack
-                        )
-                    }
-
-                    composable(
-                        route = "series/{seriesId}",
-                        arguments = listOf(
-                            navArgument("seriesId") {
-                                type = NavType.LongType
-                            }
-                        )
-                    ) { backStackEntry ->
-
-                        val seriesId =
-                            backStackEntry.arguments
-                                ?.getLong("seriesId")
-                                ?: return@composable
-
-                        val seriesDetailViewModel:
-                                SeriesDetailViewModel = viewModel(
-                                    factory =
-                                        SeriesDetailViewModelFactory(
-                                            (application as ComicReadingCompanionApplication)
-                                                .container
-                                                .comicRepository
-                                        )
-                                )
-
-                        SeriesDetailScreen(
-                            seriesId = seriesId,
-                            viewModel = seriesDetailViewModel,
-                            onPublisherClick = { publisherId ->
-                                navController.navigate(
-                                    "publisher/$publisherId"
-                                )
-                            },
-                            onIssueClick = { issueId ->
-                                navController.navigate(
-                                    "issue/$issueId"
-                                )
-                            },
-                            onBackClick = safeNavigateBack
-                        )
-                    }
-
-                    composable(
-                        route = "issue/{issueId}",
-                        arguments = listOf(
-                            navArgument("issueId") {
-                                type = NavType.LongType
-                            }
-                        )
-                    ) { backStackEntry ->
-
-                        val issueId =
-                            backStackEntry.arguments
-                                ?.getLong("issueId")
-                                ?: return@composable
-
-                        val issueDetailViewModel:
-                                IssueDetailViewModel = viewModel(
-                                    factory =
-                                        IssueDetailViewModelFactory(
-                                            (application as ComicReadingCompanionApplication)
-                                                .container
-                                                .comicRepository
-                                        )
-                                )
-
-                        val addIssueToReadingListViewModel:
-                                AddIssueToReadingListViewModel =
-                            viewModel(
+                            val detailViewModel:
+                                    ReadingListDetailViewModel = viewModel(
                                 factory =
-                                    AddIssueToReadingListViewModelFactory(
-                                        issueId = issueId,
+                                    ReadingListDetailViewModelFactory(
                                         repository =
                                             (application as ComicReadingCompanionApplication)
                                                 .container
-                                                .comicRepository
+                                                .comicRepository,
+                                        readingListUiPreferences =
+                                            (application as ComicReadingCompanionApplication)
+                                                .container
+                                                .readingListUiPreferences
                                     )
                             )
 
-                        IssueDetailScreen(
-                            issueId = issueId,
-                            viewModel = issueDetailViewModel,
-                            addToReadingListViewModel =
-                                addIssueToReadingListViewModel,
-                            onSeriesClick = {seriesId ->
-                                navController.navigate(
-                                    "series/$seriesId"
+                            ReadingListDetailScreen(
+                                readingListId = readingListId,
+                                startPosition = startPosition,
+                                viewModel = detailViewModel,
+                                onIssueClick = { issueId ->
+                                    navController.navigate(
+                                        "issue/$issueId"
+                                    )
+                                },
+                                onBackClick = safeNavigateBack,
+                                onExportReadingListClick = { id, title ->
+                                    pendingExportReadingListId = id
+
+                                    exportReadingListLauncher.launch(
+                                        readingListExportFileName(title)
+                                    )
+                                },
+                                onReadingListDuplicated = { duplicatedReadingListId ->
+                                    navController.navigate(
+                                        "readingList/$duplicatedReadingListId?startPosition=-1"
+                                    )
+                                }
+                            )
+                        }
+
+                        composable(
+                            route = "publisher/{publisherId}",
+                            arguments = listOf(
+                                navArgument("publisherId") {
+                                    type = NavType.LongType
+                                }
+                            )
+                        ) { backStackEntry ->
+
+                            val publisherId =
+                                backStackEntry.arguments
+                                    ?.getLong("publisherId")
+                                    ?: return@composable
+
+                            val publisherDetailViewModel:
+                                    PublisherDetailViewModel = viewModel(
+                                factory =
+                                    PublisherDetailViewModelFactory(
+                                        (application as ComicReadingCompanionApplication)
+                                            .container
+                                            .comicRepository
+                                    )
+                            )
+
+                            PublisherDetailScreen(
+                                publisherId = publisherId,
+                                viewModel = publisherDetailViewModel,
+                                onSeriesClick = { seriesId ->
+                                    navController.navigate(
+                                        "series/$seriesId"
+                                    )
+                                },
+                                onBackClick = safeNavigateBack
+                            )
+                        }
+
+                        composable(
+                            route = "series/{seriesId}",
+                            arguments = listOf(
+                                navArgument("seriesId") {
+                                    type = NavType.LongType
+                                }
+                            )
+                        ) { backStackEntry ->
+
+                            val seriesId =
+                                backStackEntry.arguments
+                                    ?.getLong("seriesId")
+                                    ?: return@composable
+
+                            val seriesDetailViewModel:
+                                    SeriesDetailViewModel = viewModel(
+                                factory =
+                                    SeriesDetailViewModelFactory(
+                                        (application as ComicReadingCompanionApplication)
+                                            .container
+                                            .comicRepository
+                                    )
+                            )
+
+                            SeriesDetailScreen(
+                                seriesId = seriesId,
+                                viewModel = seriesDetailViewModel,
+                                onPublisherClick = { publisherId ->
+                                    navController.navigate(
+                                        "publisher/$publisherId"
+                                    )
+                                },
+                                onIssueClick = { issueId ->
+                                    navController.navigate(
+                                        "issue/$issueId"
+                                    )
+                                },
+                                onBackClick = safeNavigateBack
+                            )
+                        }
+
+                        composable(
+                            route = "issue/{issueId}",
+                            arguments = listOf(
+                                navArgument("issueId") {
+                                    type = NavType.LongType
+                                }
+                            )
+                        ) { backStackEntry ->
+
+                            val issueId =
+                                backStackEntry.arguments
+                                    ?.getLong("issueId")
+                                    ?: return@composable
+
+                            val issueDetailViewModel:
+                                    IssueDetailViewModel = viewModel(
+                                factory =
+                                    IssueDetailViewModelFactory(
+                                        (application as ComicReadingCompanionApplication)
+                                            .container
+                                            .comicRepository
+                                    )
+                            )
+
+                            val addIssueToReadingListViewModel:
+                                    AddIssueToReadingListViewModel =
+                                viewModel(
+                                    factory =
+                                        AddIssueToReadingListViewModelFactory(
+                                            issueId = issueId,
+                                            repository =
+                                                (application as ComicReadingCompanionApplication)
+                                                    .container
+                                                    .comicRepository
+                                        )
                                 )
-                            },
-                            onBackClick = safeNavigateBack
-                        )
+
+                            IssueDetailScreen(
+                                issueId = issueId,
+                                viewModel = issueDetailViewModel,
+                                addToReadingListViewModel =
+                                    addIssueToReadingListViewModel,
+                                onSeriesClick = { seriesId ->
+                                    navController.navigate(
+                                        "series/$seriesId"
+                                    )
+                                },
+                                onBackClick = safeNavigateBack
+                            )
+                        }
                     }
                 }
             }

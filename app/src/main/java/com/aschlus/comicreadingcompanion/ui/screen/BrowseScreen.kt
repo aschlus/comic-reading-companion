@@ -40,7 +40,7 @@ fun BrowseScreen(
     onPublisherClick: (Long) -> Unit,
     onSeriesClick: (Long) -> Unit,
     onIssueClick: (Long) -> Unit,
-    onBackClick: () -> Unit
+    onBackClick: (() -> Unit)? = null
 ) {
     val publishers by
         viewModel.publishers.collectAsState()
@@ -61,14 +61,16 @@ fun BrowseScreen(
                     Text("Browse Comics")
                 },
                 navigationIcon = {
-                    IconButton(
-                        onClick = onBackClick
-                    ) {
-                        Icon(
-                            imageVector =
-                                Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back"
-                        )
+                    onBackClick?.let { backClick ->
+                        IconButton(
+                            onClick = onBackClick
+                        ) {
+                            Icon(
+                                imageVector =
+                                    Icons.AutoMirrored.Filled.ArrowBack,
+                                contentDescription = "Back"
+                            )
+                        }
                     }
                 }
             )
