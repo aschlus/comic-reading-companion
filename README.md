@@ -161,8 +161,8 @@ building, following, and tracking comic-book reading orders.
 - [x] Show progress on each reading-list card
 - [x] Show issue count on each card
 - [x] Show current / next issue on each card
-- [ ] Sort reading lists
-- [ ] Search reading lists
+- [x] Sort reading lists
+- [x] Search reading lists
 - [ ] Reading-list cover / hero artwork
 - [ ] Recently opened reading lists
 - [ ] Dedicated Continue Reading section

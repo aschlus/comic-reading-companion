@@ -3,33 +3,48 @@ package com.aschlus.comicreadingcompanion.ui.screen
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListContinueItem
+import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeReadingListSort
 import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ImportReadingListState
+import androidx.compose.ui.platform.LocalFocusManager
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -42,7 +57,17 @@ fun HomeScreen(
     onImportResultConsumed: () -> Unit = {},
     onReadingListClick: (Long, Int) -> Unit
 ) {
+    val sort by viewModel.sort.collectAsState()
+
+    var sortMenuExpanded by remember { mutableStateOf(false) }
+
+    val focusManager = LocalFocusManager.current
+
     val readingLists by viewModel.readingLists.collectAsState()
+
+    val visibleReadingLists by viewModel.visibleReadingLists.collectAsState()
+
+    val searchQuery by viewModel.searchQuery.collectAsState()
 
     val readingListSummaries by
         viewModel.readingListSummaries.collectAsState()
@@ -124,8 +149,115 @@ fun HomeScreen(
 
             Text("My Reading Lists")
 
+            if (readingLists.isNotEmpty()) {
+                Row(
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    OutlinedTextField(
+                        value = searchQuery,
+                        onValueChange = {
+                            viewModel.updateSearchQuery(it)
+                        },
+                        modifier = Modifier.weight(1f),
+                        label = {
+                            Text("Search reading lists")
+                        },
+                        singleLine = true,
+                        trailingIcon =
+                            if (searchQuery.isNotEmpty()) {
+                                {
+                                    IconButton(
+                                        onClick = {
+                                            viewModel.clearSearchQuery()
+                                        }
+                                    ) {
+                                        Icon(
+                                            imageVector = Icons.Default.Close,
+                                            contentDescription = "Clear reading list search"
+                                        )
+                                    }
+                                }
+                            } else {
+                                null
+                            }
+                    )
+
+                    Spacer(modifier = Modifier.width(8.dp))
+
+                    Column {
+                        TextButton(
+                            onClick = {
+                                focusManager.clearFocus()
+                                sortMenuExpanded = true
+                            }
+                        ) {
+                            Text(
+                                text =
+                                    when (sort) {
+                                        HomeReadingListSort.RECENTLY_UPDATED ->
+                                            "Recently updated"
+
+                                        HomeReadingListSort.TITLE_ASCENDING ->
+                                            "Title A-Z"
+
+                                        HomeReadingListSort.TITLE_DESCENDING ->
+                                            "Title Z-A"
+                                    }
+                            )
+                        }
+
+                        DropdownMenu(
+                            expanded = sortMenuExpanded,
+                            onDismissRequest = {
+                                sortMenuExpanded = false
+                            }
+                        ) {
+                            DropdownMenuItem(
+                                text = {
+                                    Text("Recently updated")
+                                },
+                                onClick = {
+                                    viewModel.updateSort(
+                                        HomeReadingListSort.RECENTLY_UPDATED
+                                    )
+                                    sortMenuExpanded = false
+                                }
+                            )
+
+                            DropdownMenuItem(
+                                text = {
+                                    Text("Title A-Z")
+                                },
+                                onClick = {
+                                    viewModel.updateSort(
+                                        HomeReadingListSort.TITLE_ASCENDING
+                                    )
+                                    sortMenuExpanded = false
+                                }
+                            )
+
+                            DropdownMenuItem(
+                                text = {
+                                    Text("Title Z-A")
+                                },
+                                onClick = {
+                                    viewModel.updateSort(
+                                        HomeReadingListSort.TITLE_DESCENDING
+                                    )
+                                    sortMenuExpanded = false
+                                }
+                            )
+                        }
+                    }
+                }
+            }
+
             if (readingLists.isEmpty()) {
                 Text("No reading lists yet")
+            } else if (visibleReadingLists.isEmpty()) {
+                Text(
+                    "No reading lists match \"${searchQuery.trim()}\""
+                )
             } else {
                 LazyColumn(
                     modifier = Modifier
@@ -134,7 +266,7 @@ fun HomeScreen(
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     items(
-                        items = readingLists,
+                        items = visibleReadingLists,
                         key = { readingList ->
                             readingList.id
                         }

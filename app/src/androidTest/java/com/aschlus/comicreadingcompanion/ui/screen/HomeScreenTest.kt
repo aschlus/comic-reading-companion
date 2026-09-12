@@ -5,8 +5,10 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithText
+import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performTextInput
 import androidx.lifecycle.viewModelScope
 import androidx.room3.Room
 import androidx.test.core.app.ApplicationProvider
@@ -482,5 +484,334 @@ class HomeScreenTest {
         composeRule
             .onNodeWithText("Import failed")
             .assertIsDisplayed()
+    }
+
+    @Test
+    fun homeScreen_searchFiltersReadingListsAndCanBeCleared() {
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name = "Marvel"
+                    )
+                )
+
+            comicDao.insertReadingList(
+                ReadingList(
+                    title =
+                        "Ultimate Marvel",
+                    description =
+                        "Complete Earth-1610 reading order",
+                    publisherId =
+                        publisherId,
+                    universeId = null,
+                    createdAt = 1000L,
+                    updatedAt = 1000L
+                )
+            )
+
+            comicDao.insertReadingList(
+                ReadingList(
+                    title =
+                        "Spider-Man Volume 2 Era",
+                    description =
+                        "Earth-616 Spider-Man chronology",
+                    publisherId =
+                        publisherId,
+                    universeId = null,
+                    createdAt = 2000L,
+                    updatedAt = 2000L
+                )
+            )
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    HomeScreen(
+                        viewModel = viewModel,
+                        onBrowseClick = {},
+                        onCreateReadingListClick = {},
+                        onImportReadingListClick = {},
+                        onReadingListClick = { _, _ -> }
+                    )
+                }
+            }
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        "Ultimate Marvel"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty() &&
+                        composeRule
+                            .onAllNodesWithText(
+                                "Spider-Man Volume 2 Era"
+                            )
+                            .fetchSemanticsNodes()
+                            .isNotEmpty()
+            }
+
+            composeRule
+                .onNodeWithText(
+                    "Search reading lists"
+                )
+                .performTextInput(
+                    "ultimate"
+                )
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        "Spider-Man Volume 2 Era"
+                    )
+                    .fetchSemanticsNodes()
+                    .isEmpty()
+            }
+
+            composeRule
+                .onNodeWithText(
+                    "Ultimate Marvel"
+                )
+                .assertIsDisplayed()
+
+            composeRule
+                .onNodeWithText(
+                    "Spider-Man Volume 2 Era"
+                )
+                .assertDoesNotExist()
+
+            composeRule
+                .onNodeWithContentDescription(
+                    "Clear reading list search"
+                )
+                .assertIsDisplayed()
+                .performClick()
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        "Spider-Man Volume 2 Era"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule
+                .onNodeWithText(
+                    "Ultimate Marvel"
+                )
+                .assertIsDisplayed()
+
+            composeRule
+                .onNodeWithText(
+                    "Spider-Man Volume 2 Era"
+                )
+                .assertIsDisplayed()
+        }
+    }
+
+    @Test
+    fun homeScreen_sortControlReordersFilteredReadingLists() {
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name = "Marvel"
+                    )
+                )
+
+            comicDao.insertReadingList(
+                ReadingList(
+                    title =
+                        "Gamma Marvel List",
+                    description = null,
+                    publisherId =
+                        publisherId,
+                    universeId = null,
+                    createdAt = 1000L,
+                    updatedAt = 1000L
+                )
+            )
+
+            comicDao.insertReadingList(
+                ReadingList(
+                    title =
+                        "Alpha Marvel List",
+                    description = null,
+                    publisherId =
+                        publisherId,
+                    universeId = null,
+                    createdAt = 2000L,
+                    updatedAt = 3000L
+                )
+            )
+
+            comicDao.insertReadingList(
+                ReadingList(
+                    title =
+                        "Beta DC List",
+                    description = null,
+                    publisherId =
+                        publisherId,
+                    universeId = null,
+                    createdAt = 3000L,
+                    updatedAt = 2000L
+                )
+            )
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    HomeScreen(
+                        viewModel = viewModel,
+                        onBrowseClick = {},
+                        onCreateReadingListClick = {},
+                        onImportReadingListClick = {},
+                        onReadingListClick = { _, _ -> }
+                    )
+                }
+            }
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        "Alpha Marvel List"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule
+                .onNodeWithText(
+                    "Search reading lists"
+                )
+                .performTextInput(
+                    "marvel"
+                )
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        "Beta DC List"
+                    )
+                    .fetchSemanticsNodes()
+                    .isEmpty()
+            }
+
+            composeRule
+                .onNodeWithText(
+                    "Recently updated"
+                )
+                .performClick()
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        "Title A-Z"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule
+                .onNodeWithText(
+                    "Title A-Z"
+                )
+                .performClick()
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                viewModel
+                    .visibleReadingLists
+                    .value
+                    .map {
+                        it.title
+                    } ==
+                        listOf(
+                            "Alpha Marvel List",
+                            "Gamma Marvel List"
+                        )
+            }
+
+            assertEquals(
+                listOf(
+                    "Alpha Marvel List",
+                    "Gamma Marvel List"
+                ),
+                viewModel
+                    .visibleReadingLists
+                    .value
+                    .map {
+                        it.title
+                    }
+            )
+
+            composeRule
+                .onNodeWithText(
+                    "Title A-Z"
+                )
+                .performClick()
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        "Title Z-A"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule
+                .onNodeWithText(
+                    "Title Z-A"
+                )
+                .performClick()
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                viewModel
+                    .visibleReadingLists
+                    .value
+                    .map {
+                        it.title
+                    } ==
+                        listOf(
+                            "Gamma Marvel List",
+                            "Alpha Marvel List"
+                        )
+            }
+
+            assertEquals(
+                listOf(
+                    "Gamma Marvel List",
+                    "Alpha Marvel List"
+                ),
+                viewModel
+                    .visibleReadingLists
+                    .value
+                    .map {
+                        it.title
+                    }
+            )
+        }
     }
 }

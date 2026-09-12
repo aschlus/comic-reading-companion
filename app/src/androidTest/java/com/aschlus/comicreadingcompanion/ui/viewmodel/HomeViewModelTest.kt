@@ -415,4 +415,287 @@ class HomeViewModelTest {
                 }
             assertEquals(false, completedContinue.containsKey(readingListId))
         }
+
+    @Test
+    fun visibleReadingLists_filtersBySearchQuery() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name = "Marvel"
+                    )
+                )
+
+            comicDao.insertReadingList(
+                ReadingList(
+                    title =
+                        "Ultimate Marvel",
+                    description =
+                        "Complete Earth-1610 reading order",
+                    publisherId =
+                        publisherId,
+                    universeId = null,
+                    createdAt = 1000L,
+                    updatedAt = 1000L
+                )
+            )
+
+            comicDao.insertReadingList(
+                ReadingList(
+                    title =
+                        "Spider-Man Volume 2 Era",
+                    description =
+                        "Earth-616 Spider-Man chronology",
+                    publisherId =
+                        publisherId,
+                    universeId = null,
+                    createdAt = 2000L,
+                    updatedAt = 2000L
+                )
+            )
+
+            comicDao.insertReadingList(
+                ReadingList(
+                    title =
+                        "Avengers Test List",
+                    description =
+                        "A separate test chronology",
+                    publisherId =
+                        publisherId,
+                    universeId = null,
+                    createdAt = 3000L,
+                    updatedAt = 3000L
+                )
+            )
+
+            withTimeout(
+                5000L.milliseconds
+            ) {
+                viewModel
+                    .visibleReadingLists
+                    .first {
+                        it.size == 3
+                    }
+            }
+
+            viewModel.updateSearchQuery(
+                "spider"
+            )
+
+            val titleMatches =
+                withTimeout(
+                    5000L.milliseconds
+                ) {
+                    viewModel
+                        .visibleReadingLists
+                        .first {
+                            it.size == 1
+                        }
+                }
+
+            assertEquals(
+                "Spider-Man Volume 2 Era",
+                titleMatches.single().title
+            )
+
+            viewModel.updateSearchQuery(
+                "1610"
+            )
+
+            val descriptionMatches =
+                withTimeout(
+                    5000L.milliseconds
+                ) {
+                    viewModel
+                        .visibleReadingLists
+                        .first {
+                            it.size == 1 &&
+                                    it.single().title ==
+                                    "Ultimate Marvel"
+                        }
+                }
+
+            assertEquals(
+                "Ultimate Marvel",
+                descriptionMatches.single().title
+            )
+
+            viewModel.updateSearchQuery(
+                "ULTIMATE"
+            )
+
+            val caseInsensitiveMatches =
+                withTimeout(
+                    5000L.milliseconds
+                ) {
+                    viewModel
+                        .visibleReadingLists
+                        .first {
+                            it.size == 1 &&
+                                    it.single().title ==
+                                    "Ultimate Marvel"
+                        }
+                }
+
+            assertEquals(
+                "Ultimate Marvel",
+                caseInsensitiveMatches
+                    .single()
+                    .title
+            )
+
+            viewModel.clearSearchQuery()
+
+            val clearedResults =
+                withTimeout(
+                    5000L.milliseconds
+                ) {
+                    viewModel
+                        .visibleReadingLists
+                        .first {
+                            it.size == 3
+                        }
+                }
+
+            assertEquals(
+                3,
+                clearedResults.size
+            )
+            assertEquals(
+                "",
+                viewModel.searchQuery.value
+            )
+        }
+
+    @Test
+    fun visibleReadingLists_appliesSelectedSort() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name = "Marvel"
+                    )
+                )
+
+            comicDao.insertReadingList(
+                ReadingList(
+                    title = "Beta Reading List",
+                    description = null,
+                    publisherId = publisherId,
+                    universeId = null,
+                    createdAt = 1000L,
+                    updatedAt = 2000L
+                )
+            )
+
+            comicDao.insertReadingList(
+                ReadingList(
+                    title = "Alpha Reading List",
+                    description = null,
+                    publisherId = publisherId,
+                    universeId = null,
+                    createdAt = 2000L,
+                    updatedAt = 3000L
+                )
+            )
+
+            comicDao.insertReadingList(
+                ReadingList(
+                    title = "Gamma Reading List",
+                    description = null,
+                    publisherId = publisherId,
+                    universeId = null,
+                    createdAt = 3000L,
+                    updatedAt = 1000L
+                )
+            )
+
+            val recentlyUpdated =
+                withTimeout(
+                    5000L.milliseconds
+                ) {
+                    viewModel
+                        .visibleReadingLists
+                        .first {
+                            it.size == 3
+                        }
+                }
+
+            assertEquals(
+                listOf(
+                    "Alpha Reading List",
+                    "Beta Reading List",
+                    "Gamma Reading List"
+                ),
+                recentlyUpdated.map {
+                    it.title
+                }
+            )
+
+            viewModel.updateSort(
+                HomeReadingListSort
+                    .TITLE_ASCENDING
+            )
+
+            val ascending =
+                withTimeout(
+                    5000L.milliseconds
+                ) {
+                    viewModel
+                        .visibleReadingLists
+                        .first {
+                            it.size == 3 &&
+                                    it.first().title ==
+                                    "Alpha Reading List" &&
+                                    it.last().title ==
+                                    "Gamma Reading List"
+                        }
+                }
+
+            assertEquals(
+                listOf(
+                    "Alpha Reading List",
+                    "Beta Reading List",
+                    "Gamma Reading List"
+                ),
+                ascending.map {
+                    it.title
+                }
+            )
+
+            viewModel.updateSort(
+                HomeReadingListSort
+                    .TITLE_DESCENDING
+            )
+
+            val descending =
+                withTimeout(
+                    5000L.milliseconds
+                ) {
+                    viewModel
+                        .visibleReadingLists
+                        .first {
+                            it.size == 3 &&
+                                    it.first().title ==
+                                    "Gamma Reading List"
+                        }
+                }
+
+            assertEquals(
+                listOf(
+                    "Gamma Reading List",
+                    "Beta Reading List",
+                    "Alpha Reading List"
+                ),
+                descending.map {
+                    it.title
+                }
+            )
+
+            assertEquals(
+                HomeReadingListSort
+                    .TITLE_DESCENDING,
+                viewModel.sort.value
+            )
+        }
 }
