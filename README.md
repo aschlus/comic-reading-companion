@@ -118,7 +118,7 @@ building, following, and tracking comic-book reading orders.
 - [x] Detect duplicate issues within a reading list
 - [x] Validate missing / invalid series metadata
 - [x] Support optional reading-list sections in JSON
-- [ ] Support per-item universe / continuity for multiverse reading lists
+- [x] Support per-item universe / continuity for multiverse reading lists
 - [x] Support external IDs in reading-list JSON
 - [ ] Support importing user-provided reading-list files
 - [ ] Export reading lists to JSON

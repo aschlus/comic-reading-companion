@@ -2,6 +2,7 @@ package com.aschlus.comicreadingcompanion.data.importer
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import com.aschlus.comicreadingcompanion.data.importer.models.UniverseOverrideMode
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -198,6 +199,36 @@ class ReadingListAssetParserTest {
             result.items.size
         )
 
+        val universeOverrides =
+            result.items.filter { item ->
+                item.universeOverride != null
+            }
+
+        assertEquals(
+            20,
+            universeOverrides.size
+        )
+
+        assertTrue(
+            universeOverrides.all { item ->
+                item.universeOverride?.mode ==
+                        UniverseOverrideMode.NONE
+            }
+        )
+
+        assertEquals(
+            setOf(
+                "Spider-Men",
+                "Secret Wars",
+                "Ultimate End"
+            ),
+            universeOverrides
+                .map { item ->
+                    item.series.title
+                }
+                .toSet()
+        )
+
         assertEquals(
             1,
             result.sections.first().position
@@ -216,6 +247,49 @@ class ReadingListAssetParserTest {
         assertEquals(
             714,
             result.items.last().position
+        )
+    }
+
+    @Test
+    fun parseAssetWithUniverseOverrides_returnsOverrideData() {
+        val result =
+            parser.parse(
+                "reading_lists/universe_overrides_test.json"
+            )
+
+        assertEquals(
+            2,
+            result.items.size
+        )
+
+        val universeOverride =
+            result.items[0]
+                .universeOverride
+
+        assertEquals(
+            UniverseOverrideMode.UNIVERSE,
+            universeOverride?.mode
+        )
+
+        assertEquals(
+            "Earth-Alternate",
+            universeOverride
+                ?.universe
+                ?.designation
+        )
+
+        val noneOverride =
+            result.items[1]
+                .universeOverride
+
+        assertEquals(
+            UniverseOverrideMode.NONE,
+            noneOverride?.mode
+        )
+
+        assertEquals(
+            null,
+            noneOverride?.universe
         )
     }
 }

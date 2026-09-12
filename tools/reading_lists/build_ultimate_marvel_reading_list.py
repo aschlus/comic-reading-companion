@@ -249,6 +249,42 @@ def catalog_issue_identities(
     return identities
 
 
+def build_universe_override(list_universe: dict, catalog: dict, issue: dict) -> dict | None:
+    list_designation = list_universe["designation"]
+    issue_designation = issue.get("universeDesignation")
+
+    if issue_designation == list_designation:
+        return None
+
+    if issue_designation is None:
+        return { "mode": "NONE" }
+
+    matching_universe = next(
+        (
+            universe
+            for universe
+            in catalog.get("universes", [])
+            if (
+                universe.get("designation") == issue_designation
+            )
+        ),
+        None
+    )
+
+    if matching_universe is None:
+        raise ValueError(
+            f"Issue references universe '{issue_designation}', but that universe is not declared in the catalog"
+        )
+
+    return {
+        "mode": "UNIVERSE",
+        "universe": {
+            "name": matching_universe["name"],
+            "designation": matching_universe["designation"]
+        }
+    }
+
+
 def build_reading_list(
         manifest: dict,
         catalog: dict
@@ -375,8 +411,7 @@ def build_reading_list(
 
             seen_issues.add(identity)
 
-            items.append(
-                {
+            item = {
                     "position": item_position,
                     "sectionPosition": section_position,
                     "series": {
@@ -397,7 +432,19 @@ def build_reading_list(
                     "required": entry.get("required", True),
                     "notes": entry.get("notes")
                 }
+
+            universe_override = (
+                build_universe_override(
+                    list_universe=manifest["universe"],
+                    catalog=catalog,
+                    issue=issue
+                )
             )
+
+            if universe_override is not None:
+                item["universeOverride"] = (universe_override)
+
+            items.append(item)
 
             item_position += 1
 

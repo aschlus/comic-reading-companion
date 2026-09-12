@@ -632,6 +632,70 @@ class ComicCatalogImporterTest {
                 ultimateEndOneBefore?.universeId
             )
 
+            val spiderMen =
+                comicDao.getSeries(
+                    publisherId = publisher.id,
+                    title = "Spider-Men",
+                    volume = 1
+                )
+
+            assertNotNull(
+                spiderMen
+            )
+
+            val spiderMenOneBefore =
+                comicDao.getIssue(
+                    seriesId = spiderMen!!.id,
+                    issueNumber = "1"
+                )
+
+            assertNotNull(
+                spiderMenOneBefore
+            )
+
+            assertEquals(
+                null,
+                spiderMenOneBefore?.universeId
+            )
+
+            val earth1610 =
+                comicDao.getUniverseByDesignation(
+                    publisherId = publisher.id,
+                    designation = "Earth-1610"
+                )
+
+            assertNotNull(
+                earth1610
+            )
+
+            val ultimateSpiderMan =
+                comicDao.getSeries(
+                    publisherId = publisher.id,
+                    title = "Ultimate Spider-Man",
+                    volume = 1
+                )
+
+            assertNotNull(
+                ultimateSpiderMan
+            )
+
+            val ultimateSpiderManOneBefore =
+                comicDao.getIssue(
+                    seriesId =
+                        ultimateSpiderMan!!.id,
+                    issueNumber = "1"
+                )
+
+            assertNotNull(
+                ultimateSpiderManOneBefore
+            )
+
+            assertEquals(
+                earth1610?.id,
+                ultimateSpiderManOneBefore
+                    ?.universeId
+            )
+
             // Then import the bundled reading order.
             readingListImporter.import(
                 readingList
@@ -716,6 +780,16 @@ class ComicCatalogImporterTest {
                     ultimateEndOneBefore!!.id
                 )
 
+            val spiderMenOneAfter =
+                comicDao.getIssueById(
+                    spiderMenOneBefore!!.id
+                )
+
+            val ultimateSpiderManOneAfter =
+                comicDao.getIssueById(
+                    ultimateSpiderManOneBefore!!.id
+                )
+
             assertEquals(
                 null,
                 secretWarsZeroAfter?.universeId
@@ -724,6 +798,17 @@ class ComicCatalogImporterTest {
             assertEquals(
                 null,
                 ultimateEndOneAfter?.universeId
+            )
+
+            assertEquals(
+                null,
+                spiderMenOneAfter?.universeId
+            )
+
+            assertEquals(
+                earth1610?.id,
+                ultimateSpiderManOneAfter
+                    ?.universeId
             )
         }
 }

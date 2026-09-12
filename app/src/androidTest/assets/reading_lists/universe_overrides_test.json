@@ -1,0 +1,59 @@
+{
+  "title": "Universe Overrides Test",
+  "description": "Tests per-item universe overrides",
+  "publisher": "Test Publisher",
+  "universe": {
+    "name": "Default Universe",
+    "designation": "Earth-Default"
+  },
+  "items": [
+    {
+      "position": 1,
+      "series": {
+        "title": "Test Series",
+        "volume": 1,
+        "startYear": 2000,
+        "endYear": 2001
+      },
+      "issue": {
+        "number": "1",
+        "title": "Alternate Universe Issue",
+        "publicationDate": "2000-01",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "universeOverride": {
+        "mode": "UNIVERSE",
+        "universe": {
+          "name": "Alternate Universe",
+          "designation": "Earth-Alternate"
+        }
+      },
+      "required": true,
+      "notes": null
+    },
+    {
+      "position": 2,
+      "series": {
+        "title": "Test Series",
+        "volume": 1,
+        "startYear": 2000,
+        "endYear": 2001
+      },
+      "issue": {
+        "number": "2",
+        "title": "No Universe Issue",
+        "publicationDate": "2000-02",
+        "coverUrl": null,
+        "description": null,
+        "type": "REGULAR"
+      },
+      "universeOverride": {
+        "mode": "NONE"
+      },
+      "required": true,
+      "notes": null
+    }
+  ]
+}

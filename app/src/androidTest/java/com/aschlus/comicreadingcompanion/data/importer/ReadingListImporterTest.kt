@@ -17,6 +17,8 @@ import com.aschlus.comicreadingcompanion.data.importer.models.ReadingListImportD
 import com.aschlus.comicreadingcompanion.data.importer.models.ReadingListItemImportDto
 import com.aschlus.comicreadingcompanion.data.importer.models.SeriesImportDto
 import com.aschlus.comicreadingcompanion.data.importer.models.UniverseImportDto
+import com.aschlus.comicreadingcompanion.data.importer.models.UniverseOverrideImportDto
+import com.aschlus.comicreadingcompanion.data.importer.models.UniverseOverrideMode
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.After
@@ -840,6 +842,268 @@ class ReadingListImporterTest {
 
             assertNotNull(
                 issueAfterImport
+            )
+
+            assertNull(
+                issueAfterImport?.universeId
+            )
+        }
+
+    @Test
+    fun importUniverseOverrideUniverse_withoutUniverse_fails() =
+        runBlocking {
+            val baseImport =
+                createValidImportData()
+
+            val item =
+                baseImport.items.first()
+
+            val importData =
+                baseImport.copy(
+                    items = listOf(
+                        item.copy(
+                            universeOverride =
+                                UniverseOverrideImportDto(
+                                    mode =
+                                        UniverseOverrideMode.UNIVERSE,
+                                    universe = null
+                                )
+                        )
+                    )
+                )
+
+            try {
+                importer.import(
+                    importData
+                )
+
+                fail(
+                    "Expected UNIVERSE override " +
+                            "without universe to fail"
+                )
+            } catch (
+                exception: IllegalArgumentException
+            ) {
+                assertTrue(
+                    exception.message
+                        ?.contains(
+                            "does not provide a universe"
+                        ) == true
+                )
+            }
+        }
+
+    @Test
+    fun importUniverseOverrideNone_withUniverse_fails() =
+        runBlocking {
+            val baseImport =
+                createValidImportData()
+
+            val item =
+                baseImport.items.first()
+
+            val importData =
+                baseImport.copy(
+                    items = listOf(
+                        item.copy(
+                            universeOverride =
+                                UniverseOverrideImportDto(
+                                    mode =
+                                        UniverseOverrideMode.NONE,
+                                    universe =
+                                        UniverseImportDto(
+                                            name =
+                                                "Wrong Universe",
+                                            designation =
+                                                "Earth-Wrong"
+                                        )
+                                )
+                        )
+                    )
+                )
+
+            try {
+                importer.import(
+                    importData
+                )
+
+                fail(
+                    "Expected NONE override " +
+                            "with universe to fail"
+                )
+            } catch (
+                exception: IllegalArgumentException
+            ) {
+                assertTrue(
+                    exception.message
+                        ?.contains(
+                            "also provides a universe"
+                        ) == true
+                )
+            }
+        }
+
+    @Test
+    fun reimportWithUniverseOverride_updatesExistingIssueUniverse() =
+        runBlocking {
+            val baseImport =
+                createValidImportData()
+
+            importer.import(
+                baseImport
+            )
+
+            val readingList =
+                database.comicDao()
+                    .getAllReadingLists()
+                    .first()
+                    .first()
+
+            val originalItem =
+                database.comicDao()
+                    .getItemsForReadingList(
+                        readingList.id
+                    )
+                    .first()
+
+            val originalIssueId =
+                originalItem.issueId
+
+            val overriddenItem =
+                baseImport.items
+                    .first()
+                    .copy(
+                        universeOverride =
+                            UniverseOverrideImportDto(
+                                mode =
+                                    UniverseOverrideMode.UNIVERSE,
+                                universe =
+                                    UniverseImportDto(
+                                        name =
+                                            "Alternate Universe",
+                                        designation =
+                                            "Earth-Alternate"
+                                    )
+                            )
+                    )
+
+            importer.import(
+                baseImport.copy(
+                    items =
+                        listOf(
+                            overriddenItem
+                        )
+                )
+            )
+
+            val issueAfterImport =
+                database.comicDao()
+                    .getIssueById(
+                        originalIssueId
+                    )
+
+            assertNotNull(
+                issueAfterImport
+            )
+
+            val alternateUniverse =
+                database.comicDao()
+                    .getUniverseByDesignation(
+                        publisherId =
+                            database.comicDao()
+                                .getPublisherByName(
+                                    "Test Publisher"
+                                )!!
+                                .id,
+                        designation =
+                            "Earth-Alternate"
+                    )
+
+            assertNotNull(
+                alternateUniverse
+            )
+
+            assertEquals(
+                alternateUniverse?.id,
+                issueAfterImport?.universeId
+            )
+
+            assertEquals(
+                originalIssueId,
+                issueAfterImport?.id
+            )
+        }
+
+    @Test
+    fun reimportWithUniverseOverrideNone_clearsExistingIssueUniverse() =
+        runBlocking {
+            val baseImport =
+                createValidImportData()
+
+            importer.import(
+                baseImport
+            )
+
+            val readingList =
+                database.comicDao()
+                    .getAllReadingLists()
+                    .first()
+                    .first()
+
+            val originalItem =
+                database.comicDao()
+                    .getItemsForReadingList(
+                        readingList.id
+                    )
+                    .first()
+
+            val originalIssueId =
+                originalItem.issueId
+
+            val issueBeforeImport =
+                database.comicDao()
+                    .getIssueById(
+                        originalIssueId
+                    )
+
+            assertNotNull(
+                issueBeforeImport?.universeId
+            )
+
+            val overriddenItem =
+                baseImport.items
+                    .first()
+                    .copy(
+                        universeOverride =
+                            UniverseOverrideImportDto(
+                                mode =
+                                    UniverseOverrideMode.NONE,
+                                universe = null
+                            )
+                    )
+
+            importer.import(
+                baseImport.copy(
+                    items =
+                        listOf(
+                            overriddenItem
+                        )
+                )
+            )
+
+            val issueAfterImport =
+                database.comicDao()
+                    .getIssueById(
+                        originalIssueId
+                    )
+
+            assertNotNull(
+                issueAfterImport
+            )
+
+            assertEquals(
+                originalIssueId,
+                issueAfterImport?.id
             )
 
             assertNull(

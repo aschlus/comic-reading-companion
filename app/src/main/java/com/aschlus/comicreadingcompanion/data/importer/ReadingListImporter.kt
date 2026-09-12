@@ -14,6 +14,8 @@ import com.aschlus.comicreadingcompanion.data.database.entities.Series
 import com.aschlus.comicreadingcompanion.data.database.entities.Universe
 import com.aschlus.comicreadingcompanion.data.importer.models.ReadingListImportDto
 import com.aschlus.comicreadingcompanion.data.importer.models.ReadingListItemImportDto
+import com.aschlus.comicreadingcompanion.data.importer.models.UniverseImportDto
+import com.aschlus.comicreadingcompanion.data.importer.models.UniverseOverrideMode
 import java.time.YearMonth
 import java.time.format.DateTimeParseException
 import kotlinx.coroutines.flow.first
@@ -28,6 +30,10 @@ class ReadingListImporter(
     ) {
 
         validateRequiredMetadata(
+            importData = importData
+        )
+
+        validateUniverseOverrides(
             importData = importData
         )
 
@@ -120,6 +126,56 @@ class ReadingListImporter(
             }
         }
 
+    }
+
+    private fun validateUniverseOverrides(
+        importData: ReadingListImportDto
+    ) {
+        importData.items.forEach { item ->
+            val override =
+                item.universeOverride
+                    ?: return@forEach
+
+            when (override.mode) {
+                UniverseOverrideMode.UNIVERSE -> {
+                    val universe =
+                        override.universe
+                            ?: throw IllegalArgumentException(
+                                "Reading list '${importData.title}' " +
+                                "item at position ${item.position} " +
+                                "uses universe override UNIVERSE " +
+                                "but does not provide a universe"
+                            )
+
+                    if (universe.name.isBlank()) {
+                        throw IllegalArgumentException(
+                            "Reading list '${importData.title}' " +
+                            "item at position ${item.position} " +
+                            "has a blank override universe name"
+                        )
+                    }
+
+                    if (universe.designation.isBlank()) {
+                        throw IllegalArgumentException(
+                            "Reading list '${importData.title}' " +
+                            "item at position ${item.position} " +
+                            "has a blank override universe designation"
+                        )
+                    }
+                }
+
+                UniverseOverrideMode.NONE -> {
+                    if (override.universe != null) {
+                        throw IllegalArgumentException(
+                            "Reading list '${importData.title}' " +
+                            "item at position ${item.position} " +
+                            "uses universe override NONE " +
+                            "but also provides a universe"
+                        )
+                    }
+                }
+            }
+        }
     }
 
     private fun validateItemPositions(
@@ -531,8 +587,16 @@ class ReadingListImporter(
         importData: ReadingListImportDto,
         publisher: Publisher
     ): Universe {
-        val universeData = importData.universe
+        return getOrCreateUniverse(
+            universeData = importData.universe,
+            publisher = publisher
+        )
+    }
 
+    private suspend fun getOrCreateUniverse(
+        universeData: UniverseImportDto,
+        publisher: Publisher
+    ): Universe {
         val existing =
             comicDao.getUniverseByDesignation(
                 publisherId = publisher.id,
@@ -740,6 +804,7 @@ class ReadingListImporter(
                 getOrCreateIssue(
                     itemData = itemData,
                     series = series,
+                    publisher = publisher,
                     universe = universe
                 )
 
@@ -910,9 +975,34 @@ class ReadingListImporter(
     private suspend fun getOrCreateIssue(
         itemData: ReadingListItemImportDto,
         series: Series,
+        publisher: Publisher,
         universe: Universe
     ): Issue {
         val issueData = itemData.issue
+
+        val universeOverride = itemData.universeOverride
+
+        val resolvedUniverse =
+            when (universeOverride?.mode) {
+                null -> universe
+
+                UniverseOverrideMode.UNIVERSE -> {
+                    val overrideUniverse =
+                        universeOverride.universe
+                            ?: throw IllegalArgumentException(
+                                "Universe override requires a universe"
+                            )
+
+                    getOrCreateUniverse(
+                        universeData = overrideUniverse,
+                        publisher = publisher
+                    )
+                }
+
+                UniverseOverrideMode.NONE -> {
+                    null
+                }
+            }
 
         val issueType =
             try {
@@ -936,6 +1026,12 @@ class ReadingListImporter(
         if (existing != null) {
             val updated =
                 existing.copy(
+                    universeId =
+                        if (universeOverride == null) {
+                            existing.universeId
+                        } else {
+                            resolvedUniverse?.id
+                        },
                     title = issueData.title,
                     publicationDate = issueData.publicationDate,
                     coverUrl = issueData.coverUrl,
@@ -953,7 +1049,7 @@ class ReadingListImporter(
         val id = comicDao.insertIssue(
             Issue(
                 seriesId = series.id,
-                universeId = universe.id,
+                universeId = resolvedUniverse?.id,
                 issueNumber = issueData.number,
                 title = issueData.title,
                 publicationDate = issueData.publicationDate,
@@ -966,7 +1062,7 @@ class ReadingListImporter(
         return Issue(
             id = id,
             seriesId = series.id,
-            universeId = universe.id,
+            universeId = resolvedUniverse?.id,
             issueNumber = issueData.number,
             title = issueData.title,
             publicationDate = issueData.publicationDate,

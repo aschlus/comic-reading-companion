@@ -27,11 +27,24 @@ data class UniverseImportDto(
 )
 
 @Serializable
+data class UniverseOverrideImportDto(
+    val mode: UniverseOverrideMode,
+    val universe: UniverseImportDto? = null
+)
+
+@Serializable
+enum class UniverseOverrideMode {
+    UNIVERSE,
+    NONE
+}
+
+@Serializable
 data class ReadingListItemImportDto(
     val position: Int,
     val sectionPosition: Int? = null,
     val series: SeriesImportDto,
     val issue: IssueImportDto,
+    val universeOverride: UniverseOverrideImportDto? = null,
     val required: Boolean,
     val notes: String?
 )
