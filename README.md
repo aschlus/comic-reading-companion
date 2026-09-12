@@ -195,7 +195,7 @@ building, following, and tracking comic-book reading orders.
 - [x] Universe / continuity stored separately from publisher
 - [x] Marvel Earth-616 support
 - [x] Marvel Earth-1610 support
-- [ ] Multi-universe reading lists
+- [x] Multi-universe reading lists
 - [ ] DC universe / continuity support
 - [ ] Image and independent publisher support
 - [ ] Publisher-specific metadata adapters where needed

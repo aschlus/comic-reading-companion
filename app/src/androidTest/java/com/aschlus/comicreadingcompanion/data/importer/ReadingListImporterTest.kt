@@ -1111,6 +1111,205 @@ class ReadingListImporterTest {
             )
         }
 
+    @Test
+    fun importWithoutDefaultUniverse_createsNullUniverseListAndIssue() =
+        runBlocking {
+            val importData =
+                createValidImportData()
+                    .copy(
+                        universe = null
+                    )
+
+            importer.import(
+                importData
+            )
+
+            val readingList =
+                database.comicDao()
+                    .getAllReadingLists()
+                    .first()
+                    .first()
+
+            assertNull(
+                readingList.universeId
+            )
+
+            val item =
+                database.comicDao()
+                    .getItemsForReadingList(
+                        readingList.id
+                    )
+                    .first()
+
+            val issue =
+                database.comicDao()
+                    .getIssueById(
+                        item.issueId
+                    )
+
+            assertNotNull(
+                issue
+            )
+
+            assertNull(
+                issue?.universeId
+            )
+        }
+
+    @Test
+    fun importWithoutDefaultUniverse_itemOverrideCreatesUniverse() =
+        runBlocking {
+            val baseImport =
+                createValidImportData()
+
+            val overriddenItem =
+                baseImport.items
+                    .first()
+                    .copy(
+                        universeOverride =
+                            UniverseOverrideImportDto(
+                                mode =
+                                    UniverseOverrideMode.UNIVERSE,
+                                universe =
+                                    UniverseImportDto(
+                                        name =
+                                            "Alternate Universe",
+                                        designation =
+                                            "Earth-Alternate"
+                                    )
+                            )
+                    )
+
+            importer.import(
+                baseImport.copy(
+                    universe = null,
+                    items =
+                        listOf(
+                            overriddenItem
+                        )
+                )
+            )
+
+            val readingList =
+                database.comicDao()
+                    .getAllReadingLists()
+                    .first()
+                    .first()
+
+            assertNull(
+                readingList.universeId
+            )
+
+            val publisher =
+                database.comicDao()
+                    .getPublisherByName(
+                        "Test Publisher"
+                    )
+
+            assertNotNull(
+                publisher
+            )
+
+            val alternateUniverse =
+                database.comicDao()
+                    .getUniverseByDesignation(
+                        publisherId =
+                            publisher!!.id,
+                        designation =
+                            "Earth-Alternate"
+                    )
+
+            assertNotNull(
+                alternateUniverse
+            )
+
+            val item =
+                database.comicDao()
+                    .getItemsForReadingList(
+                        readingList.id
+                    )
+                    .first()
+
+            val issue =
+                database.comicDao()
+                    .getIssueById(
+                        item.issueId
+                    )
+
+            assertEquals(
+                alternateUniverse?.id,
+                issue?.universeId
+            )
+        }
+
+    @Test
+    fun reimportWithoutDefaultUniverse_preservesExistingIssueUniverse() =
+        runBlocking {
+            val baseImport =
+                createValidImportData()
+
+            importer.import(
+                baseImport
+            )
+
+            val publisher =
+                database.comicDao()
+                    .getPublisherByName(
+                        "Test Publisher"
+                    )
+
+            assertNotNull(
+                publisher
+            )
+
+            val originalUniverse =
+                database.comicDao()
+                    .getUniverseByDesignation(
+                        publisherId =
+                            publisher!!.id,
+                        designation =
+                            "Earth-Test"
+                    )
+
+            assertNotNull(
+                originalUniverse
+            )
+
+            importer.import(
+                baseImport.copy(
+                    universe = null
+                )
+            )
+
+            val readingList =
+                database.comicDao()
+                    .getAllReadingLists()
+                    .first()
+                    .first()
+
+            assertNull(
+                readingList.universeId
+            )
+
+            val item =
+                database.comicDao()
+                    .getItemsForReadingList(
+                        readingList.id
+                    )
+                    .first()
+
+            val issue =
+                database.comicDao()
+                    .getIssueById(
+                        item.issueId
+                    )
+
+            assertEquals(
+                originalUniverse?.id,
+                issue?.universeId
+            )
+        }
+
     //Write tests above
 
     private fun createValidImportData(

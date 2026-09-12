@@ -84,18 +84,20 @@ class ReadingListImporter(
             )
         }
 
-        if (importData.universe.name.isBlank()) {
-            throw IllegalArgumentException(
-                "Reading list '${importData.title}' " +
-                "has a blank universe name"
-            )
-        }
+        importData.universe?.let { universe ->
+            if (universe.name.isBlank()) {
+                throw IllegalArgumentException(
+                    "Reading list '${importData.title}' " +
+                            "has a blank universe name"
+                )
+            }
 
-        if (importData.universe.designation.isBlank()) {
-            throw IllegalArgumentException(
-                "Reading list '${importData.title}' " +
-                "has a blank universe designation"
-            )
+            if (universe.designation.isBlank()) {
+                throw IllegalArgumentException(
+                    "Reading list '${importData.title}' " +
+                            "has a blank universe designation"
+                )
+            }
         }
 
         importData.items.forEach { item ->
@@ -586,9 +588,13 @@ class ReadingListImporter(
     private suspend fun getOrCreateUniverse(
         importData: ReadingListImportDto,
         publisher: Publisher
-    ): Universe {
+    ): Universe? {
+        val universeData =
+            importData.universe
+                ?: return null
+
         return getOrCreateUniverse(
-            universeData = importData.universe,
+            universeData = universeData,
             publisher = publisher
         )
     }
@@ -628,7 +634,7 @@ class ReadingListImporter(
     private suspend fun getOrCreateReadingList(
         importData: ReadingListImportDto,
         publisher: Publisher,
-        universe: Universe
+        universe: Universe?
     ): ReadingList {
         val existing =
             comicDao.getAllReadingLists()
@@ -642,7 +648,7 @@ class ReadingListImporter(
             val updated =
                 existing.copy(
                     description = importData.description,
-                    universeId = universe.id,
+                    universeId = universe?.id,
                     updatedAt = System.currentTimeMillis()
                 )
 
@@ -665,7 +671,7 @@ class ReadingListImporter(
                 title = importData.title,
                 description = importData.description,
                 publisherId = publisher.id,
-                universeId = universe.id,
+                universeId = universe?.id,
                 createdAt = currentTime,
                 updatedAt = currentTime
             )
@@ -676,7 +682,7 @@ class ReadingListImporter(
             title = importData.title,
             description = importData.description,
             publisherId = publisher.id,
-            universeId = universe.id,
+            universeId = universe?.id,
             createdAt = currentTime,
             updatedAt = currentTime
         )
@@ -772,7 +778,7 @@ class ReadingListImporter(
     private suspend fun importItems(
         importData: ReadingListImportDto,
         publisher: Publisher,
-        universe: Universe,
+        universe: Universe?,
         readingList: ReadingList,
         sectionsByPosition: Map<Int, ReadingListSection>
     ) {
@@ -976,7 +982,7 @@ class ReadingListImporter(
         itemData: ReadingListItemImportDto,
         series: Series,
         publisher: Publisher,
-        universe: Universe
+        universe: Universe?
     ): Issue {
         val issueData = itemData.issue
 

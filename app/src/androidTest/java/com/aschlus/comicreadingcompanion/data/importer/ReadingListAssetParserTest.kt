@@ -47,7 +47,7 @@ class ReadingListAssetParserTest {
 
         assertEquals(
             "Earth-Test",
-            result.universe.designation
+            result.universe?.designation
         )
 
         assertEquals(
@@ -186,7 +186,7 @@ class ReadingListAssetParserTest {
 
         assertEquals(
             "Earth-1610",
-            result.universe.designation
+            result.universe?.designation
         )
 
         assertEquals(
@@ -328,7 +328,7 @@ class ReadingListAssetParserTest {
 
         assertEquals(
             "Earth-Test",
-            result.universe.designation
+            result.universe?.designation
         )
     }
 
@@ -361,5 +361,30 @@ class ReadingListAssetParserTest {
                 ) == true
             )
         }
+    }
+
+    @Test
+    fun parseJson_withoutDefaultUniverse_returnsNullUniverse() {
+        val jsonText =
+            """
+        {
+          "title": "Multiverse Test",
+          "description": "Mixed continuities",
+          "publisher": "Marvel Comics",
+          "items": []
+        }
+        """.trimIndent()
+
+        val result =
+            parser.parseJson(
+                jsonText = jsonText,
+                sourceDescription =
+                    "reading-list file 'multiverse.json'"
+            )
+
+        assertEquals(
+            null,
+            result.universe
+        )
     }
 }

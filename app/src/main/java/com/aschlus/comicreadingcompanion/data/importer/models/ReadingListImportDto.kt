@@ -7,7 +7,7 @@ data class ReadingListImportDto(
     val title: String,
     val description: String?,
     val publisher: String,
-    val universe: UniverseImportDto,
+    val universe: UniverseImportDto? = null,
     val sections: List<ReadingListSectionImportDto> =
         emptyList(),
     val items: List<ReadingListItemImportDto>
