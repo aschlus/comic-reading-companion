@@ -13,12 +13,12 @@ building, following, and tracking comic-book reading orders.
 - [x] Series model
 - [x] Issue model
 - [x] Issue types
-    - Regular issues
-    - Annuals
-    - Specials
-    - One-shots
-    - Giant-size issues
-    - Previews
+  - Regular issues
+  - Annuals
+  - Specials
+  - One-shots
+  - Giant-size issues
+  - Previews
 - [x] External issue ID model
 - [x] Reading-list model
 - [x] Reading-list item model
@@ -126,12 +126,12 @@ building, following, and tracking comic-book reading orders.
 ### Included Reading Orders
 
 - [x] Spider-Man Volume 2 Era — Earth-616
-    - September 1998 through September 2003
-    - 213 issues
+  - September 1998 through September 2003
+  - 213 issues
 - [x] Ultimate Marvel (2000–2015) — Earth-1610
-    - Complete original Ultimate Universe
-    - 127 story arcs / sections
-    - 714 issues
+  - Complete original Ultimate Universe
+  - 127 story arcs / sections
+  - 714 issues
 - [ ] Additional Spider-Man eras
 - [ ] Larger Spider-Man master chronology
 - [ ] Additional Marvel characters / events
@@ -154,6 +154,32 @@ building, following, and tracking comic-book reading orders.
 > third-party reading-history synchronization. The app should not depend on
 > scraping or private Marvel APIs.
 
+### Comic Print Visual Design System
+
+- [ ] Replace starter Material palette with the Comic Print color system
+- [ ] Use app-controlled colors instead of dynamic system colors by default
+- [ ] Establish comic-inspired display typography and readable body typography
+- [ ] Define reusable spacing, border, shadow, and corner-shape design tokens
+- [ ] Add reusable comic-style section headers and banners
+- [ ] Add reusable comic-style action panels and cards
+- [ ] Add reusable progress indicators that fit the Comic Print style
+- [ ] Add subtle halftone / ink-texture decoration without reducing readability
+- [ ] Add original app-owned placeholder / decorative artwork
+- [ ] Maintain accessible contrast and touch targets beneath stylized visuals
+- [ ] Create a coordinated dark-theme treatment
+- [ ] Apply the design system consistently across all screens
+
+### App Navigation and Screen Structure
+
+- [ ] Add persistent top-level navigation for Home, Browse, and Library
+- [ ] Add a dedicated Library screen
+- [ ] Add a Settings screen
+- [ ] Open Settings from the Home header gear icon
+- [ ] Hide top-level navigation on detail / editing screens
+- [ ] Preserve normal back navigation from detail screens
+- [ ] Move reading-list management actions to the Library where appropriate
+- [ ] Move reading-list import from Home to the Library as a secondary action
+
 ### Home Screen
 
 - [x] Reading-list cards
@@ -163,9 +189,30 @@ building, following, and tracking comic-book reading orders.
 - [x] Show current / next issue on each card
 - [x] Sort reading lists
 - [x] Search reading lists
-- [ ] Reading-list cover / hero artwork
 - [x] Recently opened reading lists
 - [x] Dedicated Continue Reading section
+- [ ] Replace the current Home layout with the Bright & Playful Comic Print design
+- [ ] Add comic-style Home header with Settings gear
+- [ ] Add prominent Browse Comics action panel
+- [ ] Add prominent Create Reading List action panel
+- [ ] Add Continue Reading hero card
+- [ ] Show Recently Opened as a horizontal card row
+- [ ] Remove the full reading-list library from Home once Library is available
+- [ ] Remove search / sorting controls from Home once Library is available
+- [ ] Reading-list cover / hero artwork
+- [ ] Add original placeholder artwork when reading-list artwork is unavailable
+
+### Library Screen
+
+- [ ] Display all reading lists
+- [ ] Search reading lists
+- [ ] Sort reading lists
+- [ ] Open a reading list
+- [ ] Create a reading list
+- [ ] Import a reading list as a secondary management action
+- [ ] Add library-focused filtering as needed
+- [ ] Use Comic Print reading-list cards and progress treatment
+- [ ] Support reading-list cover / hero artwork when available
 
 ### Reading-List Detail UI
 
@@ -188,6 +235,17 @@ building, following, and tracking comic-book reading orders.
 - [x] Persistent reading-progress header
 - [ ] Scroll-to-top action
 - [ ] Jump to a specific issue / reading-order number
+- [ ] Apply Comic Print visual treatment to headers, progress, sections, and rows
+
+### Browse and Detail Screen Visual Refresh
+
+- [ ] Apply Comic Print styling to Browse
+- [ ] Apply Comic Print styling to Publisher detail
+- [ ] Apply Comic Print styling to Series detail
+- [ ] Apply Comic Print styling to Issue detail
+- [ ] Apply Comic Print styling to create / edit forms
+- [ ] Apply Comic Print styling to dialogs, menus, and empty states
+- [ ] Keep data-dense screens visually quieter than Home for readability
 
 ### Publisher and Continuity Support
 
@@ -224,6 +282,8 @@ building, following, and tracking comic-book reading orders.
 - [x] Handle malformed reading-list files gracefully
 - [x] Handle importer failures without partially updating a list
 - [x] Improve error reporting / logging
+- [ ] Add UI regression coverage for top-level Home / Browse / Library navigation
+- [ ] Add UI coverage for the redesigned Home and Library screens
 
 ### Longer-Term Ideas
 
