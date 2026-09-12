@@ -43,6 +43,11 @@ class ReadingListDetailViewModel(
     val issues: StateFlow<List<ReadingListIssue>> =
         _issues.asStateFlow()
 
+    private val _selectedReadingListItemIds =
+        MutableStateFlow<Set<Long>>(emptySet())
+
+    val selectedReadingListItemIds: StateFlow<Set<Long>> = _selectedReadingListItemIds.asStateFlow()
+
     private val _readingListDeleted =
         MutableStateFlow(false)
 
@@ -69,6 +74,7 @@ class ReadingListDetailViewModel(
 
     fun loadReadingList(readingListId: Long) {
         activeReadingListId = readingListId
+        _selectedReadingListItemIds.value = emptySet()
         _collapsedSectionsLoaded.value = false
 
         collapsedSectionsJob?.cancel()
@@ -204,6 +210,24 @@ class ReadingListDetailViewModel(
                 issue.issueId
             )
         }
+    }
+
+    fun toggleIssueSelection(
+        issue: ReadingListIssue
+    ) {
+        val itemId = issue.readingListItemId
+        val currentSelection = _selectedReadingListItemIds.value
+
+        _selectedReadingListItemIds.value =
+            if (itemId in currentSelection) {
+                currentSelection - itemId
+            } else {
+                currentSelection + itemId
+            }
+    }
+
+    fun clearIssueSelection() {
+        _selectedReadingListItemIds.value = emptySet()
     }
 
     fun createSection(
@@ -391,6 +415,64 @@ class ReadingListDetailViewModel(
             repository.markIssuesAsUnread(
                 issueIdsToReset
             )
+        }
+    }
+
+    fun markSelectedIssuesAsRead() {
+        val selectedItemIds = _selectedReadingListItemIds.value
+
+        if (selectedItemIds.isEmpty()) {
+            return
+        }
+
+        val issueIds =
+            _issues.value
+                .filter { issue ->
+                    issue.readingListItemId in selectedItemIds
+                }
+                .map { issue ->
+                    issue.issueId
+                }
+                .distinct()
+
+        if (issueIds.isEmpty()) {
+            clearIssueSelection()
+            return
+        }
+
+        viewModelScope.launch {
+            repository.markIssuesAsRead(issueIds)
+
+            clearIssueSelection()
+        }
+    }
+
+    fun markSelectedIssuesAsUnread() {
+        val selectedItemIds = _selectedReadingListItemIds.value
+
+        if (selectedItemIds.isEmpty()) {
+            return
+        }
+
+        val issueIds =
+            _issues.value
+                .filter { issue ->
+                    issue.readingListItemId in selectedItemIds
+                }
+                .map { issue ->
+                    issue.issueId
+                }
+                .distinct()
+
+        if (issueIds.isEmpty()) {
+            clearIssueSelection()
+            return
+        }
+
+        viewModelScope.launch {
+            repository.markIssuesAsUnread(issueIds)
+
+            clearIssueSelection()
         }
     }
 

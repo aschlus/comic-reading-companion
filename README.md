@@ -70,8 +70,8 @@ building, following, and tracking comic-book reading orders.
 - [x] Expose the "Reading" status in the UI
 - [x] "Continue Reading" action
 - [x] Automatically open / scroll to the current reading position
-- [ ] Select multiple issues and mark as read
-- [ ] Select multiple issues and mark as unread
+- [x] Select multiple issues and mark as read
+- [x] Select multiple issues and mark as unread
 - [x] Mark everything before a selected issue as read
 - [x] Reset reading-list progress
 - [x] Mark entire reading-list as read

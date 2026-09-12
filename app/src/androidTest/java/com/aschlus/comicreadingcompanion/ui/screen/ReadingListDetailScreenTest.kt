@@ -7,9 +7,11 @@ import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.assertIsOff
 import androidx.compose.ui.test.assertIsOn
+import androidx.compose.ui.test.click
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.hasSetTextAction
 import androidx.compose.ui.test.isToggleable
+import androidx.compose.ui.test.longClick
 import androidx.compose.ui.test.onAllNodesWithContentDescription
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithContentDescription
@@ -17,6 +19,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTextClearance
+import androidx.compose.ui.test.performTouchInput
 import androidx.lifecycle.viewModelScope
 import androidx.room3.Room
 import androidx.test.core.app.ApplicationProvider
@@ -30,6 +33,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListItem
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSection
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSource
+import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.database.entities.Series
 import com.aschlus.comicreadingcompanion.data.preferences.ReadingListUiPreferences
 import com.aschlus.comicreadingcompanion.data.repository.ComicRepository
@@ -1965,7 +1969,22 @@ class ReadingListDetailScreenTest {
                     .isNotEmpty()
             }
             composeRule.onNodeWithText("Main Arc").performClick()
-            composeRule.onNodeWithContentDescription("Expand section").assertIsDisplayed()
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithContentDescription(
+                        "Expand section"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule
+                .onNodeWithContentDescription(
+                    "Expand section"
+                )
+                .assertIsDisplayed()
             composeRule.runOnIdle { startPosition.value = 2 }
             composeRule.waitUntil(timeoutMillis = 5000L) {
                 composeRule.onAllNodesWithText("Target Story")
@@ -2090,7 +2109,22 @@ class ReadingListDetailScreenTest {
                     .isNotEmpty()
             }
             composeRule.onNodeWithText("Main Arc").performClick()
-            composeRule.onNodeWithContentDescription("Expand section").assertIsDisplayed()
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithContentDescription(
+                        "Expand section"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule
+                .onNodeWithContentDescription(
+                    "Expand section"
+                )
+                .assertIsDisplayed()
             composeRule.onNodeWithText("Jump to first unread").assertIsDisplayed().performClick()
             composeRule.waitUntil(timeoutMillis = 5000L) {
             composeRule.onAllNodesWithText("Target Story")
@@ -3386,4 +3420,464 @@ class ReadingListDetailScreenTest {
                 duplicatedList?.source
             )
         }
+
+    @Test
+    fun readingListDetailScreen_longPressEntersMultiSelectMode() {
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name = "Selection UI Publisher"
+                    )
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Selection UI Series",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2000
+                    )
+                )
+
+            val firstIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "Selection UI Issue One",
+                        publicationDate = "2000-01",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val secondIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "2",
+                        title = "Selection UI Issue Two",
+                        publicationDate = "2000-02",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val readingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title = "Selection UI List",
+                        description = null,
+                        publisherId = publisherId,
+                        universeId = null,
+                        source = ReadingListSource.BUNDLED,
+                        sourceKey = "selection-ui-test",
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            comicDao.insertReadingListItem(
+                ReadingListItem(
+                    readingListId = readingListId,
+                    sectionId = null,
+                    issueId = firstIssueId,
+                    position = 1,
+                    required = true,
+                    notes = null
+                )
+            )
+
+            comicDao.insertReadingListItem(
+                ReadingListItem(
+                    readingListId = readingListId,
+                    sectionId = null,
+                    issueId = secondIssueId,
+                    position = 2,
+                    required = true,
+                    notes = null
+                )
+            )
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    ReadingListDetailScreen(
+                        readingListId = readingListId,
+                        startPosition = -1,
+                        viewModel = viewModel,
+                        onIssueClick = {},
+                        onBackClick = {}
+                    )
+                }
+            }
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        "Selection UI Issue One"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty() &&
+                        composeRule
+                            .onAllNodesWithText(
+                                "Selection UI Issue Two"
+                            )
+                            .fetchSemanticsNodes()
+                            .isNotEmpty()
+            }
+
+            composeRule
+                .onNodeWithText(
+                    "Selection UI Issue One"
+                )
+                .performTouchInput {
+                    longClick()
+                }
+
+            composeRule
+                .onNodeWithText(
+                    "1 selected"
+                )
+                .assertIsDisplayed()
+
+            composeRule
+                .onNodeWithContentDescription(
+                    "Cancel selection"
+                )
+                .assertIsDisplayed()
+
+            composeRule
+                .onNodeWithText(
+                    "Selection UI Issue Two"
+                )
+                .performTouchInput {
+                    click()
+                }
+
+            composeRule
+                .onNodeWithText(
+                    "2 selected"
+                )
+                .assertIsDisplayed()
+
+            composeRule
+                .onNodeWithText(
+                    "Selection UI Issue One"
+                )
+                .performTouchInput {
+                    click()
+                }
+
+            composeRule
+                .onNodeWithText(
+                    "1 selected"
+                )
+                .assertIsDisplayed()
+
+            composeRule
+                .onNodeWithContentDescription(
+                    "Cancel selection"
+                )
+                .performClick()
+
+            composeRule
+                .onNodeWithContentDescription(
+                    "Cancel selection"
+                )
+                .assertDoesNotExist()
+
+            composeRule
+                .onNodeWithText(
+                    "Selection UI List"
+                )
+                .assertIsDisplayed()
+        }
+    }
+
+    @Test
+    fun readingListDetailScreen_bulkSelectionMarksReadAndUnread() {
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name =
+                            "Bulk Selection UI Publisher"
+                    )
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId =
+                            publisherId,
+                        title =
+                            "Bulk Selection UI Series",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2000
+                    )
+                )
+
+            val firstIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId =
+                            seriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title =
+                            "Bulk Selection Issue One",
+                        publicationDate =
+                            "2000-01",
+                        coverUrl = null,
+                        description = null,
+                        issueType =
+                            IssueType.REGULAR
+                    )
+                )
+
+            val secondIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId =
+                            seriesId,
+                        universeId = null,
+                        issueNumber = "2",
+                        title =
+                            "Bulk Selection Issue Two",
+                        publicationDate =
+                            "2000-02",
+                        coverUrl = null,
+                        description = null,
+                        issueType =
+                            IssueType.REGULAR
+                    )
+                )
+
+            val readingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title =
+                            "Bulk Selection UI List",
+                        description = null,
+                        publisherId =
+                            publisherId,
+                        universeId = null,
+                        source =
+                            ReadingListSource.BUNDLED,
+                        sourceKey =
+                            "bulk-selection-ui-test",
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            comicDao.insertReadingListItem(
+                ReadingListItem(
+                    readingListId =
+                        readingListId,
+                    sectionId = null,
+                    issueId =
+                        firstIssueId,
+                    position = 1,
+                    required = true,
+                    notes = null
+                )
+            )
+
+            comicDao.insertReadingListItem(
+                ReadingListItem(
+                    readingListId =
+                        readingListId,
+                    sectionId = null,
+                    issueId =
+                        secondIssueId,
+                    position = 2,
+                    required = true,
+                    notes = null
+                )
+            )
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    ReadingListDetailScreen(
+                        readingListId =
+                            readingListId,
+                        startPosition = -1,
+                        viewModel =
+                            viewModel,
+                        onIssueClick = {},
+                        onBackClick = {}
+                    )
+                }
+            }
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        "Bulk Selection Issue One"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty() &&
+                        composeRule
+                            .onAllNodesWithText(
+                                "Bulk Selection Issue Two"
+                            )
+                            .fetchSemanticsNodes()
+                            .isNotEmpty()
+            }
+
+            // Select both issues.
+            composeRule
+                .onNodeWithText(
+                    "Bulk Selection Issue One"
+                )
+                .performTouchInput {
+                    longClick()
+                }
+
+            composeRule
+                .onNodeWithText(
+                    "Bulk Selection Issue Two"
+                )
+                .performTouchInput {
+                    click()
+                }
+
+            composeRule
+                .onNodeWithText(
+                    "2 selected"
+                )
+                .assertIsDisplayed()
+
+            // Mark both read.
+            composeRule
+                .onNodeWithText(
+                    "Mark read"
+                )
+                .performClick()
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                viewModel.issues.value
+                    .size == 2 &&
+                        viewModel.issues.value
+                            .all { issue ->
+                                issue.readingStatus ==
+                                        ReadingStatus.READ
+                            } &&
+                        viewModel
+                            .selectedReadingListItemIds
+                            .value
+                            .isEmpty()
+            }
+
+            assertEquals(
+                ReadingStatus.READ,
+                repository
+                    .getReadingProgressForIssue(
+                        firstIssueId
+                    )
+                    ?.status
+            )
+
+            assertEquals(
+                ReadingStatus.READ,
+                repository
+                    .getReadingProgressForIssue(
+                        secondIssueId
+                    )
+                    ?.status
+            )
+
+            composeRule
+                .onNodeWithText(
+                    "Bulk Selection UI List"
+                )
+                .assertIsDisplayed()
+
+            // Select both again.
+            composeRule
+                .onNodeWithText(
+                    "Bulk Selection Issue One"
+                )
+                .performTouchInput {
+                    longClick()
+                }
+
+            composeRule
+                .onNodeWithText(
+                    "Bulk Selection Issue Two"
+                )
+                .performTouchInput {
+                    click()
+                }
+
+            composeRule
+                .onNodeWithText(
+                    "2 selected"
+                )
+                .assertIsDisplayed()
+
+            // Mark both unread.
+            composeRule
+                .onNodeWithText(
+                    "Mark unread"
+                )
+                .performClick()
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                viewModel.issues.value
+                    .size == 2 &&
+                        viewModel.issues.value
+                            .all { issue ->
+                                issue.readingStatus == null
+                            } &&
+                        viewModel
+                            .selectedReadingListItemIds
+                            .value
+                            .isEmpty()
+            }
+
+            assertEquals(
+                null,
+                repository
+                    .getReadingProgressForIssue(
+                        firstIssueId
+                    )
+            )
+
+            assertEquals(
+                null,
+                repository
+                    .getReadingProgressForIssue(
+                        secondIssueId
+                    )
+            )
+
+            composeRule
+                .onNodeWithText(
+                    "Bulk Selection UI List"
+                )
+                .assertIsDisplayed()
+        }
+    }
 }

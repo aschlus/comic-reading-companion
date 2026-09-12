@@ -1,6 +1,7 @@
 package com.aschlus.comicreadingcompanion.ui.screen
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -99,6 +100,11 @@ fun ReadingListDetailScreen(
 
     val collapsedSectionsLoaded by
         viewModel.collapsedSectionsLoaded.collectAsState()
+
+    val selectedReadingListItemIds by
+            viewModel.selectedReadingListItemIds.collectAsState()
+
+    val isSelectionMode = selectedReadingListItemIds.isNotEmpty()
 
     val listState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
@@ -412,55 +418,99 @@ fun ReadingListDetailScreen(
         topBar = {
             TopAppBar(
                 title = {
-                    if (isSearchActive) {
-                        OutlinedTextField(
-                            value = searchQuery,
-                            onValueChange = { newQuery ->
-                                searchQuery = newQuery
-                            },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .focusRequester(
-                                    searchFocusRequester
-                                ),
-                            singleLine = true,
-                            placeholder = {
-                                Text("Search reading list")
-                            },
-                            leadingIcon = {
-                                Icon(
-                                    imageVector = Icons.Default.Search,
-                                    contentDescription = null
-                                )
-                            }
-                        )
-                    } else {
-                        Text(
-                            readingList?.title
-                                ?: "Reading list"
-                        )
+                    when {
+                        isSelectionMode -> {
+                            Text(
+                                "${selectedReadingListItemIds.size} selected"
+                            )
+                        }
+
+                        isSearchActive -> {
+                            OutlinedTextField(
+                                value = searchQuery,
+                                onValueChange = { newQuery ->
+                                    searchQuery = newQuery
+                                },
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .focusRequester(
+                                        searchFocusRequester
+                                    ),
+                                singleLine = true,
+                                placeholder = {
+                                    Text("Search reading list")
+                                },
+                                leadingIcon = {
+                                    Icon(
+                                        imageVector = Icons.Default.Search,
+                                        contentDescription = null
+                                    )
+                                }
+                            )
+                        }
+
+                        else -> {
+                            Text(
+                                readingList?.title
+                                    ?: "Reading list"
+                            )
+                        }
                     }
                 },
                 navigationIcon = {
                     IconButton(
                         onClick = {
-                            if (isSearchActive) {
-                                searchQuery = ""
-                                isSearchActive = false
-                                keyboardController?.hide()
-                            } else {
-                                onBackClick()
+                            when {
+                                isSelectionMode -> {
+                                    viewModel.clearIssueSelection()
+                                }
+
+                                isSearchActive -> {
+                                    searchQuery = ""
+                                    isSearchActive = false
+                                    keyboardController?.hide()
+                                }
+
+                                else -> {
+                                    onBackClick()
+                                }
                             }
                         }
                     ) {
                         Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back"
+                            imageVector =
+                                if (isSelectionMode) {
+                                    Icons.Default.Close
+                                } else {
+                                    Icons.AutoMirrored.Filled.ArrowBack
+                                },
+                            contentDescription =
+                                if (isSelectionMode) {
+                                    "Cancel selection"
+                                } else {
+                                    "Back"
+                                }
                         )
                     }
                 },
                 actions = {
-                    if (isSearchActive) {
+                    if (isSelectionMode) {
+                        TextButton(
+                            onClick = {
+                                viewModel.markSelectedIssuesAsRead()
+                            }
+                        ) {
+                            Text("Mark read")
+                        }
+
+                        TextButton(
+                            onClick = {
+                                viewModel.markSelectedIssuesAsUnread()
+                            }
+                        ) {
+                            Text("Mark unread")
+                        }
+                    } else if (isSearchActive) {
                         IconButton(
                             onClick = {
                                 searchQuery = ""
@@ -824,6 +874,11 @@ fun ReadingListDetailScreen(
 
                             ReadingListIssueRow(
                                 issue = issue,
+                                isSelectionMode = isSelectionMode,
+                                isSelected = issue.readingListItemId in selectedReadingListItemIds,
+                                onSelectionToggle = {
+                                    viewModel.toggleIssueSelection(issue)
+                                },
                                 onIssueClick = {
                                     onIssueClick(issue.issueId)
                                 },
@@ -1448,6 +1503,9 @@ private fun ReadingListSectionHeader(
 @Composable
 private fun ReadingListIssueRow(
     issue: ReadingListIssue,
+    isSelectionMode: Boolean,
+    isSelected: Boolean,
+    onSelectionToggle: () -> Unit,
     onIssueClick: () -> Unit,
     onToggleRead: () -> Unit,
     onMarkAsReading: () -> Unit,
@@ -1473,17 +1531,34 @@ private fun ReadingListIssueRow(
     ) {
         Checkbox(
             checked =
-                issue.readingStatus == ReadingStatus.READ,
+                if (isSelectionMode) {
+                    isSelected
+                } else {
+                    issue.readingStatus == ReadingStatus.READ
+                },
             onCheckedChange = {
-                onToggleRead()
+                if (isSelectionMode) {
+                    onSelectionToggle()
+                } else {
+                    onToggleRead()
+                }
             }
         )
 
         Row(
             modifier = Modifier
                 .weight(1f)
-                .clickable(
-                    onClick = onIssueClick
+                .combinedClickable(
+                    onClick = {
+                        if (isSelectionMode) {
+                            onSelectionToggle()
+                        } else {
+                            onIssueClick()
+                        }
+                    },
+                    onLongClick = {
+                        onSelectionToggle()
+                    }
                 )
                 .padding(
                     vertical = 8.dp
@@ -1561,92 +1636,94 @@ private fun ReadingListIssueRow(
             }
         }
 
-        Column {
-            IconButton(
-                onClick = {
-                    menuExpanded = true
-                }
-            ) {
-                Icon(
-                    imageVector = Icons.Default.MoreVert,
-                    contentDescription = "More options"
-                )
-            }
-
-            DropdownMenu(
-                expanded = menuExpanded,
-                onDismissRequest = {
-                    menuExpanded = false
-                }
-            ) {
-                DropdownMenuItem(
-                    text = {
-                        Text("Mark as reading")
-                    },
+        if (!isSelectionMode) {
+            Column {
+                IconButton(
                     onClick = {
-                        menuExpanded = false
-                        onMarkAsReading()
+                        menuExpanded = true
                     }
-                )
-
-                if (issue.position > 1) {
-                    DropdownMenuItem(
-                        text = {
-                            Text("Mark all before as read")
-                        },
-                        onClick = {
-                            menuExpanded = false
-                            onMarkAllBeforeRead()
-                        }
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.MoreVert,
+                        contentDescription = "More options"
                     )
                 }
 
-                if (canReorder) {
+                DropdownMenu(
+                    expanded = menuExpanded,
+                    onDismissRequest = {
+                        menuExpanded = false
+                    }
+                ) {
                     DropdownMenuItem(
                         text = {
-                            Text("Move up")
+                            Text("Mark as reading")
                         },
-                        enabled = canMoveUp,
                         onClick = {
                             menuExpanded = false
-                            onMoveUp()
+                            onMarkAsReading()
                         }
                     )
 
-                    DropdownMenuItem(
-                        text = {
-                            Text("Move down")
-                        },
-                        enabled = canMoveDown,
-                        onClick = {
-                            menuExpanded = false
-                            onMoveDown()
-                        }
-                    )
-                }
+                    if (issue.position > 1) {
+                        DropdownMenuItem(
+                            text = {
+                                Text("Mark all before as read")
+                            },
+                            onClick = {
+                                menuExpanded = false
+                                onMarkAllBeforeRead()
+                            }
+                        )
+                    }
 
-                if (canChangeSection) {
-                    DropdownMenuItem(
-                        text = {
-                            Text("Move to section")
-                        },
-                        onClick = {
-                            menuExpanded = false
-                            onMoveToSectionRequest()
-                        }
-                    )
-                }
+                    if (canReorder) {
+                        DropdownMenuItem(
+                            text = {
+                                Text("Move up")
+                            },
+                            enabled = canMoveUp,
+                            onClick = {
+                                menuExpanded = false
+                                onMoveUp()
+                            }
+                        )
 
-                if (canRemove) {
-                    DropdownMenuItem(
-                        text = {
-                            Text("Remove from reading list")
-                        },
-                        onClick = {
-                            menuExpanded = false
-                            onRemoveRequest()
-                        }
-                    )
+                        DropdownMenuItem(
+                            text = {
+                                Text("Move down")
+                            },
+                            enabled = canMoveDown,
+                            onClick = {
+                                menuExpanded = false
+                                onMoveDown()
+                            }
+                        )
+                    }
+
+                    if (canChangeSection) {
+                        DropdownMenuItem(
+                            text = {
+                                Text("Move to section")
+                            },
+                            onClick = {
+                                menuExpanded = false
+                                onMoveToSectionRequest()
+                            }
+                        )
+                    }
+
+                    if (canRemove) {
+                        DropdownMenuItem(
+                            text = {
+                                Text("Remove from reading list")
+                            },
+                            onClick = {
+                                menuExpanded = false
+                                onRemoveRequest()
+                            }
+                        )
+                    }
                 }
             }
         }

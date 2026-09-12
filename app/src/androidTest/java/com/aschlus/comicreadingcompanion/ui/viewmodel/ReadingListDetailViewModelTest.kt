@@ -1954,4 +1954,485 @@ class ReadingListDetailViewModelTest {
                     .value
             )
         }
+
+    @Test
+    fun issueSelection_toggleAndClearUpdatesSelectedItems() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name =
+                            "Selection Test Publisher"
+                    )
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId =
+                            publisherId,
+                        title =
+                            "Selection Test Series",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2000
+                    )
+                )
+
+            val firstIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId =
+                            seriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title =
+                            "First Selection Issue",
+                        publicationDate =
+                            "2000-01",
+                        coverUrl = null,
+                        description = null,
+                        issueType =
+                            IssueType.REGULAR
+                    )
+                )
+
+            val secondIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId =
+                            seriesId,
+                        universeId = null,
+                        issueNumber = "2",
+                        title =
+                            "Second Selection Issue",
+                        publicationDate =
+                            "2000-02",
+                        coverUrl = null,
+                        description = null,
+                        issueType =
+                            IssueType.REGULAR
+                    )
+                )
+
+            val readingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title =
+                            "Selection Test List",
+                        description = null,
+                        publisherId =
+                            publisherId,
+                        universeId = null,
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            comicDao.insertReadingListItem(
+                ReadingListItem(
+                    readingListId =
+                        readingListId,
+                    sectionId = null,
+                    issueId =
+                        firstIssueId,
+                    position = 1,
+                    required = true,
+                    notes = null
+                )
+            )
+
+            comicDao.insertReadingListItem(
+                ReadingListItem(
+                    readingListId =
+                        readingListId,
+                    sectionId = null,
+                    issueId =
+                        secondIssueId,
+                    position = 2,
+                    required = true,
+                    notes = null
+                )
+            )
+
+            viewModel.loadReadingList(
+                readingListId
+            )
+
+            val loadedIssues =
+                withTimeout(
+                    5000L.milliseconds
+                ) {
+                    viewModel.issues.first {
+                        it.size == 2
+                    }
+                }
+
+            val firstIssue =
+                loadedIssues[0]
+
+            val secondIssue =
+                loadedIssues[1]
+
+            assertEquals(
+                emptySet<Long>(),
+                viewModel
+                    .selectedReadingListItemIds
+                    .value
+            )
+
+            viewModel.toggleIssueSelection(
+                firstIssue
+            )
+
+            assertEquals(
+                setOf(
+                    firstIssue
+                        .readingListItemId
+                ),
+                viewModel
+                    .selectedReadingListItemIds
+                    .value
+            )
+
+            viewModel.toggleIssueSelection(
+                secondIssue
+            )
+
+            assertEquals(
+                setOf(
+                    firstIssue
+                        .readingListItemId,
+                    secondIssue
+                        .readingListItemId
+                ),
+                viewModel
+                    .selectedReadingListItemIds
+                    .value
+            )
+
+            viewModel.toggleIssueSelection(
+                firstIssue
+            )
+
+            assertEquals(
+                setOf(
+                    secondIssue
+                        .readingListItemId
+                ),
+                viewModel
+                    .selectedReadingListItemIds
+                    .value
+            )
+
+            viewModel.clearIssueSelection()
+
+            assertEquals(
+                emptySet<Long>(),
+                viewModel
+                    .selectedReadingListItemIds
+                    .value
+            )
+        }
+
+    @Test
+    fun markSelectedIssuesAsRead_marksOnlySelectedIssuesAndClearsSelection() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name =
+                            "Selected Read Publisher"
+                    )
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId =
+                            publisherId,
+                        title =
+                            "Selected Read Series",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2000
+                    )
+                )
+
+            val issueIds =
+                (1..3).map { number ->
+                    comicDao.insertIssue(
+                        Issue(
+                            seriesId =
+                                seriesId,
+                            universeId = null,
+                            issueNumber =
+                                number.toString(),
+                            title =
+                                "Selected Read Issue $number",
+                            publicationDate =
+                                "2000-0$number",
+                            coverUrl = null,
+                            description = null,
+                            issueType =
+                                IssueType.REGULAR
+                        )
+                    )
+                }
+
+            val readingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title =
+                            "Selected Read List",
+                        description = null,
+                        publisherId =
+                            publisherId,
+                        universeId = null,
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            issueIds.forEachIndexed {
+                    index,
+                    issueId ->
+                comicDao.insertReadingListItem(
+                    ReadingListItem(
+                        readingListId =
+                            readingListId,
+                        sectionId = null,
+                        issueId =
+                            issueId,
+                        position =
+                            index + 1,
+                        required = true,
+                        notes = null
+                    )
+                )
+            }
+
+            viewModel.loadReadingList(
+                readingListId
+            )
+
+            val loadedIssues =
+                withTimeout(
+                    5000L.milliseconds
+                ) {
+                    viewModel.issues.first {
+                        it.size == 3
+                    }
+                }
+
+            viewModel.toggleIssueSelection(
+                loadedIssues[0]
+            )
+
+            viewModel.toggleIssueSelection(
+                loadedIssues[2]
+            )
+
+            viewModel.markSelectedIssuesAsRead()
+
+            withTimeout(
+                5000L.milliseconds
+            ) {
+                viewModel.issues.first {
+                    it[0].readingStatus ==
+                            ReadingStatus.READ &&
+                            it[2].readingStatus ==
+                            ReadingStatus.READ
+                }
+            }
+
+            val firstProgress =
+                repository
+                    .getReadingProgressForIssue(
+                        issueIds[0]
+                    )
+
+            val secondProgress =
+                repository
+                    .getReadingProgressForIssue(
+                        issueIds[1]
+                    )
+
+            val thirdProgress =
+                repository
+                    .getReadingProgressForIssue(
+                        issueIds[2]
+                    )
+
+            assertEquals(
+                ReadingStatus.READ,
+                firstProgress?.status
+            )
+            assertNull(
+                secondProgress
+            )
+            assertEquals(
+                ReadingStatus.READ,
+                thirdProgress?.status
+            )
+            assertEquals(
+                emptySet<Long>(),
+                viewModel
+                    .selectedReadingListItemIds
+                    .value
+            )
+        }
+
+    @Test
+    fun markSelectedIssuesAsUnread_marksOnlySelectedIssuesAndClearsSelection() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name =
+                            "Selected Unread Publisher"
+                    )
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId =
+                            publisherId,
+                        title =
+                            "Selected Unread Series",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2000
+                    )
+                )
+
+            val issueIds =
+                (1..3).map { number ->
+                    comicDao.insertIssue(
+                        Issue(
+                            seriesId =
+                                seriesId,
+                            universeId = null,
+                            issueNumber =
+                                number.toString(),
+                            title =
+                                "Selected Unread Issue $number",
+                            publicationDate =
+                                "2000-0$number",
+                            coverUrl = null,
+                            description = null,
+                            issueType =
+                                IssueType.REGULAR
+                        )
+                    )
+                }
+
+            val readingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title =
+                            "Selected Unread List",
+                        description = null,
+                        publisherId =
+                            publisherId,
+                        universeId = null,
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            issueIds.forEachIndexed {
+                    index,
+                    issueId ->
+                comicDao.insertReadingListItem(
+                    ReadingListItem(
+                        readingListId =
+                            readingListId,
+                        sectionId = null,
+                        issueId =
+                            issueId,
+                        position =
+                            index + 1,
+                        required = true,
+                        notes = null
+                    )
+                )
+            }
+
+            repository.markIssuesAsRead(
+                issueIds
+            )
+
+            viewModel.loadReadingList(
+                readingListId
+            )
+
+            val loadedIssues =
+                withTimeout(
+                    5000L.milliseconds
+                ) {
+                    viewModel.issues.first {
+                        it.size == 3 &&
+                                it.all { issue ->
+                                    issue.readingStatus ==
+                                            ReadingStatus.READ
+                                }
+                    }
+                }
+
+            viewModel.toggleIssueSelection(
+                loadedIssues[0]
+            )
+
+            viewModel.toggleIssueSelection(
+                loadedIssues[2]
+            )
+
+            viewModel.markSelectedIssuesAsUnread()
+
+            withTimeout(
+                5000L.milliseconds
+            ) {
+                viewModel.issues.first {
+                    it[0].readingStatus == null &&
+                            it[2].readingStatus == null
+                }
+            }
+
+            val firstProgress =
+                repository
+                    .getReadingProgressForIssue(
+                        issueIds[0]
+                    )
+
+            val secondProgress =
+                repository
+                    .getReadingProgressForIssue(
+                        issueIds[1]
+                    )
+
+            val thirdProgress =
+                repository
+                    .getReadingProgressForIssue(
+                        issueIds[2]
+                    )
+
+            assertNull(
+                firstProgress
+            )
+            assertEquals(
+                ReadingStatus.READ,
+                secondProgress?.status
+            )
+            assertNull(
+                thirdProgress
+            )
+            assertEquals(
+                emptySet<Long>(),
+                viewModel
+                    .selectedReadingListItemIds
+                    .value
+            )
+        }
 }
