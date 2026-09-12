@@ -164,8 +164,8 @@ building, following, and tracking comic-book reading orders.
 - [x] Sort reading lists
 - [x] Search reading lists
 - [ ] Reading-list cover / hero artwork
-- [ ] Recently opened reading lists
-- [ ] Dedicated Continue Reading section
+- [x] Recently opened reading lists
+- [x] Dedicated Continue Reading section
 
 ### Reading-List Detail UI
 

@@ -17,6 +17,9 @@ import org.junit.Assert.assertNull
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import androidx.compose.ui.test.hasScrollAction
+import androidx.compose.ui.test.hasText
+import androidx.compose.ui.test.performScrollToNode
 
 @RunWith(AndroidJUnit4::class)
 class AppNavigationTest {
@@ -167,7 +170,11 @@ class AppNavigationTest {
             }
             composeRule.onAllNodesWithText(expectedContinueText)[0].assertIsDisplayed()
 
-            composeRule.onNodeWithText("Spider-Man Volume 2").performClick()
+            composeRule
+                .onAllNodesWithText(
+                    "Spider-Man Volume 2"
+                )[0]
+                .performClick()
 
             composeRule.waitUntil(timeoutMillis = 10000L) {
                 composeRule.onAllNodesWithContentDescription(expectedCoverDescription)
@@ -378,16 +385,17 @@ class AppNavigationTest {
                 )
         }
 
-        composeRule.waitUntil(
-            timeoutMillis = 5000L
-        ) {
-            composeRule
-                .onAllNodesWithText(
+        composeRule.waitForIdle()
+
+        composeRule
+            .onNode(
+                hasScrollAction()
+            )
+            .performScrollToNode(
+                hasText(
                     readingListTitle
                 )
-                .fetchSemanticsNodes()
-                .isNotEmpty()
-        }
+            )
 
         composeRule
             .onNodeWithText(
@@ -462,6 +470,95 @@ class AppNavigationTest {
                     readingListId
                 )
             )
+        }
+    }
+
+    @Test
+    fun appNavigation_openingReadingListRecordsRecentlyOpened() {
+        val application =
+            composeRule.activity.application
+                    as ComicReadingCompanionApplication
+
+        val repository =
+            application.container.comicRepository
+
+        val homeUiPreferences =
+            application.container.homeUiPreferences
+
+        var readingListId = -1L
+
+        runBlocking {
+            homeUiPreferences
+                .clearRecentlyOpenedReadingLists()
+
+            readingListId =
+                repository
+                    .getReadingLists()
+                    .first { readingLists ->
+                        readingLists.any {
+                            it.title ==
+                                    "Spider-Man Volume 2"
+                        }
+                    }
+                    .first {
+                        it.title ==
+                                "Spider-Man Volume 2"
+                    }
+                    .id
+        }
+
+        try {
+            composeRule.waitForIdle()
+
+            composeRule
+                .onNode(
+                    hasScrollAction()
+                )
+                .performScrollToNode(
+                    hasText(
+                        "Spider-Man Volume 2"
+                    )
+                )
+
+            composeRule
+                .onNodeWithText(
+                    "Spider-Man Volume 2"
+                )
+                .performClick()
+
+            composeRule.waitUntil(
+                timeoutMillis = 10000L
+            ) {
+                composeRule
+                    .onAllNodesWithContentDescription(
+                        "Back"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            runBlocking {
+                val recentIds =
+                    kotlinx.coroutines
+                        .withTimeout(5000L) {
+                            homeUiPreferences
+                                .recentlyOpenedReadingListIds
+                                .first { ids ->
+                                    ids.firstOrNull() ==
+                                            readingListId
+                                }
+                        }
+
+                org.junit.Assert.assertEquals(
+                    readingListId,
+                    recentIds.first()
+                )
+            }
+        } finally {
+            runBlocking {
+                homeUiPreferences
+                    .clearRecentlyOpenedReadingLists()
+            }
         }
     }
 }

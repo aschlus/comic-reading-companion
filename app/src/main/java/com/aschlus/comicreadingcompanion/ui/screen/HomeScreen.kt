@@ -38,13 +38,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListContinueItem
 import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeReadingListSort
 import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ImportReadingListState
-import androidx.compose.ui.platform.LocalFocusManager
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -66,6 +66,10 @@ fun HomeScreen(
     val readingLists by viewModel.readingLists.collectAsState()
 
     val visibleReadingLists by viewModel.visibleReadingLists.collectAsState()
+
+    val recentlyOpenedReadingLists by viewModel.recentlyOpenedReadingLists.collectAsState()
+
+    val continueReadingLists by viewModel.continueReadingLists.collectAsState()
 
     val searchQuery by viewModel.searchQuery.collectAsState()
 
@@ -114,184 +118,342 @@ fun HomeScreen(
         }
     ) { innerPadding: PaddingValues ->
 
-        Column(
+        LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
                 .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement =
+                Arrangement.spacedBy(12.dp)
         ) {
-            OutlinedButton(
-                onClick = onBrowseClick,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("Browse Comics")
-            }
-            OutlinedButton(
-                onClick = onCreateReadingListClick,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("Create Reading List")
-            }
-            OutlinedButton(
-                onClick = onImportReadingListClick,
-                enabled = importState !is ImportReadingListState.Importing,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(
-                    if (importState is ImportReadingListState.Importing) {
-                        "Importing Reading List…"
-                    } else {
-                        "Import Reading List"
-                    }
-                )
-            }
-
-            Text("My Reading Lists")
-
-            if (readingLists.isNotEmpty()) {
-                Row(
+            item {
+                OutlinedButton(
+                    onClick = onBrowseClick,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    OutlinedTextField(
-                        value = searchQuery,
-                        onValueChange = {
-                            viewModel.updateSearchQuery(it)
-                        },
-                        modifier = Modifier.weight(1f),
-                        label = {
-                            Text("Search reading lists")
-                        },
-                        singleLine = true,
-                        trailingIcon =
-                            if (searchQuery.isNotEmpty()) {
-                                {
-                                    IconButton(
-                                        onClick = {
-                                            viewModel.clearSearchQuery()
-                                        }
-                                    ) {
-                                        Icon(
-                                            imageVector = Icons.Default.Close,
-                                            contentDescription = "Clear reading list search"
-                                        )
-                                    }
-                                }
-                            } else {
-                                null
-                            }
-                    )
+                    Text("Browse Comics")
+                }
+            }
 
-                    Spacer(modifier = Modifier.width(8.dp))
+            item {
+                OutlinedButton(
+                    onClick = onCreateReadingListClick,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("Create Reading List")
+                }
+            }
 
-                    Column {
-                        TextButton(
-                            onClick = {
-                                focusManager.clearFocus()
-                                sortMenuExpanded = true
-                            }
+            item {
+                OutlinedButton(
+                    onClick = onImportReadingListClick,
+                    enabled =
+                        importState !is
+                                ImportReadingListState.Importing,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(
+                        if (
+                            importState is
+                                    ImportReadingListState.Importing
                         ) {
-                            Text(
-                                text =
-                                    when (sort) {
-                                        HomeReadingListSort.RECENTLY_UPDATED ->
-                                            "Recently updated"
+                            "Importing Reading List…"
+                        } else {
+                            "Import Reading List"
+                        }
+                    )
+                }
+            }
 
-                                        HomeReadingListSort.TITLE_ASCENDING ->
-                                            "Title A-Z"
+            if (continueReadingLists.isNotEmpty()) {
+                item {
+                    Text(
+                        text = "Continue Reading",
+                        style =
+                            MaterialTheme
+                                .typography
+                                .titleMedium
+                    )
+                }
 
-                                        HomeReadingListSort.TITLE_DESCENDING ->
-                                            "Title Z-A"
-                                    }
+                items(
+                    items =
+                        continueReadingLists.take(3),
+                    key = {
+                        "continue-${it.id}"
+                    }
+                ) { readingList ->
+                    val summary =
+                        readingListSummaries
+                            .firstOrNull {
+                                it.readingListId ==
+                                        readingList.id
+                            }
+
+                    val continueItem =
+                        continueItems[
+                            readingList.id
+                        ]
+
+                    ReadingListCard(
+                        readingList = readingList,
+                        readCount =
+                            summary?.readCount ?: 0,
+                        totalCount =
+                            summary?.totalCount ?: 0,
+                        continueItem =
+                            continueItem,
+                        onClick = {
+                            onReadingListClick(
+                                readingList.id,
+                                continueItem
+                                    ?.position
+                                    ?: -1
                             )
                         }
+                    )
+                }
+            }
 
-                        DropdownMenu(
-                            expanded = sortMenuExpanded,
-                            onDismissRequest = {
-                                sortMenuExpanded = false
+            if (recentlyOpenedReadingLists.isNotEmpty()) {
+                item {
+                    Text(
+                        text = "Recently Opened",
+                        style =
+                            MaterialTheme
+                                .typography
+                                .titleMedium
+                    )
+                }
+
+                items(
+                    items =
+                        recentlyOpenedReadingLists
+                            .take(3),
+                    key = {
+                        "recent-${it.id}"
+                    }
+                ) { readingList ->
+                    val continueItem =
+                        continueItems[
+                            readingList.id
+                        ]
+
+                    OutlinedButton(
+                        onClick = {
+                            onReadingListClick(
+                                readingList.id,
+                                continueItem
+                                    ?.position
+                                    ?: -1
+                            )
+                        },
+                        modifier =
+                            Modifier.fillMaxWidth()
+                    ) {
+                        Text(
+                            text =
+                                readingList.title
+                        )
+                    }
+                }
+            }
+
+            item {
+                Text("My Reading Lists")
+            }
+
+            if (readingLists.isNotEmpty()) {
+                item {
+                    Row(
+                        modifier =
+                            Modifier.fillMaxWidth()
+                    ) {
+                        OutlinedTextField(
+                            value = searchQuery,
+                            onValueChange = {
+                                viewModel
+                                    .updateSearchQuery(
+                                        it
+                                    )
+                            },
+                            modifier =
+                                Modifier.weight(1f),
+                            label = {
+                                Text(
+                                    "Search reading lists"
+                                )
+                            },
+                            singleLine = true,
+                            trailingIcon =
+                                if (
+                                    searchQuery
+                                        .isNotEmpty()
+                                ) {
+                                    {
+                                        IconButton(
+                                            onClick = {
+                                                viewModel
+                                                    .clearSearchQuery()
+                                            }
+                                        ) {
+                                            Icon(
+                                                imageVector =
+                                                    Icons.Default.Close,
+                                                contentDescription =
+                                                    "Clear reading list search"
+                                            )
+                                        }
+                                    }
+                                } else {
+                                    null
+                                }
+                        )
+
+                        Spacer(
+                            modifier =
+                                Modifier.width(8.dp)
+                        )
+
+                        Column {
+                            TextButton(
+                                onClick = {
+                                    focusManager
+                                        .clearFocus()
+
+                                    sortMenuExpanded =
+                                        true
+                                }
+                            ) {
+                                Text(
+                                    text =
+                                        when (sort) {
+                                            HomeReadingListSort.RECENTLY_UPDATED ->
+                                                "Recently updated"
+
+                                            HomeReadingListSort.TITLE_ASCENDING ->
+                                                "Title A-Z"
+
+                                            HomeReadingListSort.TITLE_DESCENDING ->
+                                                "Title Z-A"
+                                        }
+                                )
                             }
-                        ) {
-                            DropdownMenuItem(
-                                text = {
-                                    Text("Recently updated")
-                                },
-                                onClick = {
-                                    viewModel.updateSort(
-                                        HomeReadingListSort.RECENTLY_UPDATED
-                                    )
-                                    sortMenuExpanded = false
-                                }
-                            )
 
-                            DropdownMenuItem(
-                                text = {
-                                    Text("Title A-Z")
-                                },
-                                onClick = {
-                                    viewModel.updateSort(
-                                        HomeReadingListSort.TITLE_ASCENDING
-                                    )
-                                    sortMenuExpanded = false
+                            DropdownMenu(
+                                expanded =
+                                    sortMenuExpanded,
+                                onDismissRequest = {
+                                    sortMenuExpanded =
+                                        false
                                 }
-                            )
+                            ) {
+                                DropdownMenuItem(
+                                    text = {
+                                        Text(
+                                            "Recently updated"
+                                        )
+                                    },
+                                    onClick = {
+                                        viewModel
+                                            .updateSort(
+                                                HomeReadingListSort
+                                                    .RECENTLY_UPDATED
+                                            )
 
-                            DropdownMenuItem(
-                                text = {
-                                    Text("Title Z-A")
-                                },
-                                onClick = {
-                                    viewModel.updateSort(
-                                        HomeReadingListSort.TITLE_DESCENDING
-                                    )
-                                    sortMenuExpanded = false
-                                }
-                            )
+                                        sortMenuExpanded =
+                                            false
+                                    }
+                                )
+
+                                DropdownMenuItem(
+                                    text = {
+                                        Text(
+                                            "Title A-Z"
+                                        )
+                                    },
+                                    onClick = {
+                                        viewModel
+                                            .updateSort(
+                                                HomeReadingListSort
+                                                    .TITLE_ASCENDING
+                                            )
+
+                                        sortMenuExpanded =
+                                            false
+                                    }
+                                )
+
+                                DropdownMenuItem(
+                                    text = {
+                                        Text(
+                                            "Title Z-A"
+                                        )
+                                    },
+                                    onClick = {
+                                        viewModel
+                                            .updateSort(
+                                                HomeReadingListSort
+                                                    .TITLE_DESCENDING
+                                            )
+
+                                        sortMenuExpanded =
+                                            false
+                                    }
+                                )
+                            }
                         }
                     }
                 }
             }
 
             if (readingLists.isEmpty()) {
-                Text("No reading lists yet")
+                item {
+                    Text("No reading lists yet")
+                }
             } else if (visibleReadingLists.isEmpty()) {
-                Text(
-                    "No reading lists match \"${searchQuery.trim()}\""
-                )
+                item {
+                    Text(
+                        "No reading lists match " +
+                                "\"${searchQuery.trim()}\""
+                    )
+                }
             } else {
-                LazyColumn(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    items(
-                        items = visibleReadingLists,
-                        key = { readingList ->
-                            readingList.id
-                        }
-                    ) { readingList ->
-
-                        val summary = readingListSummaries.firstOrNull {
-                            it.readingListId == readingList.id
-                        }
-
-                        val continueItem =
-                            continueItems[readingList.id]
-
-                        ReadingListCard(
-                            readingList = readingList,
-                            readCount = summary?.readCount ?: 0,
-                            totalCount = summary?.totalCount ?: 0,
-                            continueItem = continueItem,
-                            onClick = {
-                                onReadingListClick(
-                                    readingList.id,
-                                    continueItem?.position ?: -1
-                                )
-                            }
-                        )
+                items(
+                    items = visibleReadingLists,
+                    key = {
+                        "library-${it.id}"
                     }
+                ) { readingList ->
+                    val summary =
+                        readingListSummaries
+                            .firstOrNull {
+                                it.readingListId ==
+                                        readingList.id
+                            }
+
+                    val continueItem =
+                        continueItems[
+                            readingList.id
+                        ]
+
+                    ReadingListCard(
+                        readingList = readingList,
+                        readCount =
+                            summary?.readCount ?: 0,
+                        totalCount =
+                            summary?.totalCount ?: 0,
+                        continueItem =
+                            continueItem,
+                        onClick = {
+                            onReadingListClick(
+                                readingList.id,
+                                continueItem
+                                    ?.position
+                                    ?: -1
+                            )
+                        }
+                    )
                 }
             }
         }

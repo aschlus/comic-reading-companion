@@ -5,14 +5,16 @@ import androidx.lifecycle.viewModelScope
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListContinueItem
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListSummary
+import com.aschlus.comicreadingcompanion.data.preferences.HomeUiPreferences
 import com.aschlus.comicreadingcompanion.data.repository.ComicRepository
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
 enum class HomeReadingListSort {
     RECENTLY_UPDATED,
@@ -21,7 +23,8 @@ enum class HomeReadingListSort {
 }
 
 class HomeViewModel(
-    repository: ComicRepository
+    repository: ComicRepository,
+    private val homeUiPreferences: HomeUiPreferences
 ) : ViewModel() {
 
     val readingLists: StateFlow<List<ReadingList>> =
@@ -32,6 +35,36 @@ class HomeViewModel(
                 started = SharingStarted.WhileSubscribed(5_000),
                 initialValue = emptyList()
             )
+
+    val recentlyOpenedReadingLists: StateFlow<List<ReadingList>> =
+        combine(
+            readingLists,
+            homeUiPreferences.recentlyOpenedReadingListIds
+        ) { readingLists, recentIds ->
+
+            val readingListsById =
+                readingLists.associateBy { it.id }
+
+            recentIds.mapNotNull { readingListId ->
+                readingListsById[readingListId]
+            }
+        }
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5_000),
+                initialValue = emptyList()
+            )
+
+    fun recordReadingListOpened(
+        readingListId: Long
+    ) {
+        viewModelScope.launch {
+            homeUiPreferences
+                .recordReadingListOpened(
+                    readingListId
+                )
+        }
+    }
 
     private val _searchQuery = MutableStateFlow("")
 
@@ -134,5 +167,53 @@ class HomeViewModel(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5_000),
                 initialValue = emptyMap()
+            )
+
+    val continueReadingLists: StateFlow<List<ReadingList>> =
+        combine(
+            readingLists,
+            readingListSummaries,
+            continueItems,
+            recentlyOpenedReadingLists
+        ) {
+            readingLists,
+            summaries,
+            continueItems,
+            recentlyOpened ->
+
+            val summariesById =
+                summaries.associateBy { it.readingListId}
+
+            val recentOrder =
+                recentlyOpened
+                    .mapIndexed { index, readingList ->
+                        readingList.id to index
+                    }
+                    .toMap()
+
+            readingLists
+                .filter { readingList ->
+                    val summary =
+                        summariesById[readingList.id]
+
+                    summary != null &&
+                        summary.readCount > 0 &&
+                        summary.readCount < summary.totalCount &&
+                        continueItems.containsKey(readingList.id)
+                }
+                .sortedWith(
+                    compareBy<ReadingList> {
+                        recentOrder[it.id]
+                            ?: Int.MAX_VALUE
+                    }
+                        .thenByDescending {
+                            it.updatedAt
+                        }
+                )
+        }
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5_000),
+                initialValue = emptyList()
             )
 }

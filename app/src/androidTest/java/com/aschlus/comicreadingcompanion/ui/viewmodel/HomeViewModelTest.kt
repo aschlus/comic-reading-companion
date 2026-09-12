@@ -25,6 +25,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import kotlin.time.Duration.Companion.milliseconds
+import com.aschlus.comicreadingcompanion.data.preferences.HomeUiPreferences
 
 @RunWith(AndroidJUnit4::class)
 class HomeViewModelTest {
@@ -33,10 +34,17 @@ class HomeViewModelTest {
     private lateinit var comicDao: ComicDao
     private lateinit var repository: ComicRepository
     private lateinit var viewModel: HomeViewModel
+    private lateinit var homeUiPreferences: HomeUiPreferences
 
     @Before
     fun setUp() {
         val context = ApplicationProvider.getApplicationContext<Context>()
+
+        homeUiPreferences = HomeUiPreferences(context)
+
+        runBlocking {
+            homeUiPreferences.clearRecentlyOpenedReadingLists()
+        }
 
         database =
             Room.inMemoryDatabaseBuilder(
@@ -54,7 +62,10 @@ class HomeViewModelTest {
                 database = database
             )
 
-        viewModel = HomeViewModel(repository = repository)
+        viewModel = HomeViewModel(
+            repository = repository,
+            homeUiPreferences = homeUiPreferences
+        )
     }
 
     @After
@@ -696,6 +707,231 @@ class HomeViewModelTest {
                 HomeReadingListSort
                     .TITLE_DESCENDING,
                 viewModel.sort.value
+            )
+        }
+
+    @Test
+    fun recentlyOpenedReadingLists_preservesRecentOrderAndIgnoresMissingLists() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name = "Marvel"
+                    )
+                )
+
+            val firstListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title = "First Recent List",
+                        description = null,
+                        publisherId = publisherId,
+                        universeId = null,
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            val secondListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title = "Second Recent List",
+                        description = null,
+                        publisherId = publisherId,
+                        universeId = null,
+                        createdAt = 2000L,
+                        updatedAt = 2000L
+                    )
+                )
+
+            withTimeout(
+                5000L.milliseconds
+            ) {
+                viewModel.readingLists.first {
+                    it.size == 2
+                }
+            }
+
+            viewModel.recordReadingListOpened(
+                firstListId
+            )
+
+            viewModel.recordReadingListOpened(
+                999999L
+            )
+
+            viewModel.recordReadingListOpened(
+                secondListId
+            )
+
+            val recentLists =
+                withTimeout(
+                    5000L.milliseconds
+                ) {
+                    viewModel
+                        .recentlyOpenedReadingLists
+                        .first { lists ->
+                            lists.size == 2 &&
+                                    lists[0].id ==
+                                    secondListId &&
+                                    lists[1].id ==
+                                    firstListId
+                        }
+                }
+
+            assertEquals(
+                listOf(
+                    secondListId,
+                    firstListId
+                ),
+                recentLists.map {
+                    it.id
+                }
+            )
+        }
+
+    @Test
+    fun continueReadingLists_includesOnlyPartiallyReadLists() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name = "Marvel"
+                    )
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Test Series",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2000
+                    )
+                )
+
+            suspend fun insertIssue(
+                number: String
+            ): Long {
+                return comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = number,
+                        title = "Issue $number",
+                        publicationDate = null,
+                        coverUrl = null,
+                        description = null,
+                        issueType =
+                            IssueType.REGULAR
+                    )
+                )
+            }
+
+            suspend fun insertList(
+                title: String,
+                issueIds: List<Long>,
+                updatedAt: Long
+            ): Long {
+                val readingListId =
+                    comicDao.insertReadingList(
+                        ReadingList(
+                            title = title,
+                            description = null,
+                            publisherId =
+                                publisherId,
+                            universeId = null,
+                            createdAt = updatedAt,
+                            updatedAt = updatedAt
+                        )
+                    )
+
+                issueIds.forEachIndexed {
+                        index,
+                        issueId ->
+
+                    comicDao.insertReadingListItem(
+                        ReadingListItem(
+                            readingListId =
+                                readingListId,
+                            sectionId = null,
+                            issueId = issueId,
+                            position = index + 1,
+                            required = true,
+                            notes = null
+                        )
+                    )
+                }
+
+                return readingListId
+            }
+
+            val firstIssueId =
+                insertIssue("1")
+
+            val secondIssueId =
+                insertIssue("2")
+
+            val thirdIssueId =
+                insertIssue("3")
+
+            val fourthIssueId =
+                insertIssue("4")
+
+            val inProgressListId =
+                insertList(
+                    title = "In Progress",
+                    issueIds =
+                        listOf(
+                            firstIssueId,
+                            secondIssueId
+                        ),
+                    updatedAt = 3000L
+                )
+
+            insertList(
+                title = "Not Started",
+                issueIds =
+                    listOf(
+                        thirdIssueId
+                    ),
+                updatedAt = 2000L
+            )
+
+            insertList(
+                title = "Completed",
+                issueIds =
+                    listOf(
+                        fourthIssueId
+                    ),
+                updatedAt = 1000L
+            )
+
+            repository.markIssueAsRead(
+                firstIssueId
+            )
+
+            repository.markIssueAsRead(
+                fourthIssueId
+            )
+
+            val continueLists =
+                withTimeout(
+                    5000L.milliseconds
+                ) {
+                    viewModel
+                        .continueReadingLists
+                        .first { lists ->
+                            lists.size == 1
+                        }
+                }
+
+            assertEquals(
+                listOf(inProgressListId),
+                continueLists.map {
+                    it.id
+                }
             )
         }
 }

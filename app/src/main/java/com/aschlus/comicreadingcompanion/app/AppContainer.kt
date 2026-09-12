@@ -8,6 +8,7 @@ import com.aschlus.comicreadingcompanion.data.importer.ComicCatalogAssetParser
 import com.aschlus.comicreadingcompanion.data.importer.ComicCatalogImporter
 import com.aschlus.comicreadingcompanion.data.importer.ReadingListAssetParser
 import com.aschlus.comicreadingcompanion.data.importer.ReadingListImporter
+import com.aschlus.comicreadingcompanion.data.preferences.HomeUiPreferences
 import com.aschlus.comicreadingcompanion.data.preferences.ReadingListUiPreferences
 import com.aschlus.comicreadingcompanion.data.repository.ComicRepository
 
@@ -22,6 +23,9 @@ class AppContainer(context: Context) {
 
     val readingListUiPreferences =
         ReadingListUiPreferences(context)
+
+    val homeUiPreferences =
+        HomeUiPreferences(context)
 
     val databaseSeeder = DatabaseSeeder(
         comicDao = database.comicDao()
