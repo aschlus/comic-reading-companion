@@ -76,7 +76,8 @@ fun ReadingListDetailScreen(
     viewModel: ReadingListDetailViewModel,
     onIssueClick: (Long) -> Unit,
     onBackClick: () -> Unit,
-    onExportReadingListClick: (Long, String) -> Unit = { _, _ -> }
+    onExportReadingListClick: (Long, String) -> Unit = { _, _ -> },
+    onReadingListDuplicated: (Long) -> Unit = {}
 ) {
     val readingList by
         viewModel.readingList.collectAsState()
@@ -89,6 +90,9 @@ fun ReadingListDetailScreen(
 
     val readingListDeleted by
         viewModel.readingListDeleted.collectAsState()
+
+    val duplicatedReadingListId by
+        viewModel.duplicatedReadingListId.collectAsState()
 
     val collapsedSectionIds by
         viewModel.collapsedSectionIds.collectAsState()
@@ -224,6 +228,15 @@ fun ReadingListDetailScreen(
         if (readingListDeleted) {
             onBackClick()
         }
+    }
+
+    LaunchedEffect(duplicatedReadingListId) {
+        val duplicatedId = duplicatedReadingListId
+            ?: return@LaunchedEffect
+
+        viewModel.clearDuplicatedReadingList()
+
+        onReadingListDuplicated(duplicatedId)
     }
 
     LaunchedEffect(isSearchActive) {
@@ -519,6 +532,17 @@ fun ReadingListDetailScreen(
                                         }
                                     )
                                 }
+
+                                DropdownMenuItem(
+                                    text = {
+                                        Text("Duplicate reading list")
+                                    },
+                                    enabled = readingList != null,
+                                    onClick = {
+                                        listMenuExpanded = false
+                                        viewModel.duplicateReadingList()
+                                    }
+                                )
 
                                 DropdownMenuItem(
                                     text = {

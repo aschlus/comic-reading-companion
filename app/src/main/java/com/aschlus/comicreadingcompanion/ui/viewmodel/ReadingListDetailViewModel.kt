@@ -49,6 +49,12 @@ class ReadingListDetailViewModel(
     val readingListDeleted: StateFlow<Boolean> =
         _readingListDeleted.asStateFlow()
 
+    private val _duplicatedReadingListId =
+        MutableStateFlow<Long?>(null)
+
+    val duplicatedReadingListId: StateFlow<Long?> =
+        _duplicatedReadingListId.asStateFlow()
+
     private val _collapsedSectionIds =
         MutableStateFlow<Set<Long>>(emptySet())
 
@@ -162,6 +168,20 @@ class ReadingListDetailViewModel(
             issuesJob?.cancel()
             _readingListDeleted.value = true
         }
+    }
+
+    fun duplicateReadingList() {
+        val readingList = _readingList.value
+            ?: return
+
+        viewModelScope.launch {
+            _duplicatedReadingListId.value =
+                repository.duplicateReadingList(readingList.id)
+        }
+    }
+
+    fun clearDuplicatedReadingList() {
+        _duplicatedReadingListId.value = null
     }
 
     fun toggleIssueRead(

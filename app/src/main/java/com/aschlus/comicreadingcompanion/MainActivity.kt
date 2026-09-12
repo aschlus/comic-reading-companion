@@ -368,6 +368,11 @@ class MainActivity : ComponentActivity() {
                                 exportReadingListLauncher.launch(
                                     readingListExportFileName(title)
                                 )
+                            },
+                            onReadingListDuplicated = { duplicatedReadingListId ->
+                                navController.navigate(
+                                    "readingList/$duplicatedReadingListId?startPosition=-1"
+                                )
                             }
                         )
                     }

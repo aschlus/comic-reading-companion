@@ -2015,4 +2015,301 @@ class ComicRepositoryTest {
                 thrownException?.message
             )
         }
+
+    @Test
+    fun duplicateReadingList_copiesStructureAsUserOwnedList() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name = "Marvel"
+                    )
+                )
+
+            val universeId =
+                comicDao.insertUniverse(
+                    Universe(
+                        publisherId =
+                            publisherId,
+                        name =
+                            "Ultimate Universe",
+                        designation =
+                            "Earth-1610",
+                        description = null
+                    )
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId =
+                            publisherId,
+                        title =
+                            "Ultimate Test Series",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2001
+                    )
+                )
+
+            val firstIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId =
+                            seriesId,
+                        universeId =
+                            universeId,
+                        issueNumber = "1",
+                        title = "First Issue",
+                        publicationDate =
+                            "2000-01",
+                        coverUrl = null,
+                        description = null,
+                        issueType =
+                            IssueType.REGULAR
+                    )
+                )
+
+            val secondIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId =
+                            seriesId,
+                        universeId =
+                            universeId,
+                        issueNumber = "2",
+                        title = "Second Issue",
+                        publicationDate =
+                            "2000-02",
+                        coverUrl = null,
+                        description = null,
+                        issueType =
+                            IssueType.REGULAR
+                    )
+                )
+
+            val originalReadingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title =
+                            "Ultimate Test List",
+                        description =
+                            "Original description",
+                        publisherId =
+                            publisherId,
+                        universeId =
+                            universeId,
+                        source =
+                            ReadingListSource.BUNDLED,
+                        sourceKey =
+                            "ultimate-test-list",
+                        createdAt = 1000L,
+                        updatedAt = 2000L
+                    )
+                )
+
+            val firstSectionId =
+                comicDao.insertReadingListSection(
+                    ReadingListSection(
+                        readingListId =
+                            originalReadingListId,
+                        title =
+                            "First Arc",
+                        description =
+                            "First description",
+                        position = 1
+                    )
+                )
+
+            val secondSectionId =
+                comicDao.insertReadingListSection(
+                    ReadingListSection(
+                        readingListId =
+                            originalReadingListId,
+                        title =
+                            "Second Arc",
+                        description = null,
+                        position = 2
+                    )
+                )
+
+            comicDao.insertReadingListItem(
+                ReadingListItem(
+                    readingListId =
+                        originalReadingListId,
+                    sectionId =
+                        firstSectionId,
+                    issueId =
+                        firstIssueId,
+                    position = 1,
+                    required = true,
+                    notes =
+                        "First note"
+                )
+            )
+
+            comicDao.insertReadingListItem(
+                ReadingListItem(
+                    readingListId =
+                        originalReadingListId,
+                    sectionId =
+                        secondSectionId,
+                    issueId =
+                        secondIssueId,
+                    position = 2,
+                    required = false,
+                    notes =
+                        "Second note"
+                )
+            )
+
+            repository.markIssueAsRead(
+                firstIssueId
+            )
+
+            val duplicatedReadingListId =
+                repository.duplicateReadingList(
+                    originalReadingListId
+                )
+
+            val duplicatedList =
+                comicDao.getReadingListById(
+                    duplicatedReadingListId
+                )
+
+            assertNotNull(
+                duplicatedList
+            )
+            assertTrue(
+                duplicatedReadingListId !=
+                        originalReadingListId
+            )
+            assertEquals(
+                "Ultimate Test List Copy",
+                duplicatedList?.title
+            )
+            assertEquals(
+                "Original description",
+                duplicatedList?.description
+            )
+            assertEquals(
+                publisherId,
+                duplicatedList?.publisherId
+            )
+            assertEquals(
+                universeId,
+                duplicatedList?.universeId
+            )
+            assertEquals(
+                ReadingListSource.USER,
+                duplicatedList?.source
+            )
+            assertNull(
+                duplicatedList?.sourceKey
+            )
+
+            val duplicatedSections =
+                comicDao.getSectionsForReadingList(
+                    duplicatedReadingListId
+                )
+
+            assertEquals(
+                2,
+                duplicatedSections.size
+            )
+            assertEquals(
+                "First Arc",
+                duplicatedSections[0].title
+            )
+            assertEquals(
+                "First description",
+                duplicatedSections[0]
+                    .description
+            )
+            assertEquals(
+                1,
+                duplicatedSections[0]
+                    .position
+            )
+            assertEquals(
+                "Second Arc",
+                duplicatedSections[1].title
+            )
+            assertEquals(
+                2,
+                duplicatedSections[1]
+                    .position
+            )
+
+            assertTrue(
+                duplicatedSections[0].id !=
+                        firstSectionId
+            )
+            assertTrue(
+                duplicatedSections[1].id !=
+                        secondSectionId
+            )
+
+            val duplicatedItems =
+                comicDao.getItemsForReadingList(
+                    duplicatedReadingListId
+                )
+
+            assertEquals(
+                2,
+                duplicatedItems.size
+            )
+
+            assertEquals(
+                firstIssueId,
+                duplicatedItems[0].issueId
+            )
+            assertEquals(
+                duplicatedSections[0].id,
+                duplicatedItems[0].sectionId
+            )
+            assertEquals(
+                1,
+                duplicatedItems[0].position
+            )
+            assertTrue(
+                duplicatedItems[0].required
+            )
+            assertEquals(
+                "First note",
+                duplicatedItems[0].notes
+            )
+
+            assertEquals(
+                secondIssueId,
+                duplicatedItems[1].issueId
+            )
+            assertEquals(
+                duplicatedSections[1].id,
+                duplicatedItems[1].sectionId
+            )
+            assertEquals(
+                2,
+                duplicatedItems[1].position
+            )
+            assertEquals(
+                false,
+                duplicatedItems[1].required
+            )
+            assertEquals(
+                "Second note",
+                duplicatedItems[1].notes
+            )
+
+            val sharedProgress =
+                repository
+                    .getReadingProgressForIssue(
+                        firstIssueId
+                    )
+
+            assertEquals(
+                ReadingStatus.READ,
+                sharedProgress?.status
+            )
+        }
 }

@@ -27,6 +27,7 @@ import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -1861,6 +1862,96 @@ class ReadingListDetailViewModelTest {
             assertEquals(
                 false,
                 viewModel.readingListDeleted.value
+            )
+        }
+
+    @Test
+    fun duplicateReadingList_reportsDuplicatedReadingListId() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name =
+                            "Duplicate ViewModel Publisher"
+                    )
+                )
+
+            val readingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title =
+                            "Duplicate ViewModel List",
+                        description =
+                            "Original description",
+                        publisherId =
+                            publisherId,
+                        universeId = null,
+                        source =
+                            ReadingListSource.BUNDLED,
+                        sourceKey =
+                            "duplicate-viewmodel-test",
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            viewModel.loadReadingList(
+                readingListId
+            )
+
+            withTimeout(
+                5000L.milliseconds
+            ) {
+                viewModel.readingList.first {
+                    it?.id == readingListId
+                }
+            }
+
+            viewModel.duplicateReadingList()
+
+            val duplicatedReadingListId =
+                withTimeout(
+                    5000L.milliseconds
+                ) {
+                    viewModel
+                        .duplicatedReadingListId
+                        .first { id ->
+                            id != null
+                        }
+                }
+
+            assertNotNull(
+                duplicatedReadingListId
+            )
+
+            assertTrue(
+                duplicatedReadingListId !=
+                        readingListId
+            )
+
+            val duplicatedList =
+                comicDao.getReadingListById(
+                    duplicatedReadingListId!!
+                )
+
+            assertNotNull(
+                duplicatedList
+            )
+            assertEquals(
+                "Duplicate ViewModel List Copy",
+                duplicatedList?.title
+            )
+            assertEquals(
+                ReadingListSource.USER,
+                duplicatedList?.source
+            )
+
+            viewModel.clearDuplicatedReadingList()
+
+            assertNull(
+                viewModel
+                    .duplicatedReadingListId
+                    .value
             )
         }
 }

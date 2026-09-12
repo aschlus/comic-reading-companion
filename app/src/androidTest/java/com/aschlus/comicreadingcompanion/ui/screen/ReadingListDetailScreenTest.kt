@@ -40,6 +40,7 @@ import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -3286,5 +3287,103 @@ class ReadingListDetailScreenTest {
                     exportedTitle
                 )
             }
+        }
+
+    @Test
+    fun readingListDetailScreen_duplicateNavigatesToCopy() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name =
+                            "Duplicate UI Publisher"
+                    )
+                )
+
+            val readingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title =
+                            "Duplicate UI List",
+                        description = null,
+                        publisherId =
+                            publisherId,
+                        universeId = null,
+                        source =
+                            ReadingListSource.BUNDLED,
+                        sourceKey =
+                            "duplicate-ui-test",
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            var duplicatedId:
+                    Long? = null
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    ReadingListDetailScreen(
+                        readingListId =
+                            readingListId,
+                        startPosition = -1,
+                        viewModel = viewModel,
+                        onIssueClick = {},
+                        onBackClick = {},
+                        onReadingListDuplicated =
+                            { id ->
+                                duplicatedId = id
+                            }
+                    )
+                }
+            }
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        "Duplicate UI List"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule
+                .onNodeWithContentDescription(
+                    "Reading list options"
+                )
+                .performClick()
+
+            composeRule
+                .onNodeWithText(
+                    "Duplicate reading list"
+                )
+                .performClick()
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                duplicatedId != null
+            }
+
+            val duplicatedList =
+                comicDao.getReadingListById(
+                    duplicatedId!!
+                )
+
+            assertNotNull(
+                duplicatedList
+            )
+            assertEquals(
+                "Duplicate UI List Copy",
+                duplicatedList?.title
+            )
+            assertEquals(
+                ReadingListSource.USER,
+                duplicatedList?.source
+            )
         }
 }

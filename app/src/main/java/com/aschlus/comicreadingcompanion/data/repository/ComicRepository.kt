@@ -223,6 +223,87 @@ class ComicRepository(
         )
     }
 
+    suspend fun duplicateReadingList(
+        readingListId: Long
+    ): Long {
+        var duplicatedReadingListId: Long? = null
+
+        database.withWriteTransaction {
+            val original =
+                comicDao.getReadingListById(readingListId)
+                    ?: throw IllegalArgumentException(
+                        "Reading list $readingListId does not exist"
+                    )
+
+            val originalSections =
+                comicDao.getSectionsForReadingList(readingListId)
+
+            val originalItems=
+                comicDao.getItemsForReadingList(readingListId)
+
+            val currentTime = System.currentTimeMillis()
+
+            val newReadingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title = "${original.title} Copy",
+                        description = original.description,
+                        publisherId = original.publisherId,
+                        universeId = original.universeId,
+                        source = ReadingListSource.USER,
+                        sourceKey = null,
+                        createdAt = currentTime,
+                        updatedAt = currentTime
+                    )
+                )
+
+            val duplicatedSectionIds = mutableMapOf<Long, Long>()
+
+            originalSections.forEach { section ->
+                val newSectionId =
+                    comicDao.insertReadingListSection(
+                        ReadingListSection(
+                            readingListId = newReadingListId,
+                            title = section.title,
+                            description = section.description,
+                            position = section.position
+                        )
+                    )
+
+                duplicatedSectionIds[section.id] = newSectionId
+            }
+
+            originalItems.forEach { item ->
+                val newSectionId =
+                    item.sectionId?.let { originalSectionId ->
+                        duplicatedSectionIds[originalSectionId]
+                            ?: throw IllegalStateException(
+                                "Section $originalSectionId was not duplicated"
+                            )
+                    }
+
+                comicDao.insertReadingListItem(
+                    ReadingListItem(
+                        readingListId = newReadingListId,
+                        sectionId = newSectionId,
+                        issueId = item.issueId,
+                        position = item.position,
+                        required = item.required,
+                        notes = item.notes
+                    )
+                )
+            }
+
+            duplicatedReadingListId = newReadingListId
+        }
+
+        return checkNotNull(
+            duplicatedReadingListId
+        ) {
+            "Duplicated reading-list ID was not set"
+        }
+    }
+
 
     // Reading list sections
 
