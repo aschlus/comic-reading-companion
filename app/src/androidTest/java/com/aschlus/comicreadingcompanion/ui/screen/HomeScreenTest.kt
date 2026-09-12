@@ -2,6 +2,7 @@ package com.aschlus.comicreadingcompanion.ui.screen
 
 import android.content.Context
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithText
@@ -21,6 +22,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.Series
 import com.aschlus.comicreadingcompanion.data.repository.ComicRepository
 import com.aschlus.comicreadingcompanion.ui.theme.ComicReadingCompanionTheme
 import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeViewModel
+import com.aschlus.comicreadingcompanion.ui.viewmodel.ImportReadingListState
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.runBlocking
@@ -86,6 +88,7 @@ class HomeScreenTest {
                     viewModel = viewModel,
                     onBrowseClick = {},
                     onCreateReadingListClick = {},
+                    onImportReadingListClick = {},
                     onReadingListClick = { _, _ -> }
                 )
             }
@@ -94,6 +97,7 @@ class HomeScreenTest {
         composeRule.onNodeWithText("Comic Reading Companion").assertIsDisplayed()
         composeRule.onNodeWithText("Browse Comics").assertIsDisplayed()
         composeRule.onNodeWithText("Create Reading List").assertIsDisplayed()
+        composeRule.onNodeWithText("Import Reading List").assertIsDisplayed()
         composeRule.onNodeWithText("My Reading Lists").assertIsDisplayed()
         composeRule.onNodeWithText("No reading lists yet").assertIsDisplayed()
     }
@@ -112,6 +116,7 @@ class HomeScreenTest {
                         browseClicked = true
                     },
                     onCreateReadingListClick = {},
+                    onImportReadingListClick = {},
                     onReadingListClick = { _, _ -> }
                 )
             }
@@ -212,6 +217,7 @@ class HomeScreenTest {
                         viewModel = viewModel,
                         onBrowseClick = {},
                         onCreateReadingListClick = {},
+                        onImportReadingListClick = {},
                         onReadingListClick = { _, _ -> }
                     )
                 }
@@ -323,6 +329,7 @@ class HomeScreenTest {
                         viewModel = viewModel,
                         onBrowseClick = {},
                         onCreateReadingListClick = {},
+                        onImportReadingListClick = {},
                         onReadingListClick = { id, position ->
                             clickedReadingListId = id
                             clickedPosition = position
@@ -358,6 +365,7 @@ class HomeScreenTest {
                     onCreateReadingListClick = {
                         createClicked = true
                     },
+                    onImportReadingListClick = {},
                     onReadingListClick = { _, _ -> }
                 )
             }
@@ -367,5 +375,112 @@ class HomeScreenTest {
         composeRule.runOnIdle {
             assert(createClicked)
         }
+    }
+
+    @Test
+    fun homeScreen_importReadingListButtonInvokesCallback() {
+        var importClicked = false
+
+        composeRule.setContent {
+            ComicReadingCompanionTheme(
+                dynamicColor = false
+            ) {
+                HomeScreen(
+                    viewModel = viewModel,
+                    onBrowseClick = {},
+                    onCreateReadingListClick = {},
+                    onImportReadingListClick = {
+                        importClicked = true
+                    },
+                    onReadingListClick = { _, _ -> }
+                )
+            }
+        }
+
+        composeRule
+            .onNodeWithText("Import Reading List")
+            .performClick()
+
+        composeRule.runOnIdle {
+            assert(importClicked)
+        }
+    }
+
+    @Test
+    fun homeScreen_importingStateDisablesImportButton() {
+        composeRule.setContent {
+            ComicReadingCompanionTheme(
+                dynamicColor = false
+            ) {
+                HomeScreen(
+                    viewModel = viewModel,
+                    onBrowseClick = {},
+                    onCreateReadingListClick = {},
+                    onImportReadingListClick = {},
+                    importState =
+                        ImportReadingListState.Importing,
+                    onReadingListClick = { _, _ -> }
+                )
+            }
+        }
+
+        composeRule
+            .onNodeWithText(
+                "Importing Reading List…"
+            )
+            .assertIsDisplayed()
+            .assertIsNotEnabled()
+    }
+
+    @Test
+    fun homeScreen_importSuccessDisplaysMessage() {
+        composeRule.setContent {
+            ComicReadingCompanionTheme(
+                dynamicColor = false
+            ) {
+                HomeScreen(
+                    viewModel = viewModel,
+                    onBrowseClick = {},
+                    onCreateReadingListClick = {},
+                    onImportReadingListClick = {},
+                    importState =
+                        ImportReadingListState.Success(
+                            title = "Test Import"
+                        ),
+                    onReadingListClick = { _, _ -> }
+                )
+            }
+        }
+
+        composeRule
+            .onNodeWithText(
+                "Imported \"Test Import\""
+            )
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun homeScreen_importErrorDisplaysMessage() {
+        composeRule.setContent {
+            ComicReadingCompanionTheme(
+                dynamicColor = false
+            ) {
+                HomeScreen(
+                    viewModel = viewModel,
+                    onBrowseClick = {},
+                    onCreateReadingListClick = {},
+                    onImportReadingListClick = {},
+                    importState =
+                        ImportReadingListState.Error(
+                            message = "Import failed"
+                        ),
+                    onReadingListClick = { _, _ -> }
+                )
+            }
+        }
+
+        composeRule
+            .onNodeWithText("Import failed")
+            .assertIsDisplayed()
     }
 }

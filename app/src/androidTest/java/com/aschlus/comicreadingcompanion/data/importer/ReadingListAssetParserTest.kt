@@ -292,4 +292,74 @@ class ReadingListAssetParserTest {
             noneOverride?.universe
         )
     }
+
+    @Test
+    fun parseJson_validText_returnsReadingListData() {
+        val jsonText =
+            """
+        {
+          "title": "Imported File",
+          "description": null,
+          "publisher": "Test Publisher",
+          "universe": {
+            "name": "Test Universe",
+            "designation": "Earth-Test"
+          },
+          "items": []
+        }
+        """.trimIndent()
+
+        val result =
+            parser.parseJson(
+                jsonText = jsonText,
+                sourceDescription =
+                    "reading-list file 'test.json'"
+            )
+
+        assertEquals(
+            "Imported File",
+            result.title
+        )
+
+        assertEquals(
+            "Test Publisher",
+            result.publisher
+        )
+
+        assertEquals(
+            "Earth-Test",
+            result.universe.designation
+        )
+    }
+
+    @Test
+    fun parseJson_malformedText_includesSourceDescription() {
+        val jsonText =
+            """
+        {
+          "title": "Broken"
+        """.trimIndent()
+
+        try {
+            parser.parseJson(
+                jsonText = jsonText,
+                sourceDescription =
+                    "reading-list file 'broken.json'"
+            )
+
+            throw AssertionError(
+                "Expected malformed JSON " +
+                        "to fail parsing"
+            )
+        } catch (
+            exception: IllegalArgumentException
+        ) {
+            assertTrue(
+                exception.message?.contains(
+                    "Could not parse reading-list file " +
+                            "'broken.json'"
+                ) == true
+            )
+        }
+    }
 }

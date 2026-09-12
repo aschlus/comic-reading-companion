@@ -1,9 +1,15 @@
 package com.aschlus.comicreadingcompanion
 
+import android.net.Uri
 import android.os.Bundle
+import android.provider.OpenableColumns
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -26,6 +32,8 @@ import com.aschlus.comicreadingcompanion.ui.viewmodel.CreateReadingListViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.CreateReadingListViewModelFactory
 import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeViewModelFactory
+import com.aschlus.comicreadingcompanion.ui.viewmodel.ImportReadingListViewModel
+import com.aschlus.comicreadingcompanion.ui.viewmodel.ImportReadingListViewModelFactory
 import com.aschlus.comicreadingcompanion.ui.viewmodel.IssueDetailViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.IssueDetailViewModelFactory
 import com.aschlus.comicreadingcompanion.ui.viewmodel.PublisherDetailViewModel
@@ -34,6 +42,9 @@ import com.aschlus.comicreadingcompanion.ui.viewmodel.ReadingListDetailViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ReadingListDetailViewModelFactory
 import com.aschlus.comicreadingcompanion.ui.viewmodel.SeriesDetailViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.SeriesDetailViewModelFactory
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : ComponentActivity() {
 
@@ -43,6 +54,91 @@ class MainActivity : ComponentActivity() {
                 .container
                 .comicRepository
         )
+    }
+
+    private val importReadingListViewModel:
+            ImportReadingListViewModel by viewModels {
+                val container =
+                    (application as ComicReadingCompanionApplication)
+                        .container
+
+        ImportReadingListViewModelFactory(
+            parser = container.readingListAssetParser,
+            importer = container.readingListImporter
+        )
+    }
+
+    private val importReadingListLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.OpenDocument()
+        ) { uri ->
+            if (uri == null) {
+                return@registerForActivityResult
+            }
+
+            lifecycleScope.launch {
+                try {
+                    val fileName =
+                        getDisplayName(uri)
+                            ?: "selected file"
+
+                    val jsonText =
+                        withContext(
+                            Dispatchers.IO
+                        ) {
+                            contentResolver
+                                .openInputStream(uri)
+                                ?.bufferedReader()
+                                ?.use { reader ->
+                                    reader.readText()
+                                }
+                                ?: throw IllegalArgumentException(
+                                    "Could not read selected file '$fileName"
+                                )
+                        }
+
+                    importReadingListViewModel
+                        .importReadingList(
+                            jsonText = jsonText,
+                            sourceDescription = "reading-list file '$fileName'"
+                        )
+                } catch (
+                    exception: Exception
+                ) {
+                    importReadingListViewModel
+                        .reportError(
+                            exception.message
+                                ?: "Could not read selected reading-list file"
+                        )
+                }
+            }
+        }
+
+    private fun getDisplayName(
+        uri: Uri
+    ): String? {
+        contentResolver
+            .query(
+                uri,
+                arrayOf(
+                    OpenableColumns.DISPLAY_NAME
+                ),
+                null,
+                null,
+                null
+            )
+            ?.use { cursor ->
+                val columnIndex =
+                    cursor.getColumnIndex(
+                        OpenableColumns.DISPLAY_NAME
+                    )
+
+                if (columnIndex >= 0 && cursor.moveToFirst()) {
+                    return cursor.getString(columnIndex)
+                }
+            }
+
+        return uri.lastPathSegment
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,6 +160,8 @@ class MainActivity : ComponentActivity() {
                     startDestination = "home"
                 ) {
                     composable("home") {
+                        val importState by importReadingListViewModel.state.collectAsState()
+
                         HomeScreen(
                             viewModel = homeViewModel,
                             onBrowseClick = {
@@ -73,6 +171,15 @@ class MainActivity : ComponentActivity() {
                                 navController.navigate(
                                     "createReadingList"
                                 )
+                            },
+                            onImportReadingListClick = {
+                                importReadingListLauncher.launch(
+                                    arrayOf("application/json", "text/plain")
+                                )
+                            },
+                            importState = importState,
+                            onImportResultConsumed = {
+                                importReadingListViewModel.clearResult()
                             },
                             onReadingListClick = { readingListId, startPosition ->
                                 navController.navigate(

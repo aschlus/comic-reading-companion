@@ -2,7 +2,6 @@ package com.aschlus.comicreadingcompanion.data.importer
 
 import android.content.Context
 import com.aschlus.comicreadingcompanion.data.importer.models.ReadingListImportDto
-import com.aschlus.comicreadingcompanion.data.importer.models.ReadingListItemImportDto
 import java.io.IOException
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.SerializationException
@@ -32,14 +31,26 @@ class ReadingListAssetParser(
                     exception
                 )
             }
+
+        return parseJson(
+            jsonText = jsonText,
+            sourceDescription =
+                "reading-list asset '$assetPath'"
+        )
+    }
+
+    fun parseJson(
+        jsonText: String,
+        sourceDescription: String = "reading-list JSON"
+    ): ReadingListImportDto {
         return try {
-            json.decodeFromString<ReadingListImportDto>(
-                jsonText
-            )
-        } catch (exception: SerializationException) {
+            json.decodeFromString<ReadingListImportDto>(jsonText)
+        } catch (
+            exception: SerializationException
+        ) {
             throw IllegalArgumentException(
-                "Could not parse reading-list asset " +
-                "'$assetPath': " +
+                "Could not parse " +
+                "$sourceDescription: " +
                 "${exception.message}",
                 exception
             )

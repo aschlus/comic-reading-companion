@@ -15,16 +15,21 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListContinueItem
 import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeViewModel
+import com.aschlus.comicreadingcompanion.ui.viewmodel.ImportReadingListState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -32,6 +37,9 @@ fun HomeScreen(
     viewModel: HomeViewModel,
     onBrowseClick: () -> Unit,
     onCreateReadingListClick: () -> Unit,
+    onImportReadingListClick: () -> Unit,
+    importState: ImportReadingListState = ImportReadingListState.Idle,
+    onImportResultConsumed: () -> Unit = {},
     onReadingListClick: (Long, Int) -> Unit
 ) {
     val readingLists by viewModel.readingLists.collectAsState()
@@ -42,12 +50,41 @@ fun HomeScreen(
     val continueItems by
         viewModel.continueItems.collectAsState()
 
+    val snackbarHostState = remember { SnackbarHostState() }
+
+    LaunchedEffect(importState) {
+        when (val state = importState) {
+            is ImportReadingListState.Success -> {
+                snackbarHostState.showSnackbar(
+                    message = "Imported \"${state.title}\""
+                )
+
+                onImportResultConsumed()
+            }
+
+            is ImportReadingListState.Error -> {
+                snackbarHostState.showSnackbar(
+                    message = state.message
+                )
+
+                onImportResultConsumed()
+            }
+
+            else -> Unit
+        }
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
                     Text("Comic Reading Companion")
                 }
+            )
+        },
+        snackbarHost = {
+            SnackbarHost(
+                hostState = snackbarHostState
             )
         }
     ) { innerPadding: PaddingValues ->
@@ -70,6 +107,19 @@ fun HomeScreen(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text("Create Reading List")
+            }
+            OutlinedButton(
+                onClick = onImportReadingListClick,
+                enabled = importState !is ImportReadingListState.Importing,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    if (importState is ImportReadingListState.Importing) {
+                        "Importing Reading List…"
+                    } else {
+                        "Import Reading List"
+                    }
+                )
             }
 
             Text("My Reading Lists")

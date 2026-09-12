@@ -120,7 +120,7 @@ building, following, and tracking comic-book reading orders.
 - [x] Support optional reading-list sections in JSON
 - [x] Support per-item universe / continuity for multiverse reading lists
 - [x] Support external IDs in reading-list JSON
-- [ ] Support importing user-provided reading-list files
+- [x] Support importing user-provided reading-list files
 - [ ] Export reading lists to JSON
 
 ### Included Reading Orders
