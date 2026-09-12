@@ -3,6 +3,7 @@ package com.aschlus.comicreadingcompanion.app
 import android.content.Context
 import com.aschlus.comicreadingcompanion.data.database.ComicDatabase
 import com.aschlus.comicreadingcompanion.data.database.DatabaseSeeder
+import com.aschlus.comicreadingcompanion.data.exporter.ReadingListExporter
 import com.aschlus.comicreadingcompanion.data.importer.ComicCatalogAssetParser
 import com.aschlus.comicreadingcompanion.data.importer.ComicCatalogImporter
 import com.aschlus.comicreadingcompanion.data.importer.ReadingListAssetParser
@@ -32,6 +33,10 @@ class AppContainer(context: Context) {
     val readingListImporter = ReadingListImporter(
         comicDao = database.comicDao(),
         database = database
+    )
+
+    val readingListExporter = ReadingListExporter(
+        comicDao = database.comicDao()
     )
 
     val comicCatalogAssetParser =

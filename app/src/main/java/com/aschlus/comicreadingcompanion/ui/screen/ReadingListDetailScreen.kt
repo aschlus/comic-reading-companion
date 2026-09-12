@@ -75,7 +75,8 @@ fun ReadingListDetailScreen(
     startPosition: Int,
     viewModel: ReadingListDetailViewModel,
     onIssueClick: (Long) -> Unit,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    onExportReadingListClick: (Long, String) -> Unit = { _, _ -> }
 ) {
     val readingList by
         viewModel.readingList.collectAsState()
@@ -518,6 +519,24 @@ fun ReadingListDetailScreen(
                                         }
                                     )
                                 }
+
+                                DropdownMenuItem(
+                                    text = {
+                                        Text("Export reading list")
+                                    },
+                                    enabled = readingList != null,
+                                    onClick = {
+                                        val currentReadingList = readingList
+                                            ?: return@DropdownMenuItem
+
+                                        listMenuExpanded = false
+
+                                        onExportReadingListClick(
+                                            currentReadingList.id,
+                                            currentReadingList.title
+                                        )
+                                    }
+                                )
 
                                 if (readingList?.source == ReadingListSource.USER) {
                                     DropdownMenuItem(

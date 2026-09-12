@@ -2,6 +2,7 @@ package com.aschlus.comicreadingcompanion
 
 import android.net.Uri
 import android.os.Bundle
+import android.widget.Toast
 import android.provider.OpenableColumns
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -16,6 +17,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.aschlus.comicreadingcompanion.data.exporter.readingListExportFileName
 import com.aschlus.comicreadingcompanion.ui.screen.BrowseScreen
 import com.aschlus.comicreadingcompanion.ui.screen.CreateReadingListScreen
 import com.aschlus.comicreadingcompanion.ui.screen.HomeScreen
@@ -110,6 +112,72 @@ class MainActivity : ComponentActivity() {
                             exception.message
                                 ?: "Could not read selected reading-list file"
                         )
+                }
+            }
+        }
+
+    private var pendingExportReadingListId:
+            Long? = null
+
+    private val exportReadingListLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.CreateDocument(
+                "application/json"
+            )
+        ) { uri ->
+            val readingListId =
+                pendingExportReadingListId
+
+            pendingExportReadingListId = null
+
+            if (uri == null || readingListId == null) {
+                return@registerForActivityResult
+            }
+
+            lifecycleScope.launch {
+                try {
+                    val exporter =
+                        (application as ComicReadingCompanionApplication)
+                            .container
+                            .readingListExporter
+
+                    val jsonText =
+                        withContext(
+                            Dispatchers.IO
+                        ) {
+                            exporter.exportJson(
+                                readingListId = readingListId
+                            )
+                        }
+
+                    withContext(
+                        Dispatchers.IO
+                    ) {
+                        contentResolver
+                            .openOutputStream(uri, "wt")
+                            ?.bufferedWriter()
+                            ?.use { writer ->
+                                writer.write(jsonText)
+                            }
+                            ?: throw IllegalArgumentException(
+                                "Could not write exported file"
+                            )
+                    }
+
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Reading list exported",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } catch (
+                    exception : Exception
+                ) {
+                    Toast.makeText(
+                        this@MainActivity,
+                        exception.message
+                            ?: "Could not export reading list",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
         }
@@ -293,7 +361,14 @@ class MainActivity : ComponentActivity() {
                                     "issue/$issueId"
                                 )
                             },
-                            onBackClick = safeNavigateBack
+                            onBackClick = safeNavigateBack,
+                            onExportReadingListClick = { id, title ->
+                                pendingExportReadingListId = id
+
+                                exportReadingListLauncher.launch(
+                                    readingListExportFileName(title)
+                                )
+                            }
                         )
                     }
 

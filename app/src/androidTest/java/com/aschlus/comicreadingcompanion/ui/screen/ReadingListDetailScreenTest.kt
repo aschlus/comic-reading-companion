@@ -3199,4 +3199,92 @@ class ReadingListDetailScreenTest {
                 .assertDoesNotExist()
         }
     }
+
+    @Test
+    fun readingListDetailScreen_exportInvokesCallback() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name = "Marvel"
+                    )
+                )
+
+            val readingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title =
+                            "Export Callback Test",
+                        description = null,
+                        publisherId =
+                            publisherId,
+                        universeId = null,
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            var exportedReadingListId:
+                    Long? = null
+
+            var exportedTitle:
+                    String? = null
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    ReadingListDetailScreen(
+                        readingListId =
+                            readingListId,
+                        startPosition = -1,
+                        viewModel = viewModel,
+                        onIssueClick = {},
+                        onBackClick = {},
+                        onExportReadingListClick =
+                            { id, title ->
+                                exportedReadingListId =
+                                    id
+                                exportedTitle =
+                                    title
+                            }
+                    )
+                }
+            }
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        "Export Callback Test"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule
+                .onNodeWithContentDescription(
+                    "Reading list options"
+                )
+                .performClick()
+
+            composeRule
+                .onNodeWithText(
+                    "Export reading list"
+                )
+                .performClick()
+
+            composeRule.runOnIdle {
+                assertEquals(
+                    readingListId,
+                    exportedReadingListId
+                )
+
+                assertEquals(
+                    "Export Callback Test",
+                    exportedTitle
+                )
+            }
+        }
 }

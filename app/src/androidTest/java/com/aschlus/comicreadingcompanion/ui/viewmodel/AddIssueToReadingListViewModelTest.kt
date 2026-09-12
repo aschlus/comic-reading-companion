@@ -160,6 +160,12 @@ class AddIssueToReadingListViewModelTest {
                     viewModel.addedReadingListId.first { it != null }
                 }
 
+            withTimeout(5000L.milliseconds) {
+                viewModel.isAdding.first {
+                    !it
+                }
+            }
+
             assertEquals(readingListId, addedReadingListId)
 
             val items = comicDao.getItemsForReadingList(readingListId)
@@ -191,6 +197,12 @@ class AddIssueToReadingListViewModelTest {
                 withTimeout(5000L.milliseconds) {
                     viewModel.errorMessage.first { it != null }
                 }
+
+            withTimeout(5000L.milliseconds) {
+                viewModel.isAdding.first {
+                    !it
+                }
+            }
 
             assertEquals(
                 "Issue $issueId belongs to a " +
