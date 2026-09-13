@@ -822,7 +822,7 @@ class AppNavigationTest {
         ) {
             composeRule
                 .onAllNodesWithText(
-                    "READING LISTS"
+                    "YOUR LISTS"
                 )
                 .fetchSemanticsNodes()
                 .isNotEmpty()
@@ -830,7 +830,7 @@ class AppNavigationTest {
 
         composeRule
             .onNodeWithText(
-                "READING LISTS"
+                "YOUR LISTS"
             )
             .assertIsDisplayed()
 
@@ -937,7 +937,7 @@ class AppNavigationTest {
 
         composeRule
             .onNodeWithText(
-                "READING LISTS"
+                "YOUR LISTS"
             )
             .assertIsDisplayed()
     }
