@@ -120,13 +120,7 @@ class LibraryScreenTest {
         }
 
         composeRule
-            .onNodeWithText("LIBRARY")
-            .assertIsDisplayed()
-
-        composeRule
-            .onNodeWithText(
-                "ALL YOUR\nREADING LISTS\nIN ONE PLACE!"
-            )
+            .onNodeWithText("Library")
             .assertIsDisplayed()
 
         composeRule
@@ -143,7 +137,7 @@ class LibraryScreenTest {
 
         composeRule
             .onNodeWithText(
-                "YOUR LISTS"
+                "READING LISTS"
             )
             .assertIsDisplayed()
 
@@ -699,13 +693,13 @@ class LibraryScreenTest {
 
             composeRule
                 .onNodeWithText(
-                    "1 of 2 read • 50% complete"
+                    "1 of 2 read"
                 )
                 .assertIsDisplayed()
 
             composeRule
                 .onNodeWithText(
-                    "Next up: Amazing Spider-Man #2"
+                    "Continue: Amazing Spider-Man #2"
                 )
                 .assertIsDisplayed()
         }

@@ -1,26 +1,24 @@
 package com.aschlus.comicreadingcompanion.ui.screen
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
+import android.graphics.drawable.Icon
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Upload
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -28,11 +26,12 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -40,23 +39,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.aschlus.comicreadingcompanion.ui.component.ComicLibraryActionCard
-import com.aschlus.comicreadingcompanion.ui.component.ComicLibraryActionIcon
-import com.aschlus.comicreadingcompanion.ui.component.ComicLibraryHeader
-import com.aschlus.comicreadingcompanion.ui.component.ComicLibraryReadingListCard
+import com.aschlus.comicreadingcompanion.ui.component.ComicActionPanel
+import com.aschlus.comicreadingcompanion.ui.component.ComicProgressBar
 import com.aschlus.comicreadingcompanion.ui.component.ComicSectionBanner
-import com.aschlus.comicreadingcompanion.ui.theme.ComicBlue
-import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicMutedInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
-import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
-import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
 import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeReadingListSort
 import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ImportReadingListState
@@ -124,14 +112,13 @@ fun LibraryScreen(
     }
 
     Scaffold(
-        containerColor = ComicPaper,
-        contentWindowInsets =
-            WindowInsets(
-                left = 0,
-                top = 0,
-                right = 0,
-                bottom = 0
-            ),
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text("Library")
+                }
+            )
+        },
         snackbarHost = {
             SnackbarHost(
                 hostState =
@@ -145,74 +132,44 @@ fun LibraryScreen(
                 Modifier
                     .fillMaxSize()
                     .padding(innerPadding)
+                    .padding(16.dp),
+            verticalArrangement =
+                Arrangement.spacedBy(12.dp)
         ) {
-            item{
-                ComicLibraryHeader()
-            }
-
             item {
                 Row(
                     modifier =
-                        Modifier
-                            .fillMaxWidth()
-                            .padding(
-                                start = 10.dp,
-                                end = 10.dp,
-                                top = 10.dp,
-                                bottom = 4.dp
-                            ),
+                        Modifier.fillMaxWidth(),
                     horizontalArrangement =
-                        Arrangement.spacedBy(
-                            8.dp
-                        )
+                        Arrangement.spacedBy(12.dp)
                 ) {
-                    ComicLibraryActionCard(
-                        title =
-                            "Create Reading List",
-                        icon =
-                            ComicLibraryActionIcon.CREATE,
-                        backgroundColor =
-                            ComicYellow,
-                        onClick =
-                            onCreateReadingListClick,
-                        modifier =
-                            Modifier.weight(1f)
+                    ComicActionPanel(
+                        title = "Create Reading List",
+                        icon = Icons.Default.Add,
+                        onClick = onCreateReadingListClick,
+                        modifier = Modifier.weight(1f),
+                        backgroundColor = MaterialTheme.colorScheme.secondary
                     )
 
-                    ComicLibraryActionCard(
+                    ComicActionPanel(
                         title =
-                            if (
-                                importState is
-                                        ImportReadingListState.Importing
-                            ) {
+                            if (importState is ImportReadingListState.Importing) {
                                 "Importing Reading List…"
                             } else {
                                 "Import Reading List"
                             },
-                        icon =
-                            ComicLibraryActionIcon.IMPORT,
-                        backgroundColor =
-                            ComicBlue,
-                        onClick =
-                            onImportReadingListClick,
-                        modifier =
-                            Modifier.weight(1f),
-                        enabled =
-                            importState !is
-                                    ImportReadingListState.Importing
+                        icon = Icons.Default.Upload,
+                        onClick = onImportReadingListClick,
+                        modifier = Modifier.weight(1f),
+                        backgroundColor = MaterialTheme.colorScheme.primary,
+                        enabled = importState !is ImportReadingListState.Importing
                     )
                 }
             }
 
             item {
                 ComicSectionBanner(
-                    text = "Your Lists",
-                    modifier =
-                        Modifier.padding(
-                            start = 18.dp,
-                            top = 2.dp
-                        ),
-                    backgroundColor = ComicRed
+                    text = "Reading Lists"
                 )
             }
 
@@ -220,17 +177,7 @@ fun LibraryScreen(
                 item {
                     Row(
                         modifier =
-                            Modifier
-                                .fillMaxWidth()
-                                .padding(
-                                    start = 14.dp,
-                                    end = 14.dp,
-                                    top = 2.dp
-                                ),
-                        verticalAlignment =
-                            Alignment.CenterVertically,
-                        horizontalArrangement =
-                            Arrangement.spacedBy(10.dp)
+                            Modifier.fillMaxWidth()
                     ) {
                         OutlinedTextField(
                             value = searchQuery,
@@ -239,73 +186,24 @@ fun LibraryScreen(
                                     .updateSearchQuery(it)
                             },
                             modifier =
-                                Modifier
-                                    .weight(1f)
-                                    .height(56.dp),
+                                Modifier.weight(1f),
                             label = {
                                 Text(
-                                    text = "Search reading lists",
-                                    style =
-                                        MaterialTheme
-                                            .typography
-                                            .bodyMedium
-                                            .copy(
-                                                fontSize = 15.sp
-                                            )
-                                )
-                            },
-                            leadingIcon = {
-                                Icon(
-                                    imageVector =
-                                        Icons.Default.Search,
-                                    contentDescription = null,
-                                    modifier =
-                                        Modifier.size(25.dp),
-                                    tint = ComicInk
+                                    "Search reading lists"
                                 )
                             },
                             singleLine = true,
-                            shape =
-                                RoundedCornerShape(
-                                    28.dp
-                                ),
-                            colors =
-                                OutlinedTextFieldDefaults.colors(
-                                    focusedContainerColor =
-                                        ComicPaper,
-                                    unfocusedContainerColor =
-                                        ComicPaper,
-                                    focusedBorderColor =
-                                        ComicInk,
-                                    unfocusedBorderColor =
-                                        ComicInk,
-                                    focusedTextColor =
-                                        ComicInk,
-                                    unfocusedTextColor =
-                                        ComicInk,
-                                    focusedLabelColor =
-                                        ComicMutedInk,
-                                    unfocusedLabelColor =
-                                        ComicMutedInk,
-                                    cursorColor =
-                                        ComicInk
-                                ),
                             trailingIcon =
                                 if (searchQuery.isNotEmpty()) {
                                     {
                                         IconButton(
                                             onClick = {
-                                                viewModel
-                                                    .clearSearchQuery()
+                                                viewModel.clearSearchQuery()
                                             }
                                         ) {
                                             Icon(
-                                                imageVector =
-                                                    Icons.Default.Close,
-                                                contentDescription =
-                                                    "Clear reading list search",
-                                                tint =
-                                                    ComicInk
+                                                imageVector = Icons.Default.Close,
+                                                contentDescription = "Clear reading list search"
                                             )
                                         }
                                     }
@@ -314,147 +212,75 @@ fun LibraryScreen(
                                 }
                         )
 
+                        Spacer(modifier = Modifier.width(8.dp))
+
                         Column {
-                            Box(
-                                modifier =
-                                    Modifier
-                                        .height(56.dp)
-                                        .background(
-                                            color = ComicPaper,
-                                            shape =
-                                                RoundedCornerShape(
-                                                    8.dp
-                                                )
-                                        )
-                                        .border(
-                                            width = 2.dp,
-                                            color = ComicInk,
-                                            shape =
-                                                RoundedCornerShape(
-                                                    8.dp
-                                                )
-                                        )
-                                        .clickable {
-                                            focusManager
-                                                .clearFocus()
+                            TextButton(
+                                onClick = {
+                                    focusManager.clearFocus()
 
-                                            sortMenuExpanded =
-                                                true
-                                        }
-                                        .padding(
-                                            start = 14.dp,
-                                            end = 10.dp
-                                        ),
-                                contentAlignment =
-                                    Alignment.Center
-                            ) {
-                                Row(
-                                    verticalAlignment =
-                                        Alignment.CenterVertically,
-                                    horizontalArrangement =
-                                        Arrangement.spacedBy(
-                                            5.dp
-                                        )
-                                ) {
-                                    Text(
-                                        text =
-                                            when (sort) {
-                                                HomeReadingListSort.RECENTLY_UPDATED ->
-                                                    "Recently updated"
-
-                                                HomeReadingListSort.TITLE_ASCENDING ->
-                                                    "Title A-Z"
-
-                                                HomeReadingListSort.TITLE_DESCENDING ->
-                                                    "Title Z-A"
-                                            },
-                                        style =
-                                            MaterialTheme
-                                                .typography
-                                                .labelLarge
-                                                .copy(
-                                                    fontSize = 14.sp
-                                                ),
-                                        fontWeight =
-                                            FontWeight.Bold,
-                                        color =
-                                            ComicInk,
-                                        maxLines = 1
-                                    )
-
-                                    Icon(
-                                        imageVector =
-                                            Icons.Default.ArrowDropDown,
-                                        contentDescription = null,
-                                        modifier =
-                                            Modifier.size(
-                                                20.dp
-                                            ),
-                                        tint =
-                                            ComicInk
-                                    )
+                                    sortMenuExpanded = true
                                 }
+                            ) {
+                                Text(
+                                    when (sort) {
+                                        HomeReadingListSort.RECENTLY_UPDATED ->
+                                            "Recently updated"
+
+                                        HomeReadingListSort.TITLE_ASCENDING ->
+                                            "Title A-Z"
+
+                                        HomeReadingListSort.TITLE_DESCENDING ->
+                                            "Title Z-A"
+                                    }
+                                )
                             }
 
                             DropdownMenu(
-                                expanded =
-                                    sortMenuExpanded,
+                                expanded = sortMenuExpanded,
                                 onDismissRequest = {
-                                    sortMenuExpanded =
-                                        false
+                                    sortMenuExpanded = false
                                 }
                             ) {
                                 DropdownMenuItem(
                                     text = {
-                                        Text(
-                                            "Recently updated"
-                                        )
+                                        Text("Recently updated")
                                     },
                                     onClick = {
                                         viewModel
                                             .updateSort(
-                                                HomeReadingListSort
-                                                    .RECENTLY_UPDATED
+                                                HomeReadingListSort.RECENTLY_UPDATED
                                             )
 
-                                        sortMenuExpanded =
-                                            false
+                                        sortMenuExpanded = false
                                     }
                                 )
 
                                 DropdownMenuItem(
                                     text = {
-                                        Text(
-                                            "Title A-Z"
-                                        )
+                                        Text("Title A-Z")
                                     },
                                     onClick = {
                                         viewModel
                                             .updateSort(
-                                                HomeReadingListSort
-                                                    .TITLE_ASCENDING
+                                                HomeReadingListSort.TITLE_ASCENDING
                                             )
 
-                                        sortMenuExpanded =
-                                            false
+                                        sortMenuExpanded = false
                                     }
                                 )
 
                                 DropdownMenuItem(
                                     text = {
-                                        Text(
-                                            "Title Z-A"
-                                        )
+                                        Text("Title Z-A")
                                     },
                                     onClick = {
                                         viewModel
                                             .updateSort(
-                                                HomeReadingListSort
-                                                    .TITLE_DESCENDING
+                                                HomeReadingListSort.TITLE_DESCENDING
                                             )
 
-                                        sortMenuExpanded =
-                                            false
+                                        sortMenuExpanded = false
                                     }
                                 )
                             }
@@ -500,16 +326,7 @@ fun LibraryScreen(
                             readCount.toFloat() / totalCount.toFloat()
                         }
 
-                    ComicLibraryReadingListCard(
-                        title = readingList.title,
-                        description = readingList.description,
-                        readCount = readCount,
-                        totalCount = totalCount,
-                        progress = progress,
-                        continueText = continueItem?.let {
-                            "${it.seriesTitle} " +
-                            "#${it.issueNumber}"
-                        },
+                    Card(
                         onClick = {
                             onReadingListClick(
                                 readingList.id,
@@ -517,8 +334,60 @@ fun LibraryScreen(
                                     ?.position
                                     ?: -1
                             )
+                        },
+                        modifier =
+                            Modifier.fillMaxWidth(),
+                        border =
+                            BorderStroke(
+                                2.dp,
+                                MaterialTheme.colorScheme.outline
+                            ),
+                        colors =
+                            CardDefaults.cardColors(
+                                containerColor = MaterialTheme.colorScheme.surface
+                            )
+                    ) {
+                        Column(
+                            modifier =
+                                Modifier.padding(16.dp),
+                            verticalArrangement =
+                                Arrangement.spacedBy(8.dp)
+                        ) {
+                            Text(
+                                text = readingList.title,
+                                style = MaterialTheme.typography.titleMedium
+                            )
+
+                            readingList
+                                .description
+                                ?.let {
+                                    Text(
+                                        text = it,
+                                        style = MaterialTheme.typography.bodyMedium
+                                    )
+                                }
+
+                            Text(
+                                text = "$readCount of $totalCount read",
+                                style = MaterialTheme.typography.labelMedium
+                            )
+
+                            ComicProgressBar(
+                                progress = progress,
+                                modifier = Modifier.fillMaxWidth()
+                            )
+
+                            if (continueItem != null) {
+                                Text(
+                                    text =
+                                        "Continue: " +
+                                        "${continueItem.seriesTitle} " +
+                                        "#${continueItem.issueNumber}",
+                                    style = MaterialTheme.typography.bodySmall
+                                )
+                            }
                         }
-                    )
+                    }
                 }
             }
         }
