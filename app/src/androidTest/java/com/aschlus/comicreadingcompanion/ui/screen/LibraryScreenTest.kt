@@ -120,24 +120,24 @@ class LibraryScreenTest {
         }
 
         composeRule
-            .onNodeWithText("Library")
+            .onNodeWithText("LIBRARY")
             .assertIsDisplayed()
 
         composeRule
             .onNodeWithText(
-                "CREATE READING LIST"
+                "CREATE\nLIST"
             )
             .assertIsDisplayed()
 
         composeRule
             .onNodeWithText(
-                "IMPORT READING LIST"
+                "IMPORT\nLIST"
             )
             .assertIsDisplayed()
 
         composeRule
             .onNodeWithText(
-                "READING LISTS"
+                "YOUR LISTS"
             )
             .assertIsDisplayed()
 
@@ -216,7 +216,7 @@ class LibraryScreenTest {
 
             composeRule
                 .onNodeWithText(
-                    "Search reading lists"
+                    "Search reading lists..."
                 )
                 .performTextInput(
                     "ultimate"
@@ -348,7 +348,7 @@ class LibraryScreenTest {
 
             composeRule
                 .onNodeWithText(
-                    "Search reading lists"
+                    "Search reading lists..."
                 )
                 .performTextInput(
                     "marvel"
@@ -482,7 +482,7 @@ class LibraryScreenTest {
 
         composeRule
             .onNodeWithText(
-                "IMPORT READING LIST"
+                "IMPORT\nLIST"
             )
             .performClick()
 
@@ -562,7 +562,7 @@ class LibraryScreenTest {
 
         composeRule
             .onNodeWithText(
-                "IMPORTING READING LIST…"
+                "IMPORTING…"
             )
             .assertIsDisplayed()
             .assertIsNotEnabled()
@@ -693,13 +693,13 @@ class LibraryScreenTest {
 
             composeRule
                 .onNodeWithText(
-                    "1 of 2 read"
+                    "1 of 2 read • 50% complete"
                 )
                 .assertIsDisplayed()
 
             composeRule
                 .onNodeWithText(
-                    "Continue: Amazing Spider-Man #2"
+                    "Next up: Amazing Spider-Man #2"
                 )
                 .assertIsDisplayed()
         }

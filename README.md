@@ -163,7 +163,7 @@ building, following, and tracking comic-book reading orders.
 - [x] Add reusable comic-style section headers and banners
 - [x] Add reusable comic-style action panels and cards
 - [x] Add reusable progress indicators that fit the Comic Print style
-- [ ] Add subtle halftone / ink-texture decoration without reducing readability
+- [x] Add subtle halftone / ink-texture decoration without reducing readability
 - [ ] Add original app-owned placeholder / decorative artwork
 - [ ] Maintain accessible contrast and touch targets beneath stylized visuals
 - [ ] Create a coordinated dark-theme treatment
@@ -211,7 +211,7 @@ building, following, and tracking comic-book reading orders.
 - [x] Create a reading list
 - [x] Import a reading list as a secondary management action
 - [ ] Add library-focused filtering as needed
-- [ ] Use Comic Print reading-list cards and progress treatment
+- [x] Use Comic Print reading-list cards and progress treatment
 - [ ] Support reading-list cover / hero artwork when available
 
 ### Reading-List Detail UI
