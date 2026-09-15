@@ -30,11 +30,11 @@ class AppNavigationTest {
     @Test
     fun appNavigation_homeToBrowse() {
         composeRule
-            .onNodeWithText("Comic Reading Companion")
+            .onNodeWithText("HOME")
             .assertIsDisplayed()
 
         composeRule
-            .onNodeWithText("BROWSE COMICS")
+            .onNodeWithText("DISCOVER\nCOMICS")
             .performClick()
 
         composeRule.waitUntil(
@@ -61,7 +61,7 @@ class AppNavigationTest {
 
     @Test
     fun appNavigation_browseToPublisher() {
-        composeRule.onNodeWithText("BROWSE COMICS").performClick()
+        composeRule.onNodeWithText("DISCOVER\nCOMICS").performClick()
         composeRule.waitUntil(timeoutMillis = 10000L) {
             composeRule.onAllNodesWithText("Marvel Comics")
                 .fetchSemanticsNodes()
@@ -81,7 +81,7 @@ class AppNavigationTest {
     @Test
     fun appNavigation_publisherToSeries() {
         composeRule
-            .onNodeWithText("BROWSE COMICS")
+            .onNodeWithText("DISCOVER\nCOMICS")
             .performClick()
         composeRule.waitUntil(timeoutMillis = 10000L) {
             composeRule.onAllNodesWithText("Marvel Comics")
@@ -108,7 +108,7 @@ class AppNavigationTest {
     @Test
     fun appNavigation_seriesToIssue() {
         composeRule
-            .onNodeWithText("BROWSE COMICS")
+            .onNodeWithText("DISCOVER\nCOMICS")
             .performClick()
         composeRule.waitUntil(timeoutMillis = 10000L) {
             composeRule.onAllNodesWithText("Marvel Comics")
@@ -270,7 +270,7 @@ class AppNavigationTest {
     fun appNavigation_backNavigationMainPaths() {
         // Home -> Browse
         composeRule
-            .onNodeWithText("BROWSE COMICS")
+            .onNodeWithText("DISCOVER\nCOMICS")
             .performClick()
 
         composeRule.waitUntil(
@@ -404,7 +404,7 @@ class AppNavigationTest {
         ) {
             composeRule
                 .onAllNodesWithText(
-                    "Comic Reading Companion"
+                    "HOME"
                 )
                 .fetchSemanticsNodes()
                 .isNotEmpty()
@@ -412,14 +412,14 @@ class AppNavigationTest {
 
         composeRule
             .onNodeWithText(
-                "BROWSE COMICS"
+                "DISCOVER\nCOMICS"
             )
             .assertIsDisplayed()
     }
 
     @Test
     fun appNavigation_homeToCreateReadingList() {
-        composeRule.onNodeWithText("CREATE READING LIST").performClick()
+        composeRule.onNodeWithText("NEW\nLIST").performClick()
         composeRule.waitUntil(timeoutMillis = 5000L) {
             composeRule.onAllNodesWithText("Title")
                 .fetchSemanticsNodes()
@@ -446,7 +446,7 @@ class AppNavigationTest {
                 }
 
             try {
-                composeRule.onNodeWithText("CREATE READING LIST").performClick()
+                composeRule.onNodeWithText("NEW\nLIST").performClick()
                 composeRule.waitUntil(timeoutMillis = 5000L) {
                     composeRule.onAllNodesWithText("Title")
                         .fetchSemanticsNodes()
@@ -493,7 +493,7 @@ class AppNavigationTest {
     fun appNavigation_createReadingListBackReturned() {
         composeRule
             .onNodeWithText(
-                "CREATE READING LIST"
+                "NEW\nLIST"
             )
             .performClick()
 
@@ -515,7 +515,7 @@ class AppNavigationTest {
         ) {
             composeRule
                 .onAllNodesWithText(
-                    "Comic Reading Companion"
+                    "HOME"
                 )
                 .fetchSemanticsNodes()
                 .isNotEmpty()
@@ -523,13 +523,13 @@ class AppNavigationTest {
 
         composeRule
             .onNodeWithText(
-                "Comic Reading Companion"
+                "HOME"
             )
             .assertIsDisplayed()
 
         composeRule
             .onNodeWithText(
-                "BROWSE COMICS"
+                "DISCOVER\nCOMICS"
             )
             .assertIsDisplayed()
     }
@@ -845,7 +845,7 @@ class AppNavigationTest {
         ) {
             composeRule
                 .onAllNodesWithText(
-                    "Comic Reading Companion"
+                    "HOME"
                 )
                 .fetchSemanticsNodes()
                 .isNotEmpty()
@@ -853,7 +853,7 @@ class AppNavigationTest {
 
         composeRule
             .onNodeWithText(
-                "Comic Reading Companion"
+                "HOME"
             )
             .assertIsDisplayed()
     }

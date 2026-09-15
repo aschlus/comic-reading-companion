@@ -34,6 +34,11 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import kotlin.time.Duration.Companion.milliseconds
+import androidx.compose.ui.test.onNodeWithContentDescription
+import com.aschlus.comicreadingcompanion.data.database.entities.ReadingProgress
+import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 
 @RunWith(AndroidJUnit4::class)
 class HomeScreenTest {
@@ -90,6 +95,7 @@ class HomeScreenTest {
         database.close()
     }
 
+
     @Test
     fun homeScreen_emptyStateDisplaysCoreContent() {
         composeRule.setContent {
@@ -99,19 +105,55 @@ class HomeScreenTest {
                 HomeScreen(
                     viewModel = viewModel,
                     onBrowseClick = {},
+                    onLibraryClick = {},
                     onCreateReadingListClick = {},
-                    onReadingListClick = { _, _ -> }
+                    onReadingListClick = { _, _ -> },
+                    onIssueClick = {}
                 )
             }
         }
 
-        composeRule.onNodeWithText("Comic Reading Companion").assertIsDisplayed()
-        composeRule.onNodeWithText("BROWSE COMICS").assertIsDisplayed()
-        composeRule.onNodeWithText("CREATE READING LIST").assertIsDisplayed()
+        composeRule
+            .onNodeWithText("HOME")
+            .assertIsDisplayed()
+
+        composeRule
+            .onNodeWithText(
+                "CONTINUE READING"
+            )
+            .assertIsDisplayed()
+
+        composeRule
+            .onNodeWithText(
+                "Ready for your next story? " +
+                        "Start a reading list to " +
+                        "continue it here."
+            )
+            .assertIsDisplayed()
+
+        composeRule
+            .onNodeWithText(
+                "QUICK ACCESS"
+            )
+            .assertIsDisplayed()
+
+        composeRule
+            .onNodeWithText(
+                "RECENTLY READ"
+            )
+            .assertIsDisplayed()
+
+        composeRule
+            .onNodeWithText(
+                "No recent reads yet. " +
+                        "Finish an issue and " +
+                        "we’ll keep track of it here."
+            )
+            .assertIsDisplayed()
     }
 
     @Test
-    fun homeScreen_browseButtonInvokesCallback() {
+    fun homeScreen_discoverComicsInvokesBrowseCallback() {
         var browseClicked = false
 
         composeRule.setContent {
@@ -123,18 +165,27 @@ class HomeScreenTest {
                     onBrowseClick = {
                         browseClicked = true
                     },
+                    onLibraryClick = {},
                     onCreateReadingListClick = {},
-                    onReadingListClick = { _, _ -> }
+                    onReadingListClick = { _, _ -> },
+                    onIssueClick = {}
                 )
             }
         }
 
-        composeRule.onNodeWithText("BROWSE COMICS").performClick()
-        composeRule.runOnIdle { assert(browseClicked) }
+        composeRule
+            .onNodeWithText(
+                "DISCOVER\nCOMICS"
+            )
+            .performClick()
+
+        composeRule.runOnIdle {
+            assert(browseClicked)
+        }
     }
 
     @Test
-    fun homeScreen_createReadingListButtonInvokesCallback() {
+    fun homeScreen_newListInvokesCreateCallback() {
         var createClicked = false
 
         composeRule.setContent {
@@ -144,279 +195,24 @@ class HomeScreenTest {
                 HomeScreen(
                     viewModel = viewModel,
                     onBrowseClick = {},
+                    onLibraryClick = {},
                     onCreateReadingListClick = {
                         createClicked = true
                     },
-                    onReadingListClick = { _, _ -> }
+                    onReadingListClick = { _, _ -> },
+                    onIssueClick = {}
                 )
             }
         }
 
-        composeRule.onNodeWithText("CREATE READING LIST").performClick()
+        composeRule
+            .onNodeWithText(
+                "NEW\nLIST"
+            )
+            .performClick()
+
         composeRule.runOnIdle {
             assert(createClicked)
-        }
-    }
-
-    @Test
-    fun homeScreen_displaysRecentlyOpenedReadingListsInRecentOrder() {
-        runBlocking {
-            val publisherId =
-                comicDao.insertPublisher(
-                    Publisher(
-                        name = "Marvel"
-                    )
-                )
-
-            val firstListId =
-                comicDao.insertReadingList(
-                    ReadingList(
-                        title =
-                            "Older Recent List",
-                        description = null,
-                        publisherId =
-                            publisherId,
-                        universeId = null,
-                        createdAt = 1000L,
-                        updatedAt = 1000L
-                    )
-                )
-
-            val secondListId =
-                comicDao.insertReadingList(
-                    ReadingList(
-                        title =
-                            "Newest Recent List",
-                        description = null,
-                        publisherId =
-                            publisherId,
-                        universeId = null,
-                        createdAt = 2000L,
-                        updatedAt = 2000L
-                    )
-                )
-
-            withTimeout(
-                5000L.milliseconds
-            ) {
-                viewModel
-                    .readingLists
-                    .first {
-                        it.size == 2
-                    }
-            }
-
-            viewModel.recordReadingListOpened(
-                firstListId
-            )
-
-            viewModel.recordReadingListOpened(
-                secondListId
-            )
-
-            withTimeout(
-                5000L.milliseconds
-            ) {
-                viewModel
-                    .recentlyOpenedReadingLists
-                    .first { lists ->
-                        lists.size == 2 &&
-                                lists[0].id ==
-                                secondListId &&
-                                lists[1].id ==
-                                firstListId
-                    }
-            }
-
-            composeRule.setContent {
-                ComicReadingCompanionTheme(
-                    dynamicColor = false
-                ) {
-                    HomeScreen(
-                        viewModel = viewModel,
-                        onBrowseClick = {},
-                        onCreateReadingListClick = {},
-                        onReadingListClick = { _, _ -> }
-                    )
-                }
-            }
-
-            composeRule
-                .onNodeWithText(
-                    "RECENTLY OPENED"
-                )
-                .assertIsDisplayed()
-
-            composeRule
-                .onAllNodesWithText(
-                    "Newest Recent List"
-                )[0]
-                .assertIsDisplayed()
-
-            composeRule
-                .onAllNodesWithText(
-                    "Older Recent List"
-                )[0]
-                .assertIsDisplayed()
-        }
-    }
-
-    @Test
-    fun homeScreen_recentlyOpenedInvokesCallbackWithContinuePosition() {
-        runBlocking {
-            val publisherId =
-                comicDao.insertPublisher(
-                    Publisher(
-                        name = "Marvel"
-                    )
-                )
-
-            val seriesId =
-                comicDao.insertSeries(
-                    Series(
-                        publisherId = publisherId,
-                        title = "Amazing Spider-Man",
-                        volume = 2,
-                        startYear = 1999,
-                        endYear = 2003
-                    )
-                )
-
-            val firstIssueId =
-                comicDao.insertIssue(
-                    Issue(
-                        seriesId = seriesId,
-                        universeId = null,
-                        issueNumber = "1",
-                        title = "First Issue",
-                        publicationDate = "1999-01",
-                        coverUrl = null,
-                        description = null,
-                        issueType = IssueType.REGULAR
-                    )
-                )
-
-            val secondIssueId =
-                comicDao.insertIssue(
-                    Issue(
-                        seriesId = seriesId,
-                        universeId = null,
-                        issueNumber = "2",
-                        title = "Second Issue",
-                        publicationDate = "1999-02",
-                        coverUrl = null,
-                        description = null,
-                        issueType = IssueType.REGULAR
-                    )
-                )
-
-            val readingListId =
-                comicDao.insertReadingList(
-                    ReadingList(
-                        title =
-                            "Recent Continue List",
-                        description = null,
-                        publisherId = publisherId,
-                        universeId = null,
-                        createdAt = 1000L,
-                        updatedAt = 1000L
-                    )
-                )
-
-            comicDao.insertReadingListItem(
-                ReadingListItem(
-                    readingListId =
-                        readingListId,
-                    sectionId = null,
-                    issueId = firstIssueId,
-                    position = 1,
-                    required = true,
-                    notes = null
-                )
-            )
-
-            comicDao.insertReadingListItem(
-                ReadingListItem(
-                    readingListId =
-                        readingListId,
-                    sectionId = null,
-                    issueId = secondIssueId,
-                    position = 2,
-                    required = true,
-                    notes = null
-                )
-            )
-
-            repository.markIssueAsRead(
-                firstIssueId
-            )
-
-            viewModel.recordReadingListOpened(
-                readingListId
-            )
-
-            var clickedReadingListId:
-                    Long? = null
-
-            var clickedPosition:
-                    Int? = null
-
-            composeRule.setContent {
-                ComicReadingCompanionTheme(
-                    dynamicColor = false
-                ) {
-                    HomeScreen(
-                        viewModel = viewModel,
-                        onBrowseClick = {},
-                        onCreateReadingListClick = {},
-                        onReadingListClick = { id,
-                                               position ->
-
-                            clickedReadingListId =
-                                id
-
-                            clickedPosition =
-                                position
-                        }
-                    )
-                }
-            }
-
-            composeRule.waitUntil(
-                timeoutMillis = 10000L
-            ) {
-                composeRule
-                    .onAllNodesWithText(
-                        "Recent Continue List"
-                    )
-                    .fetchSemanticsNodes()
-                    .size == 2
-            }
-
-            // Current Home ordering is:
-            //
-            // 0 -> Continue Reading card
-            // 1 -> Recently Opened card
-            //
-            // This test specifically verifies the
-            // Recently Opened card callback.
-            composeRule
-                .onAllNodesWithText(
-                    "Recent Continue List"
-                )[1]
-                .performClick()
-
-            composeRule.runOnIdle {
-                assertEquals(
-                    readingListId,
-                    clickedReadingListId
-                )
-
-                assertEquals(
-                    2,
-                    clickedPosition
-                )
-            }
         }
     }
 
@@ -561,8 +357,10 @@ class HomeScreenTest {
                     HomeScreen(
                         viewModel = viewModel,
                         onBrowseClick = {},
+                        onLibraryClick = {},
                         onCreateReadingListClick = {},
-                        onReadingListClick = { _, _ -> }
+                        onReadingListClick = { _, _ -> },
+                        onIssueClick = {}
                     )
                 }
             }
@@ -721,6 +519,7 @@ class HomeScreenTest {
                     HomeScreen(
                         viewModel = viewModel,
                         onBrowseClick = {},
+                        onLibraryClick = {},
                         onCreateReadingListClick = {},
                         onReadingListClick = {
                                 id,
@@ -731,7 +530,8 @@ class HomeScreenTest {
 
                             clickedPosition =
                                 position
-                        }
+                        },
+                        onIssueClick = {}
                     )
                 }
             }
@@ -747,12 +547,10 @@ class HomeScreenTest {
                     .isNotEmpty()
             }
 
-            // First copy is the card in
-            // Continue Reading.
             composeRule
-                .onAllNodesWithText(
+                .onNodeWithText(
                     "Continue Reading Test"
-                )[0]
+                )
                 .performClick()
 
             composeRule.runOnIdle {
@@ -764,6 +562,396 @@ class HomeScreenTest {
                 assertEquals(
                     2,
                     clickedPosition
+                )
+            }
+        }
+    }
+
+    @Test
+    fun homeScreen_continueReadingSeeAllInvokesLibraryCallback() {
+        var libraryClicked = false
+
+        composeRule.setContent {
+            ComicReadingCompanionTheme(
+                dynamicColor = false
+            ) {
+                HomeScreen(
+                    viewModel = viewModel,
+                    onBrowseClick = {},
+                    onLibraryClick = {
+                        libraryClicked = true
+                    },
+                    onCreateReadingListClick = {},
+                    onReadingListClick = { _, _ -> },
+                    onIssueClick = {}
+                )
+            }
+        }
+
+        composeRule
+            .onNodeWithContentDescription(
+                "CONTINUE READING see all"
+            )
+            .performClick()
+
+        composeRule.runOnIdle {
+            assert(libraryClicked)
+        }
+    }
+
+    @Test
+    fun homeScreen_recentlyReadDisplaysNewestFirst() {
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name = "Test Publisher"
+                    )
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Recent Test Series",
+                        volume = 1,
+                        startYear = 2026,
+                        endYear = null
+                    )
+                )
+
+            val oldestIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "Oldest",
+                        publicationDate = null,
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val middleIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "2",
+                        title = "Middle",
+                        publicationDate = null,
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val newestIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "3",
+                        title = "Newest",
+                        publicationDate = null,
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            comicDao.insertReadingProgress(
+                ReadingProgress(
+                    issueId = oldestIssueId,
+                    status = ReadingStatus.READ,
+                    startedAt = 1000L,
+                    completedAt = 1000L,
+                    notes = null
+                )
+            )
+
+            comicDao.insertReadingProgress(
+                ReadingProgress(
+                    issueId = middleIssueId,
+                    status = ReadingStatus.READ,
+                    startedAt = 2000L,
+                    completedAt = 2000L,
+                    notes = null
+                )
+            )
+
+            comicDao.insertReadingProgress(
+                ReadingProgress(
+                    issueId = newestIssueId,
+                    status = ReadingStatus.READ,
+                    startedAt = 3000L,
+                    completedAt = 3000L,
+                    notes = null
+                )
+            )
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    HomeScreen(
+                        viewModel = viewModel,
+                        onBrowseClick = {},
+                        onLibraryClick = {},
+                        onCreateReadingListClick = {},
+                        onReadingListClick = { _, _ -> },
+                        onIssueClick = {}
+                    )
+                }
+            }
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        "Issue #3"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            val newestBounds =
+                composeRule
+                    .onNodeWithText(
+                        "Issue #3"
+                    )
+                    .fetchSemanticsNode()
+                    .boundsInRoot
+
+            val middleBounds =
+                composeRule
+                    .onNodeWithText(
+                        "Issue #2"
+                    )
+                    .fetchSemanticsNode()
+                    .boundsInRoot
+
+            val oldestBounds =
+                composeRule
+                    .onNodeWithText(
+                        "Issue #1"
+                    )
+                    .fetchSemanticsNode()
+                    .boundsInRoot
+
+            assertTrue(
+                newestBounds.left <
+                        middleBounds.left
+            )
+
+            assertTrue(
+                middleBounds.left <
+                        oldestBounds.left
+            )
+        }
+    }
+
+    @Test
+    fun homeScreen_recentlyReadDisplaysAtMostThreeIssues() {
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name = "Test Publisher"
+                    )
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Limit Test Series",
+                        volume = 1,
+                        startYear = 2026,
+                        endYear = null
+                    )
+                )
+
+            repeat(4) { index ->
+                val issueNumber =
+                    index + 1
+
+                val issueId =
+                    comicDao.insertIssue(
+                        Issue(
+                            seriesId = seriesId,
+                            universeId = null,
+                            issueNumber =
+                                issueNumber.toString(),
+                            title =
+                                "Issue $issueNumber",
+                            publicationDate = null,
+                            coverUrl = null,
+                            description = null,
+                            issueType =
+                                IssueType.REGULAR
+                        )
+                    )
+
+                comicDao.insertReadingProgress(
+                    ReadingProgress(
+                        issueId = issueId,
+                        status =
+                            ReadingStatus.READ,
+                        startedAt =
+                            issueNumber * 1000L,
+                        completedAt =
+                            issueNumber * 1000L,
+                        notes = null
+                    )
+                )
+            }
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    HomeScreen(
+                        viewModel = viewModel,
+                        onBrowseClick = {},
+                        onLibraryClick = {},
+                        onCreateReadingListClick = {},
+                        onReadingListClick = { _, _ -> },
+                        onIssueClick = {}
+                    )
+                }
+            }
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        "Issue #4"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule
+                .onNodeWithText(
+                    "Issue #4"
+                )
+                .assertIsDisplayed()
+
+            composeRule
+                .onNodeWithText(
+                    "Issue #3"
+                )
+                .assertIsDisplayed()
+
+            composeRule
+                .onNodeWithText(
+                    "Issue #2"
+                )
+                .assertIsDisplayed()
+
+            assertFalse(
+                composeRule
+                    .onAllNodesWithText(
+                        "Issue #1"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            )
+        }
+    }
+
+    @Test
+    fun homeScreen_recentlyReadInvokesIssueCallback() {
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name = "Test Publisher"
+                    )
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Clickable Series",
+                        volume = 1,
+                        startYear = 2026,
+                        endYear = null
+                    )
+                )
+
+            val issueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "7",
+                        title = "Clickable Issue",
+                        publicationDate = null,
+                        coverUrl = null,
+                        description = null,
+                        issueType =
+                            IssueType.REGULAR
+                    )
+                )
+
+            comicDao.insertReadingProgress(
+                ReadingProgress(
+                    issueId = issueId,
+                    status = ReadingStatus.READ,
+                    startedAt = 1000L,
+                    completedAt = 2000L,
+                    notes = null
+                )
+            )
+
+            var clickedIssueId:
+                    Long? = null
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    HomeScreen(
+                        viewModel = viewModel,
+                        onBrowseClick = {},
+                        onLibraryClick = {},
+                        onCreateReadingListClick = {},
+                        onReadingListClick = { _, _ -> },
+                        onIssueClick = {
+                            clickedIssueId = it
+                        }
+                    )
+                }
+            }
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        "Issue #7"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule
+                .onNodeWithText(
+                    "Issue #7"
+                )
+                .performClick()
+
+            composeRule.runOnIdle {
+                assertEquals(
+                    issueId,
+                    clickedIssueId
                 )
             }
         }

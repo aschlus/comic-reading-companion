@@ -3,44 +3,50 @@ package com.aschlus.comicreadingcompanion.ui.screen
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material.icons.filled.History
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.aschlus.comicreadingcompanion.ui.component.ComicActionPanel
-import com.aschlus.comicreadingcompanion.ui.component.ComicContinueCard
-import com.aschlus.comicreadingcompanion.ui.component.ComicRecentCard
-import com.aschlus.comicreadingcompanion.ui.component.ComicSectionBanner
+import androidx.compose.ui.unit.sp
+import com.aschlus.comicreadingcompanion.ui.component.ComicHomeHeader
+import com.aschlus.comicreadingcompanion.ui.component.ComicHomeQuickAccessTile
+import com.aschlus.comicreadingcompanion.ui.component.ComicHomeRecentReadCard
+import com.aschlus.comicreadingcompanion.ui.component.ComicHomeSectionHeader
+import com.aschlus.comicreadingcompanion.ui.component.ComicLibraryReadingListCard
+import com.aschlus.comicreadingcompanion.ui.theme.ComicBlueLight
+import com.aschlus.comicreadingcompanion.ui.theme.ComicGreen
+import com.aschlus.comicreadingcompanion.ui.theme.ComicMutedInk
+import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
+import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
 import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel,
     onBrowseClick: () -> Unit,
+    onLibraryClick: () -> Unit,
     onCreateReadingListClick: () -> Unit,
-    onReadingListClick: (Long, Int) -> Unit
+    onReadingListClick: (Long, Int) -> Unit,
+    onIssueClick: (Long) -> Unit
 ) {
-    val recentlyOpenedReadingLists by viewModel.recentlyOpenedReadingLists.collectAsState()
-
     val continueReadingLists by viewModel.continueReadingLists.collectAsState()
+
+    val continueReadingList = continueReadingLists.firstOrNull()
 
     val readingListSummaries by
         viewModel.readingListSummaries.collectAsState()
@@ -48,22 +54,23 @@ fun HomeScreen(
     val continueItems by
         viewModel.continueItems.collectAsState()
 
-    val recentlyOpenedListState =
-        rememberLazyListState()
+    val recentlyReadIssues by
+        viewModel.recentlyReadIssues.collectAsState()
 
-    LaunchedEffect(
-        recentlyOpenedReadingLists.map { it.id }
-    ) {
-        if (recentlyOpenedReadingLists.isNotEmpty()) {
-            recentlyOpenedListState.scrollToItem(0)
-        }
-    }
 
     Scaffold(
+        contentWindowInsets =
+            WindowInsets(
+                left = 0,
+                top = 0,
+                right = 0,
+                bottom = 0
+            ),
+        containerColor = ComicPaper,
         topBar = {
-            TopAppBar(
-                title = {
-                    Text("Comic Reading Companion")
+            ComicHomeHeader(
+                onSettingsClick = {
+                    // Settings screen will be added later
                 }
             )
         }
@@ -72,135 +79,223 @@ fun HomeScreen(
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(innerPadding)
-                .padding(16.dp),
-            verticalArrangement =
-                Arrangement.spacedBy(12.dp)
+                .padding(innerPadding),
         ) {
             item {
-                Row(
+                ComicHomeSectionHeader(
+                    text = "CONTINUE READING",
+                    onSeeAllClick = onLibraryClick,
                     modifier =
-                        Modifier.fillMaxWidth(),
-                    horizontalArrangement =
-                        Arrangement.spacedBy(12.dp)
-                ) {
-                    ComicActionPanel(
-                        title = "Browse Comics",
-                        icon = Icons.Default.Search,
-                        onClick = onBrowseClick,
-                        modifier = Modifier.weight(1f)
-                    )
-
-                    ComicActionPanel(
-                        title = "Create Reading List",
-                        icon = Icons.Default.Add,
-                        onClick = onCreateReadingListClick,
-                        modifier = Modifier.weight(1f),
-                        backgroundColor = MaterialTheme.colorScheme.secondary
-                    )
-                }
+                        Modifier
+                            .padding(
+                                start = 12.dp,
+                                end = 12.dp,
+                                top = 6.dp,
+                                bottom = 4.dp
+                            )
+                )
             }
 
-            if (continueReadingLists.isNotEmpty()) {
-                item {
-                    ComicSectionBanner(
-                        text = "Continue Reading",
-                        backgroundColor = MaterialTheme.colorScheme.tertiary
-                    )
-                }
-
-                items(
-                    items =
-                        continueReadingLists.take(3),
-                    key = {
-                        "continue-${it.id}"
-                    }
-                ) { readingList ->
+            item {
+                if (continueReadingList != null) {
                     val summary =
                         readingListSummaries
                             .firstOrNull {
                                 it.readingListId ==
-                                        readingList.id
+                                        continueReadingList.id
                             }
 
                     val continueItem =
-                        continueItems[
-                            readingList.id
-                        ]
+                        continueItems[continueReadingList.id]
 
-                    ComicContinueCard(
-                        readingList = readingList,
-                        readCount =
-                            summary?.readCount ?: 0,
-                        totalCount =
-                            summary?.totalCount ?: 0,
-                        continueItem =
-                            continueItem,
+                    val readCount = summary?.readCount ?: 0
+                    val totalCount = summary?.totalCount ?: 0
+
+                    val progress =
+                        if (totalCount > 0) {
+                            readCount.toFloat() / totalCount.toFloat()
+                        } else {
+                            0f
+                        }
+                    ComicLibraryReadingListCard(
+                        title = continueReadingList.title,
+                        description = continueReadingList.description,
+                        readCount = readCount,
+                        totalCount = totalCount,
+                        progress = progress,
+                        continueText =
+                            continueItem?.let {
+                                "${it.seriesTitle} #${it.issueNumber}"
+                            },
                         onClick = {
                             onReadingListClick(
-                                readingList.id,
-                                continueItem
-                                    ?.position
+                                continueReadingList.id,
+                                continueItem?.position
                                     ?: -1
                             )
-                        }
+                        },
+                        modifier =
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(
+                                    horizontal = 12.dp,
+                                    vertical = 4.dp
+                                )
+                    )
+                } else {
+                    Text(
+                        text =
+                            "Ready for your next story? " +
+                            "Start a reading list to " +
+                            "continue it here.",
+                        modifier =
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(
+                                    horizontal = 28.dp,
+                                    vertical = 18.dp
+                                ),
+                        fontSize = 15.sp,
+                        lineHeight = 20.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        fontStyle = FontStyle.Italic,
+                        color = ComicMutedInk,
+                        textAlign = TextAlign.Center
                     )
                 }
             }
 
-            if (recentlyOpenedReadingLists.isNotEmpty()) {
-                item {
-                    ComicSectionBanner(
-                        text = "Recently Opened"
+            item {
+                ComicHomeSectionHeader(
+                    text = "QUICK ACCESS",
+                    modifier =
+                        Modifier
+                            .padding(
+                                start = 12.dp,
+                                end = 12.dp,
+                                top = 4.dp,
+                                bottom = 4.dp
+                            )
+                )
+            }
+
+            item {
+                Row(
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(
+                                start = 12.dp,
+                                end = 12.dp,
+                                top = 4.dp,
+                                bottom = 10.dp
+                            ),
+                    horizontalArrangement =
+                        Arrangement.spacedBy(8.dp)
+                ) {
+                    ComicHomeQuickAccessTile(
+                        text = "NEW\nLIST",
+                        icon = Icons.Default.Add,
+                        backgroundColor = ComicYellow,
+                        onClick = onCreateReadingListClick,
+                        modifier = Modifier.weight(1f),
+                        iconSize = 36.dp,
+                        textFontSize = 16.sp,
+                        textLineHeight = 17.sp,
+                        drawCustomPlus = true
+                    )
+
+                    ComicHomeQuickAccessTile(
+                        text = "DISCOVER\nCOMICS",
+                        icon = Icons.AutoMirrored.Filled.MenuBook,
+                        backgroundColor = ComicBlueLight,
+                        onClick = onBrowseClick,
+                        modifier = Modifier.weight(1f),
+                        iconSize = 32.dp,
+                        textFontSize = 16.sp,
+                        textLineHeight = 17.sp
+                    )
+
+                    ComicHomeQuickAccessTile(
+                        text = "READING\nHISTORY",
+                        icon = Icons.Default.History,
+                        backgroundColor = ComicGreen,
+                        onClick = {
+                            // Reading History screen will be added later
+                        },
+                        modifier = Modifier.weight(1f),
+                        iconSize = 33.dp,
+                        textFontSize = 16.sp,
+                        textLineHeight = 17.sp
                     )
                 }
+            }
 
-                item {
-                    LazyRow(
-                        modifier = Modifier.fillMaxWidth(),
-                        state = recentlyOpenedListState,
-                        contentPadding =
-                            PaddingValues(
-                                start = 4.dp,
-                                end = 8.dp
-                            ),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+            item {
+                ComicHomeSectionHeader(
+                    text = "RECENTLY READ",
+                    onSeeAllClick = {
+                        // Reading History screen will be added later
+                    },
+                    modifier =
+                        Modifier.padding(
+                            start = 12.dp,
+                            end = 12.dp,
+                            top = 4.dp,
+                            bottom = 4.dp
+                        )
+                )
+            }
+
+            item {
+                if (recentlyReadIssues.isEmpty()) {
+                    Text(
+                        text =
+                            "No recent reads yet. " +
+                            "Finish an issue and " +
+                            "we’ll keep track of it here.",
+                        modifier =
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(
+                                    horizontal = 28.dp,
+                                    vertical = 18.dp
+                                ),
+                        fontSize = 15.sp,
+                        lineHeight = 20.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        fontStyle = FontStyle.Italic,
+                        color = ComicMutedInk,
+                        textAlign = TextAlign.Center
+                    )
+                } else {
+                    Row(
+                        modifier =
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(
+                                    start = 12.dp,
+                                    end = 12.dp,
+                                    top = 4.dp,
+                                    bottom = 10.dp
+                                ),
+                        horizontalArrangement =
+                            Arrangement.spacedBy(8.dp)
                     ) {
-                        items(
-                            items =
-                                recentlyOpenedReadingLists
-                                    .take(3),
-                            key = {
-                                "recent-${it.id}"
+                        recentlyReadIssues
+                            .take(3)
+                            .forEach { issue ->
+                                ComicHomeRecentReadCard(
+                                    seriesTitle = issue.seriesTitle,
+                                    issueNumber = issue.issueNumber,
+                                    coverUrl = issue.coverUrl,
+                                    completedAt = issue.completedAt,
+                                    onClick = {
+                                        onIssueClick(issue.issueId)
+                                    },
+                                    modifier = Modifier.weight(1f)
+                                )
                             }
-                        ) { readingList ->
-
-                            val summary =
-                                readingListSummaries
-                                    .firstOrNull() {
-                                        it.readingListId == readingList.id
-                                    }
-
-                            val continueItem =
-                                continueItems[
-                                    readingList.id
-                                ]
-
-                            ComicRecentCard(
-                                readingList = readingList,
-                                readCount = summary?.readCount ?: 0,
-                                totalCount = summary?.totalCount ?: 0,
-                                continueItem = continueItem,
-                                onClick = {
-                                    onReadingListClick(
-                                        readingList.id,
-                                        continueItem
-                                            ?.position
-                                            ?: -1
-                                    )
-                                }
-                            )
-                        }
                     }
                 }
             }

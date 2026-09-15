@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListContinueItem
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListSummary
+import com.aschlus.comicreadingcompanion.data.database.models.RecentReadIssue
 import com.aschlus.comicreadingcompanion.data.preferences.HomeUiPreferences
 import com.aschlus.comicreadingcompanion.data.repository.ComicRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -211,6 +212,14 @@ class HomeViewModel(
                         }
                 )
         }
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5_000),
+                initialValue = emptyList()
+            )
+
+    val recentlyReadIssues: StateFlow<List<RecentReadIssue>> =
+        repository.getRecentlyReadIssues()
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5_000),

@@ -189,14 +189,14 @@ building, following, and tracking comic-book reading orders.
 - [x] Show current / next issue on each card
 - [x] Sort reading lists
 - [x] Search reading lists
-- [x] Recently opened reading lists
+- [x] Track recently opened reading lists for Continue Reading prioritization
 - [x] Dedicated Continue Reading section
-- [ ] Replace the current Home layout with the Bright & Playful Comic Print design
-- [ ] Add comic-style Home header with Settings gear
+- [x] Replace the current Home layout with the Bright & Playful Comic Print design
+- [x] Add comic-style Home header with Settings gear
 - [x] Add prominent Browse Comics action panel
 - [x] Add prominent Create Reading List action panel
 - [x] Add Continue Reading hero card
-- [x] Show Recently Opened as a horizontal card row
+- [x] Show Recently Read issues as a three-card row
 - [x] Remove the full reading-list library from Home once Library is available
 - [x] Remove search / sorting controls from Home once Library is available
 - [ ] Reading-list cover / hero artwork

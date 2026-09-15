@@ -233,12 +233,13 @@ class ComicRepositoryTest {
             assertNotNull(firstProgress?.completedAt)
             assertNotNull(secondProgress?.startedAt)
             assertNotNull(secondProgress?.completedAt)
-            assertTrue(firstProgress!!.startedAt!! >= before)
-            assertTrue(firstProgress.startedAt!! <= after)
-            assertTrue(secondProgress!!.startedAt!! >= before)
-            assertTrue(secondProgress.startedAt!! <= after)
-            assertEquals(firstProgress.startedAt, firstProgress.completedAt)
-            assertEquals(secondProgress.startedAt, secondProgress.completedAt)
+            assertEquals(firstProgress?.startedAt, firstProgress?.completedAt)
+            assertEquals(secondProgress?.startedAt, secondProgress?.completedAt)
+            assertTrue(firstProgress!!.completedAt!! < secondProgress!!.completedAt!!)
+            assertEquals(
+                1L,
+                secondProgress.completedAt!! -
+                        firstProgress.completedAt!!)
         }
 
     @Test

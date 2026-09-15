@@ -1,28 +1,29 @@
 package com.aschlus.comicreadingcompanion.data.database
 
 import androidx.room3.Dao
+import androidx.room3.Delete
 import androidx.room3.Insert
 import androidx.room3.OnConflictStrategy
 import androidx.room3.Query
-import androidx.room3.Delete
 import androidx.room3.Update
 import androidx.room3.Upsert
+import com.aschlus.comicreadingcompanion.data.database.entities.ExternalId
 import com.aschlus.comicreadingcompanion.data.database.entities.Issue
 import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
-import com.aschlus.comicreadingcompanion.data.database.entities.Series
-import com.aschlus.comicreadingcompanion.data.database.entities.SeriesExternalId
-import com.aschlus.comicreadingcompanion.data.database.entities.Universe
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListItem
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSection
-import com.aschlus.comicreadingcompanion.data.database.entities.ExternalId
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingProgress
+import com.aschlus.comicreadingcompanion.data.database.entities.Series
+import com.aschlus.comicreadingcompanion.data.database.entities.SeriesExternalId
+import com.aschlus.comicreadingcompanion.data.database.entities.Universe
 import com.aschlus.comicreadingcompanion.data.database.models.IssueDetail
 import com.aschlus.comicreadingcompanion.data.database.models.IssueSearchResult
 import com.aschlus.comicreadingcompanion.data.database.models.PublisherSeries
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListContinueItem
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListIssue
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListSummary
+import com.aschlus.comicreadingcompanion.data.database.models.RecentReadIssue
 import com.aschlus.comicreadingcompanion.data.database.models.SeriesDetail
 import com.aschlus.comicreadingcompanion.data.database.models.SeriesIssue
 import com.aschlus.comicreadingcompanion.data.database.models.SeriesSearchResult
@@ -562,6 +563,31 @@ interface ComicDao {
     suspend fun getReadingProgressForIssues(
         issueIds: List<Long>
     ): List<ReadingProgress>
+
+    @Query("""
+        SELECT
+            issues.id AS issueId,
+            series.title AS seriesTitle,
+            issues.issueNumber AS issueNumber,
+            issues.title AS issueTitle,
+            issues.coverUrl AS coverUrl,
+            COALESCE(
+                reading_progress.completedAt,
+                0
+            ) AS completedAt
+        FROM reading_progress
+        INNER JOIN issues
+            ON reading_progress.issueId = issues.id
+        INNER JOIN series
+            ON issues.seriesId = series.id
+        WHERE reading_progress.status = 'READ'
+            AND reading_progress.completedAt IS NOT NULL
+        ORDER BY
+            reading_progress.completedAt DESC,
+            issues.id DESC
+    """)
+    fun getRecentlyReadIssues():
+        Flow<List<RecentReadIssue>>
 
 
     // Updates and deletes

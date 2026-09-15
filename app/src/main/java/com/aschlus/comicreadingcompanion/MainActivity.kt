@@ -303,6 +303,9 @@ class MainActivity : ComponentActivity() {
                                 onBrowseClick = {
                                     navigateTopLevel("browse")
                                 },
+                                onLibraryClick = {
+                                    navigateTopLevel("library")
+                                },
                                 onCreateReadingListClick = {
                                     navController.navigate(
                                         "createReadingList"
@@ -311,6 +314,11 @@ class MainActivity : ComponentActivity() {
                                 onReadingListClick = { readingListId, startPosition ->
                                     navController.navigate(
                                         "readingList/$readingListId?startPosition=$startPosition"
+                                    )
+                                },
+                                onIssueClick = { issueId ->
+                                    navController.navigate(
+                                        "issue/$issueId"
                                     )
                                 }
                             )

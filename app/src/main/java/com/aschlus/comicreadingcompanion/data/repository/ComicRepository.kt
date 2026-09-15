@@ -20,6 +20,7 @@ import com.aschlus.comicreadingcompanion.data.database.models.PublisherSeries
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListContinueItem
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListIssue
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListSummary
+import com.aschlus.comicreadingcompanion.data.database.models.RecentReadIssue
 import com.aschlus.comicreadingcompanion.data.database.models.SeriesDetail
 import com.aschlus.comicreadingcompanion.data.database.models.SeriesIssue
 import com.aschlus.comicreadingcompanion.data.database.models.SeriesSearchResult
@@ -846,11 +847,16 @@ class ComicRepository(
                     progress.issueId
                 }
 
-            val currentTime =
-                System.currentTimeMillis()
+            val latestCompletionTime = System.currentTimeMillis()
+
+            val earliestCompletionTime =
+                latestCompletionTime - distinctIssueIds.lastIndex.toLong()
 
             val updateProgress =
-                distinctIssueIds.map { issueId ->
+                distinctIssueIds.mapIndexed { index, issueId ->
+
+                    val completionTime =
+                        earliestCompletionTime + index
 
                     val existing =
                         progressByIssueId[issueId]
@@ -859,8 +865,8 @@ class ComicRepository(
                         ReadingProgress(
                             issueId = issueId,
                             status = ReadingStatus.READ,
-                            startedAt = currentTime,
-                            completedAt = currentTime,
+                            startedAt = completionTime,
+                            completedAt = completionTime,
                             notes = null
                         )
                     } else {
@@ -868,8 +874,8 @@ class ComicRepository(
                             status = ReadingStatus.READ,
                             startedAt =
                                 existing.startedAt
-                                    ?: currentTime,
-                            completedAt = currentTime
+                                    ?: completionTime,
+                            completedAt = completionTime
                         )
                     }
                 }
@@ -900,6 +906,11 @@ class ComicRepository(
         comicDao.deleteReadingProgressForIssues(
             distinctIssueIds
         )
+    }
+
+    fun getRecentlyReadIssues():
+        Flow<List<RecentReadIssue>> {
+        return comicDao.getRecentlyReadIssues()
     }
 
 

@@ -2228,4 +2228,172 @@ class ComicDaoTest {
             assertEquals("COMIC_VINE", externalId?.source)
             assertEquals("2127", externalId?.externalId)
         }
+
+    @Test
+    fun getRecentlyReadIssues_returnsCompletedReadIssuesNewestFirst() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name = "Test Publisher"
+                    )
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Recent Reads",
+                        volume = 1,
+                        startYear = 2026,
+                        endYear = null
+                    )
+                )
+
+            val oldestReadId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "Oldest Read",
+                        publicationDate = null,
+                        coverUrl = "old-cover",
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val newestReadId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "2",
+                        title = "Newest Read",
+                        publicationDate = null,
+                        coverUrl = "new-cover",
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val inProgressId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "3",
+                        title = "Still Reading",
+                        publicationDate = null,
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val readWithoutCompletedAtId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "4",
+                        title = "Missing Completion",
+                        publicationDate = null,
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            comicDao.insertReadingProgress(
+                ReadingProgress(
+                    issueId = oldestReadId,
+                    status = ReadingStatus.READ,
+                    startedAt = 500L,
+                    completedAt = 1000L,
+                    notes = null
+                )
+            )
+
+            comicDao.insertReadingProgress(
+                ReadingProgress(
+                    issueId = newestReadId,
+                    status = ReadingStatus.READ,
+                    startedAt = 2000L,
+                    completedAt = 3000L,
+                    notes = null
+                )
+            )
+
+            comicDao.insertReadingProgress(
+                ReadingProgress(
+                    issueId = inProgressId,
+                    status = ReadingStatus.READING,
+                    startedAt = 4000L,
+                    completedAt = null,
+                    notes = null
+                )
+            )
+
+            comicDao.insertReadingProgress(
+                ReadingProgress(
+                    issueId = readWithoutCompletedAtId,
+                    status = ReadingStatus.READ,
+                    startedAt = 5000L,
+                    completedAt = null,
+                    notes = null
+                )
+            )
+
+            val results =
+                comicDao
+                    .getRecentlyReadIssues()
+                    .first()
+
+            assertEquals(
+                2,
+                results.size
+            )
+
+            assertEquals(
+                newestReadId,
+                results[0].issueId
+            )
+
+            assertEquals(
+                "Recent Reads",
+                results[0].seriesTitle
+            )
+
+            assertEquals(
+                "2",
+                results[0].issueNumber
+            )
+
+            assertEquals(
+                "Newest Read",
+                results[0].issueTitle
+            )
+
+            assertEquals(
+                "new-cover",
+                results[0].coverUrl
+            )
+
+            assertEquals(
+                3000L,
+                results[0].completedAt
+            )
+
+            assertEquals(
+                oldestReadId,
+                results[1].issueId
+            )
+
+            assertEquals(
+                1000L,
+                results[1].completedAt
+            )
+        }
 }
