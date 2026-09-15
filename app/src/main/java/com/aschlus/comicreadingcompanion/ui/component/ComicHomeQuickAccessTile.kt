@@ -23,14 +23,15 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.aschlus.comicreadingcompanion.ui.theme.ComicAccentTextTransform
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
+import com.aschlus.comicreadingcompanion.ui.theme.LilitaOneFontFamily
 
 @Composable
 fun ComicHomeQuickAccessTile(
@@ -213,10 +214,13 @@ fun ComicHomeQuickAccessTile(
                 ) {
                     Text(
                         text = text,
-                        fontSize = textFontSize,
-                        lineHeight = textLineHeight,
-                        fontWeight = FontWeight.ExtraBold,
-                        fontStyle = FontStyle.Italic,
+                        style =
+                            TextStyle(
+                                fontFamily = LilitaOneFontFamily,
+                                fontSize = textFontSize,
+                                lineHeight = textLineHeight,
+                                textGeometricTransform = ComicAccentTextTransform
+                            ),
                         color = ComicInk,
                         textAlign = TextAlign.Center,
                         maxLines = 2

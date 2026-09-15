@@ -14,16 +14,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.aschlus.comicreadingcompanion.ui.theme.ComicAccentTextTransform
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
+import com.aschlus.comicreadingcompanion.ui.theme.LilitaOneFontFamily
 
 @Composable
 fun ComicLibrarySectionHeader(
@@ -33,15 +34,15 @@ fun ComicLibrarySectionHeader(
 
     val outlineWidth =
         with (density) {
-            1.3.dp.toPx()
+            7.dp.toPx()
         }
 
     val titleStyle =
         TextStyle(
+            fontFamily = LilitaOneFontFamily,
             fontSize = 22.sp,
             lineHeight = 24.sp,
-            fontWeight = FontWeight.Black,
-            fontStyle = FontStyle.Italic
+            textGeometricTransform = ComicAccentTextTransform
         )
 
     Row(
@@ -99,7 +100,8 @@ fun ComicLibrarySectionHeader(
                         titleStyle.copy(
                             drawStyle =
                                 Stroke(
-                                    width = outlineWidth
+                                    width = outlineWidth,
+                                    join = StrokeJoin.Round
                                 )
                         ),
 

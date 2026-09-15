@@ -22,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.clearAndSetSemantics
@@ -34,6 +35,8 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicBlue
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlueLight
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
+import com.aschlus.comicreadingcompanion.ui.theme.ComicHeaderTextTransform
+import com.aschlus.comicreadingcompanion.ui.theme.LilitaOneFontFamily
 
 private val LibraryHeaderContentHeight = 136.dp
 
@@ -157,40 +160,31 @@ private fun LibraryTitle(
     val density = LocalDensity.current
     val outlineWidth =
         with (density) {
-            1.8.dp.toPx()
+            10.2.dp.toPx()
         }
 
     val titleStyle = MaterialTheme.typography.displayLarge
         .copy(
+            fontFamily = LilitaOneFontFamily,
             fontSize = 54.sp,
             lineHeight = 54.sp,
-            letterSpacing = (-2).sp,
-            fontWeight = FontWeight.Black,
-            fontStyle = FontStyle.Italic
+            letterSpacing = 1.sp,
+            fontWeight = FontWeight.Normal,
+            fontStyle = FontStyle.Normal,
+            textGeometricTransform = ComicHeaderTextTransform
         )
 
     Box(
         modifier = modifier
     ) {
-        // Deep comic-book extrusion
-
-        DecorativeLibraryTitle(
-            modifier =
-                Modifier.offset(
-                    x = 5.dp,
-                    y = 7.dp
-                ),
-            style = titleStyle,
-            color = ComicInk
-        )
-
         // Continuous black outline
         DecorativeLibraryTitle(
             style =
                 titleStyle.copy(
                     drawStyle =
                         Stroke(
-                            width = outlineWidth
+                            width = outlineWidth,
+                            join = StrokeJoin.Round
                         )
                 ),
             color = ComicInk

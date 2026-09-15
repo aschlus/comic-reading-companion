@@ -28,6 +28,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
+import com.aschlus.comicreadingcompanion.ui.theme.ComicAccentTextTransform
+import com.aschlus.comicreadingcompanion.ui.theme.LilitaOneFontFamily
 
 @Composable
 fun ComicLibraryActionButton(
@@ -124,10 +126,12 @@ fun ComicLibraryActionButton(
                         ),
                     style = MaterialTheme.typography.titleMedium
                         .copy(
+                            fontFamily = LilitaOneFontFamily,
                             fontSize = 16.sp,
                             lineHeight = 16.sp,
-                            fontWeight = FontWeight.ExtraBold,
-                            fontStyle = FontStyle.Italic
+                            fontWeight = FontWeight.Normal,
+                            fontStyle = FontStyle.Normal,
+                            textGeometricTransform = ComicAccentTextTransform
                         ),
                     color = ComicInk
                 )
