@@ -185,7 +185,7 @@ class ReadingListDetailScreenTest {
             composeRule.onNodeWithText("0 of 1 read • 0% complete").assertIsDisplayed()
             composeRule.onNodeWithText("Amazing Spider-Man #30").assertIsDisplayed()
             composeRule.onNodeWithText("1 issues").assertIsDisplayed()
-            composeRule.onNodeWithText("Jump to first unread").assertIsDisplayed()
+            composeRule.onNodeWithText("Jump to Current").assertIsDisplayed()
         }
     }
 
@@ -493,12 +493,12 @@ class ReadingListDetailScreenTest {
                     .isNotEmpty()
             }
 
-            composeRule.onNodeWithText("Coming Home Arc").assertIsDisplayed()
+            composeRule.onNodeWithText("Coming Home Arc", ignoreCase = true).assertIsDisplayed()
             composeRule.onNodeWithText("Amazing Spider-Man #30").assertIsDisplayed()
-            composeRule.onNodeWithText("Coming Home Arc").performClick()
+            composeRule.onNodeWithText("Coming Home Arc", ignoreCase = true).performClick()
             composeRule.waitForIdle()
             composeRule.onNodeWithText("Amazing Spider-Man #30").assertDoesNotExist()
-            composeRule.onNodeWithText("Coming Home Arc").performClick()
+            composeRule.onNodeWithText("Coming Home Arc", ignoreCase = true).performClick()
             composeRule.waitForIdle()
             composeRule.onNodeWithText("Amazing Spider-Man #30").assertIsDisplayed()
         }
@@ -686,7 +686,7 @@ class ReadingListDetailScreenTest {
     }
 
     @Test
-    fun readingListDetailScreen_backButtonClosesSearchBeforeNavigatingBack() {
+    fun readingListDetailScreen_searchCloseDoesNotNavigateBack() {
         runBlocking {
             val publisherId =
                 comicDao.insertPublisher(
@@ -730,12 +730,11 @@ class ReadingListDetailScreenTest {
             }
             composeRule.onNodeWithContentDescription("Search reading list").performClick()
             composeRule.waitForIdle()
-            composeRule.onNodeWithContentDescription("Back").performClick()
+            composeRule.onNodeWithContentDescription("Close search").performClick()
             composeRule.runOnIdle {
                 assertEquals(false, backClicked)
             }
             composeRule.onNodeWithText("Search Back Test").assertIsDisplayed()
-            composeRule.onNode(hasSetTextAction()).assertDoesNotExist()
             composeRule.onNodeWithContentDescription("Back").performClick()
             composeRule.runOnIdle {
                 assertEquals(true, backClicked)
@@ -849,7 +848,7 @@ class ReadingListDetailScreenTest {
                             .isNotEmpty()
             }
             composeRule.onNodeWithText("Filters").performClick()
-            composeRule.onNodeWithText("Filter issues").assertIsDisplayed()
+            composeRule.onNodeWithText("Filter issues", ignoreCase = true).assertIsDisplayed()
             composeRule.onNodeWithText("Read").performClick()
             composeRule.waitUntil(timeoutMillis = 5000L) {
                 composeRule.onAllNodesWithText("Show 1 issues")
@@ -1112,7 +1111,7 @@ class ReadingListDetailScreenTest {
                     .isNotEmpty()
             }
             composeRule.onNodeWithText("2 of 2 read • 100% complete").assertIsDisplayed()
-            composeRule.onNodeWithText("Jump to first unread").assertDoesNotExist()
+            composeRule.onNodeWithText("Jump to Current").assertDoesNotExist()
         }
     }
 
@@ -1221,7 +1220,7 @@ class ReadingListDetailScreenTest {
             }
             composeRule.onNodeWithContentDescription("Reading list options").performClick()
             composeRule.onNodeWithText("Reset reading progress").performClick()
-            composeRule.onNodeWithText("Reset reading progress?").assertIsDisplayed()
+            composeRule.onNodeWithText("Reset Progress?", ignoreCase = true).assertIsDisplayed()
             composeRule.onNodeWithText("Reset").performClick()
             composeRule.waitUntil(timeoutMillis = 5000L) {
                 composeRule.onAllNodesWithText("0 of 2 read • 0% complete")
@@ -1229,7 +1228,7 @@ class ReadingListDetailScreenTest {
                     .isNotEmpty()
             }
             composeRule.onNodeWithText("0 of 2 read • 0% complete").assertIsDisplayed()
-            composeRule.onNodeWithText("Jump to first unread").assertIsDisplayed()
+            composeRule.onNodeWithText("Jump to Current").assertIsDisplayed()
         }
     }
 
@@ -1311,11 +1310,12 @@ class ReadingListDetailScreenTest {
             composeRule.onNodeWithContentDescription("More options").performClick()
             composeRule.onNodeWithText("Mark as reading").performClick()
             composeRule.waitUntil(timeoutMillis = 5000L) {
-                composeRule.onAllNodesWithText("Currently reading")
-                    .fetchSemanticsNodes()
-                    .isNotEmpty()
+                viewModel.issues.value.any { issue ->
+                    issue.issueId == issueId &&
+                            issue.readingStatus ==
+                            ReadingStatus.READING
+                }
             }
-            composeRule.onNodeWithText("Currently reading").assertIsDisplayed()
             composeRule.onNodeWithText("0 of 1 read • 0% complete").assertIsDisplayed()
             composeRule.onNode(isToggleable()).assertIsOff()
         }
@@ -1849,9 +1849,9 @@ class ReadingListDetailScreenTest {
             }
             composeRule.onNodeWithContentDescription("Reading list options").performClick()
             composeRule.onNodeWithText("Reset reading progress").performClick()
-            composeRule.onNodeWithText("Reset reading progress?").assertIsDisplayed()
+            composeRule.onNodeWithText("Reset progress?", ignoreCase = true).assertIsDisplayed()
             composeRule.onNodeWithText("Cancel").performClick()
-            composeRule.onNodeWithText("Reset reading progress?").assertDoesNotExist()
+            composeRule.onNodeWithText("Reset progress?", ignoreCase = true).assertDoesNotExist()
             composeRule.onNodeWithText("1 of 1 read • 100% complete").assertIsDisplayed()
         }
     }
@@ -1964,11 +1964,11 @@ class ReadingListDetailScreenTest {
             }
 
             composeRule.waitUntil(timeoutMillis = 5000L) {
-                composeRule.onAllNodesWithText("Main Arc")
+                composeRule.onAllNodesWithText("Main Arc", ignoreCase = true)
                     .fetchSemanticsNodes()
                     .isNotEmpty()
             }
-            composeRule.onNodeWithText("Main Arc").performClick()
+            composeRule.onNodeWithText("Main Arc", ignoreCase = true).performClick()
             composeRule.waitUntil(
                 timeoutMillis = 5000L
             ) {
@@ -1997,7 +1997,7 @@ class ReadingListDetailScreenTest {
     }
 
     @Test
-    fun readingListDetailScreen_jumpToFirstUnreadKeepsTargetVisible() {
+    fun readingListDetailScreen_jumpToCurrentKeepsTargetVisible() {
         runBlocking {
             val publisherId =
                 comicDao.insertPublisher(
@@ -2104,11 +2104,11 @@ class ReadingListDetailScreenTest {
             }
 
             composeRule.waitUntil(timeoutMillis = 5000L) {
-                composeRule.onAllNodesWithText("Main Arc")
+                composeRule.onAllNodesWithText("Main Arc", ignoreCase = true)
                     .fetchSemanticsNodes()
                     .isNotEmpty()
             }
-            composeRule.onNodeWithText("Main Arc").performClick()
+            composeRule.onNodeWithText("Main Arc", ignoreCase = true).performClick()
             composeRule.waitUntil(
                 timeoutMillis = 5000L
             ) {
@@ -2125,7 +2125,7 @@ class ReadingListDetailScreenTest {
                     "Expand section"
                 )
                 .assertIsDisplayed()
-            composeRule.onNodeWithText("Jump to first unread").assertIsDisplayed().performClick()
+            composeRule.onNodeWithText("Jump to Current").assertIsDisplayed().performClick()
             composeRule.waitUntil(timeoutMillis = 5000L) {
             composeRule.onAllNodesWithText("Target Story")
                 .fetchSemanticsNodes()
@@ -2205,7 +2205,7 @@ class ReadingListDetailScreenTest {
             }
             composeRule.onNodeWithContentDescription("More options").performClick()
             composeRule.onNodeWithText("Remove from reading list").performClick()
-            composeRule.onNodeWithText("Remove issue?").assertIsDisplayed()
+            composeRule.onNodeWithText("Remove issue?", ignoreCase = true).assertIsDisplayed()
             composeRule.onNodeWithText("Remove").performClick()
             composeRule.waitUntil(timeoutMillis = 5000L) {
                 composeRule.onAllNodesWithText("No issues in this reading list")
@@ -2598,7 +2598,7 @@ class ReadingListDetailScreenTest {
                     .isNotEmpty()
             }
             composeRule.onNodeWithContentDescription("Reading list options").performClick()
-            composeRule.onNodeWithText("Add section").performClick()
+            composeRule.onNodeWithText("Add section", ignoreCase = true).performClick()
             composeRule.onAllNodes(hasSetTextAction())[0]
                 .performTextInput("Opening Arc")
             composeRule.onAllNodes(hasSetTextAction())[1]
@@ -2691,7 +2691,7 @@ class ReadingListDetailScreenTest {
                     .isNotEmpty()
             }
             composeRule.onNodeWithContentDescription("More options").performClick()
-            composeRule.onNodeWithText("Move to section").performClick()
+            composeRule.onNodeWithText("Move to section", ignoreCase = true).performClick()
             composeRule.onNodeWithText("Destination Arc").performClick()
             composeRule.waitUntil(timeoutMillis = 5000L) {
                 runBlocking {
@@ -2702,7 +2702,7 @@ class ReadingListDetailScreenTest {
 
             val item = comicDao.getItemsForReadingList(readingListId).single()
             assertEquals(sectionId, item.sectionId)
-            composeRule.onNodeWithText("Destination Arc").assertIsDisplayed()
+            composeRule.onNodeWithText("Destination Arc", ignoreCase = true).assertIsDisplayed()
         }
     }
 
@@ -2802,10 +2802,10 @@ class ReadingListDetailScreenTest {
             }
 
             composeRule.onNodeWithContentDescription("Reading list options").performClick()
-            composeRule.onNodeWithText("Add section").assertDoesNotExist()
+            composeRule.onNodeWithText("Add section", ignoreCase = true).assertDoesNotExist()
             composeRule.onNodeWithContentDescription("Reading list options").performClick()
             composeRule.onNodeWithContentDescription("More options").performClick()
-            composeRule.onNodeWithText("Move to section").assertDoesNotExist()
+            composeRule.onNodeWithText("Move to section", ignoreCase = true).assertDoesNotExist()
         }
     }
 
@@ -2858,7 +2858,7 @@ class ReadingListDetailScreenTest {
 
             composeRule
                 .onNodeWithText(
-                    "Edit reading list"
+                    "Edit reading list", ignoreCase = true
                 )
                 .performClick()
 
@@ -2986,7 +2986,7 @@ class ReadingListDetailScreenTest {
 
             composeRule
                 .onNodeWithText(
-                    "Edit reading list"
+                    "Edit reading list", ignoreCase = true
                 )
                 .assertDoesNotExist()
         }
@@ -3047,7 +3047,7 @@ class ReadingListDetailScreenTest {
 
             composeRule
                 .onNodeWithText(
-                    "Delete reading list?"
+                    "Delete reading list?", ignoreCase = true
                 )
                 .assertIsDisplayed()
 
@@ -3057,7 +3057,7 @@ class ReadingListDetailScreenTest {
 
             composeRule
                 .onNodeWithText(
-                    "Delete reading list?"
+                    "Delete reading list?", ignoreCase = true
                 )
                 .assertDoesNotExist()
 
@@ -3132,7 +3132,7 @@ class ReadingListDetailScreenTest {
 
             composeRule
                 .onNodeWithText(
-                    "Delete reading list?"
+                    "Delete reading list?", ignoreCase = true
                 )
                 .assertIsDisplayed()
 
@@ -3768,7 +3768,7 @@ class ReadingListDetailScreenTest {
             // Mark both read.
             composeRule
                 .onNodeWithText(
-                    "Mark read"
+                    "READ"
                 )
                 .performClick()
 
@@ -3838,7 +3838,7 @@ class ReadingListDetailScreenTest {
             // Mark both unread.
             composeRule
                 .onNodeWithText(
-                    "Mark unread"
+                    "UNREAD"
                 )
                 .performClick()
 

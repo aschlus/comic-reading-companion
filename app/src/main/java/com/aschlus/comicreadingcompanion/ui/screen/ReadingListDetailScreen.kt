@@ -1,75 +1,102 @@
 package com.aschlus.comicreadingcompanion.ui.screen
 
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
-import androidx.compose.material.icons.filled.FilterList
 import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
-import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeJoin
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSource
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListIssue
+import com.aschlus.comicreadingcompanion.ui.component.ComicConfirmationDialog
 import com.aschlus.comicreadingcompanion.ui.component.ComicCoverImage
+import com.aschlus.comicreadingcompanion.ui.component.ComicDropdownMenu
+import com.aschlus.comicreadingcompanion.ui.component.ComicDropdownMenuItem
+import com.aschlus.comicreadingcompanion.ui.component.ComicFormDialog
+import com.aschlus.comicreadingcompanion.ui.component.ComicReadingListDetailControls
+import com.aschlus.comicreadingcompanion.ui.component.ComicReadingListDetailHeader
+import com.aschlus.comicreadingcompanion.ui.component.ComicReadingListDetailHero
+import com.aschlus.comicreadingcompanion.ui.component.ComicReadingListFilterSeriesOption
+import com.aschlus.comicreadingcompanion.ui.component.ComicReadingListFilterSheetContent
+import com.aschlus.comicreadingcompanion.ui.component.ComicReadingListSearchHeader
+import com.aschlus.comicreadingcompanion.ui.component.ComicReadingListSelectionHeader
+import com.aschlus.comicreadingcompanion.ui.component.ComicSectionPickerDialog
+import com.aschlus.comicreadingcompanion.ui.component.ComicSectionPickerOption
+import com.aschlus.comicreadingcompanion.ui.component.ComicSlantedShape
+import com.aschlus.comicreadingcompanion.ui.theme.ComicAccentTextTransform
+import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
+import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
+import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
+import com.aschlus.comicreadingcompanion.ui.theme.LilitaOneFontFamily
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ReadingListDetailViewModel
+import kotlinx.coroutines.launch
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.Locale
-import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(
+    ExperimentalMaterial3Api::class,
+    ExperimentalFoundationApi::class
+)
 @Composable
 fun ReadingListDetailScreen(
     readingListId: Long,
@@ -166,6 +193,10 @@ fun ReadingListDetailScreen(
         mutableStateOf("")
     }
 
+    var stickyControlsHeightPx by remember {
+        mutableIntStateOf(0)
+    }
+
     var issuePendingSectionMove by remember(
         readingListId
     ) {
@@ -213,10 +244,6 @@ fun ReadingListDetailScreen(
         mutableStateOf<String?>(null)
     }
 
-    var seriesMenuExpanded by remember {
-        mutableStateOf(false)
-    }
-
     var showFilterSheet by remember {
         mutableStateOf(false)
     }
@@ -257,9 +284,10 @@ fun ReadingListDetailScreen(
         issues,
         startPosition,
         hasAutoScrolled,
-        collapsedSectionsLoaded
+        collapsedSectionsLoaded,
+        stickyControlsHeightPx
     ) {
-        if (!collapsedSectionsLoaded) {
+        if (!collapsedSectionsLoaded || stickyControlsHeightPx == 0) {
             return@LaunchedEffect
         }
 
@@ -272,7 +300,7 @@ fun ReadingListDetailScreen(
                 issue.position == startPosition
             }
 
-            if (targetIndex >= 0) {
+            if (targetIndex > 0) {
                 val targetIssue = issues[targetIndex]
                 val targetSectionId = targetIssue.sectionId
                 val sectionWasCollapsed =
@@ -290,7 +318,10 @@ fun ReadingListDetailScreen(
                     withFrameNanos {  }
                 }
 
-                listState.scrollToItem(targetIndex)
+                listState.scrollToItem(
+                    index = targetIndex + 2,
+                    scrollOffset = -stickyControlsHeightPx
+                )
             }
 
             hasAutoScrolled = true
@@ -414,154 +445,81 @@ fun ReadingListDetailScreen(
             matchesReadingStatus && matchesRequiredStatus && matchesSeries
         }
 
+    val readCount = issues.count {
+        it.readingStatus == ReadingStatus.READ
+    }
+
+    val totalCount = issues.size
+
+    val progress =
+        if (totalCount == 0) {
+            0f
+        } else {
+            readCount.toFloat() / totalCount.toFloat()
+        }
+
+    val firstUnreadIndex = issues.indexOfFirst { issue ->
+        issue.readingStatus != ReadingStatus.READ
+    }
+
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = {
-                    when {
-                        isSelectionMode -> {
-                            Text(
-                                "${selectedReadingListItemIds.size} selected"
-                            )
+            when {
+                isSelectionMode -> {
+                    ComicReadingListSelectionHeader(
+                        selectedCount = selectedReadingListItemIds.size,
+                        onCancelClick = {
+                            viewModel.clearIssueSelection()
+                        },
+                        onMarkReadClick = {
+                            viewModel.markSelectedIssuesAsRead()
+                        },
+                        onMarkUnreadClick = {
+                            viewModel.markSelectedIssuesAsUnread()
                         }
+                    )
+                }
 
-                        isSearchActive -> {
-                            OutlinedTextField(
-                                value = searchQuery,
-                                onValueChange = { newQuery ->
-                                    searchQuery = newQuery
-                                },
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .focusRequester(
-                                        searchFocusRequester
-                                    ),
-                                singleLine = true,
-                                placeholder = {
-                                    Text("Search reading list")
-                                },
-                                leadingIcon = {
-                                    Icon(
-                                        imageVector = Icons.Default.Search,
-                                        contentDescription = null
-                                    )
-                                }
-                            )
-                        }
+                isSearchActive -> {
+                    ComicReadingListSearchHeader(
+                        query = searchQuery,
+                        onQueryChange = { newQuery ->
+                            searchQuery = newQuery
+                        },
+                        onCloseClick = {
+                            searchQuery = ""
+                            isSearchActive = false
+                            keyboardController?.hide()
+                        },
+                        focusRequester = searchFocusRequester
+                    )
+                }
 
-                        else -> {
-                            Text(
-                                readingList?.title
-                                    ?: "Reading list"
-                            )
-                        }
-                    }
-                },
-                navigationIcon = {
-                    IconButton(
-                        onClick = {
-                            when {
-                                isSelectionMode -> {
-                                    viewModel.clearIssueSelection()
-                                }
-
-                                isSearchActive -> {
-                                    searchQuery = ""
-                                    isSearchActive = false
-                                    keyboardController?.hide()
-                                }
-
-                                else -> {
-                                    onBackClick()
-                                }
-                            }
-                        }
-                    ) {
-                        Icon(
-                            imageVector =
-                                if (isSelectionMode) {
-                                    Icons.Default.Close
-                                } else {
-                                    Icons.AutoMirrored.Filled.ArrowBack
-                                },
-                            contentDescription =
-                                if (isSelectionMode) {
-                                    "Cancel selection"
-                                } else {
-                                    "Back"
-                                }
-                        )
-                    }
-                },
-                actions = {
-                    if (isSelectionMode) {
-                        TextButton(
-                            onClick = {
-                                viewModel.markSelectedIssuesAsRead()
-                            }
-                        ) {
-                            Text("Mark read")
-                        }
-
-                        TextButton(
-                            onClick = {
-                                viewModel.markSelectedIssuesAsUnread()
-                            }
-                        ) {
-                            Text("Mark unread")
-                        }
-                    } else if (isSearchActive) {
-                        IconButton(
-                            onClick = {
-                                searchQuery = ""
-                                isSearchActive = false
-                                keyboardController?.hide()
-                            }
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Close,
-                                contentDescription = "Close search"
-                            )
-                        }
-                    } else {
-                        IconButton(
-                            onClick = {
-                                isSearchActive = true
-                            }
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Search,
-                                contentDescription = "Search reading list"
-                            )
-                        }
-
-                        Box {
-                            IconButton(
-                                onClick = {
-                                    listMenuExpanded = true
-                                }
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.MoreVert,
-                                    contentDescription =
-                                        "Reading list options"
-                                )
-                            }
-
-                            DropdownMenu(
+                else -> {
+                    ComicReadingListDetailHeader(
+                        title =
+                            readingList?.title
+                                ?: "Reading list",
+                        onBackClick =
+                            onBackClick,
+                        onSearchClick = {
+                            isSearchActive = true
+                        },
+                        onMenuClick = {
+                            listMenuExpanded = true
+                        },
+                        menuContent = {
+                            ComicDropdownMenu(
                                 expanded = listMenuExpanded,
                                 onDismissRequest = {
                                     listMenuExpanded = false
                                 }
                             ) {
                                 if (readingList?.source == ReadingListSource.USER) {
-                                    DropdownMenuItem(
-                                        text = {
-                                            Text("Edit reading list")
-                                        },
+                                    ComicDropdownMenuItem(
+                                        text = "Edit reading list",
                                         onClick = {
                                             listMenuExpanded = false
-
                                             editReadingListTitle =
                                                 readingList?.title.orEmpty()
                                             editReadingListDescription =
@@ -572,10 +530,8 @@ fun ReadingListDetailScreen(
                                 }
 
                                 if (readingList?.source == ReadingListSource.USER) {
-                                    DropdownMenuItem(
-                                        text = {
-                                            Text("Add section")
-                                        },
+                                    ComicDropdownMenuItem(
+                                        text = "Add section",
                                         onClick = {
                                             listMenuExpanded = false
                                             showCreateSectionDialog = true
@@ -583,10 +539,8 @@ fun ReadingListDetailScreen(
                                     )
                                 }
 
-                                DropdownMenuItem(
-                                    text = {
-                                        Text("Duplicate reading list")
-                                    },
+                                ComicDropdownMenuItem(
+                                    text = "Duplicate reading list",
                                     enabled = readingList != null,
                                     onClick = {
                                         listMenuExpanded = false
@@ -594,14 +548,12 @@ fun ReadingListDetailScreen(
                                     }
                                 )
 
-                                DropdownMenuItem(
-                                    text = {
-                                        Text("Export reading list")
-                                    },
+                                ComicDropdownMenuItem(
+                                    text = "Export reading list",
                                     enabled = readingList != null,
                                     onClick = {
                                         val currentReadingList = readingList
-                                            ?: return@DropdownMenuItem
+                                            ?: return@ComicDropdownMenuItem
 
                                         listMenuExpanded = false
 
@@ -613,13 +565,9 @@ fun ReadingListDetailScreen(
                                 )
 
                                 if (readingList?.source == ReadingListSource.USER) {
-                                    DropdownMenuItem(
-                                        text = {
-                                            Text(
-                                                text = "Delete reading list",
-                                                color = MaterialTheme.colorScheme.error
-                                            )
-                                        },
+                                    ComicDropdownMenuItem(
+                                        text = "Delete reading list",
+                                        destructive = true,
                                         onClick = {
                                             listMenuExpanded = false
                                             showDeleteReadingListDialog = true
@@ -627,10 +575,8 @@ fun ReadingListDetailScreen(
                                     )
                                 }
 
-                                DropdownMenuItem(
-                                    text = {
-                                        Text("Mark all as read")
-                                    },
+                                ComicDropdownMenuItem(
+                                    text = "Mark all as read",
                                     enabled = hasUnreadIssues,
                                     onClick = {
                                         listMenuExpanded = false
@@ -638,10 +584,8 @@ fun ReadingListDetailScreen(
                                     }
                                 )
 
-                                DropdownMenuItem(
-                                    text = {
-                                        Text("Reset reading progress")
-                                    },
+                                ComicDropdownMenuItem(
+                                    text = "Reset reading progress",
                                     enabled = hasAnyProgress,
                                     onClick = {
                                         listMenuExpanded = false
@@ -650,169 +594,178 @@ fun ReadingListDetailScreen(
                                 )
                             }
                         }
-                    }
+                    )
                 }
-            )
+            }
         }
     )
     { innerPadding: PaddingValues ->
 
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-                .padding(16.dp),
-            verticalArrangement =
-                Arrangement.spacedBy(8.dp)
-        ) {
+        val currentReadingList =
+            readingList
 
-            val currentReadingList = readingList
-
-            if (currentReadingList == null) {
+        if (currentReadingList == null) {
+            Box(
+                modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .padding(innerPadding),
+                contentAlignment =
+                    Alignment.Center
+            ) {
                 Text("Loading...")
-            } else {
-
-                currentReadingList.description
-                    ?.let { description ->
-                        Text(description)
-                    }
-
-                val readCount = issues.count {
-                    it.readingStatus == ReadingStatus.READ
-                }
-
-                val totalCount = issues.size
-
-                val progress =
-                    if (totalCount == 0) {
-                        0f
-                    } else {
-                        readCount.toFloat() / totalCount.toFloat()
-                    }
-
-                val completionPercentage =
-                    if (totalCount == 0) {
-                        0
-                    } else {
-                        (readCount * 100) / totalCount
-                    }
-
-                Text(
-                    text = "$readCount of $totalCount read • " +
-                        "$completionPercentage% complete"
-                )
-
-                LinearProgressIndicator(
-                    progress = { progress },
-                    modifier = Modifier.fillMaxWidth()
-                )
-
-                val firstUnreadIndex = issues.indexOfFirst { issue ->
-                    issue.readingStatus != ReadingStatus.READ
-                }
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    OutlinedButton(
-                        onClick = {
-                            showFilterSheet = true
-                        }
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.FilterList,
-                            contentDescription = null
-                        )
-
-                        Spacer(modifier = Modifier.width(8.dp))
-
-                        Text(
-                            text =
-                                if (activeFilterCount == 0) {
-                                    "Filters"
-                                } else {
-                                    "Filters ($activeFilterCount)"
-                                }
-                        )
-                    }
-
-                    Text(
-                        text =
-                            if (isSearching || hasActiveFilters) {
-                                "${visibleIssues.size} of ${issues.size} issues"
-                            } else {
-                                "${issues.size} issues"
-                            },
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(
-                                horizontal = 8.dp
-                            ),
-                        style =
-                            MaterialTheme.typography.bodySmall
+            }
+        } else {
+            LazyColumn(
+                modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .padding(innerPadding),
+                state =
+                    listState,
+                contentPadding =
+                    PaddingValues(
+                        start = 16.dp,
+                        end = 16.dp,
+                        bottom = 16.dp
                     )
+            ) {
+                item(
+                    key = "reading-list-hero"
+                ) {
+                    ComicReadingListDetailHero(
+                        description =
+                            currentReadingList
+                                .description,
+                        coverUrl =
+                            issues
+                                .firstOrNull()
+                                ?.coverUrl,
+                        modifier =
+                            Modifier.padding(
+                                top = 16.dp,
+                                bottom = 12.dp
+                            )
+                    )
+                }
 
-                    if (
-                        firstUnreadIndex >= 0 &&
-                        !isSearching &&
-                        !hasActiveFilters
+                stickyHeader {
+                    Box(
+                        modifier =
+                            Modifier
+                                .fillMaxWidth()
+                                .background(
+                                    ComicPaper
+                                )
+                                .onGloballyPositioned { coordinates ->
+                                    stickyControlsHeightPx =
+                                        coordinates.size.height
+                                }
+                                .padding(
+                                    top = 8.dp,
+                                    bottom = 12.dp
+                                )
                     ) {
-                        TextButton(
-                            onClick = {
+                        ComicReadingListDetailControls(
+                            readCount =
+                                readCount,
+                            totalCount =
+                                totalCount,
+                            progress =
+                                progress,
+                            visibleIssueCount =
+                                visibleIssues.size,
+                            showFilteredCount =
+                                isSearching ||
+                                        hasActiveFilters,
+                            activeFilterCount =
+                                activeFilterCount,
+                            showJumpToCurrent =
+                                firstUnreadIndex >= 0 &&
+                                        !isSearching &&
+                                        !hasActiveFilters,
+                            onFiltersClick = {
+                                showFilterSheet = true
+                            },
+                            onJumpToCurrentClick = {
                                 coroutineScope.launch {
-                                    val targetIssue = issues[firstUnreadIndex]
-                                    val targetSectionId = targetIssue.sectionId
+                                    val targetIssue =
+                                        issues[
+                                            firstUnreadIndex
+                                        ]
+
+                                    val targetSectionId =
+                                        targetIssue
+                                            .sectionId
+
                                     val sectionWasCollapsed =
-                                        targetSectionId != null &&
-                                                collapsedSectionIds.contains(
-                                                    targetSectionId
-                                                )
+                                        targetSectionId !=
+                                                null &&
+                                                collapsedSectionIds
+                                                    .contains(
+                                                        targetSectionId
+                                                    )
 
                                     if (
-                                        targetSectionId != null &&
+                                        targetSectionId !=
+                                        null &&
                                         sectionWasCollapsed
                                     ) {
-                                        viewModel.expandSection(targetSectionId)
+                                        viewModel
+                                            .expandSection(
+                                                targetSectionId
+                                            )
 
                                         withFrameNanos { }
                                     }
 
-                                    listState.animateScrollToItem(
-                                        firstUnreadIndex
-                                    )
+                                    listState
+                                        .animateScrollToItem(
+                                            index = firstUnreadIndex + 2,
+                                            scrollOffset = -stickyControlsHeightPx
+                                        )
                                 }
                             }
-                        ) {
-                            Text("Jump to first unread")
-                        }
+                        )
                     }
                 }
-            }
-            if (issues.isEmpty()) {
-                Text("No issues in this reading list")
-            } else if (
-                (isSearching || hasActiveFilters) && visibleIssues.isEmpty()
-            ) {
-                Text(
-                    text =
-                        if (isSearching) {
-                            "No issues match " +
-                                "\"$trimmedSearchQuery\" " +
-                                "with the current filters."
-                        } else {
-                            "No issues match the current filters."
-                        }
-                )
-            } else {
-                LazyColumn(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f),
-                    state = listState
+
+                if (issues.isEmpty()) {
+                    item {
+                        Text(
+                            text =
+                                "No issues in this reading list",
+                            modifier =
+                                Modifier.padding(
+                                    top = 8.dp
+                                )
+                        )
+                    }
+                } else if (
+                    (isSearching ||
+                            hasActiveFilters) &&
+                    visibleIssues.isEmpty()
                 ) {
+                    item {
+                        Text(
+                            text =
+                                if (isSearching) {
+                                    "No issues match " +
+                                            "\"$trimmedSearchQuery\" " +
+                                            "with the current filters."
+                                } else {
+                                    "No issues match the current filters."
+                                },
+                            modifier =
+                                Modifier.padding(
+                                    top = 8.dp
+                                )
+                        )
+                    }
+                } else {
                     itemsIndexed(
-                        items = visibleIssues,
+                        items =
+                            visibleIssues,
                         key = { _, issue ->
                             issue.readingListItemId
                         }
@@ -820,7 +773,9 @@ fun ReadingListDetailScreen(
 
                         val previousSectionId =
                             if (index > 0) {
-                                visibleIssues[index - 1].sectionId
+                                visibleIssues[
+                                    index - 1
+                                ].sectionId
                             } else {
                                 null
                             }
@@ -830,76 +785,139 @@ fun ReadingListDetailScreen(
 
                         val isFirstIssueInSection =
                             sectionId != null &&
-                                sectionId != previousSectionId
+                                    sectionId !=
+                                    previousSectionId
 
                         val isSectionCollapsed =
                             !isSearching &&
-                                !hasActiveFilters &&
-                                sectionId != null &&
-                                collapsedSectionIds.contains(
-                                    sectionId
-                                )
+                                    !hasActiveFilters &&
+                                    sectionId != null &&
+                                    collapsedSectionIds
+                                        .contains(
+                                            sectionId
+                                        )
 
                         if (isFirstIssueInSection) {
+                            if (!isSectionCollapsed) {
+                                Spacer(modifier = Modifier.height(2.dp))
+                            }
+                            val sectionIssueCount =
+                                visibleIssues.count {
+                                        visibleIssue ->
+                                    visibleIssue.sectionId ==
+                                            sectionId
+                                }
+
                             ReadingListSectionHeader(
                                 title =
                                     issue.sectionTitle
                                         ?: "Section",
-                                description =
-                                    issue.sectionDescription,
+                                issueCount =
+                                    sectionIssueCount,
                                 isCollapsed =
                                     isSectionCollapsed,
+                                canCollapse = !isSearching && !hasActiveFilters,
                                 onToggleCollapsed = {
-                                    viewModel.toggleSectionCollapsed(sectionId)
-                                }
+                                    viewModel
+                                        .toggleSectionCollapsed(
+                                            sectionId
+                                        )
+                                },
+                                modifier =
+                                    Modifier.padding(
+                                        top =
+                                            if (index == 0) {
+                                                2.dp
+                                            } else {
+                                                8.dp
+                                            },
+                                        bottom =
+                                            if (isSectionCollapsed) {
+                                                4.dp
+                                            } else {
+                                                2.dp
+                                            }
+                                    )
                             )
                         }
 
                         if (!isSectionCollapsed) {
                             val fullIssueIndex =
-                                issues.indexOfFirst { fullIssue ->
-                                    fullIssue.readingListItemId == issue.readingListItemId
+                                issues.indexOfFirst {
+                                        fullIssue ->
+                                    fullIssue
+                                        .readingListItemId ==
+                                            issue
+                                                .readingListItemId
                                 }
 
-                            val canReorder = readingList?.source == ReadingListSource.USER
+                            val canReorder =
+                                readingList?.source ==
+                                        ReadingListSource.USER
 
-                            val canMoveUp = canReorder &&
-                                    fullIssueIndex > 0 &&
-                                    issues[fullIssueIndex - 1].sectionId == issue.sectionId
+                            val canMoveUp =
+                                canReorder &&
+                                        fullIssueIndex > 0 &&
+                                        issues[
+                                            fullIssueIndex - 1
+                                        ].sectionId ==
+                                        issue.sectionId
 
-                            val canMoveDown = canReorder &&
-                                    fullIssueIndex >= 0 &&
-                                    fullIssueIndex < issues.lastIndex &&
-                                    issues[fullIssueIndex + 1].sectionId == issue.sectionId
+                            val canMoveDown =
+                                canReorder &&
+                                        fullIssueIndex >= 0 &&
+                                        fullIssueIndex <
+                                        issues.lastIndex &&
+                                        issues[
+                                            fullIssueIndex + 1
+                                        ].sectionId ==
+                                        issue.sectionId
 
                             ReadingListIssueRow(
-                                issue = issue,
-                                isSelectionMode = isSelectionMode,
-                                isSelected = issue.readingListItemId in selectedReadingListItemIds,
+                                issue =
+                                    issue,
+                                isSelectionMode =
+                                    isSelectionMode,
+                                isSelected =
+                                    issue
+                                        .readingListItemId in
+                                            selectedReadingListItemIds,
                                 onSelectionToggle = {
-                                    viewModel.toggleIssueSelection(issue)
+                                    viewModel
+                                        .toggleIssueSelection(
+                                            issue
+                                        )
                                 },
                                 onIssueClick = {
-                                    onIssueClick(issue.issueId)
+                                    onIssueClick(
+                                        issue.issueId
+                                    )
                                 },
                                 onToggleRead = {
-                                    viewModel.toggleIssueRead(
-                                        issue = issue
-                                    )
+                                    viewModel
+                                        .toggleIssueRead(
+                                            issue = issue
+                                        )
                                 },
                                 onMarkAsReading = {
-                                    viewModel.markIssueAsReading(
-                                        issue = issue
-                                    )
+                                    viewModel
+                                        .markIssueAsReading(
+                                            issue = issue
+                                        )
                                 },
                                 onMarkAllBeforeRead = {
-                                    viewModel.markAllBeforeAsRead(
-                                        selectedIssue = issue
-                                    )
+                                    viewModel
+                                        .markAllBeforeAsRead(
+                                            selectedIssue =
+                                                issue
+                                        )
                                 },
-                                canReorder = canReorder,
-                                canMoveUp = canMoveUp,
-                                canMoveDown = canMoveDown,
+                                canReorder =
+                                    canReorder,
+                                canMoveUp =
+                                    canMoveUp,
+                                canMoveDown =
+                                    canMoveDown,
                                 onMoveUp = {
                                     viewModel.moveIssueUp(
                                         issue = issue
@@ -910,12 +928,20 @@ fun ReadingListDetailScreen(
                                         issue = issue
                                     )
                                 },
-                                canChangeSection = canReorder && sections.isNotEmpty(),
+                                canChangeSection =
+                                    canReorder &&
+                                            sections.isNotEmpty(),
                                 onMoveToSectionRequest = {
-                                    issuePendingSectionMove = issue
+                                    issuePendingSectionMove =
+                                        issue
                                 },
-                                canRemove = readingList?.source == ReadingListSource.USER,
-                                onRemoveRequest = { issuePendingRemoval = issue }
+                                canRemove =
+                                    readingList?.source ==
+                                            ReadingListSource.USER,
+                                onRemoveRequest = {
+                                    issuePendingRemoval =
+                                        issue
+                                }
                             )
                         }
                     }
@@ -929,507 +955,198 @@ fun ReadingListDetailScreen(
             onDismissRequest = {
                 showFilterSheet = false
             },
-            sheetState = filterSheetState
+            sheetState = filterSheetState,
+            containerColor = ComicPaper,
+            dragHandle = null
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        start = 24.dp,
-                        end = 24.dp,
-                        bottom = 32.dp
-                    ),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                Text(
-                    text = "Filter issues",
-                    style = MaterialTheme.typography.headlineSmall
-                )
-                Text(
-                    text = "Reading status",
-                    style = MaterialTheme.typography.labelLarge
-                )
-
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    FilterChip(
-                        selected =
-                            readingStatusFilter == "UNREAD",
-                        onClick = {
-                            readingStatusFilter =
-                                if (readingStatusFilter == "UNREAD") {
-                                    "ALL"
-                                } else {
-                                    "UNREAD"
-                                }
-                        },
-                        label = {
-                            Text("Unread")
-                        }
-                    )
-
-                    FilterChip(
-                        selected =
-                            readingStatusFilter == "READING",
-                        onClick = {
-                            readingStatusFilter =
-                                if (readingStatusFilter == "READING") {
-                                    "ALL"
-                                } else {
-                                    "READING"
-                                }
-                        },
-                        label = {
-                            Text("Reading")
-                        }
-                    )
-
-                    FilterChip(
-                        selected =
-                            readingStatusFilter == "READ",
-                        onClick = {
-                            readingStatusFilter =
-                                if (readingStatusFilter == "READ"
-                                ) {
-                                    "ALL"
-                                } else {
-                                    "READ"
-                                }
-                        },
-                        label = {
-                            Text("Read")
-                        }
-                    )
-                }
-
-                Text(
-                    text = "List status",
-                    style = MaterialTheme.typography.labelLarge
-                )
-
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    FilterChip(
-                        selected =
-                            requiredFilter == "REQUIRED",
-                        onClick = {
-                            requiredFilter =
-                                if (requiredFilter == "REQUIRED") {
-                                    "ALL"
-                                } else {
-                                    "REQUIRED"
-                                }
-                        },
-                        label = {
-                            Text("Required")
-                        }
-                    )
-
-                    FilterChip(
-                        selected =
-                            requiredFilter == "OPTIONAL",
-                        onClick = {
-                            requiredFilter =
-                                if (requiredFilter == "OPTIONAL") {
-                                    "ALL"
-                                } else {
-                                    "OPTIONAL"
-                                }
-                        },
-                        label = {
-                            Text("Optional")
-                        }
-                    )
-                }
-
-                Text(
-                    text = "Series",
-                    style = MaterialTheme.typography.labelLarge
-                )
-
-                Box {
-                    OutlinedButton(
-                        onClick = {
-                            seriesMenuExpanded = true
-                        }
-                    ) {
-                        Text(
-                            text =
-                                selectedSeries
-                                    ?.displayName
-                                    ?: "All series"
+            ComicReadingListFilterSheetContent(
+                readingStatusFilter = readingStatusFilter,
+                onReadingStatusFilterChange = { newFilter ->
+                    readingStatusFilter = newFilter
+                },
+                requiredFilter = requiredFilter,
+                onRequiredFilterChange = { newFilter ->
+                    requiredFilter = newFilter
+                },
+                selectedSeriesLabel =
+                    selectedSeries
+                        ?.displayName
+                        ?: "All series",
+                seriesOptions =
+                    seriesOptions.map { option ->
+                        ComicReadingListFilterSeriesOption(
+                            key = option.key,
+                            label = option.displayName
                         )
-                    }
-
-                    DropdownMenu(
-                        expanded = seriesMenuExpanded,
-                        onDismissRequest = {
-                            seriesMenuExpanded = false
-                        }
-                    ) {
-                        DropdownMenuItem(
-                            text = {
-                                Text("All series")
-                            },
-                            onClick = {
-                                selectedSeriesKey = null
-                                seriesMenuExpanded = false
-                            }
-                        )
-
-                        seriesOptions.forEach {option ->
-                            DropdownMenuItem(
-                                text = {
-                                    Text(option.displayName)
-                                },
-                                onClick = {
-                                    selectedSeriesKey = option.key
-                                    seriesMenuExpanded = false
-                                }
-                            )
-                        }
-                    }
-                }
-
-                if (hasActiveFilters) {
-                    TextButton(
-                        onClick = {
-                            readingStatusFilter = "ALL"
-                            requiredFilter = "ALL"
-                            selectedSeriesKey = null
-                        }
-                    ) {
-                        Text("Clear all filters")
-                    }
-                }
-
-                Button(
-                    onClick = {
-                        showFilterSheet = false
                     },
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(
-                        text =
-                            if (hasActiveFilters) {
-                                "Show ${visibleIssues.size} issues"
-                            } else {
-                                "Done"
-                            }
-                    )
+                onSeriesSelected = { seriesKey ->
+                    selectedSeriesKey = seriesKey
+                },
+                activeFilterCount = activeFilterCount,
+                visibleIssueCount = visibleIssues.size,
+                onClearAll = {
+                    readingStatusFilter = "ALL"
+                    requiredFilter = "ALL"
+                    selectedSeriesKey = null
+                },
+                onDone = {
+                    showFilterSheet = false
                 }
-            }
+            )
         }
     }
 
     if (showResetProgressDialog) {
-        AlertDialog(
-            onDismissRequest = {
+        ComicConfirmationDialog(
+            title = "Reset Progress?",
+            message =
+                "This will mark every issue in this " +
+                "reading list as unread. Issue " +
+                "progress is shared across reading " +
+                "lists, so these issues will also " +
+                "appear unread in any other lists " +
+                "that contain them.",
+            confirmText = "Reset",
+            destructive = true,
+            onConfirm = {
                 showResetProgressDialog = false
+                viewModel.resetProgress()
             },
-            title = {
-                Text("Reset reading progress?")
-            },
-            text = {
-                Text(
-                    "This will mark every issue in this " +
-                    "reading list as unread. Issue " +
-                    "progress is shared across reading " +
-                    "lists, so these issues will also " +
-                    "appear unread in any other lists " +
-                    "that contain them."
-                )
-            },
-            confirmButton = {
-                TextButton(
-                    onClick = {
-                        showResetProgressDialog = false
-                        viewModel.resetProgress()
-                    }
-                ) {
-                    Text("Reset")
-                }
-            },
-            dismissButton = {
-                TextButton(
-                    onClick = {
-                        showResetProgressDialog = false
-                    }
-                ) {
-                    Text("Cancel")
-                }
+            onDismiss = {
+                showResetProgressDialog = false
             }
         )
     }
 
     if (showEditReadingListDialog) {
-        AlertDialog(
-            onDismissRequest = {
+        ComicFormDialog(
+            title = "Edit Reading List",
+            primaryLabel = "Title",
+            primaryValue = editReadingListTitle,
+            onPrimaryValueChange = {
+                editReadingListTitle = it
+            },
+            secondaryLabel = "Description (optional)",
+            secondaryValue = editReadingListDescription,
+            onSecondaryValueChange = {
+                editReadingListDescription = it
+            },
+            confirmText = "Save",
+            confirmEnabled = editReadingListTitle.trim().isNotEmpty(),
+            onConfirm = {
+                viewModel.updateReadingListDetails(
+                    title = editReadingListTitle,
+                    description = editReadingListDescription.takeIf { it.isNotBlank() }
+                )
+
                 showEditReadingListDialog = false
             },
-            title = {
-                Text("Edit reading list")
-            },
-            text = {
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    OutlinedTextField(
-                        value = editReadingListTitle,
-                        onValueChange = {
-                            editReadingListTitle = it
-                        },
-                        label = {
-                            Text("Title")
-                        },
-                        singleLine = true
-                    )
-
-                    OutlinedTextField(
-                        value = editReadingListDescription,
-                        onValueChange = {
-                            editReadingListDescription = it
-                        },
-                        label = {
-                            Text("Description (optional)")
-                        }
-                    )
-                }
-            },
-            confirmButton = {
-                TextButton(
-                    enabled = editReadingListTitle.trim().isNotEmpty(),
-                    onClick = {
-                        viewModel.updateReadingListDetails(
-                            title = editReadingListTitle,
-                            description = editReadingListDescription.takeIf { it.isNotBlank() }
-                        )
-
-                        showEditReadingListDialog = false
-                    }
-                ) {
-                    Text("Save")
-                }
-            },
-            dismissButton = {
-                TextButton(
-                    onClick = {
-                        showEditReadingListDialog = false
-                    }
-                ) {
-                    Text("Cancel")
-                }
+            onDismiss = {
+                showEditReadingListDialog = false
             }
         )
     }
 
     if (showCreateSectionDialog) {
-        AlertDialog(
-            onDismissRequest = {
+        ComicFormDialog(
+            title = "Add Section",
+            primaryLabel = "Section title",
+            primaryValue = newSectionTitle,
+            onPrimaryValueChange = {
+                newSectionTitle = it
+            },
+            secondaryLabel = "Description (optional)",
+            secondaryValue = newSectionDescription,
+            onSecondaryValueChange = {
+                newSectionDescription = it
+            },
+            confirmText = "Add",
+            confirmEnabled = newSectionTitle.trim().isNotEmpty(),
+            onConfirm = {
+                viewModel.createSection(
+                    title = newSectionTitle,
+                    description = newSectionDescription.takeIf { it.isNotBlank() }
+                )
+
                 showCreateSectionDialog = false
                 newSectionTitle = ""
                 newSectionDescription = ""
             },
-            title = {
-                Text("Add section")
-            },
-            text = {
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    OutlinedTextField(
-                        value = newSectionTitle,
-                        onValueChange = {
-                            newSectionTitle = it
-                        },
-                        label = {
-                            Text("Section title")
-                        },
-                        singleLine = true
-                    )
-
-                    OutlinedTextField(
-                        value = newSectionDescription,
-                        onValueChange = {
-                            newSectionDescription = it
-                        },
-                        label = {
-                            Text("Description (optional)")
-                        }
-                    )
-                }
-            },
-            confirmButton = {
-                TextButton(
-                    enabled = newSectionTitle.trim().isNotEmpty(),
-                    onClick = {
-                        viewModel.createSection(
-                            title = newSectionTitle,
-                            description = newSectionDescription.takeIf { it.isNotBlank() }
-                        )
-
-                        showCreateSectionDialog = false
-                        newSectionTitle = ""
-                        newSectionDescription = ""
-                    }
-                ) {
-                    Text("Add")
-                }
-            },
-            dismissButton = {
-                TextButton(
-                    onClick = {
-                        showCreateSectionDialog = false
-                        newSectionTitle = ""
-                        newSectionDescription = ""
-                    }
-                ) {
-                    Text("Cancel")
-                }
+            onDismiss = {
+                showCreateSectionDialog = false
+                newSectionTitle = ""
+                newSectionDescription = ""
             }
         )
     }
 
     if (showDeleteReadingListDialog) {
-        AlertDialog(
-            onDismissRequest = {
+        ComicConfirmationDialog(
+            title = "Delete Reading List?",
+            message =
+                "Delete \"${readingList?.title.orEmpty()}\"? " +
+                "This will permanently delete the " +
+                "reading list and its sections. " +
+                "Your comics and reading progress " +
+                "will not be deleted.",
+            confirmText = "Delete",
+            destructive = true,
+            onConfirm = {
                 showDeleteReadingListDialog = false
+                viewModel.deleteReadingList()
             },
-            title = {
-                Text("Delete reading list?")
-            },
-            text = {
-                Text(
-                    "Delete \"${readingList?.title.orEmpty()}\"? " +
-                    "This will permanently delete the " +
-                    "reading list and its sections. " +
-                    "Your comics and reading progress " +
-                    "will not be deleted."
-                )
-            },
-            confirmButton = {
-                TextButton(
-                    onClick = {
-                        showEditReadingListDialog = false
-                        viewModel.deleteReadingList()
-                    }
-                ) {
-                    Text(
-                        text = "Delete",
-                        color = MaterialTheme.colorScheme.error
-                    )
-                }
-            },
-            dismissButton = {
-                TextButton(
-                    onClick = {
-                        showDeleteReadingListDialog = false
-                    }
-                ) {
-                    Text("Cancel")
-                }
+            onDismiss = {
+                showDeleteReadingListDialog = false
             }
         )
     }
 
     issuePendingSectionMove?.let { issue ->
-        AlertDialog(
-            onDismissRequest = {
+        ComicSectionPickerDialog(
+            issueLabel =
+                "${issue.seriesTitle} " +
+                "#${issue.issueNumber}",
+            currentSectionId = issue.sectionId,
+            sections =
+                sections.map { section ->
+                    ComicSectionPickerOption(
+                        id = section.id,
+                        title = section.title
+                    )
+                },
+            onSectionSelected = { targetSectionId ->
                 issuePendingSectionMove = null
-            },
-            title = {
-                Text("Move to section")
-            },
-            text = {
-                Column {
-                    TextButton(
-                        enabled = issue.sectionId != null,
-                        onClick = {
-                            issuePendingSectionMove = null
 
-                            viewModel
-                                .moveIssueToSection(
-                                    issue = issue,
-                                    targetSectionId = null
-                                )
-                        },
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Text("No section")
-                    }
-
-                    sections.forEach { section ->
-                        TextButton(
-                            enabled = issue.sectionId != section.id,
-                            onClick = {
-                                issuePendingSectionMove = null
-
-                                viewModel
-                                    .moveIssueToSection(
-                                        issue = issue,
-                                        targetSectionId = section.id
-                                    )
-                            },
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Text(section.title)
-                        }
-                    }
-                }
+                viewModel.moveIssueToSection(
+                    issue = issue,
+                    targetSectionId = targetSectionId
+                )
             },
-            confirmButton = {},
-            dismissButton = {
-                TextButton(
-                    onClick = {
-                        issuePendingSectionMove = null
-                    }
-                ) {
-                    Text("Cancel")
-                }
+            onDismiss = {
+                issuePendingSectionMove = null
             }
         )
     }
 
     issuePendingRemoval?.let { issue ->
-        AlertDialog(
-            onDismissRequest = {
+        ComicConfirmationDialog(
+            title = "Remove Issue?",
+            message =
+                "Remove " +
+                "${issue.seriesTitle} " +
+                "#${issue.issueNumber} " +
+                "from this reading list? " +
+                "The issue itself and its " +
+                "reading status will not " +
+                "be deleted.",
+            confirmText = "Remove",
+            destructive = true,
+            onConfirm = {
                 issuePendingRemoval = null
+                viewModel.removeIssue(issue)
             },
-            title = {
-                Text("Remove issue?")
-            },
-            text = {
-                Text(
-                    "Remove " +
-                    "${issue.seriesTitle} " +
-                    "#${issue.issueNumber} " +
-                    "from this reading list? " +
-                    "The issue itself and its " +
-                    "reading status will not " +
-                    "be deleted."
-                )
-            },
-            confirmButton = {
-                TextButton(
-                    onClick = {
-                        issuePendingRemoval = null
-
-                        viewModel.removeIssue(issue)
-                    }
-                ) {
-                    Text("Remove")
-                }
-            },
-            dismissButton = {
-                TextButton(
-                    onClick = {
-                        issuePendingRemoval = null
-                    }
-                ) {
-                    Text("Cancel")
-                }
+            onDismiss = {
+                issuePendingRemoval = null
             }
         )
     }
@@ -1438,65 +1155,170 @@ fun ReadingListDetailScreen(
 @Composable
 private fun ReadingListSectionHeader(
     title: String,
-    description: String?,
+    issueCount: Int,
     isCollapsed: Boolean,
-    onToggleCollapsed: () -> Unit
+    canCollapse: Boolean,
+    onToggleCollapsed: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
+    val density = LocalDensity.current
+
+    val outlineWidth =
+        with (density) {
+            7.dp.toPx()
+        }
+
+    val titleStyle =
+        TextStyle(
+            fontFamily = LilitaOneFontFamily,
+            fontSize = 20.sp,
+            lineHeight = 22.sp,
+            textGeometricTransform =
+                ComicAccentTextTransform
+        )
+
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable(
-                onClick =
-                    onToggleCollapsed
-            )
-            .padding(
-                top = 16.dp,
-                bottom = 8.dp
-            ),
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .height(48.dp)
+                .clickable(
+                    enabled = canCollapse,
+                    onClick = onToggleCollapsed
+                ),
         verticalAlignment =
             Alignment.CenterVertically
     ) {
-        Column(
+        Box(
             modifier =
-                Modifier.weight(1f)
+                Modifier
+                    .weight(1f)
+                    .height(42.dp),
+            contentAlignment =
+                Alignment.CenterStart
         ) {
-            Text(
-                text = title,
-                style =
-                    MaterialTheme.typography
-                        .headlineSmall
-            )
-
-            description?.let {
-                    sectionDescription ->
-                Text(
-                    text =
-                        sectionDescription,
-                    style =
-                        MaterialTheme.typography
-                            .bodyMedium,
+            Box(
+                modifier =
+                    Modifier
+                        .wrapContentWidth()
+                        .height(42.dp)
+            ) {
+                Box(
                     modifier =
-                        Modifier.padding(
-                            top = 4.dp
-                        )
+                        Modifier
+                            .matchParentSize()
+                            .offset(
+                                x = 3.dp,
+                                y = 4.dp
+                            )
+                            .background(
+                                color = ComicInk,
+                                shape = ComicSlantedShape
+                            )
                 )
+
+                Box(
+                    modifier =
+                        Modifier
+                            .height(42.dp)
+                            .background(
+                                color = ComicRed,
+                                shape = ComicSlantedShape
+                            )
+                            .border(
+                                width = 2.dp,
+                                color = ComicInk,
+                                shape = ComicSlantedShape
+                            )
+                            .padding(
+                                horizontal = 14.dp
+                            ),
+                    contentAlignment =
+                        Alignment.CenterStart
+                ) {
+                    Text(
+                        text = title.uppercase(),
+                        modifier =
+                            Modifier
+                                .offset(y = 1.dp)
+                                .clearAndSetSemantics { },
+                        autoSize =
+                            TextAutoSize.StepBased(
+                                minFontSize = 14.sp,
+                                maxFontSize = 20.sp,
+                                stepSize = 0.5.sp
+                            ),
+                        style =
+                            titleStyle.copy(
+                                drawStyle =
+                                    Stroke(
+                                        width = outlineWidth,
+                                        join = StrokeJoin.Round
+                                    )
+                            ),
+                        color = ComicInk,
+                        maxLines = 1
+                    )
+
+                    Text(
+                        text = title.uppercase(),
+                        modifier =
+                            Modifier.offset(y = 1.dp),
+                        autoSize =
+                            TextAutoSize.StepBased(
+                                minFontSize = 14.sp,
+                                maxFontSize = 20.sp,
+                                stepSize = 0.5.sp
+                            ),
+                        style = titleStyle,
+                        color = Color.White,
+                        maxLines = 1
+                    )
+                }
             }
         }
 
-        Icon(
-            imageVector =
-                if (isCollapsed) {
-                    Icons.Default.ExpandMore
+        Text(
+            text =
+                if (issueCount == 1) {
+                    "1 issue"
                 } else {
-                    Icons.Default.ExpandLess
+                    "$issueCount issues"
                 },
-            contentDescription =
-                if (isCollapsed) {
-                    "Expand section"
-                } else {
-                    "Collapse section"
-                }
+            modifier =
+                Modifier.padding(
+                    start = 8.dp
+                ),
+            style = MaterialTheme.typography.bodySmall
+                .copy(fontWeight = FontWeight.SemiBold),
+            color = ComicInk
         )
+
+        if (canCollapse) {
+            IconButton(
+                onClick = onToggleCollapsed,
+                modifier = Modifier.size(40.dp)
+            ) {
+                Icon(
+                    imageVector =
+                        if (isCollapsed) {
+                            Icons.Default.ExpandMore
+                        } else {
+                            Icons.Default.ExpandLess
+                        },
+                    contentDescription =
+                        if (isCollapsed) {
+                            "Expand section"
+                        } else {
+                            "Collapse section"
+                        },
+                    tint = ComicInk,
+                    modifier = Modifier.size(22.dp)
+                )
+            }
+        } else {
+            Spacer(modifier = Modifier.size(40.dp))
+        }
     }
 }
 
@@ -1561,18 +1383,22 @@ private fun ReadingListIssueRow(
                     }
                 )
                 .padding(
-                    vertical = 8.dp
+                    vertical = 10.dp
                 ),
             verticalAlignment = Alignment.CenterVertically
         ) {
+            val coverShape = RoundedCornerShape(4.dp)
+
             ComicCoverImage(
                 coverUrl = issue.coverUrl,
                 contentDescription =
                     "${issue.seriesTitle} #${issue.issueNumber} cover",
                 modifier = Modifier
-                    .width(56.dp)
+                    .width(62.dp)
                     .aspectRatio(2f / 3f),
-                placeholderText = "No Cover"
+                placeholderText = "No Cover",
+                shape = coverShape,
+                borderColor = ComicInk
             )
 
             Spacer(
@@ -1580,59 +1406,54 @@ private fun ReadingListIssueRow(
             )
 
             Column(
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
+                verticalArrangement =
+                    Arrangement.spacedBy(2.dp)
             ) {
                 Text(
                     text =
                         "${issue.seriesTitle} #${issue.issueNumber}",
                     style =
                         MaterialTheme.typography.titleMedium
+                            .copy(
+                                fontSize = 17.sp,
+                                lineHeight = 19.sp
+                            ),
+                    color = ComicInk,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
                 )
 
-                issue.issueTitle?.let { title ->
+                issue.issueTitle?.takeIf {
+                    it.isNotBlank()
+                }
+                ?.let { issueTitle ->
                     Text(
-                        text = title,
+                        text = issueTitle,
                         style =
                             MaterialTheme.typography.bodyMedium
+                                .copy(
+                                    fontSize = 15.sp,
+                                    lineHeight = 17.sp
+                                ),
+                        color = ComicInk,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
                     )
                 }
 
-                val metadata = buildList {
-                    issue.publicationDate?.let { publicationDate ->
-                        add(formatPublicationDate(publicationDate))
+                issue.publicationDate
+                    ?.let { publicationDate ->
+                        Text(
+                            text = formatPublicationDate(publicationDate),
+                            style = MaterialTheme.typography.bodySmall
+                                .copy(
+                                    fontSize = 13.sp,
+                                    lineHeight = 15.sp
+                                ),
+                            color = ComicInk
+                        )
                     }
-
-                    add("Order #${issue.position}")
-
-                    if (!issue.required) {
-                        add("Optional")
-                    }
-                }
-
-                Text(
-                    text = metadata.joinToString(" • "),
-                    style =
-                        MaterialTheme.typography.bodySmall
-                )
-
-                if (
-                    issue.readingStatus ==
-                    ReadingStatus.READING
-                ) {
-                    Text(
-                        text = "Currently reading",
-                        style =
-                            MaterialTheme.typography.labelMedium
-                    )
-                }
-
-                issue.notes?.let { notes ->
-                    Text(
-                        text = notes,
-                        style =
-                            MaterialTheme.typography.bodySmall
-                    )
-                }
             }
         }
 
@@ -1645,20 +1466,19 @@ private fun ReadingListIssueRow(
                 ) {
                     Icon(
                         imageVector = Icons.Default.MoreVert,
-                        contentDescription = "More options"
+                        contentDescription = "More options",
+                        tint = ComicInk
                     )
                 }
 
-                DropdownMenu(
+                ComicDropdownMenu(
                     expanded = menuExpanded,
                     onDismissRequest = {
                         menuExpanded = false
                     }
                 ) {
-                    DropdownMenuItem(
-                        text = {
-                            Text("Mark as reading")
-                        },
+                    ComicDropdownMenuItem(
+                        text = "Mark as reading",
                         onClick = {
                             menuExpanded = false
                             onMarkAsReading()
@@ -1666,10 +1486,8 @@ private fun ReadingListIssueRow(
                     )
 
                     if (issue.position > 1) {
-                        DropdownMenuItem(
-                            text = {
-                                Text("Mark all before as read")
-                            },
+                        ComicDropdownMenuItem(
+                            text = "Mark all before as read",
                             onClick = {
                                 menuExpanded = false
                                 onMarkAllBeforeRead()
@@ -1678,10 +1496,8 @@ private fun ReadingListIssueRow(
                     }
 
                     if (canReorder) {
-                        DropdownMenuItem(
-                            text = {
-                                Text("Move up")
-                            },
+                        ComicDropdownMenuItem(
+                            text = "Move up",
                             enabled = canMoveUp,
                             onClick = {
                                 menuExpanded = false
@@ -1689,10 +1505,8 @@ private fun ReadingListIssueRow(
                             }
                         )
 
-                        DropdownMenuItem(
-                            text = {
-                                Text("Move down")
-                            },
+                        ComicDropdownMenuItem(
+                            text = "Move down",
                             enabled = canMoveDown,
                             onClick = {
                                 menuExpanded = false
@@ -1702,10 +1516,8 @@ private fun ReadingListIssueRow(
                     }
 
                     if (canChangeSection) {
-                        DropdownMenuItem(
-                            text = {
-                                Text("Move to section")
-                            },
+                        ComicDropdownMenuItem(
+                            text = "Move to section",
                             onClick = {
                                 menuExpanded = false
                                 onMoveToSectionRequest()
@@ -1714,10 +1526,8 @@ private fun ReadingListIssueRow(
                     }
 
                     if (canRemove) {
-                        DropdownMenuItem(
-                            text = {
-                                Text("Remove from reading list")
-                            },
+                        ComicDropdownMenuItem(
+                            text = "Remove from reading list",
                             onClick = {
                                 menuExpanded = false
                                 onRemoveRequest()
@@ -1772,7 +1582,7 @@ private fun sectionMatchesSearch(
     query: String
 ): Boolean {
     val searchText = buildString {
-        issue.seriesTitle?.let { title ->
+        issue.sectionTitle?.let { title ->
             append(title)
         }
 

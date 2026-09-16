@@ -626,7 +626,7 @@ class AppNavigationTest {
 
             composeRule
                 .onNodeWithText(
-                    "Delete reading list?"
+                    "Delete reading list?", ignoreCase = true
                 )
                 .assertIsDisplayed()
 

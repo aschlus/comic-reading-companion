@@ -20,20 +20,24 @@ import coil3.compose.SubcomposeAsyncImage
 import coil3.compose.SubcomposeAsyncImageContent
 import coil3.request.ImageRequest
 import coil3.request.crossfade
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 
 @Composable
 fun ComicCoverImage(
     coverUrl: String?,
     contentDescription: String?,
     modifier: Modifier = Modifier,
-    placeholderText: String = "No Cover"
+    placeholderText: String = "No Cover",
+    shape: Shape = RoundedCornerShape(12.dp),
+    borderColor: Color = MaterialTheme.colorScheme.outlineVariant
 ) {
-    val shape = RoundedCornerShape(12.dp)
-
     if (coverUrl.isNullOrBlank()) {
         CoverPlaceholder(
             modifier = modifier,
-            placeholderText = placeholderText
+            placeholderText = placeholderText,
+            shape,
+            borderColor
         )
     } else {
         SubcomposeAsyncImage(
@@ -49,19 +53,23 @@ fun ComicCoverImage(
                 .clip(shape)
                 .border(
                     width = 1.dp,
-                    color = MaterialTheme.colorScheme.outlineVariant,
+                    color = borderColor,
                     shape = shape
                 ),
             loading = {
                 CoverPlaceholder(
                     modifier = Modifier.fillMaxSize(),
-                    placeholderText = "Loading..."
+                    placeholderText = "Loading...",
+                    shape,
+                    borderColor
                 )
             },
             error = {
                 CoverPlaceholder(
                     modifier = Modifier.fillMaxSize(),
-                    placeholderText = placeholderText
+                    placeholderText = placeholderText,
+                    shape,
+                    borderColor
                 )
             },
             success = {
@@ -74,7 +82,9 @@ fun ComicCoverImage(
 @Composable
 private fun CoverPlaceholder(
     modifier: Modifier = Modifier,
-    placeholderText: String
+    placeholderText: String,
+    shape: Shape,
+    borderColor: Color
 ) {
     val shape = RoundedCornerShape(12.dp)
 
@@ -84,7 +94,7 @@ private fun CoverPlaceholder(
             .background(MaterialTheme.colorScheme.surfaceVariant)
             .border(
                 width = 1.dp,
-                color = MaterialTheme.colorScheme.outlineVariant,
+                color = borderColor,
                 shape = shape
             ),
         contentAlignment = Alignment.Center

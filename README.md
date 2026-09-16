@@ -223,9 +223,9 @@ building, following, and tracking comic-book reading orders.
 - [x] Progress indicator
 - [x] Scrollable issue list
 - [x] Read / unread checkboxes
-- [x] Reading-order numbers
-- [x] Jump to first unread
-- [ ] Better issue-row visual design
+- [x] Preserve reading-list ordering
+- [x] Jump to current / first unread
+- [x] Better issue-row visual design
 - [x] Issue cover thumbnails
 - [x] Required / optional indicators
 - [x] Story / arc information
@@ -235,7 +235,12 @@ building, following, and tracking comic-book reading orders.
 - [x] Persistent reading-progress header
 - [ ] Scroll-to-top action
 - [ ] Jump to a specific issue / reading-order number
-- [ ] Apply Comic Print visual treatment to headers, progress, sections, and rows
+- [x] Apply Comic Print visual treatment to headers, progress, sections, and rows
+- [x] Search issues within a reading list
+- [x] Filter issues by reading status, list status, and series
+- [x] Bulk-select issues and mark them read / unread
+- [x] Collapse and expand reading-list sections
+- [x] Comic Print menus, confirmation dialogs, forms, and section picker
 
 ### Browse and Detail Screen Visual Refresh
 
