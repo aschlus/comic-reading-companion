@@ -132,3 +132,21 @@ val MIGRATION_2_3 =
             )
         }
     }
+
+val MIGRATION_3_4 =
+    object : Migration(
+        startVersion = 3,
+        endVersion = 4
+    ) {
+        override suspend fun migrate(
+            connection: SQLiteConnection
+        ) {
+            connection.execSQL(
+                """
+                ALTER TABLE reading_lists
+                ADD COLUMN style TEXT
+                NOT NULL DEFAULT 'GREEN'
+                """.trimIndent()
+            )
+        }
+    }

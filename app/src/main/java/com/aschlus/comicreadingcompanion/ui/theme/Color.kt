@@ -24,6 +24,10 @@ val ComicGreen = Color(0xFF51C96D)
 
 val ComicPurple = Color(0xFF9B73E8)
 
+val ComicOrange = Color(0xFFFF8A3D)
+
+val ComicGray = Color(0xFF929292)
+
 val ComicMutedInk = Color(0xFF514B43)
 
 // Dark-theme surfaces

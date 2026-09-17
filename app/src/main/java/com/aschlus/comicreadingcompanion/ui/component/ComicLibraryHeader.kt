@@ -38,8 +38,6 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
 import com.aschlus.comicreadingcompanion.ui.theme.ComicHeaderTextTransform
 import com.aschlus.comicreadingcompanion.ui.theme.LilitaOneFontFamily
 
-private val LibraryHeaderContentHeight = 136.dp
-
 @Composable
 fun ComicLibraryHeader(
     onCreateReadingListClick: () -> Unit,
@@ -47,170 +45,55 @@ fun ComicLibraryHeader(
     isImporting: Boolean,
     modifier: Modifier = Modifier
 ) {
-    Box(
-        modifier =
-            modifier
-                .fillMaxWidth()
-                .background(ComicBlue)
-                .drawBehind {
-                    val strokeWidth = 2.dp.toPx()
-
-                    drawLine(
-                        color = ComicInk,
-                        start =
-                            Offset(
-                                x = 0f,
-                                y = size.height - strokeWidth / 2f
-                            ),
-                        end =
-                            Offset(
-                                x = size.width,
-                                y = size.height - strokeWidth / 2f
-                            ),
-                        strokeWidth = strokeWidth
-                    )
-                }
+    ComicPrimaryHeader(
+        modifier = modifier
     ) {
-        ComicHalftoneOverlay(
-            modifier = Modifier.matchParentSize(),
-            dotColor = ComicInk,
-            spacing = 10.dp,
-            radius = 1.1.dp,
-            startFraction = 0f,
-            minAlpha = 0.3f,
-            maxAlpha = 0.14f
+        ComicPrimaryHeaderTitle(
+            text = "LIBRARY",
+            modifier =
+                Modifier
+                    .align(
+                        Alignment.CenterStart
+                    )
+                    .padding(
+                        start = 25.dp
+                    )
         )
 
         Column(
             modifier =
                 Modifier
-                    .fillMaxWidth()
-        ) {
-
-            Spacer(
-                modifier =
-                    Modifier.windowInsetsTopHeight(
-                        WindowInsets.statusBars
+                    .align(
+                        Alignment.CenterEnd
                     )
+                    .padding(
+                        end = 16.dp
+                    )
+                    .width(142.dp)
+        ) {
+            ComicLibraryActionButton(
+                text = "CREATE\nLIST",
+                icon = Icons.Default.Add,
+                backgroundColor = ComicYellow,
+                onClick = onCreateReadingListClick
             )
 
-            Box(
+            ComicLibraryActionButton(
+                text =
+                    if (isImporting) {
+                        "IMPORTING…"
+                    } else {
+                        "IMPORT\nLIST"
+                    },
+                icon = Icons.Default.Upload,
+                backgroundColor = ComicBlueLight,
+                onClick = onImportReadingListClick,
                 modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .height(
-                            LibraryHeaderContentHeight
-                        )
-            ) {
-                LibraryTitle(
-                    modifier =
-                        Modifier
-                            .align(
-                                Alignment.CenterStart
-                            )
-                            .padding(
-                                start = 25.dp
-                            )
-                )
-
-                Column(
-                    modifier =
-                        Modifier
-                            .align(
-                                Alignment.CenterEnd
-                            )
-                            .padding(
-                                end = 16.dp
-                            )
-                            .width(142.dp)
-                ) {
-                    ComicLibraryActionButton(
-                        text = "CREATE\nLIST",
-                        icon = Icons.Default.Add,
-                        backgroundColor = ComicYellow,
-                        onClick = onCreateReadingListClick
-                    )
-
-                    ComicLibraryActionButton(
-                        text =
-                            if (isImporting) {
-                                "IMPORTING…"
-                            } else {
-                                "IMPORT\nLIST"
-                            },
-                        icon = Icons.Default.Upload,
-                        backgroundColor = ComicBlueLight,
-                        onClick = onImportReadingListClick,
-                        modifier =
-                            Modifier.padding(
-                                top = 7.dp
-                            ),
-                        enabled = !isImporting
-                    )
-                }
-            }
+                    Modifier.padding(
+                        top = 7.dp
+                    ),
+                enabled = !isImporting
+            )
         }
     }
-}
-
-@Composable
-private fun LibraryTitle(
-    modifier: Modifier = Modifier
-) {
-    val density = LocalDensity.current
-    val outlineWidth =
-        with (density) {
-            10.2.dp.toPx()
-        }
-
-    val titleStyle = MaterialTheme.typography.displayLarge
-        .copy(
-            fontFamily = LilitaOneFontFamily,
-            fontSize = 54.sp,
-            lineHeight = 54.sp,
-            letterSpacing = 1.sp,
-            fontWeight = FontWeight.Normal,
-            fontStyle = FontStyle.Normal,
-            textGeometricTransform = ComicHeaderTextTransform
-        )
-
-    Box(
-        modifier = modifier
-    ) {
-        // Continuous black outline
-        DecorativeLibraryTitle(
-            style =
-                titleStyle.copy(
-                    drawStyle =
-                        Stroke(
-                            width = outlineWidth,
-                            join = StrokeJoin.Round
-                        )
-                ),
-            color = ComicInk
-        )
-
-        // Yellow face
-        Text(
-            text = "LIBRARY",
-            style = titleStyle,
-            color = ComicYellow
-        )
-    }
-}
-
-@Composable
-private fun DecorativeLibraryTitle(
-    modifier: Modifier = Modifier,
-    style: TextStyle,
-    color: androidx.compose.ui.graphics.Color
-) {
-    Text(
-        text = "LIBRARY",
-        modifier =
-            modifier
-                .clearAndSetSemantics { },
-        style = style,
-        color = color
-    )
 }

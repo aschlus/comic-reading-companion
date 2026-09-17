@@ -1274,4 +1274,134 @@ class ComicDatabaseMigrationTest {
                 statement.getLong(0)
             }
     }
+
+    @Test
+    fun migration3To4_addsReadingListStyleWithGreenDefault() {
+        runBlocking {
+            val database = migrationHelper.createDatabase(3)
+
+            database.execSQL(
+                """
+                INSERT INTO publishers (
+                    id,
+                    name
+                )
+                VALUES (
+                    1,
+                    'Test Publisher'
+                )
+                """.trimIndent()
+            )
+
+            database.execSQL(
+                """
+                INSERT INTO reading_lists (
+                    id,
+                    title,
+                    description,
+                    publisherId,
+                    universeId,
+                    source,
+                    sourceKey,
+                    createdAt,
+                    updatedAt
+                )
+                VALUES (
+                    1,
+                    'Existing Reading List',
+                    NULL,
+                    1,
+                    NULL,
+                    'USER',
+                    NULL,
+                    100,
+                    100
+                )
+                """.trimIndent()
+            )
+
+            database.close()
+
+            val migrated =
+                migrationHelper
+                    .runMigrationsAndValidate(
+                        version = 4,
+                        migrations =
+                            listOf(
+                                MIGRATION_3_4
+                            )
+                    )
+
+            migrated.prepare(
+                """
+                SELECT style
+                FROM reading_lists
+                WHERE id = 1
+                """.trimIndent()
+            )
+                .use { statement ->
+                    assertTrue(statement.step())
+                    assertEquals("GREEN", statement.getText(0))
+                }
+
+            migrated.close()
+        }
+    }
+
+    @Test
+    fun version4_freshDatabaseUsesReadingListStyleDefaule() {
+        runBlocking {
+            val database = migrationHelper.createDatabase(4)
+
+            database.execSQL(
+                """
+                INSERT INTO publishers (
+                    id,
+                    name
+                )
+                VALUES (
+                    1,
+                    'Test Publisher'
+                )
+                """.trimIndent()
+            )
+
+            database.execSQL(
+                """
+                INSERT INTO reading_lists (
+                    id,
+                    title,
+                    description,
+                    publisherId,
+                    universeId,
+                    createdAt,
+                    updatedAt
+                )
+                VALUES (
+                    1,
+                    'Existing Reading List',
+                    NULL,
+                    1,
+                    NULL,
+                    100,
+                    100
+                )
+                """.trimIndent()
+            )
+
+            database.prepare(
+                """
+                SELECT style
+                FROM reading_lists
+                WHERE id = 1
+                """.trimIndent()
+            )
+                .use { statement ->
+                    assertTrue(statement.step())
+                    assertEquals("GREEN", statement.getText(0))
+                }
+
+            database.close()
+        }
+    }
 }

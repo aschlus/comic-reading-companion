@@ -36,6 +36,11 @@ data class ReadingList(
     val publisherId: Long,
     val universeId: Long?,
     @ColumnInfo(
+        defaultValue = "'GREEN'"
+    )
+    val style: ReadingListStyle =
+        ReadingListStyle.GREEN,
+    @ColumnInfo(
         defaultValue = "'BUNDLED'"
     )
     val source: ReadingListSource =
@@ -49,4 +54,13 @@ enum class ReadingListSource {
     BUNDLED,
     USER,
     IMPORTED
+}
+
+enum class ReadingListStyle {
+    GREEN,
+    RED,
+    BLUE,
+    PURPLE,
+    ORANGE,
+    GRAY
 }

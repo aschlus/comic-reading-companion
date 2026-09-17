@@ -20,6 +20,8 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import kotlin.time.Duration.Companion.milliseconds
+import androidx.compose.ui.test.hasSetTextAction
+import androidx.compose.ui.test.performScrollTo
 
 @RunWith(AndroidJUnit4::class)
 class AppNavigationTest {
@@ -419,15 +421,46 @@ class AppNavigationTest {
 
     @Test
     fun appNavigation_homeToCreateReadingList() {
-        composeRule.onNodeWithText("NEW\nLIST").performClick()
-        composeRule.waitUntil(timeoutMillis = 5000L) {
-            composeRule.onAllNodesWithText("Title")
+        composeRule
+            .onNodeWithText(
+                "NEW\nLIST"
+            )
+            .performClick()
+
+        composeRule.waitUntil(
+            timeoutMillis = 5000L
+        ) {
+            composeRule
+                .onAllNodes(
+                    hasText(
+                        "Reading list title"
+                    ) and
+                            hasSetTextAction()
+                )
                 .fetchSemanticsNodes()
                 .isNotEmpty()
         }
-        composeRule.onNodeWithText("Title").assertIsDisplayed()
-        composeRule.onNodeWithText("Select publisher").assertIsDisplayed()
-        composeRule.onNodeWithContentDescription("Back").assertIsDisplayed()
+
+        composeRule
+            .onNode(
+                hasText(
+                    "Reading list title"
+                ) and
+                        hasSetTextAction()
+            )
+            .assertIsDisplayed()
+
+        composeRule
+            .onNodeWithText(
+                "Select publisher"
+            )
+            .assertIsDisplayed()
+
+        composeRule
+            .onNodeWithContentDescription(
+                "Back"
+            )
+            .assertIsDisplayed()
     }
 
     @Test
@@ -447,12 +480,29 @@ class AppNavigationTest {
 
             try {
                 composeRule.onNodeWithText("NEW\nLIST").performClick()
-                composeRule.waitUntil(timeoutMillis = 5000L) {
-                    composeRule.onAllNodesWithText("Title")
+                composeRule.waitUntil(
+                    timeoutMillis = 5000L
+                ) {
+                    composeRule
+                        .onAllNodes(
+                            hasText(
+                                "Reading list title"
+                            ) and
+                                    hasSetTextAction()
+                        )
                         .fetchSemanticsNodes()
                         .isNotEmpty()
                 }
-                composeRule.onNodeWithText("Title").performTextInput(readingListTile)
+                composeRule
+                    .onNode(
+                        hasText(
+                            "Reading list title"
+                        ) and
+                                hasSetTextAction()
+                    )
+                    .performTextInput(
+                        readingListTile
+                    )
                 composeRule.onNodeWithText("Select publisher").performClick()
                 composeRule.waitUntil(timeoutMillis = 5000L) {
                     composeRule.onAllNodesWithText("Marvel Comics")
@@ -461,7 +511,11 @@ class AppNavigationTest {
                 }
                 composeRule.onNodeWithText("Marvel Comics").performClick()
                 composeRule.waitForIdle()
-                composeRule.onNode(hasText("Create Reading List") and hasClickAction())
+                composeRule
+                    .onNodeWithText(
+                        "SAVE LIST"
+                    )
+                    .performScrollTo()
                     .performClick()
                 composeRule.waitUntil(timeoutMillis = 5000L) {
                     composeRule.onAllNodesWithText("No issues in this reading list")
@@ -501,7 +555,12 @@ class AppNavigationTest {
             timeoutMillis = 5000L
         ) {
             composeRule
-                .onAllNodesWithText("Title")
+                .onAllNodes(
+                    hasText(
+                        "Reading list title"
+                    ) and
+                            hasSetTextAction()
+                )
                 .fetchSemanticsNodes()
                 .isNotEmpty()
         }

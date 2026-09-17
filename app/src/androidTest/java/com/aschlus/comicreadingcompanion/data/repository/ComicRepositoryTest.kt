@@ -9,14 +9,15 @@ import com.aschlus.comicreadingcompanion.data.database.ComicDatabase
 import com.aschlus.comicreadingcompanion.data.database.entities.Issue
 import com.aschlus.comicreadingcompanion.data.database.entities.IssueType
 import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
-import com.aschlus.comicreadingcompanion.data.database.entities.ReadingProgress
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListItem
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSection
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSource
+import com.aschlus.comicreadingcompanion.data.database.entities.ReadingProgress
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.database.entities.Series
 import com.aschlus.comicreadingcompanion.data.database.entities.Universe
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -448,6 +449,63 @@ class ComicRepositoryTest {
             assertTrue(readingList!!.createdAt >= before)
             assertTrue(readingList.createdAt <= after)
             assertEquals(readingList.createdAt, readingList.updatedAt)
+        }
+
+    @Test
+    fun createUserReadingListWithIssues_rollsBackWhenIssueIsInvalid() =
+        runBlocking {
+            val publisherId = comicDao.insertPublisher(
+                Publisher(name = "Test Publisher")
+            )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Test Series",
+                        volume = 1,
+                        startYear = 2026,
+                        endYear = null
+                    )
+                )
+
+            val validIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "Valid Issue",
+                        publicationDate = null,
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val invalidIssueId = 999_999L
+
+            try {
+                repository.createUserReadingListWithIssues(
+                    title = "Rollback Test",
+                    description = null,
+                    publisherId = publisherId,
+                    universeId = null,
+                    issueIds =
+                        listOf(
+                            validIssueId,
+                            invalidIssueId
+                        )
+                )
+            } catch (
+                expected: IllegalArgumentException
+            ) {
+                // Expected.
+            }
+
+            val readingLists = comicDao.getAllReadingLists().first()
+
+            assertEquals(0, readingLists.size)
         }
 
     @Test

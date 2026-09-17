@@ -1,13 +1,11 @@
 package com.aschlus.comicreadingcompanion.ui.screen
 
 import android.content.Context
-import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
@@ -31,6 +29,8 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import androidx.compose.ui.test.hasSetTextAction
+import androidx.compose.ui.test.performScrollTo
 
 @RunWith(AndroidJUnit4::class)
 class CreateReadingListScreenTest {
@@ -88,12 +88,14 @@ class CreateReadingListScreenTest {
                     )
                 }
             }
-            composeRule.onNode(hasText("Create Reading List") and hasClickAction()).assertIsNotEnabled()
-            composeRule.onNodeWithText("Title").performTextInput("My Spider-Man List")
-            composeRule.onNode(hasText("Create Reading List") and hasClickAction()).assertIsNotEnabled()
+            composeRule.onNode(hasText("SAVE LIST") and hasClickAction())
+                .assertIsNotEnabled()
+            composeRule.onNode(hasText("Reading list title") and hasSetTextAction())
+                .performTextInput("My Spider-Man List")
+            composeRule.onNodeWithText("SAVE LIST").assertIsNotEnabled()
             composeRule.onNodeWithText("Select publisher").performClick()
             composeRule.onNodeWithText("Marvel").performClick()
-            composeRule.onNode(hasText("Create Reading List") and hasClickAction()).assertIsEnabled()
+            composeRule.onNodeWithText("SAVE LIST").assertIsEnabled()
         }
     }
 
@@ -126,8 +128,10 @@ class CreateReadingListScreenTest {
                     )
                 }
             }
-            composeRule.onNodeWithText("Title").performTextInput("My Earth-616 List")
-            composeRule.onNodeWithText("Description (optional)")
+            composeRule.onNode(hasText("Reading list title") and hasSetTextAction())
+                .performTextInput("My Earth-616 List")
+
+            composeRule.onNode(hasText("Add a short description") and hasSetTextAction())
                 .performTextInput("Custom Marvel order")
             composeRule.onNodeWithText("Select publisher").performClick()
             composeRule.onNodeWithText("Marvel").performClick()
@@ -136,8 +140,7 @@ class CreateReadingListScreenTest {
             }
             composeRule.onNodeWithText("No specific continuity").performClick()
             composeRule.onNodeWithText("Earth-616").performClick()
-            composeRule.onNode(hasText("Create Reading List")
-                    and hasClickAction()).performClick()
+            composeRule.onNodeWithText("SAVE LIST").performScrollTo().performClick()
             composeRule.waitUntil(timeoutMillis = 5000L) {createdId != null}
             val readingList =
                 comicDao.getReadingListById(createdId!!)

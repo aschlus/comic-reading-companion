@@ -3,17 +3,18 @@ package com.aschlus.comicreadingcompanion.data.repository
 import androidx.room3.withWriteTransaction
 import com.aschlus.comicreadingcompanion.data.database.ComicDao
 import com.aschlus.comicreadingcompanion.data.database.ComicDatabase
+import com.aschlus.comicreadingcompanion.data.database.entities.ExternalId
 import com.aschlus.comicreadingcompanion.data.database.entities.Issue
 import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListItem
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSection
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSource
+import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListStyle
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingProgress
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.database.entities.Series
 import com.aschlus.comicreadingcompanion.data.database.entities.Universe
-import com.aschlus.comicreadingcompanion.data.database.entities.ExternalId
 import com.aschlus.comicreadingcompanion.data.database.models.IssueDetail
 import com.aschlus.comicreadingcompanion.data.database.models.IssueSearchResult
 import com.aschlus.comicreadingcompanion.data.database.models.PublisherSeries
@@ -128,7 +129,8 @@ class ComicRepository(
         title: String,
         description: String?,
         publisherId: Long,
-        universeId: Long?
+        universeId: Long?,
+        style: ReadingListStyle = ReadingListStyle.GREEN
     ): Long {
         val currentTime = System.currentTimeMillis()
         return comicDao.insertReadingList(
@@ -137,12 +139,104 @@ class ComicRepository(
                 description = description,
                 publisherId = publisherId,
                 universeId = universeId,
+                style = style,
                 source = ReadingListSource.USER,
                 sourceKey = null,
                 createdAt = currentTime,
                 updatedAt = currentTime
             )
         )
+    }
+
+    suspend fun createUserReadingListWithIssues(
+        title: String,
+        description: String?,
+        publisherId: Long,
+        universeId: Long?,
+        style: ReadingListStyle = ReadingListStyle.GREEN,
+        issueIds: List<Long>
+    ): Long {
+        var resultReadingListId: Long? = null
+
+        database.withWriteTransaction {
+            val trimmedTitle = title.trim()
+
+            require(
+                trimmedTitle.isNotEmpty()
+            ) {
+                "Reading-list title cannot be blank"
+            }
+
+            require(
+                issueIds.distinct().size == issueIds.size
+            ) {
+                "Reading-list issues IDs contain duplicates"
+            }
+
+            val currentTime = System.currentTimeMillis()
+
+            val readingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title = trimmedTitle,
+                        description = description
+                            ?.trim()
+                            ?.takeIf { it.isNotEmpty() },
+                        publisherId = publisherId,
+                        universeId = universeId,
+                        style = style,
+                        source = ReadingListSource.USER,
+                        sourceKey = null,
+                        createdAt = currentTime,
+                        updatedAt = currentTime
+                    )
+                )
+
+            issueIds.forEachIndexed { index, issueId ->
+                val issue =
+                    comicDao.getIssueById(issueId)
+                        ?: throw IllegalArgumentException(
+                            "Issue $issueId does not exist"
+                        )
+
+                val series =
+                    comicDao.getSeriesById(issue.seriesId)
+                        ?: throw IllegalArgumentException(
+                            "Series ${issue.seriesId} does not exist"
+                        )
+
+                require(
+                    series.publisherId == publisherId
+                ) {
+                    "Issue $issueId belongs to a different publisher"
+                }
+
+                if (universeId != null) {
+                    require(
+                        issue.universeId == universeId
+                    ) {
+                        "Issue $issueId belongs to a different continuity"
+                    }
+                }
+
+                comicDao.insertReadingListItem(
+                    ReadingListItem(
+                        readingListId = readingListId,
+                        sectionId = null,
+                        issueId = issueId,
+                        position = index + 1,
+                        required = true,
+                        notes = null
+                    )
+                )
+            }
+
+            resultReadingListId = readingListId
+        }
+
+        return checkNotNull(resultReadingListId) {
+            "Created reading-list ID was not set"
+        }
     }
 
     fun getReadingLists(): Flow<List<ReadingList>> {
