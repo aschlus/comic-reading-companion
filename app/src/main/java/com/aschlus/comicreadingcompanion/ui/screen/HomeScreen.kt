@@ -3,6 +3,7 @@ package com.aschlus.comicreadingcompanion.ui.screen
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -140,7 +141,8 @@ fun HomeScreen(
                                 .padding(
                                     horizontal = 12.dp,
                                     vertical = 4.dp
-                                )
+                                ),
+                        style = continueReadingList.style
                     )
                 } else {
                     Text(
@@ -282,9 +284,13 @@ fun HomeScreen(
                         horizontalArrangement =
                             Arrangement.spacedBy(8.dp)
                     ) {
-                        recentlyReadIssues
-                            .take(3)
-                            .forEach { issue ->
+                        val recentIssues =
+                            recentlyReadIssues.take(3)
+
+                        repeat(3) { index ->
+                            val issue = recentIssues.getOrNull(index)
+
+                            if (issue != null) {
                                 ComicHomeRecentReadCard(
                                     seriesTitle = issue.seriesTitle,
                                     issueNumber = issue.issueNumber,
@@ -295,7 +301,10 @@ fun HomeScreen(
                                     },
                                     modifier = Modifier.weight(1f)
                                 )
+                            } else {
+                                Spacer(modifier = Modifier.weight(1f))
                             }
+                        }
                     }
                 }
             }

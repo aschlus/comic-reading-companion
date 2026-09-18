@@ -1,0 +1,16 @@
+{
+  "series": [
+    {
+      "title": "Spider-Girl",
+      "volume": 1,
+      "startYear": 1998,
+      "expectedIssueCount": 102
+    },
+    {
+      "title": "Spider-Girl Annual",
+      "volume": 1,
+      "startYear": 1999,
+      "expectedIssueCount": 1
+    }
+  ]
+}

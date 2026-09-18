@@ -5,16 +5,22 @@ import androidx.lifecycle.viewModelScope
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSection
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSource
+import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListStyle
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListIssue
 import com.aschlus.comicreadingcompanion.data.preferences.ReadingListUiPreferences
 import com.aschlus.comicreadingcompanion.data.repository.ComicRepository
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import com.aschlus.comicreadingcompanion.data.database.models.IssueSearchResult
+import com.aschlus.comicreadingcompanion.data.database.models.SeriesSearchResult
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.first
+import kotlin.time.Duration.Companion.milliseconds
 
 class ReadingListDetailViewModel(
     private val repository: ComicRepository,
@@ -23,6 +29,7 @@ class ReadingListDetailViewModel(
 
     private var issuesJob: Job? = null
     private var collapsedSectionsJob: Job? = null
+    private var editAddToListSearchJob: Job? = null
 
     private var activeReadingListId: Long? = null
 
@@ -42,6 +49,17 @@ class ReadingListDetailViewModel(
 
     val issues: StateFlow<List<ReadingListIssue>> =
         _issues.asStateFlow()
+
+    private val _publisherName =
+        MutableStateFlow("")
+    val publisherName: StateFlow<String> =
+        _publisherName.asStateFlow()
+
+    private val _continuityName =
+        MutableStateFlow("")
+
+    val continuityName: StateFlow<String> =
+        _continuityName.asStateFlow()
 
     private val _selectedReadingListItemIds =
         MutableStateFlow<Set<Long>>(emptySet())
@@ -72,6 +90,31 @@ class ReadingListDetailViewModel(
     val collapsedSectionsLoaded: StateFlow<Boolean> =
         _collapsedSectionsLoaded.asStateFlow()
 
+    private val _editAddToListDraftIssues =
+        MutableStateFlow<List<PendingReadingListIssue>>(emptyList())
+
+    val editAddToListDraftIssues: StateFlow<List<PendingReadingListIssue>> =
+        _editAddToListDraftIssues.asStateFlow()
+
+    private val _editAddToListQuery = MutableStateFlow("")
+
+    val editAddToListQuery: StateFlow<String> = _editAddToListQuery.asStateFlow()
+
+    private val _editAddToListFilter = MutableStateFlow(AddToListFilter.ALL)
+
+    val editAddToListFilter: StateFlow<AddToListFilter> = _editAddToListFilter.asStateFlow()
+
+    private val _editAddToListSeriesResults = MutableStateFlow<List<SeriesSearchResult>>(emptyList())
+
+    val editAddToListSeriesResults: StateFlow<List<SeriesSearchResult>> =
+        _editAddToListSeriesResults.asStateFlow()
+
+    private val _editAddToListIssueResults =
+        MutableStateFlow<List<IssueSearchResult>>(emptyList())
+
+    val editAddToListIssueResults: StateFlow<List<IssueSearchResult>> =
+        _editAddToListIssueResults.asStateFlow()
+
     fun loadReadingList(readingListId: Long) {
         activeReadingListId = readingListId
         _selectedReadingListItemIds.value = emptySet()
@@ -90,8 +133,14 @@ class ReadingListDetailViewModel(
             }
 
         viewModelScope.launch {
-            _readingList.value =
+            val loadedReadingList =
                 repository.getReadingListById(readingListId)
+
+            _readingList.value = loadedReadingList
+
+            if (loadedReadingList != null) {
+                refreshReadingListLabels(loadedReadingList)
+            }
 
             _sections.value =
                 repository.getSectionsForReadingList(readingListId)
@@ -141,7 +190,8 @@ class ReadingListDetailViewModel(
 
     fun updateReadingListDetails(
         title: String,
-        description: String?
+        description: String?,
+        style: ReadingListStyle
     ) {
         val readingList = _readingList.value
             ?: return
@@ -154,7 +204,8 @@ class ReadingListDetailViewModel(
             repository.updateUserReadingListDetails(
                 readingListId = readingList.id,
                 title = title,
-                description = description
+                description = description,
+                style = style
             )
 
             _readingList.value = repository.getReadingListById(readingList.id)
@@ -360,6 +411,15 @@ class ReadingListDetailViewModel(
                     readingListId = readingListId,
                     issueId = issue.issueId
                 )
+
+            val updatedReadingList =
+                repository.getReadingListById(readingListId)
+
+            _readingList.value = updatedReadingList
+
+            if (updatedReadingList != null) {
+                refreshReadingListLabels(updatedReadingList)
+            }
         }
     }
 
@@ -480,5 +540,297 @@ class ReadingListDetailViewModel(
         return _issues.value.count {
             it.readingStatus == ReadingStatus.READ
         }
+    }
+
+    fun beginEditAddToListSession(
+        currentIssues: List<PendingReadingListIssue>
+    ) {
+        _editAddToListDraftIssues.value =
+            currentIssues
+    }
+
+    fun cancelEditAddToListSession() {
+        _editAddToListDraftIssues.value =
+            emptyList()
+
+        clearEditAddToListSearch()
+    }
+
+    fun applyEditAddToListSession():
+            List<PendingReadingListIssue> {
+
+        val appliedIssues =
+            _editAddToListDraftIssues.value
+
+        _editAddToListDraftIssues.value =
+            emptyList()
+
+        clearEditAddToListSearch()
+
+        return appliedIssues
+    }
+
+    fun toggleEditAddToListIssue(
+        result: IssueSearchResult
+    ) {
+        val selected =
+            _editAddToListDraftIssues
+                .value
+                .any {
+                    it.issueId ==
+                            result.issueId
+                }
+
+        if (selected) {
+            _editAddToListDraftIssues.value =
+                _editAddToListDraftIssues
+                    .value
+                    .filterNot {
+                        it.issueId ==
+                                result.issueId
+                    }
+
+            return
+        }
+
+        _editAddToListDraftIssues.value +=
+            PendingReadingListIssue(
+                issueId =
+                    result.issueId,
+                seriesId =
+                    result.seriesId,
+                seriesTitle =
+                    result.seriesTitle,
+                issueNumber =
+                    result.issueNumber,
+                issueTitle =
+                    result.issueTitle,
+                publicationDate =
+                    result.publicationDate,
+                coverUrl =
+                    null
+            )
+    }
+
+    fun toggleEditAddToListSeries(
+        result: SeriesSearchResult
+    ) {
+        viewModelScope.launch {
+            val seriesIssues =
+                repository.getIssuesForSeries(
+                    result.seriesId
+                )
+
+            val seriesIssueIds =
+                seriesIssues
+                    .map { it.id }
+                    .toSet()
+
+            val allSelected =
+                seriesIssueIds.isNotEmpty() &&
+                        seriesIssueIds.all { issueId ->
+                            _editAddToListDraftIssues
+                                .value
+                                .any {
+                                    it.issueId ==
+                                            issueId
+                                }
+                        }
+
+            if (allSelected) {
+                _editAddToListDraftIssues.value =
+                    _editAddToListDraftIssues
+                        .value
+                        .filterNot {
+                            it.issueId in
+                                    seriesIssueIds
+                        }
+
+                return@launch
+            }
+
+            val existingIds =
+                _editAddToListDraftIssues
+                    .value
+                    .map { it.issueId }
+                    .toSet()
+
+            val newIssues =
+                seriesIssues
+                    .filterNot {
+                        it.id in existingIds
+                    }
+                    .map { issue ->
+                        PendingReadingListIssue(
+                            issueId =
+                                issue.id,
+                            seriesId =
+                                issue.seriesId,
+                            seriesTitle =
+                                result.title,
+                            issueNumber =
+                                issue.issueNumber,
+                            issueTitle =
+                                issue.title,
+                            publicationDate =
+                                issue.publicationDate,
+                            coverUrl =
+                                issue.coverUrl
+                        )
+                    }
+
+            _editAddToListDraftIssues.value +=
+                newIssues
+        }
+    }
+
+    fun updateEditAddToListQuery(
+        query: String
+    ) {
+        _editAddToListQuery.value =
+            query
+
+        editAddToListSearchJob
+            ?.cancel()
+
+        val trimmedQuery =
+            query.trim()
+
+        if (trimmedQuery.isBlank()) {
+            _editAddToListSeriesResults.value =
+                emptyList()
+
+            _editAddToListIssueResults.value =
+                emptyList()
+
+            return
+        }
+
+        editAddToListSearchJob =
+            viewModelScope.launch {
+                delay(
+                    250.milliseconds
+                )
+
+                combine(
+                    repository.searchSeries(
+                        trimmedQuery
+                    ),
+                    repository.searchIssues(
+                        trimmedQuery
+                    )
+                ) { seriesResults, issueResults ->
+                    seriesResults to
+                            issueResults
+                }.collect { results ->
+                    _editAddToListSeriesResults.value =
+                        results.first
+
+                    _editAddToListIssueResults.value =
+                        results.second
+                }
+            }
+    }
+
+    fun selectEditAddToListFilter(
+        filter: AddToListFilter
+    ) {
+        _editAddToListFilter.value =
+            filter
+    }
+
+    fun clearEditAddToListSearch() {
+        editAddToListSearchJob
+            ?.cancel()
+
+        _editAddToListQuery.value =
+            ""
+
+        _editAddToListSeriesResults.value =
+            emptyList()
+
+        _editAddToListIssueResults.value =
+            emptyList()
+
+        _editAddToListFilter.value =
+            AddToListFilter.ALL
+    }
+
+    fun saveReadingListEdits(
+        title: String,
+        description: String?,
+        style: ReadingListStyle,
+        issues: List<PendingReadingListIssue>
+    ) {
+        val readingList =
+            _readingList.value
+                ?: return
+
+        if (readingList.source != ReadingListSource.USER) {
+            return
+        }
+
+        viewModelScope.launch {
+            repository
+                .updateUserReadingListWithIssues(
+                    readingListId = readingList.id,
+                    title = title,
+                    description = description,
+                    style = style,
+                    issueIds = issues.map { issue -> issue.issueId }
+                )
+
+           val updatedReadingList =
+               repository.getReadingListById(readingList.id)
+
+            _readingList.value = updatedReadingList
+
+            if (updatedReadingList != null) {
+                refreshReadingListLabels(updatedReadingList)
+            }
+        }
+    }
+
+    private suspend fun refreshReadingListLabels(
+        readingList: ReadingList
+    ) {
+        _publisherName.value =
+            repository.getPublisherById(readingList.publisherId)
+                .first()
+                ?.name
+                .orEmpty()
+
+        val universeIds =
+            repository.getUniverseIdsForReadingList(readingList.id)
+                .distinct()
+
+        if (universeIds.size > 1) {
+            _continuityName.value = "Multiple continuities"
+
+            return
+        }
+
+        val universeId =
+            if (universeIds.isEmpty()) {
+                readingList.universeId
+            } else {
+                universeIds.single()
+            }
+
+        if (universeId == null) {
+            _continuityName.value = "No specific continuity"
+
+            return
+        }
+
+        val universes =
+            repository.getUniverseForPublisher(readingList.publisherId)
+
+        _continuityName.value =
+            universes.firstOrNull { universe ->
+                universe.id == universeId
+            }
+                ?.name
+                ?: "No specific continuity"
     }
 }

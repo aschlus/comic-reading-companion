@@ -14,8 +14,11 @@ import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListItem
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSection
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSource
+import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListStyle
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.database.entities.Series
+import com.aschlus.comicreadingcompanion.data.database.entities.Universe
+import com.aschlus.comicreadingcompanion.data.database.models.IssueSearchResult
 import com.aschlus.comicreadingcompanion.data.preferences.ReadingListUiPreferences
 import com.aschlus.comicreadingcompanion.data.repository.ComicRepository
 import kotlinx.coroutines.Job
@@ -1094,6 +1097,15 @@ class ReadingListDetailViewModelTest {
 
             viewModel.loadReadingList(readingListId)
 
+            withTimeout(
+                5000L.milliseconds
+            ) {
+                viewModel.readingList.first {
+                    it?.id ==
+                            readingListId
+                }
+            }
+
             val loadedIssues = withTimeout(5000L.milliseconds) {
                     viewModel.issues.first { it.size == 3 }
                 }
@@ -1165,6 +1177,15 @@ class ReadingListDetailViewModelTest {
 
             viewModel.loadReadingList(readingListId)
 
+            withTimeout(
+                5000L.milliseconds
+            ) {
+                viewModel.readingList.first {
+                    it?.id ==
+                            readingListId
+                }
+            }
+
             val loadedIssues = withTimeout(5000L.milliseconds) {
                     viewModel.issues.first { it.size == 3 }
                 }
@@ -1231,6 +1252,15 @@ class ReadingListDetailViewModelTest {
             }
 
             viewModel.loadReadingList(readingListId)
+
+            withTimeout(
+                5000L.milliseconds
+            ) {
+                viewModel.readingList.first {
+                    it?.id ==
+                            readingListId
+                }
+            }
 
             val issues = withTimeout(5000L.milliseconds) {
                     viewModel.issues.first { it.size == 2 }
@@ -1349,6 +1379,15 @@ class ReadingListDetailViewModelTest {
             )
 
             viewModel.loadReadingList(readingListId)
+
+            withTimeout(
+                5000L.milliseconds
+            ) {
+                viewModel.readingList.first {
+                    it?.id ==
+                            readingListId
+                }
+            }
 
             val issues = withTimeout(5000L.milliseconds) {
                     viewModel.issues.first { it.size == 3 }
@@ -1685,7 +1724,8 @@ class ReadingListDetailViewModelTest {
 
             viewModel.updateReadingListDetails(
                 title = "Updated Title",
-                description = "Updated description"
+                description = "Updated description",
+                style = ReadingListStyle.BLUE
             )
 
             val updated =
@@ -1704,6 +1744,11 @@ class ReadingListDetailViewModelTest {
             assertEquals(
                 "Updated description",
                 updated?.description
+            )
+
+            assertEquals(
+                ReadingListStyle.BLUE,
+                viewModel.readingList.value?.style
             )
         }
 
@@ -1743,7 +1788,8 @@ class ReadingListDetailViewModelTest {
 
             viewModel.updateReadingListDetails(
                 title = "Changed Title",
-                description = "Changed"
+                description = "Changed",
+                style = ReadingListStyle.BLUE
             )
 
             kotlinx.coroutines.delay(100)
@@ -2433,6 +2479,326 @@ class ReadingListDetailViewModelTest {
                 viewModel
                     .selectedReadingListItemIds
                     .value
+            )
+        }
+
+    @Test
+    fun cancelEditAddToListSession_discardsDraftChanges() {
+        val existingIssue =
+            PendingReadingListIssue(
+                issueId = 1L,
+                seriesId = 10L,
+                seriesTitle = "Existing Series",
+                issueNumber = "1",
+                issueTitle = "Existing Issue",
+                publicationDate = "2026-01",
+                coverUrl = null
+            )
+
+        val addedResult =
+            IssueSearchResult(
+                issueId = 2L,
+                seriesId = 20L,
+                seriesTitle = "New Series",
+                seriesVolume = 1,
+                issueNumber = "2",
+                issueTitle = "New Issue",
+                publicationDate = "2026-02",
+                publisherName = "Test Publisher",
+                readingStatus = null
+            )
+
+        viewModel.beginEditAddToListSession(
+            listOf(existingIssue)
+        )
+
+        viewModel.toggleEditAddToListIssue(
+            addedResult
+        )
+
+        assertEquals(
+            listOf(1L, 2L),
+            viewModel
+                .editAddToListDraftIssues
+                .value
+                .map { issue ->
+                    issue.issueId
+                }
+        )
+
+        viewModel.cancelEditAddToListSession()
+
+        assertTrue(
+            viewModel
+                .editAddToListDraftIssues
+                .value
+                .isEmpty()
+        )
+
+        assertEquals(
+            "",
+            viewModel
+                .editAddToListQuery
+                .value
+        )
+
+        assertEquals(
+            AddToListFilter.ALL,
+            viewModel
+                .editAddToListFilter
+                .value
+        )
+    }
+
+    @Test
+    fun applyEditAddToListSession_returnsDraftAndClearsSession() {
+        val existingIssue =
+            PendingReadingListIssue(
+                issueId = 1L,
+                seriesId = 10L,
+                seriesTitle = "Existing Series",
+                issueNumber = "1",
+                issueTitle = "Existing Issue",
+                publicationDate = "2026-01",
+                coverUrl = null
+            )
+
+        val addedResult =
+            IssueSearchResult(
+                issueId = 2L,
+                seriesId = 20L,
+                seriesTitle = "New Series",
+                seriesVolume = 1,
+                issueNumber = "2",
+                issueTitle = "New Issue",
+                publicationDate = "2026-02",
+                publisherName = "Test Publisher",
+                readingStatus = null
+            )
+
+        viewModel.beginEditAddToListSession(
+            listOf(existingIssue)
+        )
+
+        viewModel.toggleEditAddToListIssue(
+            addedResult
+        )
+
+        val appliedIssues =
+            viewModel.applyEditAddToListSession()
+
+        assertEquals(
+            listOf(1L, 2L),
+            appliedIssues.map { issue ->
+                issue.issueId
+            }
+        )
+
+        assertTrue(
+            viewModel
+                .editAddToListDraftIssues
+                .value
+                .isEmpty()
+        )
+
+        assertEquals(
+            "",
+            viewModel
+                .editAddToListQuery
+                .value
+        )
+
+        assertEquals(
+            AddToListFilter.ALL,
+            viewModel
+                .editAddToListFilter
+                .value
+        )
+    }
+
+    @Test
+    fun saveReadingListEdits_updatesContinuityNameForMultipleContinuities() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name = "Multiverse Label Publisher"
+                    )
+                )
+
+            val firstUniverseId =
+                comicDao.insertUniverse(
+                    Universe(
+                        publisherId =
+                            publisherId,
+                        name =
+                            "First Universe",
+                        designation =
+                            "Earth-1",
+                        description =
+                            null
+                    )
+                )
+
+            val secondUniverseId =
+                comicDao.insertUniverse(
+                    Universe(
+                        publisherId =
+                            publisherId,
+                        name =
+                            "Second Universe",
+                        designation =
+                            "Earth-2",
+                        description =
+                            null
+                    )
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId =
+                            publisherId,
+                        title =
+                            "Continuity Label Series",
+                        volume = 1,
+                        startYear = 2026,
+                        endYear = null
+                    )
+                )
+
+            val firstIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId =
+                            seriesId,
+                        universeId =
+                            firstUniverseId,
+                        issueNumber =
+                            "1",
+                        title =
+                            "First Issue",
+                        publicationDate =
+                            "2026-01",
+                        coverUrl =
+                            null,
+                        description =
+                            null,
+                        issueType =
+                            IssueType.REGULAR
+                    )
+                )
+
+            val secondIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId =
+                            seriesId,
+                        universeId =
+                            secondUniverseId,
+                        issueNumber =
+                            "2",
+                        title =
+                            "Second Issue",
+                        publicationDate =
+                            "2026-02",
+                        coverUrl =
+                            null,
+                        description =
+                            null,
+                        issueType =
+                            IssueType.REGULAR
+                    )
+                )
+
+            val readingListId =
+                repository.createUserReadingListWithIssues(
+                    title =
+                        "Continuity Label Test",
+                    description =
+                        null,
+                    publisherId =
+                        publisherId,
+                    universeId =
+                        firstUniverseId,
+                    issueIds =
+                        listOf(
+                            firstIssueId
+                        )
+                )
+
+            viewModel.loadReadingList(
+                readingListId
+            )
+
+            withTimeout(
+                5000L.milliseconds
+            ) {
+                viewModel.readingList.first {
+                    it?.id ==
+                            readingListId
+                }
+            }
+
+            viewModel.saveReadingListEdits(
+                title =
+                    "Continuity Label Test",
+                description =
+                    null,
+                style =
+                    ReadingListStyle.GREEN,
+                issues =
+                    listOf(
+                        PendingReadingListIssue(
+                            issueId =
+                                firstIssueId,
+                            seriesId =
+                                seriesId,
+                            seriesTitle =
+                                "Continuity Label Series",
+                            issueNumber =
+                                "1",
+                            issueTitle =
+                                "First Issue",
+                            publicationDate =
+                                "2026-01",
+                            coverUrl =
+                                null
+                        ),
+                        PendingReadingListIssue(
+                            issueId =
+                                secondIssueId,
+                            seriesId =
+                                seriesId,
+                            seriesTitle =
+                                "Continuity Label Series",
+                            issueNumber =
+                                "2",
+                            issueTitle =
+                                "Second Issue",
+                            publicationDate =
+                                "2026-02",
+                            coverUrl =
+                                null
+                        )
+                    )
+            )
+
+            withTimeout(
+                5000L.milliseconds
+            ) {
+                viewModel.continuityName.first {
+                    it ==
+                            "Multiple continuities"
+                }
+            }
+
+            assertNull(
+                comicDao
+                    .getReadingListById(
+                        readingListId
+                    )
+                    ?.universeId
             )
         }
 }

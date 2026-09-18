@@ -1,0 +1,1690 @@
+{
+  "publisher": "Marvel Comics",
+  "universes": [
+    {
+      "name": "M2 Universe",
+      "designation": "Earth-982",
+      "description": null
+    }
+  ],
+  "series": [
+    {
+      "title": "Spider-Girl",
+      "volume": 1,
+      "startYear": 1998,
+      "endYear": 2006,
+      "externalIds": [
+        {
+          "source": "COMIC_VINE",
+          "externalId": "6218",
+          "url": "https://comicvine.gamespot.com/spider-girl/4050-6218/"
+        }
+      ],
+      "issues": [
+        {
+          "number": "0",
+          "title": "Legacy...In Black and White!",
+          "publicationDate": "1998-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/59442/1610032-sg0.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "68476",
+              "url": "https://comicvine.gamespot.com/spider-girl-0-legacyin-black-and-white/4000-68476/"
+            }
+          ]
+        },
+        {
+          "number": "1",
+          "title": "Choices",
+          "publicationDate": "1998-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/15776/595318-sg1a.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "45395",
+              "url": "https://comicvine.gamespot.com/spider-girl-1-choices/4000-45395/"
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "title": "Bedeviled",
+          "publicationDate": "1998-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/3765/112863-6218-45467-2-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "45467",
+              "url": "https://comicvine.gamespot.com/spider-girl-2-bedeviled/4000-45467/"
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "title": "Fun 'N Games With The Fantastic Five",
+          "publicationDate": "1998-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/19859/510709-393px_spidergirl_3.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "45526",
+              "url": "https://comicvine.gamespot.com/spider-girl-3-fun-n-games-with-the-fantastic-five/4000-45526/"
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "title": "Deadly Is The Dragon King",
+          "publicationDate": "1999-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/40484-6218-45618-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "45618",
+              "url": "https://comicvine.gamespot.com/spider-girl-4-deadly-is-the-dragon-king/4000-45618/"
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "title": "A Touch Of Venom",
+          "publicationDate": "1999-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/40532-6218-45679-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "45679",
+              "url": "https://comicvine.gamespot.com/spider-girl-5-a-touch-of-venom/4000-45679/"
+            }
+          ]
+        },
+        {
+          "number": "6",
+          "title": "Look Out For Ladyhawk",
+          "publicationDate": "1999-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/40572-6218-45735-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "45735",
+              "url": "https://comicvine.gamespot.com/spider-girl-6-look-out-for-ladyhawk/4000-45735/"
+            }
+          ]
+        },
+        {
+          "number": "7",
+          "title": "Secrets",
+          "publicationDate": "1999-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/40609-6218-45784-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "45784",
+              "url": "https://comicvine.gamespot.com/spider-girl-7-secrets/4000-45784/"
+            }
+          ]
+        },
+        {
+          "number": "8",
+          "title": "Two Of A Kind",
+          "publicationDate": "1999-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/40643-6218-45833-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "45833",
+              "url": "https://comicvine.gamespot.com/spider-girl-8-two-of-a-kind/4000-45833/"
+            }
+          ]
+        },
+        {
+          "number": "9",
+          "title": "Training Matters",
+          "publicationDate": "1999-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/40678-6218-45877-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "45877",
+              "url": "https://comicvine.gamespot.com/spider-girl-9-training-matters/4000-45877/"
+            }
+          ]
+        },
+        {
+          "number": "10",
+          "title": "Father's Day",
+          "publicationDate": "1999-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/40714-6218-45922-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "45922",
+              "url": "https://comicvine.gamespot.com/spider-girl-10-father-s-day/4000-45922/"
+            }
+          ]
+        },
+        {
+          "number": "½",
+          "title": "Seeing Isn't Believing",
+          "publicationDate": "1999-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/15776/595321-sg_a.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "140972",
+              "url": "https://comicvine.gamespot.com/spider-girl-12-seeing-isnt-believing/4000-140972/"
+            }
+          ]
+        },
+        {
+          "number": "11",
+          "title": "Slayers, Spiders and Torches-- Oh My!",
+          "publicationDate": "1999-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/40740-6218-45957-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "45957",
+              "url": "https://comicvine.gamespot.com/spider-girl-11-slayers-spiders-and-torches-oh-my/4000-45957/"
+            }
+          ]
+        },
+        {
+          "number": "12",
+          "title": "Duel With Darkdevil",
+          "publicationDate": "1999-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/40774-6218-46004-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "46004",
+              "url": "https://comicvine.gamespot.com/spider-girl-12-duel-with-darkdevil/4000-46004/"
+            }
+          ]
+        },
+        {
+          "number": "13",
+          "title": "And Now, The Avengers",
+          "publicationDate": "1999-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/40813-6218-46048-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "46048",
+              "url": "https://comicvine.gamespot.com/spider-girl-13-and-now-the-avengers/4000-46048/"
+            }
+          ]
+        },
+        {
+          "number": "14",
+          "title": "Defeated By Kaine",
+          "publicationDate": "1999-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/40844-6218-46092-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "46092",
+              "url": "https://comicvine.gamespot.com/spider-girl-14-defeated-by-kaine/4000-46092/"
+            }
+          ]
+        },
+        {
+          "number": "15",
+          "title": "Swingin' N' Slammin' With Speedball!",
+          "publicationDate": "1999-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/42199-6218-47877-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "47877",
+              "url": "https://comicvine.gamespot.com/spider-girl-15-swingin-n-slammin-with-speedball/4000-47877/"
+            }
+          ]
+        },
+        {
+          "number": "16",
+          "title": "The Question",
+          "publicationDate": "2000-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/42200-6218-47878-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "47878",
+              "url": "https://comicvine.gamespot.com/spider-girl-16-the-question/4000-47878/"
+            }
+          ]
+        },
+        {
+          "number": "17",
+          "title": "Once A Web-Swinger....",
+          "publicationDate": "2000-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/42201-6218-47879-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "47879",
+              "url": "https://comicvine.gamespot.com/spider-girl-17-once-a-web-swinger/4000-47879/"
+            }
+          ]
+        },
+        {
+          "number": "18",
+          "title": "Raptor's Regret",
+          "publicationDate": "2000-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/42202-6218-47880-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "47880",
+              "url": "https://comicvine.gamespot.com/spider-girl-18-raptors-regret/4000-47880/"
+            }
+          ]
+        },
+        {
+          "number": "19",
+          "title": "Fantasies",
+          "publicationDate": "2000-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/42203-6218-47881-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "47881",
+              "url": "https://comicvine.gamespot.com/spider-girl-19-fantasies/4000-47881/"
+            }
+          ]
+        },
+        {
+          "number": "20",
+          "title": "Once A Goblin - - !",
+          "publicationDate": "2000-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/42204-6218-47882-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "47882",
+              "url": "https://comicvine.gamespot.com/spider-girl-20-once-a-goblin/4000-47882/"
+            }
+          ]
+        },
+        {
+          "number": "21",
+          "title": "Earthshaker",
+          "publicationDate": "2000-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/43222-6218-49397-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "49397",
+              "url": "https://comicvine.gamespot.com/spider-girl-21-earthshaker/4000-49397/"
+            }
+          ]
+        },
+        {
+          "number": "22",
+          "title": "Dance Fever",
+          "publicationDate": "2000-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/43223-6218-49398-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "49398",
+              "url": "https://comicvine.gamespot.com/spider-girl-22-dance-fever/4000-49398/"
+            }
+          ]
+        },
+        {
+          "number": "23",
+          "title": "The Girl With The Power!",
+          "publicationDate": "2000-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/43224-6218-49399-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "49399",
+              "url": "https://comicvine.gamespot.com/spider-girl-23-the-girl-with-the-power/4000-49399/"
+            }
+          ]
+        },
+        {
+          "number": "24",
+          "title": "Dragonfist",
+          "publicationDate": "2000-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/43225-6218-49400-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "49400",
+              "url": "https://comicvine.gamespot.com/spider-girl-24-dragonfist/4000-49400/"
+            }
+          ]
+        },
+        {
+          "number": "25",
+          "title": "The Savage Six! (or is it seven?)",
+          "publicationDate": "2000-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/43226-6218-49401-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "49401",
+              "url": "https://comicvine.gamespot.com/spider-girl-25-the-savage-six-or-is-it-seven/4000-49401/"
+            }
+          ]
+        },
+        {
+          "number": "26",
+          "title": "Passages",
+          "publicationDate": "2000-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/43227-6218-49402-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "49402",
+              "url": "https://comicvine.gamespot.com/spider-girl-26-passages/4000-49402/"
+            }
+          ]
+        },
+        {
+          "number": "27",
+          "title": "Endgame",
+          "publicationDate": "2000-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/43228-6218-49403-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "49403",
+              "url": "https://comicvine.gamespot.com/spider-girl-27-endgame/4000-49403/"
+            }
+          ]
+        },
+        {
+          "number": "28",
+          "title": "Unfinished Business",
+          "publicationDate": "2001-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/43229-6218-49404-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "49404",
+              "url": "https://comicvine.gamespot.com/spider-girl-28-unfinished-business/4000-49404/"
+            }
+          ]
+        },
+        {
+          "number": "29",
+          "title": "Strange Allies",
+          "publicationDate": "2001-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/43230-6218-49405-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "49405",
+              "url": "https://comicvine.gamespot.com/spider-girl-29-strange-allies/4000-49405/"
+            }
+          ]
+        },
+        {
+          "number": "30",
+          "title": "The Winds of War!",
+          "publicationDate": "2001-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/43231-6218-49406-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "49406",
+              "url": "https://comicvine.gamespot.com/spider-girl-30-the-winds-of-war/4000-49406/"
+            }
+          ]
+        },
+        {
+          "number": "31",
+          "title": "With Friends Like These...",
+          "publicationDate": "2001-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/44707-6218-51755-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "51755",
+              "url": "https://comicvine.gamespot.com/spider-girl-31-with-friends-like-these/4000-51755/"
+            }
+          ]
+        },
+        {
+          "number": "32",
+          "title": "The Steel Spider",
+          "publicationDate": "2001-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/44708-6218-51756-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "51756",
+              "url": "https://comicvine.gamespot.com/spider-girl-32-the-steel-spider/4000-51756/"
+            }
+          ]
+        },
+        {
+          "number": "33",
+          "title": "Too Many Spiders",
+          "publicationDate": "2001-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/44709-6218-51757-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "51757",
+              "url": "https://comicvine.gamespot.com/spider-girl-33-too-many-spiders/4000-51757/"
+            }
+          ]
+        },
+        {
+          "number": "34",
+          "title": "Overkill",
+          "publicationDate": "2001-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/44710-6218-51758-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "51758",
+              "url": "https://comicvine.gamespot.com/spider-girl-34-overkill/4000-51758/"
+            }
+          ]
+        },
+        {
+          "number": "35",
+          "title": "Line of Fire",
+          "publicationDate": "2001-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/3765/111894-6218-108758-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "108758",
+              "url": "https://comicvine.gamespot.com/spider-girl-35-line-of-fire/4000-108758/"
+            }
+          ]
+        },
+        {
+          "number": "36",
+          "title": "Getting Involved",
+          "publicationDate": "2001-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/222191-6218-116504-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "116504",
+              "url": "https://comicvine.gamespot.com/spider-girl-36-getting-involved/4000-116504/"
+            }
+          ]
+        },
+        {
+          "number": "37",
+          "title": "Betrayed!",
+          "publicationDate": "2001-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/222192-6218-116505-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "116505",
+              "url": "https://comicvine.gamespot.com/spider-girl-37-betrayed/4000-116505/"
+            }
+          ]
+        },
+        {
+          "number": "38",
+          "title": "A New Lease on Life",
+          "publicationDate": "2001-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/222199-6218-116507-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "116507",
+              "url": "https://comicvine.gamespot.com/spider-girl-38-a-new-lease-on-life/4000-116507/"
+            }
+          ]
+        },
+        {
+          "number": "39",
+          "title": "Duty Calls!",
+          "publicationDate": "2001-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/222202-6218-116508-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "116508",
+              "url": "https://comicvine.gamespot.com/spider-girl-39-duty-calls/4000-116508/"
+            }
+          ]
+        },
+        {
+          "number": "40",
+          "title": "A Death In the Family!",
+          "publicationDate": "2002-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/222205-6218-116509-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "116509",
+              "url": "https://comicvine.gamespot.com/spider-girl-40-a-death-in-the-family/4000-116509/"
+            }
+          ]
+        },
+        {
+          "number": "41",
+          "title": "Funeral For A Fiend",
+          "publicationDate": "2002-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/74812-6218-78222-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "78222",
+              "url": "https://comicvine.gamespot.com/spider-girl-41-funeral-for-a-fiend/4000-78222/"
+            }
+          ]
+        },
+        {
+          "number": "42",
+          "title": "Mother's Day",
+          "publicationDate": "2002-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/74813-6218-78223-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "78223",
+              "url": "https://comicvine.gamespot.com/spider-girl-42-mothers-day/4000-78223/"
+            }
+          ]
+        },
+        {
+          "number": "43",
+          "title": "A Separate Peace",
+          "publicationDate": "2002-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/74814-6218-78224-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "78224",
+              "url": "https://comicvine.gamespot.com/spider-girl-43-a-separate-peace/4000-78224/"
+            }
+          ]
+        },
+        {
+          "number": "44",
+          "title": "Cry Uncle!",
+          "publicationDate": "2002-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/74815-6218-78225-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "78225",
+              "url": "https://comicvine.gamespot.com/spider-girl-44-cry-uncle/4000-78225/"
+            }
+          ]
+        },
+        {
+          "number": "45",
+          "title": "Secret Lives!",
+          "publicationDate": "2002-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/74816-6218-78226-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "78226",
+              "url": "https://comicvine.gamespot.com/spider-girl-45-secret-lives/4000-78226/"
+            }
+          ]
+        },
+        {
+          "number": "46",
+          "title": "Suddenly... the Scarlet Spider!",
+          "publicationDate": "2002-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/74817-6218-78227-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "78227",
+              "url": "https://comicvine.gamespot.com/spider-girl-46-suddenly-the-scarlet-spider/4000-78227/"
+            }
+          ]
+        },
+        {
+          "number": "47",
+          "title": "Gods and Men",
+          "publicationDate": "2002-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/74818-6218-78228-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "78228",
+              "url": "https://comicvine.gamespot.com/spider-girl-47-gods-and-men/4000-78228/"
+            }
+          ]
+        },
+        {
+          "number": "48",
+          "title": "Through A Mother's Eyes",
+          "publicationDate": "2002-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/74819-6218-78229-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "78229",
+              "url": "https://comicvine.gamespot.com/spider-girl-48-through-a-mothers-eyes/4000-78229/"
+            }
+          ]
+        },
+        {
+          "number": "49",
+          "title": "A Dish Served Cold!",
+          "publicationDate": "2002-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/225577-6218-117028-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117028",
+              "url": "https://comicvine.gamespot.com/spider-girl-49-a-dish-served-cold/4000-117028/"
+            }
+          ]
+        },
+        {
+          "number": "50",
+          "title": "Forgiveness",
+          "publicationDate": "2002-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/225584-6218-117029-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117029",
+              "url": "https://comicvine.gamespot.com/spider-girl-50-forgiveness/4000-117029/"
+            }
+          ]
+        },
+        {
+          "number": "51",
+          "title": "Dearest May",
+          "publicationDate": "2002-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/225603-6218-117031-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117031",
+              "url": "https://comicvine.gamespot.com/spider-girl-51-dearest-may/4000-117031/"
+            }
+          ]
+        },
+        {
+          "number": "52",
+          "title": "Seize the Day!",
+          "publicationDate": "2002-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/225626-6218-117040-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117040",
+              "url": "https://comicvine.gamespot.com/spider-girl-52-seize-the-day/4000-117040/"
+            }
+          ]
+        },
+        {
+          "number": "53",
+          "title": "An Invisible Girl!",
+          "publicationDate": "2003-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/225629-6218-117045-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117045",
+              "url": "https://comicvine.gamespot.com/spider-girl-53-an-invisible-girl/4000-117045/"
+            }
+          ]
+        },
+        {
+          "number": "54",
+          "title": "Season of the Serpent",
+          "publicationDate": "2003-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/225640-6218-117047-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117047",
+              "url": "https://comicvine.gamespot.com/spider-girl-54-season-of-the-serpent/4000-117047/"
+            }
+          ]
+        },
+        {
+          "number": "55",
+          "title": "Rising Storm!",
+          "publicationDate": "2003-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/225644-6218-117048-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117048",
+              "url": "https://comicvine.gamespot.com/spider-girl-55-rising-storm/4000-117048/"
+            }
+          ]
+        },
+        {
+          "number": "56",
+          "title": "Three Minutes!",
+          "publicationDate": "2003-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/225647-6218-117049-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117049",
+              "url": "https://comicvine.gamespot.com/spider-girl-56-three-minutes/4000-117049/"
+            }
+          ]
+        },
+        {
+          "number": "57",
+          "title": "Call of Thunder",
+          "publicationDate": "2003-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/225649-6218-117050-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117050",
+              "url": "https://comicvine.gamespot.com/spider-girl-57-call-of-thunder/4000-117050/"
+            }
+          ]
+        },
+        {
+          "number": "58",
+          "title": "Daddy's Girl!",
+          "publicationDate": "2003-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/225652-6218-117051-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117051",
+              "url": "https://comicvine.gamespot.com/spider-girl-58-daddys-girl/4000-117051/"
+            }
+          ]
+        },
+        {
+          "number": "59",
+          "title": "Proof of Life!",
+          "publicationDate": "2003-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/225656-6218-117053-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117053",
+              "url": "https://comicvine.gamespot.com/spider-girl-59-proof-of-life/4000-117053/"
+            }
+          ]
+        },
+        {
+          "number": "60",
+          "title": "Legacy!",
+          "publicationDate": "2003-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/225682-6218-117052-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117052",
+              "url": "https://comicvine.gamespot.com/spider-girl-60-legacy/4000-117052/"
+            }
+          ]
+        },
+        {
+          "number": "61",
+          "title": "Marked For Death!",
+          "publicationDate": "2003-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/225685-6218-117061-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117061",
+              "url": "https://comicvine.gamespot.com/spider-girl-61-marked-for-death/4000-117061/"
+            }
+          ]
+        },
+        {
+          "number": "62",
+          "title": "Every Hand Against Her!",
+          "publicationDate": "2003-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/225698-6218-117062-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117062",
+              "url": "https://comicvine.gamespot.com/spider-girl-62-every-hand-against-her/4000-117062/"
+            }
+          ]
+        },
+        {
+          "number": "63",
+          "title": "If This Be My Destiny!",
+          "publicationDate": "2003-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/225701-6218-117063-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117063",
+              "url": "https://comicvine.gamespot.com/spider-girl-63-if-this-be-my-destiny/4000-117063/"
+            }
+          ]
+        },
+        {
+          "number": "64",
+          "title": "Outed!",
+          "publicationDate": "2003-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/225704-6218-117066-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117066",
+              "url": "https://comicvine.gamespot.com/spider-girl-64-outed/4000-117066/"
+            }
+          ]
+        },
+        {
+          "number": "65",
+          "title": "Grave Matters",
+          "publicationDate": "2003-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/225720-6218-117067-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117067",
+              "url": "https://comicvine.gamespot.com/spider-girl-65-grave-matters/4000-117067/"
+            }
+          ]
+        },
+        {
+          "number": "66",
+          "title": "If This Be Victory",
+          "publicationDate": "2004-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/225740-6218-117069-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117069",
+              "url": "https://comicvine.gamespot.com/spider-girl-66-if-this-be-victory/4000-117069/"
+            }
+          ]
+        },
+        {
+          "number": "67",
+          "title": "Monsters!",
+          "publicationDate": "2004-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/225800-6218-117074-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117074",
+              "url": "https://comicvine.gamespot.com/spider-girl-67-monsters/4000-117074/"
+            }
+          ]
+        },
+        {
+          "number": "68",
+          "title": "The Rules",
+          "publicationDate": "2004-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/225956-6218-117089-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117089",
+              "url": "https://comicvine.gamespot.com/spider-girl-68-the-rules/4000-117089/"
+            }
+          ]
+        },
+        {
+          "number": "69",
+          "title": "Those Who Hunt Monsters!",
+          "publicationDate": "2004-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/225961-6218-117090-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117090",
+              "url": "https://comicvine.gamespot.com/spider-girl-69-those-who-hunt-monsters/4000-117090/"
+            }
+          ]
+        },
+        {
+          "number": "70",
+          "title": "When the Abyss Looks Back!",
+          "publicationDate": "2004-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/225990-6218-117093-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117093",
+              "url": "https://comicvine.gamespot.com/spider-girl-70-when-the-abyss-looks-back/4000-117093/"
+            }
+          ]
+        },
+        {
+          "number": "71",
+          "title": "Eye of the Beholder",
+          "publicationDate": "2004-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/226001-6218-117091-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117091",
+              "url": "https://comicvine.gamespot.com/spider-girl-71-eye-of-the-beholder/4000-117091/"
+            }
+          ]
+        },
+        {
+          "number": "72",
+          "title": "The Games Villains Play!",
+          "publicationDate": "2004-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/226028-6218-117100-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117100",
+              "url": "https://comicvine.gamespot.com/spider-girl-72-the-games-villains-play/4000-117100/"
+            }
+          ]
+        },
+        {
+          "number": "73",
+          "title": "All Men Are Jerks!",
+          "publicationDate": "2004-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/226043-6218-117102-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117102",
+              "url": "https://comicvine.gamespot.com/spider-girl-73-all-men-are-jerks/4000-117102/"
+            }
+          ]
+        },
+        {
+          "number": "74",
+          "title": "Buried Alive!",
+          "publicationDate": "2004-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/226035-6218-117105-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117105",
+              "url": "https://comicvine.gamespot.com/spider-girl-74-buried-alive/4000-117105/"
+            }
+          ]
+        },
+        {
+          "number": "75",
+          "title": "Team Spider",
+          "publicationDate": "2004-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/226046-6218-117103-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117103",
+              "url": "https://comicvine.gamespot.com/spider-girl-75-team-spider/4000-117103/"
+            }
+          ]
+        },
+        {
+          "number": "76",
+          "title": "Keeping the Faith",
+          "publicationDate": "2004-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/226053-6218-117104-2-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117104",
+              "url": "https://comicvine.gamespot.com/spider-girl-76-keeping-the-faith/4000-117104/"
+            }
+          ]
+        },
+        {
+          "number": "77",
+          "title": "A Taste for Treachery!",
+          "publicationDate": "2004-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/226055-6218-117107-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117107",
+              "url": "https://comicvine.gamespot.com/spider-girl-77-a-taste-for-treachery/4000-117107/"
+            }
+          ]
+        },
+        {
+          "number": "78",
+          "title": "The People Played By Games!",
+          "publicationDate": "2004-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/60550-6218-93545-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "93545",
+              "url": "https://comicvine.gamespot.com/spider-girl-78-the-people-played-by-games/4000-93545/"
+            }
+          ]
+        },
+        {
+          "number": "79",
+          "title": "When Destiny Calls!",
+          "publicationDate": "2004-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/60551-6218-93546-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "93546",
+              "url": "https://comicvine.gamespot.com/spider-girl-79-when-destiny-calls/4000-93546/"
+            }
+          ]
+        },
+        {
+          "number": "80",
+          "title": "Secrets Kill!",
+          "publicationDate": "2005-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/68146-6218-101144-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "101144",
+              "url": "https://comicvine.gamespot.com/spider-girl-80-secrets-kill/4000-101144/"
+            }
+          ]
+        },
+        {
+          "number": "81",
+          "title": "I Scorn the Body Electric!",
+          "publicationDate": "2005-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/68147-6218-101145-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "101145",
+              "url": "https://comicvine.gamespot.com/spider-girl-81-i-scorn-the-body-electric/4000-101145/"
+            }
+          ]
+        },
+        {
+          "number": "82",
+          "title": "You Only Hurt--!",
+          "publicationDate": "2005-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/68148-6218-101146-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "101146",
+              "url": "https://comicvine.gamespot.com/spider-girl-82-you-only-hurt-/4000-101146/"
+            }
+          ]
+        },
+        {
+          "number": "83",
+          "title": "Kill Phil!",
+          "publicationDate": "2005-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/68149-6218-101147-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "101147",
+              "url": "https://comicvine.gamespot.com/spider-girl-83-kill-phil/4000-101147/"
+            }
+          ]
+        },
+        {
+          "number": "84",
+          "title": "I, Hero!",
+          "publicationDate": "2005-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/68150-6218-101148-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "101148",
+              "url": "https://comicvine.gamespot.com/spider-girl-84-i-hero/4000-101148/"
+            }
+          ]
+        },
+        {
+          "number": "85",
+          "title": "Rescue Me!",
+          "publicationDate": "2005-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/68151-6218-101149-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "101149",
+              "url": "https://comicvine.gamespot.com/spider-girl-85-rescue-me/4000-101149/"
+            }
+          ]
+        },
+        {
+          "number": "86",
+          "title": "Family Business",
+          "publicationDate": "2005-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/226557-6218-117211-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117211",
+              "url": "https://comicvine.gamespot.com/spider-girl-86-family-business/4000-117211/"
+            }
+          ]
+        },
+        {
+          "number": "87",
+          "title": "Family Business 2",
+          "publicationDate": "2005-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/226651-6218-117224-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117224",
+              "url": "https://comicvine.gamespot.com/spider-girl-87-family-business-2/4000-117224/"
+            }
+          ]
+        },
+        {
+          "number": "88",
+          "title": "Family Business 3",
+          "publicationDate": "2005-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/226795-6218-117276-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117276",
+              "url": "https://comicvine.gamespot.com/spider-girl-88-family-business-3/4000-117276/"
+            }
+          ]
+        },
+        {
+          "number": "89",
+          "title": "The Girl Who Fell To Earth",
+          "publicationDate": "2005-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/226804-6218-117277-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117277",
+              "url": "https://comicvine.gamespot.com/spider-girl-89-the-girl-who-fell-to-earth/4000-117277/"
+            }
+          ]
+        },
+        {
+          "number": "90",
+          "title": "Spider-Girl Interrupted!",
+          "publicationDate": "2005-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/226806-6218-117278-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117278",
+              "url": "https://comicvine.gamespot.com/spider-girl-90-spider-girl-interrupted/4000-117278/"
+            }
+          ]
+        },
+        {
+          "number": "91",
+          "title": "The Shocking Secret of the Spider Shoppe",
+          "publicationDate": "2005-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/226827-6218-117282-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117282",
+              "url": "https://comicvine.gamespot.com/spider-girl-91-the-shocking-secret-of-the-spider-s/4000-117282/"
+            }
+          ]
+        },
+        {
+          "number": "92",
+          "title": "The Means!; Franklin Richards, Son of a Genius in: Weather or Not",
+          "publicationDate": "2006-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/2762949-00spider_girl_92_cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117283",
+              "url": "https://comicvine.gamespot.com/spider-girl-92-the-means-franklin-richards-son-of-/4000-117283/"
+            }
+          ]
+        },
+        {
+          "number": "93",
+          "title": "Something Osborn This Way Comes!",
+          "publicationDate": "2006-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/226868-6218-117284-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117284",
+              "url": "https://comicvine.gamespot.com/spider-girl-93-something-osborn-this-way-comes/4000-117284/"
+            }
+          ]
+        },
+        {
+          "number": "94",
+          "title": "Old Soldiers",
+          "publicationDate": "2006-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/226936-6218-117314-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117314",
+              "url": "https://comicvine.gamespot.com/spider-girl-94-old-soldiers/4000-117314/"
+            }
+          ]
+        },
+        {
+          "number": "95",
+          "title": "And You Don't Mess Around With Jim!",
+          "publicationDate": "2006-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/227008-6218-117317-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117317",
+              "url": "https://comicvine.gamespot.com/spider-girl-95-and-you-dont-mess-around-with-jim/4000-117317/"
+            }
+          ]
+        },
+        {
+          "number": "96",
+          "title": "Shadows From The Past!",
+          "publicationDate": "2006-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/227064-6218-117318-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117318",
+              "url": "https://comicvine.gamespot.com/spider-girl-96-shadows-from-the-past/4000-117318/"
+            }
+          ]
+        },
+        {
+          "number": "97",
+          "title": "I'm Back!",
+          "publicationDate": "2006-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/227084-6218-117319-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117319",
+              "url": "https://comicvine.gamespot.com/spider-girl-97-im-back/4000-117319/"
+            }
+          ]
+        },
+        {
+          "number": "98",
+          "title": "Sacrifices Must Be Made",
+          "publicationDate": "2006-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/227124-6218-117320-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117320",
+              "url": "https://comicvine.gamespot.com/spider-girl-98-sacrifices-must-be-made/4000-117320/"
+            }
+          ]
+        },
+        {
+          "number": "99",
+          "title": "Family Ties!",
+          "publicationDate": "2006-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/227143-6218-117321-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117321",
+              "url": "https://comicvine.gamespot.com/spider-girl-99-family-ties/4000-117321/"
+            }
+          ]
+        },
+        {
+          "number": "100",
+          "title": "If Death Be My Destiny!",
+          "publicationDate": "2006-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/7995/227189-6218-117324-1-spider-girl.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "117324",
+              "url": "https://comicvine.gamespot.com/spider-girl-100-if-death-be-my-destiny/4000-117324/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Spider-Girl Annual",
+      "volume": null,
+      "startYear": 1999,
+      "endYear": 1999,
+      "externalIds": [
+        {
+          "source": "COMIC_VINE",
+          "externalId": "23208",
+          "url": "https://comicvine.gamespot.com/spider-girl-1999/4050-23208/"
+        }
+      ],
+      "issues": [
+        {
+          "number": "1999",
+          "title": "Misery",
+          "publicationDate": "1999-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/19859/564808-6188_4_1.jpg",
+          "description": null,
+          "type": "ANNUAL",
+          "universeDesignation": "Earth-982",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "139640",
+              "url": "https://comicvine.gamespot.com/spider-girl-annual-1999-1-misery/4000-139640/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -351,7 +351,8 @@ fun LibraryScreen(
                                     end = 12.dp,
                                     top = 4.dp,
                                     bottom = 4.dp
-                                )
+                                ),
+                        style = readingList.style
                     )
                 }
             }

@@ -489,6 +489,7 @@ interface ComicDao {
         SELECT
             reading_list_items.id AS readingListItemId,
             issues.id AS issueId,
+            series.id AS seriesId,
             reading_list_items.position AS position,
             reading_list_items.required AS required,
             reading_list_items.notes AS notes,
@@ -518,6 +519,17 @@ interface ComicDao {
     fun getReadingListIssues(
         readingListId: Long
     ): Flow<List<ReadingListIssue>>
+
+    @Query("""
+        SELECT DISTINCT issues.universeId
+        FROM reading_list_items
+        INNER JOIN issues
+            ON reading_list_items.issueId = issues.id
+        WHERE reading_list_items.readingListId = :readingListId
+    """)
+    suspend fun getUniverseIdsForReadingList(
+        readingListId: Long
+    ): List<Long?>
 
 
     // External IDs

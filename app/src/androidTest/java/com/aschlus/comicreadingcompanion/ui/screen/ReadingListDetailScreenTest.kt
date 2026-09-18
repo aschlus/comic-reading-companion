@@ -17,6 +17,7 @@ import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTextClearance
 import androidx.compose.ui.test.performTouchInput
@@ -35,6 +36,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSecti
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSource
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.database.entities.Series
+import com.aschlus.comicreadingcompanion.data.database.entities.Universe
 import com.aschlus.comicreadingcompanion.data.preferences.ReadingListUiPreferences
 import com.aschlus.comicreadingcompanion.data.repository.ComicRepository
 import com.aschlus.comicreadingcompanion.ui.theme.ComicReadingCompanionTheme
@@ -49,6 +51,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import androidx.compose.ui.test.hasText
 
 @RunWith(AndroidJUnit4::class)
 class ReadingListDetailScreenTest {
@@ -2884,7 +2887,10 @@ class ReadingListDetailScreenTest {
                 )
 
             composeRule
-                .onNodeWithText("Save")
+                .onNodeWithText(
+                    "SAVE CHANGES"
+                )
+                .performScrollTo()
                 .performClick()
 
             composeRule.waitUntil(
@@ -3880,4 +3886,1093 @@ class ReadingListDetailScreenTest {
                 .assertIsDisplayed()
         }
     }
+
+    @Test
+    fun readingListDetailScreen_editAddToListBackDiscardsSelection() {
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name = "Edit Test Publisher"
+                    )
+                )
+
+            val existingSeriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Existing Series",
+                        volume = 1,
+                        startYear = 2025,
+                        endYear = null
+                    )
+                )
+
+            val newSeriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "New Series",
+                        volume = 1,
+                        startYear = 2026,
+                        endYear = null
+                    )
+                )
+
+            val existingIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = existingSeriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "Existing Issue",
+                        publicationDate = "2025-01",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            comicDao.insertIssue(
+                Issue(
+                    seriesId = newSeriesId,
+                    universeId = null,
+                    issueNumber = "2",
+                    title = "New Issue",
+                    publicationDate = "2026-02",
+                    coverUrl = null,
+                    description = null,
+                    issueType = IssueType.REGULAR
+                )
+            )
+
+            val readingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title = "Edit Add Test",
+                        description = null,
+                        publisherId = publisherId,
+                        universeId = null,
+                        source = ReadingListSource.USER,
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            comicDao.insertReadingListItem(
+                ReadingListItem(
+                    readingListId = readingListId,
+                    sectionId = null,
+                    issueId = existingIssueId,
+                    position = 1,
+                    required = true,
+                    notes = null
+                )
+            )
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    ReadingListDetailScreen(
+                        readingListId = readingListId,
+                        startPosition = -1,
+                        viewModel = viewModel,
+                        onIssueClick = {},
+                        onBackClick = {}
+                    )
+                }
+            }
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        "Existing Series #1"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule
+                .onNodeWithContentDescription(
+                    "Reading list options"
+                )
+                .performClick()
+
+            composeRule
+                .onNodeWithText(
+                    "Edit reading list"
+                )
+                .performClick()
+
+            composeRule
+                .onNodeWithText(
+                    "Search issues or series"
+                )
+                .performScrollTo()
+                .performClick()
+
+            composeRule
+                .onNode(
+                    hasText(
+                        "Search issues or series"
+                    ) and
+                            hasSetTextAction()
+                )
+                .performTextInput(
+                    "New"
+                )
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        "New Series #2"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule
+                .onNodeWithText(
+                    "New Series #2"
+                )
+                .performClick()
+
+            composeRule
+                .onNodeWithText(
+                    "BACK"
+                )
+                .performClick()
+
+            composeRule
+                .onNodeWithText(
+                    "Existing Series #1"
+                )
+                .performScrollTo()
+                .assertIsDisplayed()
+
+            composeRule
+                .onNodeWithText(
+                    "New Series #2"
+                )
+                .assertDoesNotExist()
+        }
+    }
+
+    @Test
+    fun readingListDetailScreen_editAddToListDoneAndSavePersistsSelection() {
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name = "Edit Done Publisher"
+                    )
+                )
+
+            val existingSeriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Existing Series",
+                        volume = 1,
+                        startYear = 2025,
+                        endYear = null
+                    )
+                )
+
+            val newSeriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "New Series",
+                        volume = 1,
+                        startYear = 2026,
+                        endYear = null
+                    )
+                )
+
+            val existingIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = existingSeriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "Existing Issue",
+                        publicationDate = "2025-01",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val newIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = newSeriesId,
+                        universeId = null,
+                        issueNumber = "2",
+                        title = "New Issue",
+                        publicationDate = "2026-02",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val readingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title = "Edit Done Test",
+                        description = null,
+                        publisherId = publisherId,
+                        universeId = null,
+                        source = ReadingListSource.USER,
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            comicDao.insertReadingListItem(
+                ReadingListItem(
+                    readingListId = readingListId,
+                    sectionId = null,
+                    issueId = existingIssueId,
+                    position = 1,
+                    required = true,
+                    notes = null
+                )
+            )
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    ReadingListDetailScreen(
+                        readingListId = readingListId,
+                        startPosition = -1,
+                        viewModel = viewModel,
+                        onIssueClick = {},
+                        onBackClick = {}
+                    )
+                }
+            }
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        "Existing Series #1"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule
+                .onNodeWithContentDescription(
+                    "Reading list options"
+                )
+                .performClick()
+
+            composeRule
+                .onNodeWithText(
+                    "Edit reading list"
+                )
+                .performClick()
+
+            composeRule
+                .onNodeWithText(
+                    "Search issues or series"
+                )
+                .performScrollTo()
+                .performClick()
+
+            composeRule
+                .onNode(
+                    hasText(
+                        "Search issues or series"
+                    ) and
+                            hasSetTextAction()
+                )
+                .performTextInput(
+                    "New"
+                )
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        "New Series #2"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule
+                .onNodeWithText(
+                    "New Series #2"
+                )
+                .performClick()
+
+            composeRule
+                .onNodeWithText(
+                    "DONE"
+                )
+                .performClick()
+
+            composeRule
+                .onNodeWithText(
+                    "Existing Series #1"
+                )
+                .performScrollTo()
+                .assertIsDisplayed()
+
+            composeRule
+                .onNodeWithText(
+                    "New Series #2"
+                )
+                .performScrollTo()
+                .assertIsDisplayed()
+
+            composeRule
+                .onNodeWithText(
+                    "SAVE CHANGES"
+                )
+                .performScrollTo()
+                .performClick()
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                viewModel
+                    .issues
+                    .value
+                    .any { issue ->
+                        issue.issueId ==
+                                newIssueId
+                    }
+            }
+
+            val savedItems =
+                comicDao.getItemsForReadingList(
+                    readingListId
+                )
+
+            assertEquals(
+                listOf(
+                    existingIssueId,
+                    newIssueId
+                ),
+                savedItems.map { item ->
+                    item.issueId
+                }
+            )
+        }
+    }
+
+    @Test
+    fun readingListDetailScreen_editRemoveIssueAndSavePersistsRemoval() {
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name = "Edit Remove Publisher"
+                    )
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Remove Test Series",
+                        volume = 1,
+                        startYear = 2026,
+                        endYear = null
+                    )
+                )
+
+            val firstIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "First Issue",
+                        publicationDate = "2026-01",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val secondIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "2",
+                        title = "Second Issue",
+                        publicationDate = "2026-02",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val readingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title = "Remove Test",
+                        description = null,
+                        publisherId = publisherId,
+                        universeId = null,
+                        source = ReadingListSource.USER,
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            comicDao.insertReadingListItem(
+                ReadingListItem(
+                    readingListId = readingListId,
+                    sectionId = null,
+                    issueId = firstIssueId,
+                    position = 1,
+                    required = true,
+                    notes = null
+                )
+            )
+
+            comicDao.insertReadingListItem(
+                ReadingListItem(
+                    readingListId = readingListId,
+                    sectionId = null,
+                    issueId = secondIssueId,
+                    position = 2,
+                    required = true,
+                    notes = null
+                )
+            )
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    ReadingListDetailScreen(
+                        readingListId = readingListId,
+                        startPosition = -1,
+                        viewModel = viewModel,
+                        onIssueClick = {},
+                        onBackClick = {}
+                    )
+                }
+            }
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                viewModel
+                    .issues
+                    .value
+                    .size == 2
+            }
+
+            composeRule
+                .onNodeWithContentDescription(
+                    "Reading list options"
+                )
+                .performClick()
+
+            composeRule
+                .onNodeWithText(
+                    "Edit reading list"
+                )
+                .performClick()
+
+            composeRule
+                .onNodeWithText(
+                    "Remove Test Series #2"
+                )
+                .performScrollTo()
+
+            composeRule
+                .onAllNodesWithContentDescription(
+                    "Remove issue"
+                )[1]
+                .performClick()
+
+            composeRule
+                .onNodeWithText(
+                    "Remove Test Series #2"
+                )
+                .assertDoesNotExist()
+
+            composeRule
+                .onNodeWithText(
+                    "SAVE CHANGES"
+                )
+                .performScrollTo()
+                .performClick()
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                viewModel
+                    .issues
+                    .value
+                    .map { issue ->
+                        issue.issueId
+                    } ==
+                        listOf(
+                            firstIssueId
+                        )
+            }
+
+            val savedItems =
+                comicDao.getItemsForReadingList(
+                    readingListId
+                )
+
+            assertEquals(
+                listOf(
+                    firstIssueId
+                ),
+                savedItems.map { item ->
+                    item.issueId
+                }
+            )
+
+            assertEquals(
+                listOf(1),
+                savedItems.map { item ->
+                    item.position
+                }
+            )
+        }
+    }
+
+    @Test
+    fun readingListDetailScreen_editReorderIssuesAndSavePersistsOrder() {
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name = "Edit Reorder Publisher"
+                    )
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Reorder Test Series",
+                        volume = 1,
+                        startYear = 2026,
+                        endYear = null
+                    )
+                )
+
+            val firstIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "First Issue",
+                        publicationDate = "2026-01",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val secondIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "2",
+                        title = "Second Issue",
+                        publicationDate = "2026-02",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val readingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title = "Reorder Test",
+                        description = null,
+                        publisherId = publisherId,
+                        universeId = null,
+                        source = ReadingListSource.USER,
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            comicDao.insertReadingListItem(
+                ReadingListItem(
+                    readingListId = readingListId,
+                    sectionId = null,
+                    issueId = firstIssueId,
+                    position = 1,
+                    required = true,
+                    notes = null
+                )
+            )
+
+            comicDao.insertReadingListItem(
+                ReadingListItem(
+                    readingListId = readingListId,
+                    sectionId = null,
+                    issueId = secondIssueId,
+                    position = 2,
+                    required = true,
+                    notes = null
+                )
+            )
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    ReadingListDetailScreen(
+                        readingListId = readingListId,
+                        startPosition = -1,
+                        viewModel = viewModel,
+                        onIssueClick = {},
+                        onBackClick = {}
+                    )
+                }
+            }
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                viewModel
+                    .issues
+                    .value
+                    .size == 2
+            }
+
+            composeRule
+                .onNodeWithContentDescription(
+                    "Reading list options"
+                )
+                .performClick()
+
+            composeRule
+                .onNodeWithText(
+                    "Edit reading list"
+                )
+                .performClick()
+
+            composeRule
+                .onNodeWithText(
+                    "Reorder Test Series #1"
+                )
+                .performScrollTo()
+
+            composeRule
+                .onAllNodesWithContentDescription(
+                    "Move issue down"
+                )[0]
+                .performClick()
+
+            composeRule
+                .onNodeWithText(
+                    "SAVE CHANGES"
+                )
+                .performScrollTo()
+                .performClick()
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                viewModel
+                    .issues
+                    .value
+                    .map { issue ->
+                        issue.issueId
+                    } ==
+                        listOf(
+                            secondIssueId,
+                            firstIssueId
+                        )
+            }
+
+            val savedItems =
+                comicDao.getItemsForReadingList(
+                    readingListId
+                )
+
+            assertEquals(
+                listOf(
+                    secondIssueId,
+                    firstIssueId
+                ),
+                savedItems.map { item ->
+                    item.issueId
+                }
+            )
+
+            assertEquals(
+                listOf(1, 2),
+                savedItems.map { item ->
+                    item.position
+                }
+            )
+        }
+    }
+
+    @Test
+    fun readingListDetailScreen_editCancelDiscardsIssueChanges() {
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name = "Edit Cancel Publisher"
+                    )
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Cancel Test Series",
+                        volume = 1,
+                        startYear = 2026,
+                        endYear = null
+                    )
+                )
+
+            val firstIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "First Issue",
+                        publicationDate = "2026-01",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val secondIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "2",
+                        title = "Second Issue",
+                        publicationDate = "2026-02",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val readingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title = "Cancel Test",
+                        description = null,
+                        publisherId = publisherId,
+                        universeId = null,
+                        source = ReadingListSource.USER,
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            comicDao.insertReadingListItem(
+                ReadingListItem(
+                    readingListId = readingListId,
+                    sectionId = null,
+                    issueId = firstIssueId,
+                    position = 1,
+                    required = true,
+                    notes = null
+                )
+            )
+
+            comicDao.insertReadingListItem(
+                ReadingListItem(
+                    readingListId = readingListId,
+                    sectionId = null,
+                    issueId = secondIssueId,
+                    position = 2,
+                    required = true,
+                    notes = null
+                )
+            )
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    ReadingListDetailScreen(
+                        readingListId = readingListId,
+                        startPosition = -1,
+                        viewModel = viewModel,
+                        onIssueClick = {},
+                        onBackClick = {}
+                    )
+                }
+            }
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                viewModel
+                    .issues
+                    .value
+                    .size == 2
+            }
+
+            composeRule
+                .onNodeWithContentDescription(
+                    "Reading list options"
+                )
+                .performClick()
+
+            composeRule
+                .onNodeWithText(
+                    "Edit reading list"
+                )
+                .performClick()
+
+            composeRule
+                .onNodeWithText(
+                    "Cancel Test Series #2"
+                )
+                .performScrollTo()
+
+            composeRule
+                .onAllNodesWithContentDescription(
+                    "Remove issue"
+                )[1]
+                .performClick()
+
+            composeRule
+                .onNodeWithText(
+                    "Cancel Test Series #2"
+                )
+                .assertDoesNotExist()
+
+            composeRule
+                .onNodeWithText(
+                    "CANCEL"
+                )
+                .performScrollTo()
+                .performClick()
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        "Cancel Test Series #2"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            val savedItems =
+                comicDao.getItemsForReadingList(
+                    readingListId
+                )
+
+            assertEquals(
+                listOf(
+                    firstIssueId,
+                    secondIssueId
+                ),
+                savedItems.map { item ->
+                    item.issueId
+                }
+            )
+
+            assertEquals(
+                listOf(1, 2),
+                savedItems.map { item ->
+                    item.position
+                }
+            )
+        }
+    }
+
+    @Test
+    fun readingListDetailScreen_editShowsMultipleContinuities() {
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name = "Multiverse UI Publisher"
+                    )
+                )
+
+            val firstUniverseId =
+                comicDao.insertUniverse(
+                    Universe(
+                        publisherId =
+                            publisherId,
+                        name =
+                            "First Universe",
+                        designation =
+                            "Earth-1",
+                        description =
+                            null
+                    )
+                )
+
+            val secondUniverseId =
+                comicDao.insertUniverse(
+                    Universe(
+                        publisherId =
+                            publisherId,
+                        name =
+                            "Second Universe",
+                        designation =
+                            "Earth-2",
+                        description =
+                            null
+                    )
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId =
+                            publisherId,
+                        title =
+                            "Multiverse UI Series",
+                        volume = 1,
+                        startYear = 2026,
+                        endYear = null
+                    )
+                )
+
+            val firstIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId =
+                            seriesId,
+                        universeId =
+                            firstUniverseId,
+                        issueNumber =
+                            "1",
+                        title =
+                            "First Universe Issue",
+                        publicationDate =
+                            "2026-01",
+                        coverUrl =
+                            null,
+                        description =
+                            null,
+                        issueType =
+                            IssueType.REGULAR
+                    )
+                )
+
+            val secondIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId =
+                            seriesId,
+                        universeId =
+                            secondUniverseId,
+                        issueNumber =
+                            "2",
+                        title =
+                            "Second Universe Issue",
+                        publicationDate =
+                            "2026-02",
+                        coverUrl =
+                            null,
+                        description =
+                            null,
+                        issueType =
+                            IssueType.REGULAR
+                    )
+                )
+
+            val readingListId =
+                repository
+                    .createUserReadingListWithIssues(
+                        title =
+                            "Multiverse UI List",
+                        description =
+                            null,
+                        publisherId =
+                            publisherId,
+                        universeId =
+                            firstUniverseId,
+                        issueIds =
+                            listOf(
+                                firstIssueId,
+                                secondIssueId
+                            )
+                    )
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    ReadingListDetailScreen(
+                        readingListId =
+                            readingListId,
+                        startPosition =
+                            -1,
+                        viewModel =
+                            viewModel,
+                        onIssueClick = {},
+                        onBackClick = {}
+                    )
+                }
+            }
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        "Multiverse UI List"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule
+                .onNodeWithContentDescription(
+                    "Reading list options"
+                )
+                .performClick()
+
+            composeRule
+                .onNodeWithText(
+                    "Edit reading list",
+                    ignoreCase = true
+                )
+                .performClick()
+
+            composeRule
+                .onNodeWithText(
+                    "Multiple continuities"
+                )
+                .performScrollTo()
+                .assertIsDisplayed()
+        }
+    }
+
 }

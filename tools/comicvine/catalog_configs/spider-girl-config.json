@@ -1,0 +1,35 @@
+{
+  "publisher": "Marvel Comics",
+  "universes": [
+    {
+      "name": "M2 Universe",
+      "designation": "Earth-982",
+      "description": null
+    }
+  ],
+  "series": [
+    {
+      "title": "Spider-Girl",
+      "volume": 1,
+      "startYear": 1998,
+      "endYear": 2006,
+      "comicVineVolumeId": 6218,
+      "defaultUniverseDesignation": "Earth-982",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Spider-Girl Annual",
+      "volume": null,
+      "startYear": 1999,
+      "endYear": 1999,
+      "defaultUniverseDesignation": "Earth-982",
+      "defaultIssueType": "ANNUAL",
+      "issueMappings": {
+        "Spider-Girl 1999": {
+          "comicVineVolumeId": 23208,
+          "comicVineIssueNumber": "1"
+        }
+      }
+    }
+  ]
+}

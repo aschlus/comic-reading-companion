@@ -17,6 +17,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.aschlus.comicreadingcompanion.data.database.models.IssueSearchResult
+import com.aschlus.comicreadingcompanion.data.database.models.SeriesSearchResult
 import com.aschlus.comicreadingcompanion.ui.component.ComicAddToListActionBar
 import com.aschlus.comicreadingcompanion.ui.component.ComicAddToListFilters
 import com.aschlus.comicreadingcompanion.ui.component.ComicAddToListHeader
@@ -27,6 +29,7 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.viewmodel.AddToListFilter
 import com.aschlus.comicreadingcompanion.ui.viewmodel.CreateReadingListViewModel
+import com.aschlus.comicreadingcompanion.ui.viewmodel.PendingReadingListIssue
 
 @Composable
 fun AddToReadingListScreen(
@@ -40,7 +43,40 @@ fun AddToReadingListScreen(
     val issueResults by viewModel.addToListIssueResults.collectAsState()
     val draftIssues by viewModel.addToListDraftIssues.collectAsState()
 
-    val selectedIssueIds = draftIssues.map { it.issueId }.toSet()
+    AddToReadingListScreen(
+        query = query,
+        filter = filter,
+        seriesResults = seriesResults,
+        issueResults = issueResults,
+        draftIssues = draftIssues,
+        onQueryChange =
+            viewModel::updateAddToListQuery,
+        onFilterSelected =
+            viewModel::selectAddToListFilter,
+        onSeriesClick =
+            viewModel::toggleAddToListSeries,
+        onIssueClick =
+            viewModel::toggleAddToListIssue,
+        onBackClick = onBackClick,
+        onDoneClick = onDoneClick
+    )
+}
+
+@Composable
+fun AddToReadingListScreen(
+    query: String,
+    filter: AddToListFilter,
+    seriesResults: List<SeriesSearchResult>,
+    issueResults: List<IssueSearchResult>,
+    draftIssues: List<PendingReadingListIssue>,
+    onQueryChange: (String) -> Unit,
+    onFilterSelected: (AddToListFilter) -> Unit,
+    onSeriesClick: (SeriesSearchResult) -> Unit,
+    onIssueClick: (IssueSearchResult) -> Unit,
+    onBackClick: () -> Unit,
+    onDoneClick: () -> Unit
+) {
+    val selectedIssueIds = draftIssues.map { issue -> issue.issueId }.toSet()
 
     Scaffold(
         containerColor = ComicPaper,
@@ -62,7 +98,9 @@ fun AddToReadingListScreen(
             modifier =
                 Modifier
                     .fillMaxSize()
-                    .padding(innerPadding)
+                    .padding(
+                        innerPadding
+                    )
                     .padding(
                         horizontal = 16.dp,
                         vertical = 18.dp
@@ -70,17 +108,15 @@ fun AddToReadingListScreen(
             verticalArrangement =
                 Arrangement.spacedBy(14.dp)
         ) {
-             ComicAddToListSearchField(
-                 query = query,
-                 onQueryChange =
-                     viewModel::updateAddToListQuery,
-                 modifier = Modifier.fillMaxWidth()
-             )
+            ComicAddToListSearchField(
+                query = query,
+                onQueryChange = onQueryChange,
+                modifier = Modifier.fillMaxWidth()
+            )
 
             ComicAddToListFilters(
                 selectedFilter = filter,
-                onFilterSelected =
-                    viewModel::selectAddToListFilter
+                onFilterSelected = onFilterSelected
             )
 
             if (query.isBlank()) {
@@ -103,35 +139,31 @@ fun AddToReadingListScreen(
                         AddToListFilter.ISSUES &&
                         seriesResults.isNotEmpty()
                     ) {
-                        item(
-                            key = "series-heading"
-                        ) {
+                        item(key = "series-heading") {
                             AddToListResultHeading(
                                 text = "SERIES"
                             )
                         }
 
                         items(
-                            items =
-                                seriesResults,
-                            key = {
-                                "series-${it.seriesId}"
+                            items = seriesResults,
+                            key = { result ->
+                                "series-${result.seriesId}"
                             }
                         ) { result ->
                             val selected =
                                 result.totalCount > 0 &&
                                         draftIssues
-                                            .count {
-                                                it.seriesId == result.seriesId
+                                            .count { issue ->
+                                                issue.seriesId ==
+                                                        result.seriesId
                                             } ==
                                         result.totalCount
 
                             ComicAddToListSeriesResult(
                                 result = result,
                                 selected = selected,
-                                onClick = {
-                                    viewModel.toggleAddToListSeries(result)
-                                }
+                                onClick = { onSeriesClick(result) }
                             )
                         }
                     }
@@ -141,17 +173,17 @@ fun AddToReadingListScreen(
                         AddToListFilter.SERIES &&
                         issueResults.isNotEmpty()
                     ) {
-                        item(
-                            key = "issue-heading"
-                        ) {
+                        item(key = "issue-heading") {
                             AddToListResultHeading(
                                 text = "ISSUES",
                                 modifier =
                                     Modifier.padding(
                                         top =
                                             if (
-                                                filter == AddToListFilter.ALL &&
-                                                seriesResults.isNotEmpty()
+                                                filter ==
+                                                AddToListFilter.ALL &&
+                                                seriesResults
+                                                    .isNotEmpty()
                                             ) {
                                                 6.dp
                                             } else {
@@ -163,15 +195,15 @@ fun AddToReadingListScreen(
 
                         items(
                             items = issueResults,
-                            key = {
-                                "issue-${it.issueId}"
+                            key = { result ->
+                                "issue-${result.issueId}"
                             }
                         ) { result ->
                             ComicAddToListIssueResult(
                                 result = result,
                                 selected = result.issueId in selectedIssueIds,
                                 onClick = {
-                                    viewModel.toggleAddToListIssue(result)
+                                    onIssueClick(result)
                                 }
                             )
                         }
@@ -180,20 +212,22 @@ fun AddToReadingListScreen(
                     val hasVisibleResults =
                         when (filter) {
                             AddToListFilter.ALL ->
-                                seriesResults.isNotEmpty() ||
-                                        issueResults.isNotEmpty()
+                                seriesResults
+                                    .isNotEmpty() ||
+                                        issueResults
+                                            .isNotEmpty()
 
                             AddToListFilter.SERIES ->
-                                seriesResults.isNotEmpty()
+                                seriesResults
+                                    .isNotEmpty()
 
                             AddToListFilter.ISSUES ->
-                                issueResults.isNotEmpty()
+                                issueResults
+                                    .isNotEmpty()
                         }
 
                     if (!hasVisibleResults) {
-                        item(
-                            key = "no-results"
-                        ) {
+                        item(key = "no-results") {
                             Text(
                                 text = "No results found",
                                 style = MaterialTheme.typography.bodyLarge,
@@ -216,9 +250,9 @@ private fun AddToListResultHeading(
         text = text,
         modifier = modifier,
         style = MaterialTheme.typography.labelLarge
-            .copy(
-                fontWeight = FontWeight.ExtraBold,
-            ),
+                .copy(
+                    fontWeight = FontWeight.ExtraBold
+                ),
         color = ComicInk
     )
 }

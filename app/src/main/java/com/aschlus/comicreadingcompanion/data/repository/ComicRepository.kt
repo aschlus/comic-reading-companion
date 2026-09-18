@@ -211,14 +211,6 @@ class ComicRepository(
                     "Issue $issueId belongs to a different publisher"
                 }
 
-                if (universeId != null) {
-                    require(
-                        issue.universeId == universeId
-                    ) {
-                        "Issue $issueId belongs to a different continuity"
-                    }
-                }
-
                 comicDao.insertReadingListItem(
                     ReadingListItem(
                         readingListId = readingListId,
@@ -227,6 +219,26 @@ class ComicRepository(
                         position = index + 1,
                         required = true,
                         notes = null
+                    )
+                )
+            }
+
+            val resolvedUniverseId =
+                resolveReadingListUniverseId(
+                    readingListId = readingListId,
+                    fallbackUniverseId = universeId
+                )
+
+            if (resolvedUniverseId != universeId) {
+                val createdReadingList =
+                    comicDao.getReadingListById(readingListId)
+                        ?: throw IllegalArgumentException(
+                            "Created reading list $readingListId does not exist"
+                        )
+
+                comicDao.updateReadingList(
+                    createdReadingList.copy(
+                        universeId = resolvedUniverseId
                     )
                 )
             }
@@ -255,6 +267,13 @@ class ComicRepository(
         return comicDao.getReadingListIssues(
             readingListId
         )
+    }
+
+    suspend fun getUniverseIdsForReadingList(
+        readingListId: Long
+    ): List<Long?> {
+        return comicDao
+            .getUniverseIdsForReadingList(readingListId)
     }
 
     suspend fun updateReadingList(readingList: ReadingList) {
@@ -288,7 +307,8 @@ class ComicRepository(
     suspend fun updateUserReadingListDetails(
         readingListId: Long,
         title: String,
-        description: String?
+        description: String?,
+        style: ReadingListStyle
     ) {
         val readingList =
             comicDao.getReadingListById(readingListId)
@@ -313,9 +333,183 @@ class ComicRepository(
             readingList.copy(
                 title = trimmedTitle,
                 description = trimmedDescription,
+                style = style,
                 updatedAt = updatedAt
             )
         )
+    }
+
+    suspend fun updateUserReadingListWithIssues(
+        readingListId: Long,
+        title: String,
+        description: String?,
+        style: ReadingListStyle,
+        issueIds: List<Long>
+    ) {
+        database.withWriteTransaction {
+            val readingList =
+                comicDao.getReadingListById(readingListId)
+                    ?: throw IllegalArgumentException(
+                        "Reading list $readingListId does not exist"
+                    )
+
+            require(
+                readingList.source == ReadingListSource.USER
+            ) {
+                "Reading list $readingListId is not user-owned"
+            }
+
+            val trimmedTitle = title.trim()
+
+            require(
+                trimmedTitle.isNotEmpty()
+            ) {
+                "Reading-list title cannot be blank"
+            }
+
+            require(
+                issueIds.distinct().size == issueIds.size
+            ) {
+                "Reading-list issue IDs contain duplicates"
+            }
+
+            val currentItems =
+                comicDao.getItemsForReadingList(readingListId)
+
+            val currentItemsByIssueId =
+                currentItems.associateBy { item ->
+                    item.issueId
+                }
+
+            issueIds.forEach { issueId ->
+                val issue =
+                    comicDao.getIssueById(issueId)
+                        ?: throw IllegalArgumentException(
+                            "Issue $issueId does not exist"
+                        )
+
+                val series =
+                    comicDao.getSeriesById(issue.seriesId)
+                        ?: throw IllegalArgumentException(
+                            "Series ${issue.seriesId} does not exist"
+                        )
+
+                require(
+                    series.publisherId == readingList.publisherId
+                ) {
+                    "Issues $issueId belongs to a different publisher"
+                }
+            }
+
+            val sections =
+                comicDao.getSectionsForReadingList(readingListId)
+
+            val sectionOrder =
+                sections
+                    .mapIndexed { index, section ->
+                        section.id to index
+                    }
+                    .toMap()
+
+            val unsectionedOrder = sections.size
+
+            val desiredSectionOrder =
+                issueIds.map { issueId ->
+                    val sectionId =
+                        currentItemsByIssueId[issueId]?.sectionId
+
+                    if (sectionId == null) {
+                        unsectionedOrder
+                    } else {
+                        sectionOrder[sectionId]
+                            ?: throw IllegalArgumentException(
+                                "Section $sectionId does not belong to reading list $readingListId"
+                            )
+                    }
+                }
+
+            require(
+                desiredSectionOrder.zipWithNext().all { (first, second) -> first <= second }
+            ) {
+                "Items cannot move between sections while editing reading list"
+            }
+
+            val desiredIssueIds =
+                issueIds.toSet()
+
+            val removedItems =
+                currentItems.filter { item ->
+                    item.issueId !in desiredIssueIds
+                }
+
+            removedItems.forEach { item ->
+                comicDao.deleteReadingListItem(item)
+            }
+
+            val retainedItems =
+                currentItems.filter { item ->
+                    item.issueId in desiredIssueIds
+                }
+
+            retainedItems.forEachIndexed { index, item ->
+                comicDao.updateReadingListItem(
+                    item.copy(
+                        position = -(index + 1)
+                    )
+                )
+            }
+
+            issueIds.forEachIndexed { index, issueId ->
+                val existingItem =
+                    currentItemsByIssueId[issueId]
+
+                if (existingItem != null) {
+                    comicDao.updateReadingListItem(
+                        existingItem.copy(
+                            position = index + 1
+                        )
+                    )
+                } else {
+                    comicDao.insertReadingListItem(
+                        ReadingListItem(
+                            readingListId = readingListId,
+                            sectionId = null,
+                            issueId = issueId,
+                            position = index + 1,
+                            required = true,
+                            notes = null
+                        )
+                    )
+                }
+            }
+
+            val trimmedDescription =
+                description
+                    ?.trim()
+                    ?.takeIf { it.isNotEmpty() }
+
+            val updatedAt =
+                maxOf(
+                    System.currentTimeMillis(),
+                    readingList.updatedAt + 1
+                )
+
+            val resolvedUniverseId =
+                resolveReadingListUniverseId(
+                    readingListId = readingListId,
+                    fallbackUniverseId = readingList.universeId
+                )
+
+            comicDao.updateReadingList(
+                readingList.copy(
+                    title = trimmedTitle,
+                    description = trimmedDescription,
+                    style = style,
+                    universeId = resolvedUniverseId,
+                    updatedAt = updatedAt
+                )
+            )
+        }
     }
 
     suspend fun duplicateReadingList(
@@ -522,15 +716,6 @@ class ComicRepository(
                 "different publisher"
             }
 
-            if (readingList.universeId != null) {
-                require(
-                    issue.universeId == readingList.universeId
-                ) {
-                    "Issue $issueId belongs to a " +
-                    "different continuity"
-                }
-            }
-
             val existingItem =
                 comicDao.getReadingListItem(
                     readingListId = readingListId,
@@ -562,11 +747,18 @@ class ComicRepository(
 
                 resultItemId = itemId
 
+                val resolvedUniverseId =
+                    resolveReadingListUniverseId(
+                        readingListId = readingListId,
+                        fallbackUniverseId = readingList.universeId
+                    )
+
                 val updatedAt =
                     maxOf(System.currentTimeMillis(), readingList.updatedAt + 1)
 
                 comicDao.updateReadingList(
                     readingList.copy(
+                        universeId = resolvedUniverseId,
                         updatedAt = updatedAt
                     )
                 )
@@ -627,8 +819,15 @@ class ComicRepository(
                         readingList.updatedAt + 1
                     )
 
+                val resolvedUniverseId =
+                    resolveReadingListUniverseId(
+                        readingListId = readingListId,
+                        fallbackUniverseId = readingList.universeId
+                    )
+
                 comicDao.updateReadingList(
                     readingList.copy(
+                        universeId = resolvedUniverseId,
                         updatedAt = updatedAt
                     )
                 )
@@ -1047,5 +1246,28 @@ class ComicRepository(
             source = source,
             externalId = externalId
         )
+    }
+
+    private suspend fun resolveReadingListUniverseId(
+        readingListId: Long,
+        fallbackUniverseId: Long?
+    ): Long? {
+        val universeIds =
+            comicDao
+                .getUniverseIdsForReadingList(
+                    readingListId
+                )
+                .distinct()
+
+        return when {
+            universeIds.isEmpty() ->
+                fallbackUniverseId
+
+            universeIds.size == 1 ->
+                universeIds.single()
+
+            else ->
+                null
+        }
     }
 }

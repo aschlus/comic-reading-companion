@@ -13,6 +13,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListItem
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSection
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSource
+import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListStyle
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingProgress
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.database.entities.Series
@@ -754,91 +755,312 @@ class ComicRepositoryTest {
         }
 
     @Test
-    fun addIssueToUserReadingList_rejectsDifferentContinuity() =
+    fun addIssueToUserReadingList_allowsMultipleContinuitiesAndUpdatesUniverse() =
         runBlocking {
             val publisherId =
                 comicDao.insertPublisher(
-                    Publisher(name = "Marvel")
+                    Publisher(
+                        name = "Marvel"
+                    )
                 )
 
             val earth616Id =
                 comicDao.insertUniverse(
                     Universe(
-                        publisherId = publisherId,
-                        name = "Marvel Universe",
-                        designation = "Earth-616",
-                        description = null
+                        publisherId =
+                            publisherId,
+                        name =
+                            "Marvel Universe",
+                        designation =
+                            "Earth-616",
+                        description =
+                            null
                     )
                 )
 
             val earth1610Id =
                 comicDao.insertUniverse(
                     Universe(
-                        publisherId = publisherId,
-                        name = "Ultimate Universe",
-                        designation = "Earth-1610",
-                        description = null
+                        publisherId =
+                            publisherId,
+                        name =
+                            "Ultimate Universe",
+                        designation =
+                            "Earth-1610",
+                        description =
+                            null
                     )
                 )
 
             val seriesId =
                 comicDao.insertSeries(
                     Series(
-                        publisherId = publisherId,
-                        title = "Ultimate Spider-Man",
+                        publisherId =
+                            publisherId,
+                        title =
+                            "Multiverse Test",
                         volume = 1,
                         startYear = 2000,
-                        endYear = 2000
+                        endYear = null
                     )
                 )
 
-            val issueId =
+            val earth616IssueId =
                 comicDao.insertIssue(
                     Issue(
-                        seriesId = seriesId,
-                        universeId = earth1610Id,
-                        issueNumber = "1",
-                        title = "Test Issue",
-                        publicationDate = "2000-01",
-                        coverUrl = null,
-                        description = null,
-                        issueType = IssueType.REGULAR
+                        seriesId =
+                            seriesId,
+                        universeId =
+                            earth616Id,
+                        issueNumber =
+                            "1",
+                        title =
+                            "Earth-616 Issue",
+                        publicationDate =
+                            "2000-01",
+                        coverUrl =
+                            null,
+                        description =
+                            null,
+                        issueType =
+                            IssueType.REGULAR
+                    )
+                )
+
+            val earth1610IssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId =
+                            seriesId,
+                        universeId =
+                            earth1610Id,
+                        issueNumber =
+                            "2",
+                        title =
+                            "Earth-1610 Issue",
+                        publicationDate =
+                            "2000-02",
+                        coverUrl =
+                            null,
+                        description =
+                            null,
+                        issueType =
+                            IssueType.REGULAR
                     )
                 )
 
             val readingListId =
                 repository.createUserReadingList(
-                    title = "Earth-616 List",
-                    description = null,
-                    publisherId = publisherId,
-                    universeId = earth616Id
+                    title =
+                        "Multiverse List",
+                    description =
+                        null,
+                    publisherId =
+                        publisherId,
+                    universeId =
+                        earth616Id
                 )
 
-            var thrownException:
-                    IllegalArgumentException? = null
-
-            try {
-                repository.addIssueToUserReadingList(
-                    readingListId = readingListId,
-                    issueId = issueId
-                )
-            } catch (
-                exception: IllegalArgumentException
-            ) {
-                thrownException = exception
-            }
-
-            assertNotNull(
-                thrownException
+            repository.addIssueToUserReadingList(
+                readingListId =
+                    readingListId,
+                issueId =
+                    earth616IssueId
             )
 
             assertEquals(
-                "Issue $issueId belongs to a " +
-                        "different continuity",
-                thrownException?.message
+                earth616Id,
+                comicDao
+                    .getReadingListById(
+                        readingListId
+                    )
+                    ?.universeId
             )
 
-            assertTrue(comicDao.getItemsForReadingList(readingListId).isEmpty())
+            repository.addIssueToUserReadingList(
+                readingListId =
+                    readingListId,
+                issueId =
+                    earth1610IssueId
+            )
+
+            assertNull(
+                comicDao
+                    .getReadingListById(
+                        readingListId
+                    )
+                    ?.universeId
+            )
+
+            repository.removeIssueFromUserReadingList(
+                readingListId =
+                    readingListId,
+                issueId =
+                    earth1610IssueId
+            )
+
+            assertEquals(
+                earth616Id,
+                comicDao
+                    .getReadingListById(
+                        readingListId
+                    )
+                    ?.universeId
+            )
+        }
+
+    @Test
+    fun updateUserReadingListWithIssues_allowsMultipleContinuities() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name = "Multiverse Edit Publisher"
+                    )
+                )
+
+            val firstUniverseId =
+                comicDao.insertUniverse(
+                    Universe(
+                        publisherId =
+                            publisherId,
+                        name =
+                            "First Universe",
+                        designation =
+                            "Earth-1",
+                        description =
+                            null
+                    )
+                )
+
+            val secondUniverseId =
+                comicDao.insertUniverse(
+                    Universe(
+                        publisherId =
+                            publisherId,
+                        name =
+                            "Second Universe",
+                        designation =
+                            "Earth-2",
+                        description =
+                            null
+                    )
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId =
+                            publisherId,
+                        title =
+                            "Multiverse Edit Series",
+                        volume = 1,
+                        startYear = 2026,
+                        endYear = null
+                    )
+                )
+
+            val firstIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId =
+                            seriesId,
+                        universeId =
+                            firstUniverseId,
+                        issueNumber =
+                            "1",
+                        title =
+                            "First Universe Issue",
+                        publicationDate =
+                            "2026-01",
+                        coverUrl =
+                            null,
+                        description =
+                            null,
+                        issueType =
+                            IssueType.REGULAR
+                    )
+                )
+
+            val secondIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId =
+                            seriesId,
+                        universeId =
+                            secondUniverseId,
+                        issueNumber =
+                            "2",
+                        title =
+                            "Second Universe Issue",
+                        publicationDate =
+                            "2026-02",
+                        coverUrl =
+                            null,
+                        description =
+                            null,
+                        issueType =
+                            IssueType.REGULAR
+                    )
+                )
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title =
+                        "Edit Multiverse Test",
+                    description =
+                        null,
+                    publisherId =
+                        publisherId,
+                    universeId =
+                        firstUniverseId
+                )
+
+            repository.addIssueToUserReadingList(
+                readingListId =
+                    readingListId,
+                issueId =
+                    firstIssueId
+            )
+
+            repository.updateUserReadingListWithIssues(
+                readingListId =
+                    readingListId,
+                title =
+                    "Edit Multiverse Test",
+                description =
+                    null,
+                style =
+                    ReadingListStyle.GREEN,
+                issueIds =
+                    listOf(
+                        firstIssueId,
+                        secondIssueId
+                    )
+            )
+
+            val updatedList =
+                comicDao.getReadingListById(
+                    readingListId
+                )!!
+
+            assertNull(
+                updatedList.universeId
+            )
+
+            assertEquals(
+                listOf(
+                    firstIssueId,
+                    secondIssueId
+                ),
+                comicDao
+                    .getItemsForReadingList(
+                        readingListId
+                    )
+                    .map { item ->
+                        item.issueId
+                    }
+            )
         }
 
     @Test
@@ -1797,7 +2019,8 @@ class ComicRepositoryTest {
             repository.updateUserReadingListDetails(
                 readingListId = readingListId,
                 title = "  Updated Title  ",
-                description = "  Updated description  "
+                description = "  Updated description  ",
+                style = ReadingListStyle.BLUE
             )
 
             val after =
@@ -1817,6 +2040,11 @@ class ComicRepositoryTest {
 
             assertTrue(
                 after.updatedAt > before.updatedAt
+            )
+
+            assertEquals(
+                ReadingListStyle.BLUE,
+                after.style
             )
         }
 
@@ -1839,7 +2067,8 @@ class ComicRepositoryTest {
             repository.updateUserReadingListDetails(
                 readingListId = readingListId,
                 title = "Description Test",
-                description = "   "
+                description = "   ",
+                style = ReadingListStyle.BLUE
             )
 
             val updated =
@@ -1875,7 +2104,8 @@ class ComicRepositoryTest {
                 repository.updateUserReadingListDetails(
                     readingListId = readingListId,
                     title = "   ",
-                    description = null
+                    description = null,
+                    style = ReadingListStyle.BLUE
                 )
             } catch (
                 caught: IllegalArgumentException
@@ -1898,6 +2128,11 @@ class ComicRepositoryTest {
             assertEquals(
                 "Valid Title",
                 unchanged.title
+            )
+
+            assertEquals(
+                ReadingListStyle.GREEN,
+                unchanged.style
             )
         }
 
@@ -1932,7 +2167,8 @@ class ComicRepositoryTest {
                 repository.updateUserReadingListDetails(
                     readingListId = readingListId,
                     title = "Changed",
-                    description = null
+                    description = null,
+                    style = ReadingListStyle.BLUE
                 )
             } catch (
                 caught: IllegalArgumentException
@@ -1955,6 +2191,11 @@ class ComicRepositoryTest {
             assertEquals(
                 "Bundled List",
                 unchanged.title
+            )
+
+            assertEquals(
+                ReadingListStyle.GREEN,
+                unchanged.style
             )
         }
 
@@ -2369,6 +2610,445 @@ class ComicRepositoryTest {
             assertEquals(
                 ReadingStatus.READ,
                 sharedProgress?.status
+            )
+        }
+
+    @Test
+    fun updateUserReadingListWithIssues_updatesListAndPreservesItemMetadata() =
+        runBlocking {
+            val firstIssueId =
+                createIssue("1")
+
+            val removedIssueId =
+                createIssue("2")
+
+            val newIssueId =
+                createIssue("3")
+
+            val publisher =
+                comicDao.getPublisherByName(
+                    "Marvel"
+                )!!
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Original",
+                    description = "Old description",
+                    publisherId = publisher.id,
+                    universeId = null
+                )
+
+            val sectionId =
+                repository.createUserReadingListSection(
+                    readingListId =
+                        readingListId,
+                    title = "Arc One",
+                    description = null
+                )
+
+            val firstItemId =
+                repository.addReadingListItem(
+                    ReadingListItem(
+                        readingListId =
+                            readingListId,
+                        sectionId =
+                            sectionId,
+                        issueId =
+                            firstIssueId,
+                        position =
+                            1,
+                        required =
+                            false,
+                        notes =
+                            "Keep this note"
+                    )
+                )
+
+            repository.addReadingListItem(
+                ReadingListItem(
+                    readingListId =
+                        readingListId,
+                    sectionId =
+                        null,
+                    issueId =
+                        removedIssueId,
+                    position =
+                        2,
+                    required =
+                        true,
+                    notes =
+                        null
+                )
+            )
+
+            repository.updateUserReadingListWithIssues(
+                readingListId =
+                    readingListId,
+                title =
+                    "  Updated List  ",
+                description =
+                    "  Updated description  ",
+                style =
+                    ReadingListStyle.BLUE,
+                issueIds =
+                    listOf(
+                        firstIssueId,
+                        newIssueId
+                    )
+            )
+
+            val updatedList =
+                comicDao.getReadingListById(
+                    readingListId
+                )!!
+
+            assertEquals(
+                "Updated List",
+                updatedList.title
+            )
+
+            assertEquals(
+                "Updated description",
+                updatedList.description
+            )
+
+            assertEquals(
+                ReadingListStyle.BLUE,
+                updatedList.style
+            )
+
+            val items =
+                comicDao.getItemsForReadingList(
+                    readingListId
+                )
+
+            assertEquals(
+                listOf(
+                    firstIssueId,
+                    newIssueId
+                ),
+                items.map {
+                    it.issueId
+                }
+            )
+
+            assertEquals(
+                listOf(1, 2),
+                items.map {
+                    it.position
+                }
+            )
+
+            val preservedItem =
+                items.first()
+
+            assertEquals(
+                firstItemId,
+                preservedItem.id
+            )
+
+            assertEquals(
+                sectionId,
+                preservedItem.sectionId
+            )
+
+            assertEquals(
+                false,
+                preservedItem.required
+            )
+
+            assertEquals(
+                "Keep this note",
+                preservedItem.notes
+            )
+
+            val newItem =
+                items.last()
+
+            assertEquals(
+                null,
+                newItem.sectionId
+            )
+
+            assertEquals(
+                true,
+                newItem.required
+            )
+
+            assertEquals(
+                null,
+                newItem.notes
+            )
+        }
+
+    @Test
+    fun updateUserReadingListWithIssues_rollsBackWhenIssueIsInvalid() =
+        runBlocking {
+            val issueId =
+                createIssue("1")
+
+            val publisher =
+                comicDao.getPublisherByName(
+                    "Marvel"
+                )!!
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Original",
+                    description = "Original description",
+                    publisherId = publisher.id,
+                    universeId = null,
+                    style =
+                        ReadingListStyle.GREEN
+                )
+
+            repository.addIssueToUserReadingList(
+                readingListId =
+                    readingListId,
+                issueId =
+                    issueId
+            )
+
+            var exception:
+                    IllegalArgumentException? =
+                null
+
+            try {
+                repository
+                    .updateUserReadingListWithIssues(
+                        readingListId =
+                            readingListId,
+                        title =
+                            "Changed",
+                        description =
+                            "Changed description",
+                        style =
+                            ReadingListStyle.BLUE,
+                        issueIds =
+                            listOf(
+                                issueId,
+                                Long.MAX_VALUE
+                            )
+                    )
+            } catch (
+                caught: IllegalArgumentException
+            ) {
+                exception =
+                    caught
+            }
+
+            assertNotNull(
+                exception
+            )
+
+            val readingList =
+                comicDao.getReadingListById(
+                    readingListId
+                )!!
+
+            assertEquals(
+                "Original",
+                readingList.title
+            )
+
+            assertEquals(
+                "Original description",
+                readingList.description
+            )
+
+            assertEquals(
+                ReadingListStyle.GREEN,
+                readingList.style
+            )
+
+            val items =
+                comicDao.getItemsForReadingList(
+                    readingListId
+                )
+
+            assertEquals(
+                listOf(issueId),
+                items.map {
+                    it.issueId
+                }
+            )
+
+            assertEquals(
+                listOf(1),
+                items.map {
+                    it.position
+                }
+            )
+        }
+
+    @Test
+    fun updateUserReadingListWithIssues_rejectsReorderAcrossSections() =
+        runBlocking {
+            val firstIssueId =
+                createIssue("1")
+
+            val secondIssueId =
+                createIssue("2")
+
+            val publisher =
+                comicDao.getPublisherByName(
+                    "Marvel"
+                )!!
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Section Order Test",
+                    description = "Original description",
+                    publisherId = publisher.id,
+                    universeId = null,
+                    style = ReadingListStyle.GREEN
+                )
+
+            val firstSectionId =
+                repository.createUserReadingListSection(
+                    readingListId = readingListId,
+                    title = "First Section",
+                    description = null
+                )
+
+            val secondSectionId =
+                repository.createUserReadingListSection(
+                    readingListId = readingListId,
+                    title = "Second Section",
+                    description = null
+                )
+
+            val firstItemId =
+                repository.addReadingListItem(
+                    ReadingListItem(
+                        readingListId = readingListId,
+                        sectionId = firstSectionId,
+                        issueId = firstIssueId,
+                        position = 1,
+                        required = false,
+                        notes = "First note"
+                    )
+                )
+
+            val secondItemId =
+                repository.addReadingListItem(
+                    ReadingListItem(
+                        readingListId = readingListId,
+                        sectionId = secondSectionId,
+                        issueId = secondIssueId,
+                        position = 2,
+                        required = true,
+                        notes = "Second note"
+                    )
+                )
+
+            var exception:
+                    IllegalArgumentException? =
+                null
+
+            try {
+                repository
+                    .updateUserReadingListWithIssues(
+                        readingListId =
+                            readingListId,
+                        title =
+                            "Changed Title",
+                        description =
+                            "Changed description",
+                        style =
+                            ReadingListStyle.BLUE,
+                        issueIds =
+                            listOf(
+                                secondIssueId,
+                                firstIssueId
+                            )
+                    )
+            } catch (
+                caught: IllegalArgumentException
+            ) {
+                exception =
+                    caught
+            }
+
+            assertNotNull(
+                exception
+            )
+
+            assertEquals(
+                "Items cannot move between sections while editing reading list",
+                exception?.message
+            )
+
+            val unchangedList =
+                comicDao.getReadingListById(
+                    readingListId
+                )!!
+
+            assertEquals(
+                "Section Order Test",
+                unchangedList.title
+            )
+
+            assertEquals(
+                "Original description",
+                unchangedList.description
+            )
+
+            assertEquals(
+                ReadingListStyle.GREEN,
+                unchangedList.style
+            )
+
+            val unchangedItems =
+                comicDao.getItemsForReadingList(
+                    readingListId
+                )
+
+            assertEquals(
+                listOf(
+                    firstItemId,
+                    secondItemId
+                ),
+                unchangedItems.map { item ->
+                    item.id
+                }
+            )
+
+            assertEquals(
+                listOf(
+                    firstIssueId,
+                    secondIssueId
+                ),
+                unchangedItems.map { item ->
+                    item.issueId
+                }
+            )
+
+            assertEquals(
+                listOf(
+                    firstSectionId,
+                    secondSectionId
+                ),
+                unchangedItems.map { item ->
+                    item.sectionId
+                }
+            )
+
+            assertEquals(
+                listOf(1, 2),
+                unchangedItems.map { item ->
+                    item.position
+                }
+            )
+
+            assertEquals(
+                listOf(
+                    "First note",
+                    "Second note"
+                ),
+                unchangedItems.map { item ->
+                    item.notes
+                }
             )
         }
 }

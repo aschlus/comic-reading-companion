@@ -1081,4 +1081,194 @@ class CreateReadingListViewModelTest {
                 viewModel.pendingIssues.value.map { it.issueId }
             )
         }
+
+    @Test
+    fun createReadingList_withMultipleContinuitiesStoresNoSingleUniverse() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name = "Multiverse Publisher"
+                    )
+                )
+
+            val firstUniverseId =
+                comicDao.insertUniverse(
+                    Universe(
+                        publisherId =
+                            publisherId,
+                        name =
+                            "First Universe",
+                        designation =
+                            "Earth-1",
+                        description =
+                            null
+                    )
+                )
+
+            val secondUniverseId =
+                comicDao.insertUniverse(
+                    Universe(
+                        publisherId =
+                            publisherId,
+                        name =
+                            "Second Universe",
+                        designation =
+                            "Earth-2",
+                        description =
+                            null
+                    )
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId =
+                            publisherId,
+                        title =
+                            "Multiverse Create Series",
+                        volume = 1,
+                        startYear = 2026,
+                        endYear = null
+                    )
+                )
+
+            val firstIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId =
+                            seriesId,
+                        universeId =
+                            firstUniverseId,
+                        issueNumber =
+                            "1",
+                        title =
+                            "First Universe Issue",
+                        publicationDate =
+                            "2026-01",
+                        coverUrl =
+                            null,
+                        description =
+                            null,
+                        issueType =
+                            IssueType.REGULAR
+                    )
+                )
+
+            val secondIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId =
+                            seriesId,
+                        universeId =
+                            secondUniverseId,
+                        issueNumber =
+                            "2",
+                        title =
+                            "Second Universe Issue",
+                        publicationDate =
+                            "2026-02",
+                        coverUrl =
+                            null,
+                        description =
+                            null,
+                        issueType =
+                            IssueType.REGULAR
+                    )
+                )
+
+            viewModel.updateTitle(
+                "Multiverse Reading List"
+            )
+
+            viewModel.selectPublisher(
+                publisherId
+            )
+
+            withTimeout(
+                5000L.milliseconds
+            ) {
+                viewModel.universes.first {
+                    it.size == 2
+                }
+            }
+
+            viewModel.selectUniverse(
+                firstUniverseId
+            )
+
+            viewModel.addPendingIssue(
+                PendingReadingListIssue(
+                    issueId =
+                        firstIssueId,
+                    seriesId =
+                        seriesId,
+                    seriesTitle =
+                        "Multiverse Create Series",
+                    issueNumber =
+                        "1",
+                    issueTitle =
+                        "First Universe Issue",
+                    publicationDate =
+                        "2026-01",
+                    coverUrl =
+                        null
+                )
+            )
+
+            viewModel.addPendingIssue(
+                PendingReadingListIssue(
+                    issueId =
+                        secondIssueId,
+                    seriesId =
+                        seriesId,
+                    seriesTitle =
+                        "Multiverse Create Series",
+                    issueNumber =
+                        "2",
+                    issueTitle =
+                        "Second Universe Issue",
+                    publicationDate =
+                        "2026-02",
+                    coverUrl =
+                        null
+                )
+            )
+
+            viewModel.createReadingList()
+
+            val readingListId =
+                withTimeout(
+                    5000L.milliseconds
+                ) {
+                    viewModel
+                        .createdReadingListId
+                        .first {
+                            it != null
+                        }
+                }!!
+
+            val readingList =
+                comicDao.getReadingListById(
+                    readingListId
+                )!!
+
+            assertNull(
+                readingList.universeId
+            )
+
+            assertEquals(
+                listOf(
+                    firstIssueId,
+                    secondIssueId
+                ),
+                comicDao
+                    .getItemsForReadingList(
+                        readingListId
+                    )
+                    .map { item ->
+                        item.issueId
+                    }
+            )
+        }
 }

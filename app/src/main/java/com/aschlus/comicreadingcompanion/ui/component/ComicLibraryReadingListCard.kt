@@ -16,8 +16,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -34,13 +32,15 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListStyle
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlue
+import com.aschlus.comicreadingcompanion.ui.theme.ComicGray
 import com.aschlus.comicreadingcompanion.ui.theme.ComicGreen
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
+import com.aschlus.comicreadingcompanion.ui.theme.ComicOrange
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPurple
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
-import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
 import kotlin.math.roundToInt
 
 @Composable
@@ -52,28 +52,34 @@ fun ComicLibraryReadingListCard(
     progress: Float,
     continueText: String?,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    style: ReadingListStyle = ReadingListStyle.GREEN
 ) {
     val shape = RoundedCornerShape(14.dp)
 
     val completionPercent =
         (progress.coerceIn(0f, 1f) * 100).roundToInt()
 
-    val palette =
-        listOf(
-            ComicRed,
-            ComicYellow,
-            ComicBlue,
-            ComicGreen,
-            ComicPurple
-        )
-
     val thumbnailColor =
-        palette[
-            title.hashCode()
-                .and(Int.MAX_VALUE) %
-                    palette.size
-        ]
+        when (style) {
+            ReadingListStyle.GREEN ->
+                ComicGreen
+
+            ReadingListStyle.RED ->
+                ComicRed
+
+            ReadingListStyle.BLUE ->
+                ComicBlue
+
+            ReadingListStyle.PURPLE ->
+                ComicPurple
+
+            ReadingListStyle.ORANGE ->
+                ComicOrange
+
+            ReadingListStyle.GRAY ->
+                ComicGray
+        }
 
     val initials =
         title

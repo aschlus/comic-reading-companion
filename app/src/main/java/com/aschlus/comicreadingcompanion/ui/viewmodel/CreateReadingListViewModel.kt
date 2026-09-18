@@ -27,7 +27,9 @@ data class PendingReadingListIssue(
     val issueNumber: String,
     val issueTitle: String?,
     val publicationDate: String?,
-    val coverUrl: String?
+    val coverUrl: String?,
+    val readingListItemId: Long? = null,
+    val sectionId: Long? = null
 )
 
 enum class AddToListFilter {

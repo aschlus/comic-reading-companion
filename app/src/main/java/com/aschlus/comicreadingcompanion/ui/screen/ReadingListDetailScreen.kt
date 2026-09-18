@@ -65,6 +65,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSource
+import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListStyle
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListIssue
 import com.aschlus.comicreadingcompanion.ui.component.ComicConfirmationDialog
@@ -92,6 +93,18 @@ import kotlinx.coroutines.launch
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.Locale
+import com.aschlus.comicreadingcompanion.ui.component.ComicEditReadingListHeader
+import com.aschlus.comicreadingcompanion.ui.component.ComicFormDropdownField
+import com.aschlus.comicreadingcompanion.ui.component.ComicFormTextField
+import com.aschlus.comicreadingcompanion.ui.component.ComicHomeSectionHeader
+import com.aschlus.comicreadingcompanion.ui.component.ComicReadingListStylePicker
+import com.aschlus.comicreadingcompanion.ui.component.ComicWideActionButton
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import com.aschlus.comicreadingcompanion.ui.component.ComicAddIssuesTrigger
+import com.aschlus.comicreadingcompanion.ui.component.ComicPendingReadingListIssueRow
+import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
+import com.aschlus.comicreadingcompanion.ui.viewmodel.PendingReadingListIssue
 
 @OptIn(
     ExperimentalMaterial3Api::class,
@@ -116,6 +129,12 @@ fun ReadingListDetailScreen(
     val sections by
         viewModel.sections.collectAsState()
 
+    val publisherName by
+            viewModel.publisherName.collectAsState()
+
+    val continuityName by
+            viewModel.continuityName.collectAsState()
+
     val readingListDeleted by
         viewModel.readingListDeleted.collectAsState()
 
@@ -130,6 +149,21 @@ fun ReadingListDetailScreen(
 
     val selectedReadingListItemIds by
             viewModel.selectedReadingListItemIds.collectAsState()
+
+    val editAddToListQuery by
+        viewModel.editAddToListQuery.collectAsState()
+
+    val editAddToListFilter by
+        viewModel.editAddToListFilter.collectAsState()
+
+    val editAddToListSeriesResults by
+        viewModel.editAddToListSeriesResults.collectAsState()
+
+    val editAddToListIssueResults by
+        viewModel.editAddToListIssueResults.collectAsState()
+
+    val editAddToListDraftIssues by
+        viewModel.editAddToListDraftIssues.collectAsState()
 
     val isSelectionMode = selectedReadingListItemIds.isNotEmpty()
 
@@ -151,7 +185,13 @@ fun ReadingListDetailScreen(
         mutableStateOf(false)
     }
 
-    var showEditReadingListDialog by remember(
+    var editMode by remember(
+        readingListId
+    ) {
+        mutableStateOf(false)
+    }
+
+    var editAddToListMode by remember(
         readingListId
     ) {
         mutableStateOf(false)
@@ -167,6 +207,18 @@ fun ReadingListDetailScreen(
         readingListId
     ) {
         mutableStateOf("")
+    }
+
+    var editReadingListStyle by remember(
+        readingListId
+    ) {
+        mutableStateOf(ReadingListStyle.GREEN)
+    }
+
+    var editReadingListIssues by remember(
+        readingListId
+    ) {
+        mutableStateOf<List<PendingReadingListIssue>>(emptyList())
     }
 
     var showCreateSectionDialog by remember(
@@ -462,6 +514,126 @@ fun ReadingListDetailScreen(
         issue.readingStatus != ReadingStatus.READ
     }
 
+    if (editAddToListMode) {
+        AddToReadingListScreen(
+            query =
+                editAddToListQuery,
+            filter =
+                editAddToListFilter,
+            seriesResults =
+                editAddToListSeriesResults,
+            issueResults =
+                editAddToListIssueResults,
+            draftIssues =
+                editAddToListDraftIssues,
+            onQueryChange =
+                viewModel::
+                updateEditAddToListQuery,
+            onFilterSelected =
+                viewModel::
+                selectEditAddToListFilter,
+            onSeriesClick =
+                viewModel::
+                toggleEditAddToListSeries,
+            onIssueClick =
+                viewModel::
+                toggleEditAddToListIssue,
+            onBackClick = {
+                viewModel
+                    .cancelEditAddToListSession()
+
+                editAddToListMode =
+                    false
+            },
+            onDoneClick = {
+                editReadingListIssues =
+                    viewModel
+                        .applyEditAddToListSession()
+
+                editAddToListMode =
+                    false
+            }
+        )
+
+        return
+    }
+
+    if (editMode) {
+        val currentList = readingList
+
+        if (currentList != null) {
+            EditReadingListContent(
+                title = editReadingListTitle,
+                description = editReadingListDescription,
+                style = editReadingListStyle,
+                publisherName = publisherName,
+                continuityName = continuityName,
+                issues = editReadingListIssues,
+                onTitleChange = {
+                    editReadingListTitle = it
+                },
+                onDescriptionChange = {
+                    editReadingListDescription = it
+                },
+                onStyleChange = {
+                    editReadingListStyle = it
+                },
+                onBackClick = {
+                    listMenuExpanded = false
+                    editMode = false
+                },
+                onCancelClick = {
+                    listMenuExpanded = false
+                    editMode = false
+                },
+                onSaveClick = {
+                    listMenuExpanded = false
+                    viewModel.saveReadingListEdits(
+                        title = editReadingListTitle,
+                        description = editReadingListDescription
+                            .takeIf { it.isNotBlank() },
+                        style = editReadingListStyle,
+                        issues = editReadingListIssues
+                    )
+
+                    editMode = false
+                },
+                onMoveIssue = { issueId, offset ->
+                    val currentIndex =
+                        editReadingListIssues
+                            .indexOfFirst { it.issueId == issueId }
+
+                    if (currentIndex != -1) {
+                        val targetIndex = currentIndex + offset
+
+                        if (targetIndex in editReadingListIssues.indices) {
+                            val reordered = editReadingListIssues.toMutableList()
+                            val moved = reordered.removeAt(currentIndex)
+                            reordered.add(targetIndex, moved)
+                            editReadingListIssues = reordered
+                        }
+                    }
+                },
+                onRemoveIssue = { issueId ->
+                    editReadingListIssues =
+                        editReadingListIssues
+                            .filterNot { it.issueId == issueId }
+                },
+                onAddIssuesClick = {
+                    viewModel
+                        .beginEditAddToListSession(
+                            editReadingListIssues
+                        )
+
+                    editAddToListMode =
+                        true
+                },
+            )
+
+            return
+        }
+    }
+
     Scaffold(
         topBar = {
             when {
@@ -520,11 +692,31 @@ fun ReadingListDetailScreen(
                                         text = "Edit reading list",
                                         onClick = {
                                             listMenuExpanded = false
+
+                                            val currentList = readingList
+                                                ?: return@ComicDropdownMenuItem
                                             editReadingListTitle =
-                                                readingList?.title.orEmpty()
+                                                currentList.title
                                             editReadingListDescription =
-                                                readingList?.description.orEmpty()
-                                            showEditReadingListDialog = true
+                                                currentList.description.orEmpty()
+                                            editReadingListStyle =
+                                                currentList.style
+
+                                            editReadingListIssues =
+                                                issues.map { issue ->
+                                                    PendingReadingListIssue(
+                                                        issueId = issue.issueId,
+                                                        seriesId = issue.seriesId,
+                                                        seriesTitle = issue.seriesTitle,
+                                                        issueNumber = issue.issueNumber,
+                                                        issueTitle = issue.issueTitle,
+                                                        publicationDate = issue.publicationDate,
+                                                        coverUrl = issue.coverUrl,
+                                                        readingListItemId = issue.readingListItemId,
+                                                        sectionId = issue.sectionId
+                                                    )
+                                                }
+                                            editMode = true
                                         }
                                     )
                                 }
@@ -1014,35 +1206,6 @@ fun ReadingListDetailScreen(
             },
             onDismiss = {
                 showResetProgressDialog = false
-            }
-        )
-    }
-
-    if (showEditReadingListDialog) {
-        ComicFormDialog(
-            title = "Edit Reading List",
-            primaryLabel = "Title",
-            primaryValue = editReadingListTitle,
-            onPrimaryValueChange = {
-                editReadingListTitle = it
-            },
-            secondaryLabel = "Description (optional)",
-            secondaryValue = editReadingListDescription,
-            onSecondaryValueChange = {
-                editReadingListDescription = it
-            },
-            confirmText = "Save",
-            confirmEnabled = editReadingListTitle.trim().isNotEmpty(),
-            onConfirm = {
-                viewModel.updateReadingListDetails(
-                    title = editReadingListTitle,
-                    description = editReadingListDescription.takeIf { it.isNotBlank() }
-                )
-
-                showEditReadingListDialog = false
-            },
-            onDismiss = {
-                showEditReadingListDialog = false
             }
         )
     }
@@ -1612,5 +1775,146 @@ private fun formatPublicationDate(
             )
     } catch (_: Exception) {
         publicationDate
+    }
+}
+
+@Composable
+private fun EditReadingListContent(
+    title: String,
+    description: String,
+    style: ReadingListStyle,
+    publisherName: String,
+    continuityName: String,
+    issues: List<PendingReadingListIssue>,
+    onTitleChange: (String) -> Unit,
+    onDescriptionChange: (String) -> Unit,
+    onStyleChange: (ReadingListStyle) -> Unit,
+    onBackClick: () -> Unit,
+    onCancelClick: () -> Unit,
+    onSaveClick: () -> Unit,
+    onMoveIssue: (issueId: Long, offset: Int) -> Unit,
+    onRemoveIssue: (Long) -> Unit,
+    onAddIssuesClick: () -> Unit
+) {
+    Scaffold(
+        containerColor = ComicPaper,
+        topBar = {
+            ComicEditReadingListHeader(
+                onBackClick = onBackClick
+            )
+        }
+    ) { innerPadding ->
+        Column(
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
+                    .padding(16.dp)
+                    .verticalScroll(
+                        rememberScrollState()
+                    ),
+            verticalArrangement =
+                Arrangement.spacedBy(16.dp)
+        ) {
+            ComicHomeSectionHeader(
+                text = "LIST DETAILS"
+            )
+
+            ComicFormTextField(
+                label = "TITLE",
+                value = title,
+                onValueChange = onTitleChange,
+                placeholder = "Reading list title"
+            )
+
+            ComicFormTextField(
+                label = "Description (optional)",
+                value = description,
+                onValueChange = onDescriptionChange,
+                placeholder = "Add a short description",
+                singleLine = false,
+                minHeight = 96
+            )
+
+            ComicHomeSectionHeader(
+                text = "LIST STYLE"
+            )
+
+            ComicReadingListStylePicker(
+                selectedStyle = style,
+                onStyleSeclected = onStyleChange
+            )
+
+            ComicHomeSectionHeader(
+                text = "PUBLISHER & CONTINUITY"
+            )
+
+            ComicFormDropdownField(
+                text = publisherName,
+                expanded = false,
+                onExpandedChange = {},
+                enabled = false
+            ) { }
+
+            ComicFormDropdownField(
+                text = continuityName,
+                expanded = false,
+                onExpandedChange = {},
+                enabled = false
+            ) { }
+
+            Text(
+                text = "Publisher and continuity are fixed for this list.",
+                style = MaterialTheme.typography.bodySmall
+            )
+
+            ComicHomeSectionHeader(
+                text = "ADD ISSUES OR SERIES"
+            )
+
+            ComicAddIssuesTrigger(
+                onClick = onAddIssuesClick
+            )
+
+            if (issues.isNotEmpty()) {
+                ComicHomeSectionHeader(
+                    text = "ADDED TO LIST"
+                )
+
+                issues.forEachIndexed { index, issue ->
+                    ComicPendingReadingListIssueRow(
+                        issue = issue,
+                        canMoveUp = index > 0 &&
+                            issues[index - 1].sectionId == issue.sectionId,
+                        canMoveDown = index < issues.lastIndex &&
+                            issues[index + 1].sectionId == issue.sectionId,
+                        onMoveUp = { onMoveIssue(issue.issueId, -1) },
+                        onMoveDown = { onMoveIssue(issue.issueId, 1) },
+                        onRemove = { onRemoveIssue(issue.issueId) }
+                    )
+                }
+            }
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement =
+                    Arrangement.spacedBy(10.dp)
+            ) {
+                ComicWideActionButton(
+                    text = "CANCEL",
+                    backgroundColor = ComicPaper,
+                    onClick = onCancelClick,
+                    modifier = Modifier.weight(1f)
+                )
+
+                ComicWideActionButton(
+                    text = "SAVE CHANGES",
+                    backgroundColor = ComicYellow,
+                    enabled = title.trim().isNotEmpty(),
+                    onClick = onSaveClick,
+                    modifier = Modifier.weight(1f)
+                )
+            }
+        }
     }
 }
