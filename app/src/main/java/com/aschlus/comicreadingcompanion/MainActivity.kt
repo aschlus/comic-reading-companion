@@ -608,6 +608,11 @@ class MainActivity : ComponentActivity() {
                                         "series/$seriesId"
                                     )
                                 },
+                                onReadingListClick = { readingListId, position ->
+                                    navController.navigate(
+                                        "readingList/$readingListId?startPosition=$position"
+                                    )
+                                },
                                 onBackClick = safeNavigateBack
                             )
                         }

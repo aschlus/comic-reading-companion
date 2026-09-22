@@ -266,4 +266,126 @@ class IssueDetailViewModelTest {
 
             assertEquals(null, updatedIssue?.readingStatus)
         }
+
+    @Test
+    fun loadIssue_loadsReadingListsContainingIssue() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name =
+                            "Test Publisher"
+                    )
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId =
+                            publisherId,
+                        title =
+                            "Test Series",
+                        volume = 1,
+                        startYear = 2026,
+                        endYear = null
+                    )
+                )
+
+            val issueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId =
+                            seriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "First Issue",
+                        publicationDate =
+                            "2026-01",
+                        coverUrl = null,
+                        description = null,
+                        issueType =
+                            IssueType.REGULAR
+                    )
+                )
+
+            val otherIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId =
+                            seriesId,
+                        universeId = null,
+                        issueNumber = "2",
+                        title = "Second Issue",
+                        publicationDate =
+                            "2026-02",
+                        coverUrl = null,
+                        description = null,
+                        issueType =
+                            IssueType.REGULAR
+                    )
+                )
+
+            val readingListId =
+                repository
+                    .createUserReadingListWithIssues(
+                        title =
+                            "Issue Detail List",
+                        description = null,
+                        publisherId =
+                            publisherId,
+                        universeId = null,
+                        issueIds =
+                            listOf(
+                                otherIssueId,
+                                issueId
+                            )
+                    )
+
+            repository.markIssueAsRead(
+                otherIssueId
+            )
+
+            viewModel.loadIssue(
+                issueId
+            )
+
+            val readingLists =
+                withTimeout(
+                    5000L.milliseconds
+                ) {
+                    viewModel
+                        .readingLists
+                        .first {
+                            it.size == 1
+                        }
+                }
+
+            val result =
+                readingLists.single()
+
+            assertEquals(
+                readingListId,
+                result.readingListId
+            )
+
+            assertEquals(
+                "Issue Detail List",
+                result.title
+            )
+
+            assertEquals(
+                2,
+                result.position
+            )
+
+            assertEquals(
+                2,
+                result.totalCount
+            )
+
+            assertEquals(
+                1,
+                result.readCount
+            )
+        }
 }

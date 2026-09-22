@@ -31,6 +31,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import androidx.compose.ui.test.onAllNodesWithContentDescription
 
 @RunWith(AndroidJUnit4::class)
 class IssueDetailScreenTest {
@@ -123,19 +124,26 @@ class IssueDetailScreenTest {
                 }
             }
 
-            composeRule.waitUntil(timeoutMillis = 5000L) {
-                composeRule.onAllNodesWithText("Amazing Spider-Man #30")
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        "Amazing Spider-Man"
+                    )
                     .fetchSemanticsNodes()
                     .isNotEmpty()
             }
-            composeRule.onNodeWithText("Amazing Spider-Man #30").assertIsDisplayed()
+            composeRule.onNodeWithText("ISSUE DETAIL").assertIsDisplayed()
             composeRule.onNodeWithText("Amazing Spider-Man").assertIsDisplayed()
             composeRule.onNodeWithText("#30").assertIsDisplayed()
             composeRule.onNodeWithText("Coming Home").assertIsDisplayed()
-            composeRule.onNodeWithText("Jun 2001 • Regular").assertIsDisplayed()
+            composeRule.onNodeWithText("Jun 2001").performScrollTo().assertIsDisplayed()
+            composeRule.onNodeWithText("Regular").performScrollTo().assertIsDisplayed()
             composeRule.onNodeWithText("Marvel").performScrollTo().assertIsDisplayed()
-            composeRule.onNodeWithText("Description").performScrollTo().assertIsDisplayed()
-            composeRule.onNodeWithText("Spider-Man faces a dangerous new enemy.").performScrollTo().assertIsDisplayed()
+            composeRule.onNodeWithText("Description").assertDoesNotExist()
+            composeRule
+                .onNodeWithText("Spider-Man faces a dangerous new enemy.").assertDoesNotExist()
         }
     }
 
@@ -303,84 +311,44 @@ class IssueDetailScreenTest {
                 }
             }
 
-            composeRule.waitUntil(timeoutMillis = 5000L) {
-                composeRule.onAllNodesWithText("Amazing Spider-Man #30")
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        "Amazing Spider-Man"
+                    )
                     .fetchSemanticsNodes()
                     .isNotEmpty()
             }
-            composeRule.onNodeWithText("Reading").performScrollTo().performClick()
-            composeRule.waitUntil(timeoutMillis = 5000L) {
-                composeRule.onAllNodesWithText("Currently reading")
+            composeRule
+                .onNodeWithContentDescription(
+                    "Reading reading status"
+                )
+                .performScrollTo()
+                .performClick()
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithContentDescription(
+                        "Reading reading status selected"
+                    )
                     .fetchSemanticsNodes()
                     .isNotEmpty()
             }
-            composeRule.onNodeWithText("Currently reading").performScrollTo().assertIsDisplayed()
+
+            composeRule
+                .onNodeWithContentDescription(
+                    "Reading reading status selected"
+                )
+                .assertIsDisplayed()
         }
     }
 
     @Test
     fun issueDetailScreen_markAsUnreadClearsStatus() {
-        runBlocking {
-            val publisherId =
-                comicDao.insertPublisher(
-                    Publisher(name = "Marvel")
-                )
-
-            val seriesId =
-                comicDao.insertSeries(
-                    Series(
-                        publisherId = publisherId,
-                        title = "Amazing Spider-Man",
-                        volume = 2,
-                        startYear = 1999,
-                        endYear = 2003
-                    )
-                )
-
-            val issueId =
-                comicDao.insertIssue(
-                    Issue(
-                        seriesId = seriesId,
-                        universeId = null,
-                        issueNumber = "30",
-                        title = "Coming Home",
-                        publicationDate = "2001-06",
-                        coverUrl = null,
-                        description = "Spider-Man faces a dangerous new enemy.",
-                        issueType = IssueType.REGULAR
-                    )
-                )
-
-            composeRule.setContent {
-                ComicReadingCompanionTheme(
-                    dynamicColor = false
-                ) {
-                    IssueDetailScreen(
-                        issueId = issueId,
-                        viewModel = viewModel,
-                        onSeriesClick = {},
-                        onBackClick = {}
-                    )
-                }
-            }
-
-            composeRule.waitUntil(timeoutMillis = 5000L) {
-                composeRule.onAllNodesWithText("Amazing Spider-Man #30")
-                    .fetchSemanticsNodes()
-                    .isNotEmpty()
-            }
-            composeRule.onNodeWithText("Read").performScrollTo().performClick()
-            composeRule.waitUntil(timeoutMillis = 5000L) {
-                composeRule.onAllNodesWithText("Read")
-                    .fetchSemanticsNodes()
-                    .size >= 2
-            }
-            composeRule.onAllNodesWithText("Read")[0].performScrollTo().assertIsDisplayed()
-        }
-    }
-
-    @Test
-    fun issueDetailScreen_markAsReadUpdatesStatus() {
         runBlocking {
             val publisherId =
                 comicDao.insertPublisher(
@@ -427,21 +395,133 @@ class IssueDetailScreenTest {
                 }
             }
 
-            composeRule.waitUntil(timeoutMillis = 5000L) {
-                composeRule.onAllNodesWithText("Read")
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        "Amazing Spider-Man"
+                    )
                     .fetchSemanticsNodes()
-                    .size >= 2
+                    .isNotEmpty()
             }
-            composeRule.onNodeWithText("Unread").performScrollTo().performClick()
-            composeRule.waitUntil(timeoutMillis = 5000L) {
-                composeRule.onAllNodesWithText("Unread")
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithContentDescription(
+                        "Read reading status selected"
+                    )
                     .fetchSemanticsNodes()
-                    .size >= 2 &&
-                        composeRule.onAllNodesWithText("Read")
-                            .fetchSemanticsNodes()
-                            .size == 1
+                    .isNotEmpty()
             }
-            composeRule.onAllNodesWithText("Unread")[0].performScrollTo().assertIsDisplayed()
+
+            composeRule
+                .onNodeWithContentDescription(
+                    "Unread reading status"
+                )
+                .performScrollTo()
+                .performClick()
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithContentDescription(
+                        "Unread reading status selected"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule
+                .onNodeWithContentDescription(
+                    "Unread reading status selected"
+                )
+                .assertIsDisplayed()
+        }
+    }
+
+    @Test
+    fun issueDetailScreen_markAsReadUpdatesStatus() {
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Amazing Spider-Man",
+                        volume = 2,
+                        startYear = 1999,
+                        endYear = 2003
+                    )
+                )
+
+            val issueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "30",
+                        title = "Coming Home",
+                        publicationDate = "2001-06",
+                        coverUrl = null,
+                        description = "Spider-Man faces a dangerous new enemy.",
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    IssueDetailScreen(
+                        issueId = issueId,
+                        viewModel = viewModel,
+                        onSeriesClick = {},
+                        onBackClick = {}
+                    )
+                }
+            }
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithContentDescription(
+                        "Unread reading status selected"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule
+                .onNodeWithContentDescription(
+                    "Read reading status"
+                )
+                .performScrollTo()
+                .performClick()
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithContentDescription(
+                        "Read reading status selected"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule
+                .onNodeWithContentDescription(
+                    "Read reading status selected"
+                )
+                .assertIsDisplayed()
         }
     }
 
@@ -506,11 +586,11 @@ class IssueDetailScreenTest {
             }
 
             composeRule.waitUntil(timeoutMillis = 5000L) {
-                composeRule.onAllNodesWithText("Add to Reading List")
+                composeRule.onAllNodesWithText("ADD TO READING LIST")
                     .fetchSemanticsNodes()
                     .isNotEmpty()
             }
-            composeRule.onNodeWithText("Add to Reading List").performScrollTo().performClick()
+            composeRule.onNodeWithText("ADD TO READING LIST").performScrollTo().performClick()
             composeRule.onNodeWithText("My Spider-Man List").assertIsDisplayed()
             addViewModel
                 .viewModelScope
@@ -580,7 +660,7 @@ class IssueDetailScreenTest {
                 }
             }
 
-            composeRule.onNodeWithText("Add to Reading List").performScrollTo().performClick()
+            composeRule.onNodeWithText("ADD TO READING LIST").performScrollTo().performClick()
             composeRule.waitUntil(timeoutMillis = 5000L) {
                 composeRule.onAllNodesWithText("My List")
                     .fetchSemanticsNodes()
@@ -601,4 +681,123 @@ class IssueDetailScreenTest {
                 ?.cancelAndJoin()
         }
     }
+
+    @Test
+    fun issueDetailScreen_readingListClickInvokesCallback() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name =
+                            "Test Publisher"
+                    )
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId =
+                            publisherId,
+                        title =
+                            "Test Series",
+                        volume = 1,
+                        startYear = 2026,
+                        endYear = null
+                    )
+                )
+
+            val issueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId =
+                            seriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title =
+                            "Test Issue",
+                        publicationDate =
+                            "2026-01",
+                        coverUrl = null,
+                        description = null,
+                        issueType =
+                            IssueType.REGULAR
+                    )
+                )
+
+            val readingListId =
+                repository
+                    .createUserReadingListWithIssues(
+                        title =
+                            "Issue Reading List",
+                        description = null,
+                        publisherId =
+                            publisherId,
+                        universeId = null,
+                        issueIds =
+                            listOf(
+                                issueId
+                            )
+                    )
+
+            var clickedReadingListId:
+                    Long? = null
+
+            var clickedPosition:
+                    Int? = null
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    IssueDetailScreen(
+                        issueId =
+                            issueId,
+                        viewModel =
+                            viewModel,
+                        onSeriesClick = {},
+                        onReadingListClick = {
+                                id,
+                                position ->
+
+                            clickedReadingListId =
+                                id
+
+                            clickedPosition =
+                                position
+                        },
+                        onBackClick = {}
+                    )
+                }
+            }
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        "Issue Reading List"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule
+                .onNodeWithText(
+                    "Issue Reading List"
+                )
+                .performScrollTo()
+                .performClick()
+
+            composeRule.runOnIdle {
+                assertEquals(
+                    readingListId,
+                    clickedReadingListId
+                )
+
+                assertEquals(
+                    1,
+                    clickedPosition
+                )
+            }
+        }
 }

@@ -1,27 +1,26 @@
 package com.aschlus.comicreadingcompanion.ui.screen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -29,18 +28,30 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
+import androidx.compose.ui.unit.sp
 import com.aschlus.comicreadingcompanion.ui.component.AddIssueToReadingListSheet
 import com.aschlus.comicreadingcompanion.ui.component.ComicCoverImage
+import com.aschlus.comicreadingcompanion.ui.component.ComicHomeSectionHeader
+import com.aschlus.comicreadingcompanion.ui.component.ComicIssueDetailHeader
+import com.aschlus.comicreadingcompanion.ui.component.ComicIssueReadingListRow
+import com.aschlus.comicreadingcompanion.ui.component.ComicIssueStatusSelector
+import com.aschlus.comicreadingcompanion.ui.component.ComicWideActionButton
+import com.aschlus.comicreadingcompanion.ui.theme.ComicBlue
+import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
+import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
+import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
 import com.aschlus.comicreadingcompanion.ui.viewmodel.AddIssueToReadingListViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.IssueDetailViewModel
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun IssueDetailScreen(
     issueId: Long,
@@ -48,9 +59,12 @@ fun IssueDetailScreen(
     addToReadingListViewModel:
             AddIssueToReadingListViewModel? = null,
     onSeriesClick: (Long) -> Unit,
+    onReadingListClick: (Long, Int) -> Unit = { _, _ -> },
     onBackClick: () -> Unit
 ) {
     val issue by viewModel.issue.collectAsState()
+
+    val readingLists by viewModel.readingLists.collectAsState()
 
     var showAddToReadingListSheet by remember(issueId) {
         mutableStateOf(false)
@@ -61,25 +75,10 @@ fun IssueDetailScreen(
     }
 
     Scaffold(
+        containerColor = ComicPaper,
         topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        issue?.let {
-                            "${it.seriesTitle} #${it.issueNumber}"
-                        } ?: "Issue"
-                    )
-                },
-                navigationIcon = {
-                    IconButton(
-                        onClick = onBackClick
-                    ) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back"
-                        )
-                    }
-                }
+            ComicIssueDetailHeader(
+                onBackClick = onBackClick
             )
         }
     ) { innerPadding: PaddingValues ->
@@ -91,7 +90,8 @@ fun IssueDetailScreen(
                 text = "Loading...",
                 modifier = Modifier
                     .padding(innerPadding)
-                    .padding(16.dp)
+                    .padding(18.dp),
+                color = ComicInk
             )
         } else {
             Column(
@@ -101,202 +101,174 @@ fun IssueDetailScreen(
                     .verticalScroll(
                         rememberScrollState()
                     )
-                    .padding(16.dp),
+                    .padding(
+                        horizontal = 16.dp,
+                        vertical = 14.dp
+                    ),
                 verticalArrangement =
                     Arrangement.spacedBy(12.dp)
             ) {
-
-                ComicCoverImage(
-                    coverUrl = currentIssue.coverUrl,
-                    contentDescription =
-                        "${currentIssue.seriesTitle} #${currentIssue.issueNumber} cover",
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .aspectRatio(2f / 3f)
-                )
-
-                Text(
-                    text = currentIssue.seriesTitle,
-                    style =
-                        MaterialTheme.typography.headlineMedium,
-                    modifier = Modifier.clickable {
-                        onSeriesClick(
-                            currentIssue.seriesId
-                        )
-                    }
-                )
-
-                Text(
-                    text = "#${currentIssue.issueNumber}",
-                    style =
-                        MaterialTheme.typography.titleLarge
-                )
-
-                currentIssue.issueTitle?.let { title ->
-                    Text(
-                        text = title,
-                        style =
-                            MaterialTheme.typography.titleLarge
+                Row(
+                    modifier =
+                        Modifier.fillMaxWidth(),
+                    horizontalArrangement =
+                        Arrangement.spacedBy(14.dp),
+                    verticalAlignment =
+                        Alignment.Top
+                ) {
+                    ComicIssueCover(
+                        coverUrl = currentIssue.coverUrl,
+                        contentDescription =
+                            "${currentIssue.seriesTitle} " +
+                            "#${currentIssue.issueNumber} " +
+                            "cover",
+                        modifier =
+                            Modifier
+                                .weight(0.43f)
+                                .aspectRatio(2f / 3f)
                     )
-                }
 
-                val metadata = buildList {
-                    currentIssue.publicationDate
-                        ?.let { publicationDate ->
-                            add(
-                                formatIssuePublicationDate(
-                                    publicationDate
-                                )
-                            )
-                        }
+                    Column(
+                        modifier =
+                            Modifier.weight(0.57f),
+                        verticalArrangement =
+                            Arrangement.spacedBy(7.dp)
+                    ) {
+                        Text(
+                            text = currentIssue.seriesTitle,
+                            modifier =
+                                Modifier.clickable {
+                                    onSeriesClick(currentIssue.seriesId)
+                                },
+                            style =
+                                MaterialTheme.typography.titleLarge
+                                    .copy(
+                                        fontSize = 21.sp,
+                                        lineHeight = 24.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        textDecoration = TextDecoration.Underline
+                                    ),
+                            color = ComicBlue,
+                            maxLines = 2,
+                            overflow = TextOverflow.Ellipsis
+                        )
 
-                    add(
-                        currentIssue.issueType
-                            .name
-                            .replace("_", " ")
-                            .lowercase()
-                            .replaceFirstChar {
-                                it.titlecase(
-                                    Locale.getDefault()
+                        Text(
+                            text =
+                                "#${currentIssue.issueNumber}",
+                            style =
+                                MaterialTheme.typography.headlineLarge
+                                    .copy(
+                                        fontSize = 34.sp,
+                                        lineHeight = 36.sp,
+                                        fontWeight = FontWeight.Black
+                                    ),
+                            color = ComicInk
+                        )
+
+                        currentIssue
+                            .issueTitle
+                            ?.takeIf { it.isNotBlank() }
+                            ?.let { title ->
+                                Text(
+                                    text = title,
+                                    style =
+                                        MaterialTheme.typography.titleMedium
+                                            .copy(
+                                                fontSize = 18.sp,
+                                                lineHeight = 21.sp,
+                                                fontWeight = FontWeight.Bold
+                                            ),
+                                    color = ComicInk
                                 )
                             }
-                    )
 
-                    currentIssue.universeDesignation
-                        ?.let { designation ->
-                            add(designation)
-                        }
+                        Spacer(modifier = Modifier.height(2.dp))
+
+                        IssueMetadataRow(
+                            label = "Publisher",
+                            value = currentIssue.publisherName
+                        )
+
+                        currentIssue
+                            .publicationDate
+                            ?.let { publicationDate ->
+                                IssueMetadataRow(
+                                    label = "Publication Date",
+                                    value = formatIssuePublicationDate(publicationDate)
+                                )
+                            }
+
+                        IssueMetadataRow(
+                            label = "Issue Type",
+                            value = currentIssue.issueType
+                                .name.replace("_", " ")
+                                .lowercase()
+                                .replaceFirstChar { it.titlecase(Locale.getDefault()) }
+                        )
+
+                        currentIssue.universeDesignation
+                            ?.let { designation ->
+                                IssueMetadataRow(
+                                    label = "Continuity",
+                                    value = designation
+                                )
+                            }
+                    }
                 }
 
-                Text(
-                    text = metadata.joinToString(" • "),
-                    style = MaterialTheme.typography.bodyMedium
+                HorizontalDivider(
+                    thickness = 2.dp,
+                    color = ComicInk
                 )
 
-                Text(
-                    text = currentIssue.publisherName,
-                    style =
-                        MaterialTheme.typography.bodyMedium
+                ComicHomeSectionHeader(
+                    text = "READING STATUS"
                 )
 
-                when (currentIssue.readingStatus) {
-                    ReadingStatus.READ -> {
-                        Text(
-                            text = "Read",
-                            style =
-                                MaterialTheme.typography.labelLarge
-                        )
-                    }
-
-                    ReadingStatus.READING -> {
-                        Text(
-                            text = "Currently reading",
-                            style =
-                                MaterialTheme.typography.labelLarge
-                        )
-                    }
-
-                    else -> {
-                        Text(
-                            text = "Unread",
-                            style =
-                                MaterialTheme.typography.labelLarge
-                        )
-                    }
-                }
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    if (currentIssue.readingStatus == null) {
-                        Button(
-                            onClick = {},
-                            enabled = false,
-                            modifier = Modifier.weight(1f)
-                        ) {
-                            Text("Unread")
-                        }
-                    } else {
-                        OutlinedButton(
-                            onClick = {
-                                viewModel.markAsUnread()
-                            },
-                            modifier = Modifier.weight(1f)
-                        ) {
-                            Text("Unread")
-                        }
-                    }
-
-                    if (currentIssue.readingStatus ==
-                        ReadingStatus.READING
-                    ) {
-                        Button(
-                            onClick = {},
-                            enabled = false,
-                            modifier = Modifier.weight(1f)
-                        ) {
-                            Text("Reading")
-                        }
-                    } else {
-                        OutlinedButton(
-                            onClick = {
-                                viewModel.markAsReading()
-                            },
-                            modifier = Modifier.weight(1f)
-                        ) {
-                            Text("Reading")
-                        }
-                    }
-
-                    if (
-                        currentIssue.readingStatus ==
-                        ReadingStatus.READ
-                    ) {
-                        Button(
-                            onClick = {},
-                            enabled = false,
-                            modifier = Modifier.weight(1f)
-                        ) {
-                            Text("Read")
-                        }
-                    } else {
-                        OutlinedButton(
-                            onClick = {
-                                viewModel.markAsRead()
-                            },
-                            modifier = Modifier.weight(1f)
-                        ) {
-                            Text("Read")
-                        }
-                    }
-                }
+                ComicIssueStatusSelector(
+                    readingStatus = currentIssue.readingStatus,
+                    onUnreadClick = { viewModel.markAsUnread() },
+                    onReadingClick = { viewModel.markAsReading() },
+                    onReadClick = { viewModel.markAsRead() }
+                )
 
                 if (addToReadingListViewModel != null) {
-                    OutlinedButton(
+                    ComicWideActionButton(
+                        text = "ADD TO READING LIST",
+                        backgroundColor = ComicYellow,
                         onClick = {
                             showAddToReadingListSheet = true
                         },
                         modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Text("Add to Reading List")
+                    )
+                }
+
+                if (readingLists.isNotEmpty()) {
+                    HorizontalDivider(
+                        modifier =
+                            Modifier.padding(
+                                top = 4.dp
+                            ),
+                        thickness = 2.dp,
+                        color = ComicInk
+                    )
+
+                    ComicHomeSectionHeader(
+                        text = "IN READING LISTS"
+                    )
+
+                    readingLists.forEach { readingList ->
+                        ComicIssueReadingListRow(
+                            readingList = readingList,
+                            onClick = {
+                                onReadingListClick(readingList.readingListId, readingList.position)
+                            }
+                        )
                     }
                 }
 
-                currentIssue.description
-                    ?.let { description ->
-                        Text(
-                            text = "Description",
-                            style =
-                                MaterialTheme.typography.titleMedium
-                        )
-
-                        Text(
-                            text = description,
-                            style =
-                                MaterialTheme.typography.bodyLarge
-                        )
-                    }
+                Spacer(modifier = Modifier.height(18.dp))
             }
         }
     }
@@ -310,6 +282,75 @@ fun IssueDetailScreen(
             onDismissRequest = {
                 showAddToReadingListSheet = false
             }
+        )
+    }
+}
+
+@Composable
+private fun ComicIssueCover(
+    coverUrl: String?,
+    contentDescription: String,
+    modifier: Modifier = Modifier
+) {
+    val shape = RoundedCornerShape(5.dp)
+
+    Box(
+        modifier = modifier
+    ) {
+        Box(
+            modifier =
+                Modifier
+                    .matchParentSize()
+                    .offset(
+                        x = 3.dp,
+                        y = 4.dp
+                    )
+                    .background(
+                        color = ComicInk,
+                        shape = shape
+                    )
+        )
+
+        ComicCoverImage(
+            coverUrl = coverUrl,
+            contentDescription = contentDescription,
+            modifier = Modifier.matchParentSize(),
+            shape = shape,
+            borderColor = ComicInk
+        )
+    }
+}
+
+@Composable
+private fun IssueMetadataRow(
+    label: String,
+    value: String
+) {
+    Column(
+        verticalArrangement =
+            Arrangement.spacedBy(1.dp)
+    ) {
+        Text(
+            text = label,
+            style =
+                MaterialTheme.typography.bodySmall
+                    .copy(
+                        fontSize = 11.sp,
+                        lineHeight = 13.sp
+                    ),
+            color = ComicInk.copy(alpha = 0.6f)
+        )
+
+        Text(
+            text = value,
+            style =
+                MaterialTheme.typography.bodyMedium
+                    .copy(
+                        fontSize = 13.sp,
+                        lineHeight = 16.sp,
+                        fontWeight = FontWeight.SemiBold
+                    ),
+            color = ComicInk
         )
     }
 }

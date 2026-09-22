@@ -16,6 +16,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.database.entities.Series
 import com.aschlus.comicreadingcompanion.data.database.entities.Universe
 import com.aschlus.comicreadingcompanion.data.database.models.IssueDetail
+import com.aschlus.comicreadingcompanion.data.database.models.IssueReadingListResult
 import com.aschlus.comicreadingcompanion.data.database.models.IssueSearchResult
 import com.aschlus.comicreadingcompanion.data.database.models.PublisherBrowseResult
 import com.aschlus.comicreadingcompanion.data.database.models.PublisherSeries
@@ -597,6 +598,14 @@ class ComicRepository(
         ) {
             "Duplicated reading-list ID was not set"
         }
+    }
+
+    fun getReadingListsContainingIssue(
+        issueId: Long
+    ): Flow<List<IssueReadingListResult>> {
+        return comicDao.getReadingListsContainingIssue(
+            issueId = issueId
+        )
     }
 
 

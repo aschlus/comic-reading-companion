@@ -18,6 +18,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.Series
 import com.aschlus.comicreadingcompanion.data.database.entities.SeriesExternalId
 import com.aschlus.comicreadingcompanion.data.database.entities.Universe
 import com.aschlus.comicreadingcompanion.data.database.models.IssueDetail
+import com.aschlus.comicreadingcompanion.data.database.models.IssueReadingListResult
 import com.aschlus.comicreadingcompanion.data.database.models.IssueSearchResult
 import com.aschlus.comicreadingcompanion.data.database.models.PublisherBrowseResult
 import com.aschlus.comicreadingcompanion.data.database.models.PublisherSeries
@@ -437,6 +438,39 @@ interface ComicDao {
     """)
     fun getUnreadReadingListItems():
     Flow<List<ReadingListContinueItem>>
+
+    @Query("""
+        SELECT
+            reading_lists.id AS readingListId,
+            reading_lists.title AS title,
+            reading_lists.style AS style,
+            target_item.position AS position,
+            COUNT(all_items.id) AS totalCount,
+            SUM(
+                CASE
+                    WHEN reading_progress.status = 'READ'
+                        THEN 1
+                    ELSE 0
+                END
+            ) AS readCount
+        FROM reading_list_items AS target_item
+        INNER JOIN reading_lists
+            ON target_item.readingListId = reading_lists.id
+        LEFT JOIN reading_list_items AS all_items
+            ON reading_lists.id = all_items.readingListId
+        LEFT JOIN reading_progress
+            ON all_items.issueId = reading_progress.issueId
+        WHERE target_item.issueId = :issueId
+        GROUP BY
+            reading_lists.id,
+            reading_lists.title,
+            reading_lists.style,
+            target_item.position
+        ORDER BY reading_lists.title ASC
+    """)
+    fun getReadingListsContainingIssue(
+        issueId: Long
+    ): Flow<List<IssueReadingListResult>>
 
 
     // Reading list sections

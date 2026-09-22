@@ -130,14 +130,34 @@ class AppNavigationTest {
                 .isNotEmpty()
         }
         composeRule.onNodeWithText("#1").performClick()
-        composeRule.waitUntil(timeoutMillis = 5000L) {
-            composeRule.onAllNodesWithText("Amazing Spider-Man #1")
+        composeRule.waitUntil(
+            timeoutMillis = 5000L
+        ) {
+            composeRule
+                .onAllNodesWithText(
+                    "ISSUE DETAIL"
+                )
                 .fetchSemanticsNodes()
                 .isNotEmpty()
         }
-        composeRule.onNodeWithText("Amazing Spider-Man #1").assertIsDisplayed()
-        composeRule.onNodeWithText("#1").assertIsDisplayed()
-        composeRule.onNodeWithContentDescription("Back").assertIsDisplayed()
+
+        composeRule
+            .onNodeWithText(
+                "ISSUE DETAIL"
+            )
+            .assertIsDisplayed()
+
+        composeRule
+            .onNodeWithText(
+                "#1"
+            )
+            .assertIsDisplayed()
+
+        composeRule
+            .onNodeWithContentDescription(
+                "Back"
+            )
+            .assertIsDisplayed()
     }
 
     @Test
@@ -330,7 +350,7 @@ class AppNavigationTest {
         ) {
             composeRule
                 .onAllNodesWithText(
-                    "Amazing Spider-Man #1"
+                    "ISSUE DETAIL"
                 )
                 .fetchSemanticsNodes()
                 .isNotEmpty()
