@@ -78,14 +78,51 @@ class BrowseViewModelTest {
                     Publisher(name = "DC")
                 )
 
+            comicDao.insertSeries(
+                Series(
+                    publisherId = marvelId,
+                    title = "Marvel Series One",
+                    volume = 1,
+                    startYear = 2000,
+                    endYear = null
+                )
+            )
+
+            comicDao.insertSeries(
+                Series(
+                    publisherId = marvelId,
+                    title = "Marvel Series Two",
+                    volume = 1,
+                    startYear = 2001,
+                    endYear = null
+                )
+            )
+
+            comicDao.insertSeries(
+                Series(
+                    publisherId = dcId,
+                    title = "DC Series",
+                    volume = 1,
+                    startYear = 2002,
+                    endYear = null
+                )
+            )
+
             val publishers =
                 withTimeout(5000L.milliseconds) {
                     viewModel.publishers.first { it.size == 2 }
                 }
-            assertEquals(2, publishers.size)
             assertEquals(
-                setOf(marvelId, dcId),
-                publishers.map { it.id }.toSet()
+                2,
+                publishers.first {
+                    it.publisherId == marvelId
+                }.seriesCount
+            )
+            assertEquals(
+                1,
+                publishers.first {
+                    it.publisherId == dcId
+                }.seriesCount
             )
         }
 

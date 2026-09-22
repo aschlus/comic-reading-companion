@@ -19,7 +19,7 @@ tools/comicvine/catalog_configs/my_new_series_search.json
 
 Then from the project root run:
 
-py tools/comicvine/search_unmapped_series.py --manifest tools/comicvine/catalog_configs/my_new_series_search.json
+python ./tools/comicvine/search_unmapped_series.py --manifest tools/comicvine/catalog_configs/my_new_series_search.json
 
 That searches Comic Vine and prints the best candidate volumes with IDs, years, issue counts, and publishers. It also writes a detailed candidate report into tools/comicvine/output.
 
@@ -76,7 +76,7 @@ Cache all issues for that Comic Vine volume
 
 Run:
 
-py tools/comicvine/cache_mapped_volume_issues.py --config tools/comicvine/catalog_configs/my_new_series.json
+python ./tools/comicvine/cache_mapped_volume_issues.py --config tools/comicvine/catalog_configs/my_new_series.json
 
 This reads the configured Comic Vine volume ID, downloads every issue for that volume, and stores it as:
 
@@ -90,13 +90,13 @@ Build a preview catalog
 
 Run:
 
-py tools/comicvine/build_catalog.py `
+python ./tools/comicvine/build_catalog.py `
   --config tools/comicvine/catalog_configs/my_new_series.json `
 --output tools/comicvine/output/my_new_series_catalog.json
 
 Or as one line:
 
-py tools/comicvine/build_catalog.py --config tools/comicvine/catalog_configs/my_new_series.json --output tools/comicvine/output/my_new_series_catalog.json
+python ./tools/comicvine/build_catalog.py --config tools/comicvine/catalog_configs/my_new_series.json --output tools/comicvine/output/my_new_series_catalog.json
 
 The builder converts the cached Comic Vine data into the app’s catalog format. It brings over things such as:
 
@@ -139,13 +139,13 @@ Promote it into the correct app catalog
 
 For example, if the series belongs in your existing Spider-Man catalog:
 
-py tools/comicvine/promote_catalog_preview.py `
+python ./tools/comicvine/promote_catalog_preview.py `
   --base app/src/main/assets/catalogs/spider_man_volume_2_catalog.json `
 --preview tools/comicvine/output/my_new_series_catalog.json
 
 One-line version:
 
-py tools/comicvine/promote_catalog_preview.py --base app/src/main/assets/catalogs/spider_man_volume_2_catalog.json --preview tools/comicvine/output/my_new_series_catalog.json
+python ./tools/comicvine/promote_catalog_preview.py --base app/src/main/assets/catalogs/spider_man_volume_2_catalog.json --preview tools/comicvine/output/my_new_series_catalog.json
 
 With no --output, the script updates the base catalog itself.
 

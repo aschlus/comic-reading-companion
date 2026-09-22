@@ -1,0 +1,147 @@
+{
+  "publisher": "Marvel Comics",
+  "universes": [
+    {
+      "name": "New Ultimate Universe",
+      "designation": "Earth-6160",
+      "description": "The new Ultimate Marvel universe."
+    }
+  ],
+  "series": [
+    {
+      "title": "Ultimate Invasion",
+      "volume": null,
+      "startYear": 2023,
+      "endYear": 2023,
+      "comicVineVolumeId": 151520,
+      "defaultUniverseDesignation": "Earth-6160",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Amazing Spider-Man/Ultimate Universe",
+      "volume": null,
+      "startYear": 2024,
+      "endYear": 2025,
+      "defaultUniverseDesignation": "Earth-6160",
+      "defaultIssueType": "SPECIAL",
+      "issueMappings": {
+        "Amazing Spider-Man/Ultimate Universe 2024": {
+          "comicVineVolumeId": 158037,
+          "comicVineIssueNumber": "1"
+        },
+        "Amazing Spider-Man/Ultimate Universe 2025": {
+          "comicVineVolumeId": 164369,
+          "comicVineIssueNumber": "1"
+        }
+      }
+    },
+    {
+      "title": "Ultimate Black Panther",
+      "volume": null,
+      "startYear": 2024,
+      "endYear": 2026,
+      "comicVineVolumeId": 156647,
+      "defaultUniverseDesignation": "Earth-6160",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Spider-Man",
+      "volume": null,
+      "startYear": 2024,
+      "endYear": 2026,
+      "comicVineVolumeId": 155969,
+      "defaultUniverseDesignation": "Earth-6160",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Universe",
+      "volume": null,
+      "startYear": 2024,
+      "endYear": 2024,
+      "comicVineVolumeId": 154417,
+      "defaultUniverseDesignation": "Earth-6160",
+      "defaultIssueType": "SPECIAL"
+    },
+    {
+      "title": "Ultimate X-Men",
+      "volume": null,
+      "startYear": 2024,
+      "endYear": 2026,
+      "comicVineVolumeId": 157127,
+      "defaultUniverseDesignation": "Earth-6160",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimates",
+      "volume": null,
+      "startYear": 2024,
+      "endYear": 2026,
+      "comicVineVolumeId": 158414,
+      "defaultUniverseDesignation": "Earth-6160",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Hawkeye",
+      "volume": null,
+      "startYear": 2025,
+      "endYear": 2025,
+      "comicVineVolumeId": 167181,
+      "defaultUniverseDesignation": "Earth-6160",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Spider-Man: Incursion",
+      "volume": null,
+      "startYear": 2025,
+      "endYear": 2025,
+      "comicVineVolumeId": 164850,
+      "defaultUniverseDesignation": "Earth-6160",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Universe: One Year In",
+      "volume": null,
+      "startYear": 2025,
+      "endYear": 2025,
+      "comicVineVolumeId": 161614,
+      "defaultUniverseDesignation": "Earth-6160",
+      "defaultIssueType": "SPECIAL"
+    },
+    {
+      "title": "Ultimate Wolverine",
+      "volume": null,
+      "startYear": 2025,
+      "endYear": 2026,
+      "comicVineVolumeId": 162012,
+      "defaultUniverseDesignation": "Earth-6160",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Endgame",
+      "volume": null,
+      "startYear": 2026,
+      "endYear": 2026,
+      "comicVineVolumeId": 169661,
+      "defaultUniverseDesignation": "Earth-6160",
+      "defaultIssueType": "REGULAR"
+    },
+    {
+      "title": "Ultimate Universe: Finale",
+      "volume": null,
+      "startYear": 2026,
+      "endYear": 2026,
+      "comicVineVolumeId": 173289,
+      "defaultUniverseDesignation": "Earth-6160",
+      "defaultIssueType": "SPECIAL"
+    },
+    {
+      "title": "Ultimate Universe: Two Years In",
+      "volume": null,
+      "startYear": 2026,
+      "endYear": 2026,
+      "comicVineVolumeId": 168941,
+      "defaultUniverseDesignation": "Earth-6160",
+      "defaultIssueType": "SPECIAL"
+    }
+  ]
+}

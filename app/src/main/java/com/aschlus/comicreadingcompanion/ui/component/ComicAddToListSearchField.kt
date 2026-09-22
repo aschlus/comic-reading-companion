@@ -34,7 +34,8 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 fun ComicAddToListSearchField(
     query: String,
     onQueryChange: (String) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    placeholder: String = "Search issues or series"
 ) {
     val shape = RoundedCornerShape(10.dp)
 
@@ -107,7 +108,7 @@ fun ComicAddToListSearchField(
                     ) {
                         if (query.isEmpty()) {
                             Text(
-                                text = "Search issues or series",
+                                text = placeholder,
                                 style = MaterialTheme.typography.bodyLarge,
                                 color = ComicInk.copy(alpha = 0.55f)
                             )

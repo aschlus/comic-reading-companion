@@ -1,0 +1,79 @@
+{
+  "series": [
+    {
+      "title": "Ultimate Invasion",
+      "startYear": 2023,
+      "expectedIssueCount": 4
+    },
+    {
+      "title": "Ultimate Universe",
+      "startYear": 2024,
+      "expectedIssueCount": 1
+    },
+    {
+      "title": "Ultimate Spider-Man",
+      "startYear": 2024,
+      "expectedIssueCount": 24
+    },
+    {
+      "title": "Ultimate Black Panther",
+      "startYear": 2024,
+      "expectedIssueCount": 24
+    },
+    {
+      "title": "Ultimate X-Men",
+      "startYear": 2024,
+      "expectedIssueCount": 24
+    },
+    {
+      "title": "Ultimates",
+      "startYear": 2024,
+      "expectedIssueCount": 24
+    },
+    {
+      "title": "Ultimate Universe: One Year In",
+      "startYear": 2025,
+      "expectedIssueCount": 1
+    },
+    {
+      "title": "Ultimate Wolverine",
+      "startYear": 2025,
+      "expectedIssueCount": 26
+    },
+    {
+      "title": "Ultimate Spider-Man: Incursion",
+      "startYear": 2025,
+      "expectedIssueCount": 5
+    },
+    {
+      "title": "Ultimate Hawkeye",
+      "startYear": 2025,
+      "expectedIssueCount": 1
+    },
+    {
+      "title": "Ultimate Universe: Two Years In",
+      "startYear": 2026,
+      "expectedIssueCount": 1
+    },
+    {
+      "title": "Ultimate Endgame",
+      "startYear": 2026,
+      "expectedIssueCount": 5
+    },
+    {
+      "title": "Ultimate Universe: Finale",
+      "startYear": 2026,
+      "expectedIssueCount": 1
+    },
+    {
+      "title": "Free Comic Book Day 2024: Amazing Spider-Man/Ultimate Universe",
+      "startYear": 2024,
+      "expectedIssueCount": 1
+    },
+    {
+      "title": "Free Comic Book Day 2025: Amazing Spider-Man/Ultimate Universe",
+      "startYear": 2025,
+      "expectedIssueCount": 1
+    }
+  ]
+}

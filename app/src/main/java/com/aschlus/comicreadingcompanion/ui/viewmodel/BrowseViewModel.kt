@@ -2,7 +2,7 @@ package com.aschlus.comicreadingcompanion.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
+import com.aschlus.comicreadingcompanion.data.database.models.PublisherBrowseResult
 import com.aschlus.comicreadingcompanion.data.database.models.IssueSearchResult
 import com.aschlus.comicreadingcompanion.data.database.models.SeriesSearchResult
 import com.aschlus.comicreadingcompanion.data.repository.ComicRepository
@@ -19,9 +19,9 @@ class BrowseViewModel(
 ) : ViewModel() {
 
     private val _publishers =
-        MutableStateFlow<List<Publisher>>(emptyList())
+        MutableStateFlow<List<PublisherBrowseResult>>(emptyList())
 
-    val publishers: StateFlow<List<Publisher>> =
+    val publishers: StateFlow<List<PublisherBrowseResult>> =
         _publishers.asStateFlow()
 
     private var searchJob: Job? = null
@@ -48,7 +48,7 @@ class BrowseViewModel(
     init {
         viewModelScope.launch {
             repository
-                .getPublishersFlow()
+                .getPublisherBrowseResults()
                 .collect { updatedPublishers ->
                     _publishers.value = updatedPublishers
                 }

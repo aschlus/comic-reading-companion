@@ -244,7 +244,7 @@ building, following, and tracking comic-book reading orders.
 
 ### Browse and Detail Screen Visual Refresh
 
-- [ ] Apply Comic Print styling to Browse
+- [x] Apply Comic Print styling to Browse
 - [ ] Apply Comic Print styling to Publisher detail
 - [ ] Apply Comic Print styling to Series detail
 - [ ] Apply Comic Print styling to Issue detail

@@ -43,17 +43,17 @@ class AppNavigationTest {
             timeoutMillis = 5000L
         ) {
             composeRule
-                .onAllNodesWithText("Publishers")
+                .onAllNodesWithText("PUBLISHERS")
                 .fetchSemanticsNodes()
                 .isNotEmpty()
         }
 
         composeRule
-            .onNodeWithText("Browse Comics")
+            .onNodeWithText("BROWSE")
             .assertIsDisplayed()
 
         composeRule
-            .onNodeWithText("Publishers")
+            .onNodeWithText("PUBLISHERS")
             .assertIsDisplayed()
 
         composeRule
@@ -381,13 +381,13 @@ class AppNavigationTest {
             timeoutMillis = 5000L
         ) {
             composeRule
-                .onAllNodesWithText("Publishers")
+                .onAllNodesWithText("PUBLISHERS")
                 .fetchSemanticsNodes()
                 .isNotEmpty()
         }
 
         composeRule
-            .onNodeWithText("Browse Comics")
+            .onNodeWithText("BROWSE")
             .assertIsDisplayed()
 
         composeRule
@@ -852,7 +852,7 @@ class AppNavigationTest {
         ) {
             composeRule
                 .onAllNodesWithText(
-                    "Publishers"
+                    "PUBLISHERS"
                 )
                 .fetchSemanticsNodes()
                 .isNotEmpty()
@@ -860,7 +860,7 @@ class AppNavigationTest {
 
         composeRule
             .onNodeWithText(
-                "Publishers"
+                "PUBLISHERS"
             )
             .assertIsDisplayed()
 

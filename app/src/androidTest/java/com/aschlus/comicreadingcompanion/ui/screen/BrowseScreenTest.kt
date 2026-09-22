@@ -1,15 +1,15 @@
 package com.aschlus.comicreadingcompanion.ui.screen
 
 import android.content.Context
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.hasSetTextAction
-import androidx.compose.ui.test.performTextInput
-import androidx.compose.ui.test.onAllNodesWithContentDescription
+import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithText
-import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onNodeWithContentDescription
+import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performTextInput
 import androidx.lifecycle.viewModelScope
 import androidx.room3.Room
 import androidx.test.core.app.ApplicationProvider
@@ -32,6 +32,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+
 
 @RunWith(AndroidJUnit4::class)
 class BrowseScreenTest {
@@ -96,8 +97,7 @@ class BrowseScreenTest {
                         viewModel = viewModel,
                         onPublisherClick = {},
                         onSeriesClick = {},
-                        onIssueClick = {},
-                        onBackClick = {}
+                        onIssueClick = {}
                     )
                 }
             }
@@ -110,9 +110,9 @@ class BrowseScreenTest {
                             .fetchSemanticsNodes()
                             .isNotEmpty()
             }
-            composeRule.onNodeWithText("Browse Comics").assertIsDisplayed()
-            composeRule.onNodeWithText("Search series and issues").assertIsDisplayed()
-            composeRule.onNodeWithText("Publishers").assertIsDisplayed()
+            composeRule.onNodeWithText("BROWSE").assertIsDisplayed()
+            composeRule.onNodeWithText("Search comics, series, or issues").assertIsDisplayed()
+            composeRule.onNodeWithText("PUBLISHERS").assertIsDisplayed()
             composeRule.onNodeWithText("Marvel").assertIsDisplayed()
             composeRule.onNodeWithText("DC").assertIsDisplayed()
         }
@@ -138,8 +138,7 @@ class BrowseScreenTest {
                             clickedPublisherId = id
                         },
                         onSeriesClick = {},
-                        onIssueClick = {},
-                        onBackClick = {}
+                        onIssueClick = {}
                     )
                 }
             }
@@ -196,8 +195,7 @@ class BrowseScreenTest {
                         viewModel = viewModel,
                         onPublisherClick = {},
                         onSeriesClick = {},
-                        onIssueClick = {},
-                        onBackClick = {}
+                        onIssueClick = {}
                     )
                 }
             }
@@ -211,9 +209,9 @@ class BrowseScreenTest {
                             .fetchSemanticsNodes()
                             .isNotEmpty()
             }
-            composeRule.onNodeWithText("Series").assertIsDisplayed()
+            composeRule.onAllNodesWithText("SERIES").assertCountEquals(2)
             composeRule.onNodeWithText("Amazing Spider-Man").assertIsDisplayed()
-            composeRule.onNodeWithText("Issues").assertIsDisplayed()
+            composeRule.onAllNodesWithText("ISSUES").assertCountEquals(2)
             composeRule.onNodeWithText("Amazing Spider-Man #1").assertIsDisplayed()
             composeRule.onNodeWithText("Spider-Man!").assertIsDisplayed()
         }
@@ -250,8 +248,7 @@ class BrowseScreenTest {
                         onSeriesClick = { id ->
                             clickedSeriesId = id
                         },
-                        onIssueClick = {},
-                        onBackClick = {}
+                        onIssueClick = {}
                     )
                 }
             }
@@ -314,8 +311,7 @@ class BrowseScreenTest {
                         onSeriesClick = {},
                         onIssueClick = { id ->
                             clickedIssueId = id
-                        },
-                        onBackClick = {}
+                        }
                     )
                 }
             }
@@ -375,8 +371,7 @@ class BrowseScreenTest {
                         viewModel = viewModel,
                         onPublisherClick = {},
                         onSeriesClick = {},
-                        onIssueClick = {},
-                        onBackClick = {}
+                        onIssueClick = {}
                     )
                 }
             }
@@ -392,17 +387,115 @@ class BrowseScreenTest {
                     .fetchSemanticsNodes()
                     .isNotEmpty()
             }
-            composeRule.onNodeWithText("Publishers").assertDoesNotExist()
+            composeRule.onNodeWithText("PUBLISHERS").assertDoesNotExist()
             composeRule.onNodeWithContentDescription("Clear search").performClick()
             composeRule.waitUntil(timeoutMillis = 5000L) {
-                composeRule.onAllNodesWithText("Publishers")
+                composeRule.onAllNodesWithText("PUBLISHERS")
                     .fetchSemanticsNodes()
                     .isNotEmpty()
             }
-            composeRule.onNodeWithText("Publishers").assertIsDisplayed()
+            composeRule.onNodeWithText("PUBLISHERS").assertIsDisplayed()
             composeRule.onNodeWithText("Marvel").assertIsDisplayed()
             composeRule.onNodeWithText("DC").assertIsDisplayed()
             composeRule.onNodeWithText("Batman").assertDoesNotExist()
+        }
+    }
+
+    @Test
+    fun browseScreen_searchFiltersOnlyAppearWithQuery() {
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name = "Test Publisher"
+                    )
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId =
+                            publisherId,
+                        title =
+                            "Test Series",
+                        volume = 1,
+                        startYear = 2026,
+                        endYear = null
+                    )
+                )
+
+            comicDao.insertIssue(
+                Issue(
+                    seriesId =
+                        seriesId,
+                    universeId =
+                        null,
+                    issueNumber =
+                        "1",
+                    title =
+                        "Test Issue",
+                    publicationDate =
+                        "2026-01",
+                    coverUrl =
+                        null,
+                    description =
+                        null,
+                    issueType =
+                        IssueType.REGULAR
+                )
+            )
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    BrowseScreen(
+                        viewModel =
+                            viewModel,
+                        onPublisherClick = {},
+                        onSeriesClick = {},
+                        onIssueClick = {}
+                    )
+                }
+            }
+
+            composeRule
+                .onNodeWithText(
+                    "ALL"
+                )
+                .assertDoesNotExist()
+
+            composeRule
+                .onNode(
+                    hasSetTextAction()
+                )
+                .performTextInput(
+                    "Test"
+                )
+
+            composeRule
+                .onNodeWithText(
+                    "ALL"
+                )
+                .assertIsDisplayed()
+
+            composeRule
+                .onNodeWithContentDescription(
+                    "Clear search"
+                )
+                .performClick()
+
+            composeRule
+                .onNodeWithText(
+                    "ALL"
+                )
+                .assertDoesNotExist()
+
+            composeRule
+                .onNodeWithText(
+                    "PUBLISHERS"
+                )
+                .assertIsDisplayed()
         }
     }
 }

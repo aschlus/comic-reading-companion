@@ -1,0 +1,2355 @@
+{
+  "publisher": "Marvel Comics",
+  "universes": [
+    {
+      "name": "New Ultimate Universe",
+      "designation": "Earth-6160",
+      "description": "The new Ultimate Marvel universe."
+    }
+  ],
+  "series": [
+    {
+      "title": "Ultimate Invasion",
+      "volume": null,
+      "startYear": 2023,
+      "endYear": 2023,
+      "externalIds": [
+        {
+          "source": "COMIC_VINE",
+          "externalId": "151520",
+          "url": "https://comicvine.gamespot.com/ultimate-invasion/4050-151520/"
+        }
+      ],
+      "issues": [
+        {
+          "number": "1",
+          "title": "Chapter One: \"Good Artists Copy\"; Epilogue: \"Great Artists Steal\"",
+          "publicationDate": "2023-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/8987823-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "996035",
+              "url": "https://comicvine.gamespot.com/ultimate-invasion-1-chapter-one-good-artists-copy-/4000-996035/"
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "title": "Chapter Two: \"Down the Rabbit Hole\"",
+          "publicationDate": "2023-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9032711-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1003590",
+              "url": "https://comicvine.gamespot.com/ultimate-invasion-2-chapter-two-down-the-rabbit-ho/4000-1003590/"
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "title": "Chapter Three: \"Through the Looking Glass\"; Epilogue: All Tomorrow's Armies",
+          "publicationDate": "2023-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9075438-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1012275",
+              "url": "https://comicvine.gamespot.com/ultimate-invasion-3-chapter-three-through-the-look/4000-1012275/"
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "title": "Chapter Four: Yesterday, Today, Tomorrow; Epilogue: Win",
+          "publicationDate": "2023-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9110902-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1018032",
+              "url": "https://comicvine.gamespot.com/ultimate-invasion-4-chapter-four-yesterday-today-t/4000-1018032/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Amazing Spider-Man/Ultimate Universe",
+      "volume": null,
+      "startYear": 2024,
+      "endYear": 2025,
+      "externalIds": [
+        {
+          "source": "COMIC_VINE",
+          "externalId": "158037",
+          "url": "https://comicvine.gamespot.com/free-comic-book-day-2024-ultimate-universespider-m/4050-158037/"
+        },
+        {
+          "source": "COMIC_VINE",
+          "externalId": "164369",
+          "url": "https://comicvine.gamespot.com/free-comic-book-day-2025-amazing-spider-manultimat/4050-164369/"
+        }
+      ],
+      "issues": [
+        {
+          "number": "2024",
+          "title": null,
+          "publicationDate": "2024-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11144/111442876/9353863-dcercec.jpg",
+          "description": null,
+          "type": "SPECIAL",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1054297",
+              "url": "https://comicvine.gamespot.com/free-comic-book-day-2024-ultimate-universespider-m/4000-1054297/"
+            }
+          ]
+        },
+        {
+          "number": "2025",
+          "title": null,
+          "publicationDate": "2025-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11182/111829875/9725594-img_8660.jpeg",
+          "description": null,
+          "type": "SPECIAL",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1110582",
+              "url": "https://comicvine.gamespot.com/free-comic-book-day-2025-amazing-spider-manultimat/4000-1110582/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Black Panther",
+      "volume": null,
+      "startYear": 2024,
+      "endYear": 2026,
+      "externalIds": [
+        {
+          "source": "COMIC_VINE",
+          "externalId": "156647",
+          "url": "https://comicvine.gamespot.com/ultimate-black-panther/4050-156647/"
+        }
+      ],
+      "issues": [
+        {
+          "number": "1",
+          "title": null,
+          "publicationDate": "2024-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9261063-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1043841",
+              "url": "https://comicvine.gamespot.com/ultimate-black-panther-1/4000-1043841/"
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "title": null,
+          "publicationDate": "2024-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9297519-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1047955",
+              "url": "https://comicvine.gamespot.com/ultimate-black-panther-2/4000-1047955/"
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "title": null,
+          "publicationDate": "2024-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9334376-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1051503",
+              "url": "https://comicvine.gamespot.com/ultimate-black-panther-3/4000-1051503/"
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "title": null,
+          "publicationDate": "2024-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9366730-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1056216",
+              "url": "https://comicvine.gamespot.com/ultimate-black-panther-4/4000-1056216/"
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "title": null,
+          "publicationDate": "2024-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9396852-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1060863",
+              "url": "https://comicvine.gamespot.com/ultimate-black-panther-5/4000-1060863/"
+            }
+          ]
+        },
+        {
+          "number": "6",
+          "title": null,
+          "publicationDate": "2024-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9422155-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1064208",
+              "url": "https://comicvine.gamespot.com/ultimate-black-panther-6/4000-1064208/"
+            }
+          ]
+        },
+        {
+          "number": "7",
+          "title": null,
+          "publicationDate": "2024-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9436383-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1066307",
+              "url": "https://comicvine.gamespot.com/ultimate-black-panther-7/4000-1066307/"
+            }
+          ]
+        },
+        {
+          "number": "8",
+          "title": null,
+          "publicationDate": "2024-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9474841-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1069420",
+              "url": "https://comicvine.gamespot.com/ultimate-black-panther-8/4000-1069420/"
+            }
+          ]
+        },
+        {
+          "number": "9",
+          "title": null,
+          "publicationDate": "2024-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9497438-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1072221",
+              "url": "https://comicvine.gamespot.com/ultimate-black-panther-9/4000-1072221/"
+            }
+          ]
+        },
+        {
+          "number": "10",
+          "title": null,
+          "publicationDate": "2025-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9547093-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1079282",
+              "url": "https://comicvine.gamespot.com/ultimate-black-panther-10/4000-1079282/"
+            }
+          ]
+        },
+        {
+          "number": "11",
+          "title": null,
+          "publicationDate": "2025-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9577558-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1086223",
+              "url": "https://comicvine.gamespot.com/ultimate-black-panther-11/4000-1086223/"
+            }
+          ]
+        },
+        {
+          "number": "12",
+          "title": null,
+          "publicationDate": "2025-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9592186-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1089481",
+              "url": "https://comicvine.gamespot.com/ultimate-black-panther-12/4000-1089481/"
+            }
+          ]
+        },
+        {
+          "number": "13",
+          "title": null,
+          "publicationDate": "2025-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9635341-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1096474",
+              "url": "https://comicvine.gamespot.com/ultimate-black-panther-13/4000-1096474/"
+            }
+          ]
+        },
+        {
+          "number": "14",
+          "title": null,
+          "publicationDate": "2025-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9663896-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1099542",
+              "url": "https://comicvine.gamespot.com/ultimate-black-panther-14/4000-1099542/"
+            }
+          ]
+        },
+        {
+          "number": "15",
+          "title": null,
+          "publicationDate": "2025-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9701885-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1106069",
+              "url": "https://comicvine.gamespot.com/ultimate-black-panther-15/4000-1106069/"
+            }
+          ]
+        },
+        {
+          "number": "16",
+          "title": null,
+          "publicationDate": "2025-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9722050-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1109662",
+              "url": "https://comicvine.gamespot.com/ultimate-black-panther-16/4000-1109662/"
+            }
+          ]
+        },
+        {
+          "number": "17",
+          "title": null,
+          "publicationDate": "2025-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9751609-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1115843",
+              "url": "https://comicvine.gamespot.com/ultimate-black-panther-17/4000-1115843/"
+            }
+          ]
+        },
+        {
+          "number": "18",
+          "title": null,
+          "publicationDate": "2025-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9791778-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1120413",
+              "url": "https://comicvine.gamespot.com/ultimate-black-panther-18/4000-1120413/"
+            }
+          ]
+        },
+        {
+          "number": "19",
+          "title": null,
+          "publicationDate": "2025-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9834501-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1127234",
+              "url": "https://comicvine.gamespot.com/ultimate-black-panther-19/4000-1127234/"
+            }
+          ]
+        },
+        {
+          "number": "20",
+          "title": null,
+          "publicationDate": "2025-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9869569-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1133851",
+              "url": "https://comicvine.gamespot.com/ultimate-black-panther-20/4000-1133851/"
+            }
+          ]
+        },
+        {
+          "number": "21",
+          "title": null,
+          "publicationDate": "2025-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9887579-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1137188",
+              "url": "https://comicvine.gamespot.com/ultimate-black-panther-21/4000-1137188/"
+            }
+          ]
+        },
+        {
+          "number": "22",
+          "title": null,
+          "publicationDate": "2026-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9913107-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1143323",
+              "url": "https://comicvine.gamespot.com/ultimate-black-panther-22/4000-1143323/"
+            }
+          ]
+        },
+        {
+          "number": "23",
+          "title": null,
+          "publicationDate": "2026-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9933543-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1147726",
+              "url": "https://comicvine.gamespot.com/ultimate-black-panther-23/4000-1147726/"
+            }
+          ]
+        },
+        {
+          "number": "24",
+          "title": null,
+          "publicationDate": "2026-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9967102-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1153508",
+              "url": "https://comicvine.gamespot.com/ultimate-black-panther-24/4000-1153508/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Spider-Man",
+      "volume": null,
+      "startYear": 2024,
+      "endYear": 2026,
+      "externalIds": [
+        {
+          "source": "COMIC_VINE",
+          "externalId": "155969",
+          "url": "https://comicvine.gamespot.com/ultimate-spider-man/4050-155969/"
+        }
+      ],
+      "issues": [
+        {
+          "number": "1",
+          "title": null,
+          "publicationDate": "2024-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9226621-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1039589",
+              "url": "https://comicvine.gamespot.com/ultimate-spider-man-1/4000-1039589/"
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "title": null,
+          "publicationDate": "2024-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11159/111592040/9277512-img_4018.jpeg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1045780",
+              "url": "https://comicvine.gamespot.com/ultimate-spider-man-2/4000-1045780/"
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "title": null,
+          "publicationDate": "2024-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9311485-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1049284",
+              "url": "https://comicvine.gamespot.com/ultimate-spider-man-3/4000-1049284/"
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "title": null,
+          "publicationDate": "2024-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9343390-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1052945",
+              "url": "https://comicvine.gamespot.com/ultimate-spider-man-4/4000-1052945/"
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "title": null,
+          "publicationDate": "2024-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9373304-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1057016",
+              "url": "https://comicvine.gamespot.com/ultimate-spider-man-5/4000-1057016/"
+            }
+          ]
+        },
+        {
+          "number": "6",
+          "title": null,
+          "publicationDate": "2024-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9391060-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1060176",
+              "url": "https://comicvine.gamespot.com/ultimate-spider-man-6/4000-1060176/"
+            }
+          ]
+        },
+        {
+          "number": "7",
+          "title": null,
+          "publicationDate": "2024-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9430468-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1065485",
+              "url": "https://comicvine.gamespot.com/ultimate-spider-man-7/4000-1065485/"
+            }
+          ]
+        },
+        {
+          "number": "8",
+          "title": null,
+          "publicationDate": "2024-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9448504-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1067250",
+              "url": "https://comicvine.gamespot.com/ultimate-spider-man-8/4000-1067250/"
+            }
+          ]
+        },
+        {
+          "number": "9",
+          "title": null,
+          "publicationDate": "2024-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9490568-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1071608",
+              "url": "https://comicvine.gamespot.com/ultimate-spider-man-9/4000-1071608/"
+            }
+          ]
+        },
+        {
+          "number": "10",
+          "title": null,
+          "publicationDate": "2024-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9510289-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1073892",
+              "url": "https://comicvine.gamespot.com/ultimate-spider-man-10/4000-1073892/"
+            }
+          ]
+        },
+        {
+          "number": "11",
+          "title": null,
+          "publicationDate": "2025-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9541314-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1078508",
+              "url": "https://comicvine.gamespot.com/ultimate-spider-man-11/4000-1078508/"
+            }
+          ]
+        },
+        {
+          "number": "12",
+          "title": null,
+          "publicationDate": "2025-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9569204-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1083738",
+              "url": "https://comicvine.gamespot.com/ultimate-spider-man-12/4000-1083738/"
+            }
+          ]
+        },
+        {
+          "number": "13",
+          "title": null,
+          "publicationDate": "2025-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9606491-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1091216",
+              "url": "https://comicvine.gamespot.com/ultimate-spider-man-13/4000-1091216/"
+            }
+          ]
+        },
+        {
+          "number": "14",
+          "title": null,
+          "publicationDate": "2025-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9642121-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1097013",
+              "url": "https://comicvine.gamespot.com/ultimate-spider-man-14/4000-1097013/"
+            }
+          ]
+        },
+        {
+          "number": "15",
+          "title": null,
+          "publicationDate": "2025-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9670412-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1100293",
+              "url": "https://comicvine.gamespot.com/ultimate-spider-man-15/4000-1100293/"
+            }
+          ]
+        },
+        {
+          "number": "16",
+          "title": null,
+          "publicationDate": "2025-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9708191-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1107195",
+              "url": "https://comicvine.gamespot.com/ultimate-spider-man-16/4000-1107195/"
+            }
+          ]
+        },
+        {
+          "number": "17",
+          "title": null,
+          "publicationDate": "2025-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9736824-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1112967",
+              "url": "https://comicvine.gamespot.com/ultimate-spider-man-17/4000-1112967/"
+            }
+          ]
+        },
+        {
+          "number": "18",
+          "title": null,
+          "publicationDate": "2025-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9764060-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1116824",
+              "url": "https://comicvine.gamespot.com/ultimate-spider-man-18/4000-1116824/"
+            }
+          ]
+        },
+        {
+          "number": "19",
+          "title": null,
+          "publicationDate": "2025-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9807576-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1123212",
+              "url": "https://comicvine.gamespot.com/ultimate-spider-man-19/4000-1123212/"
+            }
+          ]
+        },
+        {
+          "number": "20",
+          "title": null,
+          "publicationDate": "2025-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9843151-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1128968",
+              "url": "https://comicvine.gamespot.com/ultimate-spider-man-20/4000-1128968/"
+            }
+          ]
+        },
+        {
+          "number": "21",
+          "title": null,
+          "publicationDate": "2025-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9875494-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1134951",
+              "url": "https://comicvine.gamespot.com/ultimate-spider-man-21/4000-1134951/"
+            }
+          ]
+        },
+        {
+          "number": "22",
+          "title": null,
+          "publicationDate": "2025-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9897415-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1139089",
+              "url": "https://comicvine.gamespot.com/ultimate-spider-man-22/4000-1139089/"
+            }
+          ]
+        },
+        {
+          "number": "23",
+          "title": null,
+          "publicationDate": "2026-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9933544-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1147727",
+              "url": "https://comicvine.gamespot.com/ultimate-spider-man-23/4000-1147727/"
+            }
+          ]
+        },
+        {
+          "number": "24",
+          "title": null,
+          "publicationDate": "2026-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9991697-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1156322",
+              "url": "https://comicvine.gamespot.com/ultimate-spider-man-24/4000-1156322/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Universe",
+      "volume": null,
+      "startYear": 2024,
+      "endYear": 2024,
+      "externalIds": [
+        {
+          "source": "COMIC_VINE",
+          "externalId": "154417",
+          "url": "https://comicvine.gamespot.com/ultimate-universe/4050-154417/"
+        }
+      ],
+      "issues": [
+        {
+          "number": "1",
+          "title": "Epilogue",
+          "publicationDate": "2024-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9150761-wwww.jpg",
+          "description": null,
+          "type": "SPECIAL",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1027602",
+              "url": "https://comicvine.gamespot.com/ultimate-universe-1-epilogue/4000-1027602/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate X-Men",
+      "volume": null,
+      "startYear": 2024,
+      "endYear": 2026,
+      "externalIds": [
+        {
+          "source": "COMIC_VINE",
+          "externalId": "157127",
+          "url": "https://comicvine.gamespot.com/ultimate-x-men/4050-157127/"
+        }
+      ],
+      "issues": [
+        {
+          "number": "1",
+          "title": null,
+          "publicationDate": "2024-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9289807-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1047092",
+              "url": "https://comicvine.gamespot.com/ultimate-x-men-1/4000-1047092/"
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "title": null,
+          "publicationDate": "2024-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9326277-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1051131",
+              "url": "https://comicvine.gamespot.com/ultimate-x-men-2/4000-1051131/"
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "title": null,
+          "publicationDate": "2024-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9360507-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1055031",
+              "url": "https://comicvine.gamespot.com/ultimate-x-men-3/4000-1055031/"
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "title": null,
+          "publicationDate": "2024-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9384243-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1059273",
+              "url": "https://comicvine.gamespot.com/ultimate-x-men-4/4000-1059273/"
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "title": null,
+          "publicationDate": "2024-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9414936-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1063237",
+              "url": "https://comicvine.gamespot.com/ultimate-x-men-5/4000-1063237/"
+            }
+          ]
+        },
+        {
+          "number": "6",
+          "title": null,
+          "publicationDate": "2024-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9458255-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1067987",
+              "url": "https://comicvine.gamespot.com/ultimate-x-men-6/4000-1067987/"
+            }
+          ]
+        },
+        {
+          "number": "7",
+          "title": null,
+          "publicationDate": "2024-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9481503-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1070138",
+              "url": "https://comicvine.gamespot.com/ultimate-x-men-7/4000-1070138/"
+            }
+          ]
+        },
+        {
+          "number": "8",
+          "title": null,
+          "publicationDate": "2024-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9523704-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1075687",
+              "url": "https://comicvine.gamespot.com/ultimate-x-men-8/4000-1075687/"
+            }
+          ]
+        },
+        {
+          "number": "9",
+          "title": null,
+          "publicationDate": "2025-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9535018-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1077647",
+              "url": "https://comicvine.gamespot.com/ultimate-x-men-9/4000-1077647/"
+            }
+          ]
+        },
+        {
+          "number": "10",
+          "title": null,
+          "publicationDate": "2025-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9561187-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1081559",
+              "url": "https://comicvine.gamespot.com/ultimate-x-men-10/4000-1081559/"
+            }
+          ]
+        },
+        {
+          "number": "11",
+          "title": null,
+          "publicationDate": "2025-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9614854-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1093024",
+              "url": "https://comicvine.gamespot.com/ultimate-x-men-11/4000-1093024/"
+            }
+          ]
+        },
+        {
+          "number": "12",
+          "title": null,
+          "publicationDate": "2025-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9642127-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1097015",
+              "url": "https://comicvine.gamespot.com/ultimate-x-men-12/4000-1097015/"
+            }
+          ]
+        },
+        {
+          "number": "13",
+          "title": null,
+          "publicationDate": "2025-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9663898-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1099544",
+              "url": "https://comicvine.gamespot.com/ultimate-x-men-13/4000-1099544/"
+            }
+          ]
+        },
+        {
+          "number": "14",
+          "title": null,
+          "publicationDate": "2025-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9678076-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1101449",
+              "url": "https://comicvine.gamespot.com/ultimate-x-men-14/4000-1101449/"
+            }
+          ]
+        },
+        {
+          "number": "15",
+          "title": null,
+          "publicationDate": "2025-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9722053-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1109663",
+              "url": "https://comicvine.gamespot.com/ultimate-x-men-15/4000-1109663/"
+            }
+          ]
+        },
+        {
+          "number": "16",
+          "title": null,
+          "publicationDate": "2025-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9751614-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1115844",
+              "url": "https://comicvine.gamespot.com/ultimate-x-men-16/4000-1115844/"
+            }
+          ]
+        },
+        {
+          "number": "17",
+          "title": null,
+          "publicationDate": "2025-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9791779-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1120414",
+              "url": "https://comicvine.gamespot.com/ultimate-x-men-17/4000-1120414/"
+            }
+          ]
+        },
+        {
+          "number": "18",
+          "title": null,
+          "publicationDate": "2025-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9817605-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1124678",
+              "url": "https://comicvine.gamespot.com/ultimate-x-men-18/4000-1124678/"
+            }
+          ]
+        },
+        {
+          "number": "19",
+          "title": null,
+          "publicationDate": "2025-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9851074-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1130278",
+              "url": "https://comicvine.gamespot.com/ultimate-x-men-19/4000-1130278/"
+            }
+          ]
+        },
+        {
+          "number": "20",
+          "title": null,
+          "publicationDate": "2025-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9881708-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1136136",
+              "url": "https://comicvine.gamespot.com/ultimate-x-men-20/4000-1136136/"
+            }
+          ]
+        },
+        {
+          "number": "21",
+          "title": null,
+          "publicationDate": "2026-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9907494-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1141930",
+              "url": "https://comicvine.gamespot.com/ultimate-x-men-21/4000-1141930/"
+            }
+          ]
+        },
+        {
+          "number": "22",
+          "title": null,
+          "publicationDate": "2026-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9927526-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1146710",
+              "url": "https://comicvine.gamespot.com/ultimate-x-men-22/4000-1146710/"
+            }
+          ]
+        },
+        {
+          "number": "23",
+          "title": null,
+          "publicationDate": "2026-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9955809-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1151951",
+              "url": "https://comicvine.gamespot.com/ultimate-x-men-23/4000-1151951/"
+            }
+          ]
+        },
+        {
+          "number": "24",
+          "title": null,
+          "publicationDate": "2026-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9985239-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1155903",
+              "url": "https://comicvine.gamespot.com/ultimate-x-men-24/4000-1155903/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Ultimates",
+      "volume": null,
+      "startYear": 2024,
+      "endYear": 2026,
+      "externalIds": [
+        {
+          "source": "COMIC_VINE",
+          "externalId": "158414",
+          "url": "https://comicvine.gamespot.com/ultimates/4050-158414/"
+        }
+      ],
+      "issues": [
+        {
+          "number": "1",
+          "title": null,
+          "publicationDate": "2024-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9380569-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1058729",
+              "url": "https://comicvine.gamespot.com/the-ultimates-1/4000-1058729/"
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "title": null,
+          "publicationDate": "2024-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9408135-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1062570",
+              "url": "https://comicvine.gamespot.com/ultimates-2/4000-1062570/"
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "title": null,
+          "publicationDate": "2024-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9442628-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1066705",
+              "url": "https://comicvine.gamespot.com/ultimates-3/4000-1066705/"
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "title": null,
+          "publicationDate": "2024-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9465775-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1068663",
+              "url": "https://comicvine.gamespot.com/ultimates-4/4000-1068663/"
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "title": null,
+          "publicationDate": "2024-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9504391-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1073275",
+              "url": "https://comicvine.gamespot.com/ultimates-5/4000-1073275/"
+            }
+          ]
+        },
+        {
+          "number": "6",
+          "title": null,
+          "publicationDate": "2025-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9529399-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1076638",
+              "url": "https://comicvine.gamespot.com/ultimates-6/4000-1076638/"
+            }
+          ]
+        },
+        {
+          "number": "7",
+          "title": null,
+          "publicationDate": "2025-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9554279-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1080298",
+              "url": "https://comicvine.gamespot.com/ultimates-7/4000-1080298/"
+            }
+          ]
+        },
+        {
+          "number": "8",
+          "title": null,
+          "publicationDate": "2025-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9584979-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1088579",
+              "url": "https://comicvine.gamespot.com/ultimates-8/4000-1088579/"
+            }
+          ]
+        },
+        {
+          "number": "9",
+          "title": null,
+          "publicationDate": "2025-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9621278-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1094617",
+              "url": "https://comicvine.gamespot.com/ultimates-9/4000-1094617/"
+            }
+          ]
+        },
+        {
+          "number": "10",
+          "title": null,
+          "publicationDate": "2025-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9648387-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1097717",
+              "url": "https://comicvine.gamespot.com/ultimates-10/4000-1097717/"
+            }
+          ]
+        },
+        {
+          "number": "11",
+          "title": null,
+          "publicationDate": "2025-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9686359-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1102468",
+              "url": "https://comicvine.gamespot.com/ultimates-11/4000-1102468/"
+            }
+          ]
+        },
+        {
+          "number": "12",
+          "title": null,
+          "publicationDate": "2025-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9729879-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1111727",
+              "url": "https://comicvine.gamespot.com/ultimates-12/4000-1111727/"
+            }
+          ]
+        },
+        {
+          "number": "13",
+          "title": null,
+          "publicationDate": "2025-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9757120-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1116310",
+              "url": "https://comicvine.gamespot.com/ultimates-13/4000-1116310/"
+            }
+          ]
+        },
+        {
+          "number": "14",
+          "title": null,
+          "publicationDate": "2025-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9807578-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1123213",
+              "url": "https://comicvine.gamespot.com/ultimates-14/4000-1123213/"
+            }
+          ]
+        },
+        {
+          "number": "15",
+          "title": null,
+          "publicationDate": "2025-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9825224-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1125799",
+              "url": "https://comicvine.gamespot.com/ultimates-15/4000-1125799/"
+            }
+          ]
+        },
+        {
+          "number": "16",
+          "title": null,
+          "publicationDate": "2025-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9869570-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1133852",
+              "url": "https://comicvine.gamespot.com/ultimates-16/4000-1133852/"
+            }
+          ]
+        },
+        {
+          "number": "17",
+          "title": null,
+          "publicationDate": "2025-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9897416-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1139090",
+              "url": "https://comicvine.gamespot.com/ultimates-17/4000-1139090/"
+            }
+          ]
+        },
+        {
+          "number": "18",
+          "title": null,
+          "publicationDate": "2026-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9917744-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1144101",
+              "url": "https://comicvine.gamespot.com/ultimates-18/4000-1144101/"
+            }
+          ]
+        },
+        {
+          "number": "19",
+          "title": null,
+          "publicationDate": "2026-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9950396-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1150665",
+              "url": "https://comicvine.gamespot.com/ultimates-19/4000-1150665/"
+            }
+          ]
+        },
+        {
+          "number": "20",
+          "title": null,
+          "publicationDate": "2026-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9961089-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1152739",
+              "url": "https://comicvine.gamespot.com/ultimates-20/4000-1152739/"
+            }
+          ]
+        },
+        {
+          "number": "21",
+          "title": null,
+          "publicationDate": "2026-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9998213-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1156983",
+              "url": "https://comicvine.gamespot.com/ultimates-21/4000-1156983/"
+            }
+          ]
+        },
+        {
+          "number": "22",
+          "title": null,
+          "publicationDate": "2026-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10016785-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1159706",
+              "url": "https://comicvine.gamespot.com/ultimates-22/4000-1159706/"
+            }
+          ]
+        },
+        {
+          "number": "23",
+          "title": null,
+          "publicationDate": "2026-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10054330-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1164383",
+              "url": "https://comicvine.gamespot.com/ultimates-23/4000-1164383/"
+            }
+          ]
+        },
+        {
+          "number": "24",
+          "title": null,
+          "publicationDate": "2026-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10081179-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1168286",
+              "url": "https://comicvine.gamespot.com/ultimates-24/4000-1168286/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Hawkeye",
+      "volume": null,
+      "startYear": 2025,
+      "endYear": 2025,
+      "externalIds": [
+        {
+          "source": "COMIC_VINE",
+          "externalId": "167181",
+          "url": "https://comicvine.gamespot.com/ultimate-hawkeye/4050-167181/"
+        }
+      ],
+      "issues": [
+        {
+          "number": "1",
+          "title": "Prologue; The Right Tool for the Job",
+          "publicationDate": "2025-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9875492-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1134950",
+              "url": "https://comicvine.gamespot.com/ultimate-hawkeye-1-prologue-the-right-tool-for-the/4000-1134950/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Spider-Man: Incursion",
+      "volume": null,
+      "startYear": 2025,
+      "endYear": 2025,
+      "externalIds": [
+        {
+          "source": "COMIC_VINE",
+          "externalId": "164850",
+          "url": "https://comicvine.gamespot.com/ultimate-spider-man-incursion/4050-164850/"
+        }
+      ],
+      "issues": [
+        {
+          "number": "1",
+          "title": null,
+          "publicationDate": "2025-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9743709-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1114023",
+              "url": "https://comicvine.gamespot.com/ultimate-spider-man-incursion-1/4000-1114023/"
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "title": null,
+          "publicationDate": "2025-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9785100-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1119105",
+              "url": "https://comicvine.gamespot.com/ultimate-spider-man-incursion-2/4000-1119105/"
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "title": null,
+          "publicationDate": "2025-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9825223-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1125798",
+              "url": "https://comicvine.gamespot.com/ultimate-spider-man-incursion-3/4000-1125798/"
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "title": null,
+          "publicationDate": "2025-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9859771-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1131772",
+              "url": "https://comicvine.gamespot.com/ultimate-spider-man-incursion-4/4000-1131772/"
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "title": null,
+          "publicationDate": "2025-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9897414-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1139088",
+              "url": "https://comicvine.gamespot.com/ultimate-spider-man-incursion-5/4000-1139088/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Universe: One Year In",
+      "volume": null,
+      "startYear": 2025,
+      "endYear": 2025,
+      "externalIds": [
+        {
+          "source": "COMIC_VINE",
+          "externalId": "161614",
+          "url": "https://comicvine.gamespot.com/ultimate-universe-one-year-in/4050-161614/"
+        }
+      ],
+      "issues": [
+        {
+          "number": "1",
+          "title": "The World: As Remade by the Maker's Council; Ultimate Wolverine Prologue",
+          "publicationDate": "2025-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9561183-wwww.jpg",
+          "description": null,
+          "type": "SPECIAL",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1081558",
+              "url": "https://comicvine.gamespot.com/ultimate-universe-one-year-in-1-the-world-as-remad/4000-1081558/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Wolverine",
+      "volume": null,
+      "startYear": 2025,
+      "endYear": 2026,
+      "externalIds": [
+        {
+          "source": "COMIC_VINE",
+          "externalId": "162012",
+          "url": "https://comicvine.gamespot.com/ultimate-wolverine/4050-162012/"
+        }
+      ],
+      "issues": [
+        {
+          "number": "1",
+          "title": null,
+          "publicationDate": "2025-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9599529-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1090277",
+              "url": "https://comicvine.gamespot.com/ultimate-wolverine-1/4000-1090277/"
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "title": null,
+          "publicationDate": "2025-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/15776/9770708-ultimatewolverine2.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1096473",
+              "url": "https://comicvine.gamespot.com/ultimate-wolverine-2/4000-1096473/"
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "title": null,
+          "publicationDate": "2025-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9670413-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1100294",
+              "url": "https://comicvine.gamespot.com/ultimate-wolverine-3/4000-1100294/"
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "title": null,
+          "publicationDate": "2025-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9693811-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1104110",
+              "url": "https://comicvine.gamespot.com/ultimate-wolverine-4/4000-1104110/"
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "title": null,
+          "publicationDate": "2025-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9716245-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1108862",
+              "url": "https://comicvine.gamespot.com/ultimate-wolverine-5/4000-1108862/"
+            }
+          ]
+        },
+        {
+          "number": "6",
+          "title": null,
+          "publicationDate": "2025-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9743712-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1114024",
+              "url": "https://comicvine.gamespot.com/ultimate-wolverine-6/4000-1114024/"
+            }
+          ]
+        },
+        {
+          "number": "7",
+          "title": null,
+          "publicationDate": "2025-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9774759-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1117442",
+              "url": "https://comicvine.gamespot.com/ultimate-wolverine-7/4000-1117442/"
+            }
+          ]
+        },
+        {
+          "number": "8",
+          "title": null,
+          "publicationDate": "2025-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9817598-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1124677",
+              "url": "https://comicvine.gamespot.com/ultimate-wolverine-8/4000-1124677/"
+            }
+          ]
+        },
+        {
+          "number": "9",
+          "title": null,
+          "publicationDate": "2025-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9859772-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1131773",
+              "url": "https://comicvine.gamespot.com/ultimate-wolverine-9/4000-1131773/"
+            }
+          ]
+        },
+        {
+          "number": "10",
+          "title": null,
+          "publicationDate": "2025-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9881707-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1136135",
+              "url": "https://comicvine.gamespot.com/ultimate-wolverine-10/4000-1136135/"
+            }
+          ]
+        },
+        {
+          "number": "11",
+          "title": null,
+          "publicationDate": "2026-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9913108-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1143324",
+              "url": "https://comicvine.gamespot.com/ultimate-wolverine-11/4000-1143324/"
+            }
+          ]
+        },
+        {
+          "number": "12",
+          "title": null,
+          "publicationDate": "2026-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9933545-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1147728",
+              "url": "https://comicvine.gamespot.com/ultimate-wolverine-12/4000-1147728/"
+            }
+          ]
+        },
+        {
+          "number": "13",
+          "title": null,
+          "publicationDate": "2026-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9955808-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1151950",
+              "url": "https://comicvine.gamespot.com/ultimate-wolverine-13/4000-1151950/"
+            }
+          ]
+        },
+        {
+          "number": "14",
+          "title": null,
+          "publicationDate": "2026-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9978923-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1155405",
+              "url": "https://comicvine.gamespot.com/ultimate-wolverine-14/4000-1155405/"
+            }
+          ]
+        },
+        {
+          "number": "15",
+          "title": null,
+          "publicationDate": "2026-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10016784-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1159705",
+              "url": "https://comicvine.gamespot.com/ultimate-wolverine-15/4000-1159705/"
+            }
+          ]
+        },
+        {
+          "number": "16",
+          "title": null,
+          "publicationDate": "2026-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10041816-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1163069",
+              "url": "https://comicvine.gamespot.com/ultimate-wolverine-16/4000-1163069/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Endgame",
+      "volume": null,
+      "startYear": 2026,
+      "endYear": 2026,
+      "externalIds": [
+        {
+          "source": "COMIC_VINE",
+          "externalId": "169661",
+          "url": "https://comicvine.gamespot.com/ultimate-endgame/4050-169661/"
+        }
+      ],
+      "issues": [
+        {
+          "number": "1",
+          "title": null,
+          "publicationDate": "2026-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9950395-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1150664",
+              "url": "https://comicvine.gamespot.com/ultimate-endgame-1/4000-1150664/"
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "title": null,
+          "publicationDate": "2026-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9978922-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1155404",
+              "url": "https://comicvine.gamespot.com/ultimate-endgame-2/4000-1155404/"
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "title": null,
+          "publicationDate": "2026-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10023094-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1160332",
+              "url": "https://comicvine.gamespot.com/ultimate-endgame-3/4000-1160332/"
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "title": null,
+          "publicationDate": "2026-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10067814-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1166463",
+              "url": "https://comicvine.gamespot.com/ultimate-endgame-4/4000-1166463/"
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "title": null,
+          "publicationDate": "2026-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10105558-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1173384",
+              "url": "https://comicvine.gamespot.com/ultimate-endgame-5/4000-1173384/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Universe: Finale",
+      "volume": null,
+      "startYear": 2026,
+      "endYear": 2026,
+      "externalIds": [
+        {
+          "source": "COMIC_VINE",
+          "externalId": "173289",
+          "url": "https://comicvine.gamespot.com/ultimate-universe-finale/4050-173289/"
+        }
+      ],
+      "issues": [
+        {
+          "number": "1",
+          "title": null,
+          "publicationDate": "2026-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10105561-cover.jpg",
+          "description": null,
+          "type": "SPECIAL",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1173386",
+              "url": "https://comicvine.gamespot.com/ultimate-universe-finale-1/4000-1173386/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Ultimate Universe: Two Years In",
+      "volume": null,
+      "startYear": 2026,
+      "endYear": 2026,
+      "externalIds": [
+        {
+          "source": "COMIC_VINE",
+          "externalId": "168941",
+          "url": "https://comicvine.gamespot.com/ultimate-universe-two-years-in/4050-168941/"
+        }
+      ],
+      "issues": [
+        {
+          "number": "1",
+          "title": null,
+          "publicationDate": "2026-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9927525-wwww.jpg",
+          "description": null,
+          "type": "SPECIAL",
+          "universeDesignation": "Earth-6160",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1146709",
+              "url": "https://comicvine.gamespot.com/ultimate-universe-two-years-in-1/4000-1146709/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

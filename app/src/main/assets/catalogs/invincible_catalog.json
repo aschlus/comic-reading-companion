@@ -1,0 +1,2346 @@
+{
+  "publisher": "Image Comics",
+  "universes": [
+    {
+      "name": "Image Universe",
+      "designation": "Image Universe"
+    }
+  ],
+  "series": [
+    {
+      "title": "Invincible",
+      "volume": 1,
+      "startYear": 2003,
+      "endYear": 2018,
+      "externalIds": [
+        {
+          "source": "COMIC_VINE",
+          "externalId": "17993",
+          "url": "https://comicvine.gamespot.com/invincible/4050-17993/"
+        }
+      ],
+      "issues": [
+        {
+          "number": "1",
+          "title": null,
+          "publicationDate": "2003-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185533-01.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "105347",
+              "url": "https://comicvine.gamespot.com/invincible-1/4000-105347/"
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "title": null,
+          "publicationDate": "2003-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185534-02.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "105532",
+              "url": "https://comicvine.gamespot.com/invincible-2/4000-105532/"
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "title": null,
+          "publicationDate": "2003-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185535-03.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "105533",
+              "url": "https://comicvine.gamespot.com/invincible-3/4000-105533/"
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "title": null,
+          "publicationDate": "2003-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185536-04.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "105534",
+              "url": "https://comicvine.gamespot.com/invincible-4/4000-105534/"
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "title": null,
+          "publicationDate": "2003-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185541-05.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "105535",
+              "url": "https://comicvine.gamespot.com/invincible-5/4000-105535/"
+            }
+          ]
+        },
+        {
+          "number": "6",
+          "title": null,
+          "publicationDate": "2003-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185542-06.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "105536",
+              "url": "https://comicvine.gamespot.com/invincible-6/4000-105536/"
+            }
+          ]
+        },
+        {
+          "number": "7",
+          "title": null,
+          "publicationDate": "2003-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185544-07.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "105537",
+              "url": "https://comicvine.gamespot.com/invincible-7/4000-105537/"
+            }
+          ]
+        },
+        {
+          "number": "8",
+          "title": null,
+          "publicationDate": "2004-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185546-08.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "105538",
+              "url": "https://comicvine.gamespot.com/invincible-8/4000-105538/"
+            }
+          ]
+        },
+        {
+          "number": "9",
+          "title": "Perfect Strangers, Part 1",
+          "publicationDate": "2004-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185547-09.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "105539",
+              "url": "https://comicvine.gamespot.com/invincible-9-perfect-strangers-part-1/4000-105539/"
+            }
+          ]
+        },
+        {
+          "number": "10",
+          "title": "Perfect Strangers, Part 2",
+          "publicationDate": "2004-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185580-10.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "105540",
+              "url": "https://comicvine.gamespot.com/invincible-10-perfect-strangers-part-2/4000-105540/"
+            }
+          ]
+        },
+        {
+          "number": "11",
+          "title": "Perfect Strangers, Part 3",
+          "publicationDate": "2004-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185581-11.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "125143",
+              "url": "https://comicvine.gamespot.com/invincible-11-perfect-strangers-part-3/4000-125143/"
+            }
+          ]
+        },
+        {
+          "number": "12",
+          "title": "Perfect Strangers, Part 4",
+          "publicationDate": "2004-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185583-12.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "125148",
+              "url": "https://comicvine.gamespot.com/invincible-12-perfect-strangers-part-4/4000-125148/"
+            }
+          ]
+        },
+        {
+          "number": "13",
+          "title": "Perfect Strangers (Epilogue)",
+          "publicationDate": "2004-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185586-13.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "125183",
+              "url": "https://comicvine.gamespot.com/invincible-13-perfect-strangers-epilogue/4000-125183/"
+            }
+          ]
+        },
+        {
+          "number": "14",
+          "title": null,
+          "publicationDate": "2004-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185589-14.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "125184",
+              "url": "https://comicvine.gamespot.com/invincible-14/4000-125184/"
+            }
+          ]
+        },
+        {
+          "number": "15",
+          "title": null,
+          "publicationDate": "2004-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185614-15.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "125187",
+              "url": "https://comicvine.gamespot.com/invincible-15/4000-125187/"
+            }
+          ]
+        },
+        {
+          "number": "16",
+          "title": null,
+          "publicationDate": "2004-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185615-16.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "125240",
+              "url": "https://comicvine.gamespot.com/invincible-16/4000-125240/"
+            }
+          ]
+        },
+        {
+          "number": "17",
+          "title": null,
+          "publicationDate": "2004-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185616-17.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "125241",
+              "url": "https://comicvine.gamespot.com/invincible-17/4000-125241/"
+            }
+          ]
+        },
+        {
+          "number": "18",
+          "title": null,
+          "publicationDate": "2004-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185617-18.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "128555",
+              "url": "https://comicvine.gamespot.com/invincible-18/4000-128555/"
+            }
+          ]
+        },
+        {
+          "number": "19",
+          "title": null,
+          "publicationDate": "2004-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185618-19.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "125951",
+              "url": "https://comicvine.gamespot.com/invincible-19/4000-125951/"
+            }
+          ]
+        },
+        {
+          "number": "20",
+          "title": null,
+          "publicationDate": "2005-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185628-20.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "128610",
+              "url": "https://comicvine.gamespot.com/invincible-20/4000-128610/"
+            }
+          ]
+        },
+        {
+          "number": "21",
+          "title": null,
+          "publicationDate": "2005-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185629-21.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "128945",
+              "url": "https://comicvine.gamespot.com/invincible-21/4000-128945/"
+            }
+          ]
+        },
+        {
+          "number": "22",
+          "title": null,
+          "publicationDate": "2005-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185630-22.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "129012",
+              "url": "https://comicvine.gamespot.com/invincible-22/4000-129012/"
+            }
+          ]
+        },
+        {
+          "number": "0",
+          "title": null,
+          "publicationDate": "2005-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185532-00.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "125132",
+              "url": "https://comicvine.gamespot.com/invincible-0/4000-125132/"
+            }
+          ]
+        },
+        {
+          "number": "23",
+          "title": null,
+          "publicationDate": "2005-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185632-23.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "129013",
+              "url": "https://comicvine.gamespot.com/invincible-23/4000-129013/"
+            }
+          ]
+        },
+        {
+          "number": "24",
+          "title": null,
+          "publicationDate": "2005-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185633-24.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "129014",
+              "url": "https://comicvine.gamespot.com/invincible-24/4000-129014/"
+            }
+          ]
+        },
+        {
+          "number": "25",
+          "title": null,
+          "publicationDate": "2005-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185636-25.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "129080",
+              "url": "https://comicvine.gamespot.com/invincible-25/4000-129080/"
+            }
+          ]
+        },
+        {
+          "number": "26",
+          "title": null,
+          "publicationDate": "2005-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185639-26.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "129228",
+              "url": "https://comicvine.gamespot.com/invincible-26/4000-129228/"
+            }
+          ]
+        },
+        {
+          "number": "27",
+          "title": null,
+          "publicationDate": "2005-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185640-27.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "130599",
+              "url": "https://comicvine.gamespot.com/invincible-27/4000-130599/"
+            }
+          ]
+        },
+        {
+          "number": "28",
+          "title": null,
+          "publicationDate": "2006-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185641-28.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "130600",
+              "url": "https://comicvine.gamespot.com/invincible-28/4000-130600/"
+            }
+          ]
+        },
+        {
+          "number": "29",
+          "title": null,
+          "publicationDate": "2006-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185642-29.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "130601",
+              "url": "https://comicvine.gamespot.com/invincible-29/4000-130601/"
+            }
+          ]
+        },
+        {
+          "number": "30",
+          "title": null,
+          "publicationDate": "2006-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185646-30.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "130602",
+              "url": "https://comicvine.gamespot.com/invincible-30/4000-130602/"
+            }
+          ]
+        },
+        {
+          "number": "31",
+          "title": null,
+          "publicationDate": "2006-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185647-31.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "130605",
+              "url": "https://comicvine.gamespot.com/invincible-31/4000-130605/"
+            }
+          ]
+        },
+        {
+          "number": "32",
+          "title": null,
+          "publicationDate": "2006-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185648-32.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "130606",
+              "url": "https://comicvine.gamespot.com/invincible-32/4000-130606/"
+            }
+          ]
+        },
+        {
+          "number": "33",
+          "title": null,
+          "publicationDate": "2006-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185649-33.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "130607",
+              "url": "https://comicvine.gamespot.com/invincible-33/4000-130607/"
+            }
+          ]
+        },
+        {
+          "number": "34",
+          "title": null,
+          "publicationDate": "2006-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185650-34.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "130609",
+              "url": "https://comicvine.gamespot.com/invincible-34/4000-130609/"
+            }
+          ]
+        },
+        {
+          "number": "35",
+          "title": null,
+          "publicationDate": "2006-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185656-35.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "125141",
+              "url": "https://comicvine.gamespot.com/invincible-35/4000-125141/"
+            }
+          ]
+        },
+        {
+          "number": "36",
+          "title": null,
+          "publicationDate": "2006-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185657-36.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "126528",
+              "url": "https://comicvine.gamespot.com/invincible-36/4000-126528/"
+            }
+          ]
+        },
+        {
+          "number": "37",
+          "title": null,
+          "publicationDate": "2006-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2185659-37.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "128611",
+              "url": "https://comicvine.gamespot.com/invincible-37/4000-128611/"
+            }
+          ]
+        },
+        {
+          "number": "38",
+          "title": null,
+          "publicationDate": "2006-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/308/90782-17993-106421-1-invincible.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "106421",
+              "url": "https://comicvine.gamespot.com/invincible-38/4000-106421/"
+            }
+          ]
+        },
+        {
+          "number": "39",
+          "title": null,
+          "publicationDate": "2007-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/308/93470-17993-106647-1-invincible.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "106647",
+              "url": "https://comicvine.gamespot.com/invincible-39/4000-106647/"
+            }
+          ]
+        },
+        {
+          "number": "40",
+          "title": null,
+          "publicationDate": "2007-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/308/119041-17993-109270-1-invincible.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "109270",
+              "url": "https://comicvine.gamespot.com/invincible-40/4000-109270/"
+            }
+          ]
+        },
+        {
+          "number": "41",
+          "title": null,
+          "publicationDate": "2007-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/308/119109-17993-109271-1-invincible.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "109271",
+              "url": "https://comicvine.gamespot.com/invincible-41/4000-109271/"
+            }
+          ]
+        },
+        {
+          "number": "42",
+          "title": null,
+          "publicationDate": "2007-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/17055/347576-17993-126823-1-invincible.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "126823",
+              "url": "https://comicvine.gamespot.com/invincible-42/4000-126823/"
+            }
+          ]
+        },
+        {
+          "number": "43",
+          "title": null,
+          "publicationDate": "2007-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6539/394375-17993-130610-1-invincible.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "130610",
+              "url": "https://comicvine.gamespot.com/invincible-43/4000-130610/"
+            }
+          ]
+        },
+        {
+          "number": "44",
+          "title": null,
+          "publicationDate": "2007-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1867/159669-17993-112028-1-invincible.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "112028",
+              "url": "https://comicvine.gamespot.com/invincible-44/4000-112028/"
+            }
+          ]
+        },
+        {
+          "number": "45",
+          "title": null,
+          "publicationDate": "2007-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/7/71975/2225231-6e4aa729_88a5_497e_be67_029aec491596.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "126819",
+              "url": "https://comicvine.gamespot.com/invincible-45/4000-126819/"
+            }
+          ]
+        },
+        {
+          "number": "46",
+          "title": null,
+          "publicationDate": "2007-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/787/236530-17993-118125-1-invincible.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "118125",
+              "url": "https://comicvine.gamespot.com/invincible-46/4000-118125/"
+            }
+          ]
+        },
+        {
+          "number": "47",
+          "title": null,
+          "publicationDate": "2007-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/3664/271502-17993-120920-1-invincible.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120920",
+              "url": "https://comicvine.gamespot.com/invincible-47/4000-120920/"
+            }
+          ]
+        },
+        {
+          "number": "48",
+          "title": null,
+          "publicationDate": "2008-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11155/111554991/8385823-invincible048-000.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "125073",
+              "url": "https://comicvine.gamespot.com/invincible-48/4000-125073/"
+            }
+          ]
+        },
+        {
+          "number": "49",
+          "title": null,
+          "publicationDate": "2008-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/8385858-5691411699-1.jpg.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "126001",
+              "url": "https://comicvine.gamespot.com/invincible-49/4000-126001/"
+            }
+          ]
+        },
+        {
+          "number": "50",
+          "title": null,
+          "publicationDate": "2008-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/3664/419257-x.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "131455",
+              "url": "https://comicvine.gamespot.com/invincible-50/4000-131455/"
+            }
+          ]
+        },
+        {
+          "number": "51",
+          "title": null,
+          "publicationDate": "2008-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/15455/463888-invincible51_cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "134119",
+              "url": "https://comicvine.gamespot.com/invincible-51/4000-134119/"
+            }
+          ]
+        },
+        {
+          "number": "52",
+          "title": "Mark! Get Down Here, Now!",
+          "publicationDate": "2008-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/15455/537644-invincible.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "138424",
+              "url": "https://comicvine.gamespot.com/invincible-52-mark-get-down-here-now/4000-138424/"
+            }
+          ]
+        },
+        {
+          "number": "53",
+          "title": "Wow, Just...Wow",
+          "publicationDate": "2008-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/15455/566087-invincible53_cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "139696",
+              "url": "https://comicvine.gamespot.com/invincible-53-wow-justwow/4000-139696/"
+            }
+          ]
+        },
+        {
+          "number": "54",
+          "title": null,
+          "publicationDate": "2008-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/15455/592261-inv.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "140811",
+              "url": "https://comicvine.gamespot.com/invincible-54/4000-140811/"
+            }
+          ]
+        },
+        {
+          "number": "55",
+          "title": "Lock Down, But Not Out",
+          "publicationDate": "2008-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/15455/618356-invincible55_cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "142745",
+              "url": "https://comicvine.gamespot.com/invincible-55-lock-down-but-not-out/4000-142745/"
+            }
+          ]
+        },
+        {
+          "number": "56",
+          "title": null,
+          "publicationDate": "2008-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/15455/638220-invincible56_cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "145547",
+              "url": "https://comicvine.gamespot.com/invincible-56/4000-145547/"
+            }
+          ]
+        },
+        {
+          "number": "57",
+          "title": "Invincible vs. The Astounding Wolf-Man, Part 1",
+          "publicationDate": "2008-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/11863/653039-invincible57_cover_1_.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "148141",
+              "url": "https://comicvine.gamespot.com/invincible-57-invincible-vs-the-astounding-wolf-ma/4000-148141/"
+            }
+          ]
+        },
+        {
+          "number": "58",
+          "title": "Young Love...",
+          "publicationDate": "2009-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/15455/676644-inv.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "150046",
+              "url": "https://comicvine.gamespot.com/invincible-58-young-love/4000-150046/"
+            }
+          ]
+        },
+        {
+          "number": "59",
+          "title": "Meet Powerplex",
+          "publicationDate": "2009-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/31567/714219-invincible59.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "152425",
+              "url": "https://comicvine.gamespot.com/invincible-59-meet-powerplex/4000-152425/"
+            }
+          ]
+        },
+        {
+          "number": "60",
+          "title": "The Invincible War",
+          "publicationDate": "2009-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/9116/740287-60.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "153703",
+              "url": "https://comicvine.gamespot.com/invincible-60-the-invincible-war/4000-153703/"
+            }
+          ]
+        },
+        {
+          "number": "61",
+          "title": "Conquest Part One",
+          "publicationDate": "2009-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/3853/774216-invincible61.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "155799",
+              "url": "https://comicvine.gamespot.com/invincible-61-conquest-part-one/4000-155799/"
+            }
+          ]
+        },
+        {
+          "number": "62",
+          "title": "Conquest Part Two",
+          "publicationDate": "2009-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/3853/807232-invincible61.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "157824",
+              "url": "https://comicvine.gamespot.com/invincible-62-conquest-part-two/4000-157824/"
+            }
+          ]
+        },
+        {
+          "number": "63",
+          "title": "Conquest Part Three",
+          "publicationDate": "2009-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/9116/841432-63.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "160437",
+              "url": "https://comicvine.gamespot.com/invincible-63-conquest-part-three/4000-160437/"
+            }
+          ]
+        },
+        {
+          "number": "64",
+          "title": "Conquest: Conclusion",
+          "publicationDate": "2009-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/9116/887927-64.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "164880",
+              "url": "https://comicvine.gamespot.com/invincible-64-conquest-conclusion/4000-164880/"
+            }
+          ]
+        },
+        {
+          "number": "65",
+          "title": "Conquest: Epilogue",
+          "publicationDate": "2009-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/9116/922889-65.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "167415",
+              "url": "https://comicvine.gamespot.com/invincible-65-conquest-epilogue/4000-167415/"
+            }
+          ]
+        },
+        {
+          "number": "66",
+          "title": "Preparations For War! Part 1",
+          "publicationDate": "2009-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/9116/964904-66.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "172353",
+              "url": "https://comicvine.gamespot.com/invincible-66-preparations-for-war-part-1/4000-172353/"
+            }
+          ]
+        },
+        {
+          "number": "67",
+          "title": "Preparations For War! Part 2; Image United Prelude, Part 3",
+          "publicationDate": "2009-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/9116/999388-67.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "177659",
+              "url": "https://comicvine.gamespot.com/invincible-67-preparations-for-war-part-2-image-un/4000-177659/"
+            }
+          ]
+        },
+        {
+          "number": "68",
+          "title": null,
+          "publicationDate": "2009-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/9116/1031201-68.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "183787",
+              "url": "https://comicvine.gamespot.com/invincible-68/4000-183787/"
+            }
+          ]
+        },
+        {
+          "number": "69",
+          "title": null,
+          "publicationDate": "2009-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/38919/1071696-invincible_69.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "189593",
+              "url": "https://comicvine.gamespot.com/invincible-69/4000-189593/"
+            }
+          ]
+        },
+        {
+          "number": "70",
+          "title": "OVERWHELMED!",
+          "publicationDate": "2010-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/36359/1136724-invincible70_1.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "198005",
+              "url": "https://comicvine.gamespot.com/invincible-70-overwhelmed/4000-198005/"
+            }
+          ]
+        },
+        {
+          "number": "71",
+          "title": "The Viltrumite War: Part 1",
+          "publicationDate": "2010-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/38919/1211311-invincible_71.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "211115",
+              "url": "https://comicvine.gamespot.com/invincible-71-the-viltrumite-war-part-1/4000-211115/"
+            }
+          ]
+        },
+        {
+          "number": "72",
+          "title": "The Viltrumite War: Part 2",
+          "publicationDate": "2010-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/6063/1251332-invincible.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "217479",
+              "url": "https://comicvine.gamespot.com/invincible-72-the-viltrumite-war-part-2/4000-217479/"
+            }
+          ]
+        },
+        {
+          "number": "73",
+          "title": "The Viltrumite War: Part 3",
+          "publicationDate": "2010-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/56299/1283796-invincible_issue_73.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "222076",
+              "url": "https://comicvine.gamespot.com/invincible-73-the-viltrumite-war-part-3/4000-222076/"
+            }
+          ]
+        },
+        {
+          "number": "74",
+          "title": "The Viltrumite War: Part 4",
+          "publicationDate": "2010-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/56299/1356925-invincible_issue_74.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "231788",
+              "url": "https://comicvine.gamespot.com/invincible-74-the-viltrumite-war-part-4/4000-231788/"
+            }
+          ]
+        },
+        {
+          "number": "75",
+          "title": "The Viltrumite War: Part 5",
+          "publicationDate": "2010-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/58664/1489991-prv6860_cov.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "241001",
+              "url": "https://comicvine.gamespot.com/invincible-75-the-viltrumite-war-part-5/4000-241001/"
+            }
+          ]
+        },
+        {
+          "number": "76",
+          "title": "The Viltrumite War: Part 6",
+          "publicationDate": "2010-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/58664/1579478-invincible76_cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "250786",
+              "url": "https://comicvine.gamespot.com/invincible-76-the-viltrumite-war-part-6/4000-250786/"
+            }
+          ]
+        },
+        {
+          "number": "77",
+          "title": "The Viltrumite War: Part 7",
+          "publicationDate": "2011-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/58664/1651880-invincible.77.01.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "260308",
+              "url": "https://comicvine.gamespot.com/invincible-77-the-viltrumite-war-part-7/4000-260308/"
+            }
+          ]
+        },
+        {
+          "number": "78",
+          "title": "The Viltrumite War: Part 8",
+          "publicationDate": "2011-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/8/87073/1736070-invincible78.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "266629",
+              "url": "https://comicvine.gamespot.com/invincible-78-the-viltrumite-war-part-8/4000-266629/"
+            }
+          ]
+        },
+        {
+          "number": "79",
+          "title": null,
+          "publicationDate": "2011-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/8/87073/1780872-invincible79.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "268788",
+              "url": "https://comicvine.gamespot.com/invincible-79/4000-268788/"
+            }
+          ]
+        },
+        {
+          "number": "80",
+          "title": null,
+          "publicationDate": "2011-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2669997-80.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "273273",
+              "url": "https://comicvine.gamespot.com/invincible-80/4000-273273/"
+            }
+          ]
+        },
+        {
+          "number": "81",
+          "title": null,
+          "publicationDate": "2011-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/1966724-81.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "281928",
+              "url": "https://comicvine.gamespot.com/invincible-81/4000-281928/"
+            }
+          ]
+        },
+        {
+          "number": "82",
+          "title": null,
+          "publicationDate": "2011-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/10/101110/1988011-inv_82_001.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "290678",
+              "url": "https://comicvine.gamespot.com/invincible-82/4000-290678/"
+            }
+          ]
+        },
+        {
+          "number": "83",
+          "title": null,
+          "publicationDate": "2011-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/10/101110/2030706-inv_83_001.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "294297",
+              "url": "https://comicvine.gamespot.com/invincible-83/4000-294297/"
+            }
+          ]
+        },
+        {
+          "number": "84",
+          "title": null,
+          "publicationDate": "2011-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/10/101110/2066429-inv_84_001.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "301056",
+              "url": "https://comicvine.gamespot.com/invincible-84/4000-301056/"
+            }
+          ]
+        },
+        {
+          "number": "85",
+          "title": null,
+          "publicationDate": "2011-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2161741-85.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "303553",
+              "url": "https://comicvine.gamespot.com/invincible-85/4000-303553/"
+            }
+          ]
+        },
+        {
+          "number": "86",
+          "title": null,
+          "publicationDate": "2011-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/7/73936/2135117-invincible_086__2011__pagecover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "307878",
+              "url": "https://comicvine.gamespot.com/invincible-86/4000-307878/"
+            }
+          ]
+        },
+        {
+          "number": "87",
+          "title": null,
+          "publicationDate": "2012-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3446370-87.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "310923",
+              "url": "https://comicvine.gamespot.com/invincible-87/4000-310923/"
+            }
+          ]
+        },
+        {
+          "number": "88",
+          "title": null,
+          "publicationDate": "2012-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3446371-88.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "313909",
+              "url": "https://comicvine.gamespot.com/invincible-88/4000-313909/"
+            }
+          ]
+        },
+        {
+          "number": "89",
+          "title": null,
+          "publicationDate": "2012-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3446372-89.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "317973",
+              "url": "https://comicvine.gamespot.com/invincible-89/4000-317973/"
+            }
+          ]
+        },
+        {
+          "number": "90",
+          "title": null,
+          "publicationDate": "2012-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3446373-90.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "326929",
+              "url": "https://comicvine.gamespot.com/invincible-90/4000-326929/"
+            }
+          ]
+        },
+        {
+          "number": "91",
+          "title": null,
+          "publicationDate": "2012-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3446374-91.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "335054",
+              "url": "https://comicvine.gamespot.com/invincible-91/4000-335054/"
+            }
+          ]
+        },
+        {
+          "number": "92",
+          "title": null,
+          "publicationDate": "2012-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3446375-92.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "340275",
+              "url": "https://comicvine.gamespot.com/invincible-92/4000-340275/"
+            }
+          ]
+        },
+        {
+          "number": "93",
+          "title": null,
+          "publicationDate": "2012-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/7/71975/2445147-prev_img.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "344118",
+              "url": "https://comicvine.gamespot.com/invincible-93/4000-344118/"
+            }
+          ]
+        },
+        {
+          "number": "94",
+          "title": null,
+          "publicationDate": "2012-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/7/71975/2532027-prev_img.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "352728",
+              "url": "https://comicvine.gamespot.com/invincible-94/4000-352728/"
+            }
+          ]
+        },
+        {
+          "number": "95",
+          "title": null,
+          "publicationDate": "2012-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2611363-95.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "358865",
+              "url": "https://comicvine.gamespot.com/invincible-95/4000-358865/"
+            }
+          ]
+        },
+        {
+          "number": "96",
+          "title": null,
+          "publicationDate": "2012-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/2676139-96.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "363095",
+              "url": "https://comicvine.gamespot.com/invincible-96/4000-363095/"
+            }
+          ]
+        },
+        {
+          "number": "97",
+          "title": null,
+          "publicationDate": "2012-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/66303/2699931-prv14199_cov.jpeg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "367681",
+              "url": "https://comicvine.gamespot.com/invincible-97/4000-367681/"
+            }
+          ]
+        },
+        {
+          "number": "98",
+          "title": "The Death of Everyone, Part One",
+          "publicationDate": "2012-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/66303/2734630-invincible98_cover.jpeg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "371155",
+              "url": "https://comicvine.gamespot.com/invincible-98-the-death-of-everyone-part-one/4000-371155/"
+            }
+          ]
+        },
+        {
+          "number": "99",
+          "title": "The Death of Everyone, Part Two",
+          "publicationDate": "2013-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/66303/2780887-prev_img_copy.jpeg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "376607",
+              "url": "https://comicvine.gamespot.com/invincible-99-the-death-of-everyone-part-two/4000-376607/"
+            }
+          ]
+        },
+        {
+          "number": "100",
+          "title": "The Death of Everyone, Part Three of Three",
+          "publicationDate": "2013-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/66303/2839140-tumblr_mf8y7vppwe1qj97xmo2_1280.jpeg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "382769",
+              "url": "https://comicvine.gamespot.com/invincible-100-the-death-of-everyone-part-three-of/4000-382769/"
+            }
+          ]
+        },
+        {
+          "number": "101",
+          "title": null,
+          "publicationDate": "2013-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/66303/2939027-prev_img_1.jpeg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "394819",
+              "url": "https://comicvine.gamespot.com/invincible-101/4000-394819/"
+            }
+          ]
+        },
+        {
+          "number": "102",
+          "title": null,
+          "publicationDate": "2013-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/66303/3000861-invincible_102.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "398960",
+              "url": "https://comicvine.gamespot.com/invincible-102/4000-398960/"
+            }
+          ]
+        },
+        {
+          "number": "103",
+          "title": null,
+          "publicationDate": "2013-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/66303/3114165-invincible.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "411794",
+              "url": "https://comicvine.gamespot.com/invincible-103/4000-411794/"
+            }
+          ]
+        },
+        {
+          "number": "104",
+          "title": null,
+          "publicationDate": "2013-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/66303/3177798-invincible104_cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "417942",
+              "url": "https://comicvine.gamespot.com/invincible-104/4000-417942/"
+            }
+          ]
+        },
+        {
+          "number": "105",
+          "title": null,
+          "publicationDate": "2013-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/66303/3285084-invincible.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "424510",
+              "url": "https://comicvine.gamespot.com/invincible-105/4000-424510/"
+            }
+          ]
+        },
+        {
+          "number": "106",
+          "title": null,
+          "publicationDate": "2013-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/66303/3379336-invincible106-cover-3e18e.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "428972",
+              "url": "https://comicvine.gamespot.com/invincible-106/4000-428972/"
+            }
+          ]
+        },
+        {
+          "number": "107",
+          "title": null,
+          "publicationDate": "2013-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3494765-107.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "436166",
+              "url": "https://comicvine.gamespot.com/invincible-107/4000-436166/"
+            }
+          ]
+        },
+        {
+          "number": "108",
+          "title": null,
+          "publicationDate": "2014-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3607803-108.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "443962",
+              "url": "https://comicvine.gamespot.com/invincible-108/4000-443962/"
+            }
+          ]
+        },
+        {
+          "number": "109",
+          "title": null,
+          "publicationDate": "2014-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/66303/3691959-inv109_post.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "447623",
+              "url": "https://comicvine.gamespot.com/invincible-109/4000-447623/"
+            }
+          ]
+        },
+        {
+          "number": "110",
+          "title": null,
+          "publicationDate": "2014-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/66303/3746944-invincible%20110.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "450044",
+              "url": "https://comicvine.gamespot.com/invincible-110/4000-450044/"
+            }
+          ]
+        },
+        {
+          "number": "111",
+          "title": null,
+          "publicationDate": "2014-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/66303/3824886-invincible111_covera.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "452468",
+              "url": "https://comicvine.gamespot.com/invincible-111/4000-452468/"
+            }
+          ]
+        },
+        {
+          "number": "112",
+          "title": null,
+          "publicationDate": "2014-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/3914203-112.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "457591",
+              "url": "https://comicvine.gamespot.com/invincible-112/4000-457591/"
+            }
+          ]
+        },
+        {
+          "number": "113",
+          "title": null,
+          "publicationDate": "2014-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/4009290-113.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "461698",
+              "url": "https://comicvine.gamespot.com/invincible-113/4000-461698/"
+            }
+          ]
+        },
+        {
+          "number": "114",
+          "title": null,
+          "publicationDate": "2014-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/66303/4087317-invincible.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "464948",
+              "url": "https://comicvine.gamespot.com/invincible-114/4000-464948/"
+            }
+          ]
+        },
+        {
+          "number": "115",
+          "title": null,
+          "publicationDate": "2014-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/66303/4226020-invincible_115.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "470383",
+              "url": "https://comicvine.gamespot.com/invincible-115/4000-470383/"
+            }
+          ]
+        },
+        {
+          "number": "116",
+          "title": null,
+          "publicationDate": "2015-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/66303/4339418-invincible.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "476752",
+              "url": "https://comicvine.gamespot.com/invincible-116/4000-476752/"
+            }
+          ]
+        },
+        {
+          "number": "117",
+          "title": null,
+          "publicationDate": "2015-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/66303/4397138-invincible_117.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "479943",
+              "url": "https://comicvine.gamespot.com/invincible-117/4000-479943/"
+            }
+          ]
+        },
+        {
+          "number": "118",
+          "title": null,
+          "publicationDate": "2015-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/4466570-118.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "483318",
+              "url": "https://comicvine.gamespot.com/invincible-118/4000-483318/"
+            }
+          ]
+        },
+        {
+          "number": "119",
+          "title": null,
+          "publicationDate": "2015-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/66303/4531511-invincible.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "487177",
+              "url": "https://comicvine.gamespot.com/invincible-119/4000-487177/"
+            }
+          ]
+        },
+        {
+          "number": "120",
+          "title": null,
+          "publicationDate": "2015-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/66303/4585179-invincible.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "489869",
+              "url": "https://comicvine.gamespot.com/invincible-120/4000-489869/"
+            }
+          ]
+        },
+        {
+          "number": "121",
+          "title": null,
+          "publicationDate": "2015-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/4686739-121.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "495303",
+              "url": "https://comicvine.gamespot.com/invincible-121/4000-495303/"
+            }
+          ]
+        },
+        {
+          "number": "122",
+          "title": null,
+          "publicationDate": "2015-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/4763057-122.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "497990",
+              "url": "https://comicvine.gamespot.com/invincible-122/4000-497990/"
+            }
+          ]
+        },
+        {
+          "number": "123",
+          "title": null,
+          "publicationDate": "2015-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/4802878-123.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "500332",
+              "url": "https://comicvine.gamespot.com/invincible-123/4000-500332/"
+            }
+          ]
+        },
+        {
+          "number": "124",
+          "title": "Reboot? Part One of Three",
+          "publicationDate": "2015-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/4872393-124.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "503588",
+              "url": "https://comicvine.gamespot.com/invincible-124-reboot-part-one-of-three/4000-503588/"
+            }
+          ]
+        },
+        {
+          "number": "125",
+          "title": "Reboot? Part Two of Three",
+          "publicationDate": "2015-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/4913113-125.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "506222",
+              "url": "https://comicvine.gamespot.com/invincible-125-reboot-part-two-of-three/4000-506222/"
+            }
+          ]
+        },
+        {
+          "number": "126",
+          "title": "Reboot? Part Three of Three",
+          "publicationDate": "2015-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/4956185-126.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "508474",
+              "url": "https://comicvine.gamespot.com/invincible-126-reboot-part-three-of-three/4000-508474/"
+            }
+          ]
+        },
+        {
+          "number": "127",
+          "title": null,
+          "publicationDate": "2016-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/5160398-127.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "526091",
+              "url": "https://comicvine.gamespot.com/invincible-127/4000-526091/"
+            }
+          ]
+        },
+        {
+          "number": "128",
+          "title": null,
+          "publicationDate": "2016-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/5212686-128.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "530757",
+              "url": "https://comicvine.gamespot.com/invincible-128/4000-530757/"
+            }
+          ]
+        },
+        {
+          "number": "129",
+          "title": null,
+          "publicationDate": "2016-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/5264931-129.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "535385",
+              "url": "https://comicvine.gamespot.com/invincible-129/4000-535385/"
+            }
+          ]
+        },
+        {
+          "number": "130",
+          "title": null,
+          "publicationDate": "2016-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/5396637-130.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "546076",
+              "url": "https://comicvine.gamespot.com/invincible-130/4000-546076/"
+            }
+          ]
+        },
+        {
+          "number": "131",
+          "title": null,
+          "publicationDate": "2016-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/5533839-131.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "558445",
+              "url": "https://comicvine.gamespot.com/invincible-131/4000-558445/"
+            }
+          ]
+        },
+        {
+          "number": "132",
+          "title": null,
+          "publicationDate": "2017-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/5680732-132.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "579335",
+              "url": "https://comicvine.gamespot.com/invincible-132/4000-579335/"
+            }
+          ]
+        },
+        {
+          "number": "133",
+          "title": "The End of All Things Part One",
+          "publicationDate": "2017-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/5706423-133a.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "581583",
+              "url": "https://comicvine.gamespot.com/invincible-133-the-end-of-all-things-part-one/4000-581583/"
+            }
+          ]
+        },
+        {
+          "number": "134",
+          "title": "The End of All Things Part Two",
+          "publicationDate": "2017-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/5766829-134.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "587441",
+              "url": "https://comicvine.gamespot.com/invincible-134-the-end-of-all-things-part-two/4000-587441/"
+            }
+          ]
+        },
+        {
+          "number": "135",
+          "title": "The End of All Things Part Three",
+          "publicationDate": "2017-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/5814144-135a.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "592635",
+              "url": "https://comicvine.gamespot.com/invincible-135-the-end-of-all-things-part-three/4000-592635/"
+            }
+          ]
+        },
+        {
+          "number": "136",
+          "title": "The End of All Things Part Four",
+          "publicationDate": "2017-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/5853884-136.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "595722",
+              "url": "https://comicvine.gamespot.com/invincible-136-the-end-of-all-things-part-four/4000-595722/"
+            }
+          ]
+        },
+        {
+          "number": "137",
+          "title": "The End of All Things Part Five",
+          "publicationDate": "2017-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/5914924-137.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "603166",
+              "url": "https://comicvine.gamespot.com/invincible-137-the-end-of-all-things-part-five/4000-603166/"
+            }
+          ]
+        },
+        {
+          "number": "138",
+          "title": "The End of All Things Part Six",
+          "publicationDate": "2017-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/5971732-138.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "609324",
+              "url": "https://comicvine.gamespot.com/invincible-138-the-end-of-all-things-part-six/4000-609324/"
+            }
+          ]
+        },
+        {
+          "number": "139",
+          "title": "The End of All Things Part Seven",
+          "publicationDate": "2017-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/6007358-139.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "615004",
+              "url": "https://comicvine.gamespot.com/invincible-139-the-end-of-all-things-part-seven/4000-615004/"
+            }
+          ]
+        },
+        {
+          "number": "140",
+          "title": "The End of All Things Part Eight",
+          "publicationDate": "2017-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/6061078-140a.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "622919",
+              "url": "https://comicvine.gamespot.com/invincible-140-the-end-of-all-things-part-eight/4000-622919/"
+            }
+          ]
+        },
+        {
+          "number": "141",
+          "title": "The End of All Things Part Nine",
+          "publicationDate": "2017-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/6104123-141.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "630592",
+              "url": "https://comicvine.gamespot.com/invincible-141-the-end-of-all-things-part-nine/4000-630592/"
+            }
+          ]
+        },
+        {
+          "number": "142",
+          "title": "The End of All Things Part Ten; Robot War!",
+          "publicationDate": "2017-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/6145260-142.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "638638",
+              "url": "https://comicvine.gamespot.com/invincible-142-the-end-of-all-things-part-ten-robo/4000-638638/"
+            }
+          ]
+        },
+        {
+          "number": "143",
+          "title": "The End of All Things Part Eleven",
+          "publicationDate": "2017-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/6195451-143.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "647984",
+              "url": "https://comicvine.gamespot.com/invincible-143-the-end-of-all-things-part-eleven/4000-647984/"
+            }
+          ]
+        },
+        {
+          "number": "144",
+          "title": "The End of All Things Part Twelve",
+          "publicationDate": "2018-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/67663/6280616-144a.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Image Universe",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "660042",
+              "url": "https://comicvine.gamespot.com/invincible-144-the-end-of-all-things-part-twelve/4000-660042/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

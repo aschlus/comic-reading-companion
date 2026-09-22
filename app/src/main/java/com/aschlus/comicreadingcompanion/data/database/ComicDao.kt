@@ -19,6 +19,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.SeriesExternalId
 import com.aschlus.comicreadingcompanion.data.database.entities.Universe
 import com.aschlus.comicreadingcompanion.data.database.models.IssueDetail
 import com.aschlus.comicreadingcompanion.data.database.models.IssueSearchResult
+import com.aschlus.comicreadingcompanion.data.database.models.PublisherBrowseResult
 import com.aschlus.comicreadingcompanion.data.database.models.PublisherSeries
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListContinueItem
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListIssue
@@ -60,6 +61,20 @@ interface ComicDao {
     fun getPublisherById(
         publisherId: Long
     ): Flow<Publisher?>
+
+    @Query("""
+        SELECT
+            publishers.id AS publisherId,
+            publishers.name AS name,
+            COUNT(series.id) AS seriesCount
+        FROM publishers
+        LEFT JOIN series
+            ON publishers.id = series.publisherId
+        GROUP BY publishers.id
+        ORDER BY publishers.name ASC
+    """)
+    fun getPublisherBrowseResults():
+        Flow<List<PublisherBrowseResult>>
 
 
     // Universes

@@ -376,8 +376,7 @@ class MainActivity : ComponentActivity() {
                                     navController.navigate(
                                         "issue/$issueId"
                                     )
-                                },
-                                onBackClick = null
+                                }
                             )
                         }
 
