@@ -69,14 +69,21 @@ class AppNavigationTest {
                 .fetchSemanticsNodes()
                 .isNotEmpty()
         }
-        composeRule.onNodeWithText("Marvel Comics").assertIsDisplayed().performClick()
+        composeRule.onNodeWithText("Marvel Comics").performClick()
         composeRule.waitUntil(timeoutMillis = 5000L) {
-            composeRule.onAllNodesWithText("Marvel Comics")
+            composeRule
+                .onAllNodesWithText("PUBLISHER DETAIL")
                 .fetchSemanticsNodes()
-                .size >= 2
+                .isNotEmpty()
         }
-        composeRule.onAllNodesWithText("Marvel Comics")[0].assertIsDisplayed()
-        composeRule.onAllNodesWithText("Marvel Comics")[1].assertIsDisplayed()
+
+        composeRule
+            .onNodeWithText("PUBLISHER DETAIL")
+            .assertIsDisplayed()
+
+        composeRule
+            .onNodeWithText("Marvel Comics")
+            .assertIsDisplayed()
         composeRule.onNodeWithContentDescription("Back").assertIsDisplayed()
     }
 
@@ -397,11 +404,17 @@ class AppNavigationTest {
         ) {
             composeRule
                 .onAllNodesWithText(
-                    "Marvel Comics"
+                    "PUBLISHER DETAIL"
                 )
                 .fetchSemanticsNodes()
-                .size >= 2
+                .isNotEmpty()
         }
+
+        composeRule
+            .onNodeWithText(
+                "Marvel Comics"
+            )
+            .assertIsDisplayed()
 
         // Publisher -> Browse
         composeRule

@@ -126,6 +126,8 @@ class PublisherDetailScreenTest {
                     .fetchSemanticsNodes()
                     .isNotEmpty()
             }
+            composeRule.onNodeWithText("PUBLISHER DETAIL").assertIsDisplayed()
+            composeRule.onNodeWithText("SERIES").assertIsDisplayed()
             composeRule.onAllNodesWithText("Marvel")[0].assertIsDisplayed()
             composeRule.onNodeWithText("1 series").assertIsDisplayed()
             composeRule.onNodeWithText("Amazing Spider-Man").assertIsDisplayed()
