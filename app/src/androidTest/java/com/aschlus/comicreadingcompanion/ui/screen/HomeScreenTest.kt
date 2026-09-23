@@ -108,7 +108,8 @@ class HomeScreenTest {
                     onLibraryClick = {},
                     onCreateReadingListClick = {},
                     onReadingListClick = { _, _ -> },
-                    onIssueClick = {}
+                    onIssueClick = {},
+                    onReadingHistoryClick = {}
                 )
             }
         }
@@ -168,7 +169,8 @@ class HomeScreenTest {
                     onLibraryClick = {},
                     onCreateReadingListClick = {},
                     onReadingListClick = { _, _ -> },
-                    onIssueClick = {}
+                    onIssueClick = {},
+                    onReadingHistoryClick = {}
                 )
             }
         }
@@ -200,7 +202,8 @@ class HomeScreenTest {
                         createClicked = true
                     },
                     onReadingListClick = { _, _ -> },
-                    onIssueClick = {}
+                    onIssueClick = {},
+                    onReadingHistoryClick = {}
                 )
             }
         }
@@ -360,7 +363,8 @@ class HomeScreenTest {
                         onLibraryClick = {},
                         onCreateReadingListClick = {},
                         onReadingListClick = { _, _ -> },
-                        onIssueClick = {}
+                        onIssueClick = {},
+                        onReadingHistoryClick = {}
                     )
                 }
             }
@@ -531,7 +535,8 @@ class HomeScreenTest {
                             clickedPosition =
                                 position
                         },
-                        onIssueClick = {}
+                        onIssueClick = {},
+                        onReadingHistoryClick = {}
                     )
                 }
             }
@@ -583,7 +588,8 @@ class HomeScreenTest {
                     },
                     onCreateReadingListClick = {},
                     onReadingListClick = { _, _ -> },
-                    onIssueClick = {}
+                    onIssueClick = {},
+                    onReadingHistoryClick = {}
                 )
             }
         }
@@ -702,7 +708,8 @@ class HomeScreenTest {
                         onLibraryClick = {},
                         onCreateReadingListClick = {},
                         onReadingListClick = { _, _ -> },
-                        onIssueClick = {}
+                        onIssueClick = {},
+                        onReadingHistoryClick = {}
                     )
                 }
             }
@@ -820,7 +827,8 @@ class HomeScreenTest {
                         onLibraryClick = {},
                         onCreateReadingListClick = {},
                         onReadingListClick = { _, _ -> },
-                        onIssueClick = {}
+                        onIssueClick = {},
+                        onReadingHistoryClick = {}
                     )
                 }
             }
@@ -926,7 +934,8 @@ class HomeScreenTest {
                         onReadingListClick = { _, _ -> },
                         onIssueClick = {
                             clickedIssueId = it
-                        }
+                        },
+                        onReadingHistoryClick = {}
                     )
                 }
             }
@@ -954,6 +963,76 @@ class HomeScreenTest {
                     clickedIssueId
                 )
             }
+        }
+    }
+
+    @Test
+    fun homeScreen_readingHistoryTileInvokesCallback() {
+        var historyClicked = false
+
+        composeRule.setContent {
+            ComicReadingCompanionTheme(
+                dynamicColor = false
+            ) {
+                HomeScreen(
+                    viewModel = viewModel,
+                    onBrowseClick = {},
+                    onLibraryClick = {},
+                    onCreateReadingListClick = {},
+                    onReadingListClick = {
+                            _, _ ->
+                    },
+                    onIssueClick = {},
+                    onReadingHistoryClick = {
+                        historyClicked = true
+                    }
+                )
+            }
+        }
+
+        composeRule
+            .onNodeWithText(
+                "READING\nHISTORY"
+            )
+            .performClick()
+
+        composeRule.runOnIdle {
+            assertTrue(historyClicked)
+        }
+    }
+
+    @Test
+    fun homeScreen_recentlyReadSeeAllInvokesHistoryCallback() {
+        var historyClicked = false
+
+        composeRule.setContent {
+            ComicReadingCompanionTheme(
+                dynamicColor = false
+            ) {
+                HomeScreen(
+                    viewModel = viewModel,
+                    onBrowseClick = {},
+                    onLibraryClick = {},
+                    onCreateReadingListClick = {},
+                    onReadingListClick = {
+                            _, _ ->
+                    },
+                    onIssueClick = {},
+                    onReadingHistoryClick = {
+                        historyClicked = true
+                    }
+                )
+            }
+        }
+
+        composeRule
+            .onNodeWithContentDescription(
+                "RECENTLY READ see all"
+            )
+            .performClick()
+
+        composeRule.runOnIdle {
+            assertTrue(historyClicked)
         }
     }
 }

@@ -78,7 +78,7 @@ building, following, and tracking comic-book reading orders.
 - [ ] Display date started
 - [ ] Display date completed
 - [ ] User notes on reading progress
-- [ ] Reading-history screen
+- [x] Reading-history screen
 
 ### Issue and Series Browsing
 

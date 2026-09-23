@@ -18,7 +18,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Canvas
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
@@ -37,10 +36,6 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPurple
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
 import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
-import java.util.concurrent.TimeUnit
 
 @Composable
 fun ComicHomeRecentReadCard(
@@ -276,39 +271,5 @@ private fun RecentReadPlaceholder(
             fontWeight = FontWeight.Black,
             color = ComicPaper
         )
-    }
-}
-
-private fun recentReadText(
-    completedAt: Long
-): String {
-    val elapsedMillis = (System.currentTimeMillis() - completedAt).coerceAtLeast(0L)
-    val days = TimeUnit.MILLISECONDS.toDays(elapsedMillis)
-
-    return when{
-        days == 0L ->
-            "Read today"
-
-        days == 1L ->
-            "Read yesterday"
-
-        days < 7L ->
-            "Read $days days ago"
-
-        days < 14L ->
-            "Read 1 week ago"
-
-        days < 28L ->
-            "Read ${days / 7L} weeks ago"
-
-        else -> {
-            val formatter =
-                SimpleDateFormat(
-                    "MMM d, yyyy",
-                    Locale.getDefault()
-                )
-
-            "Read ${formatter.format(Date(completedAt))}"
-        }
     }
 }

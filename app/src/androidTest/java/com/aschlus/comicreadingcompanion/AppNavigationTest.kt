@@ -241,6 +241,11 @@ class AppNavigationTest {
                     }
             )
 
+            homeUiPreferences
+                .recordReadingListOpened(
+                    readingList.id
+                )
+
             val continueIssue =
                 issues[20]
 
@@ -1043,5 +1048,138 @@ class AppNavigationTest {
                 "YOUR LISTS"
             )
             .assertIsDisplayed()
+    }
+
+    @Test
+    fun appNavigation_homeToReadingHistoryAndIssue() {
+        val application =
+            composeRule.activity.application
+                    as ComicReadingCompanionApplication
+
+        val repository =
+            application.container.comicRepository
+
+        var issueId = -1L
+        var issueLabel = ""
+
+        runBlocking {
+            val readingList =
+                repository
+                    .getReadingLists()
+                    .first { readingLists ->
+                        readingLists.any {
+                            it.title ==
+                                    "Spider-Man Volume 2"
+                        }
+                    }
+                    .first {
+                        it.title ==
+                                "Spider-Man Volume 2"
+                    }
+
+            val issue =
+                repository
+                    .getReadingListIssues(
+                        readingList.id
+                    )
+                    .first { issues ->
+                        issues.isNotEmpty()
+                    }
+                    .first()
+
+            issueId =
+                issue.issueId
+
+            issueLabel =
+                "${issue.seriesTitle} " +
+                        "#${issue.issueNumber}"
+
+            repository.markIssueAsUnread(
+                issueId
+            )
+
+            repository.markIssueAsRead(
+                issueId
+            )
+        }
+
+        try {
+            composeRule
+                .onNodeWithText(
+                    "READING\nHISTORY"
+                )
+                .performClick()
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        "READING HISTORY"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule
+                .onNodeWithText(
+                    "READING HISTORY"
+                )
+                .assertIsDisplayed()
+
+            composeRule
+                .onNodeWithContentDescription(
+                    "Back"
+                )
+                .assertIsDisplayed()
+
+            composeRule
+                .onNodeWithContentDescription(
+                    "Home tab"
+                )
+                .assertDoesNotExist()
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        issueLabel
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule
+                .onNodeWithText(
+                    issueLabel
+                )
+                .performClick()
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        "ISSUE DETAIL"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule
+                .onNodeWithText(
+                    "ISSUE DETAIL"
+                )
+                .assertIsDisplayed()
+        } finally {
+            runBlocking {
+                if (issueId >= 0L) {
+                    repository.markIssueAsUnread(
+                        issueId
+                    )
+                }
+            }
+        }
     }
 }

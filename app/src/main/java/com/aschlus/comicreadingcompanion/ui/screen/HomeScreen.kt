@@ -44,7 +44,8 @@ fun HomeScreen(
     onLibraryClick: () -> Unit,
     onCreateReadingListClick: () -> Unit,
     onReadingListClick: (Long, Int) -> Unit,
-    onIssueClick: (Long) -> Unit
+    onIssueClick: (Long) -> Unit,
+    onReadingHistoryClick: () -> Unit
 ) {
     val continueReadingLists by viewModel.continueReadingLists.collectAsState()
 
@@ -223,9 +224,7 @@ fun HomeScreen(
                         text = "READING\nHISTORY",
                         icon = Icons.Default.History,
                         backgroundColor = ComicGreen,
-                        onClick = {
-                            // Reading History screen will be added later
-                        },
+                        onClick = onReadingHistoryClick,
                         modifier = Modifier.weight(1f),
                         iconSize = 33.dp,
                         textFontSize = 16.sp,
@@ -237,9 +236,7 @@ fun HomeScreen(
             item {
                 ComicHomeSectionHeader(
                     text = "RECENTLY READ",
-                    onSeeAllClick = {
-                        // Reading History screen will be added later
-                    },
+                    onSeeAllClick = onReadingHistoryClick,
                     modifier =
                         Modifier.padding(
                             start = 12.dp,

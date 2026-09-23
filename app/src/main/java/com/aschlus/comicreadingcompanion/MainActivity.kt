@@ -32,6 +32,7 @@ import com.aschlus.comicreadingcompanion.ui.screen.HomeScreen
 import com.aschlus.comicreadingcompanion.ui.screen.IssueDetailScreen
 import com.aschlus.comicreadingcompanion.ui.screen.LibraryScreen
 import com.aschlus.comicreadingcompanion.ui.screen.PublisherDetailScreen
+import com.aschlus.comicreadingcompanion.ui.screen.ReadingHistoryScreen
 import com.aschlus.comicreadingcompanion.ui.screen.ReadingListDetailScreen
 import com.aschlus.comicreadingcompanion.ui.screen.SeriesDetailScreen
 import com.aschlus.comicreadingcompanion.ui.theme.ComicReadingCompanionTheme
@@ -320,6 +321,11 @@ class MainActivity : ComponentActivity() {
                                     navController.navigate(
                                         "issue/$issueId"
                                     )
+                                },
+                                onReadingHistoryClick = {
+                                    navController.navigate(
+                                        "readingHistory"
+                                    )
                                 }
                             )
                         }
@@ -414,6 +420,18 @@ class MainActivity : ComponentActivity() {
                                         "readingList/$readingListId?startPosition=$startPosition"
                                     )
                                 }
+                            )
+                        }
+
+                        composable("readingHistory") {
+                            ReadingHistoryScreen(
+                                viewModel = homeViewModel,
+                                onIssueClick = { issueId ->
+                                    navController.navigate(
+                                        "issue/$issueId"
+                                    )
+                                },
+                                onBackClick = safeNavigateBack
                             )
                         }
 
