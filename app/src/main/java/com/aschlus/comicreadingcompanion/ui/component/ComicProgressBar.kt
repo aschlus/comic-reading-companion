@@ -12,6 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -19,20 +21,20 @@ fun ComicProgressBar(
     progress: Float,
     modifier: Modifier = Modifier,
     progressColor: Color = MaterialTheme.colorScheme.primary,
-    trackColor: Color = MaterialTheme.colorScheme.surfaceVariant
+    trackColor: Color = MaterialTheme.colorScheme.surfaceVariant,
+    borderColor: Color = MaterialTheme.colorScheme.outline,
+    height: Dp = 10.dp,
+    shape: Shape = RoundedCornerShape(3.dp)
 ) {
-    val shape =
-        RoundedCornerShape(3.dp)
-
     Box(
         modifier =
             modifier
-                .height(10.dp)
+                .height(height)
                 .clip(shape)
                 .background(trackColor)
                 .border(
                     width = 1.dp,
-                    color = MaterialTheme.colorScheme.outline,
+                    color = borderColor,
                     shape = shape
                 )
     ) {

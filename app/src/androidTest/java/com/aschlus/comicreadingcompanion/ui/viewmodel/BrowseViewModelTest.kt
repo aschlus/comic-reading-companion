@@ -110,7 +110,20 @@ class BrowseViewModelTest {
 
             val publishers =
                 withTimeout(5000L.milliseconds) {
-                    viewModel.publishers.first { it.size == 2 }
+                    viewModel.publishers.first { publishers ->
+                        publishers
+                            .firstOrNull {
+                                it.publisherId ==
+                                        marvelId
+                            }
+                            ?.seriesCount == 2 &&
+                                publishers
+                                    .firstOrNull {
+                                        it.publisherId ==
+                                                dcId
+                                    }
+                                    ?.seriesCount == 1
+                    }
                 }
             assertEquals(
                 2,

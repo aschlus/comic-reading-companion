@@ -33,7 +33,8 @@ import com.aschlus.comicreadingcompanion.ui.theme.LilitaOneFontFamily
 @Composable
 fun ComicIssueDetailHeader(
     onBackClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    title: String = "ISSUE DETAIL"
 ) {
     val density = LocalDensity.current
 
@@ -122,7 +123,7 @@ fun ComicIssueDetailHeader(
                     )
         ) {
             Text(
-                text = "ISSUE DETAIL",
+                text = title,
                 modifier =
                     Modifier
                         .clearAndSetSemantics { },
@@ -139,7 +140,7 @@ fun ComicIssueDetailHeader(
             )
 
             Text(
-                text = "ISSUE DETAIL",
+                text = title,
                 style = titleStyle,
                 color = ComicYellow,
                 maxLines = 1

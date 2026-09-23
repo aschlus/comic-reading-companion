@@ -2,46 +2,37 @@ package com.aschlus.comicreadingcompanion.ui.screen
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
-import androidx.room3.Update
-import com.aschlus.comicreadingcompanion.data.database.entities.ExternalId
+import androidx.compose.ui.unit.sp
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
-import com.aschlus.comicreadingcompanion.data.database.models.SeriesIssue
-import com.aschlus.comicreadingcompanion.ui.component.ComicCoverImage
+import com.aschlus.comicreadingcompanion.ui.component.ComicHomeSectionHeader
+import com.aschlus.comicreadingcompanion.ui.component.ComicIssueDetailHeader
+import com.aschlus.comicreadingcompanion.ui.component.ComicProgressBar
+import com.aschlus.comicreadingcompanion.ui.component.ComicSeriesIssueRow
+import com.aschlus.comicreadingcompanion.ui.theme.ComicBlue
+import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
+import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
+import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
 import com.aschlus.comicreadingcompanion.ui.viewmodel.SeriesDetailViewModel
-import java.time.YearMonth
-import java.time.format.DateTimeFormatter
-import java.util.Locale
+import androidx.compose.ui.text.font.FontStyle
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SeriesDetailScreen(
     seriesId: Long,
@@ -58,24 +49,11 @@ fun SeriesDetailScreen(
     }
 
     Scaffold(
+        containerColor = ComicPaper,
         topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        series?.title ?: "Series"
-                    )
-                },
-                navigationIcon = {
-                    IconButton(
-                        onClick = onBackClick
-                    ) {
-                        Icon(
-                            imageVector =
-                                Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back"
-                        )
-                    }
-                }
+            ComicIssueDetailHeader(
+                onBackClick = onBackClick,
+                title = "SERIES DETAIL"
             )
         }
     ) { innerPadding: PaddingValues ->
@@ -87,233 +65,192 @@ fun SeriesDetailScreen(
                 text = "Loading...",
                 modifier = Modifier
                     .padding(innerPadding)
-                    .padding(16.dp)
+                    .padding(18.dp),
+                color = ComicInk
             )
         } else {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(innerPadding)
-                    .padding(16.dp),
-                verticalArrangement =
-                    Arrangement.spacedBy(12.dp)
-            ) {
-                Text(
-                    text = currentSeries.title,
-                    style =
-                        MaterialTheme.typography.headlineMedium
-                )
-
-                val seriesMetadata = buildList {
-                    currentSeries.volume?.let { volume ->
-                        add("Volume $volume")
-                    }
-
-                    when {
-                        currentSeries.startYear != null &&
-                                currentSeries.endYear != null &&
-                                currentSeries.startYear !=
-                                currentSeries.endYear -> {
-                                add(
-                                    "${currentSeries.startYear}-" +
-                                        "${currentSeries.endYear}"
-                                )
-                            }
-
-                        currentSeries.startYear != null -> {
-                            add(
-                                currentSeries.startYear.toString()
-                            )
-                        }
-                    }
-                }
-
-                Text(
-                    text = seriesMetadata.joinToString(" • "),
-                    style =
-                        MaterialTheme.typography.bodyMedium
-                )
-
-                Text(
-                    text = currentSeries.publisherName,
-                    style =
-                        MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.clickable {
-                        onPublisherClick(
-                            currentSeries.publisherId
-                        )
-                    }
-                )
-
-                val readCount = issues.count { issue ->
+            val readCount =
+                issues.count { issue ->
                     issue.readingStatus == ReadingStatus.READ
                 }
 
-                val totalCount = issues.size
+            val totalCount = issues.size
 
-                val progress =
-                    if (totalCount == 0) {
-                        0f
-                    } else {
-                        readCount.toFloat() / totalCount.toFloat()
-                    }
-
-                val completionPercentage =
-                    if (totalCount == 0) {
-                        0
-                    } else {
-                        (readCount * 100) / totalCount
-                    }
-
-                Text(
-                    text =
-                        "$readCount of $totalCount read • " +
-                            "$completionPercentage% complete"
-                )
-
-                LinearProgressIndicator(
-                    progress = { progress },
-                    modifier = Modifier.fillMaxWidth()
-                )
-
-                Text(
-                    text = "Issues",
-                    style =
-                        MaterialTheme.typography.titleMedium
-                )
-
-                if (issues.isEmpty()) {
-                    Text("No issues found for this series")
+            val progress =
+                if (totalCount == 0) {
+                    0f
                 } else {
-                    LazyColumn(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .weight(1f),
-                        verticalArrangement =
-                            Arrangement.spacedBy(4.dp)
-                    ) {
-                        items(
-                            items = issues,
-                            key = { issue ->
-                                issue.issueId
-                            }
-                        ) { issue ->
-                            SeriesIssueRow(
-                                issue = issue,
-                                onClick = {
-                                    onIssueClick(
-                                        issue.issueId
-                                    )
-                                }
+                    readCount.toFloat() / totalCount.toFloat()
+                }
+
+            val completionPercentage =
+                if (totalCount == 0) {
+                    0
+                } else {
+                    (readCount * 100) / totalCount
+                }
+
+            val seriesMetadata =
+                buildList {
+                    currentSeries
+                        .volume
+                        ?.let { volume ->
+                            add("Volume $volume")
+                        }
+
+                    when {
+                        currentSeries.startYear != null &&
+                            currentSeries.endYear != null &&
+                            currentSeries.startYear != currentSeries.endYear -> {
+
+                            add(
+                                "${currentSeries.startYear}" +
+                                "-" +
+                                "${currentSeries.endYear}"
                             )
+                        }
+
+                        currentSeries.startYear != null -> {
+
+                            add(currentSeries.startYear.toString())
                         }
                     }
                 }
-            }
-        }
-    }
-}
+                    .joinToString(" • ")
 
-@Composable
-private fun SeriesIssueRow(
-    issue: SeriesIssue,
-    onClick: () -> Unit
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable(
-                onClick = onClick
-            )
-            .padding(
-                vertical = 10.dp,
-                horizontal = 4.dp
-            ),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        ComicCoverImage(
-            coverUrl = issue.coverUrl,
-            contentDescription = "#${issue.issueNumber} cover",
-            modifier = Modifier
-                .width(56.dp)
-                .aspectRatio(2f / 3f),
-            placeholderText = "No Cover"
-        )
-
-        Spacer(
-            modifier = Modifier.width(12.dp)
-        )
-
-        Column(
-            modifier = Modifier.weight(1f),
-            verticalArrangement =
-                Arrangement.spacedBy(2.dp)
-        ) {
-            Text(
-                text = "#${issue.issueNumber}",
-                style =
-                    MaterialTheme.typography.titleMedium
-            )
-
-            issue.issueTitle?.let { title ->
-                Text(
-                    text = title,
-                    style =
-                        MaterialTheme.typography.bodyMedium
-                )
-            }
-
-            val metadata = buildList {
-                issue.publicationDate?.let {
-                    add(
-                        formatSeriesIssuePublicationDate(it)
+            LazyColumn(
+                modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .padding(innerPadding),
+                contentPadding =
+                    PaddingValues(
+                        start = 16.dp,
+                        end = 16.dp,
+                        top = 16.dp,
+                        bottom = 24.dp
+                    ),
+                verticalArrangement =
+                    Arrangement.spacedBy(10.dp)
+            ) {
+                item {
+                    Text(
+                        text =
+                            currentSeries.title,
+                        style =
+                            MaterialTheme.typography.headlineLarge
+                                .copy(
+                                    fontSize = 34.sp,
+                                    lineHeight = 38.sp,
+                                    fontWeight = FontWeight.Black,
+                                    fontStyle = FontStyle.Normal
+                                ),
+                        color = ComicInk
                     )
                 }
 
-                add(
-                    issue.issueType.name
-                        .replace("_"," ")
-                        .lowercase()
-                        .replaceFirstChar {
-                            it.titlecase(
-                                Locale.getDefault()
-                            )
-                        }
-                )
+                if (
+                    seriesMetadata.isNotBlank()
+                ) {
+                    item {
+                        Text(
+                            text =
+                                seriesMetadata,
+                            style =
+                                MaterialTheme.typography.titleMedium
+                                    .copy(
+                                        fontSize = 18.sp,
+                                        lineHeight = 21.sp,
+                                        fontWeight = FontWeight.Bold
+                                    ),
+                            color = ComicInk
+                        )
+                    }
+                }
+
+                item {
+                    Text(
+                        text =
+                            currentSeries.publisherName,
+                        modifier =
+                            Modifier.clickable {
+                                onPublisherClick(currentSeries.publisherId)
+                            },
+                        style =
+                            MaterialTheme.typography.titleMedium
+                                .copy(
+                                    fontSize = 17.sp,
+                                    lineHeight = 20.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    textDecoration = TextDecoration.Underline
+                                ),
+                        color = ComicBlue
+                    )
+                }
+
+                item {
+                    Text(
+                        text =
+                            "$readCount of " +
+                            "$totalCount read • " +
+                            "$completionPercentage% complete",
+                        modifier =
+                            Modifier.padding(top = 10.dp),
+                        style =
+                            MaterialTheme.typography.titleMedium
+                                .copy(
+                                    fontSize = 16.sp,
+                                    lineHeight = 19.sp,
+                                    fontWeight = FontWeight.Bold
+                                ),
+                        color = ComicInk
+                    )
+                }
+
+                item {
+                    ComicProgressBar(
+                        progress = progress,
+                        modifier = Modifier.fillMaxWidth(),
+                        progressColor = ComicYellow,
+                        trackColor = ComicPaper,
+                        borderColor = ComicInk,
+                        height = 16.dp,
+                        shape = RoundedCornerShape(percent = 50)
+                    )
+                }
+
+                item {
+                    ComicHomeSectionHeader(
+                        text = "ISSUES",
+                        modifier =
+                            Modifier.padding(top = 8.dp)
+                    )
+                }
+
+                if (issues.isEmpty()) {
+                    item {
+                        Text(
+                            text = "No issues found for this series",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = ComicInk.copy(alpha = 0.7f)
+                        )
+                    }
+                } else {
+                    items(
+                        items = issues,
+                        key = { issue -> issue.issueId }
+                    ) { issue ->
+                        ComicSeriesIssueRow(
+                            issue = issue,
+                            onClick = {
+                                onIssueClick(
+                                    issue.issueId
+                                )
+                            }
+                        )
+                    }
+                }
             }
-
-            Text(
-                text = metadata.joinToString(" • "),
-                style =
-                    MaterialTheme.typography.bodySmall
-            )
         }
-
-        Text(
-            text = when (issue.readingStatus) {
-                ReadingStatus.READ -> "Read"
-                ReadingStatus.READING -> "Reading"
-                else -> "Unread"
-            },
-            style =
-                MaterialTheme.typography.labelMedium
-        )
-    }
-}
-
-private fun formatSeriesIssuePublicationDate(
-    publicationDate: String
-): String {
-    return try {
-        YearMonth
-            .parse(publicationDate)
-            .format(
-                DateTimeFormatter.ofPattern(
-                    "MMM yyyy",
-                    Locale.getDefault()
-                )
-            )
-    } catch (_: Exception) {
-        publicationDate
     }
 }

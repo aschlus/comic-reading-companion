@@ -98,11 +98,11 @@ class AppNavigationTest {
         }
         composeRule.onNodeWithText("Amazing Spider-Man").performClick()
         composeRule.waitUntil(timeoutMillis = 5000L) {
-            composeRule.onAllNodesWithText("Amazing Spider-Man")
+            composeRule.onAllNodesWithText("SERIES DETAIL")
                 .fetchSemanticsNodes()
-                .size >= 2
+                .isNotEmpty()
         }
-        composeRule.onNodeWithText("Issues").assertIsDisplayed()
+        composeRule.onNodeWithText("ISSUES").assertIsDisplayed()
         composeRule.onNodeWithText("Volume 2 • 1998-2003").assertIsDisplayed()
         composeRule.onNodeWithContentDescription("Back").assertIsDisplayed()
     }
@@ -136,6 +136,17 @@ class AppNavigationTest {
             composeRule
                 .onAllNodesWithText(
                     "ISSUE DETAIL"
+                )
+                .fetchSemanticsNodes()
+                .isNotEmpty()
+        }
+
+        composeRule.waitUntil(
+            timeoutMillis = 5000L
+        ) {
+            composeRule
+                .onAllNodesWithText(
+                    "#1"
                 )
                 .fetchSemanticsNodes()
                 .isNotEmpty()
@@ -365,7 +376,7 @@ class AppNavigationTest {
             timeoutMillis = 5000L
         ) {
             composeRule
-                .onAllNodesWithText("Issues")
+                .onAllNodesWithText("ISSUES")
                 .fetchSemanticsNodes()
                 .isNotEmpty()
         }

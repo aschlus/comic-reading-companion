@@ -123,6 +123,7 @@ class SeriesDetailScreenTest {
                 }
             }
 
+            composeRule.onNodeWithText("SERIES DETAIL").assertIsDisplayed()
             composeRule.waitUntil(timeoutMillis = 5000L) {
                 composeRule.onAllNodesWithText("#30")
                     .fetchSemanticsNodes()
@@ -131,11 +132,12 @@ class SeriesDetailScreenTest {
             composeRule.onNodeWithText("Volume 2 • 1999-2003").assertIsDisplayed()
             composeRule.onNodeWithText("Marvel").assertIsDisplayed()
             composeRule.onNodeWithText("0 of 1 read • 0% complete").assertIsDisplayed()
-            composeRule.onNodeWithText("Issues").assertIsDisplayed()
+            composeRule.onNodeWithText("ISSUES").assertIsDisplayed()
             composeRule.onNodeWithText("#30").assertIsDisplayed()
             composeRule.onNodeWithText("Coming Home").assertIsDisplayed()
-            composeRule.onNodeWithText("Jun 2001 • Regular").assertIsDisplayed()
-            composeRule.onNodeWithText("Unread").assertIsDisplayed()
+            composeRule.onNodeWithText("Jun 2001").performScrollTo().assertIsDisplayed()
+            composeRule.onNodeWithText("Regular").performScrollTo().assertIsDisplayed()
+            composeRule.onNodeWithText("UNREAD").performScrollTo().assertIsDisplayed()
         }
     }
 
@@ -293,7 +295,7 @@ class SeriesDetailScreenTest {
                     .fetchSemanticsNodes()
                     .isNotEmpty()
             }
-            composeRule.onNodeWithText("#30").performClick()
+            composeRule.onNodeWithText("#30").performScrollTo().performClick()
             composeRule.runOnIdle {
                 assertEquals(issueId, clickedIssueId)
             }
@@ -352,14 +354,14 @@ class SeriesDetailScreenTest {
                     .fetchSemanticsNodes()
                     .isNotEmpty()
             }
-            composeRule.onNodeWithText("Unread").assertIsDisplayed()
+            composeRule.onNodeWithText("UNREAD").performScrollTo().assertIsDisplayed()
             repository.markIssueAsRead(issueId)
             composeRule.waitUntil(timeoutMillis = 5000L) {
                 composeRule.onAllNodesWithText("1 of 1 read • 100% complete")
                     .fetchSemanticsNodes()
                     .isNotEmpty()
             }
-            composeRule.onNodeWithText("Read").assertIsDisplayed()
+            composeRule.onNodeWithText("READ").performScrollTo().assertIsDisplayed()
         }
     }
 }
