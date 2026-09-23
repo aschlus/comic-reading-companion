@@ -17,8 +17,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -455,16 +453,14 @@ private fun ComicSeriesFilterSelector(
             )
         }
 
-        DropdownMenu(
+        ComicDropdownMenu(
             expanded = menuExpanded,
             onDismissRequest = {
                 menuExpanded = false
             }
         ) {
-            DropdownMenuItem(
-                text = {
-                    Text("All series")
-                },
+            ComicDropdownMenuItem(
+                text = "All series",
                 onClick = {
                     onSeriesSelected(null)
                     menuExpanded = false
@@ -472,10 +468,8 @@ private fun ComicSeriesFilterSelector(
             )
 
             seriesOptions.forEach { option ->
-                DropdownMenuItem(
-                    text = {
-                        Text(option.label)
-                    },
+                ComicDropdownMenuItem(
+                    text = option.label,
                     onClick = {
                         onSeriesSelected(option.key)
                         menuExpanded = false

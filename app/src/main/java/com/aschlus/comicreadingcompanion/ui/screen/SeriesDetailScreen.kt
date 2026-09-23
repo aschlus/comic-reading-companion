@@ -32,6 +32,7 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
 import com.aschlus.comicreadingcompanion.ui.viewmodel.SeriesDetailViewModel
 import androidx.compose.ui.text.font.FontStyle
+import com.aschlus.comicreadingcompanion.ui.component.ComicEmptyState
 
 @Composable
 fun SeriesDetailScreen(
@@ -229,10 +230,8 @@ fun SeriesDetailScreen(
 
                 if (issues.isEmpty()) {
                     item {
-                        Text(
-                            text = "No issues found for this series",
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = ComicInk.copy(alpha = 0.7f)
+                        ComicEmptyState(
+                            message = "No issues found for this series"
                         )
                     }
                 } else {

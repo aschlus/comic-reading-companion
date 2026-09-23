@@ -115,8 +115,7 @@ fun ComicFormDialog(
                     ComicDialogButton(
                         text = "Cancel",
                         backgroundColor = ComicPaper,
-                        enabled = confirmEnabled,
-                        onClick = onConfirm
+                        onClick = onDismiss
                     )
 
                     ComicDialogButton(

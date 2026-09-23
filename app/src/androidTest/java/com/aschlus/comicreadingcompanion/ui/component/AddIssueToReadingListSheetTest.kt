@@ -138,7 +138,7 @@ class AddIssueToReadingListSheetTest {
                 .fetchSemanticsNodes()
                 .isNotEmpty()
         }
-        composeRule.onNodeWithText("Add to Reading List").assertIsDisplayed()
+        composeRule.onNodeWithText("ADD TO READING LIST").assertIsDisplayed()
         composeRule.onNodeWithText("My Spider-Man List").assertIsDisplayed()
         composeRule.onNodeWithText("Favorite issues").assertIsDisplayed()
     }

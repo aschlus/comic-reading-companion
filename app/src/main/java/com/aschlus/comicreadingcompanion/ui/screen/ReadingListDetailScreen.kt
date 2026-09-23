@@ -23,8 +23,10 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.TextAutoSize
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
@@ -68,11 +70,18 @@ import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSourc
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListStyle
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListIssue
+import com.aschlus.comicreadingcompanion.ui.component.ComicAddIssuesTrigger
 import com.aschlus.comicreadingcompanion.ui.component.ComicConfirmationDialog
 import com.aschlus.comicreadingcompanion.ui.component.ComicCoverImage
 import com.aschlus.comicreadingcompanion.ui.component.ComicDropdownMenu
 import com.aschlus.comicreadingcompanion.ui.component.ComicDropdownMenuItem
+import com.aschlus.comicreadingcompanion.ui.component.ComicEditReadingListHeader
+import com.aschlus.comicreadingcompanion.ui.component.ComicEmptyState
 import com.aschlus.comicreadingcompanion.ui.component.ComicFormDialog
+import com.aschlus.comicreadingcompanion.ui.component.ComicFormDropdownField
+import com.aschlus.comicreadingcompanion.ui.component.ComicFormTextField
+import com.aschlus.comicreadingcompanion.ui.component.ComicHomeSectionHeader
+import com.aschlus.comicreadingcompanion.ui.component.ComicPendingReadingListIssueRow
 import com.aschlus.comicreadingcompanion.ui.component.ComicReadingListDetailControls
 import com.aschlus.comicreadingcompanion.ui.component.ComicReadingListDetailHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicReadingListDetailHero
@@ -80,31 +89,23 @@ import com.aschlus.comicreadingcompanion.ui.component.ComicReadingListFilterSeri
 import com.aschlus.comicreadingcompanion.ui.component.ComicReadingListFilterSheetContent
 import com.aschlus.comicreadingcompanion.ui.component.ComicReadingListSearchHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicReadingListSelectionHeader
+import com.aschlus.comicreadingcompanion.ui.component.ComicReadingListStylePicker
 import com.aschlus.comicreadingcompanion.ui.component.ComicSectionPickerDialog
 import com.aschlus.comicreadingcompanion.ui.component.ComicSectionPickerOption
 import com.aschlus.comicreadingcompanion.ui.component.ComicSlantedShape
+import com.aschlus.comicreadingcompanion.ui.component.ComicWideActionButton
 import com.aschlus.comicreadingcompanion.ui.theme.ComicAccentTextTransform
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
+import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
 import com.aschlus.comicreadingcompanion.ui.theme.LilitaOneFontFamily
+import com.aschlus.comicreadingcompanion.ui.viewmodel.PendingReadingListIssue
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ReadingListDetailViewModel
 import kotlinx.coroutines.launch
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.Locale
-import com.aschlus.comicreadingcompanion.ui.component.ComicEditReadingListHeader
-import com.aschlus.comicreadingcompanion.ui.component.ComicFormDropdownField
-import com.aschlus.comicreadingcompanion.ui.component.ComicFormTextField
-import com.aschlus.comicreadingcompanion.ui.component.ComicHomeSectionHeader
-import com.aschlus.comicreadingcompanion.ui.component.ComicReadingListStylePicker
-import com.aschlus.comicreadingcompanion.ui.component.ComicWideActionButton
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import com.aschlus.comicreadingcompanion.ui.component.ComicAddIssuesTrigger
-import com.aschlus.comicreadingcompanion.ui.component.ComicPendingReadingListIssueRow
-import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
-import com.aschlus.comicreadingcompanion.ui.viewmodel.PendingReadingListIssue
 
 @OptIn(
     ExperimentalMaterial3Api::class,
@@ -924,9 +925,8 @@ fun ReadingListDetailScreen(
 
                 if (issues.isEmpty()) {
                     item {
-                        Text(
-                            text =
-                                "No issues in this reading list",
+                        ComicEmptyState(
+                            message = "No issues in this reading list",
                             modifier =
                                 Modifier.padding(
                                     top = 8.dp
@@ -939,8 +939,8 @@ fun ReadingListDetailScreen(
                     visibleIssues.isEmpty()
                 ) {
                     item {
-                        Text(
-                            text =
+                        ComicEmptyState(
+                            message =
                                 if (isSearching) {
                                     "No issues match " +
                                             "\"$trimmedSearchQuery\" " +

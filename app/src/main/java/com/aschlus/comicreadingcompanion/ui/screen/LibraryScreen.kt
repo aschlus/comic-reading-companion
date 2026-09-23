@@ -19,8 +19,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -39,6 +37,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
+import com.aschlus.comicreadingcompanion.ui.component.ComicDropdownMenu
+import com.aschlus.comicreadingcompanion.ui.component.ComicDropdownMenuItem
+import com.aschlus.comicreadingcompanion.ui.component.ComicEmptyState
 import com.aschlus.comicreadingcompanion.ui.component.ComicLibraryHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicLibraryReadingListCard
 import com.aschlus.comicreadingcompanion.ui.component.ComicLibrarySearchField
@@ -223,16 +224,14 @@ fun LibraryScreen(
                                 )
                              }
 
-                            DropdownMenu(
+                            ComicDropdownMenu(
                                 expanded = sortMenuExpanded,
                                 onDismissRequest = {
                                     sortMenuExpanded = false
                                 }
                             ) {
-                                DropdownMenuItem(
-                                    text = {
-                                        Text("Recently updated")
-                                    },
+                                ComicDropdownMenuItem(
+                                    text = "Recently updated",
                                     onClick = {
                                         viewModel
                                             .updateSort(
@@ -243,10 +242,8 @@ fun LibraryScreen(
                                     }
                                 )
 
-                                DropdownMenuItem(
-                                    text = {
-                                        Text("Title A-Z")
-                                    },
+                                ComicDropdownMenuItem(
+                                    text = "Title A-Z",
                                     onClick = {
                                         viewModel
                                             .updateSort(
@@ -257,10 +254,8 @@ fun LibraryScreen(
                                     }
                                 )
 
-                                DropdownMenuItem(
-                                    text = {
-                                        Text("Title Z-A")
-                                    },
+                                ComicDropdownMenuItem(
+                                    text = "Title Z-A",
                                     onClick = {
                                         viewModel
                                             .updateSort(
@@ -290,13 +285,30 @@ fun LibraryScreen(
 
             if (readingLists.isEmpty()) {
                 item {
-                    Text("No reading lists yet")
+                    ComicEmptyState(
+                        message = "No reading lists yet",
+                        modifier =
+                            Modifier.padding(
+                                start = 12.dp,
+                                end = 12.dp,
+                                top = 4.dp
+                            )
+                    )
                 }
             } else if (
                 visibleReadingLists.isEmpty()
             ) {
                 item {
-                    Text("No reading lists match \"${searchQuery.trim()}\"")
+                    ComicEmptyState(
+                        message = "No reading lists match \"${searchQuery.trim()}\"",
+                        modifier =
+                            Modifier
+                                .padding(
+                                    start = 12.dp,
+                                    end = 12.dp,
+                                    top = 4.dp
+                                )
+                    )
                 }
             } else {
                 items(

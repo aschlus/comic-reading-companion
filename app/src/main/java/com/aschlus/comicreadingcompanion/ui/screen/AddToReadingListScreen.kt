@@ -25,6 +25,7 @@ import com.aschlus.comicreadingcompanion.ui.component.ComicAddToListHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicAddToListIssueResult
 import com.aschlus.comicreadingcompanion.ui.component.ComicAddToListSearchField
 import com.aschlus.comicreadingcompanion.ui.component.ComicAddToListSeriesResult
+import com.aschlus.comicreadingcompanion.ui.component.ComicEmptyState
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.viewmodel.AddToListFilter
@@ -228,10 +229,8 @@ fun AddToReadingListScreen(
 
                     if (!hasVisibleResults) {
                         item(key = "no-results") {
-                            Text(
-                                text = "No results found",
-                                style = MaterialTheme.typography.bodyLarge,
-                                color = ComicInk.copy(alpha = 0.7f)
+                            ComicEmptyState(
+                                message = "No results found"
                             )
                         }
                     }

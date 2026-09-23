@@ -24,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.aschlus.comicreadingcompanion.ui.component.ComicEmptyState
 import com.aschlus.comicreadingcompanion.ui.component.ComicHomeHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicHomeQuickAccessTile
 import com.aschlus.comicreadingcompanion.ui.component.ComicHomeRecentReadCard
@@ -251,24 +252,18 @@ fun HomeScreen(
 
             item {
                 if (recentlyReadIssues.isEmpty()) {
-                    Text(
-                        text =
+                    ComicEmptyState(
+                        message =
                             "No recent reads yet. " +
                             "Finish an issue and " +
                             "we’ll keep track of it here.",
                         modifier =
-                            Modifier
-                                .fillMaxWidth()
-                                .padding(
-                                    horizontal = 28.dp,
-                                    vertical = 18.dp
-                                ),
-                        fontSize = 15.sp,
-                        lineHeight = 20.sp,
-                        fontWeight = FontWeight.SemiBold,
-                        fontStyle = FontStyle.Italic,
-                        color = ComicMutedInk,
-                        textAlign = TextAlign.Center
+                            Modifier.padding(
+                                start = 12.dp,
+                                end = 12.dp,
+                                top = 4.dp,
+                                bottom = 8.dp
+                            )
                     )
                 } else {
                     Row(

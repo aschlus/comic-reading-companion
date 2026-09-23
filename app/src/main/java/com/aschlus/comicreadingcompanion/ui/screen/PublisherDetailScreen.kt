@@ -19,6 +19,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.aschlus.comicreadingcompanion.ui.component.ComicEmptyState
 import com.aschlus.comicreadingcompanion.ui.component.ComicHomeSectionHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicIssueDetailHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicPublisherSeriesRow
@@ -123,10 +124,8 @@ fun PublisherDetailScreen(
 
                 if (series.isEmpty()) {
                     item {
-                        Text(
-                            text = "No series found for this publisher",
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = ComicInk.copy(alpha = 0.7f)
+                        ComicEmptyState(
+                            message = "No series found for this publisher"
                         )
                     }
                 } else {

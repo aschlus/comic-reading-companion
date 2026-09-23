@@ -249,7 +249,7 @@ building, following, and tracking comic-book reading orders.
 - [x] Apply Comic Print styling to Series detail
 - [x] Apply Comic Print styling to Issue detail
 - [x] Apply Comic Print styling to create / edit forms
-- [ ] Apply Comic Print styling to dialogs, menus, and empty states
+- [x] Apply Comic Print styling to dialogs, menus, and empty states
 - [ ] Keep data-dense screens visually quieter than Home for readability
 
 ### Publisher and Continuity Support

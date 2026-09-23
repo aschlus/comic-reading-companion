@@ -9,9 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -26,6 +24,7 @@ import com.aschlus.comicreadingcompanion.ui.component.ComicBrowseHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicBrowseIssueResult
 import com.aschlus.comicreadingcompanion.ui.component.ComicBrowsePublisherRow
 import com.aschlus.comicreadingcompanion.ui.component.ComicBrowseSeriesResult
+import com.aschlus.comicreadingcompanion.ui.component.ComicEmptyState
 import com.aschlus.comicreadingcompanion.ui.component.ComicHomeSectionHeader
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.viewmodel.AddToListFilter
@@ -96,7 +95,9 @@ fun BrowseScreen(
                 )
 
                 if (publishers.isEmpty()) {
-                    Text("No publishers found")
+                    ComicEmptyState(
+                        message = "No publishers found"
+                    )
                 } else {
                     LazyColumn(
                         modifier = Modifier
@@ -136,10 +137,8 @@ fun BrowseScreen(
                     showSeries || showIssues
 
                 if (!hasResults) {
-                    Text(
-                        text = "No results found",
-                        style =
-                            MaterialTheme.typography.bodyLarge
+                    ComicEmptyState(
+                        message = "No results found"
                     )
                 } else {
                     LazyColumn(
