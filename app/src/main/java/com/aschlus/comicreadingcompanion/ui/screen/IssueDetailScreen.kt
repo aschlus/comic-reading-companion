@@ -1,6 +1,7 @@
 package com.aschlus.comicreadingcompanion.ui.screen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -44,12 +45,15 @@ import com.aschlus.comicreadingcompanion.ui.component.ComicIssueStatusSelector
 import com.aschlus.comicreadingcompanion.ui.component.ComicWideActionButton
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlue
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
+import com.aschlus.comicreadingcompanion.ui.theme.ComicMutedInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
 import com.aschlus.comicreadingcompanion.ui.viewmodel.AddIssueToReadingListViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.IssueDetailViewModel
+import java.text.SimpleDateFormat
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
+import java.util.Date
 import java.util.Locale
 
 @Composable
@@ -233,6 +237,16 @@ fun IssueDetailScreen(
                     onReadClick = { viewModel.markAsRead() }
                 )
 
+                if (
+                    currentIssue.startedAt != null ||
+                    currentIssue.completedAt != null
+                ) {
+                    ReadingProgressDates(
+                        startedAt = currentIssue.startedAt,
+                        completedAt = currentIssue.completedAt
+                    )
+                }
+
                 if (addToReadingListViewModel != null) {
                     ComicWideActionButton(
                         text = "ADD TO READING LIST",
@@ -370,4 +384,110 @@ private fun formatIssuePublicationDate(
     } catch (_: Exception) {
         publicationDate
     }
+}
+
+@Composable
+private fun ReadingProgressDates(
+    startedAt: Long?,
+    completedAt: Long?,
+    modifier: Modifier = Modifier
+) {
+    val shape = RoundedCornerShape(10.dp)
+
+    Box(
+        modifier =
+            modifier.fillMaxWidth()
+    ) {
+        Box(
+            modifier =
+                Modifier
+                    .matchParentSize()
+                    .offset(
+                        x = 3.dp,
+                        y = 4.dp
+                    )
+                    .background(
+                        color = ComicInk,
+                        shape = shape
+                    )
+        )
+
+        Column(
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .background(
+                        color = ComicPaper,
+                        shape = shape
+                    )
+                    .border(
+                        width = 2.dp,
+                        color = ComicInk,
+                        shape = shape
+                    )
+                    .padding(
+                        horizontal = 14.dp,
+                        vertical = 10.dp
+                    ),
+            verticalArrangement =
+                Arrangement.spacedBy(6.dp)
+        ) {
+            startedAt?.let { timestamp ->
+                ReadingProgressDateRow(
+                    label = "Started",
+                    value = formatReadingProgressDate(timestamp)
+                )
+            }
+
+            completedAt?.let { timestamp ->
+                ReadingProgressDateRow(
+                    label = "Completed",
+                    value = formatReadingProgressDate(timestamp)
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun ReadingProgressDateRow(
+    label: String,
+    value: String
+) {
+    Row(
+        modifier =
+            Modifier.fillMaxWidth(),
+        horizontalArrangement =
+            Arrangement.SpaceBetween,
+        verticalAlignment =
+            Alignment.CenterVertically
+    ) {
+        Text(
+            text = label,
+            fontSize = 13.sp,
+            lineHeight = 16.sp,
+            fontWeight = FontWeight.Bold,
+            color = ComicMutedInk
+        )
+
+        Text(
+            text = value,
+            fontSize = 13.sp,
+            lineHeight = 16.sp,
+            fontWeight = FontWeight.SemiBold,
+            color = ComicInk
+        )
+    }
+}
+
+private fun  formatReadingProgressDate(
+    timestamp: Long
+): String {
+    val formatter =
+        SimpleDateFormat(
+            "MMM d, yyyy",
+            Locale.getDefault()
+        )
+
+    return formatter.format(Date(timestamp))
 }

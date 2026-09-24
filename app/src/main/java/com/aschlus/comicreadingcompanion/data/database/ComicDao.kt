@@ -324,7 +324,9 @@ interface ComicDao {
             publishers.name AS publisherName,
             universes.name AS universeName,
             universes.designation AS universeDesignation,
-            reading_progress.status AS readingStatus
+            reading_progress.status AS readingStatus,
+            reading_progress.startedAt AS startedAt,
+            reading_progress.completedAt AS completedAt
         FROM issues
         INNER JOIN series
             ON issues.seriesId = series.id

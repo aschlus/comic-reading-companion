@@ -17,5 +17,7 @@ data class IssueDetail(
     val publisherName: String,
     val universeName: String?,
     val universeDesignation: String?,
-    val readingStatus: ReadingStatus?
+    val readingStatus: ReadingStatus?,
+    val startedAt: Long?,
+    val completedAt: Long?
 )

@@ -344,6 +344,15 @@ class IssueDetailScreenTest {
                     "Reading reading status selected"
                 )
                 .assertIsDisplayed()
+
+            composeRule
+                .onNodeWithText("Started")
+                .performScrollTo()
+                .assertIsDisplayed()
+
+            composeRule
+                .onNodeWithText("Completed")
+                .assertDoesNotExist()
         }
     }
 
@@ -439,6 +448,14 @@ class IssueDetailScreenTest {
                     "Unread reading status selected"
                 )
                 .assertIsDisplayed()
+
+            composeRule
+                .onNodeWithText("Started")
+                .assertDoesNotExist()
+
+            composeRule
+                .onNodeWithText("Completed")
+                .assertDoesNotExist()
         }
     }
 
@@ -521,6 +538,16 @@ class IssueDetailScreenTest {
                 .onNodeWithContentDescription(
                     "Read reading status selected"
                 )
+                .assertIsDisplayed()
+
+            composeRule
+                .onNodeWithText("Started")
+                .performScrollTo()
+                .assertIsDisplayed()
+
+            composeRule
+                .onNodeWithText("Completed")
+                .performScrollTo()
                 .assertIsDisplayed()
         }
     }

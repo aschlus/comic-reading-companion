@@ -75,8 +75,8 @@ building, following, and tracking comic-book reading orders.
 - [x] Mark everything before a selected issue as read
 - [x] Reset reading-list progress
 - [x] Mark entire reading-list as read
-- [ ] Display date started
-- [ ] Display date completed
+- [x] Display date started
+- [x] Display date completed
 - [ ] User notes on reading progress
 - [x] Reading-history screen
 
