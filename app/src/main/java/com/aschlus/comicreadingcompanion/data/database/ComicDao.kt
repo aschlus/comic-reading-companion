@@ -368,6 +368,10 @@ interface ComicDao {
                 LIKE '%' || LOWER(:query) || '%'
             OR LOWER(issues.issueNumber)
                 LIKE '%' || LOWER(:query) || '%'
+            OR LOWER(series.title || ' #' || issues.issueNumber)
+                LIKE '%' || LOWER(:query) || '%'
+            OR LOWER(series.title || ' ' || issues.issueNumber)
+                LIKE '%' || LOWER(:query) || '%'
         ORDER BY
             series.title ASC,
             issues.publicationDate ASC,

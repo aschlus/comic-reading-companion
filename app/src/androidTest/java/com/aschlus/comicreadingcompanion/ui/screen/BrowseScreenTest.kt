@@ -498,4 +498,76 @@ class BrowseScreenTest {
                 .assertIsDisplayed()
         }
     }
+
+    @Test
+    fun browseScreen_searchFindsIssueByDisplayedLabel() {
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name = "Test Publisher"
+                    )
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Slingers",
+                        volume = 1,
+                        startYear = 1998,
+                        endYear = 1999
+                    )
+                )
+
+            comicDao.insertIssue(
+                Issue(
+                    seriesId = seriesId,
+                    universeId = null,
+                    issueNumber = "0",
+                    title = "Test Issue",
+                    publicationDate = "1998-11",
+                    coverUrl = null,
+                    description = null,
+                    issueType = IssueType.REGULAR
+                )
+            )
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    BrowseScreen(
+                        viewModel = viewModel,
+                        onPublisherClick = {},
+                        onSeriesClick = {},
+                        onIssueClick = {}
+                    )
+                }
+            }
+
+            composeRule
+                .onNode(hasSetTextAction())
+                .performTextInput(
+                    "Slingers #0"
+                )
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        "Slingers #0"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule
+                .onNodeWithText(
+                    "Slingers #0"
+                )
+                .assertIsDisplayed()
+        }
+    }
 }

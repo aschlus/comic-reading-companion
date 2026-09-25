@@ -1259,6 +1259,72 @@ class ComicDaoTest {
         }
 
     @Test
+    fun searchIssues_matchesSeriesAndIssueNumberLabel() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name = "Test Publisher"
+                    )
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Slingers",
+                        volume = 1,
+                        startYear = 1998,
+                        endYear = 1999
+                    )
+                )
+
+            val issueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "0",
+                        title = "Test Issue",
+                        publicationDate = "1998-11",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val bySeries =
+                comicDao
+                    .searchIssues("Slingers")
+                    .first()
+
+            val byDisplayedLabel =
+                comicDao
+                    .searchIssues("Slingers #0")
+                    .first()
+
+            val byLabelWithoutHash =
+                comicDao
+                    .searchIssues("Slingers 0")
+                    .first()
+
+            assertEquals(
+                issueId,
+                bySeries.single().issueId
+            )
+
+            assertEquals(
+                issueId,
+                byDisplayedLabel.single().issueId
+            )
+
+            assertEquals(
+                issueId,
+                byLabelWithoutHash.single().issueId
+            )
+        }
+
+    @Test
     fun getExternalIds_returnsMatchingSourceAndExternalId() =
         runBlocking {
             val publisherId =
