@@ -428,7 +428,8 @@ interface ComicDao {
             reading_list_items.position AS position,
             series.title AS seriesTitle,
             issues.issueNumber AS issueNumber,
-            issues.title AS issueTitle
+            issues.title AS issueTitle,
+            reading_progress.status AS readingStatus
         FROM reading_list_items
         INNER JOIN issues
             ON reading_list_items.issueId = issues.id
@@ -440,6 +441,11 @@ interface ComicDao {
             OR reading_progress.status != 'READ'
         ORDER BY
             reading_list_items.readingListId ASC,
+            CASE
+                WHEN reading_progress.status = 'READING'
+                    THEN 0
+                ELSE 1
+            END ASC,
             reading_list_items.position ASC
     """)
     fun getUnreadReadingListItems():

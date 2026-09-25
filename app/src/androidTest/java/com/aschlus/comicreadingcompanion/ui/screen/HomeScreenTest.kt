@@ -1035,4 +1035,132 @@ class HomeScreenTest {
             assertTrue(historyClicked)
         }
     }
+
+    @Test
+    fun homeScreen_continueReadingIncludesActivelyReadingIssueWithNoCompletedIssues() {
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name = "Test Publisher"
+                    )
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Active Series",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2000
+                    )
+                )
+
+            val firstIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "First",
+                        publicationDate = null,
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val secondIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "2",
+                        title = "Second",
+                        publicationDate = null,
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val readingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title = "Active Reading List",
+                        description = null,
+                        publisherId = publisherId,
+                        universeId = null,
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            comicDao.insertReadingListItem(
+                ReadingListItem(
+                    readingListId = readingListId,
+                    sectionId = null,
+                    issueId = firstIssueId,
+                    position = 1,
+                    required = true,
+                    notes = null
+                )
+            )
+
+            comicDao.insertReadingListItem(
+                ReadingListItem(
+                    readingListId = readingListId,
+                    sectionId = null,
+                    issueId = secondIssueId,
+                    position = 2,
+                    required = true,
+                    notes = null
+                )
+            )
+
+            repository.markIssueAsReading(
+                secondIssueId
+            )
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    HomeScreen(
+                        viewModel = viewModel,
+                        onBrowseClick = {},
+                        onLibraryClick = {},
+                        onCreateReadingListClick = {},
+                        onReadingListClick = { _, _ -> },
+                        onIssueClick = {},
+                        onReadingHistoryClick = {}
+                    )
+                }
+            }
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        "Active Reading List"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule
+                .onNodeWithText(
+                    "Active Reading List"
+                )
+                .assertIsDisplayed()
+
+            composeRule
+                .onNodeWithText(
+                    "Next up: Active Series #2"
+                )
+                .assertIsDisplayed()
+        }
+    }
 }

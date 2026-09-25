@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 
 enum class HomeReadingListSort {
     RECENTLY_UPDATED,
@@ -197,10 +198,16 @@ class HomeViewModel(
                     val summary =
                         summariesById[readingList.id]
 
+                    val continueItem =
+                        continueItems[readingList.id]
+
                     summary != null &&
-                        summary.readCount > 0 &&
+                        continueItem != null &&
                         summary.readCount < summary.totalCount &&
-                        continueItems.containsKey(readingList.id)
+                        (
+                             summary.readCount > 0 ||
+                            continueItem.readingStatus == ReadingStatus.READING
+                        )
                 }
                 .sortedWith(
                     compareBy<ReadingList> {

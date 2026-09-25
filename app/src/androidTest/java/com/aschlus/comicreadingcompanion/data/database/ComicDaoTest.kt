@@ -2462,4 +2462,127 @@ class ComicDaoTest {
                 results[1].completedAt
             )
         }
+
+    @Test
+    fun getUnreadReadingListItems_prioritizesReadingIssue() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name = "Test Publisher"
+                    )
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Continue Series",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2000
+                    )
+                )
+
+            val firstIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "First",
+                        publicationDate = null,
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val secondIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "2",
+                        title = "Second",
+                        publicationDate = null,
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val thirdIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "3",
+                        title = "Third",
+                        publicationDate = null,
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val readingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title = "Continue Test",
+                        description = null,
+                        publisherId = publisherId,
+                        universeId = null,
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            listOf(
+                firstIssueId,
+                secondIssueId,
+                thirdIssueId
+            ).forEachIndexed { index, issueId ->
+                comicDao.insertReadingListItem(
+                    ReadingListItem(
+                        readingListId = readingListId,
+                        sectionId = null,
+                        issueId = issueId,
+                        position = index + 1,
+                        required = true,
+                        notes = null
+                    )
+                )
+            }
+
+            comicDao.insertReadingProgress(
+                ReadingProgress(
+                    issueId = secondIssueId,
+                    status = ReadingStatus.READING,
+                    startedAt = 3000L,
+                    completedAt = null,
+                    notes = null
+                )
+            )
+
+            val continueItems =
+                comicDao
+                    .getUnreadReadingListItems()
+                    .first()
+
+            assertEquals(
+                secondIssueId,
+                continueItems.first().issueId
+            )
+
+            assertEquals(
+                2,
+                continueItems.first().position
+            )
+
+            assertEquals(
+                ReadingStatus.READING,
+                continueItems.first().readingStatus
+            )
+        }
 }
