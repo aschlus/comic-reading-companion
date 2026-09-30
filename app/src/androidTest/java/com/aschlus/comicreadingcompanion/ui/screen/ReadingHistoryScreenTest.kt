@@ -21,12 +21,10 @@ import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.database.entities.Series
 import com.aschlus.comicreadingcompanion.data.preferences.HomeUiPreferences
 import com.aschlus.comicreadingcompanion.data.repository.ComicRepository
+import com.aschlus.comicreadingcompanion.ui.component.recentReadSectionLabel
+import com.aschlus.comicreadingcompanion.ui.component.recentReadText
 import com.aschlus.comicreadingcompanion.ui.theme.ComicReadingCompanionTheme
 import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeViewModel
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
-import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.runBlocking
@@ -36,6 +34,12 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.ZoneId
+import java.util.Date
+import java.util.Locale
+import java.util.concurrent.TimeUnit
 
 @RunWith(AndroidJUnit4::class)
 class ReadingHistoryScreenTest {
@@ -400,5 +404,71 @@ class ReadingHistoryScreenTest {
         )
 
         return issueId
+    }
+
+    @Test
+    fun readingHistoryDateLabels_useCalendarDaysAcrossMidnight() {
+        val zoneId =
+            ZoneId.systemDefault()
+
+        val yesterdayLate =
+            LocalDate
+                .of(
+                    2026,
+                    9,
+                    29
+                )
+                .atTime(
+                    23,
+                    55
+                )
+                .atZone(zoneId)
+                .toInstant()
+                .toEpochMilli()
+
+        val todayEarly =
+            LocalDate
+                .of(
+                    2026,
+                    9,
+                    30
+                )
+                .atTime(
+                    0,
+                    5
+                )
+                .atZone(zoneId)
+                .toInstant()
+                .toEpochMilli()
+
+        assertEquals(
+            "YESTERDAY",
+            recentReadSectionLabel(
+                completedAt =
+                    yesterdayLate,
+                nowMillis =
+                    todayEarly
+            )
+        )
+
+        assertEquals(
+            "Read yesterday",
+            recentReadText(
+                completedAt =
+                    yesterdayLate,
+                nowMillis =
+                    todayEarly
+            )
+        )
+
+        assertEquals(
+            "TODAY",
+            recentReadSectionLabel(
+                completedAt =
+                    todayEarly,
+                nowMillis =
+                    todayEarly
+            )
+        )
     }
 }

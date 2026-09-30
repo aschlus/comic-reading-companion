@@ -176,20 +176,20 @@ class HomeViewModel(
             readingLists,
             readingListSummaries,
             continueItems,
-            recentlyOpenedReadingLists
+            homeUiPreferences.recentlyOpenedReadingListIds
         ) {
             readingLists,
             summaries,
             continueItems,
-            recentlyOpened ->
+            recentIds ->
 
             val summariesById =
                 summaries.associateBy { it.readingListId}
 
             val recentOrder =
-                recentlyOpened
-                    .mapIndexed { index, readingList ->
-                        readingList.id to index
+                recentIds
+                    .mapIndexed { index, readingListId ->
+                        readingListId to index
                     }
                     .toMap()
 

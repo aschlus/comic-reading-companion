@@ -934,4 +934,155 @@ class HomeViewModelTest {
                 }
             )
         }
+
+    @Test
+    fun continueReadingLists_usesPersistedRecentOrderOnFreshViewModel() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name =
+                            "Startup Publisher"
+                    )
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId =
+                            publisherId,
+                        title =
+                            "Startup Series",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2000
+                    )
+                )
+
+            suspend fun insertIssue(
+                number: String
+            ): Long {
+                return comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = number,
+                        title =
+                            "Issue $number",
+                        publicationDate = null,
+                        coverUrl = null,
+                        description = null,
+                        issueType =
+                            IssueType.REGULAR
+                    )
+                )
+            }
+
+            suspend fun insertList(
+                title: String,
+                issueId: Long,
+                updatedAt: Long
+            ): Long {
+                val readingListId =
+                    comicDao.insertReadingList(
+                        ReadingList(
+                            title = title,
+                            description = null,
+                            publisherId =
+                                publisherId,
+                            universeId = null,
+                            createdAt =
+                                updatedAt,
+                            updatedAt =
+                                updatedAt
+                        )
+                    )
+
+                comicDao.insertReadingListItem(
+                    ReadingListItem(
+                        readingListId =
+                            readingListId,
+                        sectionId = null,
+                        issueId = issueId,
+                        position = 1,
+                        required = true,
+                        notes = null
+                    )
+                )
+
+                return readingListId
+            }
+
+            val newerIssueId =
+                insertIssue("1")
+
+            val recentlyOpenedIssueId =
+                insertIssue("2")
+
+            val newerListId =
+                insertList(
+                    title =
+                        "Newer Updated List",
+                    issueId =
+                        newerIssueId,
+                    updatedAt =
+                        3000L
+                )
+
+            val recentlyOpenedListId =
+                insertList(
+                    title =
+                        "Persisted Recent List",
+                    issueId =
+                        recentlyOpenedIssueId,
+                    updatedAt =
+                        1000L
+                )
+
+            repository.markIssueAsReading(
+                newerIssueId
+            )
+
+            repository.markIssueAsReading(
+                recentlyOpenedIssueId
+            )
+
+            viewModel
+                .viewModelScope
+                .coroutineContext[Job]
+                ?.cancelAndJoin()
+
+            homeUiPreferences
+                .recordReadingListOpened(
+                    recentlyOpenedListId
+                )
+
+            viewModel =
+                HomeViewModel(
+                    repository = repository,
+                    homeUiPreferences =
+                        homeUiPreferences
+                )
+
+            val continueLists =
+                withTimeout(
+                    5000L.milliseconds
+                ) {
+                    viewModel
+                        .continueReadingLists
+                        .first { lists ->
+                            lists.size == 2
+                        }
+                }
+
+            assertEquals(
+                listOf(
+                    recentlyOpenedListId,
+                    newerListId
+                ),
+                continueLists.map {
+                    it.id
+                }
+            )
+        }
 }

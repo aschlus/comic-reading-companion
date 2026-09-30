@@ -1,9 +1,11 @@
 package com.aschlus.comicreadingcompanion.ui.component
 
 import java.text.SimpleDateFormat
+import java.time.Instant
+import java.time.ZoneId
+import java.time.temporal.ChronoUnit
 import java.util.Date
 import java.util.Locale
-import java.util.concurrent.TimeUnit
 
 internal fun recentReadText(
     completedAt: Long,
@@ -76,9 +78,26 @@ private fun recentReadElapsedDays(
     completedAt: Long,
     nowMillis: Long
 ): Long {
-    val elapsedMillis = (nowMillis - completedAt).coerceAtLeast(0L)
+    val zoneId = ZoneId.systemDefault()
 
-    return TimeUnit.MILLISECONDS.toDays(elapsedMillis)
+    val completedDate =
+        Instant
+            .ofEpochMilli(completedAt)
+            .atZone(zoneId)
+            .toLocalDate()
+
+    val currentDate =
+        Instant
+            .ofEpochMilli(nowMillis)
+            .atZone(zoneId)
+            .toLocalDate()
+
+    return ChronoUnit.DAYS
+        .between(
+            completedDate,
+            currentDate
+        )
+        .coerceAtLeast(0L)
 }
 
 private fun recentReadDate(
