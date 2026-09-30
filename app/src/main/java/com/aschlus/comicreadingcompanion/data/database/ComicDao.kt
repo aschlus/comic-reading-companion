@@ -22,6 +22,7 @@ import com.aschlus.comicreadingcompanion.data.database.models.IssueReadingListRe
 import com.aschlus.comicreadingcompanion.data.database.models.IssueSearchResult
 import com.aschlus.comicreadingcompanion.data.database.models.PublisherBrowseResult
 import com.aschlus.comicreadingcompanion.data.database.models.PublisherSeries
+import com.aschlus.comicreadingcompanion.data.database.models.ReadingListArtworkCover
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListContinueItem
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListIssue
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListSummary
@@ -429,7 +430,8 @@ interface ComicDao {
             series.title AS seriesTitle,
             issues.issueNumber AS issueNumber,
             issues.title AS issueTitle,
-            reading_progress.status AS readingStatus
+            reading_progress.status AS readingStatus,
+            issues.coverUrl AS coverUrl
         FROM reading_list_items
         INNER JOIN issues
             ON reading_list_items.issueId = issues.id
@@ -483,6 +485,23 @@ interface ComicDao {
     fun getReadingListsContainingIssue(
         issueId: Long
     ): Flow<List<IssueReadingListResult>>
+
+    @Query("""
+        SELECT
+            reading_list_items.readingListId AS readingListId,
+            issues.coverUrl AS coverUrl,
+            reading_list_items.position AS position
+        FROM reading_list_items
+        INNER JOIN issues
+            ON reading_list_items.issueId = issues.id
+        WHERE issues.coverUrl IS NOT NULL
+            AND TRIM(issues.coverUrl) != ''
+        ORDER BY
+            reading_list_items.readingListId ASC,
+            reading_list_items.position ASC
+    """)
+    fun getReadingListArtworkCovers():
+    Flow<List<ReadingListArtworkCover>>
 
 
     // Reading list sections

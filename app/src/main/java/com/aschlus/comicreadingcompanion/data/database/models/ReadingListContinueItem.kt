@@ -9,5 +9,6 @@ data class ReadingListContinueItem(
     val seriesTitle: String,
     val issueNumber: String,
     val issueTitle: String?,
-    val readingStatus: ReadingStatus?
+    val readingStatus: ReadingStatus?,
+    val coverUrl: String?
 )

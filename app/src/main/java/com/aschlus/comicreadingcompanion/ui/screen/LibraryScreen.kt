@@ -78,6 +78,9 @@ fun LibraryScreen(
     val continueItem by
         viewModel.continueItems.collectAsState()
 
+    val artworkCoverUrls by
+            viewModel.readingListArtworkCovers.collectAsState()
+
     val focusManager = LocalFocusManager.current
 
     var sortMenuExpanded by remember {
@@ -348,6 +351,7 @@ fun LibraryScreen(
                                 "${it.seriesTitle} #${it.issueNumber}"
                             },
                         artworkSeed = readingList.id,
+                        coverUrls = artworkCoverUrls[readingList.id].orEmpty(),
                         onClick = {
                             onReadingListClick(
                                 readingList.id,

@@ -60,6 +60,9 @@ fun HomeScreen(
     val recentlyReadIssues by
         viewModel.recentlyReadIssues.collectAsState()
 
+    val artworkCoverUrls by
+        viewModel.readingListArtworkCovers.collectAsState()
+
 
     Scaffold(
         contentWindowInsets =
@@ -131,6 +134,12 @@ fun HomeScreen(
                                 "${it.seriesTitle} #${it.issueNumber}"
                             },
                         artworkSeed = continueReadingList.id,
+                        coverUrls =
+                            listOfNotNull(
+                                continueItem?.coverUrl
+                            ).ifEmpty {
+                                artworkCoverUrls[continueReadingList.id].orEmpty()
+                            },
                         onClick = {
                             onReadingListClick(
                                 continueReadingList.id,

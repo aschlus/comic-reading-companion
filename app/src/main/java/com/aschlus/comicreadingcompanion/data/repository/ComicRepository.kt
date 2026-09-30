@@ -20,6 +20,7 @@ import com.aschlus.comicreadingcompanion.data.database.models.IssueReadingListRe
 import com.aschlus.comicreadingcompanion.data.database.models.IssueSearchResult
 import com.aschlus.comicreadingcompanion.data.database.models.PublisherBrowseResult
 import com.aschlus.comicreadingcompanion.data.database.models.PublisherSeries
+import com.aschlus.comicreadingcompanion.data.database.models.ReadingListArtworkCover
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListContinueItem
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListIssue
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListSummary
@@ -606,6 +607,11 @@ class ComicRepository(
         return comicDao.getReadingListsContainingIssue(
             issueId = issueId
         )
+    }
+
+    fun getReadingListArtworkCovers():
+    Flow<List<ReadingListArtworkCover>> {
+        return comicDao.getReadingListArtworkCovers()
     }
 
 

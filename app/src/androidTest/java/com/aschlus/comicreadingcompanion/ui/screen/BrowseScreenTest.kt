@@ -559,7 +559,7 @@ class BrowseScreenTest {
             ) {
                 composeRule
                     .onAllNodesWithText(
-                        "Slingers #0"
+                        "Test Issue"
                     )
                     .fetchSemanticsNodes()
                     .isNotEmpty()
@@ -567,7 +567,7 @@ class BrowseScreenTest {
 
             composeRule
                 .onNodeWithText(
-                    "Slingers #0"
+                    "Test Issue"
                 )
                 .assertIsDisplayed()
         }

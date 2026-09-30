@@ -232,4 +232,24 @@ class HomeViewModel(
                 started = SharingStarted.WhileSubscribed(5_000),
                 initialValue = emptyList()
             )
+
+    val readingListArtworkCovers: StateFlow<Map<Long, List<String>>> =
+        repository.getReadingListArtworkCovers()
+            .map { covers ->
+                covers
+                    .groupBy { it.readingListId }
+                    .mapValues { (_, listCovers) ->
+                        listCovers
+                            .asSequence()
+                            .map { it.coverUrl }
+                            .distinct()
+                            .take(4)
+                            .toList()
+                    }
+            }
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5_000),
+                initialValue = emptyMap()
+            )
 }

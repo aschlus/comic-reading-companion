@@ -44,6 +44,7 @@ fun ComicLibraryReadingListCard(
     progress: Float,
     continueText: String?,
     artworkSeed: Long,
+    coverUrls: List<String?> = emptyList(),
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     style: ReadingListStyle = ReadingListStyle.GREEN
@@ -98,7 +99,7 @@ fun ComicLibraryReadingListCard(
 
             ComicReadingListArtwork(
                 title = title,
-                coverUrls = emptyList(),
+                coverUrls = coverUrls.take(1),
                 seed = artworkSeed,
                 accentColor = readingListAccentColor(style),
                 modifier =

@@ -1092,7 +1092,7 @@ class ComicDaoTest {
                         issueNumber = "2",
                         title = "Issue Two",
                         publicationDate = "2000-02",
-                        coverUrl = null,
+                        coverUrl = "https://example.com/issue-2.jpg",
                         description = null,
                         issueType = IssueType.REGULAR
                     )
@@ -1169,6 +1169,10 @@ class ComicDaoTest {
             )
             assertEquals("Continue Test Series", continueItems.first().seriesTitle)
             assertEquals("2", continueItems.first().issueNumber)
+            assertEquals(
+                "https://example.com/issue-2.jpg",
+                continueItems.first().coverUrl
+            )
         }
 
     @Test
@@ -2583,6 +2587,122 @@ class ComicDaoTest {
             assertEquals(
                 ReadingStatus.READING,
                 continueItems.first().readingStatus
+            )
+        }
+
+    @Test
+    fun getReadingListArtworkCovers_returnsNonBlankCoversInListOrder() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(
+                        name = "Artwork Publisher"
+                    )
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Artwork Series",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2000
+                    )
+                )
+
+            val firstIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "First",
+                        publicationDate = null,
+                        coverUrl = "https://example.com/1.jpg",
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val secondIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "2",
+                        title = "Second",
+                        publicationDate = null,
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val thirdIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "3",
+                        title = "Third",
+                        publicationDate = null,
+                        coverUrl = "https://example.com/3.jpg",
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val readingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title = "Artwork List",
+                        description = null,
+                        publisherId = publisherId,
+                        universeId = null,
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            listOf(
+                firstIssueId,
+                secondIssueId,
+                thirdIssueId
+            ).forEachIndexed { index, issueId ->
+                comicDao.insertReadingListItem(
+                    ReadingListItem(
+                        readingListId =
+                            readingListId,
+                        sectionId = null,
+                        issueId = issueId,
+                        position = index + 1,
+                        required = true,
+                        notes = null
+                    )
+                )
+            }
+
+            val covers =
+                comicDao
+                    .getReadingListArtworkCovers()
+                    .first()
+
+            assertEquals(
+                listOf(
+                    "https://example.com/1.jpg",
+                    "https://example.com/3.jpg"
+                ),
+                covers.map {
+                    it.coverUrl
+                }
+            )
+
+            assertEquals(
+                listOf(1, 3),
+                covers.map {
+                    it.position
+                }
             )
         }
 }

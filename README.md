@@ -164,7 +164,7 @@ building, following, and tracking comic-book reading orders.
 - [x] Add reusable comic-style action panels and cards
 - [x] Add reusable progress indicators that fit the Comic Print style
 - [x] Add subtle halftone / ink-texture decoration without reducing readability
-- [ ] Add original app-owned placeholder / decorative artwork
+- [x] Add original app-owned placeholder / decorative artwork
 - [ ] Maintain accessible contrast and touch targets beneath stylized visuals
 - [ ] Create a coordinated dark-theme treatment
 - [ ] Apply the design system consistently across all screens
@@ -199,8 +199,8 @@ building, following, and tracking comic-book reading orders.
 - [x] Show Recently Read issues as a three-card row
 - [x] Remove the full reading-list library from Home once Library is available
 - [x] Remove search / sorting controls from Home once Library is available
-- [ ] Reading-list cover / hero artwork
-- [ ] Add original placeholder artwork when reading-list artwork is unavailable
+- [x] Reading-list cover / hero artwork
+- [x] Add original placeholder artwork when reading-list artwork is unavailable
 
 ### Library Screen
 
@@ -212,7 +212,7 @@ building, following, and tracking comic-book reading orders.
 - [x] Import a reading list as a secondary management action
 - [ ] Add library-focused filtering as needed
 - [x] Use Comic Print reading-list cards and progress treatment
-- [ ] Support reading-list cover / hero artwork when available
+- [x] Support reading-list cover / hero artwork when available
 
 ### Reading-List Detail UI
 
