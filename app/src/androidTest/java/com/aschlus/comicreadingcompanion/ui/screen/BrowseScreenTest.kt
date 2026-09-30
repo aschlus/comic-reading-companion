@@ -115,6 +115,8 @@ class BrowseScreenTest {
             composeRule.onNodeWithText("PUBLISHERS").assertIsDisplayed()
             composeRule.onNodeWithText("Marvel").assertIsDisplayed()
             composeRule.onNodeWithText("DC").assertIsDisplayed()
+            composeRule
+                .onNodeWithContentDescription("Marvel publisher artwork").assertIsDisplayed()
         }
     }
 

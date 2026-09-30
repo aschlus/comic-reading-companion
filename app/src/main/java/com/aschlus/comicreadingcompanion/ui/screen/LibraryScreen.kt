@@ -347,6 +347,7 @@ fun LibraryScreen(
                             continueItem?.let {
                                 "${it.seriesTitle} #${it.issueNumber}"
                             },
+                        artworkSeed = readingList.id,
                         onClick = {
                             onReadingListClick(
                                 readingList.id,

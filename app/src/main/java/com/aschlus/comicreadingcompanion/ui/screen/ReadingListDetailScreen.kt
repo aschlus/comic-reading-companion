@@ -809,6 +809,17 @@ fun ReadingListDetailScreen(
                 Text("Loading...")
             }
         } else {
+            val artworkCoverUrls =
+                remember(issues) {
+                    issues
+                        .asSequence()
+                        .mapNotNull { it.coverUrl }
+                        .filter { it.isNotBlank() }
+                        .distinct()
+                        .take(4)
+                        .toList()
+                }
+
             LazyColumn(
                 modifier =
                     Modifier
@@ -827,13 +838,11 @@ fun ReadingListDetailScreen(
                     key = "reading-list-hero"
                 ) {
                     ComicReadingListDetailHero(
-                        description =
-                            currentReadingList
-                                .description,
-                        coverUrl =
-                            issues
-                                .firstOrNull()
-                                ?.coverUrl,
+                        title = currentReadingList.title,
+                        description = currentReadingList.description,
+                        coverUrls = artworkCoverUrls,
+                        readingListId = currentReadingList.id,
+                        style = currentReadingList.style,
                         modifier =
                             Modifier.padding(
                                 top = 16.dp,

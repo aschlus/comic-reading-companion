@@ -702,6 +702,12 @@ class LibraryScreenTest {
                     "Next up: Amazing Spider-Man #2"
                 )
                 .assertIsDisplayed()
+
+            composeRule
+                .onNodeWithContentDescription(
+                    "Spider-Man Reading Order artwork"
+                )
+                .assertIsDisplayed()
         }
     }
 

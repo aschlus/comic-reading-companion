@@ -27,6 +27,9 @@ import com.aschlus.comicreadingcompanion.data.database.models.PublisherBrowseRes
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlueLight
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 
 @Composable
 fun ComicBrowsePublisherRow(
@@ -84,7 +87,10 @@ fun ComicBrowsePublisherRow(
                     .padding(
                         horizontal = 12.dp,
                         vertical = 10.dp
-                    ),
+                    )
+                    .semantics {
+                        contentDescription = "${publisher.name} publisher artwork"
+                    },
             verticalAlignment =
                 Alignment.CenterVertically
         ) {
@@ -93,7 +99,6 @@ fun ComicBrowsePublisherRow(
                     Modifier
                         .size(48.dp)
                         .clip(RoundedCornerShape(8.dp))
-                        .background(ComicBlueLight)
                         .border(
                             width = 2.dp,
                             color = ComicInk,
@@ -103,6 +108,12 @@ fun ComicBrowsePublisherRow(
                 contentAlignment =
                     Alignment.Center
             ) {
+                ComicArtworkBackground(
+                    seed = publisher.publisherId,
+                    accentColor = ComicBlueLight,
+                    modifier = Modifier.fillMaxSize()
+                )
+
                 Text(
                     text = initials,
                     style =

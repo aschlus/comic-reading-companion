@@ -130,6 +130,7 @@ fun HomeScreen(
                             continueItem?.let {
                                 "${it.seriesTitle} #${it.issueNumber}"
                             },
+                        artworkSeed = continueReadingList.id,
                         onClick = {
                             onReadingListClick(
                                 continueReadingList.id,

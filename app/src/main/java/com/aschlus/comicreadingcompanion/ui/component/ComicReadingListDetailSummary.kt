@@ -27,14 +27,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListStyle
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlue
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 
 @Composable
 fun ComicReadingListDetailHero(
+    title: String,
     description: String?,
-    coverUrl: String?,
+    coverUrls: List<String?>,
+    readingListId: Long,
+    style: ReadingListStyle,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -43,25 +47,16 @@ fun ComicReadingListDetailHero(
         verticalAlignment =
             Alignment.Top
     ) {
-        ComicCoverImage(
-            coverUrl = coverUrl,
-            contentDescription =
-                "Reading list cover",
+        ComicReadingListArtwork(
+            title = title,
+            coverUrls = coverUrls,
+            seed = readingListId,
+            accentColor = readingListAccentColor(style),
             modifier =
                 Modifier
-                    .width(86.dp)
-                    .aspectRatio(2f / 3f)
-                    .clip(
-                        RoundedCornerShape(6.dp)
-                    )
-                    .border(
-                        width = 2.dp,
-                        color = ComicInk,
-                        shape =
-                            RoundedCornerShape(6.dp)
-                    ),
-            placeholderText =
-                "No Cover"
+                    .width(112.dp)
+                    .aspectRatio(2f / 3f),
+            shape = RoundedCornerShape(6.dp)
         )
 
         Spacer(

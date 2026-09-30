@@ -23,8 +23,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -33,14 +31,8 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListStyle
-import com.aschlus.comicreadingcompanion.ui.theme.ComicBlue
-import com.aschlus.comicreadingcompanion.ui.theme.ComicGray
-import com.aschlus.comicreadingcompanion.ui.theme.ComicGreen
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicOrange
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPurple
-import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
 import kotlin.math.roundToInt
 
 @Composable
@@ -51,6 +43,7 @@ fun ComicLibraryReadingListCard(
     totalCount: Int,
     progress: Float,
     continueText: String?,
+    artworkSeed: Long,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     style: ReadingListStyle = ReadingListStyle.GREEN
@@ -60,39 +53,6 @@ fun ComicLibraryReadingListCard(
     val completionPercent =
         (progress.coerceIn(0f, 1f) * 100).roundToInt()
 
-    val thumbnailColor =
-        when (style) {
-            ReadingListStyle.GREEN ->
-                ComicGreen
-
-            ReadingListStyle.RED ->
-                ComicRed
-
-            ReadingListStyle.BLUE ->
-                ComicBlue
-
-            ReadingListStyle.PURPLE ->
-                ComicPurple
-
-            ReadingListStyle.ORANGE ->
-                ComicOrange
-
-            ReadingListStyle.GRAY ->
-                ComicGray
-        }
-
-    val initials =
-        title
-            .split(" ")
-            .filter {
-                it.isNotBlank()
-            }
-            .take(2)
-            .joinToString("") {
-                it.first()
-                    .uppercaseChar()
-                    .toString()
-            }
 
     Box(
         modifier = modifier
@@ -135,81 +95,19 @@ fun ComicLibraryReadingListCard(
             verticalAlignment =
                 Alignment.CenterVertically
         ) {
-            Box(
+
+            ComicReadingListArtwork(
+                title = title,
+                coverUrls = emptyList(),
+                seed = artworkSeed,
+                accentColor = readingListAccentColor(style),
                 modifier =
-                    Modifier
-                        .size(
-                            width = 74.dp,
-                            height = 104.dp
-                        )
-                        .clip(
-                            RoundedCornerShape(4.dp)
-                        )
-                        .background(
-                            color = thumbnailColor,
-                            shape = RoundedCornerShape(4.dp)
-                        )
-                        .border(
-                            width = 2.dp,
-                            color = ComicInk,
-                            shape = RoundedCornerShape(4.dp)
-                        ),
-                contentAlignment =
-                    Alignment.Center,
-            ) {
-                Canvas(
-                    modifier =
-                        Modifier.matchParentSize()
-                ) {
-                    val center =
-                        Offset(
-                            x = size.width / 2f,
-                            y = size.height / 2f
-                        )
-
-                    val rayLength = size.maxDimension * 0.65f
-
-                    repeat(12) { index ->
-                        rotate(
-                            degrees = index * 30f,
-                            pivot = center
-                        ) {
-                            drawLine(
-                                color =
-                                    ComicInk.copy(
-                                        alpha = 0.12f
-                                    ),
-                                start = center,
-                                end = Offset(
-                                    x = center.x,
-                                    y = center.y - rayLength
-                                ),
-                                strokeWidth = 8.dp.toPx()
-                            )
-                        }
-                    }
-                }
-
-                Text(
-                    text = initials,
-                    style = MaterialTheme.typography.headlineMedium.copy(
-                        fontSize = 27.sp,
-                        fontWeight = FontWeight.Black,
-                        drawStyle =
-                            Stroke(
-                                width = 5f
-                            )
+                    Modifier.size(
+                        width = 74.dp,
+                        height = 104.dp
                     ),
-                    color = ComicInk
-                )
-
-                Text(
-                    text = initials,
-                    fontSize = 27.sp,
-                    fontWeight = FontWeight.Black,
-                    color = ComicPaper
-                )
-            }
+                shape = RoundedCornerShape(4.dp)
+            )
 
             Spacer(modifier = Modifier.width(10.dp))
 

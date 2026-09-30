@@ -189,6 +189,8 @@ class ReadingListDetailScreenTest {
             composeRule.onNodeWithText("Amazing Spider-Man #30").assertIsDisplayed()
             composeRule.onNodeWithText("1 issues").assertIsDisplayed()
             composeRule.onNodeWithText("Jump to Current").assertIsDisplayed()
+            composeRule.onNodeWithContentDescription(
+                    "Spider-Man Volume Two artwork").assertIsDisplayed()
         }
     }
 
