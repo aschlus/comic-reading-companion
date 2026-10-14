@@ -1,0 +1,245 @@
+{
+  "publisher": "DC Comics",
+  "universes": [],
+  "series": [
+    {
+      "title": "Batman",
+      "volume": 4,
+      "startYear": 2025,
+      "endYear": null,
+      "externalIds": [
+        {
+          "source": "COMIC_VINE",
+          "externalId": "166619",
+          "url": "https://comicvine.gamespot.com/batman/4050-166619/"
+        }
+      ],
+      "issues": [
+        {
+          "number": "1",
+          "title": "Vast Colors in the Dark",
+          "publicationDate": "2025-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9849738-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": null,
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1130075",
+              "url": "https://comicvine.gamespot.com/batman-1-vast-colors-in-the-dark/4000-1130075/"
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "title": "Robin Rides the Black Mariah",
+          "publicationDate": "2025-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9881600-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": null,
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1136081",
+              "url": "https://comicvine.gamespot.com/batman-2-robin-rides-the-black-mariah/4000-1136081/"
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "title": "Crown of Storms",
+          "publicationDate": "2026-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9907400-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": null,
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1141898",
+              "url": "https://comicvine.gamespot.com/batman-3-crown-of-storms/4000-1141898/"
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "title": "Drop the Smoke",
+          "publicationDate": "2026-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9927474-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": null,
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1146667",
+              "url": "https://comicvine.gamespot.com/batman-4-drop-the-smoke/4000-1146667/"
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "title": "Date Night",
+          "publicationDate": "2026-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9955793-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": null,
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1151936",
+              "url": "https://comicvine.gamespot.com/batman-5-date-night/4000-1151936/"
+            }
+          ]
+        },
+        {
+          "number": "6",
+          "title": "Long Night",
+          "publicationDate": "2026-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9978793-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": null,
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1155352",
+              "url": "https://comicvine.gamespot.com/batman-6-long-night/4000-1155352/"
+            }
+          ]
+        },
+        {
+          "number": "7",
+          "title": "Kill Switch",
+          "publicationDate": "2026-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/10004090-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": null,
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1158144",
+              "url": "https://comicvine.gamespot.com/batman-7-kill-switch/4000-1158144/"
+            }
+          ]
+        },
+        {
+          "number": "8",
+          "title": "Three Old Men One Night in Gotham",
+          "publicationDate": "2026-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/10029348-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": null,
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1161291",
+              "url": "https://comicvine.gamespot.com/batman-8-three-old-men-one-night-in-gotham/4000-1161291/"
+            }
+          ]
+        },
+        {
+          "number": "9",
+          "title": "Operation Peregrine",
+          "publicationDate": "2026-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10060462-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": null,
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1165113",
+              "url": "https://comicvine.gamespot.com/batman-9-operation-peregrine/4000-1165113/"
+            }
+          ]
+        },
+        {
+          "number": "10",
+          "title": "Money and Blood",
+          "publicationDate": "2026-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10087492-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": null,
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1169584",
+              "url": "https://comicvine.gamespot.com/batman-10-money-and-blood/4000-1169584/"
+            }
+          ]
+        },
+        {
+          "number": "11",
+          "title": "Mutineers",
+          "publicationDate": "2026-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10112501-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": null,
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1175666",
+              "url": "https://comicvine.gamespot.com/batman-11-mutineers/4000-1175666/"
+            }
+          ]
+        },
+        {
+          "number": "12",
+          "title": "Verity",
+          "publicationDate": "2026-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/10146217-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": null,
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1184246",
+              "url": "https://comicvine.gamespot.com/batman-12-verity/4000-1184246/"
+            }
+          ]
+        },
+        {
+          "number": "13",
+          "title": "Siege Tactics",
+          "publicationDate": "2026-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10176530-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": null,
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1191012",
+              "url": "https://comicvine.gamespot.com/batman-13-siege-tactics/4000-1191012/"
+            }
+          ]
+        },
+        {
+          "number": "14",
+          "title": "Home Invasions; Rhetoric",
+          "publicationDate": "2026-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10206094-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": null,
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1196192",
+              "url": "https://comicvine.gamespot.com/batman-14-home-invasions-rhetoric/4000-1196192/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

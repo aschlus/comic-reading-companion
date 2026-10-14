@@ -1,0 +1,14 @@
+{
+  "publisher": "DC Comics",
+  "universes": [],
+  "series": [
+    {
+      "title": "Batman",
+      "volume": 4,
+      "startYear": 2025,
+      "endYear": null,
+      "comicVineVolumeId": 166619,
+      "defaultIssueType": "REGULAR"
+    }
+  ]
+}
