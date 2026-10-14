@@ -1,0 +1,22 @@
+{
+  "publisher": "DC Comics",
+  "universes": [
+    {
+      "name": "Earth-Two",
+      "designation": "Earth-Two",
+      "description": null
+    }
+  ],
+  "series": [
+    {
+      "title": "All-Star Comics",
+      "volume": 1,
+      "startYear": 1940,
+      "endYear": 1978,
+      "comicVineVolumeId": 2833,
+      "defaultIssueType": "REGULAR",
+      "expectedIssueCount": 74,
+      "defaultUniverseDesignation": "Earth-Two"
+    }
+  ]
+}

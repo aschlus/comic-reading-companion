@@ -1,0 +1,22 @@
+{
+  "publisher": "DC Comics",
+  "universes": [
+    {
+      "name": "Earth-Two",
+      "designation": "Earth-Two",
+      "description": null
+    }
+  ],
+  "series": [
+    {
+      "title": "Green Lantern",
+      "volume": 1,
+      "startYear": 1941,
+      "endYear": 1949,
+      "comicVineVolumeId": 25944,
+      "defaultIssueType": "REGULAR",
+      "expectedIssueCount": 38,
+      "defaultUniverseDesignation": "Earth-Two"
+    }
+  ]
+}

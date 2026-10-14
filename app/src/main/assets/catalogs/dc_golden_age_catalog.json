@@ -1,0 +1,4504 @@
+{
+  "publisher": "DC Comics",
+  "universes": [
+    {
+      "name": "Earth-Two",
+      "designation": "Earth-Two",
+      "description": null
+    }
+  ],
+  "series": [
+    {
+      "title": "Green Lantern",
+      "volume": 1,
+      "startYear": 1941,
+      "endYear": 1949,
+      "externalIds": [
+        {
+          "source": "COMIC_VINE",
+          "externalId": "25944",
+          "url": "https://comicvine.gamespot.com/green-lantern/4050-25944/"
+        }
+      ],
+      "issues": [
+        {
+          "number": "1",
+          "title": "Green Lantern",
+          "publicationDate": "1941-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/27783/732037-gl_1.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "153317",
+              "url": "https://comicvine.gamespot.com/green-lantern-1-green-lantern/4000-153317/"
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "title": "[Untitled]",
+          "publicationDate": "1941-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/27783/732040-gl_2.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "153318",
+              "url": "https://comicvine.gamespot.com/green-lantern-2-untitled/4000-153318/"
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "title": "The Living Graveyard of the Sea",
+          "publicationDate": "1942-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/27783/732142-gl_3.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "153321",
+              "url": "https://comicvine.gamespot.com/green-lantern-3-the-living-graveyard-of-the-sea/4000-153321/"
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "title": "Total War!",
+          "publicationDate": "1942-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/828438-4.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "159353",
+              "url": "https://comicvine.gamespot.com/green-lantern-4-total-war/4000-159353/"
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "title": "The Legion of the Lantern!",
+          "publicationDate": "1942-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/828440-5.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "159354",
+              "url": "https://comicvine.gamespot.com/green-lantern-5-the-legion-of-the-lantern/4000-159354/"
+            }
+          ]
+        },
+        {
+          "number": "6",
+          "title": "Empire of Exiles",
+          "publicationDate": "1942-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/828442-6.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "159355",
+              "url": "https://comicvine.gamespot.com/green-lantern-6-empire-of-exiles/4000-159355/"
+            }
+          ]
+        },
+        {
+          "number": "7",
+          "title": "The Wizard of Odds!",
+          "publicationDate": "1943-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/27783/732143-gl_7.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "153322",
+              "url": "https://comicvine.gamespot.com/green-lantern-7-the-wizard-of-odds/4000-153322/"
+            }
+          ]
+        },
+        {
+          "number": "8",
+          "title": "The Lady and Her Jewels!; A Lease on Life!; Doiby Dickles Deputy Detectives Ink.",
+          "publicationDate": "1943-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/828458-8.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "159356",
+              "url": "https://comicvine.gamespot.com/green-lantern-8-the-lady-and-her-jewels-a-lease-on/4000-159356/"
+            }
+          ]
+        },
+        {
+          "number": "9",
+          "title": "The School for Vandals!; Love Shouldn't Happen to a Dog!; Patsy the Punk Commits Haki Saki; The Tale of the Timid Terrors!",
+          "publicationDate": "1943-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/828465-9.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "159357",
+              "url": "https://comicvine.gamespot.com/green-lantern-9-the-school-for-vandals-love-should/4000-159357/"
+            }
+          ]
+        },
+        {
+          "number": "10",
+          "title": "The Man Who Wanted the World!",
+          "publicationDate": "1943-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/27783/732041-gl_10.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "153319",
+              "url": "https://comicvine.gamespot.com/green-lantern-10-the-man-who-wanted-the-world/4000-153319/"
+            }
+          ]
+        },
+        {
+          "number": "11",
+          "title": "The Dastardy Designs of Doiby Dickles' Pals!",
+          "publicationDate": "1944-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/828504-11.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "159359",
+              "url": "https://comicvine.gamespot.com/green-lantern-11-the-dastardy-designs-of-doiby-dic/4000-159359/"
+            }
+          ]
+        },
+        {
+          "number": "12",
+          "title": "It's Bad for Business!; Doiby Dickles Enters High Sassiety!; The Gambler!",
+          "publicationDate": "1944-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/828505-12.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "159360",
+              "url": "https://comicvine.gamespot.com/green-lantern-12-its-bad-for-business-doiby-dickle/4000-159360/"
+            }
+          ]
+        },
+        {
+          "number": "13",
+          "title": "Only Green Lantern Need Apply!; The Lord Haw-Haw of Crime!; Da Tantrim of Green Lantrin!",
+          "publicationDate": "1944-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/828507-13.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "159361",
+              "url": "https://comicvine.gamespot.com/green-lantern-13-only-green-lantern-need-apply-the/4000-159361/"
+            }
+          ]
+        },
+        {
+          "number": "14",
+          "title": "The Case of the Crooked Cook!; The Smile that Wins!; The Cave Kid Goes to Town!",
+          "publicationDate": "1944-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/828509-14.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "159362",
+              "url": "https://comicvine.gamespot.com/green-lantern-14-the-case-of-the-crooked-cook-the-/4000-159362/"
+            }
+          ]
+        },
+        {
+          "number": "15",
+          "title": "The Thoughts that Came to Life!; Carleton Congo Will Hoo-Doo You!",
+          "publicationDate": "1945-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/828511-15.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "159363",
+              "url": "https://comicvine.gamespot.com/green-lantern-15-the-thoughts-that-came-to-life-ca/4000-159363/"
+            }
+          ]
+        },
+        {
+          "number": "16",
+          "title": "The Man in the Moon; The Lizard of Fire!; The Jewel of Hope",
+          "publicationDate": "1945-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/828514-16.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "159364",
+              "url": "https://comicvine.gamespot.com/green-lantern-16-the-man-in-the-moon-the-lizard-of/4000-159364/"
+            }
+          ]
+        },
+        {
+          "number": "17",
+          "title": "The Mystery of the Missing Baby Doll!; Saturn Muscles In; Quirt vs. Culture!",
+          "publicationDate": "1945-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/828520-17.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "159365",
+              "url": "https://comicvine.gamespot.com/green-lantern-17-the-mystery-of-the-missing-baby-d/4000-159365/"
+            }
+          ]
+        },
+        {
+          "number": "18",
+          "title": "The Last of the Buccaneers!; The Connoisseur of Crime; The Man who Doubled in Death!",
+          "publicationDate": "1945-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/828521-18.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "159366",
+              "url": "https://comicvine.gamespot.com/green-lantern-18-the-last-of-the-buccaneers-the-co/4000-159366/"
+            }
+          ]
+        },
+        {
+          "number": "19",
+          "title": "Sing a Song of Disaster; Dickles vs. Fate; Jonah was a Jinx",
+          "publicationDate": "1946-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/828523-19.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "159367",
+              "url": "https://comicvine.gamespot.com/green-lantern-19-sing-a-song-of-disaster-dickles-v/4000-159367/"
+            }
+          ]
+        },
+        {
+          "number": "20",
+          "title": "Shadow of the Past; Untitled; The Gambler Comes Back",
+          "publicationDate": "1946-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/828749-20.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "159419",
+              "url": "https://comicvine.gamespot.com/green-lantern-20-shadow-of-the-past-untitled-the-g/4000-159419/"
+            }
+          ]
+        },
+        {
+          "number": "21",
+          "title": "The Woodman; The Good Humor Man; What Makes Goitrude Go?",
+          "publicationDate": "1946-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/828758-21.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "159420",
+              "url": "https://comicvine.gamespot.com/green-lantern-21-the-woodman-the-good-humor-man-wh/4000-159420/"
+            }
+          ]
+        },
+        {
+          "number": "22",
+          "title": "The Old-Fashioned Way; The Man Who Insults Everybody; The Invisible World",
+          "publicationDate": "1946-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/119838/2433033-greenlanternv1n22.png",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "159421",
+              "url": "https://comicvine.gamespot.com/green-lantern-22-the-old-fashioned-way-the-man-who/4000-159421/"
+            }
+          ]
+        },
+        {
+          "number": "23",
+          "title": "Doiby Dickles Da Stunt Man; The Man Who Went Back; Long Live Da King!",
+          "publicationDate": "1946-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/828762-23.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "159422",
+              "url": "https://comicvine.gamespot.com/green-lantern-23-doiby-dickles-da-stunt-man-the-ma/4000-159422/"
+            }
+          ]
+        },
+        {
+          "number": "24",
+          "title": "Once a Cop; Happy Boithday!; Indestructible Jones!",
+          "publicationDate": "1947-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/828764-24.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "159423",
+              "url": "https://comicvine.gamespot.com/green-lantern-24-once-a-cop-happy-boithday-indestr/4000-159423/"
+            }
+          ]
+        },
+        {
+          "number": "25",
+          "title": "The Diamond Magnet!; The Man who Couldn't Win!; The Man Behind the Mask!",
+          "publicationDate": "1947-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/828766-25.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "159424",
+              "url": "https://comicvine.gamespot.com/green-lantern-25-the-diamond-magnet-the-man-who-co/4000-159424/"
+            }
+          ]
+        },
+        {
+          "number": "26",
+          "title": "The Scourge of the Seas!; The Flood Maker!; The Song that Spelled Out Disaster",
+          "publicationDate": "1947-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/828780-26.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "159425",
+              "url": "https://comicvine.gamespot.com/green-lantern-26-the-scourge-of-the-seas-the-flood/4000-159425/"
+            }
+          ]
+        },
+        {
+          "number": "27",
+          "title": "The Freedom of the Skies!; The Lamb who Cried Wolf!; The Gambler Bets His Life!",
+          "publicationDate": "1947-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/829541-27.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "159443",
+              "url": "https://comicvine.gamespot.com/green-lantern-27-the-freedom-of-the-skies-the-lamb/4000-159443/"
+            }
+          ]
+        },
+        {
+          "number": "28",
+          "title": "The Fool Comes to Town!; The Tricks of the Sportsmaster; The Last Criminal on Earth!",
+          "publicationDate": "1947-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/27783/732145-gl_28.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "153323",
+              "url": "https://comicvine.gamespot.com/green-lantern-28-the-fool-comes-to-town-the-tricks/4000-153323/"
+            }
+          ]
+        },
+        {
+          "number": "29",
+          "title": "The Challenge of the Harlequin!; The Harlequin Haunts Green Lantern!",
+          "publicationDate": "1947-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/27783/732970-gl_29.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "153406",
+              "url": "https://comicvine.gamespot.com/green-lantern-29-the-challenge-of-the-harlequin-th/4000-153406/"
+            }
+          ]
+        },
+        {
+          "number": "30",
+          "title": "The Saga of Streak!; The Fatal Chance!; The Last Criminal Gets an Education!",
+          "publicationDate": "1948-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/829575-30.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "159444",
+              "url": "https://comicvine.gamespot.com/green-lantern-30-the-saga-of-streak-the-fatal-chan/4000-159444/"
+            }
+          ]
+        },
+        {
+          "number": "31",
+          "title": "The Terror of the Talismans; Beauty and the Fool!",
+          "publicationDate": "1948-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/27783/732972-gl_31.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "153407",
+              "url": "https://comicvine.gamespot.com/green-lantern-31-the-terror-of-the-talismans-beaut/4000-153407/"
+            }
+          ]
+        },
+        {
+          "number": "32",
+          "title": "The Case of the Astonishing Juggler!; The Case of the Conscience Fund!; The King of the Dam Builders!",
+          "publicationDate": "1948-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/829578-32.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "159445",
+              "url": "https://comicvine.gamespot.com/green-lantern-32-the-case-of-the-astonishing-juggl/4000-159445/"
+            }
+          ]
+        },
+        {
+          "number": "33",
+          "title": "Crime Goes West!; The Criminal Nobody Knew!; The Harlequin's Leap Year!",
+          "publicationDate": "1948-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/829579-33.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "159446",
+              "url": "https://comicvine.gamespot.com/green-lantern-33-crime-goes-west-the-criminal-nobo/4000-159446/"
+            }
+          ]
+        },
+        {
+          "number": "34",
+          "title": "The Harlequin's Secret Revealed!; Streak Meets the Princess!; Green Lantern vs. White Star!",
+          "publicationDate": "1948-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/829580-34.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "159447",
+              "url": "https://comicvine.gamespot.com/green-lantern-34-the-harlequins-secret-revealed-st/4000-159447/"
+            }
+          ]
+        },
+        {
+          "number": "35",
+          "title": "The Three-in-One Criminal!; Smash Finale!; Perfect Crimes for Sale!",
+          "publicationDate": "1948-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/27783/732973-gl_35.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "153408",
+              "url": "https://comicvine.gamespot.com/green-lantern-35-the-three-in-one-criminal-smash-f/4000-153408/"
+            }
+          ]
+        },
+        {
+          "number": "36",
+          "title": "The Riddle of the Red Domino!; Mystery of the Missing Messenger!; The Timberland Trail!",
+          "publicationDate": "1949-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/829582-36.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "159448",
+              "url": "https://comicvine.gamespot.com/green-lantern-36-the-riddle-of-the-red-domino-myst/4000-159448/"
+            }
+          ]
+        },
+        {
+          "number": "37",
+          "title": "Perils of the Trapper!; The Unexpected Guest!; The Secret of 13!; Too Many Suspects!",
+          "publicationDate": "1949-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/829618-37.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "159449",
+              "url": "https://comicvine.gamespot.com/green-lantern-37-perils-of-the-trapper-the-unexpec/4000-159449/"
+            }
+          ]
+        },
+        {
+          "number": "38",
+          "title": "The Murdered Clues!; The Double Play!; The Impossible Mr. Paradox!",
+          "publicationDate": "1949-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/829621-38.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "159450",
+              "url": "https://comicvine.gamespot.com/green-lantern-38-the-murdered-clues-the-double-pla/4000-159450/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "All-American Comics",
+      "volume": 1,
+      "startYear": 1939,
+      "endYear": 1948,
+      "externalIds": [
+        {
+          "source": "COMIC_VINE",
+          "externalId": "20663",
+          "url": "https://comicvine.gamespot.com/all-american-comics/4050-20663/"
+        }
+      ],
+      "issues": [
+        {
+          "number": "1",
+          "title": null,
+          "publicationDate": "1939-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/9116/683709-no.1.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "150520",
+              "url": "https://comicvine.gamespot.com/all-american-comics-1/4000-150520/"
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "title": null,
+          "publicationDate": "1939-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/4/45797/939352-all_american_comics__2___page_1.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "169075",
+              "url": "https://comicvine.gamespot.com/all-american-comics-2/4000-169075/"
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "title": null,
+          "publicationDate": "1939-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/27783/1058817-allmerican_3.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "187176",
+              "url": "https://comicvine.gamespot.com/all-american-comics-3/4000-187176/"
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "title": null,
+          "publicationDate": "1939-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/27783/1058819-allmerican_4.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "187177",
+              "url": "https://comicvine.gamespot.com/all-american-comics-4/4000-187177/"
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "title": null,
+          "publicationDate": "1939-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1109851-aac05.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "194937",
+              "url": "https://comicvine.gamespot.com/all-american-comics-5/4000-194937/"
+            }
+          ]
+        },
+        {
+          "number": "6",
+          "title": null,
+          "publicationDate": "1939-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1109852-aac06.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "194938",
+              "url": "https://comicvine.gamespot.com/all-american-comics-6/4000-194938/"
+            }
+          ]
+        },
+        {
+          "number": "7",
+          "title": null,
+          "publicationDate": "1939-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1109854-aac07.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "194939",
+              "url": "https://comicvine.gamespot.com/all-american-comics-7/4000-194939/"
+            }
+          ]
+        },
+        {
+          "number": "8",
+          "title": "Gary Concord, the Ultra-Man: \"Origin, Part 1\"",
+          "publicationDate": "1939-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/27783/1058820-allmerican_8.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "187178",
+              "url": "https://comicvine.gamespot.com/all-american-comics-8-gary-concord-the-ultra-man-o/4000-187178/"
+            }
+          ]
+        },
+        {
+          "number": "9",
+          "title": "Gary Concord, the Ultra-Man: \"Origin, Part 2\"",
+          "publicationDate": "1939-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/27783/1059399-allmerican_9.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "187222",
+              "url": "https://comicvine.gamespot.com/all-american-comics-9-gary-concord-the-ultra-man-o/4000-187222/"
+            }
+          ]
+        },
+        {
+          "number": "10",
+          "title": "Red White & Blue: \"Lightning Over New York\"",
+          "publicationDate": "1940-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/27783/1058822-allmerican_10.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "187179",
+              "url": "https://comicvine.gamespot.com/all-american-comics-10-red-white-and-blue-lightnin/4000-187179/"
+            }
+          ]
+        },
+        {
+          "number": "11",
+          "title": "Red, White, and Blue: \"The Murder of Senator Carter\"",
+          "publicationDate": "1940-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/27783/1059406-allmerican_11.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "187224",
+              "url": "https://comicvine.gamespot.com/all-american-comics-11-red-white-and-blue-the-murd/4000-187224/"
+            }
+          ]
+        },
+        {
+          "number": "12",
+          "title": "Red, White, and Blue: \"Who Blew Up the Williams Works?\"",
+          "publicationDate": "1940-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/27783/1058968-allmerican_12.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "187201",
+              "url": "https://comicvine.gamespot.com/all-american-comics-12-red-white-and-blue-who-blew/4000-187201/"
+            }
+          ]
+        },
+        {
+          "number": "13",
+          "title": "Gary Concord, the Ultra-Man: \"Tor Attacks America, Part 2\"",
+          "publicationDate": "1940-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/27783/1059274-allmerican_13.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "187210",
+              "url": "https://comicvine.gamespot.com/all-american-comics-13-gary-concord-the-ultra-man-/4000-187210/"
+            }
+          ]
+        },
+        {
+          "number": "14",
+          "title": "Red, White, and Blue: \"Mystery of Spott Field\"",
+          "publicationDate": "1940-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/27783/1059407-allmerican_14.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "187225",
+              "url": "https://comicvine.gamespot.com/all-american-comics-14-red-white-and-blue-mystery-/4000-187225/"
+            }
+          ]
+        },
+        {
+          "number": "15",
+          "title": "Gary Concord, the Ultra-Man: \"Marman's Monsters Have Escaped\"",
+          "publicationDate": "1940-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/27783/1059275-allmerican_15.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "187211",
+              "url": "https://comicvine.gamespot.com/all-american-comics-15-gary-concord-the-ultra-man-/4000-187211/"
+            }
+          ]
+        },
+        {
+          "number": "16",
+          "title": "The Origin of the Green Lantern",
+          "publicationDate": "1940-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/9506/316454-20663-123898-1-all-american-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "123898",
+              "url": "https://comicvine.gamespot.com/all-american-comics-16-the-origin-of-the-green-lan/4000-123898/"
+            }
+          ]
+        },
+        {
+          "number": "17",
+          "title": "\"The Sign of the Green Lantern\"",
+          "publicationDate": "1940-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/24485/430353-all-american_017.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "132049",
+              "url": "https://comicvine.gamespot.com/all-american-comics-17-the-sign-of-the-green-lante/4000-132049/"
+            }
+          ]
+        },
+        {
+          "number": "18",
+          "title": "Green Lantern: \"At the World's Fair\"",
+          "publicationDate": "1940-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/24485/430354-All-American_018.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "132050",
+              "url": "https://comicvine.gamespot.com/all-american-comics-18-green-lantern-at-the-worlds/4000-132050/"
+            }
+          ]
+        },
+        {
+          "number": "19",
+          "title": "Green Lantern: \"The Insurance Racket\"",
+          "publicationDate": "1940-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/23749/422797-5799_20060715120815_large.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "131632",
+              "url": "https://comicvine.gamespot.com/all-american-comics-19-green-lantern-the-insurance/4000-131632/"
+            }
+          ]
+        },
+        {
+          "number": "20",
+          "title": "Green Lantern: \"Mystery at Apex Studios\"",
+          "publicationDate": "1940-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/119838/2555989-allamerican20.png",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "132051",
+              "url": "https://comicvine.gamespot.com/all-american-comics-20-green-lantern-mystery-at-ap/4000-132051/"
+            }
+          ]
+        },
+        {
+          "number": "21",
+          "title": "The Long Lost Son",
+          "publicationDate": "1940-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/6/69951/3126102-21-1.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "132127",
+              "url": "https://comicvine.gamespot.com/all-american-comics-21-the-long-lost-son/4000-132127/"
+            }
+          ]
+        },
+        {
+          "number": "22",
+          "title": "The Green Lantern Aids Police",
+          "publicationDate": "1941-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/24485/431509-All-American_022.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "132128",
+              "url": "https://comicvine.gamespot.com/all-american-comics-22-the-green-lantern-aids-poli/4000-132128/"
+            }
+          ]
+        },
+        {
+          "number": "23",
+          "title": "Green Lantern: \"The Sins of the Father\"",
+          "publicationDate": "1941-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/24485/431511-All-American_023.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "132129",
+              "url": "https://comicvine.gamespot.com/all-american-comics-23-green-lantern-the-sins-of-t/4000-132129/"
+            }
+          ]
+        },
+        {
+          "number": "24",
+          "title": "Green Lantern: \"The Slave Racket\"",
+          "publicationDate": "1941-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/24485/431512-All-American_024.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "132130",
+              "url": "https://comicvine.gamespot.com/all-american-comics-24-green-lantern-the-slave-rac/4000-132130/"
+            }
+          ]
+        },
+        {
+          "number": "25",
+          "title": "Green Lantern: \"Sabotage at the Steel Mills\"",
+          "publicationDate": "1941-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/119838/2745229-allamerican25.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "132131",
+              "url": "https://comicvine.gamespot.com/all-american-comics-25-green-lantern-sabotage-at-t/4000-132131/"
+            }
+          ]
+        },
+        {
+          "number": "26",
+          "title": "Green Lantern: \"The Case of the Loan Shark\"",
+          "publicationDate": "1941-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/8/84205/3901369-431515-all-american_026.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "132132",
+              "url": "https://comicvine.gamespot.com/all-american-comics-26-green-lantern-the-case-of-t/4000-132132/"
+            }
+          ]
+        },
+        {
+          "number": "27",
+          "title": "Introducing Doiby Dickles",
+          "publicationDate": "1941-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/24485/431516-All-American_027.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "132133",
+              "url": "https://comicvine.gamespot.com/all-american-comics-27-introducing-doiby-dickles/4000-132133/"
+            }
+          ]
+        },
+        {
+          "number": "28",
+          "title": "Green Lantern: \"A Case of Heart Failure\"",
+          "publicationDate": "1941-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/8/84205/4032747-3901375-431517-all-american_028.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "132134",
+              "url": "https://comicvine.gamespot.com/all-american-comics-28-green-lantern-a-case-of-hea/4000-132134/"
+            }
+          ]
+        },
+        {
+          "number": "29",
+          "title": "Green Lantern: \"The Patent Medicine Racket\"",
+          "publicationDate": "1941-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/119838/2757126-allamerican29.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "132135",
+              "url": "https://comicvine.gamespot.com/all-american-comics-29-green-lantern-the-patent-me/4000-132135/"
+            }
+          ]
+        },
+        {
+          "number": "30",
+          "title": "The Bail Bond Racketeers",
+          "publicationDate": "1941-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/119838/2760477-allamerican30.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "132136",
+              "url": "https://comicvine.gamespot.com/all-american-comics-30-the-bail-bond-racketeers/4000-132136/"
+            }
+          ]
+        },
+        {
+          "number": "31",
+          "title": "The Adventure of the Underfed Orphans!",
+          "publicationDate": "1941-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/24485/431520-All-American_031.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "132137",
+              "url": "https://comicvine.gamespot.com/all-american-comics-31-the-adventure-of-the-underf/4000-132137/"
+            }
+          ]
+        },
+        {
+          "number": "32",
+          "title": "The Tablet of Kali",
+          "publicationDate": "1941-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/24485/431525-All-American_032.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "132139",
+              "url": "https://comicvine.gamespot.com/all-american-comics-32-the-tablet-of-kali/4000-132139/"
+            }
+          ]
+        },
+        {
+          "number": "33",
+          "title": "The American Way",
+          "publicationDate": "1941-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/24485/431529-All-American_033.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "132140",
+              "url": "https://comicvine.gamespot.com/all-american-comics-33-the-american-way/4000-132140/"
+            }
+          ]
+        },
+        {
+          "number": "34",
+          "title": "Green Lantern: \"The Building Racket\"",
+          "publicationDate": "1942-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/24485/431530-All-American_034.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "132141",
+              "url": "https://comicvine.gamespot.com/all-american-comics-34-green-lantern-the-building-/4000-132141/"
+            }
+          ]
+        },
+        {
+          "number": "35",
+          "title": "Green Lantern: \"Doiby Discovers Green Lantern's Identity\"",
+          "publicationDate": "1942-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/24485/431531-All-American_035.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "132142",
+              "url": "https://comicvine.gamespot.com/all-american-comics-35-green-lantern-doiby-discove/4000-132142/"
+            }
+          ]
+        },
+        {
+          "number": "36",
+          "title": "Green Lantern: \"Murder on Wheels\"",
+          "publicationDate": "1942-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/24485/431535-All-American_036.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "132150",
+              "url": "https://comicvine.gamespot.com/all-american-comics-36-green-lantern-murder-on-whe/4000-132150/"
+            }
+          ]
+        },
+        {
+          "number": "37",
+          "title": "The Sinister Plot of Professor Casper",
+          "publicationDate": "1942-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/24485/431536-All-American_037.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "132151",
+              "url": "https://comicvine.gamespot.com/all-american-comics-37-the-sinister-plot-of-profes/4000-132151/"
+            }
+          ]
+        },
+        {
+          "number": "38",
+          "title": "Green Lantern vs. a Modern Napoleon",
+          "publicationDate": "1942-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/24485/431537-All-American_038.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "132152",
+              "url": "https://comicvine.gamespot.com/all-american-comics-38-green-lantern-vs-a-modern-n/4000-132152/"
+            }
+          ]
+        },
+        {
+          "number": "39",
+          "title": "Mystery of the Theater of Fear",
+          "publicationDate": "1942-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/24485/431538-All-American_039.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "132153",
+              "url": "https://comicvine.gamespot.com/all-american-comics-39-mystery-of-the-theater-of-f/4000-132153/"
+            }
+          ]
+        },
+        {
+          "number": "40",
+          "title": "The Circle of Kafoon",
+          "publicationDate": "1942-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/24485/431539-All-American_040.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "132154",
+              "url": "https://comicvine.gamespot.com/all-american-comics-40-the-circle-of-kafoon/4000-132154/"
+            }
+          ]
+        },
+        {
+          "number": "41",
+          "title": "The Tribe of Terror",
+          "publicationDate": "1942-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/24485/432742-all_american_041.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "132138",
+              "url": "https://comicvine.gamespot.com/all-american-comics-41-the-tribe-of-terror/4000-132138/"
+            }
+          ]
+        },
+        {
+          "number": "42",
+          "title": "Green Lantern, Our New Police Chief",
+          "publicationDate": "1942-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53662/1009797-allamerican42.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "179881",
+              "url": "https://comicvine.gamespot.com/all-american-comics-42-green-lantern-our-new-polic/4000-179881/"
+            }
+          ]
+        },
+        {
+          "number": "43",
+          "title": "Green Lantern, Our New Police Chief",
+          "publicationDate": "1942-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53662/1007872-alla4301.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "179415",
+              "url": "https://comicvine.gamespot.com/all-american-comics-43-green-lantern-our-new-polic/4000-179415/"
+            }
+          ]
+        },
+        {
+          "number": "44",
+          "title": "Green Lantern: \"The Perfect Crime\"",
+          "publicationDate": "1942-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53662/1008756-alla4401.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "179778",
+              "url": "https://comicvine.gamespot.com/all-american-comics-44-green-lantern-the-perfect-c/4000-179778/"
+            }
+          ]
+        },
+        {
+          "number": "45",
+          "title": "Green Lantern: \"The Headstrong Heiress\"",
+          "publicationDate": "1942-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53662/1008759-allamerican45_00___cov.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "179777",
+              "url": "https://comicvine.gamespot.com/all-american-comics-45-green-lantern-the-headstron/4000-179777/"
+            }
+          ]
+        },
+        {
+          "number": "46",
+          "title": "The Riddle of Dickles Manor",
+          "publicationDate": "1943-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1098350-aac46.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "193382",
+              "url": "https://comicvine.gamespot.com/all-american-comics-46-the-riddle-of-dickles-manor/4000-193382/"
+            }
+          ]
+        },
+        {
+          "number": "47",
+          "title": "Green Lantern: \"The Disappearing Damsel\"",
+          "publicationDate": "1943-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53662/1008761-all_american_comics_047_00__cover_.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "179776",
+              "url": "https://comicvine.gamespot.com/all-american-comics-47-green-lantern-the-disappear/4000-179776/"
+            }
+          ]
+        },
+        {
+          "number": "48",
+          "title": "Green Lantern: \"League of the Three-Eyed Men\"",
+          "publicationDate": "1943-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1098358-aac48.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "193383",
+              "url": "https://comicvine.gamespot.com/all-american-comics-48-green-lantern-league-of-the/4000-193383/"
+            }
+          ]
+        },
+        {
+          "number": "49",
+          "title": "The Saga of Doiby Dickles' Cab!",
+          "publicationDate": "1943-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1098359-aac49.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "193384",
+              "url": "https://comicvine.gamespot.com/all-american-comics-49-the-saga-of-doiby-dickles-c/4000-193384/"
+            }
+          ]
+        },
+        {
+          "number": "50",
+          "title": "Green Lantern: \"Deep in the Heart of Crime!\"",
+          "publicationDate": "1943-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/1123985-50.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "196655",
+              "url": "https://comicvine.gamespot.com/all-american-comics-50-green-lantern-deep-in-the-h/4000-196655/"
+            }
+          ]
+        },
+        {
+          "number": "51",
+          "title": "Murder Under the Stars",
+          "publicationDate": "1943-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53662/1008763-allamerican51_01.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "179775",
+              "url": "https://comicvine.gamespot.com/all-american-comics-51-murder-under-the-stars/4000-179775/"
+            }
+          ]
+        },
+        {
+          "number": "52",
+          "title": "The Spotlight on Crime!",
+          "publicationDate": "1943-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1098362-aac52.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "193385",
+              "url": "https://comicvine.gamespot.com/all-american-comics-52-the-spotlight-on-crime/4000-193385/"
+            }
+          ]
+        },
+        {
+          "number": "53",
+          "title": "The Mail Goes Through",
+          "publicationDate": "1943-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53662/1008767-alla5301.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "179774",
+              "url": "https://comicvine.gamespot.com/all-american-comics-53-the-mail-goes-through/4000-179774/"
+            }
+          ]
+        },
+        {
+          "number": "54",
+          "title": "Green Lantern: \"Crime Is an Art\"",
+          "publicationDate": "1943-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53662/1008771-alla5401.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "179773",
+              "url": "https://comicvine.gamespot.com/all-american-comics-54-green-lantern-crime-is-an-a/4000-179773/"
+            }
+          ]
+        },
+        {
+          "number": "55",
+          "title": "Green Lantern and the Riddle of the Runaway Trolley",
+          "publicationDate": "1944-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53662/1008776-alla5501.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "179772",
+              "url": "https://comicvine.gamespot.com/all-american-comics-55-green-lantern-and-the-riddl/4000-179772/"
+            }
+          ]
+        },
+        {
+          "number": "56",
+          "title": "Green Lantern and the Reforming of Elegant Esmond",
+          "publicationDate": "1944-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53662/1008778-aac05601.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "179782",
+              "url": "https://comicvine.gamespot.com/all-american-comics-56-green-lantern-and-the-refor/4000-179782/"
+            }
+          ]
+        },
+        {
+          "number": "57",
+          "title": "Green Lantern and the Mystery of the Melancholy Men",
+          "publicationDate": "1944-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53662/1008781-alla5701.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "179781",
+              "url": "https://comicvine.gamespot.com/all-american-comics-57-green-lantern-and-the-myste/4000-179781/"
+            }
+          ]
+        },
+        {
+          "number": "58",
+          "title": "Green Lantern in \"The Mystery of Marvelous Mervyn\"",
+          "publicationDate": "1944-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53662/1008782-alla5801.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "179780",
+              "url": "https://comicvine.gamespot.com/all-american-comics-58-green-lantern-in-the-myster/4000-179780/"
+            }
+          ]
+        },
+        {
+          "number": "59",
+          "title": "The Story of the Man Who Couldn't Tell the Truth!!",
+          "publicationDate": "1944-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1098363-aac59.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "193386",
+              "url": "https://comicvine.gamespot.com/all-american-comics-59-the-story-of-the-man-who-co/4000-193386/"
+            }
+          ]
+        },
+        {
+          "number": "60",
+          "title": "Beware of Pickpockets",
+          "publicationDate": "1944-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53662/1008784-all_american_060_1200_00.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "179779",
+              "url": "https://comicvine.gamespot.com/all-american-comics-60-beware-of-pickpockets/4000-179779/"
+            }
+          ]
+        },
+        {
+          "number": "61",
+          "title": "Green Lantern: \"Fighters Never Quit\"",
+          "publicationDate": "1944-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/24485/430335-All-American_061.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "132048",
+              "url": "https://comicvine.gamespot.com/all-american-comics-61-green-lantern-fighters-neve/4000-132048/"
+            }
+          ]
+        },
+        {
+          "number": "62",
+          "title": "Green Lantern: \"Doiby Dickles, Da Districk Attoiney\"",
+          "publicationDate": "1944-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/1123996-62.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "196656",
+              "url": "https://comicvine.gamespot.com/all-american-comics-62-green-lantern-doiby-dickles/4000-196656/"
+            }
+          ]
+        },
+        {
+          "number": "63",
+          "title": "The Garrulous Mr. Gabb",
+          "publicationDate": "1945-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1098364-aac63.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "193387",
+              "url": "https://comicvine.gamespot.com/all-american-comics-63-the-garrulous-mr-gabb/4000-193387/"
+            }
+          ]
+        },
+        {
+          "number": "64",
+          "title": "A Bag of Assorted Nuts",
+          "publicationDate": "1945-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1109891-aac64.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "194948",
+              "url": "https://comicvine.gamespot.com/all-american-comics-64-a-bag-of-assorted-nuts/4000-194948/"
+            }
+          ]
+        },
+        {
+          "number": "65",
+          "title": "The Man Who Lost Wednesday",
+          "publicationDate": "1945-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1098366-aac65.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "193388",
+              "url": "https://comicvine.gamespot.com/all-american-comics-65-the-man-who-lost-wednesday/4000-193388/"
+            }
+          ]
+        },
+        {
+          "number": "66",
+          "title": "The Soles of Manhattan",
+          "publicationDate": "1945-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1109886-aac66.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "194946",
+              "url": "https://comicvine.gamespot.com/all-american-comics-66-the-soles-of-manhattan/4000-194946/"
+            }
+          ]
+        },
+        {
+          "number": "67",
+          "title": "King Shark Comes Back!",
+          "publicationDate": "1945-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1098367-aac67.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "193389",
+              "url": "https://comicvine.gamespot.com/all-american-comics-67-king-shark-comes-back/4000-193389/"
+            }
+          ]
+        },
+        {
+          "number": "68",
+          "title": "Green Lantern Meets Napoleon and Joe Safeen",
+          "publicationDate": "1945-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1098370-aac68.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "193391",
+              "url": "https://comicvine.gamespot.com/all-american-comics-68-green-lantern-meets-napoleo/4000-193391/"
+            }
+          ]
+        },
+        {
+          "number": "69",
+          "title": "Green Lantern: \"The Backwards Man\"",
+          "publicationDate": "1945-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/1123997-69.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "196658",
+              "url": "https://comicvine.gamespot.com/all-american-comics-69-green-lantern-the-backwards/4000-196658/"
+            }
+          ]
+        },
+        {
+          "number": "70",
+          "title": "Green Lantern: \"Love at First Blight\"",
+          "publicationDate": "1946-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/1123998-70.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "196659",
+              "url": "https://comicvine.gamespot.com/all-american-comics-70-green-lantern-love-at-first/4000-196659/"
+            }
+          ]
+        },
+        {
+          "number": "71",
+          "title": "Doiby Dickles, The Human Bomb!",
+          "publicationDate": "1946-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/27783/741826-allameican_71.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "153743",
+              "url": "https://comicvine.gamespot.com/all-american-comics-71-doiby-dickles-the-human-bom/4000-153743/"
+            }
+          ]
+        },
+        {
+          "number": "72",
+          "title": "Rumors of the Round Table",
+          "publicationDate": "1946-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1098371-aac72.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "193392",
+              "url": "https://comicvine.gamespot.com/all-american-comics-72-rumors-of-the-round-table/4000-193392/"
+            }
+          ]
+        },
+        {
+          "number": "73",
+          "title": "Mountain Music Mayhem!",
+          "publicationDate": "1946-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1098374-aac73.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "193393",
+              "url": "https://comicvine.gamespot.com/all-american-comics-73-mountain-music-mayhem/4000-193393/"
+            }
+          ]
+        },
+        {
+          "number": "74",
+          "title": "The Slap Happy Shoes!",
+          "publicationDate": "1946-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/1124002-74.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "196660",
+              "url": "https://comicvine.gamespot.com/all-american-comics-74-the-slap-happy-shoes/4000-196660/"
+            }
+          ]
+        },
+        {
+          "number": "75",
+          "title": "Adventure in a Planetarium",
+          "publicationDate": "1946-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1098376-aac75.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "193394",
+              "url": "https://comicvine.gamespot.com/all-american-comics-75-adventure-in-a-planetarium/4000-193394/"
+            }
+          ]
+        },
+        {
+          "number": "76",
+          "title": "Spring Time for Doiby",
+          "publicationDate": "1946-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1109849-aac76.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "194936",
+              "url": "https://comicvine.gamespot.com/all-american-comics-76-spring-time-for-doiby/4000-194936/"
+            }
+          ]
+        },
+        {
+          "number": "77",
+          "title": "The Case Of The Curious Critters",
+          "publicationDate": "1946-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/1124003-77.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "196661",
+              "url": "https://comicvine.gamespot.com/all-american-comics-77-the-case-of-the-curious-cri/4000-196661/"
+            }
+          ]
+        },
+        {
+          "number": "78",
+          "title": "The Giggling Gangsters!",
+          "publicationDate": "1946-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1098377-aac78.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "193395",
+              "url": "https://comicvine.gamespot.com/all-american-comics-78-the-giggling-gangsters/4000-193395/"
+            }
+          ]
+        },
+        {
+          "number": "79",
+          "title": "\"Mutt & Jeff\"",
+          "publicationDate": "1946-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/1124005-79.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "196662",
+              "url": "https://comicvine.gamespot.com/all-american-comics-79-mutt-and-jeff/4000-196662/"
+            }
+          ]
+        },
+        {
+          "number": "80",
+          "title": "Land of the Overgrown Rabbits",
+          "publicationDate": "1946-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/27783/732983-all_amer_80.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "153409",
+              "url": "https://comicvine.gamespot.com/all-american-comics-80-land-of-the-overgrown-rabbi/4000-153409/"
+            }
+          ]
+        },
+        {
+          "number": "81",
+          "title": "Two Twisted Twerps!",
+          "publicationDate": "1947-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1098379-aac81.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "193396",
+              "url": "https://comicvine.gamespot.com/all-american-comics-81-two-twisted-twerps/4000-193396/"
+            }
+          ]
+        },
+        {
+          "number": "82",
+          "title": "The Beloved Bandit!",
+          "publicationDate": "1947-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1098381-aac82.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "193397",
+              "url": "https://comicvine.gamespot.com/all-american-comics-82-the-beloved-bandit/4000-193397/"
+            }
+          ]
+        },
+        {
+          "number": "83",
+          "title": "\"Mutt & Jeff\"",
+          "publicationDate": "1947-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1098337-aac83.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "193378",
+              "url": "https://comicvine.gamespot.com/all-american-comics-83-mutt-and-jeff/4000-193378/"
+            }
+          ]
+        },
+        {
+          "number": "84",
+          "title": "The Adventure of the Man With two Faces",
+          "publicationDate": "1947-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1109848-aac84.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "194935",
+              "url": "https://comicvine.gamespot.com/all-american-comics-84-the-adventure-of-the-man-wi/4000-194935/"
+            }
+          ]
+        },
+        {
+          "number": "85",
+          "title": "The Rise and Fall of 'Crusher' Crock",
+          "publicationDate": "1947-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1098401-aac85.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "193400",
+              "url": "https://comicvine.gamespot.com/all-american-comics-85-the-rise-and-fall-of-crushe/4000-193400/"
+            }
+          ]
+        },
+        {
+          "number": "86",
+          "title": "The Crime of the Month Club",
+          "publicationDate": "1947-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1098408-aac86.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "193401",
+              "url": "https://comicvine.gamespot.com/all-american-comics-86-the-crime-of-the-month-club/4000-193401/"
+            }
+          ]
+        },
+        {
+          "number": "87",
+          "title": "The Strange Case of Professor Nobody",
+          "publicationDate": "1947-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/27783/1058578-allmerican_87.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "187171",
+              "url": "https://comicvine.gamespot.com/all-american-comics-87-the-strange-case-of-profess/4000-187171/"
+            }
+          ]
+        },
+        {
+          "number": "88",
+          "title": "Canvas of Crime",
+          "publicationDate": "1947-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1098409-aac88.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "193402",
+              "url": "https://comicvine.gamespot.com/all-american-comics-88-canvas-of-crime/4000-193402/"
+            }
+          ]
+        },
+        {
+          "number": "89",
+          "title": "Green Lantern: \"The Harlequin\"",
+          "publicationDate": "1947-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/27783/732985-all_amer_89.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "153410",
+              "url": "https://comicvine.gamespot.com/all-american-comics-89-green-lantern-the-harlequin/4000-153410/"
+            }
+          ]
+        },
+        {
+          "number": "90",
+          "title": "Green Lantern: \"The Icicle\"",
+          "publicationDate": "1947-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/1124036-90.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "196663",
+              "url": "https://comicvine.gamespot.com/all-american-comics-90-green-lantern-the-icicle/4000-196663/"
+            }
+          ]
+        },
+        {
+          "number": "91",
+          "title": "The Wedding of the Harlequin",
+          "publicationDate": "1947-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1098410-aac91.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "193403",
+              "url": "https://comicvine.gamespot.com/all-american-comics-91-the-wedding-of-the-harlequi/4000-193403/"
+            }
+          ]
+        },
+        {
+          "number": "92",
+          "title": "The Icicle Goes South!",
+          "publicationDate": "1947-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1098411-aac92.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "193404",
+              "url": "https://comicvine.gamespot.com/all-american-comics-92-the-icicle-goes-south/4000-193404/"
+            }
+          ]
+        },
+        {
+          "number": "93",
+          "title": "The Double Crossing Decoy",
+          "publicationDate": "1948-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1109847-aac93.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "194934",
+              "url": "https://comicvine.gamespot.com/all-american-comics-93-the-double-crossing-decoy/4000-194934/"
+            }
+          ]
+        },
+        {
+          "number": "94",
+          "title": "\"Partners in Peril\"",
+          "publicationDate": "1948-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/27783/1058579-allmerican_94.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "187172",
+              "url": "https://comicvine.gamespot.com/all-american-comics-94-partners-in-peril/4000-187172/"
+            }
+          ]
+        },
+        {
+          "number": "95",
+          "title": "The Unmasking of the Harlequin",
+          "publicationDate": "1948-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1098413-aac95.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "193405",
+              "url": "https://comicvine.gamespot.com/all-american-comics-95-the-unmasking-of-the-harleq/4000-193405/"
+            }
+          ]
+        },
+        {
+          "number": "96",
+          "title": "They Mystery of the Emerald Necklace",
+          "publicationDate": "1948-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1109845-aac96.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "194933",
+              "url": "https://comicvine.gamespot.com/all-american-comics-96-they-mystery-of-the-emerald/4000-194933/"
+            }
+          ]
+        },
+        {
+          "number": "97",
+          "title": "Green Lantern: \"The Country Fair Crimes\"",
+          "publicationDate": "1948-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/1124040-97.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "196665",
+              "url": "https://comicvine.gamespot.com/all-american-comics-97-green-lantern-the-country-f/4000-196665/"
+            }
+          ]
+        },
+        {
+          "number": "98",
+          "title": "The End of Sports!",
+          "publicationDate": "1948-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1098414-aac98.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "193406",
+              "url": "https://comicvine.gamespot.com/all-american-comics-98-the-end-of-sports/4000-193406/"
+            }
+          ]
+        },
+        {
+          "number": "99",
+          "title": "Green Lantern: \"Nest of Terror\"",
+          "publicationDate": "1948-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/27783/1058581-allmerican_99.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "187173",
+              "url": "https://comicvine.gamespot.com/all-american-comics-99-green-lantern-nest-of-terro/4000-187173/"
+            }
+          ]
+        },
+        {
+          "number": "100",
+          "title": "Johnny Thunder: \"Introducing Johnny Thunder\"",
+          "publicationDate": "1948-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/27783/1058585-allmerican_100.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "187174",
+              "url": "https://comicvine.gamespot.com/all-american-comics-100-johnny-thunder-introducing/4000-187174/"
+            }
+          ]
+        },
+        {
+          "number": "101",
+          "title": "Masquerade at Mesa City",
+          "publicationDate": "1948-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/55858/1058059-all_american_comics_v1939__101__1948_9____cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "187164",
+              "url": "https://comicvine.gamespot.com/all-american-comics-101-masquerade-at-mesa-city/4000-187164/"
+            }
+          ]
+        },
+        {
+          "number": "102",
+          "title": "the Bridge of Peril",
+          "publicationDate": "1948-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/3/37015/1124041-102.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "196666",
+              "url": "https://comicvine.gamespot.com/all-american-comics-102-the-bridge-of-peril/4000-196666/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "All-Star Comics",
+      "volume": 1,
+      "startYear": 1940,
+      "endYear": 1978,
+      "externalIds": [
+        {
+          "source": "COMIC_VINE",
+          "externalId": "2833",
+          "url": "https://comicvine.gamespot.com/all-star-comics/4050-2833/"
+        }
+      ],
+      "issues": [
+        {
+          "number": "1",
+          "title": "Hawkman: \"The Sorcerer Trygg\"",
+          "publicationDate": "1940-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/9541/5183769-all-star%20comics%201.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "144068",
+              "url": "https://comicvine.gamespot.com/all-star-comics-1-hawkman-the-sorcerer-trygg/4000-144068/"
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "title": "Hawkman: \"Sacrifice for Yum-Chac\"",
+          "publicationDate": "1940-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/26751/630322-a2.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "144069",
+              "url": "https://comicvine.gamespot.com/all-star-comics-2-hawkman-sacrifice-for-yum-chac/4000-144069/"
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "title": "\"The First Meeting of the Justice Society of America\"",
+          "publicationDate": "1940-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/9116/610318-5721_20051025194343_large.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "141989",
+              "url": "https://comicvine.gamespot.com/all-star-comics-3-the-first-meeting-of-the-justice/4000-141989/"
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "title": "Justice Society of America: \"For America and Democracy!\"",
+          "publicationDate": "1941-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/26751/630323-a4.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "144070",
+              "url": "https://comicvine.gamespot.com/all-star-comics-4-justice-society-of-america-for-a/4000-144070/"
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "title": "Justice Society of America: \"The Mysterious Mister X\"",
+          "publicationDate": "1941-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/26751/630325-a5.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "144071",
+              "url": "https://comicvine.gamespot.com/all-star-comics-5-justice-society-of-america-the-m/4000-144071/"
+            }
+          ]
+        },
+        {
+          "number": "6",
+          "title": "Justice Society of America: \"The Justice Society of America Initiates Johnny Thunder\"",
+          "publicationDate": "1941-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/26751/630326-a6.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "144072",
+              "url": "https://comicvine.gamespot.com/all-star-comics-6-justice-society-of-america-the-j/4000-144072/"
+            }
+          ]
+        },
+        {
+          "number": "7",
+          "title": "Justice Society of America: \"$1,000,000 for War Orphans\"",
+          "publicationDate": "1941-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/26751/630327-a7.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "144073",
+              "url": "https://comicvine.gamespot.com/all-star-comics-7-justice-society-of-america-10000/4000-144073/"
+            }
+          ]
+        },
+        {
+          "number": "8",
+          "title": "Justice Society: \"Two New Members Win Their Spurs\"",
+          "publicationDate": "1941-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/4/46731/2080568-0dc0354c6b7e9d41316ba3718afb3664.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "116412",
+              "url": "https://comicvine.gamespot.com/all-star-comics-8-justice-society-two-new-members-/4000-116412/"
+            }
+          ]
+        },
+        {
+          "number": "9",
+          "title": "Justice Society of America: \"Hemisphere Defense\"",
+          "publicationDate": "1942-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/26751/630328-a9.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "144074",
+              "url": "https://comicvine.gamespot.com/all-star-comics-9-justice-society-of-america-hemis/4000-144074/"
+            }
+          ]
+        },
+        {
+          "number": "10",
+          "title": "The Case of the Bomb Defense Formula",
+          "publicationDate": "1942-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/26751/630329-a10.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "144075",
+              "url": "https://comicvine.gamespot.com/all-star-comics-10-the-case-of-the-bomb-defense-fo/4000-144075/"
+            }
+          ]
+        },
+        {
+          "number": "11",
+          "title": "The JSA Joins the War on Japan",
+          "publicationDate": "1942-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/261352-2833-120362-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120362",
+              "url": "https://comicvine.gamespot.com/all-star-comics-11-the-jsa-joins-the-war-on-japan/4000-120362/"
+            }
+          ]
+        },
+        {
+          "number": "12",
+          "title": "The Black Dragon",
+          "publicationDate": "1942-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/261354-2833-120363-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120363",
+              "url": "https://comicvine.gamespot.com/all-star-comics-12-the-black-dragon/4000-120363/"
+            }
+          ]
+        },
+        {
+          "number": "13",
+          "title": "Shanghaied into Space",
+          "publicationDate": "1942-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/261355-2833-120364-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120364",
+              "url": "https://comicvine.gamespot.com/all-star-comics-13-shanghaied-into-space/4000-120364/"
+            }
+          ]
+        },
+        {
+          "number": "14",
+          "title": "Food for Starving Patriots",
+          "publicationDate": "1942-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/261356-2833-120365-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120365",
+              "url": "https://comicvine.gamespot.com/all-star-comics-14-food-for-starving-patriots/4000-120365/"
+            }
+          ]
+        },
+        {
+          "number": "15",
+          "title": "The Man Who Created Images",
+          "publicationDate": "1943-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/261357-2833-120366-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120366",
+              "url": "https://comicvine.gamespot.com/all-star-comics-15-the-man-who-created-images/4000-120366/"
+            }
+          ]
+        },
+        {
+          "number": "16",
+          "title": "The JSA Fights for a United America",
+          "publicationDate": "1943-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/261486-2833-120375-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120375",
+              "url": "https://comicvine.gamespot.com/all-star-comics-16-the-jsa-fights-for-a-united-ame/4000-120375/"
+            }
+          ]
+        },
+        {
+          "number": "17",
+          "title": "The Brain Wave Goes Berserk",
+          "publicationDate": "1943-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/261487-2833-120376-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120376",
+              "url": "https://comicvine.gamespot.com/all-star-comics-17-the-brain-wave-goes-berserk/4000-120376/"
+            }
+          ]
+        },
+        {
+          "number": "18",
+          "title": "Insects Turn to Crime!",
+          "publicationDate": "1943-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/261488-2833-120377-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120377",
+              "url": "https://comicvine.gamespot.com/all-star-comics-18-insects-turn-to-crime/4000-120377/"
+            }
+          ]
+        },
+        {
+          "number": "19",
+          "title": "The Crimes Set to Music",
+          "publicationDate": "1943-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/261489-2833-120379-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120379",
+              "url": "https://comicvine.gamespot.com/all-star-comics-19-the-crimes-set-to-music/4000-120379/"
+            }
+          ]
+        },
+        {
+          "number": "20",
+          "title": "A Movie That Changed a Man's Life",
+          "publicationDate": "1944-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/261490-2833-120381-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120381",
+              "url": "https://comicvine.gamespot.com/all-star-comics-20-a-movie-that-changed-a-mans-lif/4000-120381/"
+            }
+          ]
+        },
+        {
+          "number": "21",
+          "title": "The Man Who Relived His Life!",
+          "publicationDate": "1944-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/261491-2833-120383-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120383",
+              "url": "https://comicvine.gamespot.com/all-star-comics-21-the-man-who-relived-his-life/4000-120383/"
+            }
+          ]
+        },
+        {
+          "number": "22",
+          "title": "A Cure for the World",
+          "publicationDate": "1944-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/261492-2833-120384-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120384",
+              "url": "https://comicvine.gamespot.com/all-star-comics-22-a-cure-for-the-world/4000-120384/"
+            }
+          ]
+        },
+        {
+          "number": "23",
+          "title": "Justice Society of America: \"The Plunder of the Psycho-Pirate\"",
+          "publicationDate": "1944-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/11785/295922-2833-122250-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "122250",
+              "url": "https://comicvine.gamespot.com/all-star-comics-23-justice-society-of-america-the-/4000-122250/"
+            }
+          ]
+        },
+        {
+          "number": "24",
+          "title": "This Is Our Enemy!",
+          "publicationDate": "1945-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/261493-2833-120386-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120386",
+              "url": "https://comicvine.gamespot.com/all-star-comics-24-this-is-our-enemy/4000-120386/"
+            }
+          ]
+        },
+        {
+          "number": "25",
+          "title": "The Mystery of the Forgotten Crime",
+          "publicationDate": "1945-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/261494-2833-120378-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120378",
+              "url": "https://comicvine.gamespot.com/all-star-comics-25-the-mystery-of-the-forgotten-cr/4000-120378/"
+            }
+          ]
+        },
+        {
+          "number": "26",
+          "title": "Vampires of the Void!",
+          "publicationDate": "1945-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/261495-2833-120380-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120380",
+              "url": "https://comicvine.gamespot.com/all-star-comics-26-vampires-of-the-void/4000-120380/"
+            }
+          ]
+        },
+        {
+          "number": "27",
+          "title": "A Place in the World",
+          "publicationDate": "1945-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/261496-2833-120382-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120382",
+              "url": "https://comicvine.gamespot.com/all-star-comics-27-a-place-in-the-world/4000-120382/"
+            }
+          ]
+        },
+        {
+          "number": "28",
+          "title": "The Paintings that Walked the Earth!",
+          "publicationDate": "1946-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/262130-2833-120395-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120395",
+              "url": "https://comicvine.gamespot.com/all-star-comics-28-the-paintings-that-walked-the-e/4000-120395/"
+            }
+          ]
+        },
+        {
+          "number": "29",
+          "title": "The Man Who Knows Too Much",
+          "publicationDate": "1946-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/262131-2833-120397-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120397",
+              "url": "https://comicvine.gamespot.com/all-star-comics-29-the-man-who-knows-too-much/4000-120397/"
+            }
+          ]
+        },
+        {
+          "number": "30",
+          "title": "The Dreams of Madness",
+          "publicationDate": "1946-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/262132-2833-120398-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120398",
+              "url": "https://comicvine.gamespot.com/all-star-comics-30-the-dreams-of-madness/4000-120398/"
+            }
+          ]
+        },
+        {
+          "number": "31",
+          "title": "The Workshop of Willie Wonder",
+          "publicationDate": "1946-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/262133-2833-120400-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120400",
+              "url": "https://comicvine.gamespot.com/all-star-comics-31-the-workshop-of-willie-wonder/4000-120400/"
+            }
+          ]
+        },
+        {
+          "number": "32",
+          "title": "The Return of the Psycho Pirate",
+          "publicationDate": "1946-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/262134-2833-120402-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120402",
+              "url": "https://comicvine.gamespot.com/all-star-comics-32-the-return-of-the-psycho-pirate/4000-120402/"
+            }
+          ]
+        },
+        {
+          "number": "33",
+          "title": "The Revenge of Solomon Grundy!",
+          "publicationDate": "1947-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/8015/218885-2833-116138-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "116138",
+              "url": "https://comicvine.gamespot.com/all-star-comics-33-the-revenge-of-solomon-grundy/4000-116138/"
+            }
+          ]
+        },
+        {
+          "number": "34",
+          "title": "The Wiles of the Wizard!",
+          "publicationDate": "1947-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/262135-2833-120404-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120404",
+              "url": "https://comicvine.gamespot.com/all-star-comics-34-the-wiles-of-the-wizard/4000-120404/"
+            }
+          ]
+        },
+        {
+          "number": "35",
+          "title": "The Day That Dropped Out of Time",
+          "publicationDate": "1947-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/262136-2833-120406-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120406",
+              "url": "https://comicvine.gamespot.com/all-star-comics-35-the-day-that-dropped-out-of-tim/4000-120406/"
+            }
+          ]
+        },
+        {
+          "number": "36",
+          "title": "5 Drowned Men",
+          "publicationDate": "1947-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/262137-2833-120409-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120409",
+              "url": "https://comicvine.gamespot.com/all-star-comics-36-5-drowned-men/4000-120409/"
+            }
+          ]
+        },
+        {
+          "number": "37",
+          "title": "The Injustice Society of the World!",
+          "publicationDate": "1947-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/8015/218886-2833-116139-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "116139",
+              "url": "https://comicvine.gamespot.com/all-star-comics-37-the-injustice-society-of-the-wo/4000-116139/"
+            }
+          ]
+        },
+        {
+          "number": "38",
+          "title": "History's Crime Wave!",
+          "publicationDate": "1947-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/262138-2833-120396-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120396",
+              "url": "https://comicvine.gamespot.com/all-star-comics-38-historys-crime-wave/4000-120396/"
+            }
+          ]
+        },
+        {
+          "number": "39",
+          "title": "The Invasion from Fairyland",
+          "publicationDate": "1948-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/262139-2833-120399-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120399",
+              "url": "https://comicvine.gamespot.com/all-star-comics-39-the-invasion-from-fairyland/4000-120399/"
+            }
+          ]
+        },
+        {
+          "number": "40",
+          "title": "\"The Plight of a Nation!\"",
+          "publicationDate": "1948-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/262140-2833-120401-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120401",
+              "url": "https://comicvine.gamespot.com/all-star-comics-40-the-plight-of-a-nation/4000-120401/"
+            }
+          ]
+        },
+        {
+          "number": "41",
+          "title": "\"The Case of the Patriotic Crimes!\"",
+          "publicationDate": "1948-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/262142-2833-120403-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120403",
+              "url": "https://comicvine.gamespot.com/all-star-comics-41-the-case-of-the-patriotic-crime/4000-120403/"
+            }
+          ]
+        },
+        {
+          "number": "42",
+          "title": "The Man Who Hated Science",
+          "publicationDate": "1948-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/8015/218887-2833-116140-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "116140",
+              "url": "https://comicvine.gamespot.com/all-star-comics-42-the-man-who-hated-science/4000-116140/"
+            }
+          ]
+        },
+        {
+          "number": "43",
+          "title": "The Secret of the Golden Universe!",
+          "publicationDate": "1948-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/262143-2833-120405-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120405",
+              "url": "https://comicvine.gamespot.com/all-star-comics-43-the-secret-of-the-golden-univer/4000-120405/"
+            }
+          ]
+        },
+        {
+          "number": "44",
+          "title": "\"Evil Star Over Hollywood!\"",
+          "publicationDate": "1948-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/262144-2833-120407-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120407",
+              "url": "https://comicvine.gamespot.com/all-star-comics-44-evil-star-over-hollywood/4000-120407/"
+            }
+          ]
+        },
+        {
+          "number": "45",
+          "title": "The Case of the Cosmic Criminals!",
+          "publicationDate": "1949-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/262145-2833-120408-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120408",
+              "url": "https://comicvine.gamespot.com/all-star-comics-45-the-case-of-the-cosmic-criminal/4000-120408/"
+            }
+          ]
+        },
+        {
+          "number": "46",
+          "title": "The Adventure of the Invisible Band!",
+          "publicationDate": "1949-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/262146-2833-120410-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120410",
+              "url": "https://comicvine.gamespot.com/all-star-comics-46-the-adventure-of-the-invisible-/4000-120410/"
+            }
+          ]
+        },
+        {
+          "number": "47",
+          "title": "The Ghost of Billy the Kid!",
+          "publicationDate": "1949-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/8015/218888-2833-116141-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "116141",
+              "url": "https://comicvine.gamespot.com/all-star-comics-47-the-ghost-of-billy-the-kid/4000-116141/"
+            }
+          ]
+        },
+        {
+          "number": "48",
+          "title": "The Strange Lives of Edmund Blake!",
+          "publicationDate": "1949-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/262147-2833-120411-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120411",
+              "url": "https://comicvine.gamespot.com/all-star-comics-48-the-strange-lives-of-edmund-bla/4000-120411/"
+            }
+          ]
+        },
+        {
+          "number": "49",
+          "title": "The Invasion of the Fire People",
+          "publicationDate": "1949-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/262148-2833-120412-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120412",
+              "url": "https://comicvine.gamespot.com/all-star-comics-49-the-invasion-of-the-fire-people/4000-120412/"
+            }
+          ]
+        },
+        {
+          "number": "50",
+          "title": "The Prophecy of Peril!",
+          "publicationDate": "1949-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/262149-2833-120413-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120413",
+              "url": "https://comicvine.gamespot.com/all-star-comics-50-the-prophecy-of-peril/4000-120413/"
+            }
+          ]
+        },
+        {
+          "number": "51",
+          "title": "Invaders From the World Below!",
+          "publicationDate": "1950-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/1/14803/680728-51_1_1_.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "150228",
+              "url": "https://comicvine.gamespot.com/all-star-comics-51-invaders-from-the-world-below/4000-150228/"
+            }
+          ]
+        },
+        {
+          "number": "52",
+          "title": "The Secret Conquest of the Earth!",
+          "publicationDate": "1950-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/262150-2833-120414-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120414",
+              "url": "https://comicvine.gamespot.com/all-star-comics-52-the-secret-conquest-of-the-eart/4000-120414/"
+            }
+          ]
+        },
+        {
+          "number": "53",
+          "title": "Justice Society of America: \"The Gun That Dropped Through Time!\"",
+          "publicationDate": "1950-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/26751/630331-a53.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "144076",
+              "url": "https://comicvine.gamespot.com/all-star-comics-53-justice-society-of-america-the-/4000-144076/"
+            }
+          ]
+        },
+        {
+          "number": "54",
+          "title": "Circus of a Thousand Thrills",
+          "publicationDate": "1950-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/262151-2833-120415-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120415",
+              "url": "https://comicvine.gamespot.com/all-star-comics-54-circus-of-a-thousand-thrills/4000-120415/"
+            }
+          ]
+        },
+        {
+          "number": "55",
+          "title": "Justice Society of America: \"The Man Who Conquered the Solar System!\"",
+          "publicationDate": "1950-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/26751/630332-a55.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "144077",
+              "url": "https://comicvine.gamespot.com/all-star-comics-55-justice-society-of-america-the-/4000-144077/"
+            }
+          ]
+        },
+        {
+          "number": "56",
+          "title": "The Day the World Ended!",
+          "publicationDate": "1950-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/2/26751/630333-a56.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "144078",
+              "url": "https://comicvine.gamespot.com/all-star-comics-56-the-day-the-world-ended/4000-144078/"
+            }
+          ]
+        },
+        {
+          "number": "57",
+          "title": "The Mystery of the Vanishing Detectives!",
+          "publicationDate": "1951-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/262152-2833-120416-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "120416",
+              "url": "https://comicvine.gamespot.com/all-star-comics-57-the-mystery-of-the-vanishing-de/4000-120416/"
+            }
+          ]
+        },
+        {
+          "number": "58",
+          "title": "All Star Super Squad",
+          "publicationDate": "1976-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/56044/2352244-all_star_comics__1940_1978__58.jpeg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "15958",
+              "url": "https://comicvine.gamespot.com/all-star-comics-58-all-star-super-squad/4000-15958/"
+            }
+          ]
+        },
+        {
+          "number": "59",
+          "title": "Brainwave Blows Up!",
+          "publicationDate": "1976-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/56044/2352246-all_star_comics__1940_1978__59.jpeg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "16124",
+              "url": "https://comicvine.gamespot.com/all-star-comics-59-brainwave-blows-up/4000-16124/"
+            }
+          ]
+        },
+        {
+          "number": "60",
+          "title": "Vulcan Son of Fire!",
+          "publicationDate": "1976-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/8/84205/4264083-asc60nm92m113.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "16299",
+              "url": "https://comicvine.gamespot.com/all-star-comics-60-vulcan-son-of-fire/4000-16299/"
+            }
+          ]
+        },
+        {
+          "number": "61",
+          "title": "Hellfire and Holocaust!",
+          "publicationDate": "1976-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/14742-2833-16463-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "16463",
+              "url": "https://comicvine.gamespot.com/all-star-comics-61-hellfire-and-holocaust/4000-16463/"
+            }
+          ]
+        },
+        {
+          "number": "62",
+          "title": "When Fall the Mighty",
+          "publicationDate": "1976-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/14907-2833-16637-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "16637",
+              "url": "https://comicvine.gamespot.com/all-star-comics-62-when-fall-the-mighty/4000-16637/"
+            }
+          ]
+        },
+        {
+          "number": "63",
+          "title": "The Death of Doctor Fate!",
+          "publicationDate": "1976-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/15081-2833-16823-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "16823",
+              "url": "https://comicvine.gamespot.com/all-star-comics-63-the-death-of-doctor-fate/4000-16823/"
+            }
+          ]
+        },
+        {
+          "number": "64",
+          "title": "Yesterday Begins Today!",
+          "publicationDate": "1977-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/15296-2833-17053-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "17053",
+              "url": "https://comicvine.gamespot.com/all-star-comics-64-yesterday-begins-today/4000-17053/"
+            }
+          ]
+        },
+        {
+          "number": "65",
+          "title": "The Master Plan Of Vandal Savage",
+          "publicationDate": "1977-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/8/84205/3542361-asc65nm92m101.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "17229",
+              "url": "https://comicvine.gamespot.com/all-star-comics-65-the-master-plan-of-vandal-savag/4000-17229/"
+            }
+          ]
+        },
+        {
+          "number": "66",
+          "title": "Injustice strikes twice!",
+          "publicationDate": "1977-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/8/84205/2764372-asc66nm9m111.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "17391",
+              "url": "https://comicvine.gamespot.com/all-star-comics-66-injustice-strikes-twice/4000-17391/"
+            }
+          ]
+        },
+        {
+          "number": "67",
+          "title": "Mayhem in Middle Earth",
+          "publicationDate": "1977-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/15750-2833-17555-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "17555",
+              "url": "https://comicvine.gamespot.com/all-star-comics-67-mayhem-in-middle-earth/4000-17555/"
+            }
+          ]
+        },
+        {
+          "number": "68",
+          "title": "Divided We Stand",
+          "publicationDate": "1977-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/15911-2833-17732-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "17732",
+              "url": "https://comicvine.gamespot.com/all-star-comics-68-divided-we-stand/4000-17732/"
+            }
+          ]
+        },
+        {
+          "number": "69",
+          "title": "United We Fall!",
+          "publicationDate": "1977-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/16083-2833-17920-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "17920",
+              "url": "https://comicvine.gamespot.com/all-star-comics-69-united-we-fall/4000-17920/"
+            }
+          ]
+        },
+        {
+          "number": "70",
+          "title": "A Parting of the Ways!",
+          "publicationDate": "1978-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/16258-2833-18125-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "18125",
+              "url": "https://comicvine.gamespot.com/all-star-comics-70-a-parting-of-the-ways/4000-18125/"
+            }
+          ]
+        },
+        {
+          "number": "71",
+          "title": "The Deadliest Game in Town!",
+          "publicationDate": "1978-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/16407-2833-18287-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "18287",
+              "url": "https://comicvine.gamespot.com/all-star-comics-71-the-deadliest-game-in-town/4000-18287/"
+            }
+          ]
+        },
+        {
+          "number": "72",
+          "title": "The JSA Reunited--In Disaster!",
+          "publicationDate": "1978-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/16562-2833-18457-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "18457",
+              "url": "https://comicvine.gamespot.com/all-star-comics-72-the-jsa-reunited-in-disaster/4000-18457/"
+            }
+          ]
+        },
+        {
+          "number": "73",
+          "title": "Be it ever so Deadly...",
+          "publicationDate": "1978-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/16708-2833-18618-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "18618",
+              "url": "https://comicvine.gamespot.com/all-star-comics-73-be-it-ever-so-deadly/4000-18618/"
+            }
+          ]
+        },
+        {
+          "number": "74",
+          "title": "World on the edge of ending",
+          "publicationDate": "1978-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/4/16853-2833-18777-1-all-star-comics.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "18777",
+              "url": "https://comicvine.gamespot.com/all-star-comics-74-world-on-the-edge-of-ending/4000-18777/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comic Cavalcade",
+      "volume": 1,
+      "startYear": 1942,
+      "endYear": 1954,
+      "externalIds": [
+        {
+          "source": "COMIC_VINE",
+          "externalId": "18856",
+          "url": "https://comicvine.gamespot.com/comic-cavalcade/4050-18856/"
+        }
+      ],
+      "issues": [
+        {
+          "number": "1",
+          "title": "Mystery of the House of the Seven Gables",
+          "publicationDate": "1942-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/150930-18856-111487-1-comic-cavalcade.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "111487",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-1-mystery-of-the-house-of-the-seve/4000-111487/"
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "title": "Wanted by Hitler, Dead or Alive",
+          "publicationDate": "1943-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/152649-18856-111572-1-comic-cavalcade.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "111572",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-2-wanted-by-hitler-dead-or-alive/4000-111572/"
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "title": "The Invisible Invader",
+          "publicationDate": "1943-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/152650-18856-111573-1-comic-cavalcade.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "111573",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-3-the-invisible-invader/4000-111573/"
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "title": "The Purloined Pressure Coordinator",
+          "publicationDate": "1943-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/152652-18856-111574-1-comic-cavalcade.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "111574",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-4-the-purloined-pressure-coordinat/4000-111574/"
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "title": "Mystery of the Crimson Flame",
+          "publicationDate": "1943-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/169722-18856-113312-1-comic-cavalcade.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "113312",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-5-mystery-of-the-crimson-flame/4000-113312/"
+            }
+          ]
+        },
+        {
+          "number": "6",
+          "title": "The Mystery of Countess Mazuma",
+          "publicationDate": "1944-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/169724-18856-113313-1-comic-cavalcade.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "113313",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-6-the-mystery-of-countess-mazuma/4000-113313/"
+            }
+          ]
+        },
+        {
+          "number": "7",
+          "title": "The Vulture's Nest",
+          "publicationDate": "1944-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/169726-18856-113314-1-comic-cavalcade.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "113314",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-7-the-vultures-nest/4000-113314/"
+            }
+          ]
+        },
+        {
+          "number": "8",
+          "title": "The Amazon Bride",
+          "publicationDate": "1944-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/169727-18856-113315-1-comic-cavalcade.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "113315",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-8-the-amazon-bride/4000-113315/"
+            }
+          ]
+        },
+        {
+          "number": "9",
+          "title": "The Subsea Pirates",
+          "publicationDate": "1944-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/169729-18856-113316-1-comic-cavalcade.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "113316",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-9-the-subsea-pirates/4000-113316/"
+            }
+          ]
+        },
+        {
+          "number": "10",
+          "title": "The Great Blue Father",
+          "publicationDate": "1945-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/169730-18856-113317-1-comic-cavalcade.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "113317",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-10-the-great-blue-father/4000-113317/"
+            }
+          ]
+        },
+        {
+          "number": "11",
+          "title": "The Cheetah Returns",
+          "publicationDate": "1945-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/172498-18856-113570-1-comic-cavalcade.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "113570",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-11-the-cheetah-returns/4000-113570/"
+            }
+          ]
+        },
+        {
+          "number": "12",
+          "title": "Revolt on Paradise Island",
+          "publicationDate": "1945-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/172505-18856-113571-1-comic-cavalcade.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "113571",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-12-revolt-on-paradise-island/4000-113571/"
+            }
+          ]
+        },
+        {
+          "number": "13",
+          "title": "The Underwater Folly",
+          "publicationDate": "1945-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/172507-18856-113572-1-comic-cavalcade.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "113572",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-13-the-underwater-folly/4000-113572/"
+            }
+          ]
+        },
+        {
+          "number": "14",
+          "title": "The Severed Bracelets",
+          "publicationDate": "1946-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/172510-18856-113573-1-comic-cavalcade.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "113573",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-14-the-severed-bracelets/4000-113573/"
+            }
+          ]
+        },
+        {
+          "number": "15",
+          "title": "Flaming Fury",
+          "publicationDate": "1946-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/172511-18856-113574-1-comic-cavalcade.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "113574",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-15-flaming-fury/4000-113574/"
+            }
+          ]
+        },
+        {
+          "number": "16",
+          "title": "The Battle of Desires",
+          "publicationDate": "1946-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/172512-18856-113575-1-comic-cavalcade.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "113575",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-16-the-battle-of-desires/4000-113575/"
+            }
+          ]
+        },
+        {
+          "number": "17",
+          "title": "The Valkyries' Prey",
+          "publicationDate": "1946-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/172515-18856-113576-1-comic-cavalcade.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "113576",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-17-the-valkyries-prey/4000-113576/"
+            }
+          ]
+        },
+        {
+          "number": "18",
+          "title": "The Menace of the Rebel Manlings/Detour",
+          "publicationDate": "1946-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/174328-18856-113674-1-comic-cavalcade.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "113674",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-18-the-menace-of-the-rebel-manling/4000-113674/"
+            }
+          ]
+        },
+        {
+          "number": "19",
+          "title": "The Battle for Eternal Youth",
+          "publicationDate": "1947-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/174329-18856-113675-1-comic-cavalcade.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "113675",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-19-the-battle-for-eternal-youth/4000-113675/"
+            }
+          ]
+        },
+        {
+          "number": "20",
+          "title": "The Buddha Wishing Ring",
+          "publicationDate": "1947-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/174330-18856-113676-1-comic-cavalcade.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "113676",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-20-the-buddha-wishing-ring/4000-113676/"
+            }
+          ]
+        },
+        {
+          "number": "21",
+          "title": "The Siege of the Flying Mermaids",
+          "publicationDate": "1947-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/174331-18856-113677-1-comic-cavalcade.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "113677",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-21-the-siege-of-the-flying-mermaid/4000-113677/"
+            }
+          ]
+        },
+        {
+          "number": "22",
+          "title": "The Captives of Saturnette",
+          "publicationDate": "1947-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/174332-18856-113678-1-comic-cavalcade.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "113678",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-22-the-captives-of-saturnette/4000-113678/"
+            }
+          ]
+        },
+        {
+          "number": "23",
+          "title": "Siege of the Iron Giants",
+          "publicationDate": "1947-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/174333-18856-113679-1-comic-cavalcade.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "113679",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-23-siege-of-the-iron-giants/4000-113679/"
+            }
+          ]
+        },
+        {
+          "number": "24",
+          "title": "Empress of the Sea Brigands",
+          "publicationDate": "1947-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/174334-18856-113680-1-comic-cavalcade.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "113680",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-24-empress-of-the-sea-brigands/4000-113680/"
+            }
+          ]
+        },
+        {
+          "number": "25",
+          "title": "The Hatred of Badra",
+          "publicationDate": "1948-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/174335-18856-113681-1-comic-cavalcade.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "113681",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-25-the-hatred-of-badra/4000-113681/"
+            }
+          ]
+        },
+        {
+          "number": "26",
+          "title": "Deception's Daughter",
+          "publicationDate": "1948-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/175231-18856-113709-1-comic-cavalcade.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "113709",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-26-deceptions-daughter/4000-113709/"
+            }
+          ]
+        },
+        {
+          "number": "27",
+          "title": "Anti-Electric",
+          "publicationDate": "1948-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/175232-18856-113710-1-comic-cavalcade.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "113710",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-27-anti-electric/4000-113710/"
+            }
+          ]
+        },
+        {
+          "number": "28",
+          "title": "The Sinister Countess Hatra",
+          "publicationDate": "1948-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/175233-18856-113711-1-comic-cavalcade.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "113711",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-28-the-sinister-countess-hatra/4000-113711/"
+            }
+          ]
+        },
+        {
+          "number": "29",
+          "title": "The Machine of Schemes",
+          "publicationDate": "1948-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/1093/175234-18856-113712-1-comic-cavalcade.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "113712",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-29-the-machine-of-schemes/4000-113712/"
+            }
+          ]
+        },
+        {
+          "number": "30",
+          "title": null,
+          "publicationDate": "1948-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/119838/2416620-comiccavalcade30.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "180389",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-30/4000-180389/"
+            }
+          ]
+        },
+        {
+          "number": "31",
+          "title": null,
+          "publicationDate": "1949-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1012827-cc31.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "180391",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-31/4000-180391/"
+            }
+          ]
+        },
+        {
+          "number": "32",
+          "title": null,
+          "publicationDate": "1949-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1012828-cc32.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "180392",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-32/4000-180392/"
+            }
+          ]
+        },
+        {
+          "number": "33",
+          "title": null,
+          "publicationDate": "1949-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/3125/1053922-cc33.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "186643",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-33/4000-186643/"
+            }
+          ]
+        },
+        {
+          "number": "34",
+          "title": null,
+          "publicationDate": "1949-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/3125/1054861-cc34.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "186780",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-34/4000-186780/"
+            }
+          ]
+        },
+        {
+          "number": "35",
+          "title": null,
+          "publicationDate": "1949-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1012830-cc35.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "180394",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-35/4000-180394/"
+            }
+          ]
+        },
+        {
+          "number": "36",
+          "title": null,
+          "publicationDate": "1949-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1012832-cc36.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "180396",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-36/4000-180396/"
+            }
+          ]
+        },
+        {
+          "number": "37",
+          "title": null,
+          "publicationDate": "1950-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1012833-cc37.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "180397",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-37/4000-180397/"
+            }
+          ]
+        },
+        {
+          "number": "38",
+          "title": null,
+          "publicationDate": "1950-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1012835-cc38.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "180398",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-38/4000-180398/"
+            }
+          ]
+        },
+        {
+          "number": "39",
+          "title": null,
+          "publicationDate": "1950-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1012836-cc39.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "180399",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-39/4000-180399/"
+            }
+          ]
+        },
+        {
+          "number": "40",
+          "title": null,
+          "publicationDate": "1950-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1012837-cc40.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "180400",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-40/4000-180400/"
+            }
+          ]
+        },
+        {
+          "number": "41",
+          "title": null,
+          "publicationDate": "1950-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1012838-cc41.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "180401",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-41/4000-180401/"
+            }
+          ]
+        },
+        {
+          "number": "42",
+          "title": null,
+          "publicationDate": "1950-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1012839-cc42.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "180402",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-42/4000-180402/"
+            }
+          ]
+        },
+        {
+          "number": "43",
+          "title": null,
+          "publicationDate": "1951-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1012840-cc43.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "180403",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-43/4000-180403/"
+            }
+          ]
+        },
+        {
+          "number": "44",
+          "title": null,
+          "publicationDate": "1951-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1012841-cc44.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "180404",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-44/4000-180404/"
+            }
+          ]
+        },
+        {
+          "number": "45",
+          "title": null,
+          "publicationDate": "1951-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1012842-cc45.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "180405",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-45/4000-180405/"
+            }
+          ]
+        },
+        {
+          "number": "46",
+          "title": null,
+          "publicationDate": "1951-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1012843-cc46.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "180406",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-46/4000-180406/"
+            }
+          ]
+        },
+        {
+          "number": "47",
+          "title": null,
+          "publicationDate": "1951-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1012845-cc47.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "180407",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-47/4000-180407/"
+            }
+          ]
+        },
+        {
+          "number": "48",
+          "title": null,
+          "publicationDate": "1951-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1012856-cc48.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "180418",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-48/4000-180418/"
+            }
+          ]
+        },
+        {
+          "number": "49",
+          "title": null,
+          "publicationDate": "1952-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1012846-cc49.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "180408",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-49/4000-180408/"
+            }
+          ]
+        },
+        {
+          "number": "50",
+          "title": null,
+          "publicationDate": "1952-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1012857-cc50.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "180419",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-50/4000-180419/"
+            }
+          ]
+        },
+        {
+          "number": "51",
+          "title": null,
+          "publicationDate": "1952-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1012847-cc51.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "180409",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-51/4000-180409/"
+            }
+          ]
+        },
+        {
+          "number": "52",
+          "title": null,
+          "publicationDate": "1952-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1012858-cc52.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "180420",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-52/4000-180420/"
+            }
+          ]
+        },
+        {
+          "number": "53",
+          "title": null,
+          "publicationDate": "1952-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1012848-cc53.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "180410",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-53/4000-180410/"
+            }
+          ]
+        },
+        {
+          "number": "54",
+          "title": null,
+          "publicationDate": "1952-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1012849-cc54.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "180411",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-54/4000-180411/"
+            }
+          ]
+        },
+        {
+          "number": "55",
+          "title": null,
+          "publicationDate": "1953-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1012850-cc55.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "180412",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-55/4000-180412/"
+            }
+          ]
+        },
+        {
+          "number": "56",
+          "title": null,
+          "publicationDate": "1953-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1012851-cc56.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "180413",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-56/4000-180413/"
+            }
+          ]
+        },
+        {
+          "number": "57",
+          "title": null,
+          "publicationDate": "1953-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1012852-cc57.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "180414",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-57/4000-180414/"
+            }
+          ]
+        },
+        {
+          "number": "58",
+          "title": null,
+          "publicationDate": "1953-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1012860-cc58.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "180421",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-58/4000-180421/"
+            }
+          ]
+        },
+        {
+          "number": "59",
+          "title": null,
+          "publicationDate": "1953-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/0/3125/1057234-cc59.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "187068",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-59/4000-187068/"
+            }
+          ]
+        },
+        {
+          "number": "60",
+          "title": null,
+          "publicationDate": "1953-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1012853-cc60.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "180415",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-60/4000-180415/"
+            }
+          ]
+        },
+        {
+          "number": "61",
+          "title": null,
+          "publicationDate": "1954-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1012861-cc61.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "180422",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-61/4000-180422/"
+            }
+          ]
+        },
+        {
+          "number": "62",
+          "title": null,
+          "publicationDate": "1954-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1012854-cc62.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "180416",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-62/4000-180416/"
+            }
+          ]
+        },
+        {
+          "number": "63",
+          "title": null,
+          "publicationDate": "1954-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/5/53346/1012855-cc63.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Two",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "180417",
+              "url": "https://comicvine.gamespot.com/comic-cavalcade-63/4000-180417/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

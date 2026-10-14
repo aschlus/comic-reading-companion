@@ -1,0 +1,22 @@
+{
+  "publisher": "DC Comics",
+  "universes": [
+    {
+      "name": "Earth-Two",
+      "designation": "Earth-Two",
+      "description": null
+    }
+  ],
+  "series": [
+    {
+      "title": "All-American Comics",
+      "volume": 1,
+      "startYear": 1939,
+      "endYear": 1948,
+      "comicVineVolumeId": 20663,
+      "defaultIssueType": "REGULAR",
+      "expectedIssueCount": 102,
+      "defaultUniverseDesignation": "Earth-Two"
+    }
+  ]
+}

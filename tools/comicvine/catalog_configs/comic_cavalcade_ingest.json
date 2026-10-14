@@ -1,0 +1,22 @@
+{
+  "publisher": "DC Comics",
+  "universes": [
+    {
+      "name": "Earth-Two",
+      "designation": "Earth-Two",
+      "description": null
+    }
+  ],
+  "series": [
+    {
+      "title": "Comic Cavalcade",
+      "volume": 1,
+      "startYear": 1942,
+      "endYear": 1954,
+      "comicVineVolumeId": 18856,
+      "defaultIssueType": "REGULAR",
+      "expectedIssueCount": 63,
+      "defaultUniverseDesignation": "Earth-Two"
+    }
+  ]
+}
