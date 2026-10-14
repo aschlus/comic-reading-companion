@@ -1,0 +1,22 @@
+{
+  "publisher": "DC Comics",
+  "universes": [
+    {
+      "name": "Earth-Two",
+      "designation": "Earth-Two",
+      "description": null
+    }
+  ],
+  "series": [
+    {
+      "title": "The Big-All American Comic Book",
+      "volume": 1,
+      "startYear": 1944,
+      "endYear": 1944,
+      "comicVineVolumeId": 26673,
+      "defaultIssueType": "REGULAR",
+      "expectedIssueCount": 1,
+      "defaultUniverseDesignation": "Earth-Two"
+    }
+  ]
+}
