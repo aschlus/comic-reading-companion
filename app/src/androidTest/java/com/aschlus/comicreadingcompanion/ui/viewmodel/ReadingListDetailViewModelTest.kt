@@ -1204,6 +1204,357 @@ class ReadingListDetailViewModelTest {
                 reorderedIssues.map { it.issueNumber }
             )
         }
+
+    @Test
+    fun moveIssueToPosition_movesIssueForwardAndBackwardWithinSection() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Move to Position Test Series",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2000
+                    )
+                )
+
+            val issueIds =
+                (1..4).map { number ->
+                    comicDao.insertIssue(
+                        Issue(
+                            seriesId = seriesId,
+                            universeId = null,
+                            issueNumber = number.toString(),
+                            title = "Issue $number",
+                            publicationDate = "2000-0$number",
+                            coverUrl = null,
+                            description = null,
+                            issueType = IssueType.REGULAR
+                        )
+                    )
+                }
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Move to Position Test",
+                    description = null,
+                    publisherId = publisherId,
+                    universeId = null
+                )
+
+            issueIds.forEach { issueId ->
+                repository.addIssueToUserReadingList(
+                    readingListId = readingListId,
+                    issueId = issueId
+                )
+            }
+
+            viewModel.loadReadingList(readingListId)
+
+            withTimeout(5000L.milliseconds) {
+                viewModel.readingList.first {
+                    it?.id == readingListId
+                }
+            }
+
+            val loadedIssues =
+                withTimeout(5000L.milliseconds) {
+                    viewModel.issues.first { it.size == 4 }
+                }
+
+            // Move Issue 1 from position 1 to position 3.
+            viewModel.moveIssueToPosition(
+                issue = loadedIssues.first(),
+                position = 3
+            )
+
+            val movedForward =
+                withTimeout(5000L.milliseconds) {
+                    viewModel.issues.first { issues ->
+                        issues.map { it.issueNumber } ==
+                                listOf("2", "3", "1", "4")
+                    }
+                }
+
+            assertEquals(
+                listOf("2", "3", "1", "4"),
+                movedForward.map { it.issueNumber }
+            )
+
+            assertEquals(
+                listOf(1, 2, 3, 4),
+                movedForward.map { it.position }
+            )
+
+            // Move Issue 1 back from position 3 to position 2.
+            val issueOne =
+                movedForward.first { it.issueNumber == "1" }
+
+            viewModel.moveIssueToPosition(
+                issue = issueOne,
+                position = 2
+            )
+
+            val movedBackward =
+                withTimeout(5000L.milliseconds) {
+                    viewModel.issues.first { issues ->
+                        issues.map { it.issueNumber } ==
+                                listOf("2", "1", "3", "4")
+                    }
+                }
+
+            assertEquals(
+                listOf("2", "1", "3", "4"),
+                movedBackward.map { it.issueNumber }
+            )
+
+            assertEquals(
+                listOf(1, 2, 3, 4),
+                movedBackward.map { it.position }
+            )
+        }
+
+    @Test
+    fun moveIssueToPosition_ignoresInvalidAndCurrentPositions() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Invalid Position Test Series",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2000
+                    )
+                )
+
+            val issueIds =
+                (1..3).map { number ->
+                    comicDao.insertIssue(
+                        Issue(
+                            seriesId = seriesId,
+                            universeId = null,
+                            issueNumber = number.toString(),
+                            title = "Issue $number",
+                            publicationDate = "2000-0$number",
+                            coverUrl = null,
+                            description = null,
+                            issueType = IssueType.REGULAR
+                        )
+                    )
+                }
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Invalid Position Test",
+                    description = null,
+                    publisherId = publisherId,
+                    universeId = null
+                )
+
+            issueIds.forEach { issueId ->
+                repository.addIssueToUserReadingList(
+                    readingListId = readingListId,
+                    issueId = issueId
+                )
+            }
+
+            viewModel.loadReadingList(readingListId)
+
+            withTimeout(5000L.milliseconds) {
+                viewModel.readingList.first {
+                    it?.id == readingListId
+                }
+            }
+
+            val loadedIssues =
+                withTimeout(5000L.milliseconds) {
+                    viewModel.issues.first { it.size == 3 }
+                }
+
+            // Position 0 is invalid.
+            viewModel.moveIssueToPosition(
+                issue = loadedIssues[1],
+                position = 0
+            )
+
+            // Position 4 exceeds the section's size.
+            viewModel.moveIssueToPosition(
+                issue = loadedIssues[1],
+                position = 4
+            )
+
+            // Moving to the current position should do nothing.
+            viewModel.moveIssueToPosition(
+                issue = loadedIssues[1],
+                position = 2
+            )
+
+            val storedItems =
+                comicDao.getItemsForReadingList(readingListId)
+
+            assertEquals(
+                issueIds,
+                storedItems.map { it.issueId }
+            )
+
+            assertEquals(
+                listOf(1, 2, 3),
+                storedItems.map { it.position }
+            )
+        }
+
+    @Test
+    fun moveIssueToPosition_doesNotMoveAcrossSectionBoundary() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Section Position Test Series",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2000
+                    )
+                )
+
+            val issueIds =
+                (1..3).map { number ->
+                    comicDao.insertIssue(
+                        Issue(
+                            seriesId = seriesId,
+                            universeId = null,
+                            issueNumber = number.toString(),
+                            title = "Issue $number",
+                            publicationDate = "2000-0$number",
+                            coverUrl = null,
+                            description = null,
+                            issueType = IssueType.REGULAR
+                        )
+                    )
+                }
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Section Position Test",
+                    description = null,
+                    publisherId = publisherId,
+                    universeId = null
+                )
+
+            val firstSectionId =
+                repository.addReadingListSection(
+                    ReadingListSection(
+                        readingListId = readingListId,
+                        title = "First",
+                        description = null,
+                        position = 1
+                    )
+                )
+
+            val secondSectionId =
+                repository.addReadingListSection(
+                    ReadingListSection(
+                        readingListId = readingListId,
+                        title = "Second",
+                        description = null,
+                        position = 2
+                    )
+                )
+
+            repository.addReadingListItem(
+                ReadingListItem(
+                    readingListId = readingListId,
+                    sectionId = firstSectionId,
+                    issueId = issueIds[0],
+                    position = 1,
+                    required = true,
+                    notes = null
+                )
+            )
+
+            repository.addReadingListItem(
+                ReadingListItem(
+                    readingListId = readingListId,
+                    sectionId = firstSectionId,
+                    issueId = issueIds[1],
+                    position = 2,
+                    required = true,
+                    notes = null
+                )
+            )
+
+            repository.addReadingListItem(
+                ReadingListItem(
+                    readingListId = readingListId,
+                    sectionId = secondSectionId,
+                    issueId = issueIds[2],
+                    position = 3,
+                    required = true,
+                    notes = null
+                )
+            )
+
+            viewModel.loadReadingList(readingListId)
+
+            withTimeout(5000L.milliseconds) {
+                viewModel.readingList.first {
+                    it?.id == readingListId
+                }
+            }
+
+            val loadedIssues =
+                withTimeout(5000L.milliseconds) {
+                    viewModel.issues.first { it.size == 3 }
+                }
+
+            // Section one has only two issues; position 3 must be rejected.
+            viewModel.moveIssueToPosition(
+                issue = loadedIssues[0],
+                position = 3
+            )
+
+            // Section two has only one issue; position 2 must be rejected.
+            viewModel.moveIssueToPosition(
+                issue = loadedIssues[2],
+                position = 2
+            )
+
+            val storedItems =
+                comicDao.getItemsForReadingList(readingListId)
+
+            assertEquals(
+                issueIds,
+                storedItems.map { it.issueId }
+            )
+
+            assertEquals(
+                listOf(firstSectionId, firstSectionId, secondSectionId),
+                storedItems.map { it.sectionId }
+            )
+
+            assertEquals(
+                listOf(1, 2, 3),
+                storedItems.map { it.position }
+            )
+        }
+
     @Test
     fun moveIssue_doesNothingAtListBoundaries() =
         runBlocking {

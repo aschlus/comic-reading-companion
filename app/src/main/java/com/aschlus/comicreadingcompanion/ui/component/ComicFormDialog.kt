@@ -1,6 +1,5 @@
 package com.aschlus.comicreadingcompanion.ui.component
 
-import android.app.Dialog
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -13,6 +12,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
@@ -42,7 +43,9 @@ fun ComicFormDialog(
     confirmEnabled: Boolean,
     onConfirm: () -> Unit,
     onDismiss: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    showSecondaryField: Boolean = true,
+    primaryKeyboardType: KeyboardType = KeyboardType.Text
 ) {
     Dialog(
         onDismissRequest = onDismiss
@@ -93,15 +96,18 @@ fun ComicFormDialog(
                     label = primaryLabel,
                     value = primaryValue,
                     onValueChange = onPrimaryValueChange,
-                    singleLine = true
+                    singleLine = true,
+                    keyboardType = primaryKeyboardType
                 )
 
-                ComicDialogTextField(
-                    label = secondaryLabel,
-                    value = secondaryValue,
-                    onValueChange = onSecondaryValueChange,
-                    singleLine = false
-                )
+                if (showSecondaryField) {
+                    ComicDialogTextField(
+                        label = secondaryLabel,
+                        value = secondaryValue,
+                        onValueChange = onSecondaryValueChange,
+                        singleLine = false
+                    )
+                }
 
                 Row(
                     modifier =
@@ -140,7 +146,8 @@ private fun ComicDialogTextField(
     value: String,
     onValueChange: (String) -> Unit,
     singleLine: Boolean,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    keyboardType: KeyboardType = KeyboardType.Text
 ) {
     val shape = RoundedCornerShape(9.dp)
 
@@ -207,7 +214,8 @@ private fun ComicDialogTextField(
                         color = ComicInk
                     ),
                 cursorBrush =
-                    SolidColor(ComicInk)
+                    SolidColor(ComicInk),
+                keyboardOptions = KeyboardOptions(keyboardType = keyboardType)
             )
         }
     }

@@ -63,6 +63,7 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -254,6 +255,16 @@ fun ReadingListDetailScreen(
         readingListId
     ) {
         mutableStateOf<ReadingListIssue?>(null)
+    }
+
+    var issuePendingPositionMove by remember(
+        readingListId
+    ) {
+        mutableStateOf<ReadingListIssue?>(null)
+    }
+
+    var positionMoveInput by remember(readingListId) {
+        mutableStateOf("")
     }
 
     var issuePendingRemoval by remember(
@@ -1129,6 +1140,18 @@ fun ReadingListDetailScreen(
                                         issue = issue
                                     )
                                 },
+                                onMoveToPositionRequest = {
+                                    val sectionIssues =
+                                        issues.filter { it.sectionId == issue.sectionId }
+
+                                    val currentPosition =
+                                        sectionIssues.indexOfFirst {
+                                            it.readingListItemId == issue.readingListItemId
+                                        } + 1
+
+                                    positionMoveInput = currentPosition.toString()
+                                    issuePendingPositionMove = issue
+                                },
                                 canChangeSection =
                                     canReorder &&
                                             sections.isNotEmpty(),
@@ -1270,6 +1293,46 @@ fun ReadingListDetailScreen(
             onDismiss = {
                 showDeleteReadingListDialog = false
             }
+        )
+    }
+
+    issuePendingPositionMove?.let { issue ->
+        val sectionIssues =
+            issues.filter { it.sectionId == issue.sectionId }
+
+        val targetPosition = positionMoveInput.toIntOrNull()
+
+        ComicFormDialog(
+            title = "Move to Position",
+            primaryLabel = "Position (1-${sectionIssues.size})",
+            primaryValue = positionMoveInput,
+            onPrimaryValueChange = { value ->
+                if (value.all { it.isDigit() }) {
+                    positionMoveInput = value
+                }
+            },
+            secondaryLabel = "",
+            secondaryValue = "",
+            onSecondaryValueChange = {},
+            confirmText = "Move",
+            confirmEnabled = targetPosition != null &&
+                targetPosition in 1..sectionIssues.size,
+            onConfirm = {
+                targetPosition?.let { position ->
+                    issuePendingPositionMove = null
+
+                    viewModel.moveIssueToPosition(
+                        issue = issue,
+                        position = position
+                    )
+                }
+            },
+            onDismiss = {
+                issuePendingPositionMove = null
+                positionMoveInput = ""
+            },
+            showSecondaryField = false,
+            primaryKeyboardType = KeyboardType.Number
         )
     }
 
@@ -1509,6 +1572,7 @@ private fun ReadingListIssueRow(
     canMoveDown: Boolean,
     onMoveUp: () -> Unit,
     onMoveDown: () -> Unit,
+    onMoveToPositionRequest: () -> Unit,
     canChangeSection: Boolean,
     onMoveToSectionRequest: () -> Unit,
     canRemove: Boolean,
@@ -1683,6 +1747,14 @@ private fun ReadingListIssueRow(
                             onClick = {
                                 menuExpanded = false
                                 onMoveDown()
+                            }
+                        )
+
+                        ComicDropdownMenuItem(
+                            text = "Move to position…",
+                            onClick = {
+                                menuExpanded = false
+                                onMoveToPositionRequest()
                             }
                         )
                     }

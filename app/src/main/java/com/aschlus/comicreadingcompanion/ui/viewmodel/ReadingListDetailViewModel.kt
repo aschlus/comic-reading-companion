@@ -347,6 +347,70 @@ class ReadingListDetailViewModel(
         )
     }
 
+    fun moveIssueToPosition(
+        issue: ReadingListIssue,
+        position: Int
+    ) {
+        val readingList = _readingList.value
+            ?: return
+
+        if (readingList.source != ReadingListSource.USER) {
+            return
+        }
+
+        val currentIssues = _issues.value
+
+        val currentIndex = currentIssues.indexOfFirst { currentIssue ->
+            currentIssue.readingListItemId == issue.readingListItemId
+        }
+
+        if (currentIndex < 0) {
+            return
+        }
+
+        val currentIssue = currentIssues[currentIndex]
+
+        val sectionIssues = currentIssues.filter { currentItem ->
+            currentItem.sectionId == currentIssue.sectionId
+        }
+
+        if (position !in 1..sectionIssues.size) {
+            return
+        }
+
+        val currentPosition = sectionIssues.indexOfFirst { sectionIssue->
+            sectionIssue.readingListItemId == currentIssue.readingListItemId
+        } + 1
+
+        if (currentPosition == position) {
+            return
+        }
+
+        val targetIssue = sectionIssues[position - 1]
+
+        val targetIndex = currentIssues.indexOfFirst { currentItem ->
+            currentItem.readingListItemId == targetIssue.readingListItemId
+        }
+
+        if (targetIndex < 0) {
+            return
+        }
+
+        val orderedItemIds = currentIssues.map { currentItem ->
+            currentItem.readingListItemId
+        }.toMutableList()
+
+        val movedItemId = orderedItemIds.removeAt(currentIndex)
+        orderedItemIds.add(targetIndex, movedItemId)
+
+        viewModelScope.launch {
+            repository.reorderUserReadingListItems(
+                readingListId = readingList.id,
+                orderedItemIds = orderedItemIds
+            )
+        }
+    }
+
     private fun moveIssue(
         issue: ReadingListIssue,
         offset: Int
