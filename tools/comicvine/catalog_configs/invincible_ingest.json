@@ -1,0 +1,15 @@
+{
+  "publisher": "Image Comics",
+  "universes": [],
+  "series": [
+    {
+      "title": "Invincible",
+      "volume": 1,
+      "startYear": 2003,
+      "endYear": 2018,
+      "comicVineVolumeId": 17993,
+      "defaultIssueType": "REGULAR",
+      "expectedIssueCount": 145
+    }
+  ]
+}

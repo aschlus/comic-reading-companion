@@ -329,32 +329,287 @@ def validate_catalog(catalog: dict) -> None:
                 issue_external_ids.add(key)
 
 
+def is_nonstandard_issue_number(issue_number: str) -> bool:
+    text = str(issue_number).strip()
+
+    return(
+        re.fullmatch(r"\d+(?:\.\d+)?", text) is None
+    )
+
+
+def find_duplicates(values: list[str]) -> list[str]:
+    seen = set()
+    duplicates = []
+
+    for value in values:
+        if (value in seen and value not in duplicates):
+            duplicates.append(value)
+
+        seen.add(value)
+
+    return duplicates
+
+
+def build_anomaly_report(config: dict, catalog: dict) -> dict:
+    config_series = config.get("series", [])
+    catalog_series = catalog.get("series", [])
+
+    series_reports = []
+
+    all_external_ids = []
+
+    for series_index, series in enumerate(catalog_series):
+        if series_index < len(config_series):
+            series_config = config_series[series_index]
+        else:
+            series_config = {}
+
+        issues = series.get("issues", [])
+
+        missing_covers = []
+        missing_titles = []
+        missing_dates = []
+        nonstandard_numbers = []
+        issue_numbers = []
+        review_numbers = []
+
+        for issue in issues:
+            number = str(issue.get("number", ""))
+
+            issue_numbers.append(number)
+
+            needs_review = False
+
+            if not issue.get("coverUrl"):
+                missing_covers.append(number)
+                needs_review = True
+
+            if not issue.get("title"):
+                missing_titles.append(number)
+                needs_review = True
+
+            if not issue.get("publicationDate"):
+                missing_dates.append(number)
+                needs_review = True
+
+            if is_nonstandard_issue_number(number):
+                nonstandard_numbers.append(number)
+                needs_review = True
+
+            if needs_review:
+                review_numbers.append(number)
+
+            for external_id in issue.get("externalIds", []):
+                all_external_ids.append(
+                    (
+                        external_id.get("source"),
+                        external_id.get("externalId")
+                    )
+                )
+
+        expected_count = series_config.get("expectedIssueCount")
+
+        series_reports.append(
+            {
+                "title": series.get("title"),
+                "volume": series.get("volume"),
+                "startYear": series.get("startYear"),
+                "expectedIssueCount": expected_count,
+                "actualIssueCount": len(issues),
+                "missingCovers": missing_covers,
+                "missingTitles": missing_titles,
+                "missingPublicationDates": missing_dates,
+                "nonstandardIssueNumbers": nonstandard_numbers,
+                "duplicateIssueNumbers": find_duplicates(issue_numbers),
+                "reviewIssueNumbers": review_numbers
+            }
+        )
+
+    duplicate_external_ids = []
+
+    seen_external_ids = set()
+
+    for external_id in all_external_ids:
+        if (external_id in seen_external_ids and external_id not in duplicate_external_ids):
+            duplicate_external_ids.append(external_id)
+
+        seen_external_ids.add(external_id)
+
+    return {
+        "publisher": catalog.get("publisher"),
+        "series": series_reports,
+        "duplicateIssueExternalIds": duplicate_external_ids
+    }
+
+
+def format_anomaly_report(report: dict) -> str:
+    lines = [
+        "",
+        "CATALOG REVIEW",
+        "=" * 72
+    ]
+
+    for series in report.get("series", []):
+        volume = series.get("volume")
+
+        volume_text = (
+            f"Vol. {volume}"
+            if volume is not None
+            else "No volume"
+        )
+
+        year = series.get("startYear")
+
+        year_text = (
+            str(year)
+            if year is not None
+            else "Unknown year"
+        )
+
+        lines.extend(
+            [
+                "",
+                (
+                    f"{series['title']} "
+                    f"| {volume_text} "
+                    f"| {year_text}"
+                ),
+                "-" * 72
+            ]
+        )
+
+        expected = series.get("expectedIssueCount")
+        actual = series["actualIssueCount"]
+
+        if expected is None:
+            lines.append(
+                f"Issues: {actual}"
+            )
+        else:
+            lines.append(
+                "Issues: "
+                f"{actual} / "
+                f"{expected} expected"
+            )
+
+        fields = [
+            (
+                "Missing covers",
+                "missingCovers"
+            ),
+            (
+                "Missing titles",
+                "missingTitles"
+            ),
+            (
+                "Missing publication dates",
+                "missingPublicationDates"
+            ),
+            (
+                "Nonstandard issue numbers",
+                "nonstandardIssueNumbers"
+            ),
+            (
+                "Duplicate issue numbers",
+                "duplicateIssueNumbers"
+            )
+        ]
+
+        for label, key in fields:
+            values = series.get(key, [])
+
+            line = f"{label}: {len(values)}"
+
+            if values:
+                line += (
+                    " ["
+                    + ", ".join(
+                        f"#{value}"
+                        for value in values
+                    )
+                    + "]"
+                )
+
+            lines.append(line)
+
+        lines.append(
+            "Issues requiring review: "
+            f"{len(series['reviewIssueNumbers'])}"
+        )
+
+    duplicate_external_ids = report.get("duplicateIssueExternalIds", [])
+
+    lines.extend(
+        [
+            "",
+            (
+                "Duplicate issue external IDs: "
+                f"{len(duplicate_external_ids)}"
+            )
+        ]
+    )
+
+    if duplicate_external_ids:
+        lines.extend(
+            (
+                f"  {source}:{external_id}"
+                for source, external_id
+                in duplicate_external_ids
+            )
+        )
+
+    return "\n".join(lines)
+
+
+def validate_expected_issue_count(series_config: dict, built_series: dict) -> None:
+    expected_count = series_config.get("expectedIssueCount")
+
+    if expected_count is None:
+        return
+
+    expected_count = int(expected_count)
+
+    actual_count = len(built_series.get("issues", []))
+
+    if actual_count != expected_count:
+        raise ValueError(
+            f"Expected {expected_count} issues "
+            f"for '{series_config['title']}' "
+            f"but built {actual_count}"
+        )
+
+
 def build_catalog(config: dict, cached_volumes: dict[int, dict]) -> dict:
     built_series = []
 
     for series_config in config.get("series", []):
         if series_config.get("issueMappings") is not None:
-            built_series.append(
-                build_mapped_series(
-                    series_config=series_config,
-                    cached_volumes=cached_volumes
+            generated_series = build_mapped_series(
+                series_config=series_config,
+                cached_volumes=cached_volumes
+            )
+        else:
+            volume_id = int(series_config["comicVineVolumeId"])
+
+            cached_volume = cached_volumes.get(volume_id)
+
+            if cached_volume is None:
+                raise ValueError(
+                    f"No cached Comic Vine volume found for {volume_id}"
                 )
+
+            generated_series = build_series(
+                series_config=series_config,
+                cached_volume=cached_volume
             )
 
-            continue
-
-        volume_id = int(series_config["comicVineVolumeId"])
-        cached_volume = (cached_volumes.get(volume_id))
-
-        if cached_volume is None:
-            raise ValueError(
-                f"No cached Comic Vine volume found for {volume_id}"
-            )
-
-        built_series.append(
-            build_series(series_config=series_config,
-                         cached_volume=cached_volume)
+        validate_expected_issue_count(
+            series_config=series_config,
+            built_series=generated_series
         )
+
+        built_series.append(generated_series)
+
 
     catalog = {
         "publisher": config["publisher"],

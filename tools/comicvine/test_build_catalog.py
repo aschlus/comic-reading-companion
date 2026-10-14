@@ -4,7 +4,9 @@ import unittest
 from pathlib import Path
 
 from build_catalog import (
+    build_anomaly_report,
     build_catalog,
+    format_anomaly_report,
     load_cached_volumes,
     validate_catalog,
     write_catalog
@@ -86,6 +88,71 @@ class BuildCatalogTest(
         self.assertEqual("REGULAR", issue["type"])
         self.assertEqual("Earth-616", issue["universeDesignation"])
         self.assertEqual("99239", issue["externalIds"][0]["externalId"])
+
+
+
+    def test_build_catalog_supports_multiple_cached_volumes(self):
+        config = {
+            "publisher": "Image Comics",
+            "universes": [],
+            "series": [
+                {
+                    "title": "Series One",
+                    "volume": 1,
+                    "startYear": 2000,
+                    "comicVineVolumeId": 1001,
+                },
+                {
+                    "title": "Series Two",
+                    "volume": 1,
+                    "startYear": 2001,
+                    "comicVineVolumeId": 1002,
+                },
+            ],
+        }
+
+        def make_cached_volume(volume_id, issue_id, title, date):
+            return {
+                "volume_id": volume_id,
+                "results": [
+                    {
+                        "id": issue_id,
+                        "issue_number": "1",
+                        "name": title,
+                        "cover_date": date,
+                        "image": {},
+                        "site_detail_url": None,
+                        "volume": {},
+                    }
+                ],
+            }
+
+        cached_volumes = {
+            1001: make_cached_volume(
+                1001, 501, "Series One #1", "2000-01-01"
+            ),
+            1002: make_cached_volume(
+                1002, 502, "Series Two #1", "2001-01-01"
+            ),
+        }
+
+        catalog = build_catalog(
+            config=config,
+            cached_volumes=cached_volumes,
+        )
+
+        self.assertEqual(
+            ["Series One", "Series Two"],
+            [series["title"] for series in catalog["series"]],
+        )
+        self.assertEqual(
+            ["501", "502"],
+            [
+                series["issues"][0]["externalIds"][0]["externalId"]
+                for series in catalog["series"]
+            ],
+        )
+
 
 
     def test_build_catalog_rejects_wrong_cached_volume(self):
@@ -299,7 +366,7 @@ class BuildCatalogTest(
             validate_catalog(catalog)
 
 
-    def test_validate_catalog_rejects_unkown_universe(self):
+    def test_validate_catalog_rejects_unknown_universe(self):
         catalog = {
                     "publisher": "Marvel Comics",
                     "universes": [
@@ -383,7 +450,7 @@ class BuildCatalogTest(
             validate_catalog(catalog)
         
         
-    def test_validate_catalog_rejects_unkown_universe(self):
+    def test_validate_catalog_rejects_duplicate_external_issue_id(self):
         catalog = {
                     "publisher": "Marvel Comics",
                     "universes": [
@@ -719,6 +786,301 @@ class BuildCatalogTest(
                 in series["issues"]
             ]
         )
+
+
+    def test_build_catalog_rejects_unexpected_issue_count(self):
+        config = {
+            "publisher": "Image Comics",
+            "universes": [],
+            "series": [
+                {
+                    "title": "Invincible",
+                    "volume": 1,
+                    "startYear": 2003,
+                    "comicVineVolumeId": 12345,
+                    "expectedIssueCount": 2,
+                }
+            ],
+        }
+
+        cached_volumes = {
+            12345: {
+                "volume_id": 12345,
+                "results": [
+                    {
+                        "id": 1,
+                        "issue_number": "1",
+                        "name": "Issue One",
+                        "cover_date":
+                            "2003-01-01",
+                        "image": {},
+                        "site_detail_url":
+                            None,
+                        "volume": {},
+                    }
+                ],
+            }
+        }
+
+        with self.assertRaisesRegex(
+            ValueError,
+            "Expected 2 issues.*but built 1"
+        ):
+            build_catalog(
+                config=config,
+                cached_volumes=
+                    cached_volumes
+            )
+
+
+    def test_build_anomaly_report_identifies_metadata_gaps(self):
+        config = {
+            "publisher": "Image Comics",
+            "series": [
+                {
+                    "title": "Test Series",
+                    "volume": 1,
+                    "startYear": 2003,
+                    "expectedIssueCount": 3
+                }
+            ]
+        }
+
+        catalog = {
+            "publisher": "Image Comics",
+            "universes": [],
+            "series": [
+                {
+                    "title": "Test Series",
+                    "volume": 1,
+                    "startYear": 2003,
+                    "externalIds": [],
+                    "issues": [
+                        {
+                            "number": "1",
+                            "title": "Complete",
+                            "publicationDate":
+                                "2003-01",
+                            "coverUrl":
+                                "https://example.com/1.jpg",
+                            "externalIds": [
+                                {
+                                    "source":
+                                        "COMIC_VINE",
+                                    "externalId":
+                                        "101"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "2",
+                            "title": None,
+                            "publicationDate":
+                                "2003-02",
+                            "coverUrl": None,
+                            "externalIds": [
+                                {
+                                    "source":
+                                        "COMIC_VINE",
+                                    "externalId":
+                                        "102"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "1/2",
+                            "title":
+                                "Special",
+                            "publicationDate":
+                                None,
+                            "coverUrl":
+                                "https://example.com/half.jpg",
+                            "externalIds": [
+                                {
+                                    "source":
+                                        "COMIC_VINE",
+                                    "externalId":
+                                        "103"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+
+        report = build_anomaly_report(
+                config=config,
+                catalog=catalog
+            )
+
+        series = report["series"][0]
+
+        self.assertEqual(
+            3,
+            series[
+                "actualIssueCount"
+            ]
+        )
+
+        self.assertEqual(
+            ["2"],
+            series[
+                "missingCovers"
+            ]
+        )
+
+        self.assertEqual(
+            ["2"],
+            series[
+                "missingTitles"
+            ]
+        )
+
+        self.assertEqual(
+            ["1/2"],
+            series[
+                "missingPublicationDates"
+            ]
+        )
+
+        self.assertEqual(
+            ["1/2"],
+            series[
+                "nonstandardIssueNumbers"
+            ]
+        )
+
+        self.assertEqual(
+            ["2", "1/2"],
+            series[
+                "reviewIssueNumbers"
+            ]
+        )
+
+
+    def test_format_anomaly_report_produces_review_summary(self):
+        report = {
+            "publisher":
+                "Image Comics",
+            "series": [
+                {
+                    "title":
+                        "Invincible",
+                    "volume":
+                        1,
+                    "startYear":
+                        2003,
+                    "expectedIssueCount":
+                        145,
+                    "actualIssueCount":
+                        145,
+                    "missingCovers":
+                        ["14", "27"],
+                    "missingTitles":
+                        [],
+                    "missingPublicationDates":
+                        ["14"],
+                    "nonstandardIssueNumbers":
+                        [],
+                    "duplicateIssueNumbers":
+                        [],
+                    "reviewIssueNumbers":
+                        ["14", "27"]
+                }
+            ],
+            "duplicateIssueExternalIds":
+                []
+        }
+
+        output = format_anomaly_report(report)
+
+        self.assertIn(
+            "Invincible | Vol. 1 | 2003",
+            output
+        )
+
+        self.assertIn(
+            "Issues: 145 / 145 expected",
+            output
+        )
+
+        self.assertIn(
+            "Missing covers: 2 [#14, #27]",
+            output
+        )
+
+        self.assertIn(
+            "Issues requiring review: 2",
+            output
+        )
+
+        self.assertIn(
+            "Duplicate issue external IDs: 0",
+            output
+        )
+
+
+    def test_build_anomaly_report_reports_each_series_once(self):
+        config = {
+            "publisher": "Image Comics",
+            "series": [
+                {"title": "Series A", "expectedIssueCount": 2},
+                {"title": "Series B", "expectedIssueCount": 1},
+            ],
+        }
+
+        def make_issue(number, title, external_id):
+            return {
+                "number": number,
+                "title": title,
+                "publicationDate": "2000-01",
+                "coverUrl": "https://example.com/cover.jpg",
+                "externalIds": [
+                    {
+                        "source": "COMIC_VINE",
+                        "externalId": external_id,
+                    }
+                ],
+            }
+
+        catalog = {
+            "publisher": "Image Comics",
+            "series": [
+                {
+                    "title": "Series A",
+                    "volume": 1,
+                    "startYear": 2000,
+                    "issues": [
+                        make_issue("1", None, "101"),
+                        make_issue("2", "Second Issue", "102"),
+                    ],
+                },
+                {
+                    "title": "Series B",
+                    "volume": 1,
+                    "startYear": 2001,
+                    "issues": [
+                        make_issue("1", "First Issue", "101"),
+                    ],
+                },
+            ],
+        }
+
+        report = build_anomaly_report(config, catalog)
+
+        self.assertEqual(
+            ["Series A", "Series B"],
+            [series["title"] for series in report["series"]],
+        )
+        self.assertEqual(2, report["series"][0]["actualIssueCount"])
+        self.assertEqual(["1"], report["series"][0]["missingTitles"])
+        self.assertEqual(1, report["series"][1]["actualIssueCount"])
+        self.assertEqual(
+            [("COMIC_VINE", "101")],
+            report["duplicateIssueExternalIds"],
+        )
+
 
 
 if __name__ == "__main__":

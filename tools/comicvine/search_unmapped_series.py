@@ -136,6 +136,8 @@ def get_unmapped_series() -> list[dict]:
 def get_manifest_series(manifest_file: Path) -> list[dict]:
     manifest = load_json(manifest_file)
 
+    manifest_publisher = manifest.get("publisher")
+
     result = []
 
     for series in manifest.get("series", []):
@@ -144,7 +146,8 @@ def get_manifest_series(manifest_file: Path) -> list[dict]:
                 "title": series["title"],
                 "volume": series.get("volume"),
                 "startYear": series.get("startYear"),
-                "localIssueCount": series.get("expectedIssueCount", 0)
+                "localIssueCount": series.get("expectedIssueCount", 0),
+                "publisher": series.get("publisher", manifest_publisher)
             }
         )
 
@@ -262,11 +265,20 @@ def score_candidate(local_series: dict, candidate: dict) -> int:
         elif difference == 2:
             score += 10
 
-    publisher = candidate.get("publisher") or {}
-    publisher_name = (publisher.get("name") or "").lower()
+    requested_publisher = local_series.get("publisher")
+    candidate_publisher = candidate.get("publisher") or {}
+    candidate_publisher_name = candidate_publisher.get("name")
 
-    if "marvel" in publisher_name:
-        score += 15
+    if(requested_publisher and candidate_publisher_name):
+        requested_normalized = normalize_title(requested_publisher)
+        candidate_normalized = normalize_title(candidate_publisher_name)
+
+        if (requested_normalized == candidate_normalized):
+            score += 15
+        elif(requested_normalized in candidate_normalized or candidate_normalized in requested_normalized):
+            score += 10
+        else:
+            score -= 15
 
     candidate_issue_count = candidate.get("count_of_issues") or 0
     local_issue_count = local_series["localIssueCount"]
