@@ -159,7 +159,11 @@ fun IssueDetailScreen(
 
                         Text(
                             text =
-                                "#${currentIssue.issueNumber}",
+                                if (currentIssue.issueTitle.isNullOrBlank()) {
+                                    "Issue ${currentIssue.issueNumber}"
+                                } else {
+                                    "#${currentIssue.issueNumber}"
+                                },
                             style =
                                 MaterialTheme.typography.headlineLarge
                                     .copy(

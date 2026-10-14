@@ -148,6 +148,69 @@ class IssueDetailScreenTest {
     }
 
     @Test
+    fun issueDetailScreen_displaysFallbackTitleWhenIssueTitleIsMissing() {
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Image Comics")
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Test Series",
+                        volume = 1,
+                        startYear = 2003,
+                        endYear = null
+                    )
+                )
+
+            val issueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "42",
+                        title = null,
+                        publicationDate = null,
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    IssueDetailScreen(
+                        issueId = issueId,
+                        viewModel = viewModel,
+                        onSeriesClick = {},
+                        onBackClick = {}
+                    )
+                }
+            }
+
+            composeRule.waitUntil(timeoutMillis = 5000L) {
+                composeRule
+                    .onAllNodesWithText("Test Series")
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule
+                .onNodeWithText("Issue 42")
+                .assertIsDisplayed()
+
+            composeRule
+                .onNodeWithText("#42")
+                .assertDoesNotExist()
+        }
+    }
+
+    @Test
     fun issueDetailScreen_backButtonInvokesCallback() {
         runBlocking {
             val publisherId =
