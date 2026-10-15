@@ -146,21 +146,26 @@ def request_page(
 
 
 def cache_volume(
-        volume_id: int
+        volume_id: int, refresh: bool = False
 ) -> None:
     cache_file = get_cache_file(
         volume_id
     )
 
-    if cache_file.exists():
+    if cache_file.exists() and not refresh:
         print(
             f"Cache hit: volume {volume_id}"
         )
         return
 
-    print(
-        f"Fetching volume {volume_id}"
-    )
+    if cache_file.exists():
+        print(
+            f"Refreshing volume {volume_id}"
+        )
+    else:
+        print(
+            f"Fetching volume {volume_id}"
+        )
 
     all_issues = []
     offset = 0

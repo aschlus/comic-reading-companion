@@ -1,6 +1,9 @@
 import argparse
 import tempfile
 import unittest
+import io
+import json
+from contextlib import redirect_stdout
 from pathlib import Path
 from unittest.mock import patch
 
@@ -227,6 +230,201 @@ class IngestSeriesTest(
                 ][0][
                     "actualIssueCount"
                 ]
+            )
+
+    def test_run_ingest_known_volume_builds_preview_without_promoting(
+        self
+    ):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+
+            config_path = root / "config.json"
+            preview_path = root / "preview.json"
+
+            arguments = argparse.Namespace(
+                title="Test Series",
+                publisher="Image Comics",
+                volume=1,
+                start_year=2003,
+                end_year=2003,
+                expected_issue_count=1,
+                comic_vine_volume_id=12345,
+                universe_designation=None,
+                universe_name=None,
+                issue_type="REGULAR",
+                config_output=config_path,
+                preview_output=preview_path,
+                promote=False,
+                base_catalog=None,
+                refresh=True
+            )
+
+            cached_volumes = {
+                12345: {
+                    "volume_id": 12345,
+                    "results": [
+                        {
+                            "id": 1001,
+                            "issue_number": "1",
+                            "name": "Issue One",
+                            "cover_date": "2003-01-01",
+                            "store_date": None,
+                            "image": {
+                                "super_url":
+                                    "https://example.com/1.jpg"
+                            },
+                            "site_detail_url":
+                                "https://example.com/issue/1001",
+                            "volume": {
+                                "site_detail_url":
+                                    "https://example.com/volume/12345"
+                            }
+                        }
+                    ]
+                }
+            }
+
+            with patch(
+                "ingest_series.cache_volume"
+            ) as cache_mock, patch(
+                "ingest_series.load_cached_volumes",
+                return_value=cached_volumes
+            ):
+                result = run_ingest(arguments)
+
+            cache_mock.assert_called_once_with(
+                12345,
+                refresh=True
+            )
+
+            self.assertTrue(config_path.exists())
+            self.assertTrue(preview_path.exists())
+
+            self.assertEqual(
+                12345,
+                result["comicVineVolumeId"]
+            )
+
+            self.assertEqual(
+                1,
+                result["report"]["series"][0]["actualIssueCount"]
+            )
+
+    def test_run_ingest_compares_preview_against_base_catalog(
+        self
+    ):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+
+            config_path = root / "config.json"
+            preview_path = root / "preview.json"
+            base_catalog_path = root / "base_catalog.json"
+
+            catalog = {
+                "publisher": "Image Comics",
+                "universes": [],
+                "series": [
+                    {
+                        "title": "Test Series",
+                        "volume": 1,
+                        "startYear": 2003,
+                        "endYear": None,
+                        "externalIds": [
+                            {
+                                "source": "COMIC_VINE",
+                                "externalId": "12345",
+                                "url": None,
+                            }
+                        ],
+                        "issues": [
+                            {
+                                "number": "1",
+                                "title": "Issue One",
+                                "publicationDate": "2003-01",
+                                "coverUrl": "https://example.com/1.jpg",
+                                "description": None,
+                                "type": "REGULAR",
+                                "universeDesignation": None,
+                                "externalIds": [],
+                            }
+                        ],
+                    }
+                ],
+            }
+
+            base_catalog_path.write_text(
+                json.dumps(catalog, indent=2),
+                encoding="utf-8",
+            )
+
+            arguments = argparse.Namespace(
+                title="Test Series",
+                publisher="Image Comics",
+                volume=1,
+                start_year=2003,
+                end_year=2003,
+                expected_issue_count=1,
+                comic_vine_volume_id=12345,
+                universe_designation=None,
+                universe_name=None,
+                issue_type="REGULAR",
+                config_output=config_path,
+                preview_output=preview_path,
+                promote=False,
+                base_catalog=base_catalog_path,
+                refresh=False,
+            )
+
+            output = io.StringIO()
+
+            with patch(
+                "ingest_series.cache_volume"
+            ) as cache_mock, patch(
+                "ingest_series.load_cached_volumes",
+                return_value={12345: {"volume_id": 12345, "results": []}},
+            ), patch(
+                "ingest_series.build_catalog",
+                return_value=catalog,
+            ), patch(
+                "ingest_series.build_anomaly_report",
+                return_value={"series": []},
+            ), patch(
+                "ingest_series.format_anomaly_report",
+                return_value="No anomalies",
+            ), redirect_stdout(output):
+                result = run_ingest(arguments)
+
+            cache_mock.assert_called_once_with(
+                12345,
+                refresh=False,
+            )
+
+            self.assertTrue(config_path.exists())
+            self.assertTrue(preview_path.exists())
+
+            self.assertEqual(
+                12345,
+                result["comicVineVolumeId"],
+            )
+
+            self.assertIn(
+                "CATALOG COMPARISON",
+                output.getvalue(),
+            )
+
+            self.assertIn(
+                "Series status: No changes",
+                output.getvalue(),
+            )
+
+            self.assertIn(
+                "No differences detected.",
+                output.getvalue(),
+            )
+
+            self.assertIn(
+                "Preview only.",
+                output.getvalue(),
             )
 
 

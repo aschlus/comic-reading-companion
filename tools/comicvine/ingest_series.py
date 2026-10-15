@@ -20,6 +20,10 @@ from promote_catalog_preview import(
     merge_catalog,
     write_atomically,
 )
+from compare_catalog_preview import(
+    compare_catalogs,
+    format_catalog_comparison,
+)
 from search_unmapped_series import(
     build_report_entry,
     search_comic_vine,
@@ -227,7 +231,7 @@ def run_ingest(arguments, input_func=input) -> dict:
     print("Config written:")
     print(f"  {config_path}")
 
-    cache_volume(comic_vine_volume_id)
+    cache_volume(comic_vine_volume_id, refresh=getattr(arguments, "refresh", False))
 
     cached_volumes = load_cached_volumes(config=config)
 
@@ -252,14 +256,27 @@ def run_ingest(arguments, input_func=input) -> dict:
 
     print(format_anomaly_report(report))
 
+    base_catalog = None
+
+    if arguments.base_catalog is not None:
+        base_catalog = load_catalog_json(
+            arguments.base_catalog
+        )
+
+        comparisons = compare_catalogs(
+            base_catalog=base_catalog,
+            generated_catalog=catalog
+        )
+
+        print()
+        print(format_catalog_comparison(comparisons))
+
     if arguments.promote:
         if (arguments.base_catalog is None):
             raise ValueError(
                 "--base-catalog is required "
                 "when --promote is used"
             )
-
-        base_catalog = load_catalog_json(arguments.base_catalog)
 
         merged_catalog = merge_catalog(
             base_catalog=base_catalog,
@@ -371,6 +388,12 @@ def build_argument_parser():
     parser.add_argument(
         "--base-catalog",
         type=Path
+    )
+
+    parser.add_argument(
+        "--refresh",
+        action="store_true",
+        help="Refresh cached Comic Vine issue data before building the preview."
     )
 
     return parser
