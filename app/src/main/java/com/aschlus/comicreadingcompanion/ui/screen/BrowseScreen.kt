@@ -22,6 +22,7 @@ import com.aschlus.comicreadingcompanion.ui.component.ComicAddToListFilters
 import com.aschlus.comicreadingcompanion.ui.component.ComicAddToListSearchField
 import com.aschlus.comicreadingcompanion.ui.component.ComicBrowseHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicBrowseIssueResult
+import com.aschlus.comicreadingcompanion.ui.component.ComicBrowsePublisherFilter
 import com.aschlus.comicreadingcompanion.ui.component.ComicBrowsePublisherRow
 import com.aschlus.comicreadingcompanion.ui.component.ComicBrowseSeriesResult
 import com.aschlus.comicreadingcompanion.ui.component.ComicEmptyState
@@ -49,6 +50,9 @@ fun BrowseScreen(
 
     val issueResults by
         viewModel.issueResults.collectAsState()
+
+    val selectedPublisherId by
+        viewModel.selectedPublisherId.collectAsState()
 
     var selectedFilter by rememberSaveable {
         mutableStateOf(AddToListFilter.ALL)
@@ -81,14 +85,28 @@ fun BrowseScreen(
                 placeholder = "Search comics, series, or issues"
             )
 
-            if (searchQuery.isNotBlank()) {
+            ComicBrowsePublisherFilter(
+                publishers = publishers,
+                selectedPublisherId = selectedPublisherId,
+                onPublisherSelected = { publisherId ->
+                    viewModel.updatePublisherFilter(publisherId)
+                }
+            )
+
+            if (
+                searchQuery.isNotBlank() ||
+                selectedPublisherId != null
+            ) {
                 ComicAddToListFilters(
                     selectedFilter = selectedFilter,
                     onFilterSelected = { selectedFilter = it }
                 )
             }
 
-            if (searchQuery.isBlank()) {
+            if (
+                searchQuery.isBlank() &&
+                selectedPublisherId == null
+            ) {
 
                 ComicHomeSectionHeader(
                     text = "PUBLISHERS"

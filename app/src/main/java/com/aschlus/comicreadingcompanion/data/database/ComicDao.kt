@@ -225,8 +225,15 @@ interface ComicDao {
             ON series.id = issues.seriesId
         LEFT JOIN reading_progress
             ON issues.id = reading_progress.issueId
-        WHERE LOWER(series.title)
-            LIKE '%' || LOWER(:query) || '%'
+        WHERE (
+            :query = ''
+            OR LOWER(series.title)
+                LIKE '%' || LOWER(:query) || '%'
+        )
+        AND (
+            :publisherId IS NULL
+            OR series.publisherId = :publisherId
+        )
         GROUP BY series.id
         ORDER BY
             series.title ASC,
@@ -234,7 +241,8 @@ interface ComicDao {
         LIMIT 50
     """)
     fun searchSeries(
-        query: String
+        query: String,
+        publisherId: Long? = null
     ): Flow<List<SeriesSearchResult>>
 
     @Query("""
@@ -362,8 +370,9 @@ interface ComicDao {
             ON series.publisherId = publishers.id
         LEFT JOIN reading_progress
             ON issues.id = reading_progress.issueId
-        WHERE
-            LOWER(series.title)
+        WHERE (
+            :query = ''
+            OR LOWER(series.title)
                 LIKE '%' || LOWER(:query) || '%'
             OR LOWER(COALESCE(issues.title, ''))
                 LIKE '%' || LOWER(:query) || '%'
@@ -373,6 +382,11 @@ interface ComicDao {
                 LIKE '%' || LOWER(:query) || '%'
             OR LOWER(series.title || ' ' || issues.issueNumber)
                 LIKE '%' || LOWER(:query) || '%'
+        )
+        AND (
+            :publisherId IS NULL
+            OR series.publisherId = :publisherId
+        )
         ORDER BY
             series.title ASC,
             issues.publicationDate ASC,
@@ -380,7 +394,8 @@ interface ComicDao {
         LIMIT 75
     """)
     fun searchIssues(
-        query: String
+        query: String,
+        publisherId: Long? = null
     ): Flow<List<IssueSearchResult>>
 
 

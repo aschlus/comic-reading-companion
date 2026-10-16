@@ -6,6 +6,7 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.hasSetTextAction
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithText
+import androidx.compose.ui.test.onLast
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
@@ -570,6 +571,153 @@ class BrowseScreenTest {
                     "Test Issue"
                 )
                 .assertIsDisplayed()
+        }
+    }
+
+
+    @Test
+    fun browseScreen_publisherFilterWorksWithBlankAndTextQueries() {
+        runBlocking {
+            val marvelPublisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val dcPublisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "DC")
+                )
+
+            val marvelSeriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = marvelPublisherId,
+                        title = "Amazing Spider-Man",
+                        volume = 1,
+                        startYear = 1963,
+                        endYear = null
+                    )
+                )
+
+            val dcSeriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = dcPublisherId,
+                        title = "Batman",
+                        volume = 1,
+                        startYear = 1940,
+                        endYear = null
+                    )
+                )
+
+            comicDao.insertIssue(
+                Issue(
+                    seriesId = marvelSeriesId,
+                    universeId = null,
+                    issueNumber = "1",
+                    title = "Spider-Man!",
+                    publicationDate = "1963-03",
+                    coverUrl = null,
+                    description = null,
+                    issueType = IssueType.REGULAR
+                )
+            )
+
+            comicDao.insertIssue(
+                Issue(
+                    seriesId = dcSeriesId,
+                    universeId = null,
+                    issueNumber = "1",
+                    title = "Batman!",
+                    publicationDate = "1940-04",
+                    coverUrl = null,
+                    description = null,
+                    issueType = IssueType.REGULAR
+                )
+            )
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    BrowseScreen(
+                        viewModel = viewModel,
+                        onPublisherClick = {},
+                        onSeriesClick = {},
+                        onIssueClick = {}
+                    )
+                }
+            }
+
+            // Select Marvel with no text query.
+            composeRule.onNodeWithText("PUBLISHER: ALL")
+                .performClick()
+
+            composeRule.onAllNodesWithText("Marvel")
+                .onLast()
+                .performClick()
+
+            composeRule.waitUntil(timeoutMillis = 5000L) {
+                composeRule.onAllNodesWithText("Amazing Spider-Man")
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule.onNodeWithText("Amazing Spider-Man")
+                .assertIsDisplayed()
+
+            composeRule.onNodeWithText("Batman")
+                .assertDoesNotExist()
+
+            composeRule.onNodeWithText("PUBLISHER: Marvel")
+                .assertIsDisplayed()
+
+            composeRule.onNodeWithText("CLEAR FILTERS")
+                .assertIsDisplayed()
+
+            // The selected publisher must combine with text search.
+            composeRule.onNode(hasSetTextAction())
+                .performTextInput("Spider")
+
+            composeRule.waitUntil(timeoutMillis = 5000L) {
+                composeRule.onAllNodesWithText("Amazing Spider-Man #1")
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule.onNodeWithText("Amazing Spider-Man #1")
+                .assertIsDisplayed()
+
+            composeRule.onNodeWithText("Batman")
+                .assertDoesNotExist()
+
+            // Clear the query, then clear the publisher filter.
+            composeRule.onNodeWithContentDescription("Clear search")
+                .performClick()
+
+            composeRule.onNodeWithText("CLEAR FILTERS")
+                .performClick()
+
+            composeRule.waitUntil(timeoutMillis = 5000L) {
+                composeRule.onAllNodesWithText("PUBLISHERS")
+                    .fetchSemanticsNodes()
+                    .isNotEmpty() &&
+                        composeRule.onAllNodesWithText("DC")
+                            .fetchSemanticsNodes()
+                            .isNotEmpty()
+            }
+
+            composeRule.onNodeWithText("PUBLISHERS")
+                .assertIsDisplayed()
+
+            composeRule.onNodeWithText("Marvel")
+                .assertIsDisplayed()
+
+            composeRule.onNodeWithText("DC")
+                .assertIsDisplayed()
+
+            composeRule.onNodeWithText("ALL")
+                .assertDoesNotExist()
         }
     }
 }

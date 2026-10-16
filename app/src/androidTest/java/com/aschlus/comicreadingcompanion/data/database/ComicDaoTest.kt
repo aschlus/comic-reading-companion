@@ -2705,4 +2705,98 @@ class ComicDaoTest {
                 }
             )
         }
+
+
+    @Test
+    fun searchSeriesAndIssues_filtersByPublisherAndSupportsBlankQuery() =
+        runBlocking {
+            val marvelPublisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val dcPublisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "DC")
+                )
+
+            val marvelSeriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = marvelPublisherId,
+                        title = "Amazing Spider-Man",
+                        volume = 1,
+                        startYear = 1963,
+                        endYear = null
+                    )
+                )
+
+            comicDao.insertSeries(
+                Series(
+                    publisherId = dcPublisherId,
+                    title = "Batman",
+                    volume = 1,
+                    startYear = 1940,
+                    endYear = null
+                )
+            )
+
+            val marvelIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = marvelSeriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "Spider-Man!",
+                        publicationDate = "1963-03",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val seriesByPublisher =
+                comicDao.searchSeries(
+                    query = "",
+                    publisherId = marvelPublisherId
+                ).first()
+
+            val issuesByPublisher =
+                comicDao.searchIssues(
+                    query = "",
+                    publisherId = marvelPublisherId
+                ).first()
+
+            assertEquals(
+                listOf(marvelSeriesId),
+                seriesByPublisher.map { it.seriesId }
+            )
+
+            assertEquals(
+                listOf(marvelIssueId),
+                issuesByPublisher.map { it.issueId }
+            )
+
+            val matchingSeries =
+                comicDao.searchSeries(
+                    query = "Spider",
+                    publisherId = marvelPublisherId
+                ).first()
+
+            assertEquals(
+                listOf(marvelSeriesId),
+                matchingSeries.map { it.seriesId }
+            )
+
+            val nonMatchingPublisher =
+                comicDao.searchSeries(
+                    query = "Batman",
+                    publisherId = marvelPublisherId
+                ).first()
+
+            assertEquals(
+                0,
+                nonMatchingPublisher.size
+            )
+        }
 }

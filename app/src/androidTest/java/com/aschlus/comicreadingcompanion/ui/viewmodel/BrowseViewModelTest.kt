@@ -327,4 +327,147 @@ class BrowseViewModelTest {
             assertEquals(issueId, issueResults.first().issueId)
             assertEquals("   Spider   ", viewModel.searchQuery.value)
         }
+
+
+    @Test
+    fun updatePublisherFilter_filtersBlankQueryResultsAndClearsFilter() =
+        runBlocking {
+            val marvelPublisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val dcPublisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "DC")
+                )
+
+            val marvelSeriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = marvelPublisherId,
+                        title = "Amazing Spider-Man",
+                        volume = 1,
+                        startYear = 1963,
+                        endYear = null
+                    )
+                )
+
+            val dcSeriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = dcPublisherId,
+                        title = "Batman",
+                        volume = 1,
+                        startYear = 1940,
+                        endYear = null
+                    )
+                )
+
+            val marvelIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = marvelSeriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "Spider-Man!",
+                        publicationDate = "1963-03",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val dcIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = dcSeriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "Batman!",
+                        publicationDate = "1940-04",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            // A publisher filter must work with a blank query.
+            viewModel.updatePublisherFilter(marvelPublisherId)
+
+            val marvelSeriesResults =
+                withTimeout(5000L.milliseconds) {
+                    viewModel.seriesResults.first {
+                        it.size == 1 &&
+                                it.first().seriesId == marvelSeriesId
+                    }
+                }
+
+            val marvelIssueResults =
+                withTimeout(5000L.milliseconds) {
+                    viewModel.issueResults.first {
+                        it.size == 1 &&
+                                it.first().issueId == marvelIssueId
+                    }
+                }
+
+            assertEquals(
+                listOf(marvelSeriesId),
+                marvelSeriesResults.map { it.seriesId }
+            )
+            assertEquals(
+                listOf(marvelIssueId),
+                marvelIssueResults.map { it.issueId }
+            )
+            assertEquals(
+                marvelPublisherId,
+                viewModel.selectedPublisherId.value
+            )
+
+            // Changing publishers must update both result lists.
+            viewModel.updatePublisherFilter(dcPublisherId)
+
+            val dcSeriesResults =
+                withTimeout(5000L.milliseconds) {
+                    viewModel.seriesResults.first {
+                        it.size == 1 &&
+                                it.first().seriesId == dcSeriesId
+                    }
+                }
+
+            val dcIssueResults =
+                withTimeout(5000L.milliseconds) {
+                    viewModel.issueResults.first {
+                        it.size == 1 &&
+                                it.first().issueId == dcIssueId
+                    }
+                }
+
+            assertEquals(
+                listOf(dcSeriesId),
+                dcSeriesResults.map { it.seriesId }
+            )
+            assertEquals(
+                listOf(dcIssueId),
+                dcIssueResults.map { it.issueId }
+            )
+
+            // Clearing the publisher filter with a blank query
+            // should clear both result lists.
+            viewModel.updatePublisherFilter(null)
+
+            val clearedSeriesResults =
+                withTimeout(5000L.milliseconds) {
+                    viewModel.seriesResults.first { it.isEmpty() }
+                }
+
+            val clearedIssueResults =
+                withTimeout(5000L.milliseconds) {
+                    viewModel.issueResults.first { it.isEmpty() }
+                }
+
+            assertEquals(0, clearedSeriesResults.size)
+            assertEquals(0, clearedIssueResults.size)
+            assertEquals(null, viewModel.selectedPublisherId.value)
+        }
 }

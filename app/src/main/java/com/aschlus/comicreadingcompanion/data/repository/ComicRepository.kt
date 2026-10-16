@@ -1231,18 +1231,22 @@ class ComicRepository(
     // Browsing
 
     fun searchSeries(
-        query: String
+        query: String,
+        publisherId: Long? = null
     ): Flow<List<SeriesSearchResult>> {
         return comicDao.searchSeries(
-            query = query
+            query = query,
+            publisherId = publisherId
         )
     }
 
     fun searchIssues(
-        query: String
+        query: String,
+        publisherId: Long? = null
     ): Flow<List<IssueSearchResult>> {
         return comicDao.searchIssues(
-            query = query
+            query = query,
+            publisherId = publisherId
         )
     }
 
