@@ -78,6 +78,14 @@ class ComicRepository(
         return comicDao.getUniversesForPublisher(publisherId)
     }
 
+    fun getAllUniverses(): Flow<List<Universe>> {
+        return comicDao.getAllUniverses()
+    }
+
+    fun getAvailablePublicationYears(): Flow<List<Int>> {
+        return comicDao.getAvailablePublicationYears()
+    }
+
     suspend fun addSeries(series: Series): Long {
         return comicDao.insertSeries(series)
     }
@@ -1232,21 +1240,29 @@ class ComicRepository(
 
     fun searchSeries(
         query: String,
-        publisherId: Long? = null
+        publisherId: Long? = null,
+        universeId: Long? = null,
+        publicationYear: Int? = null
     ): Flow<List<SeriesSearchResult>> {
         return comicDao.searchSeries(
             query = query,
-            publisherId = publisherId
+            publisherId = publisherId,
+            universeId = universeId,
+            publicationYear = publicationYear
         )
     }
 
     fun searchIssues(
         query: String,
-        publisherId: Long? = null
+        publisherId: Long? = null,
+        universeId: Long? = null,
+        publicationYear: Int? = null
     ): Flow<List<IssueSearchResult>> {
         return comicDao.searchIssues(
             query = query,
-            publisherId = publisherId
+            publisherId = publisherId,
+            universeId = universeId,
+            publicationYear = publicationYear
         )
     }
 

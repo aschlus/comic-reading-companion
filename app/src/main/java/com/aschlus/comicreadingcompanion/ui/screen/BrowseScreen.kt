@@ -30,6 +30,31 @@ import com.aschlus.comicreadingcompanion.ui.component.ComicHomeSectionHeader
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.viewmodel.AddToListFilter
 import com.aschlus.comicreadingcompanion.ui.viewmodel.BrowseViewModel
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FilterList
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.Text
+import androidx.compose.material3.rememberModalBottomSheetState
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.font.FontWeight
+import com.aschlus.comicreadingcompanion.ui.component.ComicBrowseFilterSheetContent
+import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -54,8 +79,46 @@ fun BrowseScreen(
     val selectedPublisherId by
         viewModel.selectedPublisherId.collectAsState()
 
+    val availableUniverses by
+        viewModel.availableUniverses.collectAsState()
+
+    val availablePublicationYears by
+        viewModel.availablePublicationYears.collectAsState()
+
+    val selectedUniverseId by
+        viewModel.selectedUniverseId.collectAsState()
+
+    val selectedPublicationYear by
+        viewModel.selectedPublicationYear.collectAsState()
+
     var selectedFilter by rememberSaveable {
         mutableStateOf(AddToListFilter.ALL)
+    }
+
+    var showFilterSheet by rememberSaveable {
+        mutableStateOf(false)
+    }
+
+    val filterSheetState =
+        rememberModalBottomSheetState(
+            skipPartiallyExpanded = true
+        )
+
+    val activeFilterCount = listOf(
+        selectedPublisherId != null,
+        selectedUniverseId != null,
+        selectedPublicationYear != null
+    ).count { it }
+
+    val resultCount = when (selectedFilter) {
+        AddToListFilter.ALL ->
+            seriesResults.size + issueResults.size
+
+        AddToListFilter.SERIES ->
+            seriesResults.size
+
+        AddToListFilter.ISSUES ->
+            issueResults.size
     }
 
     Scaffold(
@@ -85,17 +148,16 @@ fun BrowseScreen(
                 placeholder = "Search comics, series, or issues"
             )
 
-            ComicBrowsePublisherFilter(
-                publishers = publishers,
-                selectedPublisherId = selectedPublisherId,
-                onPublisherSelected = { publisherId ->
-                    viewModel.updatePublisherFilter(publisherId)
+            ComicBrowseFiltersButton(
+                activeFilterCount = activeFilterCount,
+                onClick = {
+                    showFilterSheet = true
                 }
             )
 
             if (
                 searchQuery.isNotBlank() ||
-                selectedPublisherId != null
+                activeFilterCount > 0
             ) {
                 ComicAddToListFilters(
                     selectedFilter = selectedFilter,
@@ -105,7 +167,7 @@ fun BrowseScreen(
 
             if (
                 searchQuery.isBlank() &&
-                selectedPublisherId == null
+                activeFilterCount == 0
             ) {
 
                 ComicHomeSectionHeader(
@@ -212,6 +274,117 @@ fun BrowseScreen(
                         }
                     }
                 }
+            }
+        }
+    }
+
+    if (showFilterSheet) {
+        ModalBottomSheet(
+            onDismissRequest = {
+                showFilterSheet = false
+            },
+            sheetState = filterSheetState,
+            containerColor = ComicPaper,
+            dragHandle = null
+        ) {
+            ComicBrowseFilterSheetContent(
+                publishers = publishers,
+                selectedPublisherId = selectedPublisherId,
+                onPublisherSelected = { publisherId ->
+                    viewModel.updatePublisherFilter(
+                        publisherId
+                    )
+                },
+                universes = availableUniverses,
+                selectedUniverseId = selectedUniverseId,
+                onUniverseSelected = { universeId ->
+                    viewModel.updateUniverseFilter(
+                        universeId
+                    )
+                },
+                publicationYears = availablePublicationYears,
+                selectedPublicationYear = selectedPublicationYear,
+                onPublicationYearSelected = { year ->
+                    viewModel.updatePublicationYearFilter(
+                        year
+                    )
+                },
+                activeFilterCount = activeFilterCount,
+                resultCount = resultCount,
+                onClearAll = {
+                    viewModel.updatePublisherFilter(null)
+                    viewModel.updateUniverseFilter(null)
+                    viewModel.updatePublicationYearFilter(null)
+                },
+                onDone = {
+                    showFilterSheet = false
+                },
+                modifier = Modifier.navigationBarsPadding()
+            )
+        }
+    }
+}
+
+@Composable
+private fun ComicBrowseFiltersButton(
+    activeFilterCount: Int,
+    onClick: () -> Unit
+) {
+    val shape = RoundedCornerShape(9.dp)
+
+    Box(
+        modifier = Modifier.height(44.dp)
+    ) {
+        Box(
+            modifier = Modifier
+                .matchParentSize()
+                .offset(
+                    x = 2.dp,
+                    y = 3.dp
+                )
+                .background(
+                    color = ComicInk,
+                    shape = shape
+                )
+        )
+
+        Box(
+            modifier = Modifier
+                .height(41.dp)
+                .clip(shape)
+                .background(ComicPaper)
+                .border(
+                    width = 2.dp,
+                    color = ComicInk,
+                    shape = shape
+                )
+                .clickable(onClick = onClick)
+                .padding(horizontal = 14.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    imageVector = Icons.Default.FilterList,
+                    contentDescription = null,
+                    tint = ComicInk,
+                    modifier = Modifier.size(18.dp)
+                )
+
+                Spacer(modifier = Modifier.width(8.dp))
+
+                Text(
+                    text = if (activeFilterCount > 0) {
+                        "Filters ($activeFilterCount)"
+                    } else {
+                        "Filters"
+                    },
+                    style = MaterialTheme.typography.labelLarge.copy(
+                        fontWeight = FontWeight.ExtraBold
+                    ),
+                    color = ComicInk
+                )
             }
         }
     }

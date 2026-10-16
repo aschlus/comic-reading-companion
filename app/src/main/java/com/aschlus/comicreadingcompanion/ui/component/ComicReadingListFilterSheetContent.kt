@@ -218,7 +218,7 @@ fun ComicReadingListFilterSheetContent(
 }
 
 @Composable
-private fun ComicFilterTitleBanner(
+fun ComicFilterTitleBanner(
     text: String,
     modifier: Modifier = Modifier
 ) {
@@ -307,7 +307,7 @@ private fun ComicFilterTitleBanner(
 }
 
 @Composable
-private fun ComicFilterSectionLabel(
+fun ComicFilterSectionLabel(
     text: String,
     modifier: Modifier = Modifier
 ) {
@@ -481,7 +481,7 @@ private fun ComicSeriesFilterSelector(
 }
 
 @Composable
-private fun ComicFilterSecondaryButton(
+fun ComicFilterSecondaryButton(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -518,7 +518,7 @@ private fun ComicFilterSecondaryButton(
 }
 
 @Composable
-private fun ComicFilterPrimaryButton(
+fun ComicFilterPrimaryButton(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier

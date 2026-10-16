@@ -2,6 +2,7 @@ package com.aschlus.comicreadingcompanion.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.aschlus.comicreadingcompanion.data.database.entities.Universe
 import com.aschlus.comicreadingcompanion.data.database.models.IssueSearchResult
 import com.aschlus.comicreadingcompanion.data.database.models.PublisherBrowseResult
 import com.aschlus.comicreadingcompanion.data.database.models.SeriesSearchResult
@@ -39,6 +40,24 @@ class BrowseViewModel(
     val selectedPublisherId: StateFlow<Long?> =
         _selectedPublisherId.asStateFlow()
 
+    private val _selectedUniverseId =
+        MutableStateFlow<Long?>(null)
+
+    val selectedUniverseId: StateFlow<Long?> =
+        _selectedUniverseId.asStateFlow()
+
+    private val _selectedPublicationYear =
+        MutableStateFlow<Int?>(null)
+
+    val selectedPublicationYear: StateFlow<Int?> =
+        _selectedPublicationYear.asStateFlow()
+
+    private val _availableUniverses = MutableStateFlow<List<Universe>>(emptyList())
+    val availableUniverses: StateFlow<List<Universe>> = _availableUniverses.asStateFlow()
+
+    private val _availablePublicationYears = MutableStateFlow<List<Int>>(emptyList())
+    val availablePublicationYears: StateFlow<List<Int>> = _availablePublicationYears.asStateFlow()
+
     private val _seriesResults =
         MutableStateFlow<List<SeriesSearchResult>>(emptyList())
 
@@ -60,6 +79,18 @@ class BrowseViewModel(
                     _publishers.value = updatedPublishers
                 }
         }
+
+        viewModelScope.launch {
+            repository.getAllUniverses().collect {
+                _availableUniverses.value = it
+            }
+        }
+
+        viewModelScope.launch {
+            repository.getAvailablePublicationYears().collect {
+                _availablePublicationYears.value = it
+            }
+        }
     }
 
     fun updateSearchQuery(
@@ -76,13 +107,34 @@ class BrowseViewModel(
         refreshSearchResults()
     }
 
+    fun updateUniverseFilter(
+        universeId: Long?
+    ) {
+        _selectedUniverseId.value = universeId
+        refreshSearchResults()
+    }
+
+    fun updatePublicationYearFilter(
+        year: Int?
+    ) {
+        _selectedPublicationYear.value = year
+        refreshSearchResults()
+    }
+
     private fun refreshSearchResults() {
         searchJob?.cancel()
 
         val trimmedQuery = _searchQuery.value.trim()
         val publisherId = _selectedPublisherId.value
+        val universeId = _selectedUniverseId.value
+        val publicationYear = _selectedPublicationYear.value
 
-        if (trimmedQuery.isBlank() && publisherId == null) {
+        if (
+            trimmedQuery.isBlank() &&
+            publisherId == null &&
+            universeId == null &&
+            publicationYear == null
+        ) {
             _seriesResults.value = emptyList()
             _issueResults.value = emptyList()
             return
@@ -94,11 +146,15 @@ class BrowseViewModel(
             combine(
                 repository.searchSeries(
                     query = trimmedQuery,
-                    publisherId = publisherId
+                    publisherId = publisherId,
+                    universeId = universeId,
+                    publicationYear = publicationYear
                 ),
                 repository.searchIssues(
                     query = trimmedQuery,
-                    publisherId = publisherId
+                    publisherId = publisherId,
+                    universeId = universeId,
+                    publicationYear = publicationYear
                 )
             ) { seriesResults, issueResults ->
                 seriesResults to issueResults

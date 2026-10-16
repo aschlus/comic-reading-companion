@@ -93,6 +93,12 @@ interface ComicDao {
 
     @Query("""
         SELECT * FROM universes
+        ORDER BY publisherId ASC, name ASC, designation ASC
+    """)
+    fun getAllUniverses(): Flow<List<Universe>>
+
+    @Query("""
+        SELECT * FROM universes
         WHERE publisherId = :publisherId
           AND designation = :designation
         LIMIT 1
@@ -234,6 +240,25 @@ interface ComicDao {
             :publisherId IS NULL
             OR series.publisherId = :publisherId
         )
+        AND (
+            :universeId IS NULL
+            OR EXISTS (
+                SELECT 1
+                FROM issues AS universe_issue
+                WHERE universe_issue.seriesId = series.id
+                    AND universe_issue.universeId = :universeId
+            )
+        )
+        AND (
+            :publicationYear IS NULL
+            OR EXISTS (
+                SELECT 1
+                FROM issues AS year_issue
+                WHERE year_issue.seriesId = series.id
+                    AND year_issue.publicationDate
+                        LIKE CAST(:publicationYear AS TEXT) || '%'
+            )
+        )
         GROUP BY series.id
         ORDER BY
             series.title ASC,
@@ -242,7 +267,9 @@ interface ComicDao {
     """)
     fun searchSeries(
         query: String,
-        publisherId: Long? = null
+        publisherId: Long? = null,
+        universeId: Long? = null,
+        publicationYear: Int? = null
     ): Flow<List<SeriesSearchResult>>
 
     @Query("""
@@ -387,6 +414,15 @@ interface ComicDao {
             :publisherId IS NULL
             OR series.publisherId = :publisherId
         )
+        AND (
+            :universeId IS NULL
+            OR issues.universeId = :universeId
+        )
+        AND (
+            :publicationYear IS NULL
+            OR issues.publicationDate
+                LIKE CAST(:publicationYear AS TEXT) || '%'
+        )
         ORDER BY
             series.title ASC,
             issues.publicationDate ASC,
@@ -395,8 +431,21 @@ interface ComicDao {
     """)
     fun searchIssues(
         query: String,
-        publisherId: Long? = null
+        publisherId: Long? = null,
+        universeId: Long? = null,
+        publicationYear: Int? = null
     ): Flow<List<IssueSearchResult>>
+
+    @Query("""
+        SELECT DISTINCT
+            CAST(SUBSTR(publicationDate, 1, 4) AS INTEGER)
+        FROM issues
+        WHERE publicationDate IS NOT NULL
+            AND SUBSTR(publicationDate, 1, 4)
+                GLOB '[0-9][0-9][0-9][0-9]'
+        ORDER BY 1 DESC
+    """)
+    fun getAvailablePublicationYears(): Flow<List<Int>>
 
 
     // Reading lists

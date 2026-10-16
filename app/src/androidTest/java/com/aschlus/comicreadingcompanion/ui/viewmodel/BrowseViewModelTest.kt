@@ -11,6 +11,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.Issue
 import com.aschlus.comicreadingcompanion.data.database.entities.IssueType
 import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
 import com.aschlus.comicreadingcompanion.data.database.entities.Series
+import com.aschlus.comicreadingcompanion.data.database.entities.Universe
 import com.aschlus.comicreadingcompanion.data.repository.ComicRepository
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -470,4 +471,341 @@ class BrowseViewModelTest {
             assertEquals(0, clearedIssueResults.size)
             assertEquals(null, viewModel.selectedPublisherId.value)
         }
+
+
+    @Test
+    fun updateUniverseFilter_filtersBlankQueryResultsAndClearsFilter() =
+        runBlocking {
+            val marvelPublisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val dcPublisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "DC")
+                )
+
+            val earth616Id =
+                comicDao.insertUniverse(
+                    Universe(
+                        publisherId = marvelPublisherId,
+                        name = "Marvel Universe",
+                        designation = "Earth-616",
+                        description = null
+                    )
+                )
+
+            val earth1610Id =
+                comicDao.insertUniverse(
+                    Universe(
+                        publisherId = marvelPublisherId,
+                        name = "Ultimate Universe",
+                        designation = "Earth-1610",
+                        description = null
+                    )
+                )
+
+            val earth0Id =
+                comicDao.insertUniverse(
+                    Universe(
+                        publisherId = dcPublisherId,
+                        name = "DC Universe",
+                        designation = "Earth-0",
+                        description = null
+                    )
+                )
+
+            val amazingSpiderManId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = marvelPublisherId,
+                        title = "Amazing Spider-Man",
+                        volume = 1,
+                        startYear = 1963,
+                        endYear = null
+                    )
+                )
+
+            val ultimateSpiderManId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = marvelPublisherId,
+                        title = "Ultimate Spider-Man",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = null
+                    )
+                )
+
+            val batmanId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = dcPublisherId,
+                        title = "Batman",
+                        volume = 1,
+                        startYear = 1940,
+                        endYear = null
+                    )
+                )
+
+            val amazingSpiderManIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = amazingSpiderManId,
+                        universeId = earth616Id,
+                        issueNumber = "1",
+                        title = "Spider-Man!",
+                        publicationDate = "1963-03",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val ultimateSpiderManIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = ultimateSpiderManId,
+                        universeId = earth1610Id,
+                        issueNumber = "1",
+                        title = "Powerless",
+                        publicationDate = "2000-10",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            comicDao.insertIssue(
+                Issue(
+                    seriesId = batmanId,
+                    universeId = earth0Id,
+                    issueNumber = "1",
+                    title = "Batman",
+                    publicationDate = "1940-04",
+                    coverUrl = null,
+                    description = null,
+                    issueType = IssueType.REGULAR
+                )
+            )
+
+            // Universe filtering must work even with a blank search query.
+            viewModel.updateUniverseFilter(earth616Id)
+
+            val earth616SeriesResults =
+                withTimeout(5000L.milliseconds) {
+                    viewModel.seriesResults.first {
+                        it.size == 1 &&
+                                it.first().seriesId == amazingSpiderManId
+                    }
+                }
+
+            val earth616IssueResults =
+                withTimeout(5000L.milliseconds) {
+                    viewModel.issueResults.first {
+                        it.size == 1 &&
+                                it.first().issueId == amazingSpiderManIssueId
+                    }
+                }
+
+            assertEquals(
+                listOf(amazingSpiderManId),
+                earth616SeriesResults.map { it.seriesId }
+            )
+            assertEquals(
+                listOf(amazingSpiderManIssueId),
+                earth616IssueResults.map { it.issueId }
+            )
+            assertEquals(
+                earth616Id,
+                viewModel.selectedUniverseId.value
+            )
+
+            // Changing the selected universe updates both result lists.
+            viewModel.updateUniverseFilter(earth1610Id)
+
+            val earth1610SeriesResults =
+                withTimeout(5000L.milliseconds) {
+                    viewModel.seriesResults.first {
+                        it.size == 1 &&
+                                it.first().seriesId == ultimateSpiderManId
+                    }
+                }
+
+            val earth1610IssueResults =
+                withTimeout(5000L.milliseconds) {
+                    viewModel.issueResults.first {
+                        it.size == 1 &&
+                                it.first().issueId == ultimateSpiderManIssueId
+                    }
+                }
+
+            assertEquals(
+                listOf(ultimateSpiderManId),
+                earth1610SeriesResults.map { it.seriesId }
+            )
+            assertEquals(
+                listOf(ultimateSpiderManIssueId),
+                earth1610IssueResults.map { it.issueId }
+            )
+
+            // Clearing the Universe filter with a blank query clears results.
+            viewModel.updateUniverseFilter(null)
+
+            val clearedSeriesResults =
+                withTimeout(5000L.milliseconds) {
+                    viewModel.seriesResults.first { it.isEmpty() }
+                }
+
+            val clearedIssueResults =
+                withTimeout(5000L.milliseconds) {
+                    viewModel.issueResults.first { it.isEmpty() }
+                }
+
+            assertEquals(0, clearedSeriesResults.size)
+            assertEquals(0, clearedIssueResults.size)
+            assertEquals(null, viewModel.selectedUniverseId.value)
+        }
+
+
+    @Test
+    fun updatePublicationYearFilter_filtersBlankQueryResultsAndClearsFilter() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val amazingSpiderManId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Amazing Spider-Man",
+                        volume = 1,
+                        startYear = 1963,
+                        endYear = null
+                    )
+                )
+
+            val fantasticFourId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Fantastic Four",
+                        volume = 1,
+                        startYear = 1961,
+                        endYear = null
+                    )
+                )
+
+            val spiderMan1963IssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = amazingSpiderManId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "Spider-Man",
+                        publicationDate = "1963-03",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val fantasticFour1964IssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = fantasticFourId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "Fantastic Four",
+                        publicationDate = "1964-11",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            // Selecting a year must work with a blank search query.
+            viewModel.updatePublicationYearFilter(1963)
+
+            val series1963Results =
+                withTimeout(5000L.milliseconds) {
+                    viewModel.seriesResults.first {
+                        it.size == 1 &&
+                                it.first().seriesId == amazingSpiderManId
+                    }
+                }
+
+            val issues1963Results =
+                withTimeout(5000L.milliseconds) {
+                    viewModel.issueResults.first {
+                        it.size == 1 &&
+                                it.first().issueId == spiderMan1963IssueId
+                    }
+                }
+
+            assertEquals(
+                listOf(amazingSpiderManId),
+                series1963Results.map { it.seriesId }
+            )
+
+            assertEquals(
+                listOf(spiderMan1963IssueId),
+                issues1963Results.map { it.issueId }
+            )
+
+            assertEquals(
+                1963,
+                viewModel.selectedPublicationYear.value
+            )
+
+            // Changing the year must update both result lists.
+            viewModel.updatePublicationYearFilter(1964)
+
+            val series1964Results =
+                withTimeout(5000L.milliseconds) {
+                    viewModel.seriesResults.first {
+                        it.size == 1 &&
+                                it.first().seriesId == fantasticFourId
+                    }
+                }
+
+            val issues1964Results =
+                withTimeout(5000L.milliseconds) {
+                    viewModel.issueResults.first {
+                        it.size == 1 &&
+                                it.first().issueId == fantasticFour1964IssueId
+                    }
+                }
+
+            assertEquals(
+                listOf(fantasticFourId),
+                series1964Results.map { it.seriesId }
+            )
+
+            assertEquals(
+                listOf(fantasticFour1964IssueId),
+                issues1964Results.map { it.issueId }
+            )
+
+            // Clearing the year filter with a blank query clears results.
+            viewModel.updatePublicationYearFilter(null)
+
+            val clearedSeriesResults =
+                withTimeout(5000L.milliseconds) {
+                    viewModel.seriesResults.first { it.isEmpty() }
+                }
+
+            val clearedIssueResults =
+                withTimeout(5000L.milliseconds) {
+                    viewModel.issueResults.first { it.isEmpty() }
+                }
+
+            assertEquals(0, clearedSeriesResults.size)
+            assertEquals(0, clearedIssueResults.size)
+            assertEquals(null, viewModel.selectedPublicationYear.value)
+        }
+
 }

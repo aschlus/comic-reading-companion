@@ -2799,4 +2799,352 @@ class ComicDaoTest {
                 nonMatchingPublisher.size
             )
         }
+
+
+    @Test
+    fun searchSeriesAndIssues_filterByUniverseAndPublisherWithBlankQuery() =
+        runBlocking {
+            val marvelPublisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val dcPublisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "DC")
+                )
+
+            val earth616Id =
+                comicDao.insertUniverse(
+                    Universe(
+                        publisherId = marvelPublisherId,
+                        name = "Marvel Universe",
+                        designation = "Earth-616",
+                        description = "Main Marvel continuity"
+                    )
+                )
+
+            val earth1610Id =
+                comicDao.insertUniverse(
+                    Universe(
+                        publisherId = marvelPublisherId,
+                        name = "Ultimate Universe",
+                        designation = "Earth-1610",
+                        description = "Original Ultimate Marvel continuity"
+                    )
+                )
+
+            val earth0Id =
+                comicDao.insertUniverse(
+                    Universe(
+                        publisherId = dcPublisherId,
+                        name = "DC Universe",
+                        designation = "Earth-0",
+                        description = "Main DC continuity"
+                    )
+                )
+
+            val amazingSpiderManId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = marvelPublisherId,
+                        title = "Amazing Spider-Man",
+                        volume = 1,
+                        startYear = 1963,
+                        endYear = null
+                    )
+                )
+
+            val ultimateSpiderManId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = marvelPublisherId,
+                        title = "Ultimate Spider-Man",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2009
+                    )
+                )
+
+            val batmanId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = dcPublisherId,
+                        title = "Batman",
+                        volume = 1,
+                        startYear = 1940,
+                        endYear = null
+                    )
+                )
+
+            val amazingSpiderManIssueOneId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = amazingSpiderManId,
+                        universeId = earth616Id,
+                        issueNumber = "1",
+                        title = "Amazing Fantasy",
+                        publicationDate = "1963-03",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val amazingSpiderManIssueTwoId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = amazingSpiderManId,
+                        universeId = earth616Id,
+                        issueNumber = "2",
+                        title = "The Chameleon",
+                        publicationDate = "1963-05",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            comicDao.insertIssue(
+                Issue(
+                    seriesId = ultimateSpiderManId,
+                    universeId = earth1610Id,
+                    issueNumber = "1",
+                    title = "Power and Responsibility",
+                    publicationDate = "2000-10",
+                    coverUrl = null,
+                    description = null,
+                    issueType = IssueType.REGULAR
+                )
+            )
+
+            comicDao.insertIssue(
+                Issue(
+                    seriesId = batmanId,
+                    universeId = earth0Id,
+                    issueNumber = "1",
+                    title = "Batman",
+                    publicationDate = "2011-09",
+                    coverUrl = null,
+                    description = null,
+                    issueType = IssueType.REGULAR
+                )
+            )
+
+            val matchingSeries =
+                comicDao.searchSeries(
+                    query = "",
+                    publisherId = marvelPublisherId,
+                    universeId = earth616Id
+                ).first()
+
+            val matchingIssues =
+                comicDao.searchIssues(
+                    query = "",
+                    publisherId = marvelPublisherId,
+                    universeId = earth616Id
+                ).first()
+
+            assertEquals(
+                listOf(amazingSpiderManId),
+                matchingSeries.map { it.seriesId }
+            )
+
+            assertEquals(
+                listOf(
+                    amazingSpiderManIssueOneId,
+                    amazingSpiderManIssueTwoId
+                ),
+                matchingIssues.map { it.issueId }
+            )
+        }
+
+
+    @Test
+    fun searchSeriesAndIssues_filterByPublicationYearWithBlankQuery() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val amazingSpiderManId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Amazing Spider-Man",
+                        volume = 1,
+                        startYear = 1963,
+                        endYear = null
+                    )
+                )
+
+            val fantasticFourId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Fantastic Four",
+                        volume = 1,
+                        startYear = 1961,
+                        endYear = null
+                    )
+                )
+
+            val spiderMan1963IssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = amazingSpiderManId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "Spider-Man",
+                        publicationDate = "1963-03",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            comicDao.insertIssue(
+                Issue(
+                    seriesId = amazingSpiderManId,
+                    universeId = null,
+                    issueNumber = "2",
+                    title = "Spider-Man",
+                    publicationDate = "1964-04",
+                    coverUrl = null,
+                    description = null,
+                    issueType = IssueType.REGULAR
+                )
+            )
+
+            comicDao.insertIssue(
+                Issue(
+                    seriesId = fantasticFourId,
+                    universeId = null,
+                    issueNumber = "1",
+                    title = "Fantastic Four",
+                    publicationDate = "1964-11",
+                    coverUrl = null,
+                    description = null,
+                    issueType = IssueType.REGULAR
+                )
+            )
+
+            val seriesResults =
+                comicDao.searchSeries(
+                    query = "",
+                    publicationYear = 1963
+                ).first()
+
+            val issueResults =
+                comicDao.searchIssues(
+                    query = "",
+                    publicationYear = 1963
+                ).first()
+
+            assertEquals(
+                listOf(amazingSpiderManId),
+                seriesResults.map { it.seriesId }
+            )
+
+            assertEquals(
+                listOf(spiderMan1963IssueId),
+                issueResults.map { it.issueId }
+            )
+        }
+
+
+    @Test
+    fun browseFilterOptions_returnsUniversesAndDistinctPublicationYears() =
+        runBlocking {
+            val marvelPublisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val earth616Id =
+                comicDao.insertUniverse(
+                    Universe(
+                        publisherId = marvelPublisherId,
+                        name = "Marvel Universe",
+                        designation = "Earth-616",
+                        description = null
+                    )
+                )
+
+            val earth1610Id =
+                comicDao.insertUniverse(
+                    Universe(
+                        publisherId = marvelPublisherId,
+                        name = "Ultimate Universe",
+                        designation = "Earth-1610",
+                        description = null
+                    )
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = marvelPublisherId,
+                        title = "Amazing Spider-Man",
+                        volume = 1,
+                        startYear = 1963,
+                        endYear = null
+                    )
+                )
+
+            comicDao.insertIssue(
+                Issue(
+                    seriesId = seriesId,
+                    universeId = earth616Id,
+                    issueNumber = "1",
+                    title = "Spider-Man",
+                    publicationDate = "1963-03",
+                    coverUrl = null,
+                    description = null,
+                    issueType = IssueType.REGULAR
+                )
+            )
+
+            comicDao.insertIssue(
+                Issue(
+                    seriesId = seriesId,
+                    universeId = earth616Id,
+                    issueNumber = "2",
+                    title = "Spider-Man",
+                    publicationDate = "1963-04",
+                    coverUrl = null,
+                    description = null,
+                    issueType = IssueType.REGULAR
+                )
+            )
+
+            comicDao.insertIssue(
+                Issue(
+                    seriesId = seriesId,
+                    universeId = earth1610Id,
+                    issueNumber = "1",
+                    title = "Powerless",
+                    publicationDate = "2000-10",
+                    coverUrl = null,
+                    description = null,
+                    issueType = IssueType.REGULAR
+                )
+            )
+
+            val universes = comicDao.getAllUniverses().first()
+            val years = comicDao.getAvailablePublicationYears().first()
+
+            assertEquals(
+                setOf(earth616Id, earth1610Id),
+                universes.map { it.id }.toSet()
+            )
+
+            assertEquals(
+                listOf(2000, 1963),
+                years
+            )
+        }
+
+
 }

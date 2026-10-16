@@ -10,6 +10,7 @@ import androidx.compose.ui.test.onLast
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTextInput
 import androidx.lifecycle.viewModelScope
 import androidx.room3.Room
@@ -21,6 +22,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.Issue
 import com.aschlus.comicreadingcompanion.data.database.entities.IssueType
 import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
 import com.aschlus.comicreadingcompanion.data.database.entities.Series
+import com.aschlus.comicreadingcompanion.data.database.entities.Universe
 import com.aschlus.comicreadingcompanion.data.repository.ComicRepository
 import com.aschlus.comicreadingcompanion.ui.theme.ComicReadingCompanionTheme
 import com.aschlus.comicreadingcompanion.ui.viewmodel.BrowseViewModel
@@ -574,9 +576,8 @@ class BrowseScreenTest {
         }
     }
 
-
     @Test
-    fun browseScreen_publisherFilterWorksWithBlankAndTextQueries() {
+    fun browseScreen_filterSheetPublisherFilterWorksWithBlankAndTextQueriesAndCanClearAll() {
         runBlocking {
             val marvelPublisherId =
                 comicDao.insertPublisher(
@@ -649,12 +650,49 @@ class BrowseScreenTest {
                 }
             }
 
-            // Select Marvel with no text query.
-            composeRule.onNodeWithText("PUBLISHER: ALL")
+            // Open the filter sheet and verify its three selectors.
+            composeRule.onNodeWithText("Filters")
+                .performClick()
+
+            composeRule.onNodeWithText("FILTER BROWSE")
+                .assertIsDisplayed()
+
+            composeRule.onNodeWithText("PUBLISHER")
+                .assertIsDisplayed()
+
+            composeRule.onNodeWithText("UNIVERSE / CONTINUITY")
+                .assertIsDisplayed()
+
+            composeRule.onNodeWithText("PUBLICATION YEAR")
+                .assertIsDisplayed()
+
+            composeRule.onNodeWithText("All publishers")
+                .assertIsDisplayed()
+
+            composeRule.onNodeWithText("All universes")
+                .assertIsDisplayed()
+
+            composeRule.onNodeWithText("All years")
+                .assertIsDisplayed()
+
+            // Select Marvel while the search query is blank.
+            composeRule.onNodeWithText("All publishers")
                 .performClick()
 
             composeRule.onAllNodesWithText("Marvel")
                 .onLast()
+                .performClick()
+
+            composeRule.onNodeWithText("Clear all filters")
+                .performScrollTo()
+                .assertIsDisplayed()
+
+            composeRule.onNodeWithText(
+                "Show",
+                substring = true
+            )
+                .performScrollTo()
+                .assertIsDisplayed()
                 .performClick()
 
             composeRule.waitUntil(timeoutMillis = 5000L) {
@@ -669,13 +707,10 @@ class BrowseScreenTest {
             composeRule.onNodeWithText("Batman")
                 .assertDoesNotExist()
 
-            composeRule.onNodeWithText("PUBLISHER: Marvel")
+            composeRule.onNodeWithText("Filters (1)")
                 .assertIsDisplayed()
 
-            composeRule.onNodeWithText("CLEAR FILTERS")
-                .assertIsDisplayed()
-
-            // The selected publisher must combine with text search.
+            // The publisher filter must also combine with text search.
             composeRule.onNode(hasSetTextAction())
                 .performTextInput("Spider")
 
@@ -691,11 +726,29 @@ class BrowseScreenTest {
             composeRule.onNodeWithText("Batman")
                 .assertDoesNotExist()
 
-            // Clear the query, then clear the publisher filter.
+            // Clear the search query without losing the publisher filter.
             composeRule.onNodeWithContentDescription("Clear search")
                 .performClick()
 
-            composeRule.onNodeWithText("CLEAR FILTERS")
+            composeRule.waitUntil(timeoutMillis = 5000L) {
+                composeRule.onAllNodesWithText("Amazing Spider-Man")
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule.onNodeWithText("Amazing Spider-Man")
+                .assertIsDisplayed()
+
+            composeRule.onNodeWithText("Batman")
+                .assertDoesNotExist()
+
+            composeRule.onNodeWithText("Filters (1)")
+                .performClick()
+
+            composeRule.onNodeWithText("Clear all filters")
+                .performClick()
+
+            composeRule.onNodeWithText("Done")
                 .performClick()
 
             composeRule.waitUntil(timeoutMillis = 5000L) {
@@ -716,8 +769,369 @@ class BrowseScreenTest {
             composeRule.onNodeWithText("DC")
                 .assertIsDisplayed()
 
+            composeRule.onNodeWithText("Filters (1)")
+                .assertDoesNotExist()
+
             composeRule.onNodeWithText("ALL")
                 .assertDoesNotExist()
         }
     }
+
+    @Test
+    fun browseScreen_universeFilterWorksWithBlankAndTextQueries() =
+        runBlocking {
+            val marvelPublisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val dcPublisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "DC")
+                )
+
+            val earth616Id =
+                comicDao.insertUniverse(
+                    Universe(
+                        publisherId = marvelPublisherId,
+                        name = "Marvel Universe",
+                        designation = "Earth-616",
+                        description = null
+                    )
+                )
+
+            val earth1610Id =
+                comicDao.insertUniverse(
+                    Universe(
+                        publisherId = marvelPublisherId,
+                        name = "Ultimate Universe",
+                        designation = "Earth-1610",
+                        description = null
+                    )
+                )
+
+            val earth0Id =
+                comicDao.insertUniverse(
+                    Universe(
+                        publisherId = dcPublisherId,
+                        name = "DC Universe",
+                        designation = "Earth-0",
+                        description = null
+                    )
+                )
+
+            val amazingSpiderManId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = marvelPublisherId,
+                        title = "Amazing Spider-Man",
+                        volume = 1,
+                        startYear = 1963,
+                        endYear = null
+                    )
+                )
+
+            val ultimateSpiderManId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = marvelPublisherId,
+                        title = "Ultimate Spider-Man",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = null
+                    )
+                )
+
+            val batmanId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = dcPublisherId,
+                        title = "Batman",
+                        volume = 1,
+                        startYear = 1940,
+                        endYear = null
+                    )
+                )
+
+            comicDao.insertIssue(
+                Issue(
+                    seriesId = amazingSpiderManId,
+                    universeId = earth616Id,
+                    issueNumber = "1",
+                    title = "Spider-Man!",
+                    publicationDate = "1963-03",
+                    coverUrl = null,
+                    description = null,
+                    issueType = IssueType.REGULAR
+                )
+            )
+
+            comicDao.insertIssue(
+                Issue(
+                    seriesId = ultimateSpiderManId,
+                    universeId = earth1610Id,
+                    issueNumber = "1",
+                    title = "Powerless",
+                    publicationDate = "2000-10",
+                    coverUrl = null,
+                    description = null,
+                    issueType = IssueType.REGULAR
+                )
+            )
+
+            comicDao.insertIssue(
+                Issue(
+                    seriesId = batmanId,
+                    universeId = earth0Id,
+                    issueNumber = "1",
+                    title = "Batman",
+                    publicationDate = "1940-04",
+                    coverUrl = null,
+                    description = null,
+                    issueType = IssueType.REGULAR
+                )
+            )
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    BrowseScreen(
+                        viewModel = viewModel,
+                        onPublisherClick = {},
+                        onSeriesClick = {},
+                        onIssueClick = {}
+                    )
+                }
+            }
+
+            // Select Earth-616 with a blank search query.
+            composeRule.onNodeWithText("Filters")
+                .performClick()
+
+            composeRule.onNodeWithText("All universes")
+                .performClick()
+
+            composeRule.onNodeWithText(
+                "Earth-616 · Marvel Universe · Marvel"
+            ).performClick()
+
+            composeRule.onNodeWithText("Clear all filters")
+                .performScrollTo()
+                .assertIsDisplayed()
+
+            composeRule.onNodeWithText(
+                "Show",
+                substring = true
+            ).performScrollTo()
+                .performClick()
+
+            composeRule.waitUntil(timeoutMillis = 5000L) {
+                composeRule.onAllNodesWithText("Amazing Spider-Man")
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule.onNodeWithText("Amazing Spider-Man")
+                .assertIsDisplayed()
+
+            composeRule.onNodeWithText("Ultimate Spider-Man")
+                .assertDoesNotExist()
+
+            composeRule.onNodeWithText("Batman")
+                .assertDoesNotExist()
+
+            // The selected universe must also constrain text searches.
+            composeRule.onNode(hasSetTextAction())
+                .performTextInput("Spider")
+
+            composeRule.waitUntil(timeoutMillis = 5000L) {
+                composeRule.onAllNodesWithText("Amazing Spider-Man #1")
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule.onNodeWithText("Amazing Spider-Man #1")
+                .assertIsDisplayed()
+
+            composeRule.onNodeWithText("Ultimate Spider-Man #1")
+                .assertDoesNotExist()
+
+            composeRule.onNodeWithText("Filters (1)")
+                .assertIsDisplayed()
+
+            // Clearing the query must preserve the universe filter.
+            composeRule.onNodeWithContentDescription("Clear search")
+                .performClick()
+
+            composeRule.waitUntil(timeoutMillis = 5000L) {
+                composeRule.onAllNodesWithText("Amazing Spider-Man")
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule.onNodeWithText("Amazing Spider-Man")
+                .assertIsDisplayed()
+
+            composeRule.onNodeWithText("Ultimate Spider-Man")
+                .assertDoesNotExist()
+
+            composeRule.onNodeWithText("Batman")
+                .assertDoesNotExist()
+        }
+
+    @Test
+    fun browseScreen_publicationYearFilterWorksWithBlankAndTextQueries() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val amazingSpiderManId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Amazing Spider-Man",
+                        volume = 1,
+                        startYear = 1963,
+                        endYear = null
+                    )
+                )
+
+            val fantasticFourId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Fantastic Four",
+                        volume = 1,
+                        startYear = 1961,
+                        endYear = null
+                    )
+                )
+
+            comicDao.insertIssue(
+                Issue(
+                    seriesId = amazingSpiderManId,
+                    universeId = null,
+                    issueNumber = "1",
+                    title = "Spider-Man",
+                    publicationDate = "1963-03",
+                    coverUrl = null,
+                    description = null,
+                    issueType = IssueType.REGULAR
+                )
+            )
+
+            comicDao.insertIssue(
+                Issue(
+                    seriesId = fantasticFourId,
+                    universeId = null,
+                    issueNumber = "1",
+                    title = "Fantastic Four",
+                    publicationDate = "1964-11",
+                    coverUrl = null,
+                    description = null,
+                    issueType = IssueType.REGULAR
+                )
+            )
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    BrowseScreen(
+                        viewModel = viewModel,
+                        onPublisherClick = {},
+                        onSeriesClick = {},
+                        onIssueClick = {}
+                    )
+                }
+            }
+
+            // Open filters and select 1963.
+            composeRule.onNodeWithText("Filters")
+                .performClick()
+
+            composeRule.waitUntil(timeoutMillis = 5000L) {
+                composeRule.onAllNodesWithText("All years")
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule.onNodeWithText("All years")
+                .performClick()
+
+            composeRule.waitUntil(timeoutMillis = 5000L) {
+                composeRule.onAllNodesWithText("1963")
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule.onNodeWithText("1963")
+                .performClick()
+
+            composeRule.onNodeWithText("Clear all filters")
+                .performScrollTo()
+                .assertIsDisplayed()
+
+            composeRule.onNodeWithText(
+                "Show",
+                substring = true
+            ).performScrollTo()
+                .performClick()
+
+            // The year filter should work with a blank query.
+            composeRule.waitUntil(timeoutMillis = 5000L) {
+                composeRule.onAllNodesWithText("Amazing Spider-Man")
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule.onNodeWithText("Amazing Spider-Man")
+                .assertIsDisplayed()
+
+            composeRule.onNodeWithText("Fantastic Four")
+                .assertDoesNotExist()
+
+            composeRule.onNodeWithText("Filters (1)")
+                .assertIsDisplayed()
+
+            // The selected year should also constrain text searches.
+            composeRule.onNode(hasSetTextAction())
+                .performTextInput("Spider")
+
+            composeRule.waitUntil(timeoutMillis = 5000L) {
+                composeRule.onAllNodesWithText("Amazing Spider-Man #1")
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule.onNodeWithText("Amazing Spider-Man #1")
+                .assertIsDisplayed()
+
+            composeRule.onNodeWithText("Fantastic Four")
+                .assertDoesNotExist()
+
+            // Clearing search must preserve the year filter.
+            composeRule.onNodeWithContentDescription("Clear search")
+                .performClick()
+
+            composeRule.waitUntil(timeoutMillis = 5000L) {
+                composeRule.onAllNodesWithText("Amazing Spider-Man")
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule.onNodeWithText("Amazing Spider-Man")
+                .assertIsDisplayed()
+
+            composeRule.onNodeWithText("Fantastic Four")
+                .assertDoesNotExist()
+
+            composeRule.onNodeWithText("Filters (1)")
+                .assertIsDisplayed()
+
+            Unit
+        }
 }
