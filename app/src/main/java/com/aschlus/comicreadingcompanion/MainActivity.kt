@@ -62,6 +62,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
+import com.aschlus.comicreadingcompanion.ui.screen.SettingsScreen
+import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineSettingsViewModel
+import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineSettingsViewModelFactory
 
 class MainActivity : ComponentActivity() {
 
@@ -342,7 +345,26 @@ class MainActivity : ComponentActivity() {
                                     navController.navigate(
                                         "readingHistory"
                                     )
+                                },
+                                onSettingsClick = {
+                                    navController.navigate("settings")
                                 }
+                            )
+                        }
+
+                        composable("settings") {
+                            val settingsViewModel: ComicVineSettingsViewModel =
+                                viewModel(
+                                    factory = ComicVineSettingsViewModelFactory(
+                                        (application as ComicReadingCompanionApplication)
+                                            .container
+                                            .comicVineApiKeyStore
+                                    )
+                                )
+
+                            SettingsScreen(
+                                viewModel = settingsViewModel,
+                                onBackClick = safeNavigateBack
                             )
                         }
 

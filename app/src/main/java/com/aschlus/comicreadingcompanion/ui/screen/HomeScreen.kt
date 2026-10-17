@@ -45,7 +45,8 @@ fun HomeScreen(
     onCreateReadingListClick: () -> Unit,
     onReadingListClick: (Long, Int) -> Unit,
     onIssueClick: (Long) -> Unit,
-    onReadingHistoryClick: () -> Unit
+    onReadingHistoryClick: () -> Unit,
+    onSettingsClick: () -> Unit = {}
 ) {
     val continueReadingLists by viewModel.continueReadingLists.collectAsState()
 
@@ -75,9 +76,7 @@ fun HomeScreen(
         containerColor = ComicPaper,
         topBar = {
             ComicHomeHeader(
-                onSettingsClick = {
-                    // Settings screen will be added later
-                }
+                onSettingsClick = onSettingsClick
             )
         }
     ) { innerPadding: PaddingValues ->

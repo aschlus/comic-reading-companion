@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithText
+import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.lifecycle.viewModelScope
@@ -17,6 +18,8 @@ import com.aschlus.comicreadingcompanion.data.database.entities.IssueType
 import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListItem
+import com.aschlus.comicreadingcompanion.data.database.entities.ReadingProgress
+import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.database.entities.Series
 import com.aschlus.comicreadingcompanion.data.preferences.HomeUiPreferences
 import com.aschlus.comicreadingcompanion.data.repository.ComicRepository
@@ -24,21 +27,15 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicReadingCompanionTheme
 import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancelAndJoin
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withTimeout
 import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import kotlin.time.Duration.Companion.milliseconds
-import androidx.compose.ui.test.onNodeWithContentDescription
-import com.aschlus.comicreadingcompanion.data.database.entities.ReadingProgress
-import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertTrue
 
 @RunWith(AndroidJUnit4::class)
 class HomeScreenTest {
