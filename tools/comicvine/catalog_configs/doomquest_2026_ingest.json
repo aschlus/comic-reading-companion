@@ -1,0 +1,21 @@
+{
+  "publisher": "Marvel Comics",
+  "universes": [
+    {
+      "name": "Marvel Universe",
+      "designation": "Earth-616",
+      "description": null
+    }
+  ],
+  "series": [
+    {
+      "title": "Doomquest",
+      "volume": 1,
+      "startYear": 2026,
+      "endYear": null,
+      "comicVineVolumeId": 172118,
+      "defaultIssueType": "REGULAR",
+      "defaultUniverseDesignation": "Earth-616"
+    }
+  ]
+}

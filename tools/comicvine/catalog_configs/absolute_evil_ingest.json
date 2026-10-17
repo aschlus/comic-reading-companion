@@ -1,0 +1,21 @@
+{
+  "publisher": "DC Comics",
+  "universes": [
+    {
+      "name": "Absolute Universe",
+      "designation": "Earth-Alpha",
+      "description": null
+    }
+  ],
+  "series": [
+    {
+      "title": "Absolute Evil",
+      "volume": null,
+      "startYear": 2025,
+      "endYear": null,
+      "comicVineVolumeId": 167313,
+      "defaultIssueType": "SPECIAL",
+      "defaultUniverseDesignation": "Earth-Alpha"
+    }
+  ]
+}

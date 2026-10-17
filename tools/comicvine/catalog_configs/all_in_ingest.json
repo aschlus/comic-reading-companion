@@ -1,0 +1,21 @@
+{
+  "publisher": "DC Comics",
+  "universes": [
+    {
+      "name": "Absolute Universe",
+      "designation": "Earth-Alpha",
+      "description": null
+    }
+  ],
+  "series": [
+    {
+      "title": "DC All In Special",
+      "volume": null,
+      "startYear": 2024,
+      "endYear": null,
+      "comicVineVolumeId": 160186,
+      "defaultIssueType": "SPECIAL",
+      "defaultUniverseDesignation": "Earth-Alpha"
+    }
+  ]
+}

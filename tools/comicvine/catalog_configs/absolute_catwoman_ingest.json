@@ -1,0 +1,21 @@
+{
+  "publisher": "DC Comics",
+  "universes": [
+    {
+      "name": "Absolute Universe",
+      "designation": "Earth-Alpha",
+      "description": null
+    }
+  ],
+  "series": [
+    {
+      "title": "Absolute Catwoman",
+      "volume": null,
+      "startYear": 2025,
+      "endYear": null,
+      "comicVineVolumeId": 172741,
+      "defaultIssueType": "REGULAR",
+      "defaultUniverseDesignation": "Earth-Alpha"
+    }
+  ]
+}

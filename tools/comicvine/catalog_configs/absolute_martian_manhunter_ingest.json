@@ -1,0 +1,21 @@
+{
+  "publisher": "DC Comics",
+  "universes": [
+    {
+      "name": "Absolute Universe",
+      "designation": "Earth-Alpha",
+      "description": null
+    }
+  ],
+  "series": [
+    {
+      "title": "Absolute Martian Manhunter",
+      "volume": null,
+      "startYear": 2025,
+      "endYear": null,
+      "comicVineVolumeId": 162966,
+      "defaultIssueType": "REGULAR",
+      "defaultUniverseDesignation": "Earth-Alpha"
+    }
+  ]
+}

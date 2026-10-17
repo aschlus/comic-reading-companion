@@ -1,0 +1,21 @@
+{
+  "publisher": "DC Comics",
+  "universes": [
+    {
+      "name": "Absolute Universe",
+      "designation": "Earth-Alpha",
+      "description": null
+    }
+  ],
+  "series": [
+    {
+      "title": "Absolute Green Lantern",
+      "volume": null,
+      "startYear": 2025,
+      "endYear": null,
+      "comicVineVolumeId": 163145,
+      "defaultIssueType": "REGULAR",
+      "defaultUniverseDesignation": "Earth-Alpha"
+    }
+  ]
+}

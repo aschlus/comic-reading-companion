@@ -1,0 +1,21 @@
+{
+  "publisher": "DC Comics",
+  "universes": [
+    {
+      "name": "Absolute Universe",
+      "designation": "Earth-Alpha",
+      "description": null
+    }
+  ],
+  "series": [
+    {
+      "title": "Absolute Batman",
+      "volume": null,
+      "startYear": 2024,
+      "endYear": null,
+      "comicVineVolumeId": 160294,
+      "defaultIssueType": "REGULAR",
+      "defaultUniverseDesignation": "Earth-Alpha"
+    }
+  ]
+}

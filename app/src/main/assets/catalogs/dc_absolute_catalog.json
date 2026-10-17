@@ -1,0 +1,2274 @@
+{
+  "publisher": "DC Comics",
+  "universes": [
+    {
+      "name": "Absolute Universe",
+      "designation": "Earth-Alpha",
+      "description": null
+    }
+  ],
+  "series": [
+    {
+      "title": "Absolute Batman",
+      "volume": null,
+      "startYear": 2024,
+      "endYear": null,
+      "externalIds": [
+        {
+          "source": "COMIC_VINE",
+          "externalId": "160294",
+          "url": "https://comicvine.gamespot.com/absolute-batman/4050-160294/"
+        }
+      ],
+      "issues": [
+        {
+          "number": "1",
+          "title": "The Zoo, Part One",
+          "publicationDate": "2024-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9503379-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1073108",
+              "url": "https://comicvine.gamespot.com/absolute-batman-1-the-zoo-part-one/4000-1073108/"
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "title": "The Zoo, Part Two",
+          "publicationDate": "2025-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9534177-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1077465",
+              "url": "https://comicvine.gamespot.com/absolute-batman-2-the-zoo-part-two/4000-1077465/"
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "title": "The Zoo, Part Three",
+          "publicationDate": "2025-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9569010-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1083601",
+              "url": "https://comicvine.gamespot.com/absolute-batman-3-the-zoo-part-three/4000-1083601/"
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "title": "The Zoo, Part Four",
+          "publicationDate": "2025-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9590753-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1089295",
+              "url": "https://comicvine.gamespot.com/absolute-batman-4-the-zoo-part-four/4000-1089295/"
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "title": "The Zoo, Part Five",
+          "publicationDate": "2025-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9627063-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1095530",
+              "url": "https://comicvine.gamespot.com/absolute-batman-5-the-zoo-part-five/4000-1095530/"
+            }
+          ]
+        },
+        {
+          "number": "6",
+          "title": "The Zoo, Part Six",
+          "publicationDate": "2025-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9663675-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1099460",
+              "url": "https://comicvine.gamespot.com/absolute-batman-6-the-zoo-part-six/4000-1099460/"
+            }
+          ]
+        },
+        {
+          "number": "7",
+          "title": "Absolute Zero",
+          "publicationDate": "2025-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9686308-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1102449",
+              "url": "https://comicvine.gamespot.com/absolute-batman-7-absolute-zero/4000-1102449/"
+            }
+          ]
+        },
+        {
+          "number": "8",
+          "title": "Absolute Zero",
+          "publicationDate": "2025-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9720719-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1109522",
+              "url": "https://comicvine.gamespot.com/absolute-batman-8-absolute-zero/4000-1109522/"
+            }
+          ]
+        },
+        {
+          "number": "9",
+          "title": "Abomination, Part One",
+          "publicationDate": "2025-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9750569-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1115570",
+              "url": "https://comicvine.gamespot.com/absolute-batman-9-abomination-part-one/4000-1115570/"
+            }
+          ]
+        },
+        {
+          "number": "10",
+          "title": "Abomination, Part Two",
+          "publicationDate": "2025-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9791782-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1120416",
+              "url": "https://comicvine.gamespot.com/absolute-batman-10-abomination-part-two/4000-1120416/"
+            }
+          ]
+        },
+        {
+          "number": "11",
+          "title": "Abomination, Part Three",
+          "publicationDate": "2025-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9831339-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1126983",
+              "url": "https://comicvine.gamespot.com/absolute-batman-11-abomination-part-three/4000-1126983/"
+            }
+          ]
+        },
+        {
+          "number": "12",
+          "title": "Abomination, Part Four",
+          "publicationDate": "2025-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9859714-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1131749",
+              "url": "https://comicvine.gamespot.com/absolute-batman-12-abomination-part-four/4000-1131749/"
+            }
+          ]
+        },
+        {
+          "number": "13",
+          "title": "Abomination, Part Five",
+          "publicationDate": "2025-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9887431-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1137116",
+              "url": "https://comicvine.gamespot.com/absolute-batman-13-abomination-part-five/4000-1137116/"
+            }
+          ]
+        },
+        {
+          "number": "14",
+          "title": "Abomination, Conclusion",
+          "publicationDate": "2026-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9922918-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1145497",
+              "url": "https://comicvine.gamespot.com/absolute-batman-14-abomination-conclusion/4000-1145497/"
+            }
+          ]
+        },
+        {
+          "number": "15",
+          "title": "The Joker",
+          "publicationDate": "2026-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9932939-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1147554",
+              "url": "https://comicvine.gamespot.com/absolute-batman-15-the-joker/4000-1147554/"
+            }
+          ]
+        },
+        {
+          "number": "16",
+          "title": "Bat Out of Hell",
+          "publicationDate": "2026-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9972346-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1154054",
+              "url": "https://comicvine.gamespot.com/absolute-batman-16-bat-out-of-hell/4000-1154054/"
+            }
+          ]
+        },
+        {
+          "number": "17",
+          "title": "The Seventh Kingdom - Part 1",
+          "publicationDate": "2026-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9991547-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1156258",
+              "url": "https://comicvine.gamespot.com/absolute-batman-17-the-seventh-kingdom-part-1/4000-1156258/"
+            }
+          ]
+        },
+        {
+          "number": "18",
+          "title": "The Seventh Kingdom - Part 2",
+          "publicationDate": "2026-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/10009078-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1158997",
+              "url": "https://comicvine.gamespot.com/absolute-batman-18-the-seventh-kingdom-part-2/4000-1158997/"
+            }
+          ]
+        },
+        {
+          "number": "19",
+          "title": "The Straw Man",
+          "publicationDate": "2026-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10041672-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1163009",
+              "url": "https://comicvine.gamespot.com/absolute-batman-19-the-straw-man/4000-1163009/"
+            }
+          ]
+        },
+        {
+          "number": "20",
+          "title": "The Straw Man",
+          "publicationDate": "2026-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/10067030-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1166236",
+              "url": "https://comicvine.gamespot.com/absolute-batman-20-the-straw-man/4000-1166236/"
+            }
+          ]
+        },
+        {
+          "number": "21",
+          "title": "The Straw Man: Part 3",
+          "publicationDate": "2026-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/10099329-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1171916",
+              "url": "https://comicvine.gamespot.com/absolute-batman-21-the-straw-man-part-3/4000-1171916/"
+            }
+          ]
+        },
+        {
+          "number": "22",
+          "title": "The Straw Man, Part 4: The Crooked House",
+          "publicationDate": "2026-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10119450-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1177759",
+              "url": "https://comicvine.gamespot.com/absolute-batman-22-the-straw-man-part-4-the-crooke/4000-1177759/"
+            }
+          ]
+        },
+        {
+          "number": "23",
+          "title": "The Straw Man, Part 5",
+          "publicationDate": "2026-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10153880-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1186094",
+              "url": "https://comicvine.gamespot.com/absolute-batman-23-the-straw-man-part-5/4000-1186094/"
+            }
+          ]
+        },
+        {
+          "number": "24",
+          "title": "The Straw Man, Part 6",
+          "publicationDate": "2026-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10194849-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1194150",
+              "url": "https://comicvine.gamespot.com/absolute-batman-24-the-straw-man-part-6/4000-1194150/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Absolute Catwoman",
+      "volume": null,
+      "startYear": 2026,
+      "endYear": null,
+      "externalIds": [
+        {
+          "source": "COMIC_VINE",
+          "externalId": "172741",
+          "url": "https://comicvine.gamespot.com/absolute-catwoman/4050-172741/"
+        }
+      ],
+      "issues": [
+        {
+          "number": "1",
+          "title": "The Yarn: Chapter One",
+          "publicationDate": "2026-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10093778-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1170847",
+              "url": "https://comicvine.gamespot.com/absolute-catwoman-1-the-yarn-chapter-one/4000-1170847/"
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "title": "The Yarn: Chapter Two",
+          "publicationDate": "2026-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10119457-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1177760",
+              "url": "https://comicvine.gamespot.com/absolute-catwoman-2-the-yarn-chapter-two/4000-1177760/"
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "title": "The Yarn: Chapter Three",
+          "publicationDate": "2026-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10169895-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1189465",
+              "url": "https://comicvine.gamespot.com/absolute-catwoman-3-the-yarn-chapter-three/4000-1189465/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Absolute Flash",
+      "volume": null,
+      "startYear": 2025,
+      "endYear": null,
+      "externalIds": [
+        {
+          "source": "COMIC_VINE",
+          "externalId": "162847",
+          "url": "https://comicvine.gamespot.com/absolute-flash/4050-162847/"
+        }
+      ],
+      "issues": [
+        {
+          "number": "1",
+          "title": "Of Two Worlds, Part One",
+          "publicationDate": "2025-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9663676-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1099461",
+              "url": "https://comicvine.gamespot.com/absolute-flash-1-of-two-worlds-part-one/4000-1099461/"
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "title": "Of Two Worlds, Part Two",
+          "publicationDate": "2025-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9693772-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1104088",
+              "url": "https://comicvine.gamespot.com/absolute-flash-2-of-two-worlds-part-two/4000-1104088/"
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "title": "Of Two Worlds, Part Three",
+          "publicationDate": "2025-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9727389-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1111125",
+              "url": "https://comicvine.gamespot.com/absolute-flash-3-of-two-worlds-part-three/4000-1111125/"
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "title": "The Trials of the Flash: Iron Heights, Part 1",
+          "publicationDate": "2025-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9755713-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1116231",
+              "url": "https://comicvine.gamespot.com/absolute-flash-4-the-trials-of-the-flash-iron-heig/4000-1116231/"
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "title": "The Trials of the Flash: Iron Heights, Part 2",
+          "publicationDate": "2025-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9791783-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1120417",
+              "url": "https://comicvine.gamespot.com/absolute-flash-5-the-trials-of-the-flash-iron-heig/4000-1120417/"
+            }
+          ]
+        },
+        {
+          "number": "6",
+          "title": "Absolute Flash Interlude: The Rogues",
+          "publicationDate": "2025-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9831342-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1126984",
+              "url": "https://comicvine.gamespot.com/absolute-flash-6-absolute-flash-interlude-the-rogu/4000-1126984/"
+            }
+          ]
+        },
+        {
+          "number": "7",
+          "title": "The Trials of The Flash, Part 3 of 3",
+          "publicationDate": "2025-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9869406-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1133785",
+              "url": "https://comicvine.gamespot.com/absolute-flash-7-the-trials-of-the-flash-part-3-of/4000-1133785/"
+            }
+          ]
+        },
+        {
+          "number": "8",
+          "title": "The Life and Death of Barry Allen",
+          "publicationDate": "2025-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9892314-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1138098",
+              "url": "https://comicvine.gamespot.com/absolute-flash-8-the-life-and-death-of-barry-allen/4000-1138098/"
+            }
+          ]
+        },
+        {
+          "number": "9",
+          "title": "Rogues' Revenge, Part One",
+          "publicationDate": "2026-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9917710-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1144079",
+              "url": "https://comicvine.gamespot.com/absolute-flash-9-rogues-revenge-part-one/4000-1144079/"
+            }
+          ]
+        },
+        {
+          "number": "10",
+          "title": "Rogues' Revenge, Part Two",
+          "publicationDate": "2026-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9938847-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1148693",
+              "url": "https://comicvine.gamespot.com/absolute-flash-10-rogues-revenge-part-two/4000-1148693/"
+            }
+          ]
+        },
+        {
+          "number": "11",
+          "title": "The War of The Flashes, Part 1 of 2",
+          "publicationDate": "2026-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9972350-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1154055",
+              "url": "https://comicvine.gamespot.com/absolute-flash-11-the-war-of-the-flashes-part-1-of/4000-1154055/"
+            }
+          ]
+        },
+        {
+          "number": "12",
+          "title": "The War of The Flashes, Part 2 of 2",
+          "publicationDate": "2026-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/10004084-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1158139",
+              "url": "https://comicvine.gamespot.com/absolute-flash-12-the-war-of-the-flashes-part-2-of/4000-1158139/"
+            }
+          ]
+        },
+        {
+          "number": "13",
+          "title": "Mirror Master, Part 1 of 2",
+          "publicationDate": "2026-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10016615-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1159636",
+              "url": "https://comicvine.gamespot.com/absolute-flash-13-mirror-master-part-1-of-2/4000-1159636/"
+            }
+          ]
+        },
+        {
+          "number": "14",
+          "title": "Mirror Master, Part 2 of 2",
+          "publicationDate": "2026-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/10047888-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1163572",
+              "url": "https://comicvine.gamespot.com/absolute-flash-14-mirror-master-part-2-of-2/4000-1163572/"
+            }
+          ]
+        },
+        {
+          "number": "15",
+          "title": "...Of Things to Come",
+          "publicationDate": "2026-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10075180-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1167127",
+              "url": "https://comicvine.gamespot.com/absolute-flash-15-of-things-to-come/4000-1167127/"
+            }
+          ]
+        },
+        {
+          "number": "16",
+          "title": "In Gorilla City: Part 1 of 2",
+          "publicationDate": "2026-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/10099330-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1171917",
+              "url": "https://comicvine.gamespot.com/absolute-flash-16-in-gorilla-city-part-1-of-2/4000-1171917/"
+            }
+          ]
+        },
+        {
+          "number": "17",
+          "title": "In Gorilla City: Part 2 of 2",
+          "publicationDate": "2026-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/10125825-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1179732",
+              "url": "https://comicvine.gamespot.com/absolute-flash-17-in-gorilla-city-part-2-of-2/4000-1179732/"
+            }
+          ]
+        },
+        {
+          "number": "18",
+          "title": "Now You See Me",
+          "publicationDate": "2026-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10161952-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1188219",
+              "url": "https://comicvine.gamespot.com/absolute-flash-18-now-you-see-me/4000-1188219/"
+            }
+          ]
+        },
+        {
+          "number": "19",
+          "title": "The Place Beyond the Dark",
+          "publicationDate": "2026-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10194850-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1194151",
+              "url": "https://comicvine.gamespot.com/absolute-flash-19-the-place-beyond-the-dark/4000-1194151/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Absolute Green Arrow",
+      "volume": null,
+      "startYear": 2026,
+      "endYear": null,
+      "externalIds": [
+        {
+          "source": "COMIC_VINE",
+          "externalId": "172003",
+          "url": "https://comicvine.gamespot.com/absolute-green-arrow/4050-172003/"
+        }
+      ],
+      "issues": [
+        {
+          "number": "1",
+          "title": "The Longbow Killer, Chapter 1",
+          "publicationDate": "2026-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10075187-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1167128",
+              "url": "https://comicvine.gamespot.com/absolute-green-arrow-1-the-longbow-killer-chapter-/4000-1167128/"
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "title": "The Longbow Killer, Chapter 2",
+          "publicationDate": "2026-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/10099331-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1171918",
+              "url": "https://comicvine.gamespot.com/absolute-green-arrow-2-the-longbow-killer-chapter-/4000-1171918/"
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "title": "The Longbow Killer, Chapter 3",
+          "publicationDate": "2026-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/10125826-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1179733",
+              "url": "https://comicvine.gamespot.com/absolute-green-arrow-3-the-longbow-killer-chapter-/4000-1179733/"
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "title": null,
+          "publicationDate": "2026-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10161955-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1188220",
+              "url": "https://comicvine.gamespot.com/absolute-green-arrow-4/4000-1188220/"
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "title": null,
+          "publicationDate": "2026-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10188179-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1193024",
+              "url": "https://comicvine.gamespot.com/absolute-green-arrow-5/4000-1193024/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Absolute Green Lantern",
+      "volume": null,
+      "startYear": 2025,
+      "endYear": null,
+      "externalIds": [
+        {
+          "source": "COMIC_VINE",
+          "externalId": "163145",
+          "url": "https://comicvine.gamespot.com/absolute-green-lantern/4050-163145/"
+        }
+      ],
+      "issues": [
+        {
+          "number": "1",
+          "title": "Episode One: The Black Hand",
+          "publicationDate": "2025-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9678018-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1101424",
+              "url": "https://comicvine.gamespot.com/absolute-green-lantern-1-episode-one-the-black-han/4000-1101424/"
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "title": "Episode Two: The Abin Sur",
+          "publicationDate": "2025-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9713759-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1108452",
+              "url": "https://comicvine.gamespot.com/absolute-green-lantern-2-episode-two-the-abin-sur/4000-1108452/"
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "title": "Episode Three: The Philospher's Stone",
+          "publicationDate": "2025-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9742824-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1113852",
+              "url": "https://comicvine.gamespot.com/absolute-green-lantern-3-episode-three-the-philosp/4000-1113852/"
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "title": "Episode Four: Chaotic Action",
+          "publicationDate": "2025-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9775177-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1117488",
+              "url": "https://comicvine.gamespot.com/absolute-green-lantern-4-episode-four-chaotic-acti/4000-1117488/"
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "title": "Episode Five: With Fear",
+          "publicationDate": "2025-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9813367-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1123949",
+              "url": "https://comicvine.gamespot.com/absolute-green-lantern-5-episode-five-with-fear/4000-1123949/"
+            }
+          ]
+        },
+        {
+          "number": "6",
+          "title": "Episode Six: Qard, Rao, Aur, Aur",
+          "publicationDate": "2025-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9849665-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1130058",
+              "url": "https://comicvine.gamespot.com/absolute-green-lantern-6-episode-six-qard-rao-aur-/4000-1130058/"
+            }
+          ]
+        },
+        {
+          "number": "7",
+          "title": "Episode Seven: Meanwhile, in the Dark",
+          "publicationDate": "2025-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9881575-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1136071",
+              "url": "https://comicvine.gamespot.com/absolute-green-lantern-7-episode-seven-meanwhile-i/4000-1136071/"
+            }
+          ]
+        },
+        {
+          "number": "8",
+          "title": "Episode Eight: Sojourner",
+          "publicationDate": "2026-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9907392-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1141894",
+              "url": "https://comicvine.gamespot.com/absolute-green-lantern-8-episode-eight-sojourner/4000-1141894/"
+            }
+          ]
+        },
+        {
+          "number": "9",
+          "title": "Episode Nine: Goldface",
+          "publicationDate": "2026-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9927471-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1146664",
+              "url": "https://comicvine.gamespot.com/absolute-green-lantern-9-episode-nine-goldface/4000-1146664/"
+            }
+          ]
+        },
+        {
+          "number": "10",
+          "title": "Episode Ten: Dig it Out",
+          "publicationDate": "2026-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9955788-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1151931",
+              "url": "https://comicvine.gamespot.com/absolute-green-lantern-10-episode-ten-dig-it-out/4000-1151931/"
+            }
+          ]
+        },
+        {
+          "number": "11",
+          "title": "Episode Eleven: Something Red",
+          "publicationDate": "2026-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9978775-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1155344",
+              "url": "https://comicvine.gamespot.com/absolute-green-lantern-11-episode-eleven-something/4000-1155344/"
+            }
+          ]
+        },
+        {
+          "number": "12",
+          "title": "Episode Twelve: What Abin Sur Wanted",
+          "publicationDate": "2026-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/10009079-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1158998",
+              "url": "https://comicvine.gamespot.com/absolute-green-lantern-12-episode-twelve-what-abin/4000-1158998/"
+            }
+          ]
+        },
+        {
+          "number": "13",
+          "title": "Episode Thirteen: The Zero Zone",
+          "publicationDate": "2026-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10035527-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1162456",
+              "url": "https://comicvine.gamespot.com/absolute-green-lantern-13-episode-thirteen-the-zer/4000-1162456/"
+            }
+          ]
+        },
+        {
+          "number": "14",
+          "title": "Episode Fourteen: Tomar",
+          "publicationDate": "2026-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10060438-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1165102",
+              "url": "https://comicvine.gamespot.com/absolute-green-lantern-14-episode-fourteen-tomar/4000-1165102/"
+            }
+          ]
+        },
+        {
+          "number": "15",
+          "title": "Episode Fifteen: Power Struggle",
+          "publicationDate": "2026-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10087480-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1169578",
+              "url": "https://comicvine.gamespot.com/absolute-green-lantern-15-episode-fifteen-power-st/4000-1169578/"
+            }
+          ]
+        },
+        {
+          "number": "16",
+          "title": "Episode Sixteen: All We've Got",
+          "publicationDate": "2026-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10112490-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1175658",
+              "url": "https://comicvine.gamespot.com/absolute-green-lantern-16-episode-sixteen-all-weve/4000-1175658/"
+            }
+          ]
+        },
+        {
+          "number": "17",
+          "title": "Episode Seventeen: Sin Es Tro",
+          "publicationDate": "2026-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/10146211-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1184242",
+              "url": "https://comicvine.gamespot.com/absolute-green-lantern-17-episode-seventeen-sin-es/4000-1184242/"
+            }
+          ]
+        },
+        {
+          "number": "18",
+          "title": "Episode Eighteen: No Man Escapes",
+          "publicationDate": "2026-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10176510-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1191007",
+              "url": "https://comicvine.gamespot.com/absolute-green-lantern-18-episode-eighteen-no-man-/4000-1191007/"
+            }
+          ]
+        },
+        {
+          "number": "19",
+          "title": "Episode Nineteen: File #0",
+          "publicationDate": "2026-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10206080-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1196187",
+              "url": "https://comicvine.gamespot.com/absolute-green-lantern-19-episode-nineteen-file-0/4000-1196187/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Absolute Martian Manhunter",
+      "volume": null,
+      "startYear": 2025,
+      "endYear": null,
+      "externalIds": [
+        {
+          "source": "COMIC_VINE",
+          "externalId": "162966",
+          "url": "https://comicvine.gamespot.com/absolute-martian-manhunter/4050-162966/"
+        }
+      ],
+      "issues": [
+        {
+          "number": "1",
+          "title": null,
+          "publicationDate": "2025-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9668384-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1100110",
+              "url": "https://comicvine.gamespot.com/absolute-martian-manhunter-1/4000-1100110/"
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "title": null,
+          "publicationDate": "2025-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9701813-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1106020",
+              "url": "https://comicvine.gamespot.com/absolute-martian-manhunter-2/4000-1106020/"
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "title": null,
+          "publicationDate": "2025-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9736784-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1112937",
+              "url": "https://comicvine.gamespot.com/absolute-martian-manhunter-3/4000-1112937/"
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "title": null,
+          "publicationDate": "2025-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9761181-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1116605",
+              "url": "https://comicvine.gamespot.com/absolute-martian-manhunter-4/4000-1116605/"
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "title": null,
+          "publicationDate": "2025-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9797803-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1121438",
+              "url": "https://comicvine.gamespot.com/absolute-martian-manhunter-5/4000-1121438/"
+            }
+          ]
+        },
+        {
+          "number": "6",
+          "title": null,
+          "publicationDate": "2025-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9842936-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1128887",
+              "url": "https://comicvine.gamespot.com/absolute-martian-manhunter-6/4000-1128887/"
+            }
+          ]
+        },
+        {
+          "number": "7",
+          "title": null,
+          "publicationDate": "2026-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9944517-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1149793",
+              "url": "https://comicvine.gamespot.com/absolute-martian-manhunter-7/4000-1149793/"
+            }
+          ]
+        },
+        {
+          "number": "8",
+          "title": null,
+          "publicationDate": "2026-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9972353-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1154056",
+              "url": "https://comicvine.gamespot.com/absolute-martian-manhunter-8/4000-1154056/"
+            }
+          ]
+        },
+        {
+          "number": "9",
+          "title": null,
+          "publicationDate": "2026-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9998042-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1156912",
+              "url": "https://comicvine.gamespot.com/absolute-martian-manhunter-9/4000-1156912/"
+            }
+          ]
+        },
+        {
+          "number": "10",
+          "title": null,
+          "publicationDate": "2026-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10022952-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1160261",
+              "url": "https://comicvine.gamespot.com/absolute-martian-manhunter-10/4000-1160261/"
+            }
+          ]
+        },
+        {
+          "number": "11",
+          "title": null,
+          "publicationDate": "2026-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/10067031-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1166237",
+              "url": "https://comicvine.gamespot.com/absolute-martian-manhunter-11/4000-1166237/"
+            }
+          ]
+        },
+        {
+          "number": "12",
+          "title": null,
+          "publicationDate": "2026-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10112491-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1175659",
+              "url": "https://comicvine.gamespot.com/absolute-martian-manhunter-12/4000-1175659/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Absolute Superman",
+      "volume": null,
+      "startYear": 2025,
+      "endYear": null,
+      "externalIds": [
+        {
+          "source": "COMIC_VINE",
+          "externalId": "160860",
+          "url": "https://comicvine.gamespot.com/absolute-superman/4050-160860/"
+        }
+      ],
+      "issues": [
+        {
+          "number": "1",
+          "title": "Last Dust of Krypton - Part One: Down in the Dirt",
+          "publicationDate": "2025-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9528006-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1076354",
+              "url": "https://comicvine.gamespot.com/absolute-superman-1-last-dust-of-krypton-part-one-/4000-1076354/"
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "title": "Last Dust of Krypton - Part Two: Sun of Nothing",
+          "publicationDate": "2025-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9552733-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1080069",
+              "url": "https://comicvine.gamespot.com/absolute-superman-2-last-dust-of-krypton-part-two-/4000-1080069/"
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "title": "Last Dust of Krypton, Part Three: Boy from the Purple Prairie",
+          "publicationDate": "2025-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9584940-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1088557",
+              "url": "https://comicvine.gamespot.com/absolute-superman-3-last-dust-of-krypton-part-thre/4000-1088557/"
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "title": "Last Dust of Krypton, Part Four: Chasing the Storm",
+          "publicationDate": "2025-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9619516-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1094347",
+              "url": "https://comicvine.gamespot.com/absolute-superman-4-last-dust-of-krypton-part-four/4000-1094347/"
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "title": "Last Dust of Krypton, Finale: Ad Astra Per Aspera",
+          "publicationDate": "2025-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9655349-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1098329",
+              "url": "https://comicvine.gamespot.com/absolute-superman-5-last-dust-of-krypton-finale-ad/4000-1098329/"
+            }
+          ]
+        },
+        {
+          "number": "6",
+          "title": "Last Dust of Krypton, Epilogue: Son of Smallville",
+          "publicationDate": "2025-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9678026-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1101425",
+              "url": "https://comicvine.gamespot.com/absolute-superman-6-last-dust-of-krypton-epilogue-/4000-1101425/"
+            }
+          ]
+        },
+        {
+          "number": "7",
+          "title": "Superman, Son of the Demon: Prologue, A Mind is a Terrible Thing",
+          "publicationDate": "2025-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9713760-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1108453",
+              "url": "https://comicvine.gamespot.com/absolute-superman-7-superman-son-of-the-demon-prol/4000-1108453/"
+            }
+          ]
+        },
+        {
+          "number": "8",
+          "title": "Superman, Son of the Demon, Chapter One: Lazarus, Come Forth",
+          "publicationDate": "2025-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9743670-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1114005",
+              "url": "https://comicvine.gamespot.com/absolute-superman-8-superman-son-of-the-demon-chap/4000-1114005/"
+            }
+          ]
+        },
+        {
+          "number": "9",
+          "title": "Superman, Son of the Demon, Chapter Two: The Omega Man",
+          "publicationDate": "2025-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9782019-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1118462",
+              "url": "https://comicvine.gamespot.com/absolute-superman-9-superman-son-of-the-demon-chap/4000-1118462/"
+            }
+          ]
+        },
+        {
+          "number": "10",
+          "title": "Superman, Son of the Demon, Chapter Three: The Beast in the Mine",
+          "publicationDate": "2025-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9813371-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1123951",
+              "url": "https://comicvine.gamespot.com/absolute-superman-10-superman-son-of-the-demon-cha/4000-1123951/"
+            }
+          ]
+        },
+        {
+          "number": "11",
+          "title": "Superman, Son of the Demon, Finale: Man of Steel, Mind of Ash",
+          "publicationDate": "2025-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9849666-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1130059",
+              "url": "https://comicvine.gamespot.com/absolute-superman-11-superman-son-of-the-demon-fin/4000-1130059/"
+            }
+          ]
+        },
+        {
+          "number": "12",
+          "title": "The Battle of Kansas, Part One: Sol",
+          "publicationDate": "2025-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9881583-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1136072",
+              "url": "https://comicvine.gamespot.com/absolute-superman-12-the-battle-of-kansas-part-one/4000-1136072/"
+            }
+          ]
+        },
+        {
+          "number": "13",
+          "title": "The Battle of Kansas, Part Two: The Free State of Smallville",
+          "publicationDate": "2026-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9907394-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1141895",
+              "url": "https://comicvine.gamespot.com/absolute-superman-13-the-battle-of-kansas-part-two/4000-1141895/"
+            }
+          ]
+        },
+        {
+          "number": "14",
+          "title": "The Battle of Kansas, Finale: Son of Nowhere, Nothing, and No One",
+          "publicationDate": "2026-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9944518-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1149794",
+              "url": "https://comicvine.gamespot.com/absolute-superman-14-the-battle-of-kansas-finale-s/4000-1149794/"
+            }
+          ]
+        },
+        {
+          "number": "15",
+          "title": "The Never-Ending Begins, Part One: In Blue",
+          "publicationDate": "2026-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9955789-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1151932",
+              "url": "https://comicvine.gamespot.com/absolute-superman-15-the-never-ending-begins-part-/4000-1151932/"
+            }
+          ]
+        },
+        {
+          "number": "16",
+          "title": "The Never-Ending Begins, Part Two: This Universe Will Break Your Heart, Kid",
+          "publicationDate": "2026-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9978776-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1155345",
+              "url": "https://comicvine.gamespot.com/absolute-superman-16-the-never-ending-begins-part-/4000-1155345/"
+            }
+          ]
+        },
+        {
+          "number": "17",
+          "title": "The Never-Ending Begins, Finale: All Together Now",
+          "publicationDate": "2026-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/10004085-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1158140",
+              "url": "https://comicvine.gamespot.com/absolute-superman-17-the-never-ending-begins-final/4000-1158140/"
+            }
+          ]
+        },
+        {
+          "number": "18",
+          "title": "Reign of the Superman, Part One: King of the Black Land",
+          "publicationDate": "2026-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/10029341-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1161287",
+              "url": "https://comicvine.gamespot.com/absolute-superman-18-reign-of-the-superman-part-on/4000-1161287/"
+            }
+          ]
+        },
+        {
+          "number": "19",
+          "title": "Reign of the Superman, Part Two: Red Steel in the Hour of Chaos",
+          "publicationDate": "2026-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10060444-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1165103",
+              "url": "https://comicvine.gamespot.com/absolute-superman-19-reign-of-the-superman-part-tw/4000-1165103/"
+            }
+          ]
+        },
+        {
+          "number": "20",
+          "title": "Reign of the Superman, Part Three: Up, Up and...",
+          "publicationDate": "2026-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10105398-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1173315",
+              "url": "https://comicvine.gamespot.com/absolute-superman-20-reign-of-the-superman-part-th/4000-1173315/"
+            }
+          ]
+        },
+        {
+          "number": "21",
+          "title": "Reign of the Superman, Finale: Moon Fall",
+          "publicationDate": "2026-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10133186-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1181743",
+              "url": "https://comicvine.gamespot.com/absolute-superman-21-reign-of-the-superman-finale-/4000-1181743/"
+            }
+          ]
+        },
+        {
+          "number": "22",
+          "title": "Get Brainiac, Part One: Metallo",
+          "publicationDate": "2026-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/10146212-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1184243",
+              "url": "https://comicvine.gamespot.com/absolute-superman-22-get-brainiac-part-one-metallo/4000-1184243/"
+            }
+          ]
+        },
+        {
+          "number": "23",
+          "title": "Get Brainiac, Part Two: The Toyman",
+          "publicationDate": "2026-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10176513-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1191008",
+              "url": "https://comicvine.gamespot.com/absolute-superman-23-get-brainiac-part-two-the-toy/4000-1191008/"
+            }
+          ]
+        },
+        {
+          "number": "24",
+          "title": "Get Brainiac, Part Three: Steel",
+          "publicationDate": "2026-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10206082-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1196188",
+              "url": "https://comicvine.gamespot.com/absolute-superman-24-get-brainiac-part-three-steel/4000-1196188/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Absolute Wonder Woman",
+      "volume": null,
+      "startYear": 2024,
+      "endYear": null,
+      "externalIds": [
+        {
+          "source": "COMIC_VINE",
+          "externalId": "160511",
+          "url": "https://comicvine.gamespot.com/absolute-wonder-woman/4050-160511/"
+        }
+      ],
+      "issues": [
+        {
+          "number": "1",
+          "title": "The Last Amazon, Part 1 of 5",
+          "publicationDate": "2024-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9516337-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1074563",
+              "url": "https://comicvine.gamespot.com/absolute-wonder-woman-1-the-last-amazon-part-1-of-/4000-1074563/"
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "title": "The Last Amazon, Part 2 of 5",
+          "publicationDate": "2025-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9546452-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1079209",
+              "url": "https://comicvine.gamespot.com/absolute-wonder-woman-2-the-last-amazon-part-2-of-/4000-1079209/"
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "title": "The Last Amazon, Part 3 of 5",
+          "publicationDate": "2025-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9576337-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1085923",
+              "url": "https://comicvine.gamespot.com/absolute-wonder-woman-3-the-last-amazon-part-3-of-/4000-1085923/"
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "title": "The Last Amazon, Part 4 of 5",
+          "publicationDate": "2025-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9604481-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1090802",
+              "url": "https://comicvine.gamespot.com/absolute-wonder-woman-4-the-last-amazon-part-4-of-/4000-1090802/"
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "title": "The Last Amazon, Part 5 of 5",
+          "publicationDate": "2025-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9641474-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1096891",
+              "url": "https://comicvine.gamespot.com/absolute-wonder-woman-5-the-last-amazon-part-5-of-/4000-1096891/"
+            }
+          ]
+        },
+        {
+          "number": "6",
+          "title": "The Lady or the Tiger, Part 1; Li'l Diana",
+          "publicationDate": "2025-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9668385-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1100111",
+              "url": "https://comicvine.gamespot.com/absolute-wonder-woman-6-the-lady-or-the-tiger-part/4000-1100111/"
+            }
+          ]
+        },
+        {
+          "number": "7",
+          "title": "The Lady or the Tiger, Part 2; Li'l Diana",
+          "publicationDate": "2025-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9701815-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1106021",
+              "url": "https://comicvine.gamespot.com/absolute-wonder-woman-7-the-lady-or-the-tiger-part/4000-1106021/"
+            }
+          ]
+        },
+        {
+          "number": "8",
+          "title": "As My Mothers Made Me, Part 1",
+          "publicationDate": "2025-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9736785-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1112938",
+              "url": "https://comicvine.gamespot.com/absolute-wonder-woman-8-as-my-mothers-made-me-part/4000-1112938/"
+            }
+          ]
+        },
+        {
+          "number": "9",
+          "title": "As My Mothers Made Me, Part 2 of 5",
+          "publicationDate": "2025-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9761182-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1116606",
+              "url": "https://comicvine.gamespot.com/absolute-wonder-woman-9-as-my-mothers-made-me-part/4000-1116606/"
+            }
+          ]
+        },
+        {
+          "number": "10",
+          "title": "As My Mothers Made Me. Part 3 of 5",
+          "publicationDate": "2025-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9797806-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1121439",
+              "url": "https://comicvine.gamespot.com/absolute-wonder-woman-10-as-my-mothers-made-me-par/4000-1121439/"
+            }
+          ]
+        },
+        {
+          "number": "11",
+          "title": "As My Mothers Made Me, Part 4 of 5",
+          "publicationDate": "2025-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9842937-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1128888",
+              "url": "https://comicvine.gamespot.com/absolute-wonder-woman-11-as-my-mothers-made-me-par/4000-1128888/"
+            }
+          ]
+        },
+        {
+          "number": "12",
+          "title": "As My Mothers Made Me, Part 5 of 5",
+          "publicationDate": "2025-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9873425-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1134428",
+              "url": "https://comicvine.gamespot.com/absolute-wonder-woman-12-as-my-mothers-made-me-par/4000-1134428/"
+            }
+          ]
+        },
+        {
+          "number": "13",
+          "title": "The Price, Part 1 of 2",
+          "publicationDate": "2025-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9897366-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1139062",
+              "url": "https://comicvine.gamespot.com/absolute-wonder-woman-13-the-price-part-1-of-2/4000-1139062/"
+            }
+          ]
+        },
+        {
+          "number": "14",
+          "title": "The Price, Part 2 of 2",
+          "publicationDate": "2026-01",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9922919-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1145498",
+              "url": "https://comicvine.gamespot.com/absolute-wonder-woman-14-the-price-part-2-of-2/4000-1145498/"
+            }
+          ]
+        },
+        {
+          "number": "15",
+          "title": "The Mark of Hecate",
+          "publicationDate": "2026-02",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9944519-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1149795",
+              "url": "https://comicvine.gamespot.com/absolute-wonder-woman-15-the-mark-of-hecate/4000-1149795/"
+            }
+          ]
+        },
+        {
+          "number": "16",
+          "title": "Season of the Witch, Part 1 of 5",
+          "publicationDate": "2026-03",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9972355-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1154057",
+              "url": "https://comicvine.gamespot.com/absolute-wonder-woman-16-season-of-the-witch-part-/4000-1154057/"
+            }
+          ]
+        },
+        {
+          "number": "17",
+          "title": "Season of the Witch, Part 2 of 5",
+          "publicationDate": "2026-04",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9998043-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1156913",
+              "url": "https://comicvine.gamespot.com/absolute-wonder-woman-17-season-of-the-witch-part-/4000-1156913/"
+            }
+          ]
+        },
+        {
+          "number": "18",
+          "title": "Season of the Witch, Part 3 of 5",
+          "publicationDate": "2026-05",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10022953-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1160262",
+              "url": "https://comicvine.gamespot.com/absolute-wonder-woman-18-season-of-the-witch-part-/4000-1160262/"
+            }
+          ]
+        },
+        {
+          "number": "19",
+          "title": "Season of the Witch, Part 4 of 5",
+          "publicationDate": "2026-06",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/10047889-wwww.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1163573",
+              "url": "https://comicvine.gamespot.com/absolute-wonder-woman-19-season-of-the-witch-part-/4000-1163573/"
+            }
+          ]
+        },
+        {
+          "number": "20",
+          "title": "Season of the Witch, Part 5 of 5",
+          "publicationDate": "2026-07",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10080993-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1168224",
+              "url": "https://comicvine.gamespot.com/absolute-wonder-woman-20-season-of-the-witch-part-/4000-1168224/"
+            }
+          ]
+        },
+        {
+          "number": "21",
+          "title": "Friends & Neighbors, Part 1 of 2",
+          "publicationDate": "2026-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10105399-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1173316",
+              "url": "https://comicvine.gamespot.com/absolute-wonder-woman-21-friends-and-neighbors-par/4000-1173316/"
+            }
+          ]
+        },
+        {
+          "number": "22",
+          "title": "Friends & Neighbors, Part 2 of 2",
+          "publicationDate": "2026-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10133187-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1181744",
+              "url": "https://comicvine.gamespot.com/absolute-wonder-woman-22-friends-and-neighbors-par/4000-1181744/"
+            }
+          ]
+        },
+        {
+          "number": "23",
+          "title": "Heretic, Part 1 of 5",
+          "publicationDate": "2026-10",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10169910-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1189467",
+              "url": "https://comicvine.gamespot.com/absolute-wonder-woman-23-heretic-part-1-of-5/4000-1189467/"
+            }
+          ]
+        },
+        {
+          "number": "24",
+          "title": "Heretic, Part 2 of 5",
+          "publicationDate": "2026-11",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10194851-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1194152",
+              "url": "https://comicvine.gamespot.com/absolute-wonder-woman-24-heretic-part-2-of-5/4000-1194152/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Absolute Evil",
+      "volume": null,
+      "startYear": 2025,
+      "endYear": null,
+      "externalIds": [
+        {
+          "source": "COMIC_VINE",
+          "externalId": "167313",
+          "url": "https://comicvine.gamespot.com/absolute-evil/4050-167313/"
+        }
+      ],
+      "issues": [
+        {
+          "number": "1",
+          "title": "Absolute Justice",
+          "publicationDate": "2025-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/9881573-cover.jpg",
+          "description": null,
+          "type": "SPECIAL",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1136070",
+              "url": "https://comicvine.gamespot.com/absolute-evil-1-absolute-justice/4000-1136070/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "DC All In Special",
+      "volume": null,
+      "startYear": 2024,
+      "endYear": null,
+      "externalIds": [
+        {
+          "source": "COMIC_VINE",
+          "externalId": "160186",
+          "url": "https://comicvine.gamespot.com/dc-all-in-special/4050-160186/"
+        }
+      ],
+      "issues": [
+        {
+          "number": "1",
+          "title": "Alpha; Omega",
+          "publicationDate": "2024-12",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11/110017/9496498-wwww.jpg",
+          "description": null,
+          "type": "SPECIAL",
+          "universeDesignation": "Earth-Alpha",
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1072173",
+              "url": "https://comicvine.gamespot.com/dc-all-in-special-1-alpha-omega/4000-1072173/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

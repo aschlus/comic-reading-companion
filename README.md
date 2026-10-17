@@ -28,7 +28,7 @@ building, following, and tracking comic-book reading orders.
 - [x] Add database uniqueness constraints where appropriate
 - [x] Add proper Room migrations as the schema evolves
 - [ ] Add support for relationships between reading orders / events
-- [ ] Add collection / library concepts
+- [x] Add collection / library concepts
 
 ### Reading Lists
 
@@ -295,7 +295,7 @@ building, following, and tracking comic-book reading orders.
 - [ ] Reading-order relationships between events and sub-events
 - [ ] Character-based reading orders
 - [ ] Event-based reading orders
-- [ ] Personal comic collection tracking
+- [x] Personal comic collection tracking
 - [ ] Owned / wanted / missing issue status
 - [ ] Reading recommendations
 - [ ] Reading statistics

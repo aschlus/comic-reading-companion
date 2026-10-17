@@ -1,0 +1,21 @@
+{
+  "publisher": "DC Comics",
+  "universes": [
+    {
+      "name": "Absolute Universe",
+      "designation": "Earth-Alpha",
+      "description": null
+    }
+  ],
+  "series": [
+    {
+      "title": "Absolute Green Arrow",
+      "volume": null,
+      "startYear": 2026,
+      "endYear": null,
+      "comicVineVolumeId": 172003,
+      "defaultIssueType": "REGULAR",
+      "defaultUniverseDesignation": "Earth-Alpha"
+    }
+  ]
+}
