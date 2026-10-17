@@ -171,8 +171,9 @@ building, following, and tracking comic-book reading orders.
 
 ### App Navigation and Screen Structure
 
-- [x] Add persistent top-level navigation for Home, Browse, and Library
+- [x] Add persistent top-level navigation for Home, Library, Browse, and Collection
 - [x] Add a dedicated Library screen
+- [x] Add a dedicated Collection screen
 - [ ] Add a Settings screen
 - [ ] Open Settings from the Home header gear icon
 - [x] Hide top-level navigation on detail / editing screens
@@ -289,6 +290,7 @@ building, following, and tracking comic-book reading orders.
 - [x] Improve error reporting / logging
 - [x] Add UI regression coverage for top-level Home / Browse / Library navigation
 - [x] Add UI coverage for the redesigned Home and Library screens
+- [ ] Add UI regression coverage for Collection navigation and owned-issue screens
 
 ### Longer-Term Ideas
 
@@ -296,7 +298,8 @@ building, following, and tracking comic-book reading orders.
 - [ ] Character-based reading orders
 - [ ] Event-based reading orders
 - [x] Personal comic collection tracking
-- [ ] Owned / wanted / missing issue status
+- [x] Owned / unowned issue status
+- [ ] Wanted / missing issue status
 - [ ] Reading recommendations
 - [ ] Reading statistics
 - [ ] Completed reading-list archive
