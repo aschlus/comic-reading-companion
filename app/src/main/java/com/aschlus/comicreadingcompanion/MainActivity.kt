@@ -27,6 +27,7 @@ import androidx.navigation.navArgument
 import com.aschlus.comicreadingcompanion.data.exporter.readingListExportFileName
 import com.aschlus.comicreadingcompanion.ui.component.ComicBottomNavigation
 import com.aschlus.comicreadingcompanion.ui.screen.BrowseScreen
+import com.aschlus.comicreadingcompanion.ui.screen.CollectionScreen
 import com.aschlus.comicreadingcompanion.ui.screen.CreateReadingListScreen
 import com.aschlus.comicreadingcompanion.ui.screen.HomeScreen
 import com.aschlus.comicreadingcompanion.ui.screen.IssueDetailScreen
@@ -40,6 +41,8 @@ import com.aschlus.comicreadingcompanion.ui.viewmodel.AddIssueToReadingListViewM
 import com.aschlus.comicreadingcompanion.ui.viewmodel.AddIssueToReadingListViewModelFactory
 import com.aschlus.comicreadingcompanion.ui.viewmodel.BrowseViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.BrowseViewModelFactory
+import com.aschlus.comicreadingcompanion.ui.viewmodel.CollectionViewModel
+import com.aschlus.comicreadingcompanion.ui.viewmodel.CollectionViewModelFactory
 import com.aschlus.comicreadingcompanion.ui.viewmodel.CreateReadingListViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.CreateReadingListViewModelFactory
 import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeViewModel
@@ -251,7 +254,8 @@ class MainActivity : ComponentActivity() {
                     setOf(
                         "home",
                         "browse",
-                        "library"
+                        "library",
+                        "collection"
                     )
 
                 val navigateTopLevel:
@@ -287,6 +291,9 @@ class MainActivity : ComponentActivity() {
                                 },
                                 onLibraryClick = {
                                     navigateTopLevel("library")
+                                },
+                                onCollectionClick = {
+                                    navigateTopLevel("collection")
                                 }
                             )
                         }
@@ -418,6 +425,26 @@ class MainActivity : ComponentActivity() {
 
                                     navController.navigate(
                                         "readingList/$readingListId?startPosition=$startPosition"
+                                    )
+                                }
+                            )
+                        }
+
+                        composable("collection") {
+                            val collectionViewModel: CollectionViewModel =
+                                viewModel(
+                                    factory = CollectionViewModelFactory(
+                                        (application as ComicReadingCompanionApplication)
+                                            .container
+                                            .comicRepository
+                                    )
+                                )
+
+                            CollectionScreen(
+                                viewModel = collectionViewModel,
+                                onIssueClick = { issueId ->
+                                    navController.navigate(
+                                        "issue/$issueId"
                                     )
                                 }
                             )

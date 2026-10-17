@@ -6,6 +6,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.aschlus.comicreadingcompanion.data.database.entities.ExternalId
 import com.aschlus.comicreadingcompanion.data.database.entities.Issue
+import com.aschlus.comicreadingcompanion.data.database.entities.IssueOwnership
 import com.aschlus.comicreadingcompanion.data.database.entities.IssueType
 import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
@@ -3146,5 +3147,80 @@ class ComicDaoTest {
             )
         }
 
+    @Test
+    fun issueOwnership_canBeAddedRemovedAndIsIndependentOfReadingProgress() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
 
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Amazing Spider-Man",
+                        volume = 1,
+                        startYear = 1963,
+                        endYear = null
+                    )
+                )
+
+            val issueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "Test Issue",
+                        publicationDate = "1963-03",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            assertEquals(
+                false,
+                comicDao.isIssueOwned(issueId).first()
+            )
+
+            comicDao.insertReadingProgress(
+                ReadingProgress(
+                    issueId = issueId,
+                    status = ReadingStatus.READ,
+                    startedAt = 1000L,
+                    completedAt = 2000L,
+                    notes = null
+                )
+            )
+
+            comicDao.markIssueOwned(
+                IssueOwnership(issueId = issueId)
+            )
+
+            assertEquals(
+                true,
+                comicDao.isIssueOwned(issueId).first()
+            )
+
+            // Marking an already-owned issue should be harmless.
+            comicDao.markIssueOwned(
+                IssueOwnership(issueId = issueId)
+            )
+
+            comicDao.markIssueUnowned(issueId)
+
+            assertEquals(
+                false,
+                comicDao.isIssueOwned(issueId).first()
+            )
+
+            assertEquals(
+                ReadingStatus.READ,
+                comicDao.getIssueDetail(issueId)
+                    .first()
+                    .readingStatus
+            )
+        }
 }

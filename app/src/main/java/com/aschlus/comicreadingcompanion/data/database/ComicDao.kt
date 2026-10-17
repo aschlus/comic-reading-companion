@@ -9,6 +9,7 @@ import androidx.room3.Update
 import androidx.room3.Upsert
 import com.aschlus.comicreadingcompanion.data.database.entities.ExternalId
 import com.aschlus.comicreadingcompanion.data.database.entities.Issue
+import com.aschlus.comicreadingcompanion.data.database.entities.IssueOwnership
 import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListItem
@@ -20,6 +21,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.Universe
 import com.aschlus.comicreadingcompanion.data.database.models.IssueDetail
 import com.aschlus.comicreadingcompanion.data.database.models.IssueReadingListResult
 import com.aschlus.comicreadingcompanion.data.database.models.IssueSearchResult
+import com.aschlus.comicreadingcompanion.data.database.models.OwnedIssueResult
 import com.aschlus.comicreadingcompanion.data.database.models.PublisherBrowseResult
 import com.aschlus.comicreadingcompanion.data.database.models.PublisherSeries
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListArtworkCover
@@ -437,6 +439,35 @@ interface ComicDao {
     ): Flow<List<IssueSearchResult>>
 
     @Query("""
+        SELECT
+            issues.id AS issueId,
+            series.id AS seriesId,
+            series.title AS seriesTitle,
+            series.volume AS seriesVolume,
+            issues.issueNumber AS issueNumber,
+            issues.title AS issueTitle,
+            issues.publicationDate AS publicationDate,
+            issues.coverUrl AS coverUrl,
+            issues.issueType AS issueType,
+            publishers.name AS publisherName,
+            reading_progress.status AS readingStatus
+        FROM issue_ownership
+        INNER JOIN issues
+            ON issue_ownership.issueId = issues.id
+        INNER JOIN series
+            ON issues.seriesId = series.id
+        INNER JOIN publishers
+            ON series.publisherId = publishers.id
+        LEFT JOIN reading_progress
+            ON issues.id = reading_progress.issueId
+        ORDER BY
+            series.title ASC,
+            issues.publicationDate ASC,
+            issues.issueNumber ASC
+    """)
+    fun getOwnedIssues(): Flow<List<OwnedIssueResult>>
+
+    @Query("""
         SELECT DISTINCT
             CAST(SUBSTR(publicationDate, 1, 4) AS INTEGER)
         FROM issues
@@ -446,6 +477,33 @@ interface ComicDao {
         ORDER BY 1 DESC
     """)
     fun getAvailablePublicationYears(): Flow<List<Int>>
+
+
+    // Issue ownership
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun markIssueOwned(
+        ownership: IssueOwnership
+    ): Long
+
+    @Query("""
+        DELETE FROM issue_ownership
+        WHERE issueId = :issueId
+    """)
+    suspend fun markIssueUnowned(
+        issueId: Long
+    )
+
+    @Query("""
+        SELECT EXISTS (
+            SELECT 1
+            FROM issue_ownership
+            WHERE issueId = :issueId
+        )
+    """)
+    fun isIssueOwned(
+        issueId: Long
+    ): Flow<Boolean>
 
 
     // Reading lists

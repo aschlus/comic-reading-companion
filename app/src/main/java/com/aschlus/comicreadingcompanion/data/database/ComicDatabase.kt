@@ -6,6 +6,7 @@ import androidx.room3.Room
 import androidx.room3.RoomDatabase
 import com.aschlus.comicreadingcompanion.data.database.entities.ExternalId
 import com.aschlus.comicreadingcompanion.data.database.entities.Issue
+import com.aschlus.comicreadingcompanion.data.database.entities.IssueOwnership
 import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListItem
@@ -26,9 +27,10 @@ import com.aschlus.comicreadingcompanion.data.database.entities.Universe
         ReadingList::class,
         ReadingListSection::class,
         ReadingListItem::class,
-        ReadingProgress::class
+        ReadingProgress::class,
+        IssueOwnership::class
     ],
-    version = 4,
+    version = 5,
     exportSchema = true
 )
 abstract class ComicDatabase : RoomDatabase() {
@@ -49,7 +51,8 @@ abstract class ComicDatabase : RoomDatabase() {
                     .addMigrations(
                         MIGRATION_1_2,
                         MIGRATION_2_3,
-                        MIGRATION_3_4
+                        MIGRATION_3_4,
+                        MIGRATION_4_5
                     )
                     .build()
 

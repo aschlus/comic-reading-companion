@@ -150,3 +150,34 @@ val MIGRATION_3_4 =
             )
         }
     }
+
+val MIGRATION_4_5 =
+    object : Migration(
+        startVersion = 4,
+        endVersion = 5
+    ) {
+        override suspend fun migrate(
+            connection: SQLiteConnection
+        ) {
+            connection.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS issue_ownership (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                    issueId INTEGER NOT NULL,
+                    FOREIGN KEY(issueId)
+                        REFERENCES issues(id)
+                        ON UPDATE NO ACTION
+                        ON DELETE CASCADE
+                )
+                """.trimIndent()
+            )
+
+            connection.execSQL(
+                """
+                CREATE UNIQUE INDEX IF NOT EXISTS
+                    index_issue_ownership_issueId
+                ON issue_ownership (issueId)
+                """.trimIndent()
+            )
+        }
+    }

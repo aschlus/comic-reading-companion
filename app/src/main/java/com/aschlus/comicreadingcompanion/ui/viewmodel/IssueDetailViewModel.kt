@@ -31,11 +31,21 @@ class IssueDetailViewModel(
     val readingLists: StateFlow<List<IssueReadingListResult>> =
         _readingLists.asStateFlow()
 
+    private var ownershipJob: Job? = null
+
+    private val _isIssueOwned =
+        MutableStateFlow(false)
+
+    val isIssueOwned: StateFlow<Boolean> =
+        _isIssueOwned.asStateFlow()
+
+
     fun loadIssue(
         issueId: Long
     ) {
         issueJob?.cancel()
         readingListsJob?.cancel()
+        ownershipJob?.cancel()
 
         issueJob = viewModelScope.launch {
             repository
@@ -50,6 +60,14 @@ class IssueDetailViewModel(
                 .getReadingListsContainingIssue(issueId)
                 .collect { updatedLists ->
                     _readingLists.value = updatedLists
+                }
+        }
+
+        ownershipJob = viewModelScope.launch {
+            repository
+                .isIssueOwned(issueId)
+                .collect { isOwned ->
+                    _isIssueOwned.value = isOwned
                 }
         }
     }
@@ -82,6 +100,28 @@ class IssueDetailViewModel(
 
         viewModelScope.launch {
             repository.markIssueAsRead(
+                currentIssue.issueId
+            )
+        }
+    }
+
+    fun markAsOwned() {
+        val currentIssue = _issue.value
+            ?: return
+
+        viewModelScope.launch {
+            repository.markIssueOwned(
+                currentIssue.issueId
+            )
+        }
+    }
+
+    fun markAsUnowned() {
+        val currentIssue = _issue.value
+            ?: return
+
+        viewModelScope.launch {
+            repository.markIssueUnowned(
                 currentIssue.issueId
             )
         }

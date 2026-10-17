@@ -34,6 +34,7 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicMutedInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
 import androidx.compose.foundation.layout.offset
+import androidx.compose.material.icons.filled.Bookmark
 
 @Composable
 fun ComicBottomNavigation(
@@ -41,6 +42,7 @@ fun ComicBottomNavigation(
     onHomeClick: () -> Unit,
     onBrowseClick: () -> Unit,
     onLibraryClick: () -> Unit,
+    onCollectionClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     NavigationBar(
@@ -90,6 +92,14 @@ fun ComicBottomNavigation(
             contentDescription = "Browse tab",
             onClick = onBrowseClick
         )
+
+        ComicBottomNavDestination(
+            label = "Collection",
+            icon = Icons.Default.Bookmark,
+            selected = currentRoute == "collection",
+            contentDescription = "Physical collection tab",
+            onClick = onCollectionClick
+        )
     }
 }
 
@@ -127,7 +137,7 @@ private fun RowScope.ComicBottomNavDestination(
             modifier =
                 if (selected) {
                     Modifier
-                        .width(104.dp)
+                        .width(84.dp)
                         .height(58.dp)
                         .background(
                             color = ComicYellow,

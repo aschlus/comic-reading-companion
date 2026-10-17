@@ -1404,4 +1404,115 @@ class ComicDatabaseMigrationTest {
             database.close()
         }
     }
+
+    @Test
+    fun migration4To5_addsIssueOwnershipTableAndUniqueIndex() {
+        runBlocking {
+            val database = migrationHelper.createDatabase(4)
+
+            database.execSQL(
+                """
+            INSERT INTO publishers (
+                id,
+                name
+            )
+            VALUES (
+                1,
+                'Marvel Comics'
+            )
+            """.trimIndent()
+            )
+
+            database.execSQL(
+                """
+            INSERT INTO series (
+                id,
+                publisherId,
+                title,
+                volume,
+                startYear,
+                endYear
+            )
+            VALUES (
+                1,
+                1,
+                'Amazing Spider-Man',
+                2,
+                1999,
+                2003
+            )
+            """.trimIndent()
+            )
+
+            database.execSQL(
+                """
+            INSERT INTO issues (
+                id,
+                seriesId,
+                universeId,
+                issueNumber,
+                title,
+                publicationDate,
+                coverUrl,
+                description,
+                issueType
+            )
+            VALUES (
+                1,
+                1,
+                NULL,
+                '1',
+                'Test Issue',
+                '1999-01',
+                NULL,
+                NULL,
+                'REGULAR'
+            )
+            """.trimIndent()
+            )
+
+            database.close()
+
+            val migrated = migrationHelper.runMigrationsAndValidate(
+                version = 5,
+                migrations = listOf(MIGRATION_4_5)
+            )
+
+            assertEquals(
+                0L,
+                queryCount(
+                    migrated,
+                    "SELECT COUNT(*) FROM issue_ownership"
+                )
+            )
+
+            assertEquals(
+                1L,
+                queryCount(
+                    migrated,
+                    """
+                SELECT COUNT(*)
+                FROM sqlite_master
+                WHERE type = 'index'
+                    AND name = 'index_issue_ownership_issueId'
+                """.trimIndent()
+                )
+            )
+
+            assertEquals(
+                1L,
+                queryCount(
+                    migrated,
+                    """
+                SELECT COUNT(*)
+                FROM issues
+                WHERE id = 1
+                    AND issueNumber = '1'
+                """.trimIndent()
+                )
+            )
+
+            migrated.close()
+        }
+    }
 }

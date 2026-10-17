@@ -5,6 +5,7 @@ import com.aschlus.comicreadingcompanion.data.database.ComicDao
 import com.aschlus.comicreadingcompanion.data.database.ComicDatabase
 import com.aschlus.comicreadingcompanion.data.database.entities.ExternalId
 import com.aschlus.comicreadingcompanion.data.database.entities.Issue
+import com.aschlus.comicreadingcompanion.data.database.entities.IssueOwnership
 import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListItem
@@ -18,6 +19,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.Universe
 import com.aschlus.comicreadingcompanion.data.database.models.IssueDetail
 import com.aschlus.comicreadingcompanion.data.database.models.IssueReadingListResult
 import com.aschlus.comicreadingcompanion.data.database.models.IssueSearchResult
+import com.aschlus.comicreadingcompanion.data.database.models.OwnedIssueResult
 import com.aschlus.comicreadingcompanion.data.database.models.PublisherBrowseResult
 import com.aschlus.comicreadingcompanion.data.database.models.PublisherSeries
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListArtworkCover
@@ -1095,6 +1097,29 @@ class ComicRepository(
     }
 
 
+    // Issue ownership
+
+    fun isIssueOwned(
+        issueId: Long
+    ): Flow<Boolean> {
+        return comicDao.isIssueOwned(issueId)
+    }
+
+    suspend fun markIssueOwned(
+        issueId: Long
+    ) {
+        comicDao.markIssueOwned(
+            IssueOwnership(issueId = issueId)
+        )
+    }
+
+    suspend fun markIssueUnowned(
+        issueId: Long
+    ) {
+        comicDao.markIssueUnowned(issueId)
+    }
+
+
     // Reading progress
 
     suspend fun getReadingProgressForIssue(
@@ -1264,6 +1289,10 @@ class ComicRepository(
             universeId = universeId,
             publicationYear = publicationYear
         )
+    }
+
+    fun getOwnedIssues(): Flow<List<OwnedIssueResult>> {
+        return comicDao.getOwnedIssues()
     }
 
 
