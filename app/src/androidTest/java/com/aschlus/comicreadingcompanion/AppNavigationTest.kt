@@ -1206,7 +1206,7 @@ class AppNavigationTest {
 
         composeRule.waitUntil(timeoutMillis = 5000L) {
             composeRule
-                .onAllNodesWithText("COMIC VINE API KEY")
+                .onAllNodesWithText("API KEY")
                 .fetchSemanticsNodes()
                 .isNotEmpty()
         }
@@ -1216,7 +1216,7 @@ class AppNavigationTest {
             .assertIsDisplayed()
 
         composeRule
-            .onNodeWithText("COMIC VINE API KEY")
+            .onNodeWithText("API KEY")
             .assertIsDisplayed()
 
         // Settings should hide the persistent bottom navigation.
@@ -1254,6 +1254,55 @@ class AppNavigationTest {
 
         composeRule
             .onNodeWithContentDescription("Home tab")
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun appNavigation_settingsToComicVineSearchAndBack() {
+        composeRule
+            .onNodeWithContentDescription("Settings")
+            .performClick()
+
+        composeRule.waitUntil(timeoutMillis = 5000L) {
+            composeRule
+                .onAllNodesWithText("API KEY")
+                .fetchSemanticsNodes()
+                .isNotEmpty()
+        }
+
+        composeRule
+            .onNodeWithText("SEARCH SERIES")
+            .performClick()
+
+        composeRule.waitUntil(timeoutMillis = 5000L) {
+            composeRule
+                .onAllNodesWithText("SERIES SEARCH")
+                .fetchSemanticsNodes()
+                .isNotEmpty()
+        }
+
+        composeRule
+            .onNodeWithText("SERIES SEARCH")
+            .assertIsDisplayed()
+
+        // The search screen is not a top-level navigation destination.
+        composeRule
+            .onNodeWithContentDescription("Home tab")
+            .assertDoesNotExist()
+
+        composeRule
+            .onNodeWithContentDescription("Back")
+            .performClick()
+
+        composeRule.waitUntil(timeoutMillis = 5000L) {
+            composeRule
+                .onAllNodesWithText("API KEY")
+                .fetchSemanticsNodes()
+                .isNotEmpty()
+        }
+
+        composeRule
+            .onNodeWithText("SETTINGS")
             .assertIsDisplayed()
     }
 }

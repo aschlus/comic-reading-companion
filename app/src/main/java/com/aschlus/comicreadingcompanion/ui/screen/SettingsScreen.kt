@@ -61,7 +61,8 @@ import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineSettingsViewModel
 @Composable
 fun SettingsScreen(
     viewModel: ComicVineSettingsViewModel,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    onSearchSeriesClick: () -> Unit = {}
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
@@ -108,12 +109,11 @@ fun SettingsScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             ComicHomeSectionHeader(
-                text = "COMIC VINE API KEY"
+                text = "API KEY"
             )
 
             Text(
-                text = "Configure the key used by the upcoming " +
-                    "Comic Vine series-import feature.",
+                text = "Configure the key used by series search and import features.",
                 color = ComicMutedInk
             )
 
@@ -146,11 +146,18 @@ fun SettingsScreen(
                 }
             }
 
+            TextButton(
+                onClick = onSearchSeriesClick,
+                enabled = !uiState.isLoading && !uiState.isSaving
+            ) {
+                Text("SEARCH SERIES")
+            }
+
             Text(
                 text = if (uiState.hasSavedApiKey) {
                     "Enter a new key below to replace the saved one."
                 } else {
-                    "Enter your Comic Vine API key below."
+                    "Enter your API key below."
                 },
                 color = ComicInk
             )
@@ -183,7 +190,7 @@ fun SettingsScreen(
                         modifier = Modifier
                             .weight(1f)
                             .semantics {
-                                contentDescription = "Comic Vine API key"
+                                contentDescription = "API key"
                             },
                         singleLine = true,
                         textStyle = androidx.compose.material3.MaterialTheme
@@ -295,12 +302,12 @@ fun SettingsScreen(
                 showRemoveConfirmation = false
             },
             title = {
-                Text("Remove Comic Vine API key?")
+                Text("Remove API key?")
             },
             text = {
                 Text(
                     "You'll need to enter your key again before " +
-                        "using Comic Vine features."
+                        "using series search and import features."
                 )
             },
             confirmButton = {

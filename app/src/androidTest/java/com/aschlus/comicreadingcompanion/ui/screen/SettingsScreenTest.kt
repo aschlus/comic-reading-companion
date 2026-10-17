@@ -101,7 +101,7 @@ class SettingsScreenTest {
             .assertIsDisplayed()
 
         composeRule
-            .onNodeWithText("COMIC VINE API KEY")
+            .onNodeWithText("API KEY")
             .assertIsDisplayed()
 
         composeRule
@@ -109,7 +109,7 @@ class SettingsScreenTest {
             .assertIsDisplayed()
 
         composeRule
-            .onNodeWithContentDescription("Comic Vine API key")
+            .onNodeWithContentDescription("API key")
             .assertIsDisplayed()
 
         composeRule
@@ -130,7 +130,7 @@ class SettingsScreenTest {
             .assertIsDisplayed()
 
         composeRule
-            .onNodeWithContentDescription("Comic Vine API key")
+            .onNodeWithContentDescription("API key")
             .performTextInput("test-comic-vine-key")
 
         composeRule
@@ -147,7 +147,7 @@ class SettingsScreenTest {
         launchScreen()
 
         composeRule
-            .onNodeWithContentDescription("Comic Vine API key")
+            .onNodeWithContentDescription("API key")
             .performTextInput("test-comic-vine-key")
 
         composeRule
@@ -174,7 +174,7 @@ class SettingsScreenTest {
             .performClick()
 
         composeRule
-            .onNodeWithText("Remove Comic Vine API key?")
+            .onNodeWithText("Remove API key?")
             .assertIsDisplayed()
 
         composeRule
