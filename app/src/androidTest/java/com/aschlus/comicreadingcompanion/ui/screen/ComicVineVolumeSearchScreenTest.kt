@@ -209,6 +209,66 @@ class ComicVineVolumeSearchScreenTest {
     }
 
     @Test
+    fun searchScreen_matchingOptionsAreCollapsedByDefaultAndEditable() {
+        launchScreen()
+
+        composeRule
+            .onNodeWithContentDescription("Publisher filter")
+            .assertDoesNotExist()
+
+        composeRule
+            .onNodeWithContentDescription("Start year filter")
+            .assertDoesNotExist()
+
+        composeRule
+            .onNodeWithContentDescription("Expected issue count filter")
+            .assertDoesNotExist()
+
+        composeRule
+            .onNodeWithText("ADDITIONAL MATCHING OPTIONS")
+            .performClick()
+
+        composeRule
+            .onNodeWithContentDescription("Publisher filter")
+            .assertIsDisplayed()
+            .performTextInput("Image Comics")
+
+        composeRule
+            .onNodeWithContentDescription("Start year filter")
+            .performTextInput("2003")
+
+        composeRule
+            .onNodeWithContentDescription("Expected issue count filter")
+            .performTextInput("145")
+
+        assertEquals(
+            "Image Comics",
+            viewModel.uiState.value.publisherFilter
+        )
+        assertEquals(
+            "2003",
+            viewModel.uiState.value.startYearFilter
+        )
+        assertEquals(
+            "145",
+            viewModel.uiState.value.expectedIssueCountFilter
+        )
+
+        composeRule
+            .onNodeWithText("HIDE MATCHING OPTIONS")
+            .performClick()
+
+        composeRule
+            .onNodeWithContentDescription("Publisher filter")
+            .assertDoesNotExist()
+
+        assertEquals(
+            "Image Comics",
+            viewModel.uiState.value.publisherFilter
+        )
+    }
+
+    @Test
     fun searchScreen_loadMoreDisplaysNextPage() {
         launchScreen(
             apiKey = "test-api-key",

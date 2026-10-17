@@ -1,5 +1,6 @@
 package com.aschlus.comicreadingcompanion.ui.screen
 
+import android.inputmethodservice.Keyboard
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -17,6 +18,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
@@ -35,6 +37,7 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.aschlus.comicreadingcompanion.data.remote.ComicVineVolumeSearchHit
 import com.aschlus.comicreadingcompanion.ui.component.ComicHomeSectionHeader
@@ -55,6 +58,10 @@ fun ComicVineVolumeSearchScreen(
     val uiState by viewModel.uiState.collectAsState()
 
     var hasSubmittedSearch by rememberSaveable {
+        mutableStateOf(false)
+    }
+
+    var matchingOptionsExpanded by rememberSaveable {
         mutableStateOf(false)
     }
 
@@ -147,6 +154,81 @@ fun ComicVineVolumeSearchScreen(
                             }
                         }
                     )
+                }
+            }
+
+            item {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    TextButton(
+                        onClick = {
+                            matchingOptionsExpanded = !matchingOptionsExpanded
+                        },
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(
+                            if (matchingOptionsExpanded) {
+                                "HIDE MATCHING OPTIONS"
+                            } else {
+                                "ADDITIONAL MATCHING OPTIONS"
+                            }
+                        )
+                    }
+
+                    if (matchingOptionsExpanded) {
+                        Column(
+                            verticalArrangement = Arrangement.spacedBy(12.dp)
+                        ) {
+                            MatchingOptionField(
+                                label = "Publisher",
+                                placeholder = "e.g. Marvel Comics",
+                                contentDescription = "Publisher filter",
+                                value = uiState.publisherFilter,
+                                keyboardType = KeyboardType.Text,
+                                onValueChange = { publisher ->
+                                    hasSubmittedSearch = false
+                                    viewModel.updateMatchingOptions(
+                                        publisher = publisher,
+                                        startYear = uiState.startYearFilter,
+                                        expectedIssueCount = uiState.expectedIssueCountFilter
+                                    )
+                                }
+                            )
+
+                            MatchingOptionField(
+                                label = "Start year",
+                                placeholder = "e.g. 1963",
+                                contentDescription = "Start year filter",
+                                value = uiState.startYearFilter,
+                                keyboardType = KeyboardType.Number,
+                                onValueChange = { startYear ->
+                                    hasSubmittedSearch = false
+                                    viewModel.updateMatchingOptions(
+                                        publisher = uiState.publisherFilter,
+                                        startYear = startYear,
+                                        expectedIssueCount = uiState.expectedIssueCountFilter
+                                    )
+                                }
+                            )
+
+                            MatchingOptionField(
+                                label = "Expected issue count",
+                                placeholder = "e.g. 100",
+                                contentDescription = "Expected issue count filter",
+                                value = uiState.expectedIssueCountFilter,
+                                keyboardType = KeyboardType.Number,
+                                onValueChange = { expectedCount ->
+                                    hasSubmittedSearch = false
+                                    viewModel.updateMatchingOptions(
+                                        publisher = uiState.publisherFilter,
+                                        startYear = uiState.startYearFilter,
+                                        expectedIssueCount = expectedCount
+                                    )
+                                }
+                            )
+                        }
+                    }
                 }
             }
 
@@ -258,6 +340,73 @@ fun ComicVineVolumeSearchScreen(
                     }
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun MatchingOptionField(
+    label: String,
+    placeholder: String,
+    contentDescription: String,
+    value: String,
+    keyboardType: KeyboardType,
+    onValueChange: (String) -> Unit
+) {
+    val fieldShape = RoundedCornerShape(9.dp)
+
+    Column(
+        verticalArrangement = Arrangement.spacedBy(6.dp)
+    ) {
+        Text(
+            text = label.uppercase(),
+            color = ComicMutedInk,
+            fontWeight = FontWeight.Bold
+        )
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(min = 56.dp)
+                .background(Color.White, fieldShape)
+                .border(
+                    width = 2.dp,
+                    color = ComicInk,
+                    shape = fieldShape
+                )
+                .padding(horizontal = 12.dp),
+            contentAlignment = Alignment.CenterStart
+        ) {
+            BasicTextField(
+                value = value,
+                onValueChange = onValueChange,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .semantics {
+                        this.contentDescription = contentDescription
+                    },
+                singleLine = true,
+                textStyle = androidx.compose.material3.MaterialTheme
+                    .typography.bodyLarge
+                    .copy(color = ComicInk),
+                cursorBrush = SolidColor(ComicInk),
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = keyboardType,
+                    autoCorrectEnabled = false
+                ),
+                decorationBox = { innerTextField ->
+                    Box {
+                        if (value.isEmpty()) {
+                            Text(
+                                text = placeholder,
+                                color = ComicMutedInk
+                            )
+                        }
+
+                        innerTextField()
+                    }
+                }
+            )
         }
     }
 }

@@ -181,6 +181,81 @@ class ComicVineVolumeSearchViewModelTest {
     }
 
     @Test
+    fun search_ranksCandidatesByTitleYearPublisherAndIssueCount() =
+        runBlocking {
+            apiKeyStore.save("test-api-key")
+
+            transport.responseBody = """
+            {
+                "error": "OK",
+                "status_code": 1,
+                "number_of_total_results": 4,
+                "results": [
+                    {
+                        "id": 4,
+                        "name": "Invincible Returns",
+                        "start_year": "2002",
+                        "count_of_issues": 145,
+                        "publisher": {
+                            "name": "Image Comics"
+                        }
+                    },
+                    {
+                        "id": 3,
+                        "name": "Invincible",
+                        "start_year": "1999",
+                        "count_of_issues": 10,
+                        "publisher": {
+                            "name": "Image Comics"
+                        }
+                    },
+                    {
+                        "id": 2,
+                        "name": "Invincible",
+                        "start_year": "2003",
+                        "count_of_issues": 145,
+                        "publisher": {
+                            "name": "Marvel"
+                        }
+                    },
+                    {
+                        "id": 1,
+                        "name": "Invincible",
+                        "start_year": "2003",
+                        "count_of_issues": 145,
+                        "publisher": {
+                            "name": "Image Comics"
+                        }
+                    }
+                ]
+            }
+        """.trimIndent()
+
+            withTimeout(5000L.milliseconds) {
+                viewModel.uiState.first { !it.isLoadingApiKey }
+            }
+
+            viewModel.updateQuery("Invincible")
+            viewModel.updateMatchingOptions(
+                publisher = "Image Comics",
+                startYear = "2003",
+                expectedIssueCount = "145"
+            )
+            viewModel.search()
+
+            val state = withTimeout(5000L.milliseconds) {
+                viewModel.uiState.first {
+                    !it.isSearching && it.results.size == 4
+                }
+            }
+
+            assertEquals(
+                listOf(1L, 2L, 3L, 4L),
+                state.results.map { it.id }
+            )
+        }
+
+    @Test
     fun search_invalidKey_reportsErrorWithoutClearingSavedKey() =
         runBlocking {
             apiKeyStore.save("invalid-api-key")

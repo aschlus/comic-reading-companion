@@ -19,6 +19,9 @@ data class ComicVineVolumeSearchUiState(
     val isSearching: Boolean = false,
     val hasApiKey: Boolean = false,
     val query: String = "",
+    val publisherFilter: String = "",
+    val startYearFilter: String = "",
+    val expectedIssueCountFilter: String = "",
     val results: List<ComicVineVolumeSearchHit> = emptyList(),
     val totalResults: Int = 0,
     val nextOffset: Int = 0,
@@ -80,6 +83,36 @@ class ComicVineVolumeSearchViewModel(
         )
     }
 
+    fun updateMatchingOptions(
+        publisher: String,
+        startYear: String,
+        expectedIssueCount: String
+    ) {
+        val currentState = _uiState.value
+
+        if (
+            currentState.publisherFilter == publisher &&
+            currentState.startYearFilter == startYear &&
+            currentState.expectedIssueCountFilter == expectedIssueCount
+        ) {
+            return
+        }
+
+        searchJob?.cancel()
+        searchJob = null
+
+        _uiState.value = currentState.copy(
+            publisherFilter = publisher,
+            startYearFilter = startYear,
+            expectedIssueCountFilter = expectedIssueCount,
+            isSearching = false,
+            results = emptyList(),
+            totalResults = 0,
+            nextOffset = 0,
+            error = null
+        )
+    }
+
     fun search() {
         val state = _uiState.value
 
@@ -96,10 +129,36 @@ class ComicVineVolumeSearchViewModel(
             return
         }
 
+        val startYearText = state.startYearFilter.trim()
+        val startYear = startYearText.toIntOrNull()
+
+        if (startYearText.isNotEmpty() && startYear == null) {
+            _uiState.value = state.copy(
+                error = "Start year mush be a whole number."
+            )
+            return
+        }
+
+        val expectedCountText = state.expectedIssueCountFilter.trim()
+        val expectedIssueCount = expectedCountText.toIntOrNull()
+
+        if (
+            expectedCountText.isNotEmpty() &&
+            (expectedIssueCount == null || expectedIssueCount < 0)
+        ) {
+            _uiState.value = state.copy(
+                error = "Expected issue count must be a non-negative whole number."
+            )
+            return
+        }
+
         requestVolumes(
             query = query,
             offset = 0,
-            appendResults = false
+            appendResults = false,
+            publisherFilter = state.publisherFilter.trim(),
+            startYearFilter = startYear,
+            expectedIssueCountFilter = expectedIssueCount
         )
     }
 
@@ -118,14 +177,20 @@ class ComicVineVolumeSearchViewModel(
         requestVolumes(
             query = state.query.trim(),
             offset = state.nextOffset,
-            appendResults = true
+            appendResults = true,
+            publisherFilter = state.publisherFilter.trim(),
+            startYearFilter = state.startYearFilter.trim().toIntOrNull(),
+            expectedIssueCountFilter = state.expectedIssueCountFilter.trim().toIntOrNull()
         )
     }
 
     private fun requestVolumes(
         query: String,
         offset: Int,
-        appendResults: Boolean
+        appendResults: Boolean,
+        publisherFilter: String,
+        startYearFilter: Int?,
+        expectedIssueCountFilter: Int?
     ) {
         val previousState = _uiState.value
 
@@ -174,19 +239,24 @@ class ComicVineVolumeSearchViewModel(
                     is ComicVineVolumeSearchOutcome.Success -> {
                         val currentState = _uiState.value
 
-                        val combinedResults =
+                        val combinedResults = (
                             if (appendResults) {
-                                (
-                                    currentState.results + outcome.volumes
-                                ).distinctBy { it.id }
+                                currentState.results + outcome.volumes
                             } else {
                                 outcome.volumes
                             }
+                        ).distinctBy { it.id }
 
                         _uiState.value = currentState.copy(
                             isSearching = false,
                             hasApiKey = true,
-                            results = combinedResults,
+                            results = rankVolumes(
+                                title = query,
+                                publisherFilter = publisherFilter,
+                                startYearFilter = startYearFilter,
+                                expectedIssueCountFilter = expectedIssueCountFilter,
+                                volumes = combinedResults
+                            ),
                             totalResults = outcome.totalResults,
                             nextOffset = offset + outcome.volumes.size,
                             error = null
@@ -239,5 +309,99 @@ class ComicVineVolumeSearchViewModel(
                 )
             }
         }
+    }
+}
+
+private fun rankVolumes(
+    title: String,
+    publisherFilter: String,
+    startYearFilter: Int?,
+    expectedIssueCountFilter: Int?,
+    volumes: List<ComicVineVolumeSearchHit>
+): List<ComicVineVolumeSearchHit> {
+    return volumes.sortedByDescending { volume ->
+        scoreVolumeCandidate(
+            title = title,
+            publisherFilter = publisherFilter,
+            startYearFilter = startYearFilter,
+            expectedIssueCountFilter = expectedIssueCountFilter,
+            volume = volume
+        )
+    }
+}
+
+private fun scoreVolumeCandidate(
+    title: String,
+    publisherFilter: String,
+    startYearFilter: Int?,
+    expectedIssueCountFilter: Int?,
+    volume: ComicVineVolumeSearchHit
+): Int {
+    var score = 0
+
+    val normalizedTitle = normalizeSeriesTitle(title)
+    val normalizedCandidateTitle = normalizeSeriesTitle(volume.name)
+
+    if (normalizedTitle == normalizedCandidateTitle) {
+        score += 100
+    } else if (
+        normalizedTitle.contains(normalizedCandidateTitle) ||
+        normalizedCandidateTitle.contains(normalizedTitle)
+    ) {
+        score += 45
+    }
+
+    val candidateYear = volume.startYear
+
+    if (startYearFilter != null && candidateYear != null) {
+        when (kotlin.math.abs(startYearFilter - candidateYear)) {
+            0 -> score += 30
+            1 -> score += 20
+            2 -> score += 10
+        }
+    }
+
+    val candidatePublisher = volume.publisherName
+
+    if (publisherFilter.isNotBlank() && candidatePublisher != null) {
+        val normalizedPublisher = normalizeSeriesTitle(publisherFilter)
+        val normalizedCandidatePublisher = normalizeSeriesTitle(candidatePublisher)
+
+        when {
+            normalizedPublisher == normalizedCandidatePublisher ->
+                score += 15
+
+            normalizedPublisher.contains(normalizedCandidatePublisher) ||
+                normalizedCandidatePublisher.contains(normalizedPublisher) ->
+                score += 10
+
+            else -> score -= 15
+        }
+    }
+
+    if (expectedIssueCountFilter != null) {
+        val candidateIssueCount = volume.countOfIssues ?: 0
+
+        if (candidateIssueCount >= expectedIssueCountFilter) {
+            score += 5
+        } else {
+            score -= 20
+        }
+    }
+
+    return score
+}
+
+private fun normalizeSeriesTitle(value: String): String {
+    var normalized = value.lowercase(java.util.Locale.ROOT).trim()
+
+    if (normalized.startsWith("the ")) {
+        normalized = normalized.substring(4)
+    }
+
+    normalized = normalized.replace("&", "and")
+
+    return normalized.filter { character ->
+        character in 'a' .. 'z' || character in '0' .. '9'
     }
 }

@@ -155,6 +155,8 @@ building, following, and tracking comic-book reading orders.
 - [x] Validate user-provided Comic Vine API keys against the live API
 - [x] Search external series catalogs using the configured API key
 - [x] Display paginated series-search results
+- [x] Rank series-search candidates by title, year, publisher, and expected issue count
+- [x] Provide optional matching criteria in a collapsible search section
 
 > Marvel Unlimited does not currently expose a documented public API for
 > third-party reading-history synchronization. The app should not depend on
@@ -302,6 +304,7 @@ building, following, and tracking comic-book reading orders.
 - [x] Add UI regression coverage for Settings navigation and API-key management
 - [x] Test Comic Vine API-key validation, including invalid keys and network failures
 - [x] Test external series search UI, pagination, and navigation
+- [x] Test candidate ranking and optional series matching criteria
 
 ### Longer-Term Ideas
 

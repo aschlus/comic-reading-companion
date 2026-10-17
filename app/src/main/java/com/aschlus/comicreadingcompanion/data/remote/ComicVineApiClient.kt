@@ -151,7 +151,7 @@ class ComicVineApiClient(
                 "&format=json" +
                 "&resources=volume" +
                 "&query=$encodedQuery" +
-                "&limit=10" +
+                "&limit=50" +
                 "&offset=$safeOffset" +
                 "&field_list=id,name,start_year,count_of_issues," +
                 "publisher,site_detail_url,image"

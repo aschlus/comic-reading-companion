@@ -212,7 +212,7 @@ class ComicVineApiClientTest {
                             "&format=json" +
                             "&resources=volume" +
                             "&query=Amazing+Spider-Man" +
-                            "&limit=10" +
+                            "&limit=50" +
                             "&offset=20" +
                             "&field_list=id,name,start_year,count_of_issues," +
                             "publisher,site_detail_url,image"
