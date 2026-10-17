@@ -11,6 +11,7 @@ import com.aschlus.comicreadingcompanion.data.importer.ReadingListImporter
 import com.aschlus.comicreadingcompanion.data.preferences.ComicVineApiKeyStore
 import com.aschlus.comicreadingcompanion.data.preferences.HomeUiPreferences
 import com.aschlus.comicreadingcompanion.data.preferences.ReadingListUiPreferences
+import com.aschlus.comicreadingcompanion.data.remote.ComicVineApiClient
 import com.aschlus.comicreadingcompanion.data.repository.ComicRepository
 
 class AppContainer(context: Context) {
@@ -30,6 +31,9 @@ class AppContainer(context: Context) {
 
     val comicVineApiKeyStore =
         ComicVineApiKeyStore(context)
+
+    val comicVineApiClient =
+        ComicVineApiClient()
 
     val databaseSeeder = DatabaseSeeder(
         comicDao = database.comicDao()

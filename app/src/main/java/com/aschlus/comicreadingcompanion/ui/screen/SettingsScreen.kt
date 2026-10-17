@@ -70,7 +70,7 @@ fun SettingsScreen(
     var showRemoveConfirmation by remember { mutableStateOf(false) }
 
     LaunchedEffect(uiState.message) {
-        if (uiState.message == "Comic Vine API key saved securely.") {
+        if (uiState.message == "Comic Vine API key validated and saved securely.") {
             apiKeyInput = ""
             keyVisible = false
         }
@@ -245,7 +245,7 @@ fun SettingsScreen(
             ) {
                 Text(
                     text = if (uiState.isSaving) {
-                        "SAVING..."
+                        "CHECKING API KEY..."
                     } else if (uiState.hasSavedApiKey) {
                         "REPLACE API KEY"
                     } else {

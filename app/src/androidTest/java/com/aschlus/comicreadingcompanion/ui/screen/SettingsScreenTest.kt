@@ -11,6 +11,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.aschlus.comicreadingcompanion.data.preferences.ComicVineApiKeyStore
+import com.aschlus.comicreadingcompanion.data.remote.ComicVineApiClient
+import com.aschlus.comicreadingcompanion.data.remote.ComicVineHttpTransport
 import com.aschlus.comicreadingcompanion.ui.theme.ComicReadingCompanionTheme
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineSettingsViewModel
 import kotlinx.coroutines.Job
@@ -43,8 +45,10 @@ class SettingsScreenTest {
             apiKeyStore.clear()
         }
 
-        viewModel =
-            ComicVineSettingsViewModel(apiKeyStore)
+        viewModel = ComicVineSettingsViewModel(
+            apiKeyStore = apiKeyStore,
+            apiClient = validApiClient()
+        )
     }
 
     @After
@@ -57,6 +61,19 @@ class SettingsScreenTest {
             apiKeyStore.clear()
         }
     }
+
+    private fun validApiClient(): ComicVineApiClient =
+        ComicVineApiClient(
+            transport = ComicVineHttpTransport { _ ->
+                """
+                {
+                    "error": "OK",
+                    "status_code": 1,
+                    "results": []
+                }
+                """.trimIndent()
+            }
+        )
 
     private fun launchScreen() {
         composeRule.setContent {
@@ -147,7 +164,9 @@ class SettingsScreenTest {
             .assertIsDisplayed()
 
         composeRule
-            .onNodeWithText("Comic Vine API key saved securely.")
+            .onNodeWithText(
+                "Comic Vine API key validated and saved securely."
+            )
             .assertIsDisplayed()
 
         composeRule

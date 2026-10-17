@@ -353,12 +353,14 @@ class MainActivity : ComponentActivity() {
                         }
 
                         composable("settings") {
+                            val container =
+                                (application as ComicReadingCompanionApplication).container
+
                             val settingsViewModel: ComicVineSettingsViewModel =
                                 viewModel(
                                     factory = ComicVineSettingsViewModelFactory(
-                                        (application as ComicReadingCompanionApplication)
-                                            .container
-                                            .comicVineApiKeyStore
+                                        apiKeyStore = container.comicVineApiKeyStore,
+                                        apiClient = container.comicVineApiClient
                                     )
                                 )
 
