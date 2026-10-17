@@ -1,0 +1,53 @@
+{
+  "publisher": "Image Comics",
+  "universes": [],
+  "series": [
+    {
+      "title": "Hammerfist",
+      "volume": null,
+      "startYear": 2026,
+      "endYear": null,
+      "externalIds": [
+        {
+          "source": "COMIC_VINE",
+          "externalId": "176391",
+          "url": "https://comicvine.gamespot.com/hammerfist/4050-176391/"
+        }
+      ],
+      "issues": [
+        {
+          "number": "1",
+          "title": null,
+          "publicationDate": "2026-08",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10170069-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": null,
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1189512",
+              "url": "https://comicvine.gamespot.com/hammerfist-1/4000-1189512/"
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "title": null,
+          "publicationDate": "2026-09",
+          "coverUrl": "https://comicvine.gamespot.com/a/uploads/scale_large/11161/111615891/10200679-cover.jpg",
+          "description": null,
+          "type": "REGULAR",
+          "universeDesignation": null,
+          "externalIds": [
+            {
+              "source": "COMIC_VINE",
+              "externalId": "1195369",
+              "url": "https://comicvine.gamespot.com/hammerfist-2/4000-1195369/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
