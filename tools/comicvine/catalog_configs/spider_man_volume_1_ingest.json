@@ -1,0 +1,21 @@
+{
+  "publisher": "Marvel Comics",
+  "universes": [
+    {
+      "name": "Marvel Universe",
+      "designation": "Earth-616",
+      "description": null
+    }
+  ],
+  "series": [
+    {
+      "title": "The Amazing Spider-Man",
+      "volume": 1,
+      "startYear": 1963,
+      "endYear": null,
+      "comicVineVolumeId": 2127,
+      "defaultIssueType": "REGULAR",
+      "defaultUniverseDesignation": "Earth-616"
+    }
+  ]
+}

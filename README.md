@@ -149,6 +149,9 @@ building, following, and tracking comic-book reading orders.
 - [ ] Other external comic-service links
 - [ ] Automatically sync reading status with external services if an official,
   supported integration becomes available
+- [x] Securely store the user-provided Comic Vine API key
+    using Android Keystore-backed encryption
+- [x] Exclude Comic Vine API-key storage from app backups
 
 > Marvel Unlimited does not currently expose a documented public API for
 > third-party reading-history synchronization. The app should not depend on
@@ -291,6 +294,7 @@ building, following, and tracking comic-book reading orders.
 - [x] Add UI regression coverage for top-level Home / Browse / Library navigation
 - [x] Add UI coverage for the redesigned Home and Library screens
 - [ ] Add UI regression coverage for Collection navigation and owned-issue screens
+- [x] Add tests for secure Comic Vine API-key storage
 
 ### Longer-Term Ideas
 

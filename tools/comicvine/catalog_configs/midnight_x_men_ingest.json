@@ -1,0 +1,21 @@
+{
+  "publisher": "Marvel Comics",
+  "universes": [
+    {
+      "name": "Midnight Universe",
+      "designation": "Earth-1031",
+      "description": null
+    }
+  ],
+  "series": [
+    {
+      "title": "Midnight X-Men",
+      "volume": null,
+      "startYear": 2026,
+      "endYear": null,
+      "comicVineVolumeId": 177371,
+      "defaultIssueType": "REGULAR",
+      "defaultUniverseDesignation": "Earth-1031"
+    }
+  ]
+}
