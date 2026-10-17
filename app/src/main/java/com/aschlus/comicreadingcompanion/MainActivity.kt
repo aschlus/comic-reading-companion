@@ -60,6 +60,8 @@ import com.aschlus.comicreadingcompanion.ui.viewmodel.SeriesDetailViewModelFacto
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 
 class MainActivity : ComponentActivity() {
 
@@ -303,7 +305,14 @@ class MainActivity : ComponentActivity() {
                     NavHost(
                         navController = navController,
                         startDestination = "home",
-                        modifier = Modifier.padding(appPadding)
+                        modifier = Modifier.padding(appPadding),
+                        enterTransition = { EnterTransition.None },
+                        exitTransition = { ExitTransition.None },
+                        popEnterTransition = { EnterTransition.None },
+                        popExitTransition = { ExitTransition.None },
+                        predictivePopEnterTransition = { EnterTransition.None },
+                        predictivePopExitTransition = { ExitTransition.None },
+                        sizeTransform = { null }
                     ) {
                         composable("home") {
                             HomeScreen(
