@@ -177,8 +177,8 @@ building, following, and tracking comic-book reading orders.
 - [x] Add persistent top-level navigation for Home, Library, Browse, and Collection
 - [x] Add a dedicated Library screen
 - [x] Add a dedicated Collection screen
-- [ ] Add a Settings screen
-- [ ] Open Settings from the Home header gear icon
+- [x] Add a Settings screen
+- [x] Open Settings from the Home header gear icon
 - [x] Hide top-level navigation on detail / editing screens
 - [x] Preserve normal back navigation from detail screens
 - [x] Move reading-list management actions to the Library where appropriate
@@ -295,6 +295,7 @@ building, following, and tracking comic-book reading orders.
 - [x] Add UI coverage for the redesigned Home and Library screens
 - [ ] Add UI regression coverage for Collection navigation and owned-issue screens
 - [x] Add tests for secure Comic Vine API-key storage
+- [x] Add UI regression coverage for Settings navigation and API-key management
 
 ### Longer-Term Ideas
 

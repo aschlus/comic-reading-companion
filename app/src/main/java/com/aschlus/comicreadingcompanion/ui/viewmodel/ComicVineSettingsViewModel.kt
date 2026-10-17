@@ -125,4 +125,12 @@ class ComicVineSettingsViewModel(
             }
         }
     }
+
+    fun clearFeedback() {
+        _uiState.value =
+            _uiState.value.copy(
+                message = null,
+                error = null
+            )
+    }
 }

@@ -1193,4 +1193,67 @@ class AppNavigationTest {
             }
         }
     }
+
+    @Test
+    fun appNavigation_homeToSettingsAndBack() {
+        composeRule
+            .onNodeWithText("HOME")
+            .assertIsDisplayed()
+
+        composeRule
+            .onNodeWithContentDescription("Settings")
+            .performClick()
+
+        composeRule.waitUntil(timeoutMillis = 5000L) {
+            composeRule
+                .onAllNodesWithText("COMIC VINE API KEY")
+                .fetchSemanticsNodes()
+                .isNotEmpty()
+        }
+
+        composeRule
+            .onNodeWithText("SETTINGS")
+            .assertIsDisplayed()
+
+        composeRule
+            .onNodeWithText("COMIC VINE API KEY")
+            .assertIsDisplayed()
+
+        // Settings should hide the persistent bottom navigation.
+        composeRule
+            .onNodeWithContentDescription("Home tab")
+            .assertDoesNotExist()
+
+        composeRule
+            .onNodeWithContentDescription("Library tab")
+            .assertDoesNotExist()
+
+        composeRule
+            .onNodeWithContentDescription("Browse tab")
+            .assertDoesNotExist()
+
+        composeRule
+            .onNodeWithContentDescription("Physical collection tab")
+            .assertDoesNotExist()
+
+        // Return to Home using the Settings back button.
+        composeRule
+            .onNodeWithContentDescription("Back")
+            .performClick()
+
+        composeRule.waitUntil(timeoutMillis = 5000L) {
+            composeRule
+                .onAllNodesWithText("HOME")
+                .fetchSemanticsNodes()
+                .isNotEmpty()
+        }
+
+        composeRule
+            .onNodeWithText("HOME")
+            .assertIsDisplayed()
+
+        composeRule
+            .onNodeWithContentDescription("Home tab")
+            .assertIsDisplayed()
+    }
 }
