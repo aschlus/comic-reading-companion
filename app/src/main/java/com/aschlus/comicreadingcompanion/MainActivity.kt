@@ -62,6 +62,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
+import androidx.compose.runtime.remember
 import com.aschlus.comicreadingcompanion.ui.screen.ComicVineVolumeReviewScreen
 import com.aschlus.comicreadingcompanion.ui.screen.ComicVineVolumeSearchScreen
 import com.aschlus.comicreadingcompanion.ui.screen.SettingsScreen
@@ -417,6 +418,24 @@ class MainActivity : ComponentActivity() {
                                 (application as ComicReadingCompanionApplication)
                                     .container
 
+                            val searchBackStackEntry = remember(backStackEntry) {
+                                navController.getBackStackEntry("comicVineVolumeSearch")
+                            }
+
+                            val searchViewModel: ComicVineVolumeSearchViewModel =
+                                viewModel(
+                                    viewModelStoreOwner = searchBackStackEntry,
+                                    factory = ComicVineVolumeSearchViewModelFactory(
+                                        apiKeyStore = container.comicVineApiKeyStore,
+                                        apiClient = container.comicVineApiClient
+                                    )
+                                )
+
+                            val searchUiState by searchViewModel.uiState.collectAsState()
+
+                            val selectedVolume = searchUiState.results
+                                .firstOrNull { it.id == volumeId }
+
                             val reviewViewModel: ComicVineVolumeReviewViewModel =
                                 viewModel(
                                     factory = ComicVineVolumeReviewViewModelFactory(
@@ -425,8 +444,11 @@ class MainActivity : ComponentActivity() {
                                     )
                                 )
 
-                            LaunchedEffect(volumeId) {
-                                reviewViewModel.load(volumeId)
+                            LaunchedEffect(volumeId, selectedVolume) {
+                                reviewViewModel.load(
+                                    volumeId = volumeId,
+                                    selectedVolume = selectedVolume
+                                )
                             }
 
                             ComicVineVolumeReviewScreen(

@@ -7,6 +7,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.aschlus.comicreadingcompanion.data.preferences.ComicVineApiKeyStore
 import com.aschlus.comicreadingcompanion.data.remote.ComicVineApiClient
 import com.aschlus.comicreadingcompanion.data.remote.ComicVineHttpTransport
+import com.aschlus.comicreadingcompanion.data.remote.ComicVineVolumeSearchHit
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.flow.first
@@ -90,26 +91,6 @@ class ComicVineVolumeReviewViewModelTest {
                 {
                     "error": "OK",
                     "status_code": 1,
-                    "results": {
-                        "id": 123,
-                        "name": "Amazing Spider-Man",
-                        "start_year": "1963",
-                        "count_of_issues": 3,
-                        "publisher": {
-                            "name": "Marvel"
-                        },
-                        "site_detail_url": "https://example.com/volume/123",
-                        "description": "Series description",
-                        "image": {
-                            "small_url": "https://example.com/series.jpg"
-                        }
-                    }
-                }
-            """.trimIndent(),
-            """
-                {
-                    "error": "OK",
-                    "status_code": 1,
                     "number_of_total_results": 3,
                     "results": [
                         {
@@ -155,7 +136,18 @@ class ComicVineVolumeReviewViewModelTest {
             """.trimIndent()
         )
 
-        viewModel.load(123L)
+        viewModel.load(
+            volumeId = 123L,
+            selectedVolume = ComicVineVolumeSearchHit(
+                id = 123L,
+                name = "Amazing Spider-Man",
+                startYear = 1963,
+                countOfIssues = 3,
+                publisherName = "Marvel",
+                siteDetailUrl = "https://example.com/volume/123",
+                imageUrl = "https://example.com/series.jpg"
+            )
+        )
 
         val state = withTimeout(5000L.milliseconds) {
             viewModel.uiState.first {
@@ -181,15 +173,16 @@ class ComicVineVolumeReviewViewModelTest {
             state.issues.map { it.id }
         )
 
-        assertEquals(3, transport.requestedUrls.size)
+        assertEquals(2, transport.requestedUrls.size)
+
         assertTrue(
-            transport.requestedUrls[0].contains("/volume/4050-123/")
+            transport.requestedUrls[0].contains("/issues/")
         )
         assertTrue(
-            transport.requestedUrls[1].contains("filter=volume%3A123")
+            transport.requestedUrls[0].contains("filter=volume%3A123")
         )
         assertTrue(
-            transport.requestedUrls[2].contains("&offset=2")
+            transport.requestedUrls[1].contains("&offset=2")
         )
     }
 

@@ -8,6 +8,7 @@ import com.aschlus.comicreadingcompanion.data.remote.ComicVineIssueHit
 import com.aschlus.comicreadingcompanion.data.remote.ComicVineIssuePageOutcome
 import com.aschlus.comicreadingcompanion.data.remote.ComicVineVolumeDetails
 import com.aschlus.comicreadingcompanion.data.remote.ComicVineVolumeDetailsOutcome
+import com.aschlus.comicreadingcompanion.data.remote.ComicVineVolumeSearchHit
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -42,7 +43,10 @@ class ComicVineVolumeReviewViewModel(
         )
     }
 
-    fun load(volumeId: Long) {
+    fun load(
+        volumeId: Long,
+        selectedVolume: ComicVineVolumeSearchHit? = null
+    ) {
         loadJob?.cancel()
 
         if (volumeId <= 0L) {
@@ -71,22 +75,37 @@ class ComicVineVolumeReviewViewModel(
                     return@launch
                 }
 
-                val detailsOutcome = apiClient.getVolumeDetails(
-                    apiKey = apiKey,
-                    volumeId = volumeId
-                )
+                val selectedSearchResult = selectedVolume
+                    ?.takeIf { it.id == volumeId }
 
-                val volume = when (detailsOutcome) {
-                    is ComicVineVolumeDetailsOutcome.Success -> {
-                        detailsOutcome.volume
-                    }
+                val volume = if (selectedSearchResult != null) {
+                    ComicVineVolumeDetails(
+                        id = selectedSearchResult.id,
+                        name = selectedSearchResult.name,
+                        startYear = selectedSearchResult.startYear,
+                        countOfIssues = selectedSearchResult.countOfIssues,
+                        publisherName = selectedSearchResult.publisherName,
+                        siteDetailUrl = selectedSearchResult.siteDetailUrl,
+                        imageUrl = selectedSearchResult.imageUrl
+                    )
+                } else {
+                    val detailsOutcome = apiClient.getVolumeDetails(
+                        apiKey = apiKey,
+                        volumeId = volumeId
+                    )
 
-                    else -> {
-                        _uiState.value = _uiState.value.copy(
-                            isLoading = false,
-                            error = detailsErrorMessage(detailsOutcome)
-                        )
-                        return@launch
+                    when (detailsOutcome) {
+                        is ComicVineVolumeDetailsOutcome.Success -> {
+                            detailsOutcome.volume
+                        }
+
+                        else -> {
+                            _uiState.value = _uiState.value.copy(
+                                isLoading = false,
+                                error = detailsErrorMessage(detailsOutcome)
+                            )
+                            return@launch
+                        }
                     }
                 }
 
