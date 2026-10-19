@@ -811,4 +811,57 @@ class ComicCatalogImporterTest {
                     ?.universeId
             )
         }
+
+    @Test
+    fun catalogImport_preservesExistingDescriptionWhenReimportedDescriptionIsNull() =
+        runBlocking {
+            val originalCatalog = createCatalog()
+            importer.import(originalCatalog)
+
+            val originalSeriesData = originalCatalog.series.single()
+            val originalIssueData = originalSeriesData.issues.single()
+
+            val updatedCatalog =
+                originalCatalog.copy(
+                    series =
+                        listOf(
+                            originalSeriesData.copy(
+                                issues =
+                                    listOf(
+                                        originalIssueData.copy(
+                                            description = null
+                                        )
+                                    )
+                            )
+                        )
+                )
+
+            importer.import(updatedCatalog)
+
+            val publisher =
+                comicDao.getPublisherByName("Marvel Comics")
+
+            assertNotNull(publisher)
+
+            val series =
+                comicDao.getSeries(
+                    publisherId = publisher!!.id,
+                    title = originalSeriesData.title,
+                    volume = originalSeriesData.volume
+                )
+
+            assertNotNull(series)
+
+            val issue =
+                comicDao.getIssue(
+                    seriesId = series!!.id,
+                    issueNumber = originalIssueData.number
+                )
+
+            assertNotNull(issue)
+            assertEquals(
+                originalIssueData.description,
+                issue!!.description
+            )
+        }
 }

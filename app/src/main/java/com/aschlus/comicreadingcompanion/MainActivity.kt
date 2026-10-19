@@ -440,7 +440,10 @@ class MainActivity : ComponentActivity() {
                                 viewModel(
                                     factory = ComicVineVolumeReviewViewModelFactory(
                                         apiKeyStore = container.comicVineApiKeyStore,
-                                        apiClient = container.comicVineApiClient
+                                        apiClient = container.comicVineApiClient,
+                                        comicRepository = container.comicRepository,
+                                        universeFlow = container.comicRepository.getAllUniverses(),
+                                        comicCatalogImporter = container.comicCatalogImporter
                                     )
                                 )
 

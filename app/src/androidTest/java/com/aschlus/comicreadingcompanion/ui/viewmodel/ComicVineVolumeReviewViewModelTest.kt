@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.viewModelScope
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.aschlus.comicreadingcompanion.data.database.entities.Universe
 import com.aschlus.comicreadingcompanion.data.preferences.ComicVineApiKeyStore
 import com.aschlus.comicreadingcompanion.data.remote.ComicVineApiClient
 import com.aschlus.comicreadingcompanion.data.remote.ComicVineHttpTransport
@@ -11,6 +12,7 @@ import com.aschlus.comicreadingcompanion.data.remote.ComicVineVolumeSearchHit
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withTimeout
 import org.junit.After
@@ -24,6 +26,11 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import java.io.IOException
 import kotlin.time.Duration.Companion.milliseconds
+import androidx.room3.Room
+import com.aschlus.comicreadingcompanion.data.database.ComicDatabase
+import com.aschlus.comicreadingcompanion.data.repository.ComicRepository
+import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
+import com.aschlus.comicreadingcompanion.data.importer.ComicCatalogImporter
 
 @RunWith(AndroidJUnit4::class)
 class ComicVineVolumeReviewViewModelTest {
@@ -31,6 +38,7 @@ class ComicVineVolumeReviewViewModelTest {
     private lateinit var apiKeyStore: ComicVineApiKeyStore
     private lateinit var transport: FakeTransport
     private lateinit var viewModel: ComicVineVolumeReviewViewModel
+    private var database: ComicDatabase? = null
 
     @Before
     fun setUp() {
@@ -62,6 +70,8 @@ class ComicVineVolumeReviewViewModelTest {
 
             apiKeyStore.clear()
         }
+
+        database?.close()
     }
 
     @Test
@@ -158,9 +168,9 @@ class ComicVineVolumeReviewViewModelTest {
         assertNull(state.error)
         assertNotNull(state.volume)
         assertEquals(123L, state.volume!!.id)
-        assertEquals("Amazing Spider-Man", state.volume!!.name)
-        assertEquals("Marvel", state.volume!!.publisherName)
-        assertEquals(3, state.volume!!.countOfIssues)
+        assertEquals("Amazing Spider-Man", state.volume.name)
+        assertEquals("Marvel", state.volume.publisherName)
+        assertEquals(3, state.volume.countOfIssues)
 
         assertEquals(3, state.totalIssueRecords)
         assertEquals(3, state.issues.size)
@@ -256,6 +266,362 @@ class ComicVineVolumeReviewViewModelTest {
         )
         assertTrue(transport.requestedUrls.isEmpty())
     }
+
+    @Test
+    fun availableUniversesArePublishedToUiState() = runBlocking {
+        val universe = Universe(
+            id = 1L,
+            publisherId = 1L,
+            name = "Earth-616",
+            designation = "Earth-616",
+            description = null
+        )
+
+        viewModel = ComicVineVolumeReviewViewModel(
+            apiKeyStore = apiKeyStore,
+            apiClient = ComicVineApiClient(
+                transport = transport
+            ),
+            universeFlow = flowOf(listOf(universe))
+        )
+
+        val state = withTimeout(5000L.milliseconds) {
+            viewModel.uiState.first {
+                it.availableUniverses == listOf(universe)
+            }
+        }
+
+        assertEquals(
+            listOf(universe),
+            state.availableUniverses
+        )
+    }
+
+    @Test
+    fun selectUniverse_updatesSelectedUniverseId() = runBlocking {
+        val universe = Universe(
+            id = 1L,
+            publisherId = 1L,
+            name = "Earth-616",
+            designation = "Earth-616",
+            description = null
+        )
+
+        viewModel = ComicVineVolumeReviewViewModel(
+            apiKeyStore = apiKeyStore,
+            apiClient = ComicVineApiClient(
+                transport = transport
+            ),
+            universeFlow = flowOf(listOf(universe))
+        )
+
+        withTimeout(5000L.milliseconds) {
+            viewModel.uiState.first {
+                it.availableUniverses == listOf(universe)
+            }
+        }
+
+        viewModel.selectUniverse(universe.id)
+
+        assertEquals(
+            universe.id,
+            viewModel.uiState.value.selectedUniverseId
+        )
+    }
+
+    @Test
+    fun createUniverse_createsPublisherAndUniverseAndSelectsIt() =
+        runBlocking {
+            val context =
+                ApplicationProvider.getApplicationContext<Context>()
+
+            val testDatabase =
+                Room.inMemoryDatabaseBuilder(
+                    context,
+                    ComicDatabase::class.java
+                )
+                    .allowMainThreadQueries()
+                    .build()
+
+            database = testDatabase
+
+            val repository =
+                ComicRepository(
+                    comicDao = testDatabase.comicDao(),
+                    database = testDatabase
+                )
+
+            apiKeyStore.save("test-api-key")
+
+            transport.responses = listOf(
+                """
+                {
+                    "error": "OK",
+                    "status_code": 1,
+                    "number_of_total_results": 0,
+                    "results": []
+                }
+            """.trimIndent()
+            )
+
+            viewModel = ComicVineVolumeReviewViewModel(
+                apiKeyStore = apiKeyStore,
+                apiClient = ComicVineApiClient(
+                    transport = transport
+                ),
+                universeFlow = repository.getAllUniverses(),
+                comicRepository = repository
+            )
+
+            viewModel.load(
+                volumeId = 123L,
+                selectedVolume = ComicVineVolumeSearchHit(
+                    id = 123L,
+                    name = "Amazing Spider-Man",
+                    startYear = 1963,
+                    countOfIssues = 0,
+                    publisherName = "Marvel",
+                    siteDetailUrl = "https://example.com/volume/123",
+                    imageUrl = null
+                )
+            )
+
+            withTimeout(5000L.milliseconds) {
+                viewModel.uiState.first {
+                    !it.isLoading && it.volume != null
+                }
+            }
+
+            viewModel.createUniverse(
+                name = "Marvel Universe",
+                designation = "Earth-616"
+            )
+
+            val creationState =
+                withTimeout(5000L.milliseconds) {
+                    viewModel.uiState.first {
+                        !it.isCreatingUniverse &&
+                                (
+                                        it.selectedUniverseId != null ||
+                                                it.universeCreationError != null
+                                        )
+                    }
+                }
+
+            assertNull(creationState.universeCreationError)
+            assertNotNull(creationState.selectedUniverseId)
+
+            val publishers = repository.getPublishers()
+
+            assertEquals(
+                listOf("Marvel"),
+                publishers.map { it.name }
+            )
+
+            val publisher = publishers.single()
+            val universes =
+                repository.getUniverseForPublisher(publisher.id)
+
+            assertEquals(1, universes.size)
+
+            val universe = universes.single()
+
+            assertEquals(publisher.id, universe.publisherId)
+            assertEquals("Marvel Universe", universe.name)
+            assertEquals("Earth-616", universe.designation)
+            assertEquals(
+                universe.id,
+                creationState.selectedUniverseId
+            )
+
+            assertEquals(
+                listOf(universe),
+                creationState.availableUniverses
+            )
+        }
+
+    @Test
+    fun importReviewedSeries_importsSeriesIssuesAndComicVineIds() =
+        runBlocking {
+            val context =
+                ApplicationProvider.getApplicationContext<Context>()
+
+            val testDatabase =
+                Room.inMemoryDatabaseBuilder(
+                    context,
+                    ComicDatabase::class.java
+                )
+                    .allowMainThreadQueries()
+                    .build()
+
+            database = testDatabase
+
+            val repository =
+                ComicRepository(
+                    comicDao = testDatabase.comicDao(),
+                    database = testDatabase
+                )
+
+            val publisherId =
+                repository.addPublisher(
+                    Publisher(name = "Marvel Comics")
+                )
+
+            val universe =
+                Universe(
+                    publisherId = publisherId,
+                    name = "Marvel Universe",
+                    designation = "Earth-616",
+                    description = null
+                )
+
+            val universeId = repository.addUniverse(universe)
+
+            apiKeyStore.save("test-api-key")
+
+            transport.responses = listOf(
+                """
+                {
+                    "error": "OK",
+                    "status_code": 1,
+                    "number_of_total_results": 2,
+                    "results": [
+                        {
+                            "id": 1001,
+                            "issue_number": "1",
+                            "name": "Origin",
+                            "cover_date": "1963-03-01",
+                            "store_date": "1963-01-01",
+                            "site_detail_url": "https://example.com/issue/1001",
+                            "image": {
+                                "small_url": "https://example.com/issue1.jpg"
+                            }
+                        },
+                        {
+                            "id": 1002,
+                            "issue_number": "2",
+                            "name": "The Return",
+                            "cover_date": "1963-04-01",
+                            "site_detail_url": "https://example.com/issue/1002",
+                            "image": {
+                                "small_url": "https://example.com/issue2.jpg"
+                            }
+                        }
+                    ]
+                }
+            """.trimIndent()
+            )
+
+            viewModel = ComicVineVolumeReviewViewModel(
+                apiKeyStore = apiKeyStore,
+                apiClient = ComicVineApiClient(
+                    transport = transport
+                ),
+                comicRepository = repository,
+                universeFlow = repository.getAllUniverses(),
+                comicCatalogImporter = ComicCatalogImporter(
+                    comicDao = testDatabase.comicDao(),
+                    database = testDatabase
+                )
+            )
+
+            withTimeout(5000L.milliseconds) {
+                viewModel.uiState.first {
+                    it.availableUniverses.any { available ->
+                        available.id == universeId
+                    }
+                }
+            }
+
+            viewModel.load(
+                volumeId = 123L,
+                selectedVolume = ComicVineVolumeSearchHit(
+                    id = 123L,
+                    name = "Amazing Spider-Man",
+                    startYear = 1963,
+                    countOfIssues = 2,
+                    publisherName = "Marvel",
+                    siteDetailUrl = "https://example.com/volume/123",
+                    imageUrl = "https://example.com/series.jpg"
+                )
+            )
+
+            withTimeout(5000L.milliseconds) {
+                viewModel.uiState.first {
+                    !it.isLoading &&
+                            it.volume != null &&
+                            it.issues.size == 2
+                }
+            }
+
+            viewModel.selectUniverse(universeId)
+            viewModel.importReviewedSeries()
+
+            val completedState =
+                withTimeout(5000L.milliseconds) {
+                    viewModel.uiState.first {
+                        !it.isImporting &&
+                                (
+                                        it.importSuccessMessage != null ||
+                                                it.importError != null
+                                        )
+                    }
+                }
+
+            assertNull(completedState.importError)
+            assertNotNull(completedState.importSuccessMessage)
+            assertTrue(
+                completedState.importSuccessMessage!!.contains("2 issue(s)")
+            )
+
+            val seriesExternalId =
+                testDatabase.comicDao().getSeriesExternalId(
+                    source = "COMIC_VINE",
+                    externalId = "123"
+                )
+
+            assertNotNull(seriesExternalId)
+
+            val importedSeries =
+                testDatabase.comicDao().getSeriesById(
+                    seriesExternalId!!.seriesId
+                )
+
+            assertNotNull(importedSeries)
+            assertEquals("Amazing Spider-Man", importedSeries?.title)
+            assertEquals(publisherId, importedSeries?.publisherId)
+
+            val importedIssues =
+                testDatabase.comicDao().getIssuesForSeries(
+                    importedSeries!!.id
+                )
+
+            assertEquals(2, importedIssues.size)
+
+            val issueOneExternalId =
+                testDatabase.comicDao().getExternalId(
+                    source = "COMIC_VINE",
+                    externalId = "1001"
+                )
+
+            assertNotNull(issueOneExternalId)
+
+            val importedIssueOne =
+                testDatabase.comicDao().getIssueById(
+                    issueOneExternalId!!.issueId
+                )
+
+            assertNotNull(importedIssueOne)
+            assertEquals("1", importedIssueOne?.issueNumber)
+            assertEquals("Origin", importedIssueOne?.title)
+            assertEquals("1963-03", importedIssueOne?.publicationDate)
+            assertEquals(
+                "https://example.com/issue1.jpg",
+                importedIssueOne?.coverUrl
+            )
+            assertEquals(universeId, importedIssueOne?.universeId)
+            assertNull(importedIssueOne?.description)
+        }
 
     private class FakeTransport : ComicVineHttpTransport {
 

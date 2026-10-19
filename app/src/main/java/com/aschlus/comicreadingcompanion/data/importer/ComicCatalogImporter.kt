@@ -348,7 +348,7 @@ class ComicCatalogImporter(
                 title = issueData.title,
                 publicationDate = issueData.publicationDate,
                 coverUrl = issueData.coverUrl,
-                description = issueData.description,
+                description = issueData.description ?: issue.description,
                 issueType = issueType
             )
 

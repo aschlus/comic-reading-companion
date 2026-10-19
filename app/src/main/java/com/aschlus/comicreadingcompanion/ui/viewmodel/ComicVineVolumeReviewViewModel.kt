@@ -2,6 +2,8 @@ package com.aschlus.comicreadingcompanion.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
+import com.aschlus.comicreadingcompanion.data.database.entities.Universe
 import com.aschlus.comicreadingcompanion.data.preferences.ComicVineApiKeyStore
 import com.aschlus.comicreadingcompanion.data.remote.ComicVineApiClient
 import com.aschlus.comicreadingcompanion.data.remote.ComicVineIssueHit
@@ -9,12 +11,21 @@ import com.aschlus.comicreadingcompanion.data.remote.ComicVineIssuePageOutcome
 import com.aschlus.comicreadingcompanion.data.remote.ComicVineVolumeDetails
 import com.aschlus.comicreadingcompanion.data.remote.ComicVineVolumeDetailsOutcome
 import com.aschlus.comicreadingcompanion.data.remote.ComicVineVolumeSearchHit
+import com.aschlus.comicreadingcompanion.data.repository.ComicRepository
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.launch
+import com.aschlus.comicreadingcompanion.data.importer.ComicCatalogImporter
+import com.aschlus.comicreadingcompanion.data.importer.models.CatalogExternalIdImportDto
+import com.aschlus.comicreadingcompanion.data.importer.models.CatalogIssueImportDto
+import com.aschlus.comicreadingcompanion.data.importer.models.CatalogSeriesImportDto
+import com.aschlus.comicreadingcompanion.data.importer.models.CatalogUniverseImportDto
+import com.aschlus.comicreadingcompanion.data.importer.models.ComicCatalogImportDto
 
 data class ComicVineVolumeReviewUiState(
     val isLoading: Boolean = false,
@@ -23,12 +34,22 @@ data class ComicVineVolumeReviewUiState(
     val editedTitle: String = "",
     val issues: List<ComicVineIssueHit> = emptyList(),
     val totalIssueRecords: Int? = null,
+    val availableUniverses: List<Universe> = emptyList(),
+    val selectedUniverseId: Long? = null,
+    val isCreatingUniverse: Boolean = false,
+    val universeCreationError: String? = null,
+    val isImporting: Boolean = false,
+    val importError: String? = null,
+    val importSuccessMessage: String? = null,
     val error: String? = null
 )
 
 class ComicVineVolumeReviewViewModel(
     private val apiKeyStore: ComicVineApiKeyStore,
-    private val apiClient: ComicVineApiClient
+    private val apiClient: ComicVineApiClient,
+    private val comicRepository: ComicRepository? = null,
+    private val universeFlow: Flow<List<Universe>> = emptyFlow(),
+    private val comicCatalogImporter: ComicCatalogImporter? = null
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(ComicVineVolumeReviewUiState())
@@ -37,10 +58,334 @@ class ComicVineVolumeReviewViewModel(
 
     private var loadJob: Job? = null
 
+    init {
+        viewModelScope.launch {
+            universeFlow.collect { universes ->
+                _uiState.value = _uiState.value.copy(
+                    availableUniverses = universes
+                )
+            }
+        }
+    }
+
     fun updateEditedTitle(title: String){
         _uiState.value = _uiState.value.copy(
             editedTitle = title
         )
+    }
+
+    fun selectUniverse(universeId: Long?) {
+        val availableUniverses = _uiState.value.availableUniverses
+
+        if (
+            universeId != null &&
+            availableUniverses.none { it.id == universeId }
+        ) {
+            return
+        }
+
+        _uiState.value = _uiState.value.copy(
+            selectedUniverseId = universeId
+        )
+    }
+
+    fun createUniverse(
+        name: String,
+        designation: String
+    ) {
+        val normalizedName = name.trim()
+        val normalizedDesignation = designation.trim()
+        val currentState = _uiState.value
+        val publisherName = currentState.volume
+            ?.publisherName
+            ?.trim()
+            ?.takeIf { it.isNotEmpty() }
+
+        when {
+            normalizedName.isBlank() -> {
+                _uiState.value = currentState.copy(
+                    universeCreationError = "Enter a universe name."
+                )
+                return
+            }
+
+            normalizedDesignation.isBlank() -> {
+                _uiState.value = currentState.copy(
+                    universeCreationError = "Enter a continuity designation."
+                )
+                return
+            }
+
+            publisherName == null -> {
+                _uiState.value = currentState.copy(
+                    universeCreationError = "A publisher is required to create a universe."
+                )
+                return
+            }
+        }
+
+        val repository = comicRepository
+
+        if (repository == null) {
+            _uiState.value = currentState.copy(
+                universeCreationError = "Universe creation is unavailable."
+            )
+            return
+        }
+
+        _uiState.value = currentState.copy(
+            isCreatingUniverse = true,
+            universeCreationError = null
+        )
+
+        viewModelScope.launch {
+            try {
+                val publishers = repository.getPublishers()
+
+                val publisher = publishers.firstOrNull {
+                    it.name.equals(publisherName, ignoreCase = true)
+                } ?: run {
+                    val newPublisher = Publisher(name = publisherName)
+                    val publisherId = repository.addPublisher(newPublisher)
+                    newPublisher.copy(id = publisherId)
+                }
+
+                val existingUniverse =
+                    repository.getUniverseForPublisher(publisher.id)
+                        .firstOrNull { universe ->
+                            universe.designation?.equals(
+                                normalizedDesignation,
+                                ignoreCase = true
+                            ) == true
+                        }
+
+                val universe = existingUniverse ?: run {
+                    val newUniverse = Universe(
+                        publisherId = publisher.id,
+                        name = normalizedName,
+                        designation = normalizedDesignation,
+                        description = null
+                    )
+
+                    val universeId = repository.addUniverse(newUniverse)
+                    newUniverse.copy(id = universeId)
+                }
+
+                val latestState = _uiState.value
+
+                _uiState.value = latestState.copy(
+                    availableUniverses =
+                        (
+                            latestState.availableUniverses
+                                .filterNot { it.id == universe.id } +
+                                universe
+                        ).sortedBy { it.name.lowercase() },
+                    selectedUniverseId = universe.id,
+                    isCreatingUniverse = false,
+                    universeCreationError = null
+                )
+            } catch (exception: CancellationException) {
+                throw exception
+            } catch (exception: Exception) {
+                _uiState.value = _uiState.value.copy(
+                    isCreatingUniverse = false,
+                    universeCreationError = "Could not create the universe. Please try again."
+                )
+            }
+        }
+    }
+
+    fun importReviewedSeries() {
+        val currentState = _uiState.value
+
+        if (currentState.isImporting) {
+            return
+        }
+
+        if (currentState.isLoading) {
+            _uiState.value = currentState.copy(
+                importError = "Wait for the series to finish loading before importing.",
+                importSuccessMessage = null
+            )
+            return
+        }
+
+        val volume = currentState.volume
+
+        if (volume == null) {
+            _uiState.value = currentState.copy(
+                importError = "Load a series before importing it.",
+                importSuccessMessage = null
+            )
+            return
+        }
+
+        val title = currentState.editedTitle.trim()
+
+        if (title.isBlank()) {
+            _uiState.value = currentState.copy(
+                importError = "Enter a series title before importing.",
+                importSuccessMessage = null
+            )
+            return
+        }
+
+        val selectedUniverse =
+            currentState.availableUniverses.firstOrNull { universe ->
+                universe.id == currentState.selectedUniverseId
+            }
+
+        if (selectedUniverse == null) {
+            _uiState.value == currentState.copy(
+                importError = "Select a universe before importing.",
+                importSuccessMessage = null
+            )
+            return
+        }
+
+        val universeDesignation =
+            selectedUniverse.designation
+                ?.trim()
+                ?.takeIf { it.isNotBlank() }
+
+        if (universeDesignation == null) {
+            _uiState.value = currentState.copy(
+                importError = "The selected universe needs a continuity designation.",
+                importSuccessMessage = null
+            )
+            return
+        }
+
+        val repository = comicRepository
+        val importer = comicCatalogImporter
+
+        if (repository == null || importer == null) {
+            _uiState.value = currentState.copy(
+                importError = "Catalog importing is unavailable.",
+                importSuccessMessage = null
+            )
+            return
+        }
+
+        _uiState.value = currentState.copy(
+            isImporting = true,
+            importError = null,
+            importSuccessMessage = null
+        )
+
+        viewModelScope.launch {
+            try {
+                val publisher =
+                    repository.getPublishers().firstOrNull { publisher ->
+                        publisher.id == selectedUniverse.publisherId
+                    } ?: throw IllegalStateException(
+                        "The selected universe's publisher could not be found."
+                    )
+
+                val importedIssues =
+                    currentState.issues.mapNotNull { issue ->
+                        val number =
+                            issue.issueNumber
+                                ?.trim()
+                                ?.takeIf { it.isNotBlank() }
+                                ?: return@mapNotNull null
+
+                        CatalogIssueImportDto(
+                            number = number,
+                            title = issue.name
+                                ?.trim()
+                                ?.takeIf { it.isNotBlank() },
+                            publicationDate =
+                                normalizeCatalogPublicationDate(issue.coverDate)
+                                    ?: normalizeCatalogPublicationDate(issue.storeDate),
+                            coverUrl = issue.imageUrl,
+                            description = null,
+                            type = "REGULAR",
+                            universeDesignation = universeDesignation,
+                            externalIds = listOf(
+                                CatalogExternalIdImportDto(
+                                    source = "COMIC_VINE",
+                                    externalId = issue.id.toString(),
+                                    url = issue.siteDetailUrl
+                                )
+                            )
+                        )
+                    }
+
+                val importData =
+                    ComicCatalogImportDto(
+                        publisher = publisher.name,
+                        universes = listOf(
+                            CatalogUniverseImportDto(
+                                name = selectedUniverse.name,
+                                designation = universeDesignation,
+                                description = selectedUniverse.description
+                            )
+                        ),
+                        series = listOf(
+                            CatalogSeriesImportDto(
+                                title = title,
+                                volume = null,
+                                startYear = volume.startYear,
+                                endYear = null,
+                                externalIds = listOf(
+                                    CatalogExternalIdImportDto(
+                                        source = "COMIC_VINE",
+                                        externalId = volume.id.toString(),
+                                        url = volume.siteDetailUrl
+                                    )
+                                ),
+                                issues = importedIssues
+                            )
+                        )
+                    )
+
+                importer.import(importData)
+
+                val skippedIssueCount =
+                    currentState.issues.size - importedIssues.size
+
+                val skippedMessage =
+                    if (skippedIssueCount > 0) {
+                        "Skipped $skippedIssueCount issue record(s) " +
+                            "without issue numbers."
+                    } else {
+                        ""
+                    }
+
+                _uiState.value = _uiState.value.copy(
+                    isImporting = false,
+                    importError = null,
+                    importSuccessMessage =
+                        "Imported $title with ${importedIssues.size} issue(s)." + skippedMessage
+                )
+            } catch (exception: CancellationException) {
+                throw exception
+            } catch (exception: Exception) {
+                _uiState.value = _uiState.value.copy(
+                    isImporting = false,
+                    importError = "Could not import this series. Please try again.",
+                    importSuccessMessage = null
+                )
+            }
+        }
+    }
+
+    private fun normalizeCatalogPublicationDate(
+        value: String?
+    ): String? {
+        val date = value?.trim() ?: return null
+
+        if (
+            date.length < 7 ||
+            !date.substring(0, 4).all { it.isDigit() } ||
+            date[4] != '-' ||
+            !date.substring(5, 7).all { it.isDigit() }
+        ) {
+            return null
+        }
+
+        return date.substring(0, 7)
     }
 
     fun load(
@@ -51,6 +396,7 @@ class ComicVineVolumeReviewViewModel(
 
         if (volumeId <= 0L) {
             _uiState.value = ComicVineVolumeReviewUiState(
+                availableUniverses = _uiState.value.availableUniverses,
                 error = "The selected series has an invalid source ID."
             )
             return
@@ -58,7 +404,8 @@ class ComicVineVolumeReviewViewModel(
 
         _uiState.value = ComicVineVolumeReviewUiState(
             isLoading = true,
-            volumeId = volumeId
+            volumeId = volumeId,
+            availableUniverses = _uiState.value.availableUniverses
         )
 
         loadJob = viewModelScope.launch {

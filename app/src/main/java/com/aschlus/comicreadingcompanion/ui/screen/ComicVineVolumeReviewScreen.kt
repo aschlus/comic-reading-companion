@@ -3,50 +3,54 @@ package com.aschlus.comicreadingcompanion.ui.screen
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.aschlus.comicreadingcompanion.data.remote.ComicVineIssueHit
+import com.aschlus.comicreadingcompanion.ui.component.ComicCoverImage
+import com.aschlus.comicreadingcompanion.ui.component.ComicFormDialog
+import com.aschlus.comicreadingcompanion.ui.component.ComicFormDropdownField
+import com.aschlus.comicreadingcompanion.ui.component.ComicFormDropdownOption
 import com.aschlus.comicreadingcompanion.ui.component.ComicHomeSectionHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicPrimaryHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicPrimaryHeaderBackButton
 import com.aschlus.comicreadingcompanion.ui.component.ComicPrimaryHeaderTitle
+import com.aschlus.comicreadingcompanion.ui.component.ComicWideActionButton
+import com.aschlus.comicreadingcompanion.ui.theme.ComicBlueLight
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicMutedInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineVolumeReviewViewModel
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.sp
-import com.aschlus.comicreadingcompanion.ui.component.ComicCoverImage
-import com.aschlus.comicreadingcompanion.ui.theme.ComicBlueLight
 
 @Composable
 fun ComicVineVolumeReviewScreen(
@@ -54,6 +58,22 @@ fun ComicVineVolumeReviewScreen(
     onBackClick: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
+
+    var showCreateUniverseDialog by rememberSaveable {
+        mutableStateOf(false)
+    }
+
+    var newUniverseName by rememberSaveable {
+        mutableStateOf("")
+    }
+
+    var newUniverseDesignation by rememberSaveable {
+        mutableStateOf("")
+    }
+
+    var universeMenuExpanded by rememberSaveable {
+        mutableStateOf(false)
+    }
 
     Scaffold(
         containerColor = ComicPaper,
@@ -202,6 +222,129 @@ fun ComicVineVolumeReviewScreen(
                                 )
                             }
                         }
+                        Column(
+                            verticalArrangement = Arrangement.spacedBy(6.dp)
+                        ) {
+                            Text(
+                                text = "UNIVERSE / CONTINUITY",
+                                color = ComicInk,
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+
+                            val selectedUniverse = uiState.availableUniverses
+                                .firstOrNull { it.id == uiState.selectedUniverseId }
+
+                            ComicFormDropdownField(
+                                text = selectedUniverse?.let { universe ->
+                                    universe.designation?.let { designation ->
+                                        "${universe.name} ($designation)"
+                                    } ?: universe.name
+                                } ?: "Select a universe",
+                                expanded = universeMenuExpanded,
+                                onExpandedChange = {
+                                    universeMenuExpanded = it
+                                }
+                            ) {
+                                ComicFormDropdownOption(
+                                    text = "CREATE NEW UNIVERSE...",
+                                    onClick = {
+                                        universeMenuExpanded = false
+                                        newUniverseName = ""
+                                        newUniverseDesignation = ""
+                                        showCreateUniverseDialog = true
+                                    }
+                                )
+
+                                uiState.availableUniverses.forEach { universe ->
+                                    ComicFormDropdownOption(
+                                        text = universe.designation?.let { designation ->
+                                            "${universe.name} ($designation)"
+                                        } ?: universe.name,
+                                        onClick = {
+                                            viewModel.selectUniverse(universe.id)
+                                            universeMenuExpanded = false
+                                        }
+                                    )
+                                }
+                            }
+
+                            if (uiState.isCreatingUniverse) {
+                                Text(
+                                    text = "Creating universe...",
+                                    color = ComicMutedInk,
+                                    fontSize = 12.sp
+                                )
+                            }
+
+                            uiState.universeCreationError?.let { error ->
+                                Text(
+                                    text = error,
+                                    color = ComicRed,
+                                    fontSize = 12.sp,
+                                    fontWeight = FontWeight.SemiBold
+                                )
+                            }
+                        }
+
+                        Column(
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            ComicWideActionButton(
+                                text = if (uiState.isImporting) {
+                                    "IMPORTING..."
+                                } else {
+                                    "IMPORT TO CATALOG"
+                                },
+                                backgroundColor = ComicBlueLight,
+                                onClick = viewModel::importReviewedSeries,
+                                enabled = uiState.volume != null &&
+                                    !uiState.isLoading &&
+                                    !uiState.isImporting &&
+                                    !uiState.isCreatingUniverse &&
+                                    uiState.editedTitle.isNotBlank() &&
+                                    uiState.availableUniverses.any { universe ->
+                                        universe.id == uiState.selectedUniverseId &&
+                                            !universe.designation.isNullOrBlank()
+                                    }
+                            )
+
+                            if (uiState.isImporting) {
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                ) {
+                                    CircularProgressIndicator(
+                                        modifier = Modifier.size(18.dp),
+                                        color = ComicInk
+                                    )
+
+                                    Text(
+                                        text = "Importing series and issues...",
+                                        color = ComicMutedInk,
+                                        fontSize = 12.sp
+                                    )
+                                }
+                            }
+
+                            uiState.importError?.let { error ->
+                                Text(
+                                    text = error,
+                                    color = ComicRed,
+                                    fontSize = 12.sp,
+                                    fontWeight = FontWeight.SemiBold
+                                )
+                            }
+
+                            uiState.importSuccessMessage?.let { message ->
+                                Text(
+                                    text = message,
+                                    color = ComicInk,
+                                    fontSize = 12.sp,
+                                    fontWeight = FontWeight.SemiBold
+                                )
+                            }
+                        }
                     }
                 }
 
@@ -288,6 +431,35 @@ fun ComicVineVolumeReviewScreen(
                 }
             }
         }
+    }
+
+    if (showCreateUniverseDialog) {
+        ComicFormDialog(
+            title = "CREATE UNIVERSE",
+            primaryLabel = "UNIVERSE NAME",
+            primaryValue = newUniverseName,
+            onPrimaryValueChange = {
+                newUniverseName = it
+            },
+            secondaryLabel = "CONTINUITY DESIGNATION",
+            secondaryValue = newUniverseDesignation,
+            onSecondaryValueChange = {
+                newUniverseDesignation = it
+            },
+            confirmText = "CREATE",
+            confirmEnabled = newUniverseName.isNotBlank() &&
+                newUniverseDesignation.isNotBlank(),
+            onConfirm = {
+                viewModel.createUniverse(
+                    name = newUniverseName,
+                    designation = newUniverseDesignation
+                )
+                showCreateUniverseDialog = false
+            },
+            onDismiss = {
+                showCreateUniverseDialog = false
+            }
+        )
     }
 }
 
