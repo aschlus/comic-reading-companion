@@ -65,7 +65,8 @@ class ComicVineVolumeSearchScreenTest {
     private fun launchScreen(
         apiKey: String? = null,
         responseBody: String? = null,
-        responseBodies: List<String>? = null
+        responseBodies: List<String>? = null,
+        onVolumeSelected: (Long) -> Unit = {}
     ) {
         runBlocking {
             apiKeyStore.clear()
@@ -96,7 +97,8 @@ class ComicVineVolumeSearchScreenTest {
             ) {
                 ComicVineVolumeSearchScreen(
                     viewModel = viewModel,
-                    onBackClick = {}
+                    onBackClick = {},
+                    onVolumeClick = onVolumeSelected
                 )
             }
         }
@@ -141,6 +143,8 @@ class ComicVineVolumeSearchScreenTest {
 
     @Test
     fun searchScreen_searchesAndDisplaysVolumeResults() {
+        var selectedVolumeId: Long? = null
+
         launchScreen(
             apiKey = "test-api-key",
             responseBody = """
@@ -166,7 +170,10 @@ class ComicVineVolumeSearchScreenTest {
                         }
                     ]
                 }
-            """.trimIndent()
+            """.trimIndent(),
+            onVolumeSelected = { volumeId ->
+                selectedVolumeId = volumeId
+            }
         )
 
         composeRule
@@ -206,6 +213,12 @@ class ComicVineVolumeSearchScreenTest {
             1,
             transport.requestedUrls.size
         )
+
+        composeRule
+            .onNodeWithContentDescription("Series result 123")
+            .performClick()
+
+        assertEquals(123L, selectedVolumeId)
     }
 
     @Test

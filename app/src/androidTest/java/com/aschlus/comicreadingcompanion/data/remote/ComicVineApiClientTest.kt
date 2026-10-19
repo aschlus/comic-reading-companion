@@ -307,6 +307,207 @@ class ComicVineApiClientTest {
             )
         }
 
+    @Test
+    fun getVolumeDetails_successParsesMetadata() = runBlocking {
+        val transport = FakeTransport(
+            responseBody = """
+            {
+                "error": "OK",
+                "status_code": 1,
+                "results": {
+                    "id": 123,
+                    "name": "Amazing Spider-Man",
+                    "start_year": "1963",
+                    "count_of_issues": 441,
+                    "publisher": {
+                        "name": "Marvel"
+                    },
+                    "site_detail_url": "https://example.com/volume",
+                    "description": "Series description",
+                    "image": {
+                        "super_url": "https://example.com/cover.jpg"
+                    }
+                }
+            }
+        """.trimIndent()
+        )
+
+        val result = ComicVineApiClient(transport)
+            .getVolumeDetails("test-key", 123L)
+
+        assertEquals(
+            ComicVineVolumeDetailsOutcome.Success(
+                ComicVineVolumeDetails(
+                    id = 123L,
+                    name = "Amazing Spider-Man",
+                    startYear = 1963,
+                    countOfIssues = 441,
+                    publisherName = "Marvel",
+                    siteDetailUrl = "https://example.com/volume",
+                    description = "Series description",
+                    imageUrl = "https://example.com/cover.jpg"
+                )
+            ),
+            result
+        )
+
+        assertTrue(
+            transport.requestedUrl!!.contains("/volume/4050-123/")
+        )
+    }
+
+    @Test
+    fun getVolumeDetails_blankKeyDoesNotRequest() = runBlocking {
+        val transport = FakeTransport(
+            responseBody = """{"error":"OK","status_code":1}"""
+        )
+
+        val result = ComicVineApiClient(transport)
+            .getVolumeDetails(" ", 123L)
+
+        assertEquals(
+            ComicVineVolumeDetailsOutcome.MissingApiKey,
+            result
+        )
+        assertNull(transport.requestedUrl)
+    }
+
+    @Test
+    fun getVolumeDetails_invalidKeyReturnsInvalidApiKey() = runBlocking {
+        val transport = FakeTransport(
+            responseBody = """
+            {
+                "error": "Invalid API Key",
+                "status_code": 100,
+                "results": []
+            }
+        """.trimIndent()
+        )
+
+        val result = ComicVineApiClient(transport)
+            .getVolumeDetails("invalid-key", 123L)
+
+        assertEquals(
+            ComicVineVolumeDetailsOutcome.InvalidApiKey,
+            result
+        )
+    }
+
+    @Test
+    fun getVolumeIssues_successParsesPageAndBuildsRequestUrl() =
+        runBlocking {
+            val transport = FakeTransport(
+                responseBody = """
+                {
+                    "error": "OK",
+                    "status_code": 1,
+                    "number_of_total_results": 150,
+                    "results": [
+                        {
+                            "id": 9001,
+                            "issue_number": "1",
+                            "name": "Origin",
+                            "cover_date": "1963-03-01",
+                            "store_date": "1963-01-01",
+                            "description": "Issue description",
+                            "site_detail_url": "https://example.com/issue/9001",
+                            "image": {
+                                "super_url": "https://example.com/issue.jpg"
+                            }
+                        }
+                    ]
+                }
+            """.trimIndent()
+            )
+
+            val result = ComicVineApiClient(transport)
+                .getVolumeIssues(
+                    apiKey = "test key",
+                    volumeId = 123L,
+                    offset = 100
+                )
+
+            assertEquals(
+                ComicVineIssuePageOutcome.Success(
+                    issues = listOf(
+                        ComicVineIssueHit(
+                            id = 9001L,
+                            issueNumber = "1",
+                            name = "Origin",
+                            coverDate = "1963-03-01",
+                            storeDate = "1963-01-01",
+                            description = "Issue description",
+                            siteDetailUrl = "https://example.com/issue/9001",
+                            imageUrl = "https://example.com/issue.jpg"
+                        )
+                    ),
+                    totalResults = 150,
+                    offset = 100,
+                    pageResultCount = 1
+                ),
+                result
+            )
+
+            val url = transport.requestedUrl!!
+            assertTrue(url.contains("/issues/?"))
+            assertTrue(url.contains("filter=volume%3A123"))
+            assertTrue(url.contains("&limit=100&offset=100"))
+            assertTrue(url.contains("issue_number"))
+        }
+
+    @Test
+    fun getVolumeIssues_invalidKeyReturnsInvalidApiKey() = runBlocking {
+        val transport = FakeTransport(
+            responseBody = """
+            {
+                "error": "Invalid API Key",
+                "status_code": 100,
+                "results": []
+            }
+        """.trimIndent()
+        )
+
+        val result = ComicVineApiClient(transport)
+            .getVolumeIssues("invalid-key", 123L)
+
+        assertEquals(
+            ComicVineIssuePageOutcome.InvalidApiKey,
+            result
+        )
+    }
+
+    @Test
+    fun getVolumeIssues_transportFailureReturnsNetworkError() =
+        runBlocking {
+            val transport = FakeTransport(
+                failure = IOException("Simulated network failure")
+            )
+
+            val result = ComicVineApiClient(transport)
+                .getVolumeIssues("test-key", 123L)
+
+            assertEquals(
+                ComicVineIssuePageOutcome.NetworkError,
+                result
+            )
+        }
+
+    @Test
+    fun getVolumeIssues_malformedResponseReturnsServiceError() =
+        runBlocking {
+            val transport = FakeTransport(
+                responseBody = "not-json"
+            )
+
+            val result = ComicVineApiClient(transport)
+                .getVolumeIssues("test-key", 123L)
+
+            assertEquals(
+                ComicVineIssuePageOutcome.ServiceError,
+                result
+            )
+        }
+
     private class FakeTransport(
         private val responseBody: String? = null,
         private val failure: IOException? = null

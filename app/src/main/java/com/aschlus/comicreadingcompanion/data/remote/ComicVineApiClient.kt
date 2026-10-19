@@ -49,6 +49,53 @@ sealed interface ComicVineVolumeSearchOutcome {
     data object ServiceError : ComicVineVolumeSearchOutcome
 }
 
+data class ComicVineVolumeDetails(
+    val id: Long,
+    val name: String,
+    val startYear: Int?,
+    val countOfIssues: Int?,
+    val publisherName: String?,
+    val siteDetailUrl: String?,
+    val description: String?,
+    val imageUrl: String?
+)
+
+sealed interface ComicVineVolumeDetailsOutcome {
+    data class Success(
+        val volume: ComicVineVolumeDetails
+    ) : ComicVineVolumeDetailsOutcome
+
+    data object MissingApiKey : ComicVineVolumeDetailsOutcome
+    data object InvalidApiKey : ComicVineVolumeDetailsOutcome
+    data object NetworkError : ComicVineVolumeDetailsOutcome
+    data object ServiceError : ComicVineVolumeDetailsOutcome
+}
+
+data class ComicVineIssueHit(
+    val id: Long,
+    val issueNumber: String?,
+    val name: String?,
+    val coverDate: String?,
+    val storeDate: String?,
+    val description: String?,
+    val siteDetailUrl: String?,
+    val imageUrl: String?
+)
+
+sealed interface ComicVineIssuePageOutcome {
+    data class Success(
+        val issues: List<ComicVineIssueHit>,
+        val totalResults: Int,
+        val offset: Int,
+        val pageResultCount: Int
+    ) : ComicVineIssuePageOutcome
+
+    data object MissingApiKey : ComicVineIssuePageOutcome
+    data object InvalidApiKey : ComicVineIssuePageOutcome
+    data object NetworkError : ComicVineIssuePageOutcome
+    data object ServiceError : ComicVineIssuePageOutcome
+}
+
 fun interface ComicVineHttpTransport {
     suspend fun get(url: String): String
 }
@@ -228,6 +275,197 @@ class ComicVineApiClient(
                 "number_of_total_results"
             ) ?: (safeOffset + volumes.size),
             offset = safeOffset
+        )
+    }
+
+    suspend fun getVolumeDetails(
+        apiKey: String,
+        volumeId: Long
+    ): ComicVineVolumeDetailsOutcome {
+        val normalizedKey = apiKey.trim()
+
+        if (normalizedKey.isEmpty()) {
+            return ComicVineVolumeDetailsOutcome.MissingApiKey
+        }
+
+        if (volumeId <= 0L) {
+            return ComicVineVolumeDetailsOutcome.ServiceError
+        }
+
+        val encodedKey = URLEncoder.encode(
+            normalizedKey,
+            StandardCharsets.UTF_8.name()
+        )
+
+        val requestUrl =
+            "$API_BASE_URL/volume/4050-$volumeId/" +
+                "?api_key=$encodedKey" +
+                "&format=json" +
+                "&limit=1" +
+                "&field_list=id,name,start_year,count_of_issues," +
+                "publisher,site_detail_url,description,image"
+
+        val responseBody = try {
+            transport.get(requestUrl)
+        } catch (exception: okio.IOException) {
+            return ComicVineVolumeDetailsOutcome.NetworkError
+        }
+
+        val response = try {
+            json.parseToJsonElement(responseBody) as? JsonObject
+                ?: return ComicVineVolumeDetailsOutcome.ServiceError
+        } catch (exception: SerializationException) {
+            return ComicVineVolumeDetailsOutcome.ServiceError
+        }
+
+        val statusCode = response.intValue("status_code")
+            ?: return ComicVineVolumeDetailsOutcome.ServiceError
+        val apiError = response.stringValue("error")
+
+        if (
+            statusCode == 100 ||
+            apiError?.contains("invalid api key", ignoreCase = true) == true
+        ) {
+            return ComicVineVolumeDetailsOutcome.InvalidApiKey
+        }
+
+        if (statusCode != 1 || !apiError.equals("OK", ignoreCase = true)) {
+            return ComicVineVolumeDetailsOutcome.ServiceError
+        }
+
+        val result = response["results"] as? JsonObject
+            ?: return ComicVineVolumeDetailsOutcome.ServiceError
+
+        val id = result.longValue("id")
+            ?: return ComicVineVolumeDetailsOutcome.ServiceError
+
+        if (id != volumeId) {
+            return ComicVineVolumeDetailsOutcome.ServiceError
+        }
+
+        val name = result.stringValue("name")
+            ?.takeIf { it.isNotBlank() }
+            ?: return ComicVineVolumeDetailsOutcome.ServiceError
+
+        val publisher = result["publisher"] as? JsonObject
+        val image = result["image"] as? JsonObject
+
+        return ComicVineVolumeDetailsOutcome.Success(
+            volume = ComicVineVolumeDetails(
+                id = id,
+                name = name,
+                startYear = result.stringValue("start_year")?.toIntOrNull(),
+                countOfIssues = result.intValue("count_of_issues"),
+                publisherName = publisher?.stringValue("name"),
+                siteDetailUrl = result.stringValue("site_detail_url"),
+                description = result.stringValue("description"),
+                imageUrl = image?.stringValue("super_url")
+                    ?: image?.stringValue("original_url")
+                    ?: image?.stringValue("medium_url")
+                    ?: image?.stringValue("small_url")
+            )
+        )
+    }
+
+    suspend fun getVolumeIssues(
+        apiKey: String,
+        volumeId: Long,
+        offset: Int = 0
+    ): ComicVineIssuePageOutcome {
+        val normalizedKey = apiKey.trim()
+
+        if (normalizedKey.isEmpty()) {
+            return ComicVineIssuePageOutcome.MissingApiKey
+        }
+
+        if (volumeId <= 0L) {
+            return ComicVineIssuePageOutcome.ServiceError
+        }
+
+        val safeOffset = offset.coerceAtLeast(0)
+
+        val encodedKey = URLEncoder.encode(
+            normalizedKey,
+            StandardCharsets.UTF_8.name()
+        )
+        val encodedFilter = URLEncoder.encode(
+            "volume:$volumeId",
+            StandardCharsets.UTF_8.name()
+        )
+
+        val requestUrl =
+            "$API_BASE_URL/issues/" +
+                "?api_key=$encodedKey" +
+                "&format=json" +
+                "&filter=$encodedFilter" +
+                "&limit=100" +
+                "&offset=$safeOffset" +
+                "&field_list=id,issue_number,name,cover_date,store_date," +
+                "description,image,site_detail_url"
+
+        val responseBody = try {
+            transport.get(requestUrl)
+        } catch (exception: IOException) {
+            return ComicVineIssuePageOutcome.NetworkError
+        }
+
+        val response = try {
+            json.parseToJsonElement(responseBody) as? JsonObject
+                ?: return ComicVineIssuePageOutcome.ServiceError
+        } catch (exception: SerializationException) {
+            return ComicVineIssuePageOutcome.ServiceError
+        }
+
+        val statusCode = response.intValue("status_code")
+            ?: return ComicVineIssuePageOutcome.ServiceError
+        val apiError = response.stringValue("error")
+
+        if (
+            statusCode == 100 ||
+            apiError?.contains("invalid api key", ignoreCase = true) == true
+        ) {
+            return ComicVineIssuePageOutcome.InvalidApiKey
+        }
+
+        if (statusCode != 1 || !apiError.equals("OK", ignoreCase = true)) {
+            return ComicVineIssuePageOutcome.ServiceError
+        }
+
+        val rawResults = response["results"] as? JsonArray
+            ?: return ComicVineIssuePageOutcome.ServiceError
+
+        val issues = rawResults.mapNotNull { element ->
+            val issue = element as? JsonObject
+                ?: return@mapNotNull null
+
+            val id = issue.longValue("id")
+                ?: return@mapNotNull null
+
+            val image = issue["image"] as? JsonObject
+
+            ComicVineIssueHit(
+                id = id,
+                issueNumber = issue.stringValue("issue_number")
+                    ?.takeIf { it.isNotBlank() },
+                name = issue.stringValue("name")
+                    ?.takeIf { it.isNotBlank() },
+                coverDate = issue.stringValue("cover_date"),
+                storeDate = issue.stringValue("store_date"),
+                description = issue.stringValue("description"),
+                siteDetailUrl = issue.stringValue("site_detail_url"),
+                imageUrl = image?.stringValue("super_url")
+                    ?: image?.stringValue("original_url")
+                    ?: image?.stringValue("medium_url")
+                    ?: image?.stringValue("small_url")
+            )
+        }
+
+        return ComicVineIssuePageOutcome.Success(
+            issues = issues,
+            totalResults = response.intValue("number_of_total_results")
+                ?: rawResults.size,
+            offset = safeOffset,
+            pageResultCount = rawResults.size
         )
     }
 

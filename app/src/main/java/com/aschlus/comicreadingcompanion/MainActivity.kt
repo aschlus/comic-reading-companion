@@ -62,10 +62,13 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
+import com.aschlus.comicreadingcompanion.ui.screen.ComicVineVolumeReviewScreen
 import com.aschlus.comicreadingcompanion.ui.screen.ComicVineVolumeSearchScreen
 import com.aschlus.comicreadingcompanion.ui.screen.SettingsScreen
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineSettingsViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineSettingsViewModelFactory
+import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineVolumeReviewViewModel
+import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineVolumeReviewViewModelFactory
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineVolumeSearchViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineVolumeSearchViewModelFactory
 
@@ -390,6 +393,44 @@ class MainActivity : ComponentActivity() {
 
                             ComicVineVolumeSearchScreen(
                                 viewModel = searchViewModel,
+                                onBackClick = safeNavigateBack,
+                                onVolumeClick = { volumeId ->
+                                    navController.navigate(
+                                        "comicVineVolumeReview/$volumeId"
+                                    )
+                                }
+                            )
+                        }
+
+                        composable(
+                            route = "comicVineVolumeReview/{volumeId}",
+                            arguments = listOf(
+                                navArgument("volumeId") {
+                                    type = NavType.LongType
+                                }
+                            )
+                        ) { backStackEntry ->
+                            val volumeId =
+                                backStackEntry.arguments?.getLong("volumeId") ?: 0L
+
+                            val container =
+                                (application as ComicReadingCompanionApplication)
+                                    .container
+
+                            val reviewViewModel: ComicVineVolumeReviewViewModel =
+                                viewModel(
+                                    factory = ComicVineVolumeReviewViewModelFactory(
+                                        apiKeyStore = container.comicVineApiKeyStore,
+                                        apiClient = container.comicVineApiClient
+                                    )
+                                )
+
+                            LaunchedEffect(volumeId) {
+                                reviewViewModel.load(volumeId)
+                            }
+
+                            ComicVineVolumeReviewScreen(
+                                viewModel = reviewViewModel,
                                 onBackClick = safeNavigateBack
                             )
                         }

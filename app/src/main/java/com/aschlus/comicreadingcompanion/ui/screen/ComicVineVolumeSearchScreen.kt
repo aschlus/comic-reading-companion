@@ -3,6 +3,7 @@ package com.aschlus.comicreadingcompanion.ui.screen
 import android.inputmethodservice.Keyboard
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -53,7 +54,8 @@ import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineVolumeSearchViewM
 @Composable
 fun ComicVineVolumeSearchScreen(
     viewModel: ComicVineVolumeSearchViewModel,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    onVolumeClick: (Long) -> Unit = {}
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
@@ -312,7 +314,10 @@ fun ComicVineVolumeSearchScreen(
                     key = { volume -> volume.id }
                 ) { volume ->
                     ComicVineVolumeResultRow(
-                        volume = volume
+                        volume = volume,
+                        onClick = {
+                            onVolumeClick(volume.id)
+                        }
                     )
                 }
             } else if (
@@ -413,13 +418,18 @@ private fun MatchingOptionField(
 
 @Composable
 private fun ComicVineVolumeResultRow(
-    volume: ComicVineVolumeSearchHit
+    volume: ComicVineVolumeSearchHit,
+    onClick: () -> Unit
 ) {
     val shape = RoundedCornerShape(10.dp)
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
+            .clickable(onClick = onClick)
+            .semantics {
+                contentDescription = "Series result ${volume.id}"
+            }
             .background(Color.White, shape)
             .border(
                 width = 2.dp,
