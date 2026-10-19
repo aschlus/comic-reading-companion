@@ -8,6 +8,7 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performScrollToNode
+import androidx.compose.ui.test.performTextReplacement
 import androidx.compose.ui.test.printToLog
 import androidx.lifecycle.viewModelScope
 import androidx.test.core.app.ApplicationProvider
@@ -144,6 +145,15 @@ class ComicVineVolumeReviewScreenTest {
         composeRule
             .onNodeWithText("Amazing Spider-Man")
             .assertIsDisplayed()
+
+        composeRule
+            .onNodeWithText("Amazing Spider-Man")
+            .performTextReplacement("Edited Series Title")
+
+        assertEquals(
+            "Edited Series Title",
+            viewModel.uiState.value.editedTitle
+        )
 
         composeRule
             .onNodeWithText("Publisher: Marvel")

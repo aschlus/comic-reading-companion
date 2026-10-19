@@ -25,6 +25,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
@@ -35,7 +37,8 @@ fun ComicAddToListSearchField(
     query: String,
     onQueryChange: (String) -> Unit,
     modifier: Modifier = Modifier,
-    placeholder: String = "Search issues or series"
+    placeholder: String = "Search issues or series",
+    contentDescription: String? = null
 ) {
     val shape = RoundedCornerShape(10.dp)
 
@@ -93,7 +96,13 @@ fun ComicAddToListSearchField(
             BasicTextField(
                 value = query,
                 onValueChange = onQueryChange,
-                modifier = Modifier.weight(1f),
+                modifier = Modifier
+                    .weight(1f)
+                    .semantics {
+                        contentDescription?.let {
+                            this.contentDescription = it
+                        }
+                    },
                 singleLine = true,
                 textStyle = MaterialTheme.typography.bodyLarge
                     .copy(

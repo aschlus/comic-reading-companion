@@ -15,6 +15,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -99,11 +100,14 @@ fun ComicVineVolumeReviewScreen(
 
                 item {
                     ReviewInfoCard {
-                        Text(
-                            text = volume.name,
-                            color = ComicInk,
-                            style = androidx.compose.material3.MaterialTheme
-                                .typography.headlineSmall
+                        OutlinedTextField(
+                            value = uiState.editedTitle,
+                            onValueChange = viewModel::updateEditedTitle,
+                            label = {
+                                Text("SERIES TITLE")
+                            },
+                            singleLine = true,
+                            modifier = Modifier.fillMaxWidth()
                         )
 
                         Text(

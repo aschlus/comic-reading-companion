@@ -41,6 +41,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.aschlus.comicreadingcompanion.data.remote.ComicVineVolumeSearchHit
+import com.aschlus.comicreadingcompanion.ui.component.ComicAddToListSearchField
 import com.aschlus.comicreadingcompanion.ui.component.ComicHomeSectionHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicPrimaryHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicPrimaryHeaderBackButton
@@ -112,51 +113,15 @@ fun ComicVineVolumeSearchScreen(
             }
 
             item {
-                val fieldShape = RoundedCornerShape(9.dp)
-
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .heightIn(min = 56.dp)
-                        .background(Color.White, fieldShape)
-                        .border(
-                            width = 2.dp,
-                            color = ComicInk,
-                            shape = fieldShape
-                        )
-                        .padding(horizontal = 12.dp),
-                    contentAlignment = Alignment.CenterStart
-                ) {
-                    BasicTextField(
-                        value = uiState.query,
-                        onValueChange = { query ->
-                            hasSubmittedSearch = false
-                            viewModel.updateQuery(query)
-                        },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .semantics {
-                                contentDescription = "Series search"
-                            },
-                        singleLine = true,
-                        textStyle = androidx.compose.material3.MaterialTheme
-                            .typography.bodyLarge
-                            .copy(color = ComicInk),
-                        cursorBrush = SolidColor(ComicInk),
-                        decorationBox = { innerTextField ->
-                            Box {
-                                if (uiState.query.isEmpty()) {
-                                    Text(
-                                        text = "Enter a series title",
-                                        color = ComicMutedInk
-                                    )
-                                }
-
-                                innerTextField()
-                            }
-                        }
-                    )
-                }
+                ComicAddToListSearchField(
+                    query = uiState.query,
+                    onQueryChange = { query ->
+                        hasSubmittedSearch = false
+                        viewModel.updateQuery(query)
+                    },
+                    placeholder = "Enter a series title",
+                    contentDescription = "Series search"
+                )
             }
 
             item {

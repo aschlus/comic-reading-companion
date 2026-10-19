@@ -19,6 +19,7 @@ data class ComicVineVolumeReviewUiState(
     val isLoading: Boolean = false,
     val volumeId: Long? = null,
     val volume: ComicVineVolumeDetails? = null,
+    val editedTitle: String = "",
     val issues: List<ComicVineIssueHit> = emptyList(),
     val totalIssueRecords: Int? = null,
     val error: String? = null
@@ -34,6 +35,12 @@ class ComicVineVolumeReviewViewModel(
         _uiState.asStateFlow()
 
     private var loadJob: Job? = null
+
+    fun updateEditedTitle(title: String){
+        _uiState.value = _uiState.value.copy(
+            editedTitle = title
+        )
+    }
 
     fun load(volumeId: Long) {
         loadJob?.cancel()
@@ -84,7 +91,8 @@ class ComicVineVolumeReviewViewModel(
                 }
 
                 _uiState.value = _uiState.value.copy(
-                    volume = volume
+                    volume = volume,
+                    editedTitle = volume.name
                 )
 
                 val allIssues = mutableListOf<ComicVineIssueHit>()
