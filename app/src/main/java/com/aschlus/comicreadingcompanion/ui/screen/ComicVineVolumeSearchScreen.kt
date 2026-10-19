@@ -1,6 +1,5 @@
 package com.aschlus.comicreadingcompanion.ui.screen
 
-import android.inputmethodservice.Keyboard
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -11,7 +10,9 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -20,8 +21,10 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Button
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FilterList
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -33,6 +36,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.semantics.contentDescription
@@ -42,13 +46,17 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.aschlus.comicreadingcompanion.data.remote.ComicVineVolumeSearchHit
 import com.aschlus.comicreadingcompanion.ui.component.ComicAddToListSearchField
+import com.aschlus.comicreadingcompanion.ui.component.ComicBrowseResultRow
 import com.aschlus.comicreadingcompanion.ui.component.ComicHomeSectionHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicPrimaryHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicPrimaryHeaderBackButton
 import com.aschlus.comicreadingcompanion.ui.component.ComicPrimaryHeaderTitle
+import com.aschlus.comicreadingcompanion.ui.component.ComicWideActionButton
+import com.aschlus.comicreadingcompanion.ui.theme.ComicBlue
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicMutedInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
+import com.aschlus.comicreadingcompanion.ui.theme.ComicPurple
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineVolumeSearchViewModel
 
@@ -128,19 +136,56 @@ fun ComicVineVolumeSearchScreen(
                 Column(
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    TextButton(
-                        onClick = {
-                            matchingOptionsExpanded = !matchingOptionsExpanded
-                        },
-                        modifier = Modifier.fillMaxWidth()
+                    Box(
+                        modifier = Modifier.height(44.dp)
                     ) {
-                        Text(
-                            if (matchingOptionsExpanded) {
-                                "HIDE MATCHING OPTIONS"
-                            } else {
-                                "ADDITIONAL MATCHING OPTIONS"
-                            }
+                        val shape = RoundedCornerShape(9.dp)
+
+                        Box(
+                            modifier = Modifier
+                                .matchParentSize()
+                                .offset(x = 2.dp,y = 3.dp)
+                                .background(
+                                    color = ComicInk,
+                                    shape = shape
+                                )
                         )
+
+                        Row(
+                            modifier = Modifier
+                                .height(41.dp)
+                                .clip(shape)
+                                .background(ComicPaper)
+                                .border(
+                                    width = 2.dp,
+                                    color = ComicInk,
+                                    shape = shape
+                                )
+                                .clickable {
+                                    matchingOptionsExpanded = !matchingOptionsExpanded
+                                }
+                                .padding(horizontal = 14.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.FilterList,
+                                contentDescription = null,
+                                tint = ComicInk,
+                                modifier = Modifier.size(18.dp)
+                            )
+
+                            Spacer(Modifier.width(8.dp))
+
+                            Text(
+                                text = if (matchingOptionsExpanded) {
+                                    "HIDE MATCHING OPTIONS"
+                                } else {
+                                    "ADDITIONAL MATCHING OPTIONS"
+                                },
+                                color = ComicInk,
+                                fontWeight = FontWeight.ExtraBold
+                            )
+                        }
                     }
 
                     if (matchingOptionsExpanded) {
@@ -200,7 +245,13 @@ fun ComicVineVolumeSearchScreen(
             }
 
             item {
-                Button(
+                ComicWideActionButton(
+                    text = if (uiState.isSearching) {
+                        "SEARCHING..."
+                    } else {
+                        "SEARCH VOLUMES"
+                    },
+                    backgroundColor = ComicBlue,
                     onClick = {
                         hasSubmittedSearch = true
                         viewModel.search()
@@ -208,15 +259,7 @@ fun ComicVineVolumeSearchScreen(
                     enabled = !uiState.isLoadingApiKey &&
                         !uiState.isSearching,
                     modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(
-                        if (uiState.isSearching) {
-                            "SEARCHING..."
-                        } else {
-                            "SEARCH VOLUMES"
-                        }
-                    )
-                }
+                )
             }
 
             if (uiState.isLoadingApiKey) {
@@ -386,50 +429,24 @@ private fun ComicVineVolumeResultRow(
     volume: ComicVineVolumeSearchHit,
     onClick: () -> Unit
 ) {
-    val shape = RoundedCornerShape(10.dp)
+    val details = listOfNotNull(
+        volume.startYear?.toString(),
+        volume.publisherName,
+        volume.countOfIssues?.let { "$it issues" }
+    ).joinToString(" • ")
 
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable(onClick = onClick)
-            .semantics {
-                contentDescription = "Series result ${volume.id}"
-            }
-            .background(Color.White, shape)
-            .border(
-                width = 2.dp,
-                color = ComicInk,
-                shape = shape
-            )
-            .padding(14.dp),
-        verticalArrangement = Arrangement.spacedBy(6.dp)
-    ) {
-        Text(
-            text = volume.name,
-            color = ComicInk,
-            fontWeight = FontWeight.Bold,
-            style = androidx.compose.material3.MaterialTheme
-                .typography.titleMedium
-        )
-
-        val details = listOfNotNull(
-            volume.startYear?.toString(),
-            volume.publisherName,
-            volume.countOfIssues?.let { "$it issues" }
-        ).joinToString(" • ")
-
-        if (details.isNotBlank()) {
-            Text(
-                text = details,
-                color = ComicMutedInk
-            )
-        }
-
-        Text(
-            text = "Source ID: ${volume.id}",
-            color = ComicMutedInk,
-            style = androidx.compose.material3.MaterialTheme
-                .typography.bodySmall
-        )
-    }
+    ComicBrowseResultRow(
+        badgeText = volume.name
+            .firstOrNull()
+            ?.uppercaseChar()
+            ?.toString()
+            ?: "?",
+        badgeColor = ComicPurple,
+        title = volume.name,
+        subtitle = details,
+        supportingText = "Source ID: ${volume.id}",
+        statusText = null,
+        onClick = onClick,
+        contentDescription = "Series result ${volume.id}"
+    )
 }

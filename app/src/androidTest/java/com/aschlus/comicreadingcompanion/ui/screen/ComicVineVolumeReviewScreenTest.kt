@@ -147,6 +147,10 @@ class ComicVineVolumeReviewScreenTest {
             .assertIsDisplayed()
 
         composeRule
+            .onNodeWithText("Series description")
+            .assertDoesNotExist()
+
+        composeRule
             .onNodeWithText("Amazing Spider-Man")
             .performTextReplacement("Edited Series Title")
 
@@ -155,9 +159,8 @@ class ComicVineVolumeReviewScreenTest {
             viewModel.uiState.value.editedTitle
         )
 
-        composeRule
-            .onNodeWithText("Publisher: Marvel")
-            .assertIsDisplayed()
+        composeRule.onNodeWithText("PUBLISHER").assertIsDisplayed()
+        composeRule.onNodeWithText("Marvel").assertIsDisplayed()
 
         composeRule
             .onNodeWithText("ISSUES")
@@ -168,7 +171,7 @@ class ComicVineVolumeReviewScreenTest {
             .assertIsDisplayed()
 
         composeRule
-            .onNodeWithText("Issue #1")
+            .onNodeWithText("#1")
             .assertIsDisplayed()
 
         composeRule

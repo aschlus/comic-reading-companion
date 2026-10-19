@@ -56,7 +56,6 @@ data class ComicVineVolumeDetails(
     val countOfIssues: Int?,
     val publisherName: String?,
     val siteDetailUrl: String?,
-    val description: String?,
     val imageUrl: String?
 )
 
@@ -77,7 +76,6 @@ data class ComicVineIssueHit(
     val name: String?,
     val coverDate: String?,
     val storeDate: String?,
-    val description: String?,
     val siteDetailUrl: String?,
     val imageUrl: String?
 )
@@ -303,7 +301,7 @@ class ComicVineApiClient(
                 "&format=json" +
                 "&limit=1" +
                 "&field_list=id,name,start_year,count_of_issues," +
-                "publisher,site_detail_url,description,image"
+                "publisher,site_detail_url,image"
 
         val responseBody = try {
             transport.get(requestUrl)
@@ -358,7 +356,6 @@ class ComicVineApiClient(
                 countOfIssues = result.intValue("count_of_issues"),
                 publisherName = publisher?.stringValue("name"),
                 siteDetailUrl = result.stringValue("site_detail_url"),
-                description = result.stringValue("description"),
                 imageUrl = image?.stringValue("super_url")
                     ?: image?.stringValue("original_url")
                     ?: image?.stringValue("medium_url")
@@ -401,7 +398,7 @@ class ComicVineApiClient(
                 "&limit=100" +
                 "&offset=$safeOffset" +
                 "&field_list=id,issue_number,name,cover_date,store_date," +
-                "description,image,site_detail_url"
+                "image,site_detail_url"
 
         val responseBody = try {
             transport.get(requestUrl)
@@ -451,7 +448,6 @@ class ComicVineApiClient(
                     ?.takeIf { it.isNotBlank() },
                 coverDate = issue.stringValue("cover_date"),
                 storeDate = issue.stringValue("store_date"),
-                description = issue.stringValue("description"),
                 siteDetailUrl = issue.stringValue("site_detail_url"),
                 imageUrl = image?.stringValue("super_url")
                     ?: image?.stringValue("original_url")

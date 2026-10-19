@@ -35,6 +35,16 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicMutedInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineVolumeReviewViewModel
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.sp
+import com.aschlus.comicreadingcompanion.ui.theme.ComicBlueLight
 
 @Composable
 fun ComicVineVolumeReviewScreen(
@@ -84,10 +94,25 @@ fun ComicVineVolumeReviewScreen(
 
             uiState.error?.let { error ->
                 item {
-                    Text(
-                        text = error,
-                        color = ComicRed
-                    )
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(6.dp))
+                            .background(ComicRed.copy(alpha = 0.12f))
+                            .border(
+                                width = 2.dp,
+                                color = ComicRed,
+                                shape = RoundedCornerShape(6.dp)
+                            )
+                            .padding(horizontal = 12.dp, vertical = 10.dp)
+                    ) {
+                        Text(
+                            text = error,
+                            color = ComicRed,
+                            fontSize = 13.sp,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    }
                 }
             }
 
@@ -100,50 +125,81 @@ fun ComicVineVolumeReviewScreen(
 
                 item {
                     ReviewInfoCard {
-                        OutlinedTextField(
-                            value = uiState.editedTitle,
-                            onValueChange = viewModel::updateEditedTitle,
-                            label = {
-                                Text("SERIES TITLE")
-                            },
-                            singleLine = true,
-                            modifier = Modifier.fillMaxWidth()
-                        )
+                        Column(
+                            verticalArrangement = Arrangement.spacedBy(6.dp)
+                        ) {
+                            Text(
+                                text = "SERIES TITLE",
+                                color = ComicInk,
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Bold
+                            )
 
-                        Text(
-                            text = "Start year: ${
-                                volume.startYear ?: "Unknown"
-                            }",
-                            color = ComicInk
-                        )
+                            val titleFieldShape = RoundedCornerShape(6.dp)
 
-                        Text(
-                            text = "Publisher: ${
-                                volume.publisherName ?: "Unknown"
-                            }",
-                            color = ComicInk
-                        )
-
-                        Text(
-                            text = "Reported issue count: ${
-                                volume.countOfIssues ?: "Unknown"
-                            }",
-                            color = ComicInk
-                        )
-
-                        Text(
-                            text = "Source ID: ${volume.id}",
-                            color = ComicMutedInk
-                        )
-
-                        volume.description
-                            ?.takeIf { it.isNotBlank() }
-                            ?.let { description ->
-                                Text(
-                                    text = description,
-                                    color = ComicInk
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clip(titleFieldShape)
+                                    .background(ComicPaper)
+                                    .border(
+                                        width = 2.dp,
+                                        color = ComicInk,
+                                        shape = titleFieldShape
+                                    )
+                                    .padding(horizontal = 12.dp, vertical = 12.dp)
+                            ) {
+                                BasicTextField(
+                                    value = uiState.editedTitle,
+                                    onValueChange = viewModel::updateEditedTitle,
+                                    singleLine = true,
+                                    textStyle = TextStyle(
+                                        color = ComicInk,
+                                        fontSize = 16.sp,
+                                        fontWeight = FontWeight.Medium
+                                    ),
+                                    modifier = Modifier.fillMaxWidth()
                                 )
                             }
+                        }
+
+                        Column(
+                            verticalArrangement = Arrangement.spacedBy(12.dp)
+                        ) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                            ) {
+                                ReviewMetadataItem(
+                                    label = "START YEAR",
+                                    value = volume.startYear?.toString() ?: "Unknown",
+                                    modifier = Modifier.weight(1f)
+                                )
+
+                                ReviewMetadataItem(
+                                    label = "PUBLISHER",
+                                    value = volume.publisherName ?: "Unknown",
+                                    modifier = Modifier.weight(1f)
+                                )
+                            }
+
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                            ) {
+                                ReviewMetadataItem(
+                                    label = "REPORTED ISSUES",
+                                    value = volume.countOfIssues?.toString() ?: "Unknown",
+                                    modifier = Modifier.weight(1f)
+                                )
+
+                                ReviewMetadataItem(
+                                    label = "SOURCE ID",
+                                    value = volume.id.toString(),
+                                    modifier = Modifier.weight(1f)
+                                )
+                            }
+                        }
                     }
                 }
 
@@ -157,13 +213,28 @@ fun ComicVineVolumeReviewScreen(
                     Column(
                         verticalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
-                        Text(
-                            text = "Loaded ${uiState.issues.size} of ${
-                                uiState.totalIssueRecords
-                                    ?: "an unknown number of"
-                            } source issue records",
-                            color = ComicInk
-                        )
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clip(RoundedCornerShape(6.dp))
+                                .background(ComicBlueLight)
+                                .border(
+                                    width = 2.dp,
+                                    color = ComicInk,
+                                    shape = RoundedCornerShape(6.dp)
+                                )
+                                .padding(horizontal = 10.dp, vertical = 8.dp)
+                        ) {
+                            Text(
+                                text = "Loaded ${uiState.issues.size} of ${
+                                    uiState.totalIssueRecords
+                                        ?: "an unknown number of"
+                                } source issue records",
+                                color = ComicInk,
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.SemiBold
+                            )
+                        }
 
                         if (uiState.isLoading) {
                             Row(
@@ -193,10 +264,24 @@ fun ComicVineVolumeReviewScreen(
 
                 if (!uiState.isLoading && uiState.issues.isEmpty()) {
                     item {
-                        Text(
-                            text = "No issue records were retrieved.",
-                            color = ComicMutedInk
-                        )
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clip(RoundedCornerShape(6.dp))
+                                .background(ComicPaper)
+                                .border(
+                                    width = 2.dp,
+                                    color = ComicInk,
+                                    shape = RoundedCornerShape(6.dp)
+                                )
+                                .padding(horizontal = 12.dp, vertical = 12.dp)
+                        ) {
+                            Text(
+                                text = "No issues records were retrieved",
+                                color = ComicMutedInk,
+                                fontSize = 13.sp
+                            )
+                        }
                     }
                 }
             }
@@ -208,22 +293,66 @@ fun ComicVineVolumeReviewScreen(
 private fun ReviewInfoCard(
     content: @Composable () -> Unit
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(
-                Color.White,
-                RoundedCornerShape(10.dp)
-            )
-            .border(
-                width = 2.dp,
-                color = ComicInk,
-                shape = RoundedCornerShape(10.dp)
-            )
-            .padding(14.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+    val shape = RoundedCornerShape(10.dp)
+
+    Box(
+        modifier = Modifier.fillMaxWidth()
     ) {
-        content()
+        Box(
+            modifier = Modifier
+                .matchParentSize()
+                .offset(x = 3.dp, y = 4.dp)
+                .background(
+                    color = ComicInk,
+                    shape = shape
+                )
+        )
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(shape)
+                .background(ComicPaper)
+                .border(
+                    width = 2.dp,
+                    color = ComicInk,
+                    shape = shape
+                )
+                .padding(14.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            content()
+        }
+    }
+}
+
+@Composable
+private fun ReviewMetadataItem(
+    label: String,
+    value: String,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(2.dp)
+    ) {
+        Text(
+            text = label,
+            color = ComicMutedInk,
+            fontSize = 11.sp,
+            fontWeight = FontWeight.Bold,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
+        )
+
+        Text(
+            text = value,
+            color = ComicInk,
+            fontSize = 14.sp,
+            fontWeight = FontWeight.SemiBold,
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis
+        )
     }
 }
 
@@ -231,43 +360,115 @@ private fun ReviewInfoCard(
 private fun ReviewIssueRow(
     issue: ComicVineIssueHit
 ) {
-    ReviewInfoCard {
-        Text(
-            text = issue.issueNumber?.let { "Issue #$it" }
-                ?: "Issue number unavailable",
-            color = ComicInk,
-            style = androidx.compose.material3.MaterialTheme
-                .typography.titleMedium
+    val shape = RoundedCornerShape(10.dp)
+    val badgeShape = RoundedCornerShape(6.dp)
+
+    Box(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Box(
+            modifier = Modifier
+                .matchParentSize()
+                .offset(x = 3.dp, y = 4.dp)
+                .background(
+                    color = ComicInk,
+                    shape = shape
+                )
         )
 
-        Text(
-            text = issue.name ?: "Untitled issue",
-            color = ComicInk
-        )
-
-        (issue.coverDate ?: issue.storeDate)
-            ?.takeIf { it.isNotBlank() }
-            ?.let { date ->
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(shape)
+                .background(ComicPaper)
+                .border(
+                    width = 2.dp,
+                    color = ComicInk,
+                    shape = shape
+                )
+                .padding(
+                    horizontal = 10.dp,
+                    vertical = 9.dp
+                ),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Box(
+                modifier = Modifier
+                    .width(52.dp)
+                    .height(64.dp)
+                    .clip(badgeShape)
+                    .background(ComicBlueLight)
+                    .border(
+                        width = 2.dp,
+                        color = ComicInk,
+                        shape = badgeShape
+                    ),
+                contentAlignment = Alignment.Center
+            ) {
                 Text(
-                    text = "Publication date: $date",
-                    color = ComicMutedInk
+                    text  = issue.issueNumber?.let { "#$it" }
+                        ?: "ISSUE",
+                    color = ComicInk,
+                    style = androidx.compose.material3.MaterialTheme
+                        .typography.titleMedium.copy(
+                            fontSize = 15.sp,
+                            lineHeight = 17.sp,
+                            fontWeight = FontWeight.Black
+                        ),
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
                 )
             }
 
-        issue.description
-            ?.takeIf { it.isNotBlank() }
-            ?.let { description ->
+            Spacer(Modifier.width(10.dp))
+
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(2.dp)
+            ) {
                 Text(
-                    text = description,
-                    color = ComicMutedInk
+                    text = issue.name
+                        ?.takeIf { it.isNotBlank() }
+                        ?: "Untitled issue",
+                    color = ComicInk,
+                    style = androidx.compose.material3.MaterialTheme
+                        .typography.titleMedium.copy(
+                            fontSize = 15.sp,
+                            lineHeight = 18.sp,
+                            fontWeight = FontWeight.Bold
+                        ),
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
+                )
+
+                (issue.coverDate ?: issue.storeDate)
+                    ?.takeIf { it.isNotBlank() }
+                    ?.let { date ->
+                        Text(
+                            text = "Publication date: $date",
+                            color = ComicInk.copy(alpha = 0.8f),
+                            style = androidx.compose.material3.MaterialTheme
+                                .typography.bodySmall.copy(
+                                    fontSize = 12.sp,
+                                    lineHeight = 15.sp
+                                ),
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
+
+                Text(
+                    text = "Source ID: ${issue.id}",
+                    color = ComicInk.copy(alpha = 0.7f),
+                    style = androidx.compose.material3.MaterialTheme
+                        .typography.bodySmall.copy(
+                            fontSize = 11.sp,
+                            lineHeight = 14.sp
+                        ),
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
             }
-
-        Text(
-            text = "Source ID: ${issue.id}",
-            color = ComicMutedInk,
-            style = androidx.compose.material3.MaterialTheme
-                .typography.bodySmall
-        )
+        }
     }
 }

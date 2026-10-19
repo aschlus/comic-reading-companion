@@ -9,6 +9,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import org.junit.Assert.assertFalse
 
 @RunWith(AndroidJUnit4::class)
 class ComicVineApiClientTest {
@@ -323,7 +324,6 @@ class ComicVineApiClientTest {
                         "name": "Marvel"
                     },
                     "site_detail_url": "https://example.com/volume",
-                    "description": "Series description",
                     "image": {
                         "super_url": "https://example.com/cover.jpg"
                     }
@@ -344,7 +344,6 @@ class ComicVineApiClientTest {
                     countOfIssues = 441,
                     publisherName = "Marvel",
                     siteDetailUrl = "https://example.com/volume",
-                    description = "Series description",
                     imageUrl = "https://example.com/cover.jpg"
                 )
             ),
@@ -354,6 +353,7 @@ class ComicVineApiClientTest {
         assertTrue(
             transport.requestedUrl!!.contains("/volume/4050-123/")
         )
+        assertFalse(transport.requestedUrl!!.contains("description"))
     }
 
     @Test
@@ -409,7 +409,6 @@ class ComicVineApiClientTest {
                             "name": "Origin",
                             "cover_date": "1963-03-01",
                             "store_date": "1963-01-01",
-                            "description": "Issue description",
                             "site_detail_url": "https://example.com/issue/9001",
                             "image": {
                                 "super_url": "https://example.com/issue.jpg"
@@ -436,7 +435,6 @@ class ComicVineApiClientTest {
                             name = "Origin",
                             coverDate = "1963-03-01",
                             storeDate = "1963-01-01",
-                            description = "Issue description",
                             siteDetailUrl = "https://example.com/issue/9001",
                             imageUrl = "https://example.com/issue.jpg"
                         )
@@ -453,6 +451,7 @@ class ComicVineApiClientTest {
             assertTrue(url.contains("filter=volume%3A123"))
             assertTrue(url.contains("&limit=100&offset=100"))
             assertTrue(url.contains("issue_number"))
+            assertFalse(url.contains("description"))
         }
 
     @Test

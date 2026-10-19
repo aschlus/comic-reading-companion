@@ -51,6 +51,8 @@ import com.aschlus.comicreadingcompanion.ui.component.ComicHomeSectionHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicPrimaryHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicPrimaryHeaderBackButton
 import com.aschlus.comicreadingcompanion.ui.component.ComicPrimaryHeaderTitle
+import com.aschlus.comicreadingcompanion.ui.component.ComicWideActionButton
+import com.aschlus.comicreadingcompanion.ui.theme.ComicBlue
 import com.aschlus.comicreadingcompanion.ui.theme.ComicGreen
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicMutedInk
@@ -146,12 +148,13 @@ fun SettingsScreen(
                 }
             }
 
-            TextButton(
+            ComicWideActionButton(
+                text = "SEARCH SERIES",
+                backgroundColor = ComicPaper,
                 onClick = onSearchSeriesClick,
-                enabled = !uiState.isLoading && !uiState.isSaving
-            ) {
-                Text("SEARCH SERIES")
-            }
+                enabled = !uiState.isLoading && !uiState.isSaving,
+                modifier = Modifier.width(180.dp)
+            )
 
             Text(
                 text = if (uiState.hasSavedApiKey) {
@@ -244,33 +247,31 @@ fun SettingsScreen(
                 }
             }
 
-            Button(
+            ComicWideActionButton(
+                text = when {
+                    uiState.isSaving -> "CHECKING API KEY..."
+                    uiState.hasSavedApiKey -> "REPLACE API KEY"
+                    else ->"SAVE API KEY"
+                },
+                backgroundColor = ComicBlue,
                 onClick = {
                     viewModel.saveApiKey(apiKeyInput)
                 },
-                enabled = !uiState.isLoading && !uiState.isSaving
-            ) {
-                Text(
-                    text = if (uiState.isSaving) {
-                        "CHECKING API KEY..."
-                    } else if (uiState.hasSavedApiKey) {
-                        "REPLACE API KEY"
-                    } else {
-                        "SAVE API KEY"
-                    }
-                )
-            }
+                enabled = !uiState.isLoading && !uiState.isSaving,
+                modifier = Modifier.fillMaxWidth()
+            )
 
             if (uiState.hasSavedApiKey) {
-                TextButton(
+                ComicWideActionButton(
+                    text = "REMOVE API KEY",
+                    backgroundColor = ComicPaper,
                     onClick = {
                         viewModel.clearFeedback()
                         showRemoveConfirmation = true
                     },
-                    enabled = !uiState.isSaving
-                ) {
-                    Text("REMOVE API KEY")
-                }
+                    enabled = !uiState.isSaving,
+                    modifier = Modifier.width(180.dp)
+                )
             }
 
             if (uiState.isSaving) {
