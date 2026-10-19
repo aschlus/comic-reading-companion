@@ -36,6 +36,7 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineVolumeReviewViewModel
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.text.BasicTextField
@@ -44,6 +45,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.sp
+import com.aschlus.comicreadingcompanion.ui.component.ComicCoverImage
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlueLight
 
 @Composable
@@ -392,33 +394,20 @@ private fun ReviewIssueRow(
                 ),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Box(
+            ComicCoverImage(
+                coverUrl = issue.imageUrl,
+                contentDescription = issue.issueNumber?.let {
+                    "Issue #$it cover"
+                } ?: "${issue.name ?: "Issue"} cover",
                 modifier = Modifier
                     .width(52.dp)
-                    .height(64.dp)
-                    .clip(badgeShape)
-                    .background(ComicBlueLight)
-                    .border(
-                        width = 2.dp,
-                        color = ComicInk,
-                        shape = badgeShape
-                    ),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text  = issue.issueNumber?.let { "#$it" }
-                        ?: "ISSUE",
-                    color = ComicInk,
-                    style = androidx.compose.material3.MaterialTheme
-                        .typography.titleMedium.copy(
-                            fontSize = 15.sp,
-                            lineHeight = 17.sp,
-                            fontWeight = FontWeight.Black
-                        ),
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
-                )
-            }
+                    .aspectRatio(2f / 3f),
+                placeholderText = issue.issueNumber?.let {
+                    "#$it"
+                } ?: "No Cover",
+                shape = RoundedCornerShape(4.dp),
+                borderColor = ComicInk
+            )
 
             Spacer(Modifier.width(10.dp))
 
