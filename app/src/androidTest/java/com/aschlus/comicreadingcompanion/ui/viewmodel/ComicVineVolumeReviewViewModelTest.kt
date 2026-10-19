@@ -554,6 +554,12 @@ class ComicVineVolumeReviewViewModelTest {
                 }
             }
 
+            viewModel.updateEditedTitle("The Amazing Spider-Man")
+            viewModel.updateEditedPublisher("Marvel Comics")
+            viewModel.updateEditedVolume("2")
+            viewModel.updateEditedStartYear("1999")
+            viewModel.updateEditedEndYear("2003")
+
             viewModel.selectUniverse(universeId)
             viewModel.importReviewedSeries()
 
@@ -588,7 +594,7 @@ class ComicVineVolumeReviewViewModelTest {
                 )
 
             assertNotNull(importedSeries)
-            assertEquals("Amazing Spider-Man", importedSeries?.title)
+            assertEquals("The Amazing Spider-Man", importedSeries?.title)
             assertEquals(publisherId, importedSeries?.publisherId)
 
             val importedIssues =
@@ -612,7 +618,9 @@ class ComicVineVolumeReviewViewModelTest {
                 )
 
             assertNotNull(importedIssueOne)
-            assertEquals("1", importedIssueOne?.issueNumber)
+            assertEquals(2, importedSeries.volume)
+            assertEquals(1999, importedSeries.startYear)
+            assertEquals(2003, importedSeries.endYear)
             assertEquals("Origin", importedIssueOne?.title)
             assertEquals("1963-03", importedIssueOne?.publicationDate)
             assertEquals(
@@ -621,6 +629,46 @@ class ComicVineVolumeReviewViewModelTest {
             )
             assertEquals(universeId, importedIssueOne?.universeId)
             assertNull(importedIssueOne?.description)
+
+            viewModel.selectUniverse(null)
+            viewModel.importReviewedSeries()
+
+            val noUniverseState =
+                withTimeout(5000L.milliseconds) {
+                    viewModel.uiState.first {
+                        !it.isImporting &&
+                                (
+                                        it.importSuccessMessage != null ||
+                                                it.importError != null
+                                        )
+                    }
+                }
+
+            assertNull(noUniverseState.importError)
+            assertNotNull(noUniverseState.importSuccessMessage)
+
+            val seriesExternalIdAfterReimport =
+                testDatabase.comicDao().getSeriesExternalId(
+                    source = "COMIC_VINE",
+                    externalId = "123"
+                )
+
+            assertNotNull(seriesExternalIdAfterReimport)
+            assertEquals(
+                importedSeries.id,
+                seriesExternalIdAfterReimport!!.seriesId
+            )
+
+            val issuesAfterReimport =
+                testDatabase.comicDao().getIssuesForSeries(importedSeries.id)
+
+            assertEquals(2, issuesAfterReimport.size)
+
+            val issueOneAfterReimport =
+                testDatabase.comicDao().getIssueById(importedIssueOne!!.id)
+
+            assertNotNull(issueOneAfterReimport)
+            assertNull(issueOneAfterReimport?.universeId)
         }
 
     private class FakeTransport : ComicVineHttpTransport {

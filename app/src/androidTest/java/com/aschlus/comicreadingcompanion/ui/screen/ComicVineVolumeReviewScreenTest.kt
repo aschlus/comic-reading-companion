@@ -162,6 +162,12 @@ class ComicVineVolumeReviewScreenTest {
         composeRule.onNodeWithText("PUBLISHER").assertIsDisplayed()
         composeRule.onNodeWithText("Marvel").assertIsDisplayed()
 
+        composeRule.onNodeWithText("VOLUME NUMBER").assertExists()
+        composeRule.onNodeWithText("START YEAR").assertExists()
+        composeRule.onNodeWithText("END YEAR").assertExists()
+        composeRule.onNodeWithText("No universe").assertExists()
+        composeRule.onNodeWithText("IMPORT TO CATALOG").assertExists()
+
         composeRule
             .onNodeWithText("ISSUES")
             .assertIsDisplayed()

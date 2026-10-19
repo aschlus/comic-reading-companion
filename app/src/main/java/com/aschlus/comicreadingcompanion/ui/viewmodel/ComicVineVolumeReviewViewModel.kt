@@ -32,6 +32,10 @@ data class ComicVineVolumeReviewUiState(
     val volumeId: Long? = null,
     val volume: ComicVineVolumeDetails? = null,
     val editedTitle: String = "",
+    val editedPublisher: String = "",
+    val editedVolume: String = "",
+    val editedStartYear: String = "",
+    val editedEndYear: String = "",
     val issues: List<ComicVineIssueHit> = emptyList(),
     val totalIssueRecords: Int? = null,
     val availableUniverses: List<Universe> = emptyList(),
@@ -70,7 +74,41 @@ class ComicVineVolumeReviewViewModel(
 
     fun updateEditedTitle(title: String){
         _uiState.value = _uiState.value.copy(
-            editedTitle = title
+            editedTitle = title,
+            importError = null,
+            importSuccessMessage = null
+        )
+    }
+
+    fun updateEditedPublisher(publisher: String) {
+        _uiState.value = _uiState.value.copy(
+            editedPublisher = publisher,
+            importError = null,
+            importSuccessMessage = null
+        )
+    }
+
+    fun updateEditedVolume(volume: String) {
+        _uiState.value = _uiState.value.copy(
+            editedVolume = volume,
+            importError = null,
+            importSuccessMessage = null
+        )
+    }
+
+    fun updateEditedStartYear(year: String) {
+        _uiState.value = _uiState.value.copy(
+            editedStartYear = year,
+            importError = null,
+            importSuccessMessage = null
+        )
+    }
+
+    fun updateEditedEndYear(year: String) {
+        _uiState.value = _uiState.value.copy(
+            editedEndYear = year,
+            importError = null,
+            importSuccessMessage = null
         )
     }
 
@@ -96,10 +134,9 @@ class ComicVineVolumeReviewViewModel(
         val normalizedName = name.trim()
         val normalizedDesignation = designation.trim()
         val currentState = _uiState.value
-        val publisherName = currentState.volume
-            ?.publisherName
-            ?.trim()
-            ?.takeIf { it.isNotEmpty() }
+        val publisherName = currentState.editedPublisher
+            .trim()
+            .takeIf { it.isNotEmpty() }
 
         when {
             normalizedName.isBlank() -> {
@@ -230,27 +267,86 @@ class ComicVineVolumeReviewViewModel(
             return
         }
 
+        val publisherName = currentState.editedPublisher.trim()
+
+        if (publisherName.isBlank()) {
+            _uiState.value = currentState.copy(
+                importError = "Enter a publisher before importing.",
+                importSuccessMessage = null
+            )
+            return
+        }
+
+        val volumeText = currentState.editedVolume.trim()
+        val seriesVolume =
+            if (volumeText.isBlank()) null else volumeText.toIntOrNull()
+
+        if (volumeText.isNotBlank() &&
+            (seriesVolume == null || seriesVolume < 0)
+        ) {
+            _uiState.value = currentState.copy(
+                importError = "Enter a valid non-negative volume number, or leave it blank.",
+                importSuccessMessage = null
+            )
+            return
+        }
+
+        val startYearText = currentState.editedStartYear.trim()
+        val seriesStartYear =
+            if (startYearText.isBlank()) null else startYearText.toIntOrNull()
+
+        if (startYearText.isNotBlank() &&
+            (seriesStartYear == null || seriesStartYear < 0)
+        ) {
+            _uiState.value = currentState.copy(
+                importError = "Enter a valid start year, or leave it blank.",
+                importSuccessMessage = null
+            )
+            return
+        }
+
+        val endYearText = currentState.editedEndYear.trim()
+        val seriesEndYear =
+            if (endYearText.isBlank()) null else endYearText.toIntOrNull()
+
+        if (endYearText.isNotBlank() &&
+            (seriesEndYear == null || seriesEndYear < 0)
+        ) {
+            _uiState.value = currentState.copy(
+                importError = "Enter a valid end year, or leave it blank.",
+                importSuccessMessage = null
+            )
+            return
+        }
+
         val selectedUniverse =
-            currentState.availableUniverses.firstOrNull { universe ->
-                universe.id == currentState.selectedUniverseId
+            currentState.selectedUniverseId?.let { universeId ->
+                currentState.availableUniverses.firstOrNull {
+                    it.id == universeId
+                }
             }
 
-        if (selectedUniverse == null) {
-            _uiState.value == currentState.copy(
-                importError = "Select a universe before importing.",
+        if (currentState.selectedUniverseId != null &&
+            selectedUniverse == null
+        ) {
+            _uiState.value = currentState.copy(
+                importError =
+                    "The selected universe is no longer available. " +
+                    "Select a universe of choose no universe.",
                 importSuccessMessage = null
             )
             return
         }
 
         val universeDesignation =
-            selectedUniverse.designation
+            selectedUniverse?.designation
                 ?.trim()
                 ?.takeIf { it.isNotBlank() }
 
-        if (universeDesignation == null) {
+        if (selectedUniverse != null && universeDesignation == null) {
             _uiState.value = currentState.copy(
-                importError = "The selected universe needs a continuity designation.",
+                importError = "The selected universe has no continuity designation. " +
+                        "Choose another universe or choose no universe.",
                 importSuccessMessage = null
             )
             return
@@ -259,7 +355,9 @@ class ComicVineVolumeReviewViewModel(
         val repository = comicRepository
         val importer = comicCatalogImporter
 
-        if (repository == null || importer == null) {
+        if (importer == null ||
+            (selectedUniverse != null && repository == null)
+        ) {
             _uiState.value = currentState.copy(
                 importError = "Catalog importing is unavailable.",
                 importSuccessMessage = null
@@ -275,12 +373,30 @@ class ComicVineVolumeReviewViewModel(
 
         viewModelScope.launch {
             try {
-                val publisher =
-                    repository.getPublishers().firstOrNull { publisher ->
-                        publisher.id == selectedUniverse.publisherId
-                    } ?: throw IllegalStateException(
-                        "The selected universe's publisher could not be found."
-                    )
+                if (selectedUniverse != null) {
+                    val universePublisher =
+                        checkNotNull(repository)
+                            .getPublishers()
+                            .firstOrNull { it.id == selectedUniverse.publisherId }
+
+                    if (universePublisher == null) {
+                        _uiState.value = _uiState.value.copy(
+                            isImporting = false,
+                            importError = "The selected universe's publisher could not be found.",
+                            importSuccessMessage = null
+                        )
+                        return@launch
+                    }
+
+                    if (!universePublisher.name.equals(publisherName, ignoreCase = true)) {
+                        _uiState.value = _uiState.value.copy(
+                            isImporting = false,
+                            importError = "The selected universe belongs to ${universePublisher.name}. Update the publisher or choose no universe.",
+                            importSuccessMessage = null
+                        )
+                        return@launch
+                    }
+                }
 
                 val importedIssues =
                     currentState.issues.mapNotNull { issue ->
@@ -314,20 +430,24 @@ class ComicVineVolumeReviewViewModel(
 
                 val importData =
                     ComicCatalogImportDto(
-                        publisher = publisher.name,
-                        universes = listOf(
-                            CatalogUniverseImportDto(
-                                name = selectedUniverse.name,
-                                designation = universeDesignation,
-                                description = selectedUniverse.description
+                        publisher = publisherName,
+                        universes = if (selectedUniverse != null) {
+                            listOf(
+                                CatalogUniverseImportDto(
+                                    name = selectedUniverse.name,
+                                    designation = checkNotNull(universeDesignation),
+                                    description = selectedUniverse.description
+                                )
                             )
-                        ),
+                        } else {
+                            emptyList()
+                        },
                         series = listOf(
                             CatalogSeriesImportDto(
                                 title = title,
-                                volume = null,
-                                startYear = volume.startYear,
-                                endYear = null,
+                                volume = seriesVolume,
+                                startYear = seriesStartYear,
+                                endYear = seriesEndYear,
                                 externalIds = listOf(
                                     CatalogExternalIdImportDto(
                                         source = "COMIC_VINE",
@@ -458,7 +578,11 @@ class ComicVineVolumeReviewViewModel(
 
                 _uiState.value = _uiState.value.copy(
                     volume = volume,
-                    editedTitle = volume.name
+                    editedTitle = volume.name,
+                    editedPublisher = volume.publisherName.orEmpty(),
+                    editedVolume = "",
+                    editedStartYear = volume.startYear?.toString().orEmpty(),
+                    editedEndYear = ""
                 )
 
                 val allIssues = mutableListOf<ComicVineIssueHit>()

@@ -18,6 +18,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -32,6 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -192,16 +194,40 @@ fun ComicVineVolumeReviewScreen(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.spacedBy(12.dp)
                             ) {
-                                ReviewMetadataItem(
-                                    label = "START YEAR",
-                                    value = volume.startYear?.toString() ?: "Unknown",
+                                ReviewEditableMetadataField(
+                                    label = "PUBLISHER",
+                                    value = uiState.editedPublisher,
+                                    onValueChange = viewModel::updateEditedPublisher,
                                     modifier = Modifier.weight(1f)
                                 )
 
-                                ReviewMetadataItem(
-                                    label = "PUBLISHER",
-                                    value = volume.publisherName ?: "Unknown",
-                                    modifier = Modifier.weight(1f)
+                                ReviewEditableMetadataField(
+                                    label = "VOLUME NUMBER",
+                                    value = uiState.editedVolume,
+                                    onValueChange = viewModel::updateEditedVolume,
+                                    modifier = Modifier.weight(1f),
+                                    keyboardType = KeyboardType.Number
+                                )
+                            }
+
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                            ) {
+                                ReviewEditableMetadataField(
+                                    label = "START YEAR",
+                                    value = uiState.editedStartYear,
+                                    onValueChange = viewModel::updateEditedStartYear,
+                                    modifier = Modifier.weight(1f),
+                                    keyboardType = KeyboardType.Number
+                                )
+
+                                ReviewEditableMetadataField(
+                                    label = "END YEAR",
+                                    value = uiState.editedEndYear,
+                                    onValueChange = viewModel::updateEditedEndYear,
+                                    modifier = Modifier.weight(1f),
+                                    keyboardType = KeyboardType.Number
                                 )
                             }
 
@@ -240,12 +266,23 @@ fun ComicVineVolumeReviewScreen(
                                     universe.designation?.let { designation ->
                                         "${universe.name} ($designation)"
                                     } ?: universe.name
-                                } ?: "Select a universe",
+                                } ?: if (uiState.selectedUniverseId == null) {
+                                    "No universe"
+                                } else {
+                                    "Select a universe"
+                                },
                                 expanded = universeMenuExpanded,
                                 onExpandedChange = {
                                     universeMenuExpanded = it
                                 }
                             ) {
+                                ComicFormDropdownOption(
+                                    text = "NO UNIVERSE",
+                                    onClick = {
+                                        viewModel.selectUniverse(null)
+                                        universeMenuExpanded = false
+                                    }
+                                )
                                 ComicFormDropdownOption(
                                     text = "CREATE NEW UNIVERSE...",
                                     onClick = {
@@ -298,15 +335,18 @@ fun ComicVineVolumeReviewScreen(
                                 },
                                 backgroundColor = ComicBlueLight,
                                 onClick = viewModel::importReviewedSeries,
-                                enabled = uiState.volume != null &&
-                                    !uiState.isLoading &&
+                                enabled = !uiState.isLoading &&
                                     !uiState.isImporting &&
                                     !uiState.isCreatingUniverse &&
                                     uiState.editedTitle.isNotBlank() &&
-                                    uiState.availableUniverses.any { universe ->
-                                        universe.id == uiState.selectedUniverseId &&
-                                            !universe.designation.isNullOrBlank()
-                                    }
+                                    uiState.editedPublisher.isNotBlank() &&
+                                    (
+                                        uiState.selectedUniverseId == null ||
+                                            uiState.availableUniverses.any { universe ->
+                                                universe.id == uiState.selectedUniverseId &&
+                                                    !universe.designation.isNullOrBlank()
+                                            }
+                                    )
                             )
 
                             if (uiState.isImporting) {
@@ -496,6 +536,62 @@ private fun ReviewInfoCard(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             content()
+        }
+    }
+}
+
+@Composable
+private fun ReviewEditableMetadataField(
+    label: String,
+    value: String,
+    onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    keyboardType: KeyboardType = KeyboardType.Text
+) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(4.dp)
+    ) {
+        Text(
+            text = label,
+            color = ComicMutedInk,
+            fontSize = 11.sp,
+            fontWeight = FontWeight.Bold,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
+        )
+
+        val fieldShape = RoundedCornerShape(6.dp)
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(fieldShape)
+                .background(ComicPaper)
+                .border(
+                    width = 2.dp,
+                    color = ComicInk,
+                    shape = fieldShape
+                )
+                .padding(
+                    horizontal = 10.dp,
+                    vertical = 11.dp
+                )
+        ) {
+            BasicTextField(
+                value = value,
+                onValueChange = onValueChange,
+                singleLine = true,
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = keyboardType
+                ),
+                textStyle = TextStyle(
+                    color = ComicInk,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Medium
+                ),
+                modifier = Modifier.fillMaxWidth()
+            )
         }
     }
 }
