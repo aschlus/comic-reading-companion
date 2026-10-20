@@ -341,6 +341,10 @@ class ComicCatalogImporter(
                 }
             }
 
+        val preserveExistingManualOverride =
+            issue.isIssueTypeManuallyOverridden &&
+                !issueData.isIssueTypeManuallyOverridden
+
         val updatedIssue =
             issue.copy(
                 universeId = universeId,
@@ -349,7 +353,15 @@ class ComicCatalogImporter(
                 publicationDate = issueData.publicationDate,
                 coverUrl = issueData.coverUrl,
                 description = issueData.description ?: issue.description,
-                issueType = issueType
+                issueType =
+                    if (preserveExistingManualOverride) {
+                        issue.issueType
+                    } else {
+                        issueType
+                    },
+                isIssueTypeManuallyOverridden =
+                    issue.isIssueTypeManuallyOverridden ||
+                    issueData.isIssueTypeManuallyOverridden
             )
 
         if (updatedIssue != issue) {

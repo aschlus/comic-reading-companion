@@ -2,6 +2,7 @@ package com.aschlus.comicreadingcompanion.ui.screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -19,7 +21,10 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,17 +36,21 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.aschlus.comicreadingcompanion.data.database.entities.IssueType
 import com.aschlus.comicreadingcompanion.data.remote.ComicVineIssueHit
 import com.aschlus.comicreadingcompanion.ui.component.ComicCoverImage
 import com.aschlus.comicreadingcompanion.ui.component.ComicFormDialog
 import com.aschlus.comicreadingcompanion.ui.component.ComicFormDropdownField
 import com.aschlus.comicreadingcompanion.ui.component.ComicFormDropdownOption
+import com.aschlus.comicreadingcompanion.ui.component.ComicFormDropdownOptions
 import com.aschlus.comicreadingcompanion.ui.component.ComicHomeSectionHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicPrimaryHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicPrimaryHeaderBackButton
@@ -52,6 +61,7 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicMutedInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
+import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineIssueTypeInference
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineVolumeReviewViewModel
 
 @Composable
@@ -444,7 +454,23 @@ fun ComicVineVolumeReviewScreen(
                     items = uiState.issues,
                     key = { issue -> issue.id }
                 ) { issue ->
-                    ReviewIssueRow(issue)
+                    val issueType =
+                        uiState.issueTypeOverrides[issue.id]
+                            ?: IssueType.valueOf(
+                                ComicVineIssueTypeInference.infer(issue)
+                            )
+
+                    ReviewIssueRow(
+                        issue = issue,
+                        issueType = issueType,
+                        enabled = !uiState.isImporting,
+                        onIssueTypeSelected = { selectedType ->
+                            viewModel.updateIssueType(
+                                issueId = issue.id,
+                                issueType = selectedType
+                            )
+                        }
+                    )
                 }
 
                 if (!uiState.isLoading && uiState.issues.isEmpty()) {
@@ -628,10 +654,12 @@ private fun ReviewMetadataItem(
 
 @Composable
 private fun ReviewIssueRow(
-    issue: ComicVineIssueHit
+    issue: ComicVineIssueHit,
+    issueType: IssueType,
+    enabled: Boolean,
+    onIssueTypeSelected: (IssueType) -> Unit
 ) {
     val shape = RoundedCornerShape(10.dp)
-    val badgeShape = RoundedCornerShape(6.dp)
 
     Box(
         modifier = Modifier.fillMaxWidth()
@@ -725,7 +753,101 @@ private fun ReviewIssueRow(
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
+
+                ReviewIssueTypeSelector(
+                    issueId = issue.id,
+                    issueType = issueType,
+                    enabled = enabled,
+                    onIssueTypeSelected = onIssueTypeSelected
+                )
             }
         }
+    }
+}
+
+@Composable
+private fun ReviewIssueTypeSelector(
+    issueId: Long,
+    issueType: IssueType,
+    enabled: Boolean,
+    onIssueTypeSelected: (IssueType) -> Unit
+) {
+    var expanded by rememberSaveable(issueId) {
+        mutableStateOf(false)
+    }
+
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(3.dp)
+    ) {
+        Text(
+            text = "ISSUE TYPE",
+            color = ComicMutedInk,
+            fontSize = 10.sp,
+            fontWeight = FontWeight.Bold
+        )
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(36.dp)
+                .clip(RoundedCornerShape(6.dp))
+                .background(Color.White)
+                .border(
+                    width = 2.dp,
+                    color = ComicInk,
+                    shape = RoundedCornerShape(6.dp)
+                )
+                .clickable(enabled = enabled) {
+                    expanded = !expanded
+                }
+                .testTag("issue-type-selector-$issueId")
+                .padding(horizontal = 8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = issueType.displayLabel(),
+                modifier = Modifier.weight(1f),
+                color = ComicInk,
+                fontSize = 12.sp,
+                fontWeight = FontWeight.SemiBold,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+
+            Icon(
+                imageVector = Icons.Default.ArrowDropDown,
+                contentDescription = null,
+                tint = ComicInk,
+                modifier = Modifier.size(22.dp)
+            )
+        }
+
+        if (expanded) {
+            ComicFormDropdownOptions(
+                modifier = Modifier.padding(top = 2.dp)
+            ) {
+                IssueType.values().forEach { option ->
+                    ComicFormDropdownOption(
+                        text = option.displayLabel(),
+                        onClick = {
+                            onIssueTypeSelected(option)
+                            expanded = false
+                        }
+                    )
+                }
+            }
+        }
+    }
+}
+
+private fun IssueType.displayLabel(): String {
+    return when (this) {
+        IssueType.REGULAR -> "Regular"
+        IssueType.ANNUAL -> "Annual"
+        IssueType.SPECIAL -> "Special"
+        IssueType.ONE_SHOT -> "One-shot"
+        IssueType.GIANT_SIZE -> "Giant-size"
+        IssueType.PREVIEW -> "Preview"
     }
 }

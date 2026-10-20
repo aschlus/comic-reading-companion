@@ -122,7 +122,8 @@ class ComicAppBackupRestorerTest {
                         publicationDate = "1999-01",
                         coverUrl = "https://example.com/cover.jpg",
                         description = null,
-                        issueType = IssueType.REGULAR
+                        issueType = IssueType.REGULAR,
+                        isIssueTypeManuallyOverridden = true
                     )
                 )
 
@@ -286,6 +287,9 @@ class ComicAppBackupRestorerTest {
             assertEquals(
                 universeId,
                 actual.issues.single().universeId
+            )
+            assertTrue(
+                actual.issues.single().isIssueTypeManuallyOverridden
             )
             assertEquals(
                 "series-12345",

@@ -181,3 +181,19 @@ val MIGRATION_4_5 =
             )
         }
     }
+
+val MIGRATION_5_6 =
+    object: Migration(
+        startVersion = 5,
+        endVersion = 6
+    ) {
+        override suspend fun migrate(connection: SQLiteConnection) {
+            connection.execSQL(
+                """
+                    ALTER TABLE issues
+                    ADD COLUMN isIssueTypeManuallyOverridden
+                    INTEGER NOT NULL DEFAULT 0
+                """.trimIndent()
+            )
+        }
+    }

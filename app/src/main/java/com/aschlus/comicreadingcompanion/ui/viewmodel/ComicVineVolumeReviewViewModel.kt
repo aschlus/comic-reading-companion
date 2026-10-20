@@ -2,6 +2,7 @@ package com.aschlus.comicreadingcompanion.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.aschlus.comicreadingcompanion.data.database.entities.IssueType
 import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
 import com.aschlus.comicreadingcompanion.data.database.entities.Universe
 import com.aschlus.comicreadingcompanion.data.preferences.ComicVineApiKeyStore
@@ -37,6 +38,7 @@ data class ComicVineVolumeReviewUiState(
     val editedStartYear: String = "",
     val editedEndYear: String = "",
     val issues: List<ComicVineIssueHit> = emptyList(),
+    val issueTypeOverrides: Map<Long, IssueType> = emptyMap(),
     val totalIssueRecords: Int? = null,
     val availableUniverses: List<Universe> = emptyList(),
     val selectedUniverseId: Long? = null,
@@ -124,6 +126,27 @@ class ComicVineVolumeReviewViewModel(
 
         _uiState.value = _uiState.value.copy(
             selectedUniverseId = universeId
+        )
+    }
+
+    fun updateIssueType(
+        issueId: Long,
+        issueType: IssueType
+    ) {
+        val currentState = _uiState.value
+
+        if (
+            currentState.isImporting ||
+            currentState.issues.none { it.id == issueId }
+        ) {
+            return
+        }
+
+        _uiState.value = currentState.copy(
+            issueTypeOverrides = currentState.issueTypeOverrides +
+                (issueId to issueType),
+            importError = null,
+            importSuccessMessage = null
         )
     }
 
@@ -416,7 +439,10 @@ class ComicVineVolumeReviewViewModel(
                                     ?: normalizeCatalogPublicationDate(issue.storeDate),
                             coverUrl = issue.imageUrl,
                             description = null,
-                            type = ComicVineIssueTypeInference.infer(issue),
+                            type = currentState.issueTypeOverrides[issue.id]?.name
+                                ?: ComicVineIssueTypeInference.infer(issue),
+                            isIssueTypeManuallyOverridden =
+                                issue.id in currentState.issueTypeOverrides,
                             universeDesignation = universeDesignation,
                             externalIds = listOf(
                                 CatalogExternalIdImportDto(
@@ -559,6 +585,16 @@ class ComicVineVolumeReviewViewModel(
         )
     }
 
+    private suspend fun loadManualIssueTypeOverrides(
+        issues: List<ComicVineIssueHit>
+    ): Map<Long, IssueType> {
+        val repository = comicRepository ?: return emptyMap()
+
+        return repository.getManualIssueTypeOverridesForComicVineIssues(
+            comicVineIssueIds = issues.map { it.id }
+        )
+    }
+
     fun load(
         volumeId: Long,
         selectedVolume: ComicVineVolumeSearchHit? = null
@@ -656,6 +692,7 @@ class ComicVineVolumeReviewViewModel(
                             _uiState.value = _uiState.value.copy(
                                 isLoading = false,
                                 issues = sortIssuesByPublicationDate(allIssues),
+                                issueTypeOverrides = loadManualIssueTypeOverrides(allIssues),
                                 totalIssueRecords = totalRecords,
                                 error = issueErrorMessage(pageOutcome)
                             )
@@ -685,6 +722,7 @@ class ComicVineVolumeReviewViewModel(
                     isLoading = false,
                     volume = volume,
                     issues = sortIssuesByPublicationDate(allIssues),
+                    issueTypeOverrides = loadManualIssueTypeOverrides(allIssues),
                     totalIssueRecords = totalRecords,
                     error = null
                 )

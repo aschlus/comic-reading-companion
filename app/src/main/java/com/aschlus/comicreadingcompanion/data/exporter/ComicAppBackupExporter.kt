@@ -84,7 +84,9 @@ class ComicAppBackupExporter(
                         publicationDate = issue.publicationDate,
                         coverUrl = issue.coverUrl,
                         description = issue.description,
-                        issueType = issue.issueType.name
+                        issueType = issue.issueType.name,
+                        isIssueTypeManuallyOverridden =
+                            issue.isIssueTypeManuallyOverridden
                     )
                 },
 

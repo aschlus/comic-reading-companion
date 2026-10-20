@@ -74,7 +74,8 @@ data class BackupIssueDto(
     val publicationDate: String?,
     val coverUrl: String?,
     val description: String?,
-    val issueType: String
+    val issueType: String,
+    val isIssueTypeManuallyOverridden: Boolean = false
 )
 
 @Serializable

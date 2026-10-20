@@ -7,6 +7,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.aschlus.comicreadingcompanion.data.database.ComicDao
 import com.aschlus.comicreadingcompanion.data.database.ComicDatabase
+import com.aschlus.comicreadingcompanion.data.database.entities.IssueType
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingProgress
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.importer.models.CatalogExternalIdImportDto
@@ -148,6 +149,58 @@ class ComicCatalogImporterTest {
                 )
         )
     }
+
+    @Test
+    fun catalogImport_preservesManualIssueTypeOverrideWhenReimportedWithoutOverride() =
+        runBlocking {
+            val originalCatalog = createCatalog()
+
+            val manuallyOverriddenCatalog =
+                originalCatalog.copy(
+                    series = originalCatalog.series.map { seriesData ->
+                        seriesData.copy(
+                            issues = seriesData.issues.map { issueData ->
+                                issueData.copy(
+                                    type = IssueType.ONE_SHOT.name,
+                                    isIssueTypeManuallyOverridden = true
+                                )
+                            }
+                        )
+                    }
+                )
+
+            importer.import(manuallyOverriddenCatalog)
+
+            val externalId = comicDao.getExternalId(
+                source = "COMIC_VINE",
+                externalId = "100001"
+            )
+
+            assertNotNull(externalId)
+
+            val issueBefore =
+                comicDao.getIssueById(externalId!!.issueId)
+
+            assertNotNull(issueBefore)
+            assertEquals(
+                IssueType.ONE_SHOT,
+                issueBefore!!.issueType
+            )
+            assertTrue(issueBefore.isIssueTypeManuallyOverridden)
+
+            // The ordinary catalog has REGULAR and no manual override.
+            importer.import(originalCatalog)
+
+            val issueAfter =
+                comicDao.getIssueById(issueBefore.id)
+
+            assertNotNull(issueAfter)
+            assertEquals(
+                IssueType.ONE_SHOT,
+                issueAfter!!.issueType
+            )
+            assertTrue(issueAfter.isIssueTypeManuallyOverridden)
+        }
 
     @Test
     fun validCatalog_importsCatalogEntitiesAndExternalIds() =

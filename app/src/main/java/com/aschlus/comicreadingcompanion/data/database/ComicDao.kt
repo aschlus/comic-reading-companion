@@ -21,6 +21,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.Universe
 import com.aschlus.comicreadingcompanion.data.database.models.IssueDetail
 import com.aschlus.comicreadingcompanion.data.database.models.IssueReadingListResult
 import com.aschlus.comicreadingcompanion.data.database.models.IssueSearchResult
+import com.aschlus.comicreadingcompanion.data.database.models.ManualIssueTypeOverride
 import com.aschlus.comicreadingcompanion.data.database.models.OwnedIssueResult
 import com.aschlus.comicreadingcompanion.data.database.models.PublisherBrowseResult
 import com.aschlus.comicreadingcompanion.data.database.models.PublisherSeries
@@ -756,6 +757,21 @@ interface ComicDao {
         source: String,
         externalId: String
     ): ExternalId?
+
+    @Query("""
+        SELECT
+            external_ids.externalId AS externalId,
+            issues.issueType AS issueType
+        FROM external_ids
+        INNER JOIN issues
+            ON external_ids.issueId = issues.id
+        WHERE external_ids.source = :source
+            AND issues.isIssueTypeManuallyOverridden = 1
+        ORDER BY external_ids.externalId ASC
+    """)
+    suspend fun getManualIssueTypeOverrides(
+        source: String
+    ): List<ManualIssueTypeOverride>
 
 
     // Reading progress

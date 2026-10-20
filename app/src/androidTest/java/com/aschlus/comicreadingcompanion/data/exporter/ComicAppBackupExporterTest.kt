@@ -108,7 +108,8 @@ class ComicAppBackupExporterTest {
                         publicationDate = "1999-01",
                         coverUrl = "https://example.com/cover.jpg",
                         description = "Existing description",
-                        issueType = IssueType.REGULAR
+                        issueType = IssueType.REGULAR,
+                        isIssueTypeManuallyOverridden = true
                     )
                 )
 
@@ -208,6 +209,9 @@ class ComicAppBackupExporterTest {
             assertEquals(
                 "Existing description",
                 backup.issues.single().description
+            )
+            assertTrue(
+                backup.issues.single().isIssueTypeManuallyOverridden
             )
             assertEquals(
                 seriesId,

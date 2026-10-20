@@ -134,7 +134,9 @@ class ComicAppBackupRestorer(
                     publicationDate = item.publicationDate,
                     coverUrl = item.coverUrl,
                     description = item.description,
-                    issueType = IssueType.valueOf(item.issueType)
+                    issueType = IssueType.valueOf(item.issueType),
+                    isIssueTypeManuallyOverridden =
+                        item.isIssueTypeManuallyOverridden
                 )
             }
         )

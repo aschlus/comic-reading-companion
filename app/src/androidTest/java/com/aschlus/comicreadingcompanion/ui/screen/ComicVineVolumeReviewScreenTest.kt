@@ -5,14 +5,18 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.hasScrollAction
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
+import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performTextReplacement
 import androidx.compose.ui.test.printToLog
 import androidx.lifecycle.viewModelScope
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.aschlus.comicreadingcompanion.data.database.entities.IssueType
 import com.aschlus.comicreadingcompanion.data.preferences.ComicVineApiKeyStore
 import com.aschlus.comicreadingcompanion.data.remote.ComicVineApiClient
 import com.aschlus.comicreadingcompanion.data.remote.ComicVineHttpTransport
@@ -185,6 +189,60 @@ class ComicVineVolumeReviewScreenTest {
             .assertIsDisplayed()
 
         assertEquals(2, transport.requestedUrls.size)
+    }
+
+    @Test
+    fun reviewScreen_allowsChangingIssueType() {
+        composeRule.setContent {
+            ComicReadingCompanionTheme(
+                dynamicColor = false
+            ) {
+                ComicVineVolumeReviewScreen(
+                    viewModel = viewModel,
+                    onBackClick = {}
+                )
+            }
+        }
+
+        viewModel.load(123L)
+
+        composeRule.waitUntil(timeoutMillis = 5000L) {
+            !viewModel.uiState.value.isLoading &&
+                    viewModel.uiState.value.volume != null &&
+                    viewModel.uiState.value.issues.size == 1
+        }
+
+        composeRule
+            .onNodeWithText("ISSUE TYPE")
+            .performScrollTo()
+
+        composeRule
+            .onNodeWithTag("issue-type-selector-1001")
+            .performScrollTo()
+            .performClick()
+
+        composeRule
+            .onNodeWithText("Annual")
+            .performScrollTo()
+            .performClick()
+
+        assertEquals(
+            IssueType.ANNUAL,
+            viewModel.uiState.value.issueTypeOverrides[1001L]
+        )
+
+        composeRule
+            .onNodeWithText("Annual")
+            .assertIsDisplayed()
+
+        assertEquals(
+            IssueType.ANNUAL,
+            viewModel.uiState.value.issueTypeOverrides[1001L]
+        )
+
+        composeRule
+            .onNodeWithText("Annual")
+            .assertIsDisplayed()
     }
 
     private class FakeTransport(

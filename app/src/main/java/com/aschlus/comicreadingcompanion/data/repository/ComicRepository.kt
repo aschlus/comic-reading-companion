@@ -6,6 +6,7 @@ import com.aschlus.comicreadingcompanion.data.database.ComicDatabase
 import com.aschlus.comicreadingcompanion.data.database.entities.ExternalId
 import com.aschlus.comicreadingcompanion.data.database.entities.Issue
 import com.aschlus.comicreadingcompanion.data.database.entities.IssueOwnership
+import com.aschlus.comicreadingcompanion.data.database.entities.IssueType
 import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListItem
@@ -1316,6 +1317,27 @@ class ComicRepository(
             source = source,
             externalId = externalId
         )
+    }
+
+    suspend fun getManualIssueTypeOverridesForComicVineIssues(
+        comicVineIssueIds: List<Long>
+    ): Map<Long, IssueType> {
+        val requestedIds = comicVineIssueIds.toSet()
+
+        if (requestedIds.isEmpty()) {
+            return emptyMap()
+        }
+
+        return comicDao.getManualIssueTypeOverrides(
+            source = "COMIC_VINE"
+        ).mapNotNull { savedOverride ->
+            savedOverride.externalId
+                .toLongOrNull()
+                ?.takeIf { it in requestedIds }
+                ?.let { comicVineIssueId ->
+                    comicVineIssueId to savedOverride.issueType
+                }
+        }.toMap()
     }
 
     private suspend fun resolveReadingListUniverseId(

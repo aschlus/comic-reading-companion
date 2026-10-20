@@ -1515,4 +1515,93 @@ class ComicDatabaseMigrationTest {
             migrated.close()
         }
     }
+
+    @Test
+    fun migration5To6_addsManualOverrideFlagAndDefaultsExistingIssuesToFalse() =
+        runBlocking {
+            val connection =
+                migrationHelper.createDatabase(5)
+
+            connection.execSQL(
+                """
+            INSERT INTO publishers (
+                id,
+                name
+            )
+            VALUES (
+                1,
+                'Marvel Comics'
+            )
+            """.trimIndent()
+            )
+
+            connection.execSQL(
+                """
+            INSERT INTO series (
+                id,
+                publisherId,
+                title,
+                volume,
+                startYear,
+                endYear
+            )
+            VALUES (
+                1,
+                1,
+                'Amazing Spider-Man',
+                2,
+                1999,
+                2003
+            )
+            """.trimIndent()
+            )
+
+            connection.execSQL(
+                """
+            INSERT INTO issues (
+                id,
+                seriesId,
+                universeId,
+                issueNumber,
+                title,
+                publicationDate,
+                coverUrl,
+                description,
+                issueType
+            )
+            VALUES (
+                1,
+                1,
+                NULL,
+                '1',
+                'Existing Issue',
+                NULL,
+                NULL,
+                NULL,
+                'REGULAR'
+            )
+            """.trimIndent()
+            )
+
+            connection.close()
+
+            val migrated =
+                migrationHelper.runMigrationsAndValidate(
+                    version = 6,
+                    migrations = listOf(MIGRATION_5_6)
+                )
+
+            migrated.prepare(
+                """
+            SELECT isIssueTypeManuallyOverridden
+            FROM issues
+            WHERE id = 1
+            """.trimIndent()
+            ).use { statement ->
+                assertTrue(statement.step())
+                assertEquals(0L, statement.getLong(0))
+            }
+
+            migrated.close()
+        }
 }

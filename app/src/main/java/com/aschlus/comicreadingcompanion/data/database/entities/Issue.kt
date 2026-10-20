@@ -1,5 +1,6 @@
 package com.aschlus.comicreadingcompanion.data.database.entities
 
+import androidx.room3.ColumnInfo
 import androidx.room3.Entity
 import androidx.room3.ForeignKey
 import androidx.room3.Index
@@ -36,7 +37,10 @@ data class Issue(
     val publicationDate: String?,
     val coverUrl: String?,
     val description: String?,
-    val issueType: IssueType
+    val issueType: IssueType,
+
+    @ColumnInfo(defaultValue = "0")
+    val isIssueTypeManuallyOverridden: Boolean = false
 )
 
 enum class IssueType {

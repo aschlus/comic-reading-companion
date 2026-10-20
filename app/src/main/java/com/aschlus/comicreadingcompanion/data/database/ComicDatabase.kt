@@ -30,7 +30,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.Universe
         ReadingProgress::class,
         IssueOwnership::class
     ],
-    version = 5,
+    version = 6,
     exportSchema = true
 )
 abstract class ComicDatabase : RoomDatabase() {
@@ -52,7 +52,8 @@ abstract class ComicDatabase : RoomDatabase() {
                         MIGRATION_1_2,
                         MIGRATION_2_3,
                         MIGRATION_3_4,
-                        MIGRATION_4_5
+                        MIGRATION_4_5,
+                        MIGRATION_5_6
                     )
                     .build()
 

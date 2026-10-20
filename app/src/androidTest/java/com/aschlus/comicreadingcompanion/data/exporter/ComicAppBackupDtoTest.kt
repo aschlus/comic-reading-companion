@@ -54,7 +54,8 @@ class ComicAppBackupDtoTest {
                     publicationDate = "1999-01",
                     coverUrl = "https://example.com/cover.jpg",
                     description = "Existing description",
-                    issueType = "REGULAR"
+                    issueType = "REGULAR",
+                    isIssueTypeManuallyOverridden = true
                 )
             ),
             issueExternalIds = listOf(

@@ -35,7 +35,8 @@ data class CatalogIssueImportDto(
     val description: String?,
     val type: String,
     val universeDesignation: String? = null,
-    val externalIds: List<CatalogExternalIdImportDto> = emptyList()
+    val externalIds: List<CatalogExternalIdImportDto> = emptyList(),
+    val isIssueTypeManuallyOverridden: Boolean = false
 )
 
 @Serializable
