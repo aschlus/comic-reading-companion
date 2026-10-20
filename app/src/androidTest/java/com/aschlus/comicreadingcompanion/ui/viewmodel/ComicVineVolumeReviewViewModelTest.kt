@@ -28,9 +28,11 @@ import java.io.IOException
 import kotlin.time.Duration.Companion.milliseconds
 import androidx.room3.Room
 import com.aschlus.comicreadingcompanion.data.database.ComicDatabase
+import com.aschlus.comicreadingcompanion.data.database.entities.IssueType
 import com.aschlus.comicreadingcompanion.data.repository.ComicRepository
 import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
 import com.aschlus.comicreadingcompanion.data.importer.ComicCatalogImporter
+import com.aschlus.comicreadingcompanion.data.remote.ComicVineIssueHit
 
 @RunWith(AndroidJUnit4::class)
 class ComicVineVolumeReviewViewModelTest {
@@ -501,7 +503,7 @@ class ComicVineVolumeReviewViewModelTest {
                         {
                             "id": 1002,
                             "issue_number": "2",
-                            "name": "The Return",
+                            "name": "The Return Annual",
                             "cover_date": "1963-04-01",
                             "site_detail_url": "https://example.com/issue/1002",
                             "image": {
@@ -611,11 +613,22 @@ class ComicVineVolumeReviewViewModelTest {
                     externalId = "1001"
                 )
 
+            val issueTwoExternalId =
+                testDatabase.comicDao().getExternalId(
+                    source = "COMIC_VINE",
+                    externalId = "1002"
+                )
+
             assertNotNull(issueOneExternalId)
 
             val importedIssueOne =
                 testDatabase.comicDao().getIssueById(
                     issueOneExternalId!!.issueId
+                )
+
+            val importedIssueTwo =
+                testDatabase.comicDao().getIssueById(
+                    issueTwoExternalId!!.issueId
                 )
 
             assertNotNull(importedIssueOne)
@@ -630,6 +643,9 @@ class ComicVineVolumeReviewViewModelTest {
             )
             assertEquals(universeId, importedIssueOne?.universeId)
             assertNull(importedIssueOne?.description)
+
+            assertEquals(IssueType.REGULAR, importedIssueOne?.issueType)
+            assertEquals(IssueType.ANNUAL, importedIssueTwo?.issueType)
 
             viewModel.selectUniverse(null)
             viewModel.importReviewedSeries()
@@ -689,4 +705,42 @@ class ComicVineVolumeReviewViewModelTest {
                 ?: error("No fake response configured for request ${requestedUrls.size}")
         }
     }
+
+
+    @Test
+    fun issueTypeInference_usesExplicitLabelsAndDefaultsToRegular() {
+        fun issue(
+            id: Long,
+            number: String? = "1",
+            name: String? = null
+        ) = ComicVineIssueHit(
+            id = id,
+            issueNumber = number,
+            name = name,
+            coverDate = null,
+            storeDate = null,
+            siteDetailUrl = null,
+            imageUrl = null
+        )
+
+        val cases = listOf(
+            issue(1L, name = "Giant-Size X-Men") to "GIANT_SIZE",
+            issue(2L, name = "Spider-Man Annual") to "ANNUAL",
+            issue(3L, name = "Wolverine: One-Shot") to "ONE_SHOT",
+            issue(4L, name = "Official Preview") to "PREVIEW",
+            issue(5L, name = "Holiday Special") to "SPECIAL",
+            issue(6L, name = "Origin") to "REGULAR",
+            issue(7L, name = "The Specialized Spider-Man") to "REGULAR",
+            issue(8L, number = "Annual 1998") to "ANNUAL"
+        )
+
+        cases.forEach { (comicIssue, expectedType) ->
+            assertEquals(
+                "Unexpected type for issue ${comicIssue.id}",
+                expectedType,
+                ComicVineIssueTypeInference.infer(comicIssue)
+            )
+        }
+    }
+
 }

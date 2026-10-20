@@ -162,6 +162,7 @@ building, following, and tracking comic-book reading orders.
 - [x] Display a series review screen with metadata and retrieved issues
 - [x] Navigate from search results to series review
 - [x] Test review-screen rendering and result selection
+- [x] Infer common issue types from Comic Vine issue labels during import
 
 > Marvel Unlimited does not currently expose a documented public API for
 > third-party reading-history synchronization. The app should not depend on

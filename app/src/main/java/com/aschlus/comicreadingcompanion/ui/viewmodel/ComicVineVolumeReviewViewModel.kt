@@ -416,7 +416,7 @@ class ComicVineVolumeReviewViewModel(
                                     ?: normalizeCatalogPublicationDate(issue.storeDate),
                             coverUrl = issue.imageUrl,
                             description = null,
-                            type = "REGULAR",
+                            type = ComicVineIssueTypeInference.infer(issue),
                             universeDesignation = universeDesignation,
                             externalIds = listOf(
                                 CatalogExternalIdImportDto(
