@@ -107,7 +107,7 @@ class ComicVineVolumeReviewViewModelTest {
                             "id": 1001,
                             "issue_number": "1",
                             "name": "Origin",
-                            "cover_date": "1963-03-01",
+                            "cover_date": "1963-05-01",
                             "store_date": "1963-01-01",
                             "site_detail_url": "https://example.com/issue/1001",
                             "image": {
@@ -118,7 +118,7 @@ class ComicVineVolumeReviewViewModelTest {
                             "id": 1002,
                             "issue_number": "2",
                             "name": "The Return",
-                            "cover_date": "1963-04-01",
+                            "cover_date": "1963-03-01",
                             "store_date": "1963-02-01",
                             "site_detail_url": "https://example.com/issue/1002",
                             "image": {
@@ -138,7 +138,7 @@ class ComicVineVolumeReviewViewModelTest {
                             "id": 1003,
                             "issue_number": "3",
                             "name": "Another Adventure",
-                            "cover_date": "1963-05-01",
+                            "cover_date": "1963-04-01",
                             "site_detail_url": "https://example.com/issue/1003"
                         }
                     ]
@@ -175,11 +175,12 @@ class ComicVineVolumeReviewViewModelTest {
         assertEquals(3, state.totalIssueRecords)
         assertEquals(3, state.issues.size)
         assertEquals(
-            listOf("1", "2", "3"),
+            listOf("2", "3", "1"),
             state.issues.map { it.issueNumber }
         )
+
         assertEquals(
-            listOf(1001L, 1002L, 1003L),
+            listOf(1002L, 1003L, 1001L),
             state.issues.map { it.id }
         )
 

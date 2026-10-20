@@ -508,6 +508,57 @@ class ComicVineVolumeReviewViewModel(
         return date.substring(0, 7)
     }
 
+    private fun sortIssuesByPublicationDate(
+        issues: List<ComicVineIssueHit>
+    ): List<ComicVineIssueHit> {
+        return issues.sortedWith(
+            Comparator { first, second ->
+                val firstDate =
+                    first.coverDate
+                        ?.trim()
+                        ?.takeIf { it.isNotEmpty() }
+                        ?: first.storeDate
+                            ?.trim()
+                            ?.takeIf { it.isNotEmpty() }
+
+                val secondDate =
+                    second.coverDate
+                        ?.trim()
+                        ?.takeIf { it.isNotEmpty() }
+                        ?: second.storeDate
+                            ?.trim()
+                            ?.takeIf { it.isNotEmpty() }
+
+                val dateComparison = when {
+                    firstDate == null && secondDate != null -> 1
+                    firstDate != null && secondDate == null -> -1
+                    firstDate != null && secondDate != null ->
+                        firstDate.compareTo(secondDate)
+                    else -> 0
+                }
+
+                if (dateComparison != 0) {
+                    dateComparison
+                } else {
+                    val firstNumber =
+                        first.issueNumber?.trim()?.toDoubleOrNull()
+                    val secondNumber =
+                        second.issueNumber?.trim()?.toDoubleOrNull()
+
+                    when {
+                        firstNumber == null && secondNumber != null -> 1
+                        firstNumber != null && secondNumber == null -> -1
+                        firstNumber != null && secondNumber != null &&
+                            firstNumber != secondNumber ->
+                                firstNumber.compareTo(secondNumber)
+                        else ->
+                            first.id.compareTo(second.id)
+                    }
+                }
+            }
+        )
+    }
+
     fun load(
         volumeId: Long,
         selectedVolume: ComicVineVolumeSearchHit? = null
@@ -604,7 +655,7 @@ class ComicVineVolumeReviewViewModel(
                         else -> {
                             _uiState.value = _uiState.value.copy(
                                 isLoading = false,
-                                issues = allIssues.toList(),
+                                issues = sortIssuesByPublicationDate(allIssues),
                                 totalIssueRecords = totalRecords,
                                 error = issueErrorMessage(pageOutcome)
                             )
@@ -619,7 +670,7 @@ class ComicVineVolumeReviewViewModel(
                     allIssues.addAll(page.issues)
 
                     _uiState.value = _uiState.value.copy(
-                        issues = allIssues.toList(),
+                        issues = sortIssuesByPublicationDate(allIssues),
                         totalIssueRecords = totalRecords
                     )
 
@@ -633,7 +684,7 @@ class ComicVineVolumeReviewViewModel(
                 _uiState.value = _uiState.value.copy(
                     isLoading = false,
                     volume = volume,
-                    issues = allIssues.toList(),
+                    issues = sortIssuesByPublicationDate(allIssues),
                     totalIssueRecords = totalRecords,
                     error = null
                 )
