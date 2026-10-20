@@ -1305,4 +1305,172 @@ class AppNavigationTest {
             .onNodeWithText("SETTINGS")
             .assertIsDisplayed()
     }
+
+    @Test
+    fun appNavigation_homeToCollectionAndBack() {
+        composeRule
+            .onNodeWithText("HOME")
+            .assertIsDisplayed()
+
+        // Home -> Collection
+        composeRule
+            .onNodeWithContentDescription("Physical collection tab")
+            .performClick()
+
+        composeRule.waitUntil(
+            timeoutMillis = 5000L
+        ) {
+            composeRule
+                .onAllNodesWithText("COLLECTION")
+                .fetchSemanticsNodes()
+                .isNotEmpty()
+        }
+
+        composeRule
+            .onNodeWithText("COLLECTION")
+            .assertIsDisplayed()
+
+        composeRule
+            .onNodeWithText("OWNED ISSUES")
+            .assertIsDisplayed()
+
+        // Collection -> Home
+        composeRule
+            .onNodeWithContentDescription("Home tab")
+            .performClick()
+
+        composeRule.waitUntil(
+            timeoutMillis = 5000L
+        ) {
+            composeRule
+                .onAllNodesWithText("HOME")
+                .fetchSemanticsNodes()
+                .isNotEmpty()
+        }
+
+        composeRule
+            .onNodeWithText("HOME")
+            .assertIsDisplayed()
+
+        composeRule
+            .onNodeWithText("DISCOVER\nCOMICS")
+            .assertIsDisplayed()
+    }
+
+
+    @Test
+    fun appNavigation_collectionOwnedIssueOpensIssueDetail() {
+        val application =
+            composeRule.activity.application
+                    as ComicReadingCompanionApplication
+
+        val repository =
+            application.container.comicRepository
+
+        val targetIssue =
+            runBlocking {
+                val readingList =
+                    repository
+                        .getReadingLists()
+                        .first { lists ->
+                            lists.any {
+                                it.title == "Spider-Man Volume 2"
+                            }
+                        }
+                        .first {
+                            it.title == "Spider-Man Volume 2"
+                        }
+
+                val issues =
+                    repository
+                        .getReadingListIssues(readingList.id)
+                        .first { it.isNotEmpty() }
+
+                issues.first()
+            }
+
+        val wasAlreadyOwned =
+            runBlocking {
+                repository
+                    .isIssueOwned(targetIssue.issueId)
+                    .first()
+            }
+
+        val issueRowText =
+            if (targetIssue.issueTitle.isNullOrBlank()) {
+                "#${targetIssue.issueNumber}"
+            } else {
+                "#${targetIssue.issueNumber} · ${targetIssue.issueTitle}"
+            }
+
+        try {
+            if (!wasAlreadyOwned) {
+                runBlocking {
+                    repository.markIssueOwned(
+                        targetIssue.issueId
+                    )
+                }
+            }
+
+            // Open Collection.
+            composeRule
+                .onNodeWithContentDescription("Physical collection tab")
+                .performClick()
+
+            // Wait for the owned issue to appear.
+            composeRule.waitUntil(
+                timeoutMillis = 10000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(issueRowText)
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            // Open the issue from its Collection card.
+            composeRule
+                .onNodeWithText(issueRowText)
+                .performClick()
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText("ISSUE DETAIL")
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule
+                .onNodeWithText("ISSUE DETAIL")
+                .assertIsDisplayed()
+
+            composeRule
+                .onNodeWithText(targetIssue.seriesTitle)
+                .assertIsDisplayed()
+
+            if (targetIssue.issueTitle.isNullOrBlank()) {
+                composeRule
+                    .onNodeWithText("Issue ${targetIssue.issueNumber}")
+                    .assertIsDisplayed()
+            } else {
+                composeRule
+                    .onNodeWithText("#${targetIssue.issueNumber}")
+                    .assertIsDisplayed()
+
+                composeRule
+                    .onNodeWithText(targetIssue.issueTitle)
+                    .assertIsDisplayed()
+            }
+        } finally {
+            if (!wasAlreadyOwned) {
+                runBlocking {
+                    repository.markIssueUnowned(
+                        targetIssue.issueId
+                    )
+                }
+            }
+        }
+    }
+
 }

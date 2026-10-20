@@ -32,6 +32,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import androidx.compose.ui.test.onAllNodesWithContentDescription
+import kotlinx.coroutines.flow.first
 
 @RunWith(AndroidJUnit4::class)
 class IssueDetailScreenTest {
@@ -890,4 +891,107 @@ class IssueDetailScreenTest {
                 )
             }
         }
+
+
+    @Test
+    fun issueDetailScreen_markAsOwnedAndUnownedUpdatesCollectionButton() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Amazing Spider-Man",
+                        volume = 2,
+                        startYear = 1999,
+                        endYear = 2003
+                    )
+                )
+
+            val issueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "30",
+                        title = "Coming Home",
+                        publicationDate = "2001-06",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    IssueDetailScreen(
+                        issueId = issueId,
+                        viewModel = viewModel,
+                        onSeriesClick = {},
+                        onBackClick = {}
+                    )
+                }
+            }
+
+            // Wait for the initial ownership action.
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText("MARK AS OWNED")
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            // Mark the issue as owned.
+            composeRule
+                .onNodeWithText("MARK AS OWNED")
+                .performScrollTo()
+                .performClick()
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText(
+                        "OWNED — REMOVE FROM COLLECTION"
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            assertEquals(
+                true,
+                repository.isIssueOwned(issueId).first()
+            )
+
+            // Remove the issue from the physical collection.
+            composeRule
+                .onNodeWithText(
+                    "OWNED — REMOVE FROM COLLECTION"
+                )
+                .performScrollTo()
+                .performClick()
+
+            composeRule.waitUntil(
+                timeoutMillis = 5000L
+            ) {
+                composeRule
+                    .onAllNodesWithText("MARK AS OWNED")
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            assertEquals(
+                false,
+                repository.isIssueOwned(issueId).first()
+            )
+        }
+
 }

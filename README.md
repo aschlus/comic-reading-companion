@@ -305,7 +305,7 @@ building, following, and tracking comic-book reading orders.
 - [x] Improve error reporting / logging
 - [x] Add UI regression coverage for top-level Home / Browse / Library navigation
 - [x] Add UI coverage for the redesigned Home and Library screens
-- [ ] Add UI regression coverage for Collection navigation and owned-issue screens
+- [x] Add UI regression coverage for Collection navigation and owned-issue screens
 - [x] Add tests for secure Comic Vine API-key storage
 - [x] Add UI regression coverage for Settings navigation and API-key management
 - [x] Test Comic Vine API-key validation, including invalid keys and network failures
