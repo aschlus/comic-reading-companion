@@ -885,4 +885,77 @@ interface ComicDao {
 
     @Query("SELECT * FROM issue_ownership ORDER BY issueId")
     suspend fun getAllIssueOwnershipForBackup(): List<IssueOwnership>
+
+
+    // Full backup restore
+
+    // Delete dependent records before their parent records.
+
+    @Query("DELETE FROM reading_list_items")
+    suspend fun deleteAllReadingListItemsForRestore()
+
+    @Query("DELETE FROM reading_list_sections")
+    suspend fun deleteAllReadingListSectionsForRestore()
+
+    @Query("DELETE FROM reading_progress")
+    suspend fun deleteAllReadingProgressForRestore()
+
+    @Query("DELETE FROM issue_ownership")
+    suspend fun deleteAllIssueOwnershipForRestore()
+
+    @Query("DELETE FROM external_ids")
+    suspend fun deleteAllIssueExternalIdsForRestore()
+
+    @Query("DELETE FROM series_external_ids")
+    suspend fun deleteAllSeriesExternalIdsForRestore()
+
+    @Query("DELETE FROM issues")
+    suspend fun deleteAllIssuesForRestore()
+
+    @Query("DELETE FROM reading_lists")
+    suspend fun deleteAllReadingListsForRestore()
+
+    @Query("DELETE FROM series")
+    suspend fun deleteAllSeriesForRestore()
+
+    @Query("DELETE FROM universes")
+    suspend fun deleteAllUniversesForRestore()
+
+    @Query("DELETE FROM publishers")
+    suspend fun deleteAllPublishersForRestore()
+
+    // Insert entities with their IDs from the validated backup.
+
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    suspend fun insertPublishersForRestore(items: List<Publisher>)
+
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    suspend fun insertUniversesForRestore(items: List<Universe>)
+
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    suspend fun insertSeriesForRestore(items: List<Series>)
+
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    suspend fun insertSeriesExternalIdsForRestore(items: List<SeriesExternalId>)
+
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    suspend fun insertIssuesForRestore(items: List<Issue>)
+
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    suspend fun insertIssueExternalIdsForRestore(items: List<ExternalId>)
+
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    suspend fun insertReadingListsForRestore(items: List<ReadingList>)
+
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    suspend fun insertReadingListSectionsForRestore(items: List<ReadingListSection>)
+
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    suspend fun insertReadingListItemsForRestore(items: List<ReadingListItem>)
+
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    suspend fun insertReadingProgressForRestore(items: List<ReadingProgress>)
+
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    suspend fun insertIssueOwnershipForRestore(items: List<IssueOwnership>)
 }

@@ -280,10 +280,10 @@ building, following, and tracking comic-book reading orders.
 
 ### Data Management
 
-- [ ] User data export
-- [ ] User data import / restore
-- [ ] Reading-progress backup
-- [ ] Reading-list backup
+- [x] User data export
+- [x] User data import / restore
+- [x] Reading-progress backup
+- [x] Reading-list backup
 - [ ] Database integrity checks
 - [ ] Safe upgrade / migration path between app versions
 - [ ] Optional cloud backup / synchronization

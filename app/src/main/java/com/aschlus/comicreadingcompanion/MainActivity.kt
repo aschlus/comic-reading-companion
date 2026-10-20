@@ -9,13 +9,25 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
@@ -24,10 +36,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.aschlus.comicreadingcompanion.data.exporter.ComicAppBackupDto
 import com.aschlus.comicreadingcompanion.data.exporter.readingListExportFileName
 import com.aschlus.comicreadingcompanion.ui.component.ComicBottomNavigation
 import com.aschlus.comicreadingcompanion.ui.screen.BrowseScreen
 import com.aschlus.comicreadingcompanion.ui.screen.CollectionScreen
+import com.aschlus.comicreadingcompanion.ui.screen.ComicVineVolumeReviewScreen
+import com.aschlus.comicreadingcompanion.ui.screen.ComicVineVolumeSearchScreen
 import com.aschlus.comicreadingcompanion.ui.screen.CreateReadingListScreen
 import com.aschlus.comicreadingcompanion.ui.screen.HomeScreen
 import com.aschlus.comicreadingcompanion.ui.screen.IssueDetailScreen
@@ -36,6 +51,7 @@ import com.aschlus.comicreadingcompanion.ui.screen.PublisherDetailScreen
 import com.aschlus.comicreadingcompanion.ui.screen.ReadingHistoryScreen
 import com.aschlus.comicreadingcompanion.ui.screen.ReadingListDetailScreen
 import com.aschlus.comicreadingcompanion.ui.screen.SeriesDetailScreen
+import com.aschlus.comicreadingcompanion.ui.screen.SettingsScreen
 import com.aschlus.comicreadingcompanion.ui.theme.ComicReadingCompanionTheme
 import com.aschlus.comicreadingcompanion.ui.viewmodel.AddIssueToReadingListViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.AddIssueToReadingListViewModelFactory
@@ -43,6 +59,12 @@ import com.aschlus.comicreadingcompanion.ui.viewmodel.BrowseViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.BrowseViewModelFactory
 import com.aschlus.comicreadingcompanion.ui.viewmodel.CollectionViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.CollectionViewModelFactory
+import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineSettingsViewModel
+import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineSettingsViewModelFactory
+import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineVolumeReviewViewModel
+import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineVolumeReviewViewModelFactory
+import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineVolumeSearchViewModel
+import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineVolumeSearchViewModelFactory
 import com.aschlus.comicreadingcompanion.ui.viewmodel.CreateReadingListViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.CreateReadingListViewModelFactory
 import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeViewModel
@@ -60,20 +82,18 @@ import com.aschlus.comicreadingcompanion.ui.viewmodel.SeriesDetailViewModelFacto
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import androidx.compose.animation.EnterTransition
-import androidx.compose.animation.ExitTransition
-import androidx.compose.runtime.remember
-import com.aschlus.comicreadingcompanion.ui.screen.ComicVineVolumeReviewScreen
-import com.aschlus.comicreadingcompanion.ui.screen.ComicVineVolumeSearchScreen
-import com.aschlus.comicreadingcompanion.ui.screen.SettingsScreen
-import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineSettingsViewModel
-import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineSettingsViewModelFactory
-import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineVolumeReviewViewModel
-import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineVolumeReviewViewModelFactory
-import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineVolumeSearchViewModel
-import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineVolumeSearchViewModelFactory
 
 class MainActivity : ComponentActivity() {
+
+    private var backupValidationError by mutableStateOf<String?>(null)
+
+    private var pendingRestoreJson by mutableStateOf<String?>(null)
+
+    private var pendingRestoreFileName by mutableStateOf<String?>(null)
+
+    private var pendingRestoreBackup by mutableStateOf<ComicAppBackupDto?>(null)
+
+    private var restoreErrorMessage by mutableStateOf<String?>(null)
 
     private val homeViewModel: HomeViewModel by viewModels {
 
@@ -261,6 +281,107 @@ class MainActivity : ComponentActivity() {
             }
         }
 
+    private val validateBackupLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.OpenDocument()
+        ) { uri ->
+            if (uri == null) {
+                return@registerForActivityResult
+            }
+
+            lifecycleScope.launch {
+                try {
+                    val fileName =
+                        getDisplayName(uri) ?: "selected file"
+
+                    val parser =
+                        (application as ComicReadingCompanionApplication)
+                            .container
+                            .comicAppBackupParser
+
+                    val backup = withContext(Dispatchers.IO) {
+                        val jsonText =
+                            contentResolver
+                                .openInputStream(uri)
+                                ?.bufferedReader()
+                                ?.use { reader ->
+                                    reader.readText()
+                                }
+                                ?: throw IllegalArgumentException(
+                                    "Could not read backup file '$fileName'."
+                                )
+
+                        parser.parseJson(
+                            jsonText = jsonText,
+                            sourceDescription = "backup file '$fileName'"
+                        )
+                    }
+
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Backup validated: ${backup.series.size} series, " +
+                        "${backup.issues.size} issues, " +
+                        "${backup.readingLists.size} lists. " +
+                        "No data changed.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                } catch (exception: Exception) {
+                    backupValidationError =
+                        exception.message
+                            ?: "Could not validate backup file."
+                }
+            }
+        }
+
+    private val restoreBackupLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.OpenDocument()
+        ) { uri ->
+            if (uri == null) {
+                return@registerForActivityResult
+            }
+
+            lifecycleScope.launch {
+                try {
+                    val fileName =
+                        getDisplayName(uri) ?: "selected file"
+
+                    val container =
+                        (application as ComicReadingCompanionApplication)
+                            .container
+
+                    val parsed = withContext(Dispatchers.IO) {
+                        val jsonText =
+                            contentResolver
+                                .openInputStream(uri)
+                                ?.bufferedReader()
+                                ?.use { reader ->
+                                    reader.readText()
+                                }
+                                ?: throw IllegalArgumentException(
+                                    "Could not read backup file '$fileName'"
+                                )
+
+                        val backup =
+                            container.comicAppBackupParser.parseJson(
+                                jsonText = jsonText,
+                                sourceDescription = "backup file '$fileName'"
+                            )
+
+                        jsonText to backup
+                    }
+
+                    pendingRestoreJson = parsed.first
+                    pendingRestoreFileName = fileName
+                    pendingRestoreBackup = parsed.second
+                } catch (exception: Exception) {
+                    backupValidationError =
+                        exception.message
+                            ?: "Could not validate backup file"
+                }
+            }
+        }
+
     private fun getDisplayName(
         uri: Uri
     ): String? {
@@ -430,6 +551,16 @@ class MainActivity : ComponentActivity() {
                                 onExportBackupClick = {
                                     exportBackupLauncher.launch(
                                         "comic-reading-companion-backup.json"
+                                    )
+                                },
+                                onValidateBackupClick = {
+                                    validateBackupLauncher.launch(
+                                        arrayOf("application/json", "text/plain")
+                                    )
+                                },
+                                onRestoreBackupClick = {
+                                    restoreBackupLauncher.launch(
+                                        arrayOf("application/json", "text/plain")
                                     )
                                 }
                             )
@@ -840,6 +971,159 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                     }
+                }
+
+                pendingRestoreBackup?.let { backup ->
+                    AlertDialog(
+                        onDismissRequest = {
+                            pendingRestoreJson = null
+                            pendingRestoreFileName = null
+                            pendingRestoreBackup = null
+                        },
+                        title = {
+                            Text("Replace current data?")
+                        },
+                        text = {
+                            Text(
+                                text = buildString {
+                                    appendLine(
+                                        "File: ${pendingRestoreFileName ?: "selected file"}"
+                                    )
+                                    appendLine()
+                                    appendLine("This backup contains:")
+                                    appendLine("${backup.publishers.size} publishers")
+                                    appendLine("${backup.universes.size} universes")
+                                    appendLine("${backup.series.size} series")
+                                    appendLine("${backup.issues.size} issues")
+                                    appendLine("${backup.readingLists.size} reading lists")
+                                    appendLine("${backup.readingProgress.size} reading-progress records")
+                                    appendLine("${backup.issueOwnership.size} ownership records")
+                                    appendLine()
+                                    append(
+                                        "Restoring will replace your current database " +
+                                        "contents. Changes made since this backup " +
+                                        "will be lost. This cannot be undone."
+                                    )
+                                },
+                                modifier = Modifier
+                                    .heightIn(max = 320.dp)
+                                    .verticalScroll(rememberScrollState())
+                            )
+                        },
+                        confirmButton = {
+                            TextButton(
+                                onClick = {
+                                    val jsonText = pendingRestoreJson
+                                    val fileName = pendingRestoreFileName ?: "selected file"
+
+                                    pendingRestoreJson = null
+                                    pendingRestoreFileName = null
+                                    pendingRestoreBackup = null
+
+                                    if (jsonText != null) {
+                                        lifecycleScope.launch {
+                                            try {
+                                                val restorer =
+                                                    (application as ComicReadingCompanionApplication)
+                                                        .container
+                                                        .comicAppBackupRestorer
+
+                                                val restored =
+                                                    withContext(Dispatchers.IO) {
+                                                        restorer.restoreJson(
+                                                            jsonText = jsonText,
+                                                            sourceDescription = "backup file '$fileName'"
+                                                        )
+                                                    }
+
+                                                Toast.makeText(
+                                                    this@MainActivity,
+                                                    "Backup restored: " +
+                                                    "${restored.series.size} series, " +
+                                                    "${restored.issues.size} issues, " +
+                                                    "${restored.readingLists.size} lists.",
+                                                    Toast.LENGTH_LONG
+                                                ).show()
+                                            } catch (exception: Exception) {
+                                                restoreErrorMessage =
+                                                    exception.message
+                                                        ?: "Could not restore backup."
+                                            }
+                                        }
+                                    }
+                                }
+                            ) {
+                                Text("REPLACE DATA")
+                            }
+                        },
+                        dismissButton = {
+                            TextButton(
+                                onClick = {
+                                    pendingRestoreJson = null
+                                    pendingRestoreFileName = null
+                                    pendingRestoreBackup = null
+                                }
+                            ) {
+                                Text("CANCEL")
+                            }
+                        }
+                    )
+                }
+
+                restoreErrorMessage?.let { errorMessage ->
+                    AlertDialog(
+                        onDismissRequest = {
+                            restoreErrorMessage = null
+                        },
+                        title = {
+                            Text("Restore failed")
+                        },
+                        text = {
+                            Text(
+                                text = errorMessage,
+                                modifier = Modifier
+                                    .heightIn(max = 320.dp)
+                                    .verticalScroll(rememberScrollState())
+                            )
+                        },
+                        confirmButton = {
+                            TextButton(
+                                onClick = {
+                                    restoreErrorMessage = null
+                                }
+                            ) {
+                                Text("CLOSE")
+                            }
+                        }
+                    )
+                }
+
+                backupValidationError?.let { errorMessage ->
+                    AlertDialog(
+                        onDismissRequest = {
+                            backupValidationError = null
+                        },
+                        title = {
+                            Text("Backup validation failed")
+                        },
+                        text = {
+                            Text(
+                                text = errorMessage,
+                                modifier = Modifier
+                                    .heightIn(max = 320.dp)
+                                    .verticalScroll(rememberScrollState())
+                            )
+                        },
+                        confirmButton = {
+                            TextButton(
+                                onClick = {
+                                    backupValidationError = null
+                                }
+                            ) {
+                                Text("Close")
+                            }
+                        }
+                    )
                 }
             }
         }

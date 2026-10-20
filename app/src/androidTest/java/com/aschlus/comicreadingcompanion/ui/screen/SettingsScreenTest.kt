@@ -6,6 +6,7 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTextInput
 import androidx.lifecycle.viewModelScope
 import androidx.test.core.app.ApplicationProvider
@@ -240,5 +241,58 @@ class SettingsScreenTest {
             .performClick()
 
         assertTrue(exportRequested)
+    }
+
+    @Test
+    fun settingsScreen_validateBackupButtonInvokesCallback() {
+        var validationRequested = false
+
+        composeRule.setContent {
+            ComicReadingCompanionTheme(
+                dynamicColor = false
+            ) {
+                SettingsScreen(
+                    viewModel = viewModel,
+                    onBackClick = {},
+                    onValidateBackupClick = {
+                        validationRequested = true
+                    }
+                )
+            }
+        }
+
+        composeRule
+            .onNodeWithText("VALIDATE BACKUP FILE")
+            .assertIsDisplayed()
+            .performClick()
+
+        assertTrue(validationRequested)
+    }
+
+    @Test
+    fun settingsScreen_restoreBackupButtonInvokesCallback() {
+        var restoreRequested = false
+
+        composeRule.setContent {
+            ComicReadingCompanionTheme(
+                dynamicColor = false
+            ) {
+                SettingsScreen(
+                    viewModel = viewModel,
+                    onBackClick = {},
+                    onRestoreBackupClick = {
+                        restoreRequested = true
+                    }
+                )
+            }
+        }
+
+        composeRule
+            .onNodeWithText("RESTORE FROM BACKUP")
+            .performScrollTo()
+            .assertIsDisplayed()
+            .performClick()
+
+        assertTrue(restoreRequested)
     }
 }

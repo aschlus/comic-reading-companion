@@ -22,55 +22,61 @@ class ComicReadingCompanionApplication : Application() {
         container = AppContainer(this)
 
         applicationScope.launch {
-            container.databaseSeeder.seed()
-
-            val catalogAssets =
-                container.comicCatalogAssetParser
-                    .listCatalogAssets()
-
-            catalogAssets.forEach { assetPath ->
-                try {
-                    val importedCatalog =
-                        container.comicCatalogAssetParser.parse(
-                            assetPath
-                        )
-
-                    container.comicCatalogImporter.import(
-                        importedCatalog
-                    )
-                } catch (exception: Exception) {
-                    Log.e(
-                        "ComicCatalogImport",
-                        "Failed to import comic-catalog asset " +
-                                "'$assetPath': " +
-                                "${exception.message}",
-                        exception
-                    )
+            container.backupRestorePreferences.withInitializationLock {
+                if (container.backupRestorePreferences.hasCompletedRestore()) {
+                    return@withInitializationLock
                 }
-            }
 
-            val readingListAssets =
-                container.readingListAssetParser
-                    .listReadingListAssets()
+                container.databaseSeeder.seed()
 
-            readingListAssets.forEach { assetPath ->
-                try {
-                    val importedList =
-                        container.readingListAssetParser.parse(
-                            assetPath
+                val catalogAssets =
+                    container.comicCatalogAssetParser
+                        .listCatalogAssets()
+
+                catalogAssets.forEach { assetPath ->
+                    try {
+                        val importedCatalog =
+                            container.comicCatalogAssetParser.parse(
+                                assetPath
+                            )
+
+                        container.comicCatalogImporter.import(
+                            importedCatalog
                         )
+                    } catch (exception: Exception) {
+                        Log.e(
+                            "ComicCatalogImport",
+                            "Failed to import comic-catalog asset " +
+                                    "'$assetPath': " +
+                                    "${exception.message}",
+                            exception
+                        )
+                    }
+                }
 
-                    container.readingListImporter.import(
-                        importedList
-                    )
-                } catch (exception: Exception) {
-                    Log.e(
-                        "ReadingListImport",
-                        "Failed to import reading-list asset " +
-                        "'$assetPath': " +
-                        "${exception.message}",
-                        exception
-                    )
+                val readingListAssets =
+                    container.readingListAssetParser
+                        .listReadingListAssets()
+
+                readingListAssets.forEach { assetPath ->
+                    try {
+                        val importedList =
+                            container.readingListAssetParser.parse(
+                                assetPath
+                            )
+
+                        container.readingListImporter.import(
+                            importedList
+                        )
+                    } catch (exception: Exception) {
+                        Log.e(
+                            "ReadingListImport",
+                            "Failed to import reading-list asset " +
+                                    "'$assetPath': " +
+                                    "${exception.message}",
+                            exception
+                        )
+                    }
                 }
             }
         }

@@ -65,7 +65,9 @@ fun SettingsScreen(
     viewModel: ComicVineSettingsViewModel,
     onBackClick: () -> Unit,
     onSearchSeriesClick: () -> Unit = {},
-    onExportBackupClick: () -> Unit = {}
+    onExportBackupClick: () -> Unit = {},
+    onValidateBackupClick: () -> Unit = {},
+    onRestoreBackupClick: () -> Unit = {}
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
@@ -311,6 +313,33 @@ fun SettingsScreen(
                 text = "EXPORT FULL BACKUP",
                 backgroundColor = ComicBlue,
                 onClick = onExportBackupClick,
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Text(
+                text = "Check a saved backup before restoring it. " +
+                    "Validation does not modify your catalog.",
+                color = ComicMutedInk
+            )
+
+            ComicWideActionButton(
+                text = "VALIDATE BACKUP FILE",
+                backgroundColor = ComicBlue,
+                onClick = onValidateBackupClick,
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Text(
+                text = "Restore a saved backup by replacing your current " +
+                    "catalog, reading lists, reading progress, and ownership. " +
+                    "You'll be asked to confirm before anything is changed.",
+                color = ComicMutedInk
+            )
+
+            ComicWideActionButton(
+                text = "RESTORE FROM BACKUP",
+                backgroundColor = ComicRed,
+                onClick = onRestoreBackupClick,
                 modifier = Modifier.fillMaxWidth()
             )
         }

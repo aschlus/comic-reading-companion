@@ -4,11 +4,14 @@ import android.content.Context
 import com.aschlus.comicreadingcompanion.data.database.ComicDatabase
 import com.aschlus.comicreadingcompanion.data.database.DatabaseSeeder
 import com.aschlus.comicreadingcompanion.data.exporter.ComicAppBackupExporter
+import com.aschlus.comicreadingcompanion.data.exporter.ComicAppBackupParser
+import com.aschlus.comicreadingcompanion.data.exporter.ComicAppBackupRestorer
 import com.aschlus.comicreadingcompanion.data.exporter.ReadingListExporter
 import com.aschlus.comicreadingcompanion.data.importer.ComicCatalogAssetParser
 import com.aschlus.comicreadingcompanion.data.importer.ComicCatalogImporter
 import com.aschlus.comicreadingcompanion.data.importer.ReadingListAssetParser
 import com.aschlus.comicreadingcompanion.data.importer.ReadingListImporter
+import com.aschlus.comicreadingcompanion.data.preferences.BackupRestorePreferences
 import com.aschlus.comicreadingcompanion.data.preferences.ComicVineApiKeyStore
 import com.aschlus.comicreadingcompanion.data.preferences.HomeUiPreferences
 import com.aschlus.comicreadingcompanion.data.preferences.ReadingListUiPreferences
@@ -29,6 +32,9 @@ class AppContainer(context: Context) {
 
     val homeUiPreferences =
         HomeUiPreferences(context)
+
+    val backupRestorePreferences =
+        BackupRestorePreferences(context)
 
     val comicVineApiKeyStore =
         ComicVineApiKeyStore(context)
@@ -55,6 +61,15 @@ class AppContainer(context: Context) {
     val comicAppBackupExporter = ComicAppBackupExporter(
         comicDao = database.comicDao(),
         database = database
+    )
+
+    val comicAppBackupParser = ComicAppBackupParser()
+
+    val comicAppBackupRestorer = ComicAppBackupRestorer(
+        comicDao = database.comicDao(),
+        database = database,
+        parser = comicAppBackupParser,
+        backupRestorePreferences = backupRestorePreferences
     )
 
     val comicCatalogAssetParser =
