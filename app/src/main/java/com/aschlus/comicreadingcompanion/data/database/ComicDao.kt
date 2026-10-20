@@ -852,4 +852,37 @@ interface ComicDao {
     suspend fun deleteReadingProgressForIssues(
         issueIds: List<Long>
     )
+
+
+    // Complete database snapshot for backup export
+
+    @Query("SELECT * FROM universes ORDER BY publisherId, name, designation")
+    suspend fun getAllUniversesForBackup(): List<Universe>
+
+    @Query("SELECT * FROM series ORDER BY publisherId, title, volume")
+    suspend fun getAllSeriesForBackup(): List<Series>
+
+    @Query("SELECT * FROM series_external_ids ORDER BY seriesId, source, externalId")
+    suspend fun getAllSeriesExternalIdsForBackup(): List<SeriesExternalId>
+
+    @Query("SELECT * FROM issues ORDER BY seriesId, publicationDate, issueNumber")
+    suspend fun getAllIssuesForBackup(): List<Issue>
+
+    @Query("SELECT * FROM external_ids ORDER BY issueId, source, externalId")
+    suspend fun getAllIssueExternalIdsForBackup(): List<ExternalId>
+
+    @Query("SELECT * FROM reading_lists ORDER BY id")
+    suspend fun getAllReadingListsForBackup(): List<ReadingList>
+
+    @Query("SELECT * FROM reading_list_sections ORDER BY readingListId, position, id")
+    suspend fun getAllReadingListSectionsForBackup(): List<ReadingListSection>
+
+    @Query("SELECT * FROM reading_list_items ORDER BY readingListId, position, id")
+    suspend fun getAllReadingListItemsForBackup(): List<ReadingListItem>
+
+    @Query("SELECT * FROM reading_progress ORDER BY issueId")
+    suspend fun getAllReadingProgressForBackup(): List<ReadingProgress>
+
+    @Query("SELECT * FROM issue_ownership ORDER BY issueId")
+    suspend fun getAllIssueOwnershipForBackup(): List<IssueOwnership>
 }

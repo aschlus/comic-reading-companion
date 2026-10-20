@@ -64,7 +64,8 @@ import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineSettingsViewModel
 fun SettingsScreen(
     viewModel: ComicVineSettingsViewModel,
     onBackClick: () -> Unit,
-    onSearchSeriesClick: () -> Unit = {}
+    onSearchSeriesClick: () -> Unit = {},
+    onExportBackupClick: () -> Unit = {}
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
@@ -294,6 +295,24 @@ fun SettingsScreen(
                     color = ComicRed
                 )
             }
+
+            ComicHomeSectionHeader(
+                text = "DATA BACKUP"
+            )
+
+            Text(
+                text = "Save a portable JSON backup of your comic catalog, " +
+                    "reading lists, reading progress, and collection ownership. " +
+                    "Your Comic Vine API key is not included.",
+                color = ComicMutedInk
+            )
+
+            ComicWideActionButton(
+                text = "EXPORT FULL BACKUP",
+                backgroundColor = ComicBlue,
+                onClick = onExportBackupClick,
+                modifier = Modifier.fillMaxWidth()
+            )
         }
     }
 

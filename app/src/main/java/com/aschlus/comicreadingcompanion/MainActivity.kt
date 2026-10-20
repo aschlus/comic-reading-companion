@@ -211,6 +211,56 @@ class MainActivity : ComponentActivity() {
             }
         }
 
+    private val exportBackupLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.CreateDocument(
+                "application/json"
+            )
+        ) { uri ->
+            if (uri == null) {
+                return@registerForActivityResult
+            }
+
+            lifecycleScope.launch {
+                try {
+                    val exporter =
+                        (application as ComicReadingCompanionApplication)
+                            .container
+                            .comicAppBackupExporter
+
+                    val jsonText =
+                        withContext(Dispatchers.IO) {
+                            exporter.exportJson()
+                        }
+
+                    withContext(Dispatchers.IO) {
+                        contentResolver
+                            .openOutputStream(uri, "wt")
+                            ?.bufferedWriter()
+                            ?.use { writer ->
+                                writer.write(jsonText)
+                            }
+                            ?: throw IllegalArgumentException(
+                                "Could not write backup file."
+                            )
+                    }
+
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Full backup exported",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } catch (exception: Exception) {
+                    Toast.makeText(
+                        this@MainActivity,
+                        exception.message
+                            ?: "Could not export full backup.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
+
     private fun getDisplayName(
         uri: Uri
     ): String? {
@@ -376,6 +426,11 @@ class MainActivity : ComponentActivity() {
                                 onBackClick = safeNavigateBack,
                                 onSearchSeriesClick = {
                                     navController.navigate("comicVineVolumeSearch")
+                                },
+                                onExportBackupClick = {
+                                    exportBackupLauncher.launch(
+                                        "comic-reading-companion-backup.json"
+                                    )
                                 }
                             )
                         }

@@ -20,6 +20,7 @@ import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -209,5 +210,35 @@ class SettingsScreenTest {
         runBlocking {
             assertNull(apiKeyStore.get())
         }
+    }
+
+    @Test
+    fun settingsScreen_exportBackupButtonInvokesCallback() {
+        var exportRequested = false
+
+        composeRule.setContent {
+            ComicReadingCompanionTheme(
+                dynamicColor = false
+            ) {
+                SettingsScreen(
+                    viewModel = viewModel,
+                    onBackClick = {},
+                    onExportBackupClick = {
+                        exportRequested = true
+                    }
+                )
+            }
+        }
+
+        composeRule
+            .onNodeWithText("DATA BACKUP")
+            .assertIsDisplayed()
+
+        composeRule
+            .onNodeWithText("EXPORT FULL BACKUP")
+            .assertIsDisplayed()
+            .performClick()
+
+        assertTrue(exportRequested)
     }
 }
