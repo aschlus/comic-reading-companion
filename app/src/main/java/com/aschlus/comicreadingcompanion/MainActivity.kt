@@ -60,6 +60,8 @@ import com.aschlus.comicreadingcompanion.ui.viewmodel.BrowseViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.BrowseViewModelFactory
 import com.aschlus.comicreadingcompanion.ui.viewmodel.CollectionViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.CollectionViewModelFactory
+import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineSeriesRefreshViewModel
+import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineSeriesRefreshViewModelFactory
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineSettingsViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineSettingsViewModelFactory
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineVolumeReviewViewModel
@@ -891,15 +893,25 @@ class MainActivity : ComponentActivity() {
                                     ?.getLong("seriesId")
                                     ?: return@composable
 
-                            val seriesDetailViewModel:
-                                    SeriesDetailViewModel = viewModel(
-                                factory =
-                                    SeriesDetailViewModelFactory(
-                                        (application as ComicReadingCompanionApplication)
-                                            .container
-                                            .comicRepository
+                            val container =
+                                (application as ComicReadingCompanionApplication)
+                                    .container
+
+                            val seriesDetailViewModel: SeriesDetailViewModel =
+                                viewModel(
+                                    factory = SeriesDetailViewModelFactory(
+                                        repository = container.comicRepository
                                     )
-                            )
+                                )
+
+                            val refreshViewModel: ComicVineSeriesRefreshViewModel =
+                                viewModel(
+                                    factory = ComicVineSeriesRefreshViewModelFactory(
+                                        apiKeyStore = container.comicVineApiKeyStore,
+                                        apiClient = container.comicVineApiClient,
+                                        repository = container.comicRepository
+                                    )
+                                )
 
                             SeriesDetailScreen(
                                 seriesId = seriesId,
@@ -917,7 +929,8 @@ class MainActivity : ComponentActivity() {
                                 onBackClick = safeNavigateBack,
                                 onEditClick = {
                                     navController.navigate("editSeries/$seriesId")
-                                }
+                                },
+                                refreshViewModel = refreshViewModel
                             )
                         }
 

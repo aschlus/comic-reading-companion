@@ -18,6 +18,14 @@ class SeriesDetailViewModel(
     private var seriesJob: Job? = null
     private var issuesJob: Job? = null
 
+    private var comicVineVolumeIdJob: Job? = null
+
+    private val _comicVineVolumeId =
+        MutableStateFlow<Long?>(null)
+
+    val comicVineVolumeId: StateFlow<Long?> =
+        _comicVineVolumeId.asStateFlow()
+
     private val _series =
         MutableStateFlow<SeriesDetail?>(null)
 
@@ -35,6 +43,14 @@ class SeriesDetailViewModel(
     ) {
         seriesJob?.cancel()
         issuesJob?.cancel()
+
+        comicVineVolumeIdJob?.cancel()
+        _comicVineVolumeId.value = null
+
+        comicVineVolumeIdJob = viewModelScope.launch {
+            _comicVineVolumeId.value =
+                repository.getComicVineVolumeIdForSeries(seriesId)
+        }
 
         seriesJob = viewModelScope.launch {
             repository

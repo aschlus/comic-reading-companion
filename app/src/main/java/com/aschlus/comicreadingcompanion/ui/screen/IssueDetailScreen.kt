@@ -37,7 +37,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aschlus.comicreadingcompanion.ui.component.AddIssueToReadingListSheet
-import com.aschlus.comicreadingcompanion.ui.component.ComicArtworkPattern
 import com.aschlus.comicreadingcompanion.ui.component.ComicCoverImage
 import com.aschlus.comicreadingcompanion.ui.component.ComicHomeSectionHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicIssueDetailHeader
@@ -45,18 +44,16 @@ import com.aschlus.comicreadingcompanion.ui.component.ComicIssueReadingListRow
 import com.aschlus.comicreadingcompanion.ui.component.ComicIssueStatusSelector
 import com.aschlus.comicreadingcompanion.ui.component.ComicWideActionButton
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlue
-import com.aschlus.comicreadingcompanion.ui.theme.ComicGray
 import com.aschlus.comicreadingcompanion.ui.theme.ComicGreen
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicMutedInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicOrange
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPurple
-import com.aschlus.comicreadingcompanion.ui.theme.ComicRedLight
 import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
 import com.aschlus.comicreadingcompanion.ui.viewmodel.AddIssueToReadingListViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.IssueDetailViewModel
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.Date
@@ -424,17 +421,23 @@ private fun IssueMetadataRow(
 private fun formatIssuePublicationDate(
     publicationDate: String
 ): String {
+    val formatter = DateTimeFormatter.ofPattern(
+        "MMM yyyy",
+        Locale.getDefault()
+    )
+
     return try {
         YearMonth
             .parse(publicationDate)
-            .format(
-                DateTimeFormatter.ofPattern(
-                    "MMM yyyy",
-                    Locale.getDefault()
-                )
-            )
+            .format(formatter)
     } catch (_: Exception) {
-        publicationDate
+        try {
+            YearMonth
+                .from(LocalDate.parse(publicationDate))
+                .format(formatter)
+        } catch (_: Exception) {
+            publicationDate
+        }
     }
 }
 

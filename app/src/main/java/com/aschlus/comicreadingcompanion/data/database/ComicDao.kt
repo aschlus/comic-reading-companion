@@ -173,7 +173,19 @@ interface ComicDao {
             ON issues.id = reading_progress.issueId
         WHERE issues.seriesId = :seriesId
         ORDER BY
+            CASE
+                WHEN issues.publicationDate IS NULL
+                    OR TRIM(issues.publicationDate) = ''
+                THEN 1
+                ELSE 0
+            END ASC,
             issues.publicationDate ASC,
+            CASE
+                WHEN issues.issueNumber GLOB '[0-9]*'
+                THEN 0
+                ELSE 1
+            END ASC,
+            CAST(issues.issueNumber AS REAL) ASC,
             issues.issueNumber ASC
     """)
     fun getSeriesIssues(

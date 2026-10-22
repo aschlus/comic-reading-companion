@@ -30,6 +30,7 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicBlueLight
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
+import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.Locale
@@ -255,21 +256,23 @@ private fun ComicSeriesIssueStatus(
 private fun formatSeriesIssueDate(
     publicationDate: String
 ): String {
+    val formatter =
+        DateTimeFormatter.ofPattern(
+            "MMM yyyy",
+            Locale.getDefault()
+        )
+
     return try {
         YearMonth
-            .parse(
-                publicationDate
-            )
-            .format(
-                DateTimeFormatter
-                    .ofPattern(
-                        "MMM yyyy",
-                        Locale.getDefault()
-                    )
-            )
-    } catch (
-        _: Exception
-    ) {
-        publicationDate
+            .parse(publicationDate)
+            .format(formatter)
+    } catch (_: Exception) {
+        try {
+            YearMonth
+                .from(LocalDate.parse(publicationDate))
+                .format(formatter)
+        } catch (_: Exception) {
+            publicationDate
+        }
     }
 }

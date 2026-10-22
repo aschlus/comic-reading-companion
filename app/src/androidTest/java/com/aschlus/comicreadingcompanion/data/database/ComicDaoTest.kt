@@ -2095,6 +2095,96 @@ class ComicDaoTest {
         }
 
     @Test
+    fun getSeriesIssues_placesUndatedIssuesLastAndSortsThemNumerically() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Undated Issue Sort Test",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2000
+                    )
+                )
+
+            // Insert undated issues first, out of numerical order.
+            val issueTenId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "10",
+                        title = "Tenth Issue",
+                        publicationDate = null,
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val issueEightId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "8",
+                        title = "Eighth Issue",
+                        publicationDate = null,
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val issueTwoId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "2",
+                        title = "Second Issue",
+                        publicationDate = "2000-02",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val issueOneId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "First Issue",
+                        publicationDate = "2000-01",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val issues =
+                comicDao.getSeriesIssues(seriesId).first()
+
+            assertEquals(
+                listOf(
+                    issueOneId,
+                    issueTwoId,
+                    issueEightId,
+                    issueTenId
+                ),
+                issues.map { it.issueId }
+            )
+        }
+
+    @Test
     fun getPublisherSeries_returnsSeriesMetadataAndPrgoressCount() =
         runBlocking {
             val publisherId =

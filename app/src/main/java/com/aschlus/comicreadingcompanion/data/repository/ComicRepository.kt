@@ -16,6 +16,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListStyle
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingProgress
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.database.entities.Series
+import com.aschlus.comicreadingcompanion.data.database.entities.SeriesExternalId
 import com.aschlus.comicreadingcompanion.data.database.entities.Universe
 import com.aschlus.comicreadingcompanion.data.database.models.IssueDetail
 import com.aschlus.comicreadingcompanion.data.database.models.IssueReadingListResult
@@ -175,6 +176,18 @@ class ComicRepository(
         return comicDao.getSeriesById(seriesId)
     }
 
+    suspend fun getComicVineVolumeIdForSeries(
+        seriesId: Long
+    ): Long? {
+        return comicDao
+            .getSeriesExternalIdsForSeries(seriesId)
+            .firstOrNull { externalId ->
+                externalId.source == "COMIC_VINE"
+            }
+            ?.externalId
+            ?.toLongOrNull()
+    }
+
     fun getSeriesDetail(
         seriesId: Long
     ): Flow<SeriesDetail?> {
@@ -199,6 +212,324 @@ class ComicRepository(
         seriesId: Long
     ): List<Issue> {
         return comicDao.getIssuesForSeries(seriesId)
+    }
+
+    suspend fun previewComicVineSeriesRefresh(
+        seriesId: Long,
+        comicVineVolumeId: Long,
+        refreshedTitle: String,
+        refreshedStartYear: Int?,
+        sourceIssues: List<ComicVineRefreshIssue>
+    ): ComicVineSeriesRefreshPreview {
+        val series = comicDao.getSeriesById(seriesId)
+            ?: throw IllegalArgumentException(
+                "Series $seriesId does not exist"
+            )
+
+        val localIssues = comicDao.getIssuesForSeries(seriesId)
+
+        val localIssuesByComicVineId =
+            localIssues.mapNotNull { issue ->
+                comicDao.getExternalIdsForIssue(issue.id)
+                    .firstOrNull { it.source == "COMIC_VINE" }
+                    ?.externalId
+                    ?.toLongOrNull()
+                    ?.let { comicVineId -> comicVineId to issue }
+            }.toMap()
+
+        val matchedLocalIssueIds = mutableSetOf<Long>()
+
+        val changes = sourceIssues.map { sourceIssue ->
+            val localIssue =
+                localIssuesByComicVineId[sourceIssue.comicVineIssueId]
+                    ?: localIssues.firstOrNull { local ->
+                        local.id !in matchedLocalIssueIds &&
+                            local.issueNumber.trim()
+                                .equals(
+                                    sourceIssue.issueNumber.trim(),
+                                    ignoreCase = true
+                                )
+                    }
+
+            if (localIssue == null) {
+                ComicVineRefreshIssueChange(
+                    issueNumber = sourceIssue.issueNumber,
+                    title = sourceIssue.title,
+                    changeType = ComicVineRefreshIssueChange.ChangeType.ADDED
+                )
+            } else {
+                matchedLocalIssueIds += localIssue.id
+
+                val hasChanges =
+                    localIssue.issueNumber != sourceIssue.issueNumber ||
+                        (
+                            sourceIssue.title != null &&
+                                localIssue.title != sourceIssue.title
+                        ) ||
+                        (
+                            sourceIssue.publicationDate != null &&
+                                localIssue.publicationDate != sourceIssue.publicationDate
+                        ) ||
+                        (
+                            sourceIssue.coverUrl != null &&
+                            localIssue.coverUrl != sourceIssue.coverUrl
+                        ) ||
+                        (
+                            !localIssue.isIssueTypeManuallyOverridden &&
+                                localIssue.issueType != sourceIssue.issueType
+                        ) ||
+                        (
+                            series.universeId != null &&
+                                localIssue.universeId != series.universeId
+                        )
+
+                ComicVineRefreshIssueChange(
+                    issueNumber = sourceIssue.issueNumber,
+                    title = sourceIssue.title ?: localIssue.title,
+                    changeType = if (hasChanges) {
+                        ComicVineRefreshIssueChange.ChangeType.UPDATED
+                    } else {
+                        ComicVineRefreshIssueChange.ChangeType.UNCHANGED
+                    },
+                    localIssueId = localIssue.id
+                )
+            }
+        }
+
+        val missingFromSource = localIssues
+            .filter { it.id !in matchedLocalIssueIds }
+            .map { issue ->
+                ComicVineRefreshIssueChange(
+                    issueNumber = issue.issueNumber,
+                    title = issue.title,
+                    changeType = ComicVineRefreshIssueChange.ChangeType.MISSING_FROM_SOURCE,
+                    localIssueId = issue.id
+                )
+            }
+
+        return ComicVineSeriesRefreshPreview(
+            seriesId = seriesId,
+            comicVineVolumeId = comicVineVolumeId,
+            refreshedTitle = refreshedTitle,
+            refreshedStartYear = refreshedStartYear,
+            issues = changes + missingFromSource
+        )
+    }
+
+    suspend fun applyComicVineSeriesRefresh(
+        seriesId: Long,
+        comicVineVolumeId: Long,
+        refreshedTitle: String,
+        refreshedStartYear: Int?,
+        volumeUrl: String?,
+        sourceIssues: List<ComicVineRefreshIssue>
+    ) {
+        require(comicVineVolumeId > 0L) {
+            "Comic Vine volume ID must be positive"
+        }
+
+        require(refreshedTitle.isNotBlank()) {
+            "Series title cannot be blank"
+        }
+
+        require(sourceIssues.all { it.comicVineIssueId > 0L }) {
+            "Comic Vine issue IDS must be positive"
+        }
+
+        require(sourceIssues.all { it.issueNumber.isNotBlank() }) {
+            "Comic Vine issue numbers cannot be blank"
+        }
+
+        require(
+            sourceIssues.map { it.comicVineIssueId }.distinct().size == sourceIssues.size
+        ) {
+            "Comic Vine issue IDs contain duplicates"
+        }
+
+        database.withWriteTransaction {
+            val series = comicDao.getSeriesById(seriesId)
+                ?: throw IllegalArgumentException(
+                    "Series $seriesId does not exist"
+                )
+
+            val preservedSeriesUniverseId = series.universeId
+
+            val source = "COMIC_VINE"
+            val volumeId = comicVineVolumeId.toString()
+
+            val existingVolumeLink =
+                comicDao.getSeriesExternalId(source, volumeId)
+
+            require(
+                existingVolumeLink == null || existingVolumeLink.seriesId == seriesId
+            ) {
+                "This Comic Vine volume is linked to another series"
+            }
+
+            val existingSeriesLink =
+                comicDao.getSeriesExternalIdsForSeries(seriesId)
+                    .firstOrNull { it.source == source }
+
+            require(
+                existingSeriesLink == null || existingSeriesLink.externalId == volumeId
+            ) {
+                "This series is linked to a different Comic Vine volume"
+            }
+            val normalizedTitle = refreshedTitle.trim()
+
+            comicDao.updateSeries(
+                series.copy(
+                    title = normalizedTitle,
+                    startYear = refreshedStartYear ?: series.startYear,
+                    universeId = preservedSeriesUniverseId
+                )
+            )
+
+            val updatedVolumeLink =
+                existingSeriesLink?.copy(
+                    url = volumeUrl ?: existingSeriesLink.url
+                )
+
+            if (updatedVolumeLink != null) {
+                if (updatedVolumeLink != existingSeriesLink) {
+                    comicDao.updateSeriesExternalId(updatedVolumeLink)
+                }
+            } else {
+                comicDao.insertSeriesExternalId(
+                    SeriesExternalId(
+                        seriesId = seriesId,
+                        source = source,
+                        externalId = volumeId,
+                        url = volumeUrl
+                    )
+                )
+            }
+
+            val localIssues = comicDao.getIssuesForSeries(seriesId)
+            val localIssueIds = localIssues.map { it.id }.toSet()
+
+            val localIssuesByComicVineId = localIssues.mapNotNull { issue ->
+                comicDao.getExternalIdsForIssue(issue.id)
+                    .firstOrNull { it.source == source }
+                    ?.externalId
+                    ?.let { it to issue }
+            }.toMap()
+
+            val matchedLocalIssueIds = mutableSetOf<Long>()
+
+            sourceIssues.forEach { sourceIssue ->
+                val externalId = sourceIssue.comicVineIssueId.toString()
+
+                val globallyLinkedId =
+                    comicDao.getExternalId(source, externalId)
+
+                require(
+                    globallyLinkedId == null || globallyLinkedId.issueId in localIssueIds
+                ) {
+                    "Comic Vine issue $externalId is linked to another local issue"
+                }
+
+                val linkedLocalIssue =
+                    localIssuesByComicVineId[externalId]
+
+                if (linkedLocalIssue != null &&
+                    linkedLocalIssue.id in matchedLocalIssueIds
+                ) {
+                   throw IllegalStateException(
+                       "A local issue matched more than one Comic Vine issue"
+                   )
+                }
+
+                val localIssue = linkedLocalIssue
+                    ?: localIssues.firstOrNull { issue ->
+                        issue.id !in matchedLocalIssueIds &&
+                            issue.issueNumber.trim().equals(
+                                sourceIssue.issueNumber.trim(),
+                                ignoreCase = true
+                            )
+                    }
+
+                val normalizedIssueNumber = sourceIssue.issueNumber.trim()
+                val normalizedIssueTitle = sourceIssue.title?.trim()?.takeIf { it.isNotEmpty() }
+                val normalizedPublicationDate = sourceIssue.publicationDate
+                    ?.trim()?.takeIf { it.isNotEmpty() }
+                val normalizedCoverUrl = sourceIssue.coverUrl?.trim()?.takeIf { it.isNotEmpty() }
+
+                val issueId = if (localIssue == null) {
+                    comicDao.insertIssue(
+                        Issue(
+                            seriesId = seriesId,
+                            universeId = preservedSeriesUniverseId,
+                            issueNumber = normalizedIssueNumber,
+                            title = normalizedIssueTitle,
+                            publicationDate = normalizedPublicationDate,
+                            coverUrl = normalizedCoverUrl,
+                            description = null,
+                            issueType = sourceIssue.issueType,
+                            isIssueTypeManuallyOverridden = false
+                        )
+                    )
+                } else {
+                    matchedLocalIssueIds += localIssue.id
+
+                    comicDao.updateIssue(
+                        localIssue.copy(
+                            universeId = preservedSeriesUniverseId
+                                ?: localIssue.universeId,
+                            issueNumber = normalizedIssueNumber,
+                            title = normalizedIssueTitle ?: localIssue.title,
+                            publicationDate = normalizedPublicationDate
+                                ?: localIssue.publicationDate,
+                            coverUrl = normalizedCoverUrl ?: localIssue.coverUrl,
+                            issueType = if (
+                                localIssue.isIssueTypeManuallyOverridden
+                            ) {
+                                localIssue.issueType
+                            } else {
+                                sourceIssue.issueType
+                            }
+                        )
+                    )
+
+                    localIssue.id
+                }
+
+                if (globallyLinkedId == null) {
+                    comicDao.insertExternalId(
+                        ExternalId(
+                            issueId = issueId,
+                            source = source,
+                            externalId = externalId,
+                            url = sourceIssue.siteDetailsUrl
+                        )
+                    )
+                } else if (
+                    sourceIssue.siteDetailsUrl != null &&
+                    globallyLinkedId.url != sourceIssue.siteDetailsUrl
+                ) {
+                    comicDao.updateExternalId(
+                        globallyLinkedId.copy(
+                            url = sourceIssue.siteDetailsUrl
+                        )
+                    )
+                }
+            }
+
+            if (preservedSeriesUniverseId != null) {
+                localIssues
+                    .filter { it.id !in matchedLocalIssueIds }
+                    .filter {
+                        it.universeId != preservedSeriesUniverseId
+                    }
+                    .forEach { issue ->
+                        comicDao.updateIssue(
+                            issue.copy(
+                                universeId = preservedSeriesUniverseId
+                            )
+                        )
+                    }
+            }
+        }
     }
 
     suspend fun getIssueById(issueId: Long): Issue? {

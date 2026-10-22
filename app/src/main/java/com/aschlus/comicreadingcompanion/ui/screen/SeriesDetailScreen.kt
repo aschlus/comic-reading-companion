@@ -2,39 +2,54 @@ package com.aschlus.comicreadingcompanion.ui.screen
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
+import com.aschlus.comicreadingcompanion.data.repository.ComicVineRefreshIssueChange
+import com.aschlus.comicreadingcompanion.ui.component.ComicEmptyState
 import com.aschlus.comicreadingcompanion.ui.component.ComicHomeSectionHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicIssueDetailHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicProgressBar
 import com.aschlus.comicreadingcompanion.ui.component.ComicSeriesIssueRow
+import com.aschlus.comicreadingcompanion.ui.component.ComicWideActionButton
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlue
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
+import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineSeriesRefreshUiState
+import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineSeriesRefreshViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.SeriesDetailViewModel
-import androidx.compose.ui.text.font.FontStyle
-import com.aschlus.comicreadingcompanion.ui.component.ComicEmptyState
-import androidx.compose.material3.Button
-import com.aschlus.comicreadingcompanion.ui.component.ComicWideActionButton
 
 @Composable
 fun SeriesDetailScreen(
@@ -43,10 +58,14 @@ fun SeriesDetailScreen(
     onPublisherClick: (Long) -> Unit,
     onIssueClick: (Long) -> Unit,
     onBackClick: () -> Unit,
-    onEditClick: () -> Unit = {}
+    onEditClick: () -> Unit = {},
+    refreshViewModel: ComicVineSeriesRefreshViewModel? = null
 ) {
     val series by viewModel.series.collectAsState()
     val issues by viewModel.issues.collectAsState()
+    val comicVineVolumeId by viewModel.comicVineVolumeId.collectAsState()
+    val refreshUiState = refreshViewModel?.uiState?.collectAsState()?.value
+    var showRefreshDialog by remember(seriesId) { mutableStateOf(false) }
 
     LaunchedEffect(seriesId) {
         viewModel.loadSeries(seriesId)
@@ -203,6 +222,31 @@ fun SeriesDetailScreen(
                     )
                 }
 
+                val linkedVolumeId = comicVineVolumeId
+
+                if (
+                    linkedVolumeId != null &&
+                    refreshViewModel != null
+                ) {
+                    item {
+                        ComicWideActionButton(
+                            text = "REFRESH FROM COMIC VINE",
+                            backgroundColor = ComicYellow,
+                            onClick = {
+                                showRefreshDialog = true
+
+                                refreshViewModel.loadPreview(
+                                    seriesId = seriesId,
+                                    comicVineVolumeId = linkedVolumeId
+                                )
+                            },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(top = 4.dp)
+                        )
+                    }
+                }
+
                 item {
                     Text(
                         text =
@@ -266,4 +310,193 @@ fun SeriesDetailScreen(
             }
         }
     }
+
+    if (
+        showRefreshDialog &&
+        refreshViewModel != null &&
+        refreshUiState != null
+    ) {
+        ComicVineSeriesRefreshDialog(
+            uiState = refreshUiState,
+            onDismiss = {
+                refreshViewModel.clearPreview()
+                showRefreshDialog = false
+            },
+            onConfirm = {
+                refreshViewModel.applyPreview()
+            }
+        )
+    }
+}
+
+@Composable
+private fun ComicVineSeriesRefreshDialog(
+    uiState: ComicVineSeriesRefreshUiState,
+    onDismiss: () -> Unit,
+    onConfirm: () -> Unit
+) {
+    val refreshApplied =
+        uiState.successMessage == "Comic Vine refresh applied."
+
+    AlertDialog(
+        onDismissRequest = {
+            if (!uiState.isApplying) {
+                onDismiss()
+            }
+        },
+        title = {
+            Text(
+                text = "REVIEW COMIC VINE REFRESH",
+                color = ComicInk,
+                fontWeight = FontWeight.Bold
+            )
+        },
+        text = {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .heightIn(max = 440.dp)
+                    .verticalScroll(rememberScrollState()),
+                verticalArrangement =
+                    Arrangement.spacedBy(8.dp)
+            ) {
+                if (uiState.isLoading) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement =
+                            Arrangement.spacedBy(10.dp)
+                    ) {
+                        CircularProgressIndicator(
+                            modifier = Modifier.size(24.dp)
+                        )
+
+                        Text("Loading Comic Vine details...")
+                    }
+                }
+
+                if (uiState.isApplying) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement =
+                            Arrangement.spacedBy(10.dp)
+                    ) {
+                        CircularProgressIndicator(
+                            modifier = Modifier.size(24.dp)
+                        )
+
+                        Text("Applying refresh...")
+                    }
+                }
+
+                uiState.error?.let { error ->
+                    Text(
+                        text = error,
+                        color = MaterialTheme.colorScheme.error
+                    )
+                }
+
+                uiState.preview?.let { preview ->
+                    Text(
+                        text = preview.refreshedTitle,
+                        fontWeight = FontWeight.Bold,
+                        color = ComicInk
+                    )
+
+                    preview.refreshedStartYear?.let { year ->
+                        Text("Source start year: $year")
+                    }
+
+                    Text(
+                        text = "Added: ${preview.addedCount}  •  " +
+                                "Updated: ${preview.updatedCount}"
+                    )
+
+                    Text(
+                        text = "Unchanged: ${preview.unchangedCount}  •  " +
+                                "Missing from source: " +
+                                preview.missingFromSourceCount
+                    )
+
+                    Text(
+                        text = "ISSUE-BY-ISSUE CHANGES",
+                        fontWeight = FontWeight.Bold,
+                        color = ComicInk,
+                        modifier = Modifier.padding(top = 6.dp)
+                    )
+
+                    preview.issues.forEach { change ->
+                        val status = when (change.changeType) {
+                            ComicVineRefreshIssueChange.ChangeType.ADDED ->
+                                "ADDED"
+
+                            ComicVineRefreshIssueChange.ChangeType.UPDATED ->
+                                "UPDATED"
+
+                            ComicVineRefreshIssueChange.ChangeType.UNCHANGED ->
+                                "UNCHANGED"
+
+                            ComicVineRefreshIssueChange.ChangeType.MISSING_FROM_SOURCE ->
+                                "MISSING FROM SOURCE"
+                        }
+
+                        val title = change.title
+                            ?.takeIf { it.isNotBlank() }
+                            ?.let { " — $it" }
+                            .orEmpty()
+
+                        Text(
+                            text = "$status  #${change.issueNumber}$title",
+                            color = ComicInk,
+                            style = MaterialTheme.typography.bodySmall
+                        )
+                    }
+
+                    Text(
+                        text = if (refreshApplied) {
+                            "Comic Vine refresh applied."
+                        } else {
+                            "No database changes will be made unless you confirm."
+                        },
+                        color = ComicInk,
+                        fontWeight = FontWeight.Medium,
+                        modifier = Modifier.padding(top = 6.dp)
+                    )
+                }
+            }
+        },
+        confirmButton = {
+            if (refreshApplied) {
+                TextButton(
+                    onClick = onDismiss
+                ) {
+                    Text("DONE")
+                }
+            } else {
+                TextButton(
+                    enabled = uiState.preview != null &&
+                            !uiState.isLoading &&
+                            !uiState.isApplying,
+                    onClick = onConfirm
+                ) {
+                    Text(
+                        if (uiState.isApplying) {
+                            "APPLYING..."
+                        } else {
+                            "CONFIRM REFRESH"
+                        }
+                    )
+                }
+            }
+        },
+        dismissButton = {
+            if (!refreshApplied) {
+                TextButton(
+                    enabled = !uiState.isApplying,
+                    onClick = onDismiss
+                ) {
+                    Text("CANCEL")
+                }
+            }
+        }
+    )
 }

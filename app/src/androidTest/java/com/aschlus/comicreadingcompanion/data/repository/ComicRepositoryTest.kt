@@ -3304,4 +3304,229 @@ class ComicRepositoryTest {
                 comicDao.getSeriesById(seriesId)?.universeId
             )
         }
+
+
+    @Test
+    fun previewComicVineSeriesRefresh_reportsChangesWithoutModifyingDatabase() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val universeId =
+                comicDao.insertUniverse(
+                    Universe(
+                        publisherId = publisherId,
+                        name = "Marvel Universe",
+                        designation = "Earth-616",
+                        description = null
+                    )
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Preview Test Series",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2001,
+                        universeId = universeId
+                    )
+                )
+
+            val existingIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "Original Title",
+                        publicationDate = "2000-01",
+                        coverUrl = null,
+                        description = "Keep this description",
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val preview =
+                repository.previewComicVineSeriesRefresh(
+                    seriesId = seriesId,
+                    comicVineVolumeId = 12345L,
+                    refreshedTitle = "Preview Test Series Updated",
+                    refreshedStartYear = 2002,
+                    sourceIssues = listOf(
+                        ComicVineRefreshIssue(
+                            comicVineIssueId = 1001L,
+                            issueNumber = "1",
+                            title = "Updated Title",
+                            publicationDate = "2002-01-01",
+                            coverUrl = "https://example.com/issue1.jpg",
+                            issueType = IssueType.REGULAR,
+                            siteDetailsUrl = "https://comicvine.gamespot.com/issue/1001/"
+                        ),
+                        ComicVineRefreshIssue(
+                            comicVineIssueId = 1002L,
+                            issueNumber = "2",
+                            title = "Second Issue",
+                            publicationDate = "2002-02-01",
+                            coverUrl = null,
+                            issueType = IssueType.REGULAR,
+                            siteDetailsUrl = "https://comicvine.gamespot.com/issue/1002/"
+                        )
+                    )
+                )
+
+            assertEquals(1, preview.addedCount)
+            assertEquals(1, preview.updatedCount)
+            assertEquals(0, preview.unchangedCount)
+            assertEquals(0, preview.missingFromSourceCount)
+
+            val unchangedSeries = comicDao.getSeriesById(seriesId)
+            val unchangedIssue = comicDao.getIssueById(existingIssueId)
+            val localIssues = comicDao.getIssuesForSeries(seriesId)
+
+            assertEquals("Preview Test Series", unchangedSeries?.title)
+            assertEquals(2000, unchangedSeries?.startYear)
+            assertEquals("Original Title", unchangedIssue?.title)
+            assertNull(unchangedIssue?.universeId)
+            assertEquals("Keep this description", unchangedIssue?.description)
+            assertEquals(1, localIssues.size)
+        }
+
+
+    @Test
+    fun applyComicVineSeriesRefresh_updatesIssuesAndPreservesLocalData() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val universeId =
+                comicDao.insertUniverse(
+                    Universe(
+                        publisherId = publisherId,
+                        name = "Marvel Universe",
+                        designation = "Earth-616",
+                        description = null
+                    )
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Refresh Test Series",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2001,
+                        universeId = universeId
+                    )
+                )
+
+            val existingIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "Original Title",
+                        publicationDate = "2000-01",
+                        coverUrl = null,
+                        description = "Keep this description",
+                        issueType = IssueType.SPECIAL,
+                        isIssueTypeManuallyOverridden = true
+                    )
+                )
+
+            val missingIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "3",
+                        title = "Local-Only Issue",
+                        publicationDate = "2000-03",
+                        coverUrl = null,
+                        description = "Do not delete me",
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            comicDao.insertReadingProgress(
+                ReadingProgress(
+                    issueId = existingIssueId,
+                    status = ReadingStatus.READ,
+                    startedAt = 1000L,
+                    completedAt = 2000L,
+                    notes = "Preserve my reading notes"
+                )
+            )
+
+            repository.applyComicVineSeriesRefresh(
+                seriesId = seriesId,
+                comicVineVolumeId = 12345L,
+                refreshedTitle = "Refresh Test Series Updated",
+                refreshedStartYear = 2002,
+                volumeUrl = "https://comicvine.gamespot.com/volume/12345/",
+                sourceIssues = listOf(
+                    ComicVineRefreshIssue(
+                        comicVineIssueId = 1001L,
+                        issueNumber = "1",
+                        title = "Updated Title",
+                        publicationDate = "2002-01-01",
+                        coverUrl = "https://example.com/issue1.jpg",
+                        issueType = IssueType.REGULAR,
+                        siteDetailsUrl = "https://comicvine.gamespot.com/issue/1001/"
+                    ),
+                    ComicVineRefreshIssue(
+                        comicVineIssueId = 1002L,
+                        issueNumber = "2",
+                        title = "Second Issue",
+                        publicationDate = "2002-02-01",
+                        coverUrl = "https://example.com/issue2.jpg",
+                        issueType = IssueType.REGULAR,
+                        siteDetailsUrl = "https://comicvine.gamespot.com/issue/1002/"
+                    )
+                )
+            )
+
+            val refreshedSeries = comicDao.getSeriesById(seriesId)
+            assertEquals("Refresh Test Series Updated", refreshedSeries?.title)
+            assertEquals(2002, refreshedSeries?.startYear)
+
+            val existingIssue = comicDao.getIssueById(existingIssueId)
+            assertNotNull(existingIssue)
+            assertEquals(universeId, existingIssue?.universeId)
+            assertEquals("Updated Title", existingIssue?.title)
+            assertEquals("Keep this description", existingIssue?.description)
+            assertEquals(IssueType.SPECIAL, existingIssue?.issueType)
+            assertEquals(true, existingIssue?.isIssueTypeManuallyOverridden)
+
+            val progress =
+                repository.getReadingProgressForIssue(existingIssueId)
+            assertNotNull(progress)
+            assertEquals(ReadingStatus.READ, progress?.status)
+            assertEquals(1000L, progress?.startedAt)
+            assertEquals(2000L, progress?.completedAt)
+            assertEquals("Preserve my reading notes", progress?.notes)
+
+            val localIssues = comicDao.getIssuesForSeries(seriesId)
+            assertEquals(3, localIssues.size)
+
+            val newIssue = localIssues.firstOrNull { it.issueNumber == "2" }
+            assertNotNull(newIssue)
+            assertEquals(universeId, newIssue?.universeId)
+            assertEquals("Second Issue", newIssue?.title)
+
+            val missingIssue = comicDao.getIssueById(missingIssueId)
+            assertNotNull(missingIssue)
+            assertEquals("Local-Only Issue", missingIssue?.title)
+            assertEquals("Do not delete me", missingIssue?.description)
+            assertEquals(universeId, missingIssue?.universeId)
+        }
+
+
 }
