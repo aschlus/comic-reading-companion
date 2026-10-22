@@ -1604,4 +1604,96 @@ class ComicDatabaseMigrationTest {
 
             migrated.close()
         }
+
+
+    @Test
+    fun migration6To7_addsSeriesUniverseIdAndDefaultsExistingSeriesToNull() =
+        runBlocking {
+            val connection =
+                migrationHelper.createDatabase(6)
+
+            connection.execSQL(
+                """
+            INSERT INTO publishers (id, name)
+            VALUES (1, 'Marvel Comics')
+            """.trimIndent()
+            )
+
+            connection.execSQL(
+                """
+            INSERT INTO universes (
+                id,
+                publisherId,
+                name,
+                designation,
+                description
+            )
+            VALUES (
+                1,
+                1,
+                'Marvel Universe',
+                'Earth-616',
+                NULL
+            )
+            """.trimIndent()
+            )
+
+            connection.execSQL(
+                """
+            INSERT INTO series (
+                id,
+                publisherId,
+                title,
+                volume,
+                startYear,
+                endYear
+            )
+            VALUES (
+                1,
+                1,
+                'Amazing Spider-Man',
+                2,
+                1999,
+                2003
+            )
+            """.trimIndent()
+            )
+
+            connection.close()
+
+            val migrated =
+                migrationHelper.runMigrationsAndValidate(
+                    version = 7,
+                    migrations = listOf(MIGRATION_6_7)
+                )
+
+            assertEquals(
+                1L,
+                queryCount(
+                    migrated,
+                    """
+                SELECT COUNT(*)
+                FROM series
+                WHERE id = 1
+                    AND universeId IS NULL
+                """.trimIndent()
+                )
+            )
+
+            assertEquals(
+                1L,
+                queryCount(
+                    migrated,
+                    """
+                SELECT COUNT(*)
+                FROM sqlite_master
+                WHERE type = 'index'
+                    AND name = 'index_series_universeId'
+                """.trimIndent()
+                )
+            )
+
+            migrated.close()
+        }
+
 }

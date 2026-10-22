@@ -3051,4 +3051,257 @@ class ComicRepositoryTest {
                 }
             )
         }
+
+
+    @Test
+    fun updateSeriesDetails_updatesFieldsAndPublisherWithoutChangingIssues() =
+        runBlocking {
+            val originalPublisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val newPublisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Independent Comics")
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = originalPublisherId,
+                        title = "Original Series",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2005
+                    )
+                )
+
+            val issueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "First Issue",
+                        publicationDate = "2000-01",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            repository.updateSeriesDetails(
+                seriesId = seriesId,
+                title = "  Updated Series  ",
+                volume = 2,
+                startYear = 2020,
+                endYear = null,
+                publisherId = newPublisherId,
+                universeId = null
+            )
+
+            val updated =
+                comicDao.getSeriesById(seriesId)
+
+            assertNotNull(updated)
+            assertEquals(seriesId, updated?.id)
+            assertEquals("Updated Series", updated?.title)
+            assertEquals(2, updated?.volume)
+            assertEquals(2020, updated?.startYear)
+            assertNull(updated?.endYear)
+            assertEquals(newPublisherId, updated?.publisherId)
+
+            // Editing series details must preserve its issues.
+            val preservedIssue =
+                comicDao.getIssueById(issueId)
+
+            assertNotNull(preservedIssue)
+            assertEquals(seriesId, preservedIssue?.seriesId)
+            assertEquals("First Issue", preservedIssue?.title)
+        }
+
+    @Test
+    fun updateSeriesDetails_rejectsEndYearBeforeStartYear() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Original Series",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2005
+                    )
+                )
+
+            var rejected = false
+
+            try {
+                repository.updateSeriesDetails(
+                    seriesId = seriesId,
+                    title = "Changed Series",
+                    volume = 2,
+                    startYear = 2025,
+                    endYear = 2020,
+                    publisherId = publisherId,
+                    universeId = null
+                )
+            } catch (_: IllegalArgumentException) {
+                rejected = true
+            }
+
+            assertTrue(rejected)
+
+            // Invalid edits must not modify the saved series.
+            val unchanged =
+                comicDao.getSeriesById(seriesId)
+
+            assertNotNull(unchanged)
+            assertEquals("Original Series", unchanged?.title)
+            assertEquals(1, unchanged?.volume)
+            assertEquals(2000, unchanged?.startYear)
+            assertEquals(2005, unchanged?.endYear)
+        }
+
+    @Test
+    fun updateSeriesDetails_updatesSeriesUniverseWithoutChangingIssueUniverse() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val seriesUniverseId =
+                comicDao.insertUniverse(
+                    Universe(
+                        publisherId = publisherId,
+                        name = "Earth-616",
+                        designation = "Earth-616",
+                        description = null
+                    )
+                )
+
+            val issueUniverseId =
+                comicDao.insertUniverse(
+                    Universe(
+                        publisherId = publisherId,
+                        name = "Earth-1610",
+                        designation = "Earth-1610",
+                        description = null
+                    )
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Universe Test Series",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2001
+                    )
+                )
+
+            val issueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = issueUniverseId,
+                        issueNumber = "1",
+                        title = "Test Issue",
+                        publicationDate = "2000-01",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            repository.updateSeriesDetails(
+                seriesId = seriesId,
+                title = "Universe Test Series",
+                volume = 1,
+                startYear = 2000,
+                endYear = 2001,
+                publisherId = publisherId,
+                universeId = seriesUniverseId
+            )
+
+            assertEquals(
+                seriesUniverseId,
+                comicDao.getSeriesById(seriesId)?.universeId
+            )
+
+            assertEquals(
+                issueUniverseId,
+                comicDao.getIssueById(issueId)?.universeId
+            )
+        }
+
+    @Test
+    fun updateSeriesDetails_rejectsUniverseFromDifferentPublisher() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val otherPublisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "DC Comics")
+                )
+
+            val foreignUniverseId =
+                comicDao.insertUniverse(
+                    Universe(
+                        publisherId = otherPublisherId,
+                        name = "DC Universe",
+                        designation = "DC",
+                        description = null
+                    )
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Universe Validation Test",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2001
+                    )
+                )
+
+            val thrownException =
+                try {
+                    repository.updateSeriesDetails(
+                        seriesId = seriesId,
+                        title = "Universe Validation Test",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2001,
+                        publisherId = publisherId,
+                        universeId = foreignUniverseId
+                    )
+                    null
+                } catch (exception: IllegalArgumentException) {
+                    exception
+                }
+
+            assertNotNull(thrownException)
+
+            assertEquals(
+                "Universe $foreignUniverseId does not belong to publisher $publisherId",
+                thrownException?.message
+            )
+
+            assertNull(
+                comicDao.getSeriesById(seriesId)?.universeId
+            )
+        }
 }

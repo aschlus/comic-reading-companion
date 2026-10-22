@@ -145,6 +145,27 @@ class ComicAppBackupParser {
                 series.publisherId,
                 publisherIds
             )
+
+            series.universeId?.let { universeId ->
+                requireReference(
+                    source,
+                    "series ${series.id} universe",
+                    universeId,
+                    universeIds
+                )
+
+                val selectedUniverse =
+                    backup.universes.first {
+                        it.id == universeId
+                    }
+
+                checkValid(
+                    selectedUniverse.publisherId == series.publisherId,
+                    source,
+                    "series ${series.id} universe $universeId " +
+                            "belongs to a different publisher"
+                )
+            }
         }
 
         backup.seriesExternalIds.forEach { externalId ->

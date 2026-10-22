@@ -32,7 +32,8 @@ class ComicAppBackupDtoTest {
                     title = "Amazing Spider-Man",
                     volume = 2,
                     startYear = 1999,
-                    endYear = 2003
+                    endYear = 2003,
+                    universeId = 2L
                 )
             ),
             seriesExternalIds = listOf(
@@ -133,4 +134,25 @@ class ComicAppBackupDtoTest {
             restored.formatVersion
         )
     }
+
+
+    @Test
+    fun backupSeriesDto_missingUniverseIdDefaultsToNull() {
+        val restored =
+            Json.decodeFromString<BackupSeriesDto>(
+                """
+            {
+                "id": 3,
+                "publisherId": 1,
+                "title": "Test Series",
+                "volume": 1,
+                "startYear": 2000,
+                "endYear": 2001
+            }
+            """.trimIndent()
+            )
+
+        assertEquals(null, restored.universeId)
+    }
+
 }

@@ -14,10 +14,17 @@ import androidx.room3.PrimaryKey
             parentColumns = ["id"],
             childColumns = ["publisherId"],
             onDelete = ForeignKey.CASCADE
+        ),
+        ForeignKey(
+            entity = Universe::class,
+            parentColumns = ["id"],
+            childColumns = ["universeId"],
+            onDelete = ForeignKey.SET_NULL
         )
     ],
     indices = [
-        Index(value = ["publisherId"])
+        Index(value = ["publisherId"]),
+        Index(value = ["universeId"])
     ]
 )
 data class Series(
@@ -27,5 +34,6 @@ data class Series(
     val title: String,
     val volume: Int?,
     val startYear: Int?,
-    val endYear: Int?
+    val endYear: Int?,
+    val universeId: Long? = null
 )

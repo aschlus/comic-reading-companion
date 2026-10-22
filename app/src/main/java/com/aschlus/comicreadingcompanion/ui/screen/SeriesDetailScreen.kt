@@ -33,6 +33,8 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
 import com.aschlus.comicreadingcompanion.ui.viewmodel.SeriesDetailViewModel
 import androidx.compose.ui.text.font.FontStyle
 import com.aschlus.comicreadingcompanion.ui.component.ComicEmptyState
+import androidx.compose.material3.Button
+import com.aschlus.comicreadingcompanion.ui.component.ComicWideActionButton
 
 @Composable
 fun SeriesDetailScreen(
@@ -40,7 +42,8 @@ fun SeriesDetailScreen(
     viewModel: SeriesDetailViewModel,
     onPublisherClick: (Long) -> Unit,
     onIssueClick: (Long) -> Unit,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    onEditClick: () -> Unit = {}
 ) {
     val series by viewModel.series.collectAsState()
     val issues by viewModel.issues.collectAsState()
@@ -186,6 +189,17 @@ fun SeriesDetailScreen(
                                     textDecoration = TextDecoration.Underline
                                 ),
                         color = ComicBlue
+                    )
+                }
+
+                item {
+                    ComicWideActionButton(
+                        text = "EDIT SERIES DETAILS",
+                        backgroundColor = ComicYellow,
+                        onClick = onEditClick,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 4.dp)
                     )
                 }
 

@@ -52,7 +52,8 @@ data class BackupSeriesDto(
     val title: String,
     val volume: Int?,
     val startYear: Int?,
-    val endYear: Int?
+    val endYear: Int?,
+    val universeId: Long? = null
 )
 
 @Serializable

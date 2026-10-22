@@ -197,3 +197,28 @@ val MIGRATION_5_6 =
             )
         }
     }
+
+val MIGRATION_6_7 =
+    object : Migration(
+        startVersion = 6,
+        endVersion = 7
+    ) {
+        override suspend fun migrate(connection: SQLiteConnection) {
+            connection.execSQL(
+                """
+                    ALTER TABLE series
+                    ADD COLUMN universeId INTEGER
+                    REFERENCES universes(id)
+                    ON DELETE SET NULL
+                """.trimIndent()
+            )
+
+            connection.execSQL(
+                """
+                    CREATE INDEX IF NOT EXISTS
+                    index_series_universeId
+                    ON series(universeId)
+                """.trimIndent()
+            )
+        }
+    }

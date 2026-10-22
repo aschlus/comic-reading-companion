@@ -60,7 +60,8 @@ class ComicAppBackupExporter(
                         title = item.title,
                         volume = item.volume,
                         startYear = item.startYear,
-                        endYear = item.endYear
+                        endYear = item.endYear,
+                        universeId = item.universeId
                     )
                 },
 

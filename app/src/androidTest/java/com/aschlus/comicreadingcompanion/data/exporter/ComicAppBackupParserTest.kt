@@ -92,6 +92,35 @@ class ComicAppBackupParserTest {
         }
     }
 
+
+    @Test
+    fun parseSeriesUniverseFromDifferentPublisher_rejectsBackup() {
+        val original = validBackup()
+
+        val backup =
+            original.copy(
+                publishers = original.publishers +
+                        BackupPublisherDto(
+                            12L,
+                            "Other Publisher"
+                        ),
+                series = original.series.map { series ->
+                    series.copy(
+                        publisherId = 12L
+                    )
+                }
+            )
+
+        assertInvalidBackupContaining(
+            "belongs to a different publisher"
+        ) {
+            parser.parseJson(
+                json.encodeToString(backup)
+            )
+        }
+    }
+
+
     private fun validBackup() = ComicAppBackupDto(
         exportedAtEpochMillis = 1L,
         publishers = listOf(
@@ -113,7 +142,8 @@ class ComicAppBackupParserTest {
                 title = "Test Series",
                 volume = 1,
                 startYear = 2000,
-                endYear = 2001
+                endYear = 2001,
+                universeId = 2L
             )
         ),
         seriesExternalIds = listOf(

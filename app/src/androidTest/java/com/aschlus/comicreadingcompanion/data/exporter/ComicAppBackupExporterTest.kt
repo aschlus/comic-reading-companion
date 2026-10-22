@@ -85,7 +85,8 @@ class ComicAppBackupExporterTest {
                         title = "Amazing Spider-Man",
                         volume = 2,
                         startYear = 1999,
-                        endYear = 2003
+                        endYear = 2003,
+                        universeId = universeId
                     )
                 )
 
@@ -186,6 +187,7 @@ class ComicAppBackupExporterTest {
             assertEquals(1, backup.universes.size)
             assertEquals(1, backup.series.size)
             assertEquals(1, backup.seriesExternalIds.size)
+            assertEquals(universeId, backup.series.single().universeId)
             assertEquals(1, backup.issues.size)
             assertEquals(1, backup.issueExternalIds.size)
             assertEquals(1, backup.readingLists.size)

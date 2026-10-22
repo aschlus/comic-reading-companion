@@ -93,10 +93,86 @@ class ComicRepository(
         return comicDao.insertSeries(series)
     }
 
+    suspend fun updateSeriesDetails(
+        seriesId: Long,
+        title: String,
+        volume: Int?,
+        startYear: Int?,
+        endYear: Int?,
+        publisherId: Long,
+        universeId: Long?
+    ) {
+        val existingSeries =
+            comicDao.getSeriesById(seriesId)
+                ?: throw IllegalArgumentException(
+                    "Series $seriesId does not exist"
+                )
+
+        val trimmedTitle = title.trim()
+
+        require(trimmedTitle.isNotEmpty()) {
+            "Series title cannot be blank"
+        }
+
+        require(volume == null || volume > 0) {
+            "Volume must be a positive number"
+        }
+
+        require(startYear == null || startYear > 0) {
+            "Start year must be a positive number"
+        }
+
+        require(endYear == null || endYear > 0) {
+            "End year must be a positive number"
+        }
+
+        require(
+            startYear == null ||
+            endYear == null ||
+            endYear >= startYear
+        ) {
+            "End year cannot be before start year"
+        }
+
+        require(
+            comicDao.getAllPublishers().any {
+                it.id == publisherId
+            }
+        ) {
+            "Publisher $publisherId does not exist"
+        }
+
+        if (universeId != null) {
+            require(
+                getUniverseForPublisher(publisherId)
+                    .any { it.id == universeId }
+            ) {
+                "Universe $universeId does not belong to publisher $publisherId"
+            }
+        }
+
+        comicDao.updateSeries(
+            existingSeries.copy(
+                publisherId = publisherId,
+                title = trimmedTitle,
+                volume = volume,
+                startYear = startYear,
+                endYear = endYear,
+                universeId = universeId
+            )
+        )
+    }
+
     suspend fun getSeriesForPublisher(
         publisherId: Long
     ): List<Series> {
         return comicDao.getSeriesForPublisher(publisherId)
+    }
+
+    suspend fun getSeriesById(
+        seriesId: Long
+    ): Series? {
+        return comicDao.getSeriesById(seriesId)
     }
 
     fun getSeriesDetail(

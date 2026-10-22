@@ -44,6 +44,7 @@ import com.aschlus.comicreadingcompanion.ui.screen.CollectionScreen
 import com.aschlus.comicreadingcompanion.ui.screen.ComicVineVolumeReviewScreen
 import com.aschlus.comicreadingcompanion.ui.screen.ComicVineVolumeSearchScreen
 import com.aschlus.comicreadingcompanion.ui.screen.CreateReadingListScreen
+import com.aschlus.comicreadingcompanion.ui.screen.EditSeriesScreen
 import com.aschlus.comicreadingcompanion.ui.screen.HomeScreen
 import com.aschlus.comicreadingcompanion.ui.screen.IssueDetailScreen
 import com.aschlus.comicreadingcompanion.ui.screen.LibraryScreen
@@ -67,6 +68,8 @@ import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineVolumeSearchViewM
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineVolumeSearchViewModelFactory
 import com.aschlus.comicreadingcompanion.ui.viewmodel.CreateReadingListViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.CreateReadingListViewModelFactory
+import com.aschlus.comicreadingcompanion.ui.viewmodel.EditSeriesViewModel
+import com.aschlus.comicreadingcompanion.ui.viewmodel.EditSeriesViewModelFactory
 import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeViewModelFactory
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ImportReadingListViewModel
@@ -911,6 +914,41 @@ class MainActivity : ComponentActivity() {
                                         "issue/$issueId"
                                     )
                                 },
+                                onBackClick = safeNavigateBack,
+                                onEditClick = {
+                                    navController.navigate("editSeries/$seriesId")
+                                }
+                            )
+                        }
+
+                        composable(
+                            route = "editSeries/{seriesId}",
+                            arguments = listOf(
+                                navArgument("seriesId") {
+                                    type = NavType.LongType
+                                }
+                            )
+                        ) { backStackEntry ->
+
+                            val seriesId =
+                                backStackEntry.arguments
+                                    ?.getLong("seriesId")
+                                    ?: return@composable
+
+                            val container =
+                                (application as ComicReadingCompanionApplication)
+                                    .container
+
+                            val editSeriesViewModel: EditSeriesViewModel =
+                                viewModel(
+                                    factory = EditSeriesViewModelFactory(
+                                        repository = container.comicRepository
+                                    )
+                                )
+
+                            EditSeriesScreen(
+                                seriesId = seriesId,
+                                viewModel = editSeriesViewModel,
                                 onBackClick = safeNavigateBack
                             )
                         }

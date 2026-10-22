@@ -99,7 +99,8 @@ class ComicAppBackupRestorerTest {
                         title = "Amazing Spider-Man",
                         volume = 2,
                         startYear = 1999,
-                        endYear = 2003
+                        endYear = 2003,
+                        universeId = universeId
                     )
                 )
 
@@ -247,6 +248,10 @@ class ComicAppBackupRestorerTest {
             assertEquals(expected.publishers, actual.publishers)
             assertEquals(expected.universes, actual.universes)
             assertEquals(expected.series, actual.series)
+            assertEquals(
+                universeId,
+                actual.series.single().universeId
+            )
             assertEquals(
                 expected.seriesExternalIds,
                 actual.seriesExternalIds
