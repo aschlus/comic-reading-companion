@@ -24,13 +24,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.max
 import androidx.compose.ui.unit.sp
 import com.aschlus.comicreadingcompanion.data.database.models.IssueSearchResult
 import com.aschlus.comicreadingcompanion.data.database.models.SeriesSearchResult
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlueLight
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
+import com.aschlus.comicreadingcompanion.util.formatPublicationDate
 
 @Composable
 fun ComicAddToListSeriesResult(
@@ -72,7 +72,7 @@ fun ComicAddToListIssueResult(
     val metadata =
         buildList {
             result.publicationDate?.let {
-                add(it)
+                add(formatPublicationDate(it))
             }
 
             add(result.publisherName)

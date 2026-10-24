@@ -30,9 +30,7 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicBlueLight
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
-import java.time.LocalDate
-import java.time.YearMonth
-import java.time.format.DateTimeFormatter
+import com.aschlus.comicreadingcompanion.util.formatPublicationDate
 import java.util.Locale
 
 @Composable
@@ -137,7 +135,7 @@ fun ComicSeriesIssueRow(
                 issue.publicationDate
                     ?.let { publicationDate ->
                         Text(
-                            text = formatSeriesIssueDate(publicationDate),
+                            text = formatPublicationDate(publicationDate),
                             style =
                                 MaterialTheme.typography.bodySmall
                                     .copy(
@@ -250,29 +248,5 @@ private fun ComicSeriesIssueStatus(
             color = ComicInk,
             maxLines = 1
         )
-    }
-}
-
-private fun formatSeriesIssueDate(
-    publicationDate: String
-): String {
-    val formatter =
-        DateTimeFormatter.ofPattern(
-            "MMM yyyy",
-            Locale.getDefault()
-        )
-
-    return try {
-        YearMonth
-            .parse(publicationDate)
-            .format(formatter)
-    } catch (_: Exception) {
-        try {
-            YearMonth
-                .from(LocalDate.parse(publicationDate))
-                .format(formatter)
-        } catch (_: Exception) {
-            publicationDate
-        }
     }
 }

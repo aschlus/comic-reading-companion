@@ -11,5 +11,6 @@ data class IssueSearchResult(
     val issueTitle: String?,
     val publicationDate: String?,
     val publisherName: String,
-    val readingStatus: ReadingStatus?
+    val readingStatus: ReadingStatus?,
+    val coverUrl: String? = null
 )

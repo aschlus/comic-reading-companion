@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
@@ -29,12 +30,12 @@ import androidx.compose.ui.unit.sp
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.database.models.IssueSearchResult
 import com.aschlus.comicreadingcompanion.data.database.models.SeriesSearchResult
-import com.aschlus.comicreadingcompanion.ui.theme.ComicBlueLight
 import com.aschlus.comicreadingcompanion.ui.theme.ComicGreen
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPurple
 import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
+import com.aschlus.comicreadingcompanion.util.formatPublicationDate
 
 @Composable
 fun ComicBrowseSeriesResult(
@@ -56,13 +57,7 @@ fun ComicBrowseSeriesResult(
         }.joinToString( " • ")
 
     ComicBrowseResultRow(
-        badgeText =
-            result.title
-                .firstOrNull()
-                ?.uppercaseChar()
-                ?.toString()
-                ?: "?",
-        badgeColor = ComicPurple,
+        coverUrl = result.coverUrl,
         title = result.title,
         subtitle = metadata,
         supportingText =
@@ -95,7 +90,7 @@ fun ComicBrowseIssueResult(
             }
 
             result.publicationDate?.let {
-                add(it)
+                add(formatPublicationDate(it))
             }
 
             add(result.publisherName)
@@ -114,8 +109,7 @@ fun ComicBrowseIssueResult(
         }
 
     ComicBrowseResultRow(
-        badgeText = "#${result.issueNumber}",
-        badgeColor = ComicBlueLight,
+        coverUrl = result.coverUrl,
         title =
             "${result.seriesTitle} " +
             "#${result.issueNumber}",
@@ -139,15 +133,16 @@ fun ComicBrowseIssueResult(
 
 @Composable
 fun ComicBrowseResultRow(
-    badgeText: String,
-    badgeColor: androidx.compose.ui.graphics.Color,
     title: String,
     subtitle: String,
     supportingText: String?,
     statusText: String?,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    contentDescription: String? = null
+    contentDescription: String? = null,
+    coverUrl: String? = null,
+    badgeText: String? = null,
+    badgeColor: androidx.compose.ui.graphics.Color = ComicPurple
 ) {
     val shape = RoundedCornerShape(10.dp)
 
@@ -195,9 +190,20 @@ fun ComicBrowseResultRow(
             verticalAlignment =
                 Alignment.CenterVertically
         ) {
-            Box(
-                modifier =
-                    Modifier
+            if (!coverUrl.isNullOrBlank()) {
+                ComicCoverImage(
+                    coverUrl = coverUrl,
+                    contentDescription = "$title cover",
+                    modifier = Modifier
+                        .width(52.dp)
+                        .aspectRatio(2f / 3f),
+                    placeholderText = "No Cover",
+                    shape = RoundedCornerShape(4.dp),
+                    borderColor = ComicInk
+                )
+            } else if (badgeText != null) {
+                Box(
+                    modifier = Modifier
                         .width(52.dp)
                         .height(64.dp)
                         .clip(RoundedCornerShape(6.dp))
@@ -207,20 +213,29 @@ fun ComicBrowseResultRow(
                             color = ComicInk,
                             shape = RoundedCornerShape(6.dp)
                         ),
-                contentAlignment =
-                    Alignment.Center
-            ) {
-                Text(
-                    text = badgeText,
-                    style =
-                        MaterialTheme.typography.titleMedium
-                            .copy(
-                                fontSize = 15.sp,
-                                lineHeight = 17.sp,
-                                fontWeight = FontWeight.Black
-                            ),
-                    color = ComicInk,
-                    maxLines = 2
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = badgeText,
+                        style = MaterialTheme.typography.titleMedium.copy(
+                            fontSize = 15.sp,
+                            lineHeight = 17.sp,
+                            fontWeight = FontWeight.Black
+                        ),
+                        color = ComicInk,
+                        maxLines = 2
+                    )
+                }
+            } else {
+                ComicCoverImage(
+                    coverUrl = null,
+                    contentDescription = "$title cover",
+                    modifier = Modifier
+                        .width(52.dp)
+                        .aspectRatio(2f / 3f),
+                    placeholderText = "No Cover",
+                    shape = RoundedCornerShape(4.dp),
+                    borderColor = ComicInk
                 )
             }
 

@@ -2185,7 +2185,7 @@ class ComicDaoTest {
         }
 
     @Test
-    fun getPublisherSeries_returnsSeriesMetadataAndPrgoressCount() =
+    fun getPublisherSeries_returnsSeriesMetadataAndProgressCount() =
         runBlocking {
             val publisherId =
                 comicDao.insertPublisher(
@@ -2275,6 +2275,151 @@ class ComicDaoTest {
             assertEquals(2003, result.endYear)
             assertEquals(3, result.totalCount)
             assertEquals(1, result.readCount)
+        }
+
+    @Test
+    fun getPublisherBrowseResults_returnsCoversFromDistinctSeries() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Artwork Publisher")
+                )
+
+            comicDao.insertPublisher(
+                Publisher(name = "No Art Publisher")
+            )
+
+            val olderSeriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Older Series",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2005
+                    )
+                )
+
+            val middleSeriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Middle Series",
+                        volume = 1,
+                        startYear = 2010,
+                        endYear = 2015
+                    )
+                )
+
+            val newestSeriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Newest Series",
+                        volume = 1,
+                        startYear = 2020,
+                        endYear = null
+                    )
+                )
+
+            comicDao.insertIssue(
+                Issue(
+                    seriesId = olderSeriesId,
+                    universeId = null,
+                    issueNumber = "1",
+                    title = "Older First Issue",
+                    publicationDate = "2000-01",
+                    coverUrl = "https://example.com/older-first.jpg",
+                    description = null,
+                    issueType = IssueType.REGULAR
+                )
+            )
+
+            comicDao.insertIssue(
+                Issue(
+                    seriesId = olderSeriesId,
+                    universeId = null,
+                    issueNumber = "2",
+                    title = "Older Second Issue",
+                    publicationDate = "2000-02",
+                    coverUrl = "https://example.com/older-second.jpg",
+                    description = null,
+                    issueType = IssueType.REGULAR
+                )
+            )
+
+            comicDao.insertIssue(
+                Issue(
+                    seriesId = middleSeriesId,
+                    universeId = null,
+                    issueNumber = "1",
+                    title = "Middle First Issue",
+                    publicationDate = "2010-01",
+                    coverUrl = "https://example.com/middle.jpg",
+                    description = null,
+                    issueType = IssueType.REGULAR
+                )
+            )
+
+            comicDao.insertIssue(
+                Issue(
+                    seriesId = newestSeriesId,
+                    universeId = null,
+                    issueNumber = "1",
+                    title = "Newest First Issue",
+                    publicationDate = "2020-01",
+                    coverUrl = "https://example.com/newest.jpg",
+                    description = null,
+                    issueType = IssueType.REGULAR
+                )
+            )
+
+            comicDao.insertIssue(
+                Issue(
+                    seriesId = newestSeriesId,
+                    universeId = null,
+                    issueNumber = "2",
+                    title = "Newest Second Issue",
+                    publicationDate = "2020-02",
+                    coverUrl = "https://example.com/newest-second.jpg",
+                    description = null,
+                    issueType = IssueType.REGULAR
+                )
+            )
+
+            val results =
+                comicDao
+                    .getPublisherBrowseResults()
+                    .first()
+                    .associateBy { it.name }
+
+            val artworkPublisher =
+                results.getValue("Artwork Publisher")
+
+            assertEquals(3, artworkPublisher.seriesCount)
+
+            assertEquals(
+                "https://example.com/newest.jpg",
+                artworkPublisher.coverUrl1
+            )
+
+            assertEquals(
+                "https://example.com/middle.jpg",
+                artworkPublisher.coverUrl2
+            )
+
+            assertEquals(
+                "https://example.com/older-first.jpg",
+                artworkPublisher.coverUrl3
+            )
+
+            val publisherWithoutArtwork =
+                results.getValue("No Art Publisher")
+
+            assertEquals(0, publisherWithoutArtwork.seriesCount)
+            assertEquals(null, publisherWithoutArtwork.coverUrl1)
+            assertEquals(null, publisherWithoutArtwork.coverUrl2)
+            assertEquals(null, publisherWithoutArtwork.coverUrl3)
         }
 
     @Test

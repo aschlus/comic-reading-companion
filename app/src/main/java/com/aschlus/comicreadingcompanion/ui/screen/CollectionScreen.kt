@@ -56,6 +56,7 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
 import com.aschlus.comicreadingcompanion.ui.viewmodel.CollectionSort
 import com.aschlus.comicreadingcompanion.ui.viewmodel.CollectionStats
 import com.aschlus.comicreadingcompanion.ui.viewmodel.CollectionViewModel
+import com.aschlus.comicreadingcompanion.util.formatPublicationDate
 
 
 @Composable
@@ -528,7 +529,7 @@ private fun OwnedIssueCard(
                             ?.takeIf { it.isNotBlank() }
                             ?.let {
                                 append(" · ")
-                                append(it)
+                                append(formatPublicationDate(it))
                             }
                     },
                     style = MaterialTheme.typography.bodySmall,

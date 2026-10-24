@@ -8,10 +8,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -20,19 +20,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aschlus.comicreadingcompanion.data.database.models.PublisherSeries
-import com.aschlus.comicreadingcompanion.ui.theme.ComicBlueLight
-import com.aschlus.comicreadingcompanion.ui.theme.ComicGreen
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicOrange
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaperDeep
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPurple
-import com.aschlus.comicreadingcompanion.ui.theme.ComicRedLight
 import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
 
 @Composable
@@ -75,27 +71,6 @@ fun ComicPublisherSeriesRow(
             series.readCount.toFloat() / series.totalCount.toFloat()
         }
 
-    val badgeColors =
-        listOf(
-            ComicBlueLight,
-            ComicPurple,
-            ComicGreen,
-            ComicOrange,
-            ComicRedLight
-        )
-
-    val badgeColor =
-        badgeColors[
-            (series.seriesId % badgeColors.size).toInt()
-        ]
-
-    val badgeText =
-        series.title
-            .firstOrNull()
-            ?.uppercaseChar()
-            ?.toString()
-            ?: "?"
-
     Box(
         modifier =
             modifier.fillMaxWidth()
@@ -135,32 +110,18 @@ fun ComicPublisherSeriesRow(
             verticalAlignment =
                 Alignment.CenterVertically
         ) {
-            Box(
+            ComicCoverImage(
+                coverUrl = series.coverUrl,
+                contentDescription = "${series.title} cover",
                 modifier =
                     Modifier
-                        .size(56.dp)
-                        .clip(RoundedCornerShape(8.dp))
-                        .background(badgeColor)
-                        .border(
-                            width = 2.dp,
-                            color = ComicInk,
-                            shape = RoundedCornerShape(8.dp)
-                        ),
-                contentAlignment =
-                    Alignment.Center
-            ) {
-                Text(
-                    text = badgeText,
-                    style =
-                        MaterialTheme.typography.headlineMedium
-                            .copy(
-                                fontSize = 28.sp,
-                                lineHeight = 30.sp,
-                                fontWeight = FontWeight.Black
-                            ),
-                    color = ComicInk
-                )
-            }
+                        .width(64.dp)
+                        .aspectRatio(2f / 3f),
+                placeholderText = "No Cover",
+                shape = RoundedCornerShape(4.dp),
+                borderColor = ComicInk,
+                contentScale = ContentScale.Fit
+            )
 
             Spacer(modifier = Modifier.width(11.dp))
 

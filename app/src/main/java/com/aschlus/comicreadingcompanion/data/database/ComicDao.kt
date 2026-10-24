@@ -71,7 +71,146 @@ interface ComicDao {
         SELECT
             publishers.id AS publisherId,
             publishers.name AS name,
-            COUNT(series.id) AS seriesCount
+            COUNT(series.id) AS seriesCount,
+        
+            (
+                SELECT (
+                    SELECT coverIssue.coverUrl
+                    FROM issues AS coverIssue
+                    WHERE coverIssue.seriesId = coverSeries.id
+                        AND coverIssue.coverUrl IS NOT NULL
+                        AND TRIM(coverIssue.coverUrl) != ''
+                    ORDER BY
+                        CASE
+                            WHEN coverIssue.publicationDate IS NULL
+                                OR TRIM(coverIssue.publicationDate) = ''
+                            THEN 1
+                            ELSE 0
+                        END ASC,
+                        coverIssue.publicationDate ASC,
+                        CASE
+                            WHEN coverIssue.issueNumber
+                                GLOB '[0-9]*'
+                            THEN 0
+                            ELSE 1
+                        END ASC,
+                        CAST(coverIssue.issueNumber AS REAL) ASC,
+                        coverIssue.issueNumber ASC
+                    LIMIT 1
+                )
+                FROM series AS coverSeries
+                WHERE coverSeries.publisherId = publishers.id
+                    AND EXISTS (
+                        SELECT 1
+                        FROM issues AS availableIssue
+                        WHERE availableIssue.seriesId = coverSeries.id
+                            AND availableIssue.coverUrl IS NOT NULL
+                            AND TRIM(availableIssue.coverUrl) != ''
+                    )
+                ORDER BY
+                    CASE
+                        WHEN coverSeries.startYear IS NULL THEN 1
+                        ELSE 0
+                    END ASC,
+                    coverSeries.startYear DESC,
+                    coverSeries.title ASC,
+                    coverSeries.volume ASC,
+                    coverSeries.id ASC
+                LIMIT 1 OFFSET 0
+            ) AS coverUrl1,
+            
+            (
+                SELECT (
+                    SELECT coverIssue.coverUrl
+                    FROM issues AS coverIssue
+                    WHERE coverIssue.seriesId = coverSeries.id
+                        AND coverIssue.coverUrl IS NOT NULL
+                        AND TRIM(coverIssue.coverUrl) != ''
+                    ORDER BY
+                        CASE
+                            WHEN coverIssue.publicationDate IS NULL
+                                OR TRIM(coverIssue.publicationDate) = ''
+                            THEN 1
+                            ELSE 0
+                        END ASC,
+                        coverIssue.publicationDate ASC,
+                        CASE
+                            WHEN coverIssue.issueNumber
+                                GLOB '[0-9]*'
+                            THEN 0
+                            ELSE 1
+                        END ASC,
+                        CAST(coverIssue.issueNumber AS REAL) ASC,
+                        coverIssue.issueNumber ASC
+                    LIMIT 1
+                )
+                FROM series AS coverSeries
+                WHERE coverSeries.publisherId = publishers.id
+                    AND EXISTS (
+                        SELECT 1
+                        FROM issues AS availableIssue
+                        WHERE availableIssue.seriesId = coverSeries.id
+                            AND availableIssue.coverUrl IS NOT NULL
+                            AND TRIM(availableIssue.coverUrl) != ''
+                    )
+                ORDER BY
+                    CASE
+                        WHEN coverSeries.startYear IS NULL THEN 1
+                        ELSE 0
+                    END ASC,
+                    coverSeries.startYear DESC,
+                    coverSeries.title ASC,
+                    coverSeries.volume ASC,
+                    coverSeries.id ASC
+                LIMIT 1 OFFSET 1
+            ) AS coverUrl2,
+            
+            (
+                SELECT (
+                    SELECT coverIssue.coverUrl
+                    FROM issues AS coverIssue
+                    WHERE coverIssue.seriesId = coverSeries.id
+                        AND coverIssue.coverUrl IS NOT NULL
+                        AND TRIM(coverIssue.coverUrl) != ''
+                    ORDER BY
+                        CASE
+                            WHEN coverIssue.publicationDate IS NULL
+                                OR TRIM(coverIssue.publicationDate) = ''
+                            THEN 1
+                            ELSE 0
+                        END ASC,
+                        coverIssue.publicationDate ASC,
+                        CASE
+                            WHEN coverIssue.issueNumber
+                                GLOB '[0-9]*'
+                            THEN 0
+                            ELSE 1
+                        END ASC,
+                        CAST(coverIssue.issueNumber AS REAL) ASC,
+                        coverIssue.issueNumber ASC
+                    LIMIT 1
+                )
+                FROM series AS coverSeries
+                WHERE coverSeries.publisherId = publishers.id
+                    AND EXISTS (
+                        SELECT 1
+                        FROM issues AS availableIssue
+                        WHERE availableIssue.seriesId = coverSeries.id
+                            AND availableIssue.coverUrl IS NOT NULL
+                            AND TRIM(availableIssue.coverUrl) != ''
+                    )
+                ORDER BY
+                    CASE
+                        WHEN coverSeries.startYear IS NULL THEN 1
+                        ELSE 0
+                    END ASC,
+                    coverSeries.startYear DESC,
+                    coverSeries.title ASC,
+                    coverSeries.volume ASC,
+                    coverSeries.id ASC
+                LIMIT 1 OFFSET 2
+            ) AS coverUrl3
+        
         FROM publishers
         LEFT JOIN series
             ON publishers.id = series.publisherId
@@ -206,14 +345,37 @@ interface ComicDao {
                         THEN 1
                     ELSE 0
                 END
-            ) AS readCount
+            ) AS readCount,
+            (
+                SELECT cover_issue.coverUrl
+                FROM issues AS cover_issue
+                WHERE cover_issue.seriesId = series.id
+                    AND cover_issue.coverUrl IS NOT NULL
+                    AND TRIM(cover_issue.coverUrl) != ''
+                ORDER BY
+                    CASE
+                        WHEN cover_issue.publicationDate IS NULL
+                            OR TRIM(cover_issue.publicationDate) = ''
+                        THEN 1
+                        ELSE 0
+                    END ASC,
+                    cover_issue.publicationDate ASC,
+                    CASE
+                        WHEN cover_issue.issueNumber GLOB '[0-9]*'
+                        THEN 0
+                        ELSE 1
+                    END ASC,
+                    CAST(cover_issue.issueNumber AS REAL) ASC,
+                    cover_issue.issueNumber ASC
+                LIMIT 1
+            ) AS coverUrl
         FROM series
         LEFT JOIN issues
             ON series.id = issues.seriesId
         LEFT JOIN reading_progress
             ON issues.id = reading_progress.issueId
         WHERE series.publisherId = :publisherId
-        GROUP By series.id
+        GROUP BY series.id
         ORDER BY
             series.startYear ASC,
             series.title ASC,
@@ -238,7 +400,30 @@ interface ComicDao {
                         THEN 1
                     ELSE 0
                 END
-            ) AS readCount
+            ) AS readCount,
+            (
+                SELECT cover_issue.coverUrl
+                FROM issues AS cover_issue
+                WHERE cover_issue.seriesId = series.id
+                    AND cover_issue.coverUrl IS NOT NULL
+                    AND TRIM(cover_issue.coverUrl) != ''
+                ORDER BY
+                    CASE
+                        WHEN cover_issue.publicationDate IS NULL
+                            OR TRIM(cover_issue.publicationDate) = ''
+                        THEN 1
+                        ELSE 0
+                    END ASC,
+                    cover_issue.publicationDate ASC,
+                    CASE
+                        WHEN cover_issue.issueNumber GLOB '[0-9]*'
+                        THEN 0
+                        ELSE 1
+                    END ASC,
+                    CAST(cover_issue.issueNumber AS REAL) ASC,
+                    cover_issue.issueNumber ASC
+                LIMIT 1
+            ) AS coverUrl
         FROM series
         INNER JOIN publishers
             ON series.publisherId = publishers.id
@@ -403,6 +588,7 @@ interface ComicDao {
             issues.issueNumber AS issueNumber,
             issues.title AS issueTitle,
             issues.publicationDate AS publicationDate,
+            issues.coverUrl AS coverUrl,
             publishers.name AS publisherName,
             reading_progress.status AS readingStatus
         FROM issues

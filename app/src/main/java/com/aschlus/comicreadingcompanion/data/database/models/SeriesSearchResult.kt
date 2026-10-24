@@ -8,5 +8,6 @@ data class SeriesSearchResult(
     val endYear: Int?,
     val publisherName: String,
     val totalCount: Int,
-    val readCount: Int
+    val readCount: Int,
+    val coverUrl: String? = null
 )

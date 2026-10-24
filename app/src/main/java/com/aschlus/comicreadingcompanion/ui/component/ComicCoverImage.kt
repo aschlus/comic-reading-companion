@@ -30,7 +30,8 @@ fun ComicCoverImage(
     modifier: Modifier = Modifier,
     placeholderText: String = "No Cover",
     shape: Shape = RoundedCornerShape(12.dp),
-    borderColor: Color = MaterialTheme.colorScheme.outlineVariant
+    borderColor: Color = MaterialTheme.colorScheme.outlineVariant,
+    contentScale: ContentScale = ContentScale.Crop
 ) {
     if (coverUrl.isNullOrBlank()) {
         CoverPlaceholder(
@@ -48,7 +49,7 @@ fun ComicCoverImage(
                 .crossfade(true)
                 .build(),
             contentDescription = contentDescription,
-            contentScale = ContentScale.Crop,
+            contentScale = contentScale,
             modifier = modifier
                 .clip(shape)
                 .border(

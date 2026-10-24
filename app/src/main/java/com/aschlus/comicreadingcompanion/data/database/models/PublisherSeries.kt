@@ -7,5 +7,6 @@ data class PublisherSeries(
     val startYear: Int?,
     val endYear: Int?,
     val totalCount: Int,
-    val readCount: Int
+    val readCount: Int,
+    val coverUrl: String? = null
 )

@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.sp
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.viewmodel.PendingReadingListIssue
+import com.aschlus.comicreadingcompanion.util.formatPublicationDate
 
 @Composable
 fun ComicPendingReadingListIssueRow(
@@ -119,7 +120,7 @@ fun ComicPendingReadingListIssueRow(
                 issue.publicationDate
                     ?.let { date ->
                         Text(
-                            text = date,
+                            text = formatPublicationDate(date),
                             style = MaterialTheme.typography.bodySmall
                                 .copy(
                                     fontSize = 11.sp

@@ -447,6 +447,7 @@ private fun ComicVineVolumeResultRow(
         supportingText = "Source ID: ${volume.id}",
         statusText = null,
         onClick = onClick,
-        contentDescription = "Series result ${volume.id}"
+        contentDescription = "Series result ${volume.id}",
+        coverUrl = null
     )
 }

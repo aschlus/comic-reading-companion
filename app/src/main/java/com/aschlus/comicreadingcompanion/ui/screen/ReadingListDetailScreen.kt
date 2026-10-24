@@ -103,10 +103,8 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
 import com.aschlus.comicreadingcompanion.ui.theme.LilitaOneFontFamily
 import com.aschlus.comicreadingcompanion.ui.viewmodel.PendingReadingListIssue
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ReadingListDetailViewModel
+import com.aschlus.comicreadingcompanion.util.formatPublicationDate
 import kotlinx.coroutines.launch
-import java.time.YearMonth
-import java.time.format.DateTimeFormatter
-import java.util.Locale
 
 @OptIn(
     ExperimentalMaterial3Api::class,
@@ -466,7 +464,7 @@ fun ReadingListDetailScreen(
             readingStatusFilter != "ALL",
             requiredFilter != "ALL",
             selectedSeriesKey != null
-        ).count { it}
+        ).count { it }
 
     val visibleIssues =
         searchMatchedIssues.filter { issue ->
@@ -1840,23 +1838,6 @@ private fun sectionMatchesSearch(
         other = query,
         ignoreCase = true
     )
-}
-
-private fun formatPublicationDate(
-    publicationDate: String
-): String {
-    return try {
-        YearMonth
-            .parse(publicationDate)
-            .format(
-                DateTimeFormatter.ofPattern(
-                    "MMM yyyy",
-                    Locale.getDefault()
-                )
-            )
-    } catch (_: Exception) {
-        publicationDate
-    }
 }
 
 @Composable

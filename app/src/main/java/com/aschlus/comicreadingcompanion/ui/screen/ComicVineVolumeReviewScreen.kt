@@ -63,6 +63,7 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineIssueTypeInference
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineVolumeReviewViewModel
+import com.aschlus.comicreadingcompanion.util.formatPublicationDate
 
 @Composable
 fun ComicVineVolumeReviewScreen(
@@ -730,7 +731,7 @@ private fun ReviewIssueRow(
                     ?.takeIf { it.isNotBlank() }
                     ?.let { date ->
                         Text(
-                            text = "Publication date: $date",
+                            text = "Publication date: ${formatPublicationDate(date)}",
                             color = ComicInk.copy(alpha = 0.8f),
                             style = androidx.compose.material3.MaterialTheme
                                 .typography.bodySmall.copy(

@@ -52,10 +52,8 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
 import com.aschlus.comicreadingcompanion.ui.viewmodel.AddIssueToReadingListViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.IssueDetailViewModel
+import com.aschlus.comicreadingcompanion.util.formatPublicationDate
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.YearMonth
-import java.time.format.DateTimeFormatter
 import java.util.Date
 import java.util.Locale
 
@@ -208,7 +206,7 @@ fun IssueDetailScreen(
                             ?.let { publicationDate ->
                                 IssueMetadataRow(
                                     label = "Publication Date",
-                                    value = formatIssuePublicationDate(publicationDate)
+                                    value = formatPublicationDate(publicationDate)
                                 )
                             }
 
@@ -415,29 +413,6 @@ private fun IssueMetadataRow(
                     ),
             color = ComicInk
         )
-    }
-}
-
-private fun formatIssuePublicationDate(
-    publicationDate: String
-): String {
-    val formatter = DateTimeFormatter.ofPattern(
-        "MMM yyyy",
-        Locale.getDefault()
-    )
-
-    return try {
-        YearMonth
-            .parse(publicationDate)
-            .format(formatter)
-    } catch (_: Exception) {
-        try {
-            YearMonth
-                .from(LocalDate.parse(publicationDate))
-                .format(formatter)
-        } catch (_: Exception) {
-            publicationDate
-        }
     }
 }
 
