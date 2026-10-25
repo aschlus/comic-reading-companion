@@ -53,6 +53,7 @@ import com.aschlus.comicreadingcompanion.ui.component.ComicPrimaryHeaderBackButt
 import com.aschlus.comicreadingcompanion.ui.component.ComicPrimaryHeaderTitle
 import com.aschlus.comicreadingcompanion.ui.component.ComicWideActionButton
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlue
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicMutedInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
@@ -157,7 +158,7 @@ fun ComicVineVolumeSearchScreen(
                                 .clip(shape)
                                 .background(ComicPaper)
                                 .border(
-                                    width = 2.dp,
+                                    width = ComicCardBorderWidth,
                                     color = ComicInk,
                                     shape = shape
                                 )
@@ -383,7 +384,7 @@ private fun MatchingOptionField(
                 .heightIn(min = 56.dp)
                 .background(Color.White, fieldShape)
                 .border(
-                    width = 2.dp,
+                    width = ComicCardBorderWidth,
                     color = ComicInk,
                     shape = fieldShape
                 )

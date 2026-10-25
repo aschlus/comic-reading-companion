@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
@@ -35,7 +36,7 @@ fun ComicDropdownMenu(
         shadowElevation = 4.dp,
         border =
             BorderStroke(
-                width = 2.dp,
+                width = ComicCardBorderWidth,
                 color = ComicInk
             ),
         content = content

@@ -20,6 +20,7 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 
 @Composable
 fun ComicWideActionButton(
@@ -76,7 +77,7 @@ fun ComicWideActionButton(
                         shape = shape
                     )
                     .border(
-                        width = 2.dp,
+                        width = ComicCardBorderWidth,
                         color = ComicInk.copy(alpha = alpha),
                         shape = shape
                     )

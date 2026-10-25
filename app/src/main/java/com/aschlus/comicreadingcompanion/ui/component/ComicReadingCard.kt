@@ -19,6 +19,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListContinueItem
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 
 @Composable
 fun ComicRecentCard(
@@ -66,7 +67,7 @@ fun ComicRecentCard(
             shape = shape,
             border =
                 BorderStroke(
-                    2.dp,
+                    ComicCardBorderWidth,
                     outlineColor
                 ),
             colors =

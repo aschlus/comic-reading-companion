@@ -1,6 +1,5 @@
 package com.aschlus.comicreadingcompanion.ui.component
 
-import android.app.Dialog
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -24,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlue
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
@@ -70,7 +70,7 @@ fun ComicConfirmationDialog(
                             shape = shape
                         )
                         .border(
-                            width = 2.dp,
+                            width = ComicCardBorderWidth,
                             color = ComicInk,
                             shape = shape
                         )
@@ -184,7 +184,7 @@ internal fun ComicDialogButton(
                         shape = shape
                     )
                     .border(
-                        width = 2.dp,
+                        width = ComicCardBorderWidth,
                         color = ComicInk.copy(
                             alpha =
                                 if (enabled) {

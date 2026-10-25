@@ -26,6 +26,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicMutedInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
@@ -56,7 +57,7 @@ fun ComicLibrarySearchField(
                     shape = shape
                 )
                 .border(
-                    width = 2.dp,
+                    width = ComicCardBorderWidth,
                     color = ComicInk,
                     shape = shape
                 )

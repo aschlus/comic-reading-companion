@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
@@ -40,7 +41,7 @@ fun ComicAddToListActionBar(
                     ComicPaper
                 )
                 .border(
-                    width = 2.dp,
+                    width = ComicCardBorderWidth,
                     color = ComicInk
                 )
                 .navigationBarsPadding()

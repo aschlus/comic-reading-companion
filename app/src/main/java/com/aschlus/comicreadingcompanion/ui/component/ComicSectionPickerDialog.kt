@@ -25,6 +25,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlue
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
@@ -75,7 +76,7 @@ fun ComicSectionPickerDialog(
                             shape = shape
                         )
                         .border(
-                            width = 2.dp,
+                            width = ComicCardBorderWidth,
                             color = ComicInk,
                             shape = shape
                         )
@@ -175,7 +176,7 @@ private fun ComicSectionPickerRow(
                     shape = shape
                 )
                 .border(
-                    width = 2.dp,
+                    width = ComicCardBorderWidth,
                     color = ComicInk,
                     shape = shape
                 )

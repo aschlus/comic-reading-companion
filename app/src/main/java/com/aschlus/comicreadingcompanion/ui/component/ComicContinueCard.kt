@@ -161,7 +161,7 @@ fun ComicContinueCard(
                             RoundedCornerShape(4.dp),
                         border =
                             BorderStroke(
-                                2.dp,
+                                ComicCardBorderWidth,
                                 outlineColor
                             ),
                         contentPadding =

@@ -39,6 +39,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aschlus.comicreadingcompanion.ui.theme.ComicAccentTextTransform
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlue
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
@@ -263,7 +264,7 @@ fun ComicFilterTitleBanner(
                         shape = ComicSlantedShape
                     )
                     .border(
-                        width = 2.dp,
+                        width = ComicCardBorderWidth,
                         color = ComicInk,
                         shape = ComicSlantedShape
                     )
@@ -365,7 +366,7 @@ private fun ComicFilterChoice(
                         }
                     )
                     .border(
-                        width = 2.dp,
+                        width = ComicCardBorderWidth,
                         color = ComicInk,
                         shape = shape
                     )
@@ -420,7 +421,7 @@ private fun ComicSeriesFilterSelector(
                     .clip(shape)
                     .background(ComicPaper)
                     .border(
-                        width = 2.dp,
+                        width = ComicCardBorderWidth,
                         color = ComicInk,
                         shape = shape
                     )
@@ -496,7 +497,7 @@ fun ComicFilterSecondaryButton(
                 .clip(shape)
                 .background(ComicPaper)
                 .border(
-                    width = 2.dp,
+                    width = ComicCardBorderWidth,
                     color = ComicInk,
                     shape = shape
                 )
@@ -554,7 +555,7 @@ fun ComicFilterPrimaryButton(
                     .clip(shape)
                     .background(ComicBlue)
                     .border(
-                        width = 2.dp,
+                        width = ComicCardBorderWidth,
                         color = ComicInk,
                         shape = shape
                     )

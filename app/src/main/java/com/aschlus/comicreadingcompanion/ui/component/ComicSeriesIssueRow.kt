@@ -230,7 +230,7 @@ private fun ComicSeriesIssueStatus(
                     backgroundColor
                 )
                 .border(
-                    width = 2.dp,
+                    width = ComicCardBorderWidth,
                     color = ComicInk,
                     shape = shape
                 )

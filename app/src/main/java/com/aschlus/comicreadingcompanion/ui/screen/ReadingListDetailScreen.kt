@@ -96,6 +96,7 @@ import com.aschlus.comicreadingcompanion.ui.component.ComicSectionPickerOption
 import com.aschlus.comicreadingcompanion.ui.component.ComicSlantedShape
 import com.aschlus.comicreadingcompanion.ui.component.ComicWideActionButton
 import com.aschlus.comicreadingcompanion.ui.theme.ComicAccentTextTransform
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
@@ -1459,7 +1460,7 @@ private fun ReadingListSectionHeader(
                                 shape = ComicSlantedShape
                             )
                             .border(
-                                width = 2.dp,
+                                width = ComicCardBorderWidth,
                                 color = ComicInk,
                                 shape = ComicSlantedShape
                             )
