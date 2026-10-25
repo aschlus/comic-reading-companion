@@ -79,7 +79,7 @@ fun ComicReadingListDetailHero(
                             fontSize = 14.sp,
                             lineHeight = 19.sp
                         ),
-                color = ComicInk,
+                color = MaterialTheme.colorScheme.onBackground,
                 maxLines = 6,
                 overflow =
                     TextOverflow.Ellipsis
@@ -124,7 +124,7 @@ fun ComicReadingListDetailControls(
                         fontWeight =
                             FontWeight.Bold
                     ),
-            color = ComicInk
+            color = MaterialTheme.colorScheme.onBackground
         )
 
         Spacer(
@@ -178,7 +178,7 @@ fun ComicReadingListDetailControls(
                             fontWeight =
                                 FontWeight.SemiBold
                         ),
-                color = ComicInk
+                color = MaterialTheme.colorScheme.onBackground
             )
 
             if (showJumpToCurrent) {
@@ -213,7 +213,7 @@ private fun ComicReadingListFilterButton(
             modifier = Modifier
                     .height(40.dp)
                     .clip(shape)
-                    .background(ComicPaper)
+                    .background(MaterialTheme.colorScheme.surface)
                     .border(
                         width = ComicCardBorderWidth,
                         color = ComicInk,
@@ -233,7 +233,7 @@ private fun ComicReadingListFilterButton(
                 contentDescription =
                     null,
                 tint =
-                    ComicInk
+                    MaterialTheme.colorScheme.onSurface
             )
 
             Text(
@@ -247,7 +247,7 @@ private fun ComicReadingListFilterButton(
                     MaterialTheme.typography
                         .labelLarge,
                 color =
-                    ComicInk
+                    MaterialTheme.colorScheme.onSurface
             )
         }
     }

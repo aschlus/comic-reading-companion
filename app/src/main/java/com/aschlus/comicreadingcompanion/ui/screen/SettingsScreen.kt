@@ -53,10 +53,12 @@ import com.aschlus.comicreadingcompanion.ui.component.ComicPrimaryHeaderTitle
 import com.aschlus.comicreadingcompanion.ui.component.ComicWideActionButton
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlue
 import com.aschlus.comicreadingcompanion.ui.theme.ComicGreen
+import com.aschlus.comicreadingcompanion.ui.theme.ComicGreenDark
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicMutedInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
+import com.aschlus.comicreadingcompanion.ui.theme.ComicRedDark
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingXs
@@ -135,7 +137,7 @@ fun SettingsScreen(
                 uiState.hasSavedApiKey -> {
                     Text(
                         text = "API KEY CONFIGURED",
-                        color = ComicGreen
+                        color = ComicGreenDark
                     )
 
                     Text(
@@ -289,14 +291,14 @@ fun SettingsScreen(
             uiState.message?.let { message ->
                 Text(
                     text = message,
-                    color = ComicGreen
+                    color = ComicGreenDark
                 )
             }
 
             uiState.error?.let { error ->
                 Text(
                     text = error,
-                    color = ComicRed
+                    color = ComicRedDark
                 )
             }
 

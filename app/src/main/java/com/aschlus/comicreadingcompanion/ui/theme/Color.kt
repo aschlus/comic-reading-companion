@@ -20,7 +20,11 @@ val ComicRed = Color(0xFFF23D48)
 
 val ComicRedLight = Color(0xFFFF747C)
 
+val ComicRedDark = Color(0xFFB4232D)
+
 val ComicGreen = Color(0xFF51C96D)
+
+val ComicGreenDark = Color(0xFF2D7A3E)
 
 val ComicPurple = Color(0xFF9B73E8)
 
@@ -37,3 +41,5 @@ val ComicDarkBackground = Color(0xFF131619)
 val ComicDarkSurface = Color(0xFF1D2226)
 
 val ComicDarkSurfaceVariant = Color(0xFF2A3136)
+
+val ComicDarkOutline = Color(0xFF817B73)

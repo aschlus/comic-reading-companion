@@ -653,6 +653,7 @@ fun ReadingListDetailScreen(
     }
 
     Scaffold(
+        containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             when {
                 isSelectionMode -> {
@@ -874,7 +875,7 @@ fun ReadingListDetailScreen(
                             Modifier
                                 .fillMaxWidth()
                                 .background(
-                                    ComicPaper
+                                    MaterialTheme.colorScheme.background
                                 )
                                 .onGloballyPositioned { coordinates ->
                                     stickyControlsHeightPx =
@@ -1661,7 +1662,7 @@ private fun ReadingListIssueRow(
                                 fontSize = 17.sp,
                                 lineHeight = 19.sp
                             ),
-                    color = ComicInk,
+                    color = MaterialTheme.colorScheme.onBackground,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -1678,7 +1679,7 @@ private fun ReadingListIssueRow(
                                     fontSize = 15.sp,
                                     lineHeight = 17.sp
                                 ),
-                        color = ComicInk,
+                        color = MaterialTheme.colorScheme.onBackground,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -1694,7 +1695,7 @@ private fun ReadingListIssueRow(
                                     fontSize = 13.sp,
                                     lineHeight = 15.sp
                                 ),
-                            color = ComicInk
+                            color = MaterialTheme.colorScheme.onBackground
                         )
                     }
             }
@@ -1710,7 +1711,7 @@ private fun ReadingListIssueRow(
                     Icon(
                         imageVector = Icons.Default.MoreVert,
                         contentDescription = "More options",
-                        tint = ComicInk
+                        tint = MaterialTheme.colorScheme.onBackground
                     )
                 }
 

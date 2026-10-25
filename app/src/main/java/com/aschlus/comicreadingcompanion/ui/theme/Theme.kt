@@ -23,7 +23,7 @@ private val ComicLightColorScheme =
         onSecondaryContainer = ComicInk,
 
         tertiary = ComicRed,
-        onTertiary = ComicPaper,
+        onTertiary = ComicInk,
         tertiaryContainer = ComicRedLight,
         onTertiaryContainer = ComicInk,
 
@@ -40,7 +40,7 @@ private val ComicLightColorScheme =
         outlineVariant = ComicMutedInk,
 
         error = ComicRed,
-        onError = ComicPaper
+        onError = ComicInk
     )
 
 private val ComicDarkColorScheme =
@@ -66,7 +66,7 @@ private val ComicDarkColorScheme =
         onSurfaceVariant = ComicPaperDeep,
 
         outline = ComicPaperDeep,
-        outlineVariant = ComicMutedInk,
+        outlineVariant = ComicDarkOutline,
 
         error = ComicRedLight,
         onError = ComicInk

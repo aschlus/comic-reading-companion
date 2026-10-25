@@ -70,7 +70,7 @@ fun ComicSeriesIssueRow(
                     .fillMaxWidth()
                     .clip(shape)
                     .background(
-                        ComicPaper
+                        MaterialTheme.colorScheme.surface
                     )
                     .border(
                         width = ComicCardBorderWidth,
@@ -116,7 +116,7 @@ fun ComicSeriesIssueRow(
                                 lineHeight = 19.sp,
                                 fontWeight = FontWeight.Bold
                             ),
-                    color = ComicInk
+                    color = MaterialTheme.colorScheme.onSurface
                 )
 
                 issue.issueTitle
@@ -131,7 +131,7 @@ fun ComicSeriesIssueRow(
                                         lineHeight = 17.sp,
                                         fontWeight = FontWeight.SemiBold
                                     ),
-                            color = ComicInk,
+                            color = MaterialTheme.colorScheme.onSurface,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis
                         )
@@ -148,7 +148,7 @@ fun ComicSeriesIssueRow(
                                         fontSize = 12.sp,
                                         lineHeight = 14.sp
                                     ),
-                            color = ComicInk.copy(alpha = 0.72f)
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
 
@@ -169,7 +169,7 @@ fun ComicSeriesIssueRow(
                                 fontSize = 12.sp,
                                 lineHeight = 14.sp
                             ),
-                    color = ComicInk.copy(alpha = 0.72f)
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
 
@@ -186,7 +186,7 @@ fun ComicSeriesIssueRow(
                 fontSize = 30.sp,
                 lineHeight = 30.sp,
                 fontWeight = FontWeight.Bold,
-                color = ComicInk
+                color = MaterialTheme.colorScheme.onSurface
             )
         }
     }
