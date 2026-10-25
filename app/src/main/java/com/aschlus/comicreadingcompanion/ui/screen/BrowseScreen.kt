@@ -38,6 +38,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.aschlus.comicreadingcompanion.ui.component.ComicAddToListFilters
@@ -335,58 +336,66 @@ private fun ComicBrowseFiltersButton(
     val shape = RoundedCornerShape(9.dp)
 
     Box(
-        modifier = Modifier.height(44.dp)
+        modifier = Modifier
+            .height(48.dp)
+            .clickable(
+                role = Role.Button,
+                onClick = onClick
+            )
     ) {
         Box(
-            modifier = Modifier
-                .matchParentSize()
-                .offset(
-                    x = 2.dp,
-                    y = 3.dp
-                )
-                .background(
-                    color = ComicInk,
-                    shape = shape
-                )
-        )
-
-        Box(
-            modifier = Modifier
-                .height(41.dp)
-                .clip(shape)
-                .background(ComicPaper)
-                .border(
-                    width = ComicCardBorderWidth,
-                    color = ComicInk,
-                    shape = shape
-                )
-                .clickable(onClick = onClick)
-                .padding(horizontal = 14.dp),
-            contentAlignment = Alignment.Center
+            modifier = Modifier.height(44.dp)
         ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically
+            Box(
+                modifier = Modifier
+                    .matchParentSize()
+                    .offset(
+                        x = 2.dp,
+                        y = 3.dp
+                    )
+                    .background(
+                        color = ComicInk,
+                        shape = shape
+                    )
+            )
+
+            Box(
+                modifier = Modifier
+                    .height(41.dp)
+                    .clip(shape)
+                    .background(ComicPaper)
+                    .border(
+                        width = ComicCardBorderWidth,
+                        color = ComicInk,
+                        shape = shape
+                    )
+                    .padding(horizontal = 14.dp),
+                contentAlignment = Alignment.Center
             ) {
-                Icon(
-                    imageVector = Icons.Default.FilterList,
-                    contentDescription = null,
-                    tint = ComicInk,
-                    modifier = Modifier.size(18.dp)
-                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.FilterList,
+                        contentDescription = null,
+                        tint = ComicInk,
+                        modifier = Modifier.size(18.dp)
+                    )
 
-                Spacer(modifier = Modifier.width(ComicSpacingSm))
+                    Spacer(modifier = Modifier.width(ComicSpacingSm))
 
-                Text(
-                    text = if (activeFilterCount > 0) {
-                        "Filters ($activeFilterCount)"
-                    } else {
-                        "Filters"
-                    },
-                    style = MaterialTheme.typography.labelLarge.copy(
-                        fontWeight = FontWeight.ExtraBold
-                    ),
-                    color = ComicInk
-                )
+                    Text(
+                        text = if (activeFilterCount > 0) {
+                            "Filters ($activeFilterCount)"
+                        } else {
+                            "Filters"
+                        },
+                        style = MaterialTheme.typography.labelLarge.copy(
+                            fontWeight = FontWeight.ExtraBold
+                        ),
+                        color = ComicInk
+                    )
+                }
             }
         }
     }

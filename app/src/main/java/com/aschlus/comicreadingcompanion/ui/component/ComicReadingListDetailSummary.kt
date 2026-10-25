@@ -23,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -199,50 +200,56 @@ private fun ComicReadingListFilterButton(
     val shape =
         RoundedCornerShape(9.dp)
 
-    Row(
-        modifier =
-            modifier
-                .height(40.dp)
-                .clip(shape)
-                .background(ComicPaper)
-                .border(
-                    width = ComicCardBorderWidth,
-                    color = ComicInk,
-                    shape = shape
-                )
-                .clickable(
-                    onClick = onClick
-                )
-                .padding(
-                    horizontal = 11.dp
-                ),
-        verticalAlignment =
-            Alignment.CenterVertically,
-        horizontalArrangement =
-            Arrangement.spacedBy(6.dp)
+    Box(
+        modifier = modifier
+            .height(48.dp)
+            .clickable(
+                role = Role.Button,
+                onClick = onClick
+            ),
+        contentAlignment = Alignment.CenterStart
     ) {
-        Icon(
-            imageVector =
-                Icons.Default.FilterList,
-            contentDescription =
-                null,
-            tint =
-                ComicInk
-        )
+        Row(
+            modifier = Modifier
+                    .height(40.dp)
+                    .clip(shape)
+                    .background(ComicPaper)
+                    .border(
+                        width = ComicCardBorderWidth,
+                        color = ComicInk,
+                        shape = shape
+                    )
+                    .padding(
+                        horizontal = 11.dp
+                    ),
+            verticalAlignment =
+                Alignment.CenterVertically,
+            horizontalArrangement =
+                Arrangement.spacedBy(6.dp)
+        ) {
+            Icon(
+                imageVector =
+                    Icons.Default.FilterList,
+                contentDescription =
+                    null,
+                tint =
+                    ComicInk
+            )
 
-        Text(
-            text =
-                if (activeFilterCount == 0) {
-                    "Filters"
-                } else {
-                    "Filters ($activeFilterCount)"
-                },
-            style =
-                MaterialTheme.typography
-                    .labelLarge,
-            color =
-                ComicInk
-        )
+            Text(
+                text =
+                    if (activeFilterCount == 0) {
+                        "Filters"
+                    } else {
+                        "Filters ($activeFilterCount)"
+                    },
+                style =
+                    MaterialTheme.typography
+                        .labelLarge,
+                color =
+                    ComicInk
+            )
+        }
     }
 }
 
@@ -255,8 +262,16 @@ private fun ComicJumpToCurrentButton(
         RoundedCornerShape(9.dp)
 
     Box(
-        modifier =
-            modifier
+        modifier = modifier
+            .height(48.dp)
+            .clickable(
+                role = Role.Button,
+                onClick = onClick
+            ),
+        contentAlignment = Alignment.Center
+    ) {
+        Box(
+            modifier = Modifier
                 .height(40.dp)
                 .clip(shape)
                 .background(ComicBlue)
@@ -265,24 +280,15 @@ private fun ComicJumpToCurrentButton(
                     color = ComicInk,
                     shape = shape
                 )
-                .clickable(
-                    onClick = onClick
-                )
-                .padding(
-                    horizontal = ComicSpacingMd
-                ),
-        contentAlignment =
-            Alignment.Center
-    ) {
-        Text(
-            text = "Jump to Current",
-            style =
-                MaterialTheme.typography
-                    .labelLarge,
-            color =
-                ComicInk,
-            maxLines =
-                1
-        )
+                .padding(horizontal = ComicSpacingMd),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = "Jump to Current",
+                style = MaterialTheme.typography.labelLarge,
+                color = ComicInk,
+                maxLines = 1
+            )
+        }
     }
 }

@@ -24,6 +24,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -117,41 +118,49 @@ private fun ComicBrowsePublisherFilterButton(
     val shape = RoundedCornerShape(9.dp)
 
     Box(
-        modifier = modifier.height(44.dp)
+        modifier = modifier
+            .height(48.dp)
+            .clickable(
+                role = Role.Button,
+                onClick = onClick
+            )
     ) {
         Box(
-            modifier = Modifier
-                .matchParentSize()
-                .offset(x = 2.dp, y = 3.dp)
-                .background(
-                    color = ComicInk,
-                    shape = shape
-                )
-        )
-
-        Box(
-            modifier = Modifier
-                .height(41.dp)
-                .clip(shape)
-                .background(ComicPaper)
-                .border(
-                    width = ComicCardBorderWidth,
-                    color = ComicInk,
-                    shape = shape
-                )
-                .clickable(onClick = onClick)
-                .padding(horizontal = 10.dp),
-            contentAlignment = Alignment.Center
+            modifier = Modifier.height(44.dp)
         ) {
-            Text(
-                text = text,
-                style = MaterialTheme.typography.labelLarge.copy(
-                    fontWeight = FontWeight.ExtraBold
-                ),
-                color = ComicInk,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
+            Box(
+                modifier = Modifier
+                    .matchParentSize()
+                    .offset(x = 2.dp, y = 3.dp)
+                    .background(
+                        color = ComicInk,
+                        shape = shape
+                    )
             )
+
+            Box(
+                modifier = Modifier
+                    .height(41.dp)
+                    .clip(shape)
+                    .background(ComicPaper)
+                    .border(
+                        width = ComicCardBorderWidth,
+                        color = ComicInk,
+                        shape = shape
+                    )
+                    .padding(horizontal = 10.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = text,
+                    style = MaterialTheme.typography.labelLarge.copy(
+                        fontWeight = FontWeight.ExtraBold
+                    ),
+                    color = ComicInk,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
         }
     }
 }
