@@ -57,6 +57,10 @@ import com.aschlus.comicreadingcompanion.ui.component.ComicPrimaryHeaderBackButt
 import com.aschlus.comicreadingcompanion.ui.component.ComicPrimaryHeaderTitle
 import com.aschlus.comicreadingcompanion.ui.component.ComicWideActionButton
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlueLight
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShape
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicMutedInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
@@ -135,7 +139,7 @@ fun ComicVineVolumeReviewScreen(
                             .clip(RoundedCornerShape(6.dp))
                             .background(ComicRed.copy(alpha = 0.12f))
                             .border(
-                                width = 2.dp,
+                                width = ComicCardBorderWidth,
                                 color = ComicRed,
                                 shape = RoundedCornerShape(6.dp)
                             )
@@ -178,7 +182,7 @@ fun ComicVineVolumeReviewScreen(
                                     .clip(titleFieldShape)
                                     .background(ComicPaper)
                                     .border(
-                                        width = 2.dp,
+                                        width = ComicCardBorderWidth,
                                         color = ComicInk,
                                         shape = titleFieldShape
                                     )
@@ -415,7 +419,7 @@ fun ComicVineVolumeReviewScreen(
                                 .clip(RoundedCornerShape(6.dp))
                                 .background(ComicBlueLight)
                                 .border(
-                                    width = 2.dp,
+                                    width = ComicCardBorderWidth,
                                     color = ComicInk,
                                     shape = RoundedCornerShape(6.dp)
                                 )
@@ -482,7 +486,7 @@ fun ComicVineVolumeReviewScreen(
                                 .clip(RoundedCornerShape(6.dp))
                                 .background(ComicPaper)
                                 .border(
-                                    width = 2.dp,
+                                    width = ComicCardBorderWidth,
                                     color = ComicInk,
                                     shape = RoundedCornerShape(6.dp)
                                 )
@@ -534,7 +538,7 @@ fun ComicVineVolumeReviewScreen(
 private fun ReviewInfoCard(
     content: @Composable () -> Unit
 ) {
-    val shape = RoundedCornerShape(10.dp)
+    val shape = ComicCardShape
 
     Box(
         modifier = Modifier.fillMaxWidth()
@@ -542,7 +546,10 @@ private fun ReviewInfoCard(
         Box(
             modifier = Modifier
                 .matchParentSize()
-                .offset(x = 3.dp, y = 4.dp)
+                .offset(
+                    ComicCardShadowOffsetX,
+                    ComicCardShadowOffsetY
+                )
                 .background(
                     color = ComicInk,
                     shape = shape
@@ -555,7 +562,7 @@ private fun ReviewInfoCard(
                 .clip(shape)
                 .background(ComicPaper)
                 .border(
-                    width = 2.dp,
+                    width = ComicCardBorderWidth,
                     color = ComicInk,
                     shape = shape
                 )
@@ -596,7 +603,7 @@ private fun ReviewEditableMetadataField(
                 .clip(fieldShape)
                 .background(ComicPaper)
                 .border(
-                    width = 2.dp,
+                    width = ComicCardBorderWidth,
                     color = ComicInk,
                     shape = fieldShape
                 )
@@ -660,7 +667,7 @@ private fun ReviewIssueRow(
     enabled: Boolean,
     onIssueTypeSelected: (IssueType) -> Unit
 ) {
-    val shape = RoundedCornerShape(10.dp)
+    val shape = ComicCardShape
 
     Box(
         modifier = Modifier.fillMaxWidth()
@@ -668,7 +675,10 @@ private fun ReviewIssueRow(
         Box(
             modifier = Modifier
                 .matchParentSize()
-                .offset(x = 3.dp, y = 4.dp)
+                .offset(
+                    ComicCardShadowOffsetX,
+                    ComicCardShadowOffsetY
+                )
                 .background(
                     color = ComicInk,
                     shape = shape
@@ -681,7 +691,7 @@ private fun ReviewIssueRow(
                 .clip(shape)
                 .background(ComicPaper)
                 .border(
-                    width = 2.dp,
+                    width = ComicCardBorderWidth,
                     color = ComicInk,
                     shape = shape
                 )
@@ -795,7 +805,7 @@ private fun ReviewIssueTypeSelector(
                 .clip(RoundedCornerShape(6.dp))
                 .background(Color.White)
                 .border(
-                    width = 2.dp,
+                    width = ComicCardBorderWidth,
                     color = ComicInk,
                     shape = RoundedCornerShape(6.dp)
                 )

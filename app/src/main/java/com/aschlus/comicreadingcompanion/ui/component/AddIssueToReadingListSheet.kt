@@ -33,6 +33,10 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShape
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaperDeep
@@ -171,7 +175,7 @@ private fun ComicAddIssueReadingListRow(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val shape = RoundedCornerShape(10.dp)
+    val shape = ComicCardShape
 
     Box(
         modifier =
@@ -182,8 +186,8 @@ private fun ComicAddIssueReadingListRow(
                 Modifier
                     .matchParentSize()
                     .offset(
-                        x = 3.dp,
-                        y = 4.dp
+                        x = ComicCardShadowOffsetX,
+                        y = ComicCardShadowOffsetY
                     )
                     .background(
                         color =
@@ -215,7 +219,7 @@ private fun ComicAddIssueReadingListRow(
                         )
                     )
                     .border(
-                        width = 2.dp,
+                        width = ComicCardBorderWidth,
                         color =
                             ComicInk.copy(
                                 alpha =
@@ -313,7 +317,7 @@ private fun ComicSheetMessage(
                     shape = shape
                 )
                 .border(
-                    width = 2.dp,
+                    width = ComicCardBorderWidth,
                     color =
                         if (error) {
                             ComicRed

@@ -34,6 +34,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlue
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 
@@ -172,8 +174,8 @@ private fun ComicSelectionActionButton(
                     .width(66.dp)
                     .height(48.dp)
                     .offset(
-                        x = 3.dp,
-                        y = 4.dp
+                        ComicCardShadowOffsetX,
+                        ComicCardShadowOffsetY
                     )
                     .background(
                         color = ComicInk,

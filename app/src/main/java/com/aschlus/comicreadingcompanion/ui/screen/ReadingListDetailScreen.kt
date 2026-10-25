@@ -97,6 +97,8 @@ import com.aschlus.comicreadingcompanion.ui.component.ComicSlantedShape
 import com.aschlus.comicreadingcompanion.ui.component.ComicWideActionButton
 import com.aschlus.comicreadingcompanion.ui.theme.ComicAccentTextTransform
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
@@ -1442,8 +1444,8 @@ private fun ReadingListSectionHeader(
                         Modifier
                             .matchParentSize()
                             .offset(
-                                x = 3.dp,
-                                y = 4.dp
+                                ComicCardShadowOffsetX,
+                                ComicCardShadowOffsetY
                             )
                             .background(
                                 color = ComicInk,

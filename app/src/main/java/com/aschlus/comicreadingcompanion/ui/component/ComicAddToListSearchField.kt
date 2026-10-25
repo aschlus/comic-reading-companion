@@ -30,6 +30,8 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 
@@ -55,8 +57,8 @@ fun ComicAddToListSearchField(
                     .fillMaxWidth()
                     .height(50.dp)
                     .offset(
-                        x = 3.dp,
-                        y = 4.dp
+                        ComicCardShadowOffsetX,
+                        ComicCardShadowOffsetY
                     )
                     .background(
                         color = ComicInk,
