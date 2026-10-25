@@ -34,6 +34,9 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicBlueLight
 import com.aschlus.comicreadingcompanion.ui.theme.ComicGreen
 import com.aschlus.comicreadingcompanion.ui.theme.ComicMutedInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingXs
 import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
 import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeViewModel
 
@@ -93,10 +96,10 @@ fun HomeScreen(
                     modifier =
                         Modifier
                             .padding(
-                                start = 12.dp,
-                                end = 12.dp,
+                                start = ComicSpacingMd,
+                                end = ComicSpacingMd,
                                 top = 6.dp,
-                                bottom = 4.dp
+                                bottom = ComicSpacingXs
                             )
                 )
             }
@@ -150,8 +153,8 @@ fun HomeScreen(
                             Modifier
                                 .fillMaxWidth()
                                 .padding(
-                                    horizontal = 12.dp,
-                                    vertical = 4.dp
+                                    horizontal = ComicSpacingMd,
+                                    vertical = ComicSpacingXs
                                 ),
                         style = continueReadingList.style
                     )
@@ -184,10 +187,10 @@ fun HomeScreen(
                     modifier =
                         Modifier
                             .padding(
-                                start = 12.dp,
-                                end = 12.dp,
-                                top = 4.dp,
-                                bottom = 4.dp
+                                start = ComicSpacingMd,
+                                end = ComicSpacingMd,
+                                top = ComicSpacingXs,
+                                bottom = ComicSpacingXs
                             )
                 )
             }
@@ -198,13 +201,13 @@ fun HomeScreen(
                         Modifier
                             .fillMaxWidth()
                             .padding(
-                                start = 12.dp,
-                                end = 12.dp,
-                                top = 4.dp,
+                                start = ComicSpacingMd,
+                                end = ComicSpacingMd,
+                                top = ComicSpacingXs,
                                 bottom = 10.dp
                             ),
                     horizontalArrangement =
-                        Arrangement.spacedBy(8.dp)
+                        Arrangement.spacedBy(ComicSpacingSm)
                 ) {
                     ComicHomeQuickAccessTile(
                         text = "NEW\nLIST",
@@ -248,10 +251,10 @@ fun HomeScreen(
                     onSeeAllClick = onReadingHistoryClick,
                     modifier =
                         Modifier.padding(
-                            start = 12.dp,
-                            end = 12.dp,
-                            top = 4.dp,
-                            bottom = 4.dp
+                            start = ComicSpacingMd,
+                            end = ComicSpacingMd,
+                            top = ComicSpacingXs,
+                            bottom = ComicSpacingXs
                         )
                 )
             }
@@ -265,10 +268,10 @@ fun HomeScreen(
                             "we’ll keep track of it here.",
                         modifier =
                             Modifier.padding(
-                                start = 12.dp,
-                                end = 12.dp,
-                                top = 4.dp,
-                                bottom = 8.dp
+                                start = ComicSpacingMd,
+                                end = ComicSpacingMd,
+                                top = ComicSpacingXs,
+                                bottom = ComicSpacingSm
                             )
                     )
                 } else {
@@ -277,13 +280,13 @@ fun HomeScreen(
                             Modifier
                                 .fillMaxWidth()
                                 .padding(
-                                    start = 12.dp,
-                                    end = 12.dp,
-                                    top = 4.dp,
+                                    start = ComicSpacingMd,
+                                    end = ComicSpacingMd,
+                                    top = ComicSpacingXs,
                                     bottom = 10.dp
                                 ),
                         horizontalArrangement =
-                            Arrangement.spacedBy(8.dp)
+                            Arrangement.spacedBy(ComicSpacingSm)
                     ) {
                         val recentIssues =
                             recentlyReadIssues.take(3)

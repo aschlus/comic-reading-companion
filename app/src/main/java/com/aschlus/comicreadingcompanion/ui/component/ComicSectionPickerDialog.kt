@@ -29,6 +29,8 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingXl
 
 data class ComicSectionPickerOption(
     val id: Long,
@@ -80,7 +82,7 @@ fun ComicSectionPickerDialog(
                             color = ComicInk,
                             shape = shape
                         )
-                        .padding(20.dp),
+                        .padding(ComicSpacingXl),
                 verticalArrangement =
                     Arrangement.spacedBy(14.dp)
             ) {
@@ -103,7 +105,7 @@ fun ComicSectionPickerDialog(
                                 max = 320.dp
                             ),
                     verticalArrangement =
-                        Arrangement.spacedBy(8.dp)
+                        Arrangement.spacedBy(ComicSpacingSm)
                 ) {
                     item(
                         key = "no-section"

@@ -21,6 +21,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingXl
 
 @Composable
 fun ComicActionPanel(
@@ -66,7 +68,7 @@ fun ComicActionPanel(
                     )
                     .padding(
                         horizontal = 18.dp,
-                        vertical = 20.dp
+                        vertical = ComicSpacingXl
                     ),
             verticalAlignment =
                 Alignment.CenterVertically,
@@ -81,10 +83,7 @@ fun ComicActionPanel(
                     Modifier.size(30.dp)
             )
 
-            Spacer(
-                modifier =
-                    Modifier.width(12.dp)
-            )
+            Spacer(modifier = Modifier.width(ComicSpacingMd))
 
             Text(
                 text = title.uppercase(),

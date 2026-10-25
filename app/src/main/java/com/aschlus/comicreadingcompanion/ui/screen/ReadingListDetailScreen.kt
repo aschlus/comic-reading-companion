@@ -102,6 +102,9 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
 import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
 import com.aschlus.comicreadingcompanion.ui.theme.LilitaOneFontFamily
 import com.aschlus.comicreadingcompanion.ui.viewmodel.PendingReadingListIssue
@@ -841,9 +844,9 @@ fun ReadingListDetailScreen(
                     listState,
                 contentPadding =
                     PaddingValues(
-                        start = 16.dp,
-                        end = 16.dp,
-                        bottom = 16.dp
+                        start = ComicSpacingLg,
+                        end = ComicSpacingLg,
+                        bottom = ComicSpacingLg
                     )
             ) {
                 item(
@@ -857,8 +860,8 @@ fun ReadingListDetailScreen(
                         style = currentReadingList.style,
                         modifier =
                             Modifier.padding(
-                                top = 16.dp,
-                                bottom = 12.dp
+                                top = ComicSpacingLg,
+                                bottom = ComicSpacingMd
                             )
                     )
                 }
@@ -876,8 +879,8 @@ fun ReadingListDetailScreen(
                                         coordinates.size.height
                                 }
                                 .padding(
-                                    top = 8.dp,
-                                    bottom = 12.dp
+                                    top = ComicSpacingSm,
+                                    bottom = ComicSpacingMd
                                 )
                     ) {
                         ComicReadingListDetailControls(
@@ -950,7 +953,7 @@ fun ReadingListDetailScreen(
                             message = "No issues in this reading list",
                             modifier =
                                 Modifier.padding(
-                                    top = 8.dp
+                                    top = ComicSpacingSm
                                 )
                         )
                     }
@@ -971,7 +974,7 @@ fun ReadingListDetailScreen(
                                 },
                             modifier =
                                 Modifier.padding(
-                                    top = 8.dp
+                                    top = ComicSpacingSm
                                 )
                         )
                     }
@@ -1523,7 +1526,7 @@ private fun ReadingListSectionHeader(
                 },
             modifier =
                 Modifier.padding(
-                    start = 8.dp
+                    start = ComicSpacingSm
                 ),
             style = MaterialTheme.typography.bodySmall
                 .copy(fontWeight = FontWeight.SemiBold),
@@ -1639,7 +1642,7 @@ private fun ReadingListIssueRow(
             )
 
             Spacer(
-                modifier = Modifier.width(12.dp)
+                modifier = Modifier.width(ComicSpacingMd)
             )
 
             Column(
@@ -1875,12 +1878,12 @@ private fun EditReadingListContent(
                 Modifier
                     .fillMaxSize()
                     .padding(innerPadding)
-                    .padding(16.dp)
+                    .padding(ComicSpacingLg)
                     .verticalScroll(
                         rememberScrollState()
                     ),
             verticalArrangement =
-                Arrangement.spacedBy(16.dp)
+                Arrangement.spacedBy(ComicSpacingLg)
         ) {
             ComicHomeSectionHeader(
                 text = "LIST DETAILS"

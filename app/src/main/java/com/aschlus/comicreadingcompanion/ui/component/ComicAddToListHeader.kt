@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
 
 @Composable
 fun ComicAddToListHeader(
@@ -33,7 +34,7 @@ fun ComicAddToListHeader(
                 onClick = onBackClick
             )
 
-            Spacer(modifier = Modifier.width(16.dp))
+            Spacer(modifier = Modifier.width(ComicSpacingLg))
 
             ComicPrimaryHeaderTitle(
                 text = "ADD TO LIST"

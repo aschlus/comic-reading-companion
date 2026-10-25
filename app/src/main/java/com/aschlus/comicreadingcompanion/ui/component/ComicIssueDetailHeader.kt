@@ -33,6 +33,7 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
 import com.aschlus.comicreadingcompanion.ui.theme.LilitaOneFontFamily
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
 
 @Composable
 fun ComicIssueDetailHeader(
@@ -123,7 +124,7 @@ fun ComicIssueDetailHeader(
                     )
                     .padding(
                         start = 96.dp,
-                        end = 12.dp
+                        end = ComicSpacingMd
                     )
         ) {
             Text(

@@ -18,6 +18,9 @@ import com.aschlus.comicreadingcompanion.ui.component.ComicIssueDetailHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicReadingHistoryRow
 import com.aschlus.comicreadingcompanion.ui.component.recentReadSectionLabel
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacing2Xl
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
 import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeViewModel
 
 @Composable
@@ -55,13 +58,13 @@ fun ReadingHistoryScreen(
                     .padding(innerPadding),
             contentPadding =
                 PaddingValues(
-                    start = 16.dp,
-                    end = 16.dp,
+                    start = ComicSpacingLg,
+                    end = ComicSpacingLg,
                     top = 10.dp,
-                    bottom = 24.dp
+                    bottom = ComicSpacing2Xl
                 ),
             verticalArrangement =
-                Arrangement.spacedBy(8.dp)
+                Arrangement.spacedBy(ComicSpacingSm)
         ) {
             if (recentlyReadIssues.isEmpty()) {
                 item {

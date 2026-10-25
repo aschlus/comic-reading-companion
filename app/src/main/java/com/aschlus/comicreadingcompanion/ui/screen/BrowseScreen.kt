@@ -1,61 +1,62 @@
 package com.aschlus.comicreadingcompanion.ui.screen
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FilterList
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.aschlus.comicreadingcompanion.ui.component.ComicAddToListFilters
 import com.aschlus.comicreadingcompanion.ui.component.ComicAddToListSearchField
+import com.aschlus.comicreadingcompanion.ui.component.ComicBrowseFilterSheetContent
 import com.aschlus.comicreadingcompanion.ui.component.ComicBrowseHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicBrowseIssueResult
-import com.aschlus.comicreadingcompanion.ui.component.ComicBrowsePublisherFilter
 import com.aschlus.comicreadingcompanion.ui.component.ComicBrowsePublisherRow
 import com.aschlus.comicreadingcompanion.ui.component.ComicBrowseSeriesResult
 import com.aschlus.comicreadingcompanion.ui.component.ComicEmptyState
 import com.aschlus.comicreadingcompanion.ui.component.ComicHomeSectionHeader
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
-import com.aschlus.comicreadingcompanion.ui.viewmodel.AddToListFilter
-import com.aschlus.comicreadingcompanion.ui.viewmodel.BrowseViewModel
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBarsPadding
-import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.FilterList
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.Text
-import androidx.compose.material3.rememberModalBottomSheetState
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.text.font.FontWeight
-import com.aschlus.comicreadingcompanion.ui.component.ComicBrowseFilterSheetContent
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
+import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
+import com.aschlus.comicreadingcompanion.ui.viewmodel.AddToListFilter
+import com.aschlus.comicreadingcompanion.ui.viewmodel.BrowseViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -133,9 +134,9 @@ fun BrowseScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .padding(16.dp),
+                .padding(ComicSpacingLg),
             verticalArrangement =
-                Arrangement.spacedBy(12.dp)
+                Arrangement.spacedBy(ComicSpacingMd)
         ) {
             ComicAddToListSearchField(
                 query = searchQuery,
@@ -227,7 +228,7 @@ fun BrowseScreen(
                             .fillMaxWidth()
                             .weight(1f),
                         verticalArrangement =
-                            Arrangement.spacedBy(8.dp)
+                            Arrangement.spacedBy(ComicSpacingSm)
                     ) {
 
                         if (showSeries) {
@@ -373,7 +374,7 @@ private fun ComicBrowseFiltersButton(
                     modifier = Modifier.size(18.dp)
                 )
 
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(ComicSpacingSm))
 
                 Text(
                     text = if (activeFilterCount > 0) {

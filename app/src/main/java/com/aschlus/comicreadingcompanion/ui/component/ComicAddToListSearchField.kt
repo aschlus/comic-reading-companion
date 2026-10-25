@@ -33,6 +33,8 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 
 @Composable
@@ -81,7 +83,7 @@ fun ComicAddToListSearchField(
                         shape = shape
                     )
                     .padding(
-                        start = 12.dp,
+                        start = ComicSpacingMd,
                         end = 6.dp
                     ),
             verticalAlignment =
@@ -94,7 +96,7 @@ fun ComicAddToListSearchField(
                 modifier = Modifier.size(24.dp)
             )
 
-            Spacer(modifier = Modifier.size(8.dp))
+            Spacer(modifier = Modifier.size(ComicSpacingSm))
 
             BasicTextField(
                 value = query,

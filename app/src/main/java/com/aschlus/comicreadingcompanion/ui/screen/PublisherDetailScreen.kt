@@ -25,6 +25,8 @@ import com.aschlus.comicreadingcompanion.ui.component.ComicIssueDetailHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicPublisherSeriesRow
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacing2Xl
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
 import com.aschlus.comicreadingcompanion.ui.viewmodel.PublisherDetailViewModel
 
 @Composable
@@ -72,10 +74,10 @@ fun PublisherDetailScreen(
                         .padding(innerPadding),
                 contentPadding =
                     PaddingValues(
-                        start = 16.dp,
-                        end = 16.dp,
-                        top = 16.dp,
-                        bottom = 24.dp
+                        start = ComicSpacingLg,
+                        end = ComicSpacingLg,
+                        top = ComicSpacingLg,
+                        bottom = ComicSpacing2Xl
                     ),
                 verticalArrangement =
                     Arrangement.spacedBy(10.dp)

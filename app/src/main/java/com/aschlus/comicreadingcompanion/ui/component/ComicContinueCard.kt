@@ -30,6 +30,7 @@ import com.aschlus.comicreadingcompanion.data.database.models.ReadingListContinu
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShape
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
 
 @Composable
 fun ComicContinueCard(
@@ -101,7 +102,7 @@ fun ComicContinueCard(
                 modifier =
                     Modifier
                         .fillMaxWidth()
-                        .padding(16.dp),
+                        .padding(ComicSpacingLg),
                 verticalArrangement =
                     Arrangement.spacedBy(10.dp)
             ) {

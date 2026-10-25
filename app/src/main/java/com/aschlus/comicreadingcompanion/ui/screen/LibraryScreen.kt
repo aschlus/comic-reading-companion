@@ -47,6 +47,8 @@ import com.aschlus.comicreadingcompanion.ui.component.ComicLibrarySectionHeader
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingXs
 import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeReadingListSort
 import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ImportReadingListState
@@ -153,8 +155,8 @@ fun LibraryScreen(
                             Modifier
                                 .fillMaxWidth()
                                 .padding(
-                                    start = 12.dp,
-                                    end = 12.dp,
+                                    start = ComicSpacingMd,
+                                    end = ComicSpacingMd,
                                     top = 6.dp
                                 ),
                         horizontalArrangement =
@@ -196,7 +198,7 @@ fun LibraryScreen(
                                             sortMenuExpanded = true
                                         }
                                         .padding(
-                                            start = 12.dp,
+                                            start = ComicSpacingMd,
                                             end = 7.dp
                                         ),
                                 verticalAlignment =
@@ -279,10 +281,10 @@ fun LibraryScreen(
                 ComicLibrarySectionHeader(
                     modifier =
                         Modifier.padding(
-                            start = 12.dp,
-                            end = 12.dp,
+                            start = ComicSpacingMd,
+                            end = ComicSpacingMd,
                             top = 6.dp,
-                            bottom = 4.dp
+                            bottom = ComicSpacingXs
                         )
                 )
             }
@@ -293,9 +295,9 @@ fun LibraryScreen(
                         message = "No reading lists yet",
                         modifier =
                             Modifier.padding(
-                                start = 12.dp,
-                                end = 12.dp,
-                                top = 4.dp
+                                start = ComicSpacingMd,
+                                end = ComicSpacingMd,
+                                top = ComicSpacingXs
                             )
                     )
                 }
@@ -308,9 +310,9 @@ fun LibraryScreen(
                         modifier =
                             Modifier
                                 .padding(
-                                    start = 12.dp,
-                                    end = 12.dp,
-                                    top = 4.dp
+                                    start = ComicSpacingMd,
+                                    end = ComicSpacingMd,
+                                    top = ComicSpacingXs
                                 )
                     )
                 }
@@ -365,10 +367,10 @@ fun LibraryScreen(
                             Modifier
                                 .fillMaxWidth()
                                 .padding(
-                                    start = 12.dp,
-                                    end = 12.dp,
-                                    top = 4.dp,
-                                    bottom = 4.dp
+                                    start = ComicSpacingMd,
+                                    end = ComicSpacingMd,
+                                    top = ComicSpacingXs,
+                                    bottom = ComicSpacingXs
                                 ),
                         style = readingList.style
                     )

@@ -33,6 +33,7 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShape
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.util.formatPublicationDate
 
@@ -156,7 +157,7 @@ private fun ComicAddToListResultRow(
                         onClick = onClick
                     )
                     .padding(
-                        horizontal = 12.dp,
+                        horizontal = ComicSpacingMd,
                         vertical = 11.dp
                     ),
             verticalAlignment =

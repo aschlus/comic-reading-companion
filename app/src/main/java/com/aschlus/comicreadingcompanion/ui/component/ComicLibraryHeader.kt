@@ -28,6 +28,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -67,7 +68,7 @@ fun ComicLibraryHeader(
                         Alignment.CenterEnd
                     )
                     .padding(
-                        end = 16.dp
+                        end = ComicSpacingLg
                     )
                     .width(142.dp)
         ) {

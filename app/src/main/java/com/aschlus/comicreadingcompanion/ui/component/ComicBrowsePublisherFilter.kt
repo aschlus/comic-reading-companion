@@ -31,6 +31,7 @@ import com.aschlus.comicreadingcompanion.data.database.models.PublisherBrowseRes
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
 
 @Composable
 fun ComicBrowsePublisherFilter(
@@ -50,7 +51,7 @@ fun ComicBrowsePublisherFilter(
 
     Row(
         modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(ComicSpacingSm),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box {

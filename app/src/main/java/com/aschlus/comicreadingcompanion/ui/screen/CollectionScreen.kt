@@ -56,12 +56,13 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicGreen
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicOrange
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingXl
 import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
 import com.aschlus.comicreadingcompanion.ui.viewmodel.CollectionSort
 import com.aschlus.comicreadingcompanion.ui.viewmodel.CollectionStats
 import com.aschlus.comicreadingcompanion.ui.viewmodel.CollectionViewModel
 import com.aschlus.comicreadingcompanion.util.formatPublicationDate
-import kotlin.collections.buildList
 
 
 @Composable
@@ -99,12 +100,12 @@ fun CollectionScreen(
                 .fillMaxSize()
                 .padding(innerPadding),
             contentPadding = PaddingValues(
-                start = 12.dp,
-                end = 12.dp,
-                top = 12.dp,
-                bottom = 20.dp
+                start = ComicSpacingMd,
+                end = ComicSpacingMd,
+                top = ComicSpacingMd,
+                bottom = ComicSpacingXl
             ),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(ComicSpacingMd)
         ) {
             item(key = "collection-statistics") {
                 CollectionStatisticsPanel(stats)
@@ -336,7 +337,7 @@ private fun CollectionStatCard(
                 .background(cardColor, shape)
                 .border(ComicCardBorderWidth, ComicInk, shape)
                 .padding(
-                    horizontal = 12.dp,
+                    horizontal = ComicSpacingMd,
                     vertical = 11.dp
                 ),
             verticalArrangement = Arrangement.spacedBy(3.dp)
@@ -499,7 +500,7 @@ private fun OwnedIssueCard(
                 .border(ComicCardBorderWidth, ComicInk, shape)
                 .clickable(onClick = onClick)
                 .padding(10.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            horizontalArrangement = Arrangement.spacedBy(ComicSpacingMd),
             verticalAlignment = Alignment.Top
         ) {
             ComicCoverImage(

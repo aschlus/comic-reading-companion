@@ -37,6 +37,8 @@ import com.aschlus.comicreadingcompanion.ui.component.ComicWideActionButton
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
 import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
 import com.aschlus.comicreadingcompanion.ui.viewmodel.EditSeriesViewModel
 
@@ -113,7 +115,7 @@ fun EditSeriesScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(innerPadding)
-                    .padding(16.dp)
+                    .padding(ComicSpacingLg)
                     .verticalScroll(rememberScrollState()),
                 verticalArrangement = Arrangement.spacedBy(14.dp)
             ) {
@@ -234,7 +236,7 @@ fun EditSeriesScreen(
                                 shape = errorShape
                             )
                             .padding(
-                                horizontal = 12.dp,
+                                horizontal = ComicSpacingMd,
                                 vertical = 10.dp
                             )
                     ) {

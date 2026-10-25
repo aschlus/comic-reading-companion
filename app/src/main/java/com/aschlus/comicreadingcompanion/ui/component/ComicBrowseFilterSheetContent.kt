@@ -36,6 +36,9 @@ import com.aschlus.comicreadingcompanion.data.database.models.PublisherBrowseRes
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacing2Xl
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingXl
 
 private data class ComicBrowseFilterOption<T>(
     val value: T,
@@ -115,9 +118,9 @@ fun ComicBrowseFilterSheetContent(
             .fillMaxWidth()
             .verticalScroll(rememberScrollState())
             .padding(
-                start = 24.dp,
-                end = 24.dp,
-                bottom = 20.dp
+                start = ComicSpacing2Xl,
+                end = ComicSpacing2Xl,
+                bottom = ComicSpacingXl
             ),
         verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
@@ -217,7 +220,7 @@ private fun <T> ComicBrowseFilterSelector(
                 }
                 .padding(
                     start = 14.dp,
-                    end = 8.dp
+                    end = ComicSpacingSm
                 ),
             verticalAlignment = Alignment.CenterVertically
         ) {

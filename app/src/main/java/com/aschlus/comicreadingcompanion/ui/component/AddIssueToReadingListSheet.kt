@@ -41,6 +41,9 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaperDeep
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacing2Xl
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
 import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
 import com.aschlus.comicreadingcompanion.ui.viewmodel.AddIssueToReadingListViewModel
 
@@ -84,10 +87,10 @@ fun AddIssueToReadingListSheet(
                 .padding(
                     start = 18.dp,
                     end = 18.dp,
-                    top = 12.dp,
-                    bottom = 24.dp
+                    top = ComicSpacingMd,
+                    bottom = ComicSpacing2Xl
                 ),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(ComicSpacingMd)
         ) {
             Box(
                 modifier =
@@ -148,7 +151,7 @@ fun AddIssueToReadingListSheet(
                             max = 400.dp
                         ),
                     verticalArrangement =
-                        Arrangement.spacedBy(8.dp)
+                        Arrangement.spacedBy(ComicSpacingSm)
                 ) {
                     items(
                         items = readingLists,

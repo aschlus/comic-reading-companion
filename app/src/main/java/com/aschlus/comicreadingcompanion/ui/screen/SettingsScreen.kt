@@ -22,7 +22,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -58,6 +57,9 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicMutedInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingXs
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineSettingsViewModel
 
 @Composable
@@ -96,7 +98,7 @@ fun SettingsScreen(
                         onClick = onBackClick
                     )
 
-                    Spacer(Modifier.width(16.dp))
+                    Spacer(Modifier.width(ComicSpacingLg))
 
                     ComicPrimaryHeaderTitle(
                         text = "SETTINGS"
@@ -110,8 +112,8 @@ fun SettingsScreen(
                 .fillMaxWidth()
                 .padding(innerPadding)
                 .verticalScroll(rememberScrollState())
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+                .padding(ComicSpacingLg),
+            verticalArrangement = Arrangement.spacedBy(ComicSpacingLg)
         ) {
             ComicHomeSectionHeader(
                 text = "API KEY"
@@ -181,7 +183,7 @@ fun SettingsScreen(
                         color = ComicInk,
                         shape = fieldShape
                     )
-                    .padding(start = 12.dp, end = 4.dp),
+                    .padding(start = ComicSpacingMd, end = ComicSpacingXs),
                 contentAlignment = Alignment.CenterStart
             ) {
                 Row(

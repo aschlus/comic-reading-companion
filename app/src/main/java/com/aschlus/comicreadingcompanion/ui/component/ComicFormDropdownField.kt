@@ -25,6 +25,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
 
 @Composable
 fun ComicFormDropdownField(
@@ -69,7 +70,7 @@ fun ComicFormDropdownField(
                     }
                     .padding(
                         start = 14.dp,
-                        end = 8.dp
+                        end = ComicSpacingSm
                     ),
             verticalAlignment =
                 Alignment.CenterVertically

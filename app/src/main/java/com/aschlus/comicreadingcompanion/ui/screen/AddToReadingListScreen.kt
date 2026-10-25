@@ -28,6 +28,7 @@ import com.aschlus.comicreadingcompanion.ui.component.ComicAddToListSeriesResult
 import com.aschlus.comicreadingcompanion.ui.component.ComicEmptyState
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
 import com.aschlus.comicreadingcompanion.ui.viewmodel.AddToListFilter
 import com.aschlus.comicreadingcompanion.ui.viewmodel.CreateReadingListViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.PendingReadingListIssue
@@ -103,7 +104,7 @@ fun AddToReadingListScreen(
                         innerPadding
                     )
                     .padding(
-                        horizontal = 16.dp,
+                        horizontal = ComicSpacingLg,
                         vertical = 18.dp
                     ),
             verticalArrangement =

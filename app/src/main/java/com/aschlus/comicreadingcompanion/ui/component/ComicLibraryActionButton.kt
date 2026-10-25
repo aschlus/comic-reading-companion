@@ -28,6 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
 import com.aschlus.comicreadingcompanion.ui.theme.ComicAccentTextTransform
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
@@ -106,7 +107,7 @@ fun ComicLibraryActionButton(
                     Modifier
                         .fillMaxSize()
                         .padding(
-                            horizontal = 12.dp
+                            horizontal = ComicSpacingMd
                         ),
                 verticalAlignment =
                     Alignment.CenterVertically,

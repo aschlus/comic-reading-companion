@@ -38,6 +38,9 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
 
 @Composable
 fun ComicReadingListSelectionHeader(
@@ -100,7 +103,7 @@ fun ComicReadingListSelectionHeader(
                             ReadingListDetailHeaderContentHeight
                         )
                         .padding(
-                            horizontal = 16.dp
+                            horizontal = ComicSpacingLg
                         ),
                 verticalAlignment =
                     Alignment.CenterVertically
@@ -111,7 +114,7 @@ fun ComicReadingListSelectionHeader(
                     onClick = onCancelClick
                 )
 
-                Spacer(modifier = Modifier.width(12.dp))
+                Spacer(modifier = Modifier.width(ComicSpacingMd))
 
                 Text(
                     text = "$selectedCount selected",
@@ -132,7 +135,7 @@ fun ComicReadingListSelectionHeader(
                     maxLines = 1
                 )
 
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(ComicSpacingSm))
 
                 ComicSelectionActionButton(
                     text = "READ",

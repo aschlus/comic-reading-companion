@@ -46,6 +46,10 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
 import com.aschlus.comicreadingcompanion.ui.theme.LilitaOneFontFamily
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacing2Xl
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingXl
 
 data class ComicReadingListFilterSeriesOption(
     val key: String,
@@ -72,9 +76,9 @@ fun ComicReadingListFilterSheetContent(
             modifier
                 .fillMaxWidth()
                 .padding(
-                    start = 24.dp,
-                    end = 24.dp,
-                    bottom = 20.dp
+                    start = ComicSpacing2Xl,
+                    end = ComicSpacing2Xl,
+                    bottom = ComicSpacingXl
                 ),
         verticalArrangement =
             Arrangement.spacedBy(14.dp)
@@ -107,7 +111,7 @@ fun ComicReadingListFilterSheetContent(
 
         Row(
             horizontalArrangement =
-                Arrangement.spacedBy(8.dp)
+                Arrangement.spacedBy(ComicSpacingSm)
         ) {
             ComicFilterChoice(
                 text = "Unread",
@@ -158,7 +162,7 @@ fun ComicReadingListFilterSheetContent(
 
         Row(
             horizontalArrangement =
-                Arrangement.spacedBy(8.dp)
+                Arrangement.spacedBy(ComicSpacingSm)
         ) {
             ComicFilterChoice(
                 text = "Required",
@@ -271,8 +275,8 @@ fun ComicFilterTitleBanner(
                         shape = ComicSlantedShape
                     )
                     .padding(
-                        horizontal = 16.dp,
-                        vertical = 8.dp
+                        horizontal = ComicSpacingLg,
+                        vertical = ComicSpacingSm
                     ),
             contentAlignment =
                 Alignment.CenterStart
@@ -432,7 +436,7 @@ private fun ComicSeriesFilterSelector(
                     }
                     .padding(
                         start = 14.dp,
-                        end = 8.dp
+                        end = ComicSpacingSm
                     ),
             verticalAlignment =
                 Alignment.CenterVertically

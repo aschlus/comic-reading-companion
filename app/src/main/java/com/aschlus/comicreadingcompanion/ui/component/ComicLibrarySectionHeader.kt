@@ -28,6 +28,7 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
 import com.aschlus.comicreadingcompanion.ui.theme.LilitaOneFontFamily
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
 
 @Composable
 fun ComicLibrarySectionHeader(
@@ -124,7 +125,7 @@ fun ComicLibrarySectionHeader(
                 Modifier
                     .weight(1f)
                     .padding(
-                        start = 12.dp
+                        start = ComicSpacingMd
                     )
                     .height(3.dp)
                     .background(ComicInk)

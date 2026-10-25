@@ -33,6 +33,8 @@ import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListStyle
 import com.aschlus.comicreadingcompanion.data.database.models.IssueReadingListResult
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlue
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShape
@@ -91,8 +93,8 @@ fun ComicIssueReadingListRow(
                         onClick = onClick
                     )
                     .padding(
-                        horizontal = 12.dp,
-                        vertical = 8.dp
+                        horizontal = ComicSpacingMd,
+                        vertical = ComicSpacingSm
                     ),
             verticalAlignment =
                 Alignment.CenterVertically

@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
 
 @Composable
 fun ComicSectionBanner(
@@ -53,7 +54,7 @@ fun ComicSectionBanner(
                     )
                     .padding(
                         horizontal = 18.dp,
-                        vertical = 8.dp
+                        vertical = ComicSpacingSm
                     )
         ) {
             Text(

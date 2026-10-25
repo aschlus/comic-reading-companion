@@ -46,6 +46,10 @@ import com.aschlus.comicreadingcompanion.ui.component.ComicWideActionButton
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlue
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacing2Xl
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingXs
 import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineSeriesRefreshUiState
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineSeriesRefreshViewModel
@@ -148,10 +152,10 @@ fun SeriesDetailScreen(
                         .padding(innerPadding),
                 contentPadding =
                     PaddingValues(
-                        start = 16.dp,
-                        end = 16.dp,
-                        top = 16.dp,
-                        bottom = 24.dp
+                        start = ComicSpacingLg,
+                        end = ComicSpacingLg,
+                        top = ComicSpacingLg,
+                        bottom = ComicSpacing2Xl
                     ),
                 verticalArrangement =
                     Arrangement.spacedBy(10.dp)
@@ -218,7 +222,7 @@ fun SeriesDetailScreen(
                         onClick = onEditClick,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(top = 4.dp)
+                            .padding(top = ComicSpacingXs)
                     )
                 }
 
@@ -242,7 +246,7 @@ fun SeriesDetailScreen(
                             },
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(top = 4.dp)
+                                .padding(top = ComicSpacingXs)
                         )
                     }
                 }
@@ -282,7 +286,7 @@ fun SeriesDetailScreen(
                     ComicHomeSectionHeader(
                         text = "ISSUES",
                         modifier =
-                            Modifier.padding(top = 8.dp)
+                            Modifier.padding(top = ComicSpacingSm)
                     )
                 }
 
@@ -358,7 +362,7 @@ private fun ComicVineSeriesRefreshDialog(
                     .heightIn(max = 440.dp)
                     .verticalScroll(rememberScrollState()),
                 verticalArrangement =
-                    Arrangement.spacedBy(8.dp)
+                    Arrangement.spacedBy(ComicSpacingSm)
             ) {
                 if (uiState.isLoading) {
                     Row(

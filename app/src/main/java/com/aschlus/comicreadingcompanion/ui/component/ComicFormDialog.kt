@@ -30,6 +30,9 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingXl
 
 @Composable
 fun ComicFormDialog(
@@ -84,9 +87,9 @@ fun ComicFormDialog(
                             color = ComicInk,
                             shape = shape
                         )
-                        .padding(20.dp),
+                        .padding(ComicSpacingXl),
                 verticalArrangement =
-                    Arrangement.spacedBy(16.dp)
+                    Arrangement.spacedBy(ComicSpacingLg)
             ) {
                 ComicSectionBanner(
                     text = title,
@@ -202,7 +205,7 @@ private fun ComicDialogTextField(
                 modifier =
                     Modifier
                         .fillMaxWidth()
-                        .padding(12.dp),
+                        .padding(ComicSpacingMd),
                 singleLine = singleLine,
                 maxLines =
                     if (singleLine) {

@@ -27,6 +27,8 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingXl
 
 @Composable
 fun ComicConfirmationDialog(
@@ -74,9 +76,9 @@ fun ComicConfirmationDialog(
                             color = ComicInk,
                             shape = shape
                         )
-                        .padding(20.dp),
+                        .padding(ComicSpacingXl),
                 verticalArrangement =
-                    Arrangement.spacedBy(16.dp)
+                    Arrangement.spacedBy(ComicSpacingLg)
             ) {
                 ComicSectionBanner(
                     text = title,

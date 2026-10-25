@@ -28,6 +28,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
@@ -81,9 +83,9 @@ fun ComicPendingReadingListIssueRow(
                         shape = shape
                     )
                     .padding(
-                        start = 12.dp,
+                        start = ComicSpacingMd,
                         top = 10.dp,
-                        end = 8.dp,
+                        end = ComicSpacingSm,
                         bottom = 10.dp
                     ),
             verticalAlignment =

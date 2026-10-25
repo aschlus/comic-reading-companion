@@ -30,6 +30,7 @@ import com.aschlus.comicreadingcompanion.data.database.models.PublisherBrowseRes
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlueLight
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -98,7 +99,7 @@ fun ComicBrowsePublisherRow(
                         onClick = onClick
                     )
                     .padding(
-                        horizontal = 12.dp,
+                        horizontal = ComicSpacingMd,
                         vertical = 10.dp
                     )
                     .semantics {
@@ -116,7 +117,7 @@ fun ComicBrowsePublisherRow(
 
             Spacer(
                 modifier =
-                    Modifier.size(12.dp)
+                    Modifier.size(ComicSpacingMd)
             )
 
             Column(

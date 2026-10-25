@@ -20,6 +20,8 @@ import androidx.compose.ui.unit.dp
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListContinueItem
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
 
 @Composable
 fun ComicRecentCard(
@@ -81,9 +83,9 @@ fun ComicRecentCard(
         ) {
             Column(
                 modifier =
-                    Modifier.padding(12.dp),
+                    Modifier.padding(ComicSpacingMd),
                 verticalArrangement =
-                    Arrangement.spacedBy(8.dp)
+                    Arrangement.spacedBy(ComicSpacingSm)
             ) {
                 Text(
                     text = readingList.title,

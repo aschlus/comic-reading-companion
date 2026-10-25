@@ -33,6 +33,7 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShape
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
 import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
 import com.aschlus.comicreadingcompanion.util.formatPublicationDate
 import java.util.Locale
@@ -172,13 +173,13 @@ fun ComicSeriesIssueRow(
                 )
             }
 
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(ComicSpacingSm))
 
             ComicSeriesIssueStatus(
                 readingStatus = issue.readingStatus
             )
 
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(ComicSpacingSm))
 
             Text(
                 text = "›",
@@ -236,7 +237,7 @@ private fun ComicSeriesIssueStatus(
                 )
                 .padding(
                     horizontal = 13.dp,
-                    vertical = 8.dp
+                    vertical = ComicSpacingSm
                 ),
         contentAlignment =
             Alignment.Center

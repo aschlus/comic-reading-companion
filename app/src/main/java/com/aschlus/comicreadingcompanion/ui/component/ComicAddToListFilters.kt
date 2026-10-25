@@ -22,6 +22,7 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicBlue
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
 import com.aschlus.comicreadingcompanion.ui.viewmodel.AddToListFilter
 
 @Composable
@@ -34,7 +35,7 @@ fun ComicAddToListFilters(
         modifier =
             modifier.fillMaxWidth(),
         horizontalArrangement =
-            Arrangement.spacedBy(8.dp)
+            Arrangement.spacedBy(ComicSpacingSm)
     ) {
         AddToListFilter.entries.forEach { filter ->
 

@@ -53,6 +53,10 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicMutedInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicOrange
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingXs
 import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
 import com.aschlus.comicreadingcompanion.ui.viewmodel.AddIssueToReadingListViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.IssueDetailViewModel
@@ -113,11 +117,11 @@ fun IssueDetailScreen(
                         rememberScrollState()
                     )
                     .padding(
-                        horizontal = 16.dp,
+                        horizontal = ComicSpacingLg,
                         vertical = 14.dp
                     ),
                 verticalArrangement =
-                    Arrangement.spacedBy(12.dp)
+                    Arrangement.spacedBy(ComicSpacingMd)
             ) {
                 Row(
                     modifier =
@@ -291,7 +295,7 @@ fun IssueDetailScreen(
 
                 if (addToReadingListViewModel != null) {
                     HorizontalDivider(
-                        modifier = Modifier.padding(top = 4.dp),
+                        modifier = Modifier.padding(top = ComicSpacingXs),
                         thickness = 2.dp,
                         color = ComicInk
                     )
@@ -314,7 +318,7 @@ fun IssueDetailScreen(
                     HorizontalDivider(
                         modifier =
                             Modifier.padding(
-                                top = 4.dp
+                                top = ComicSpacingXs
                             ),
                         thickness = 2.dp,
                         color = ComicInk
@@ -334,7 +338,7 @@ fun IssueDetailScreen(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(18.dp))
+                Spacer(modifier = Modifier.height(ComicSpacingSm))
             }
         }
     }

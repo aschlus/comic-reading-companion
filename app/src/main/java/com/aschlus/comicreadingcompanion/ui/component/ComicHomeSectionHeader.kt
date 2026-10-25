@@ -32,6 +32,7 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
 import com.aschlus.comicreadingcompanion.ui.theme.LilitaOneFontFamily
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
 
 @Composable
 fun ComicHomeSectionHeader(
@@ -142,7 +143,7 @@ fun ComicHomeSectionHeader(
                             onClick = onSeeAllClick
                         )
                         .padding(
-                            horizontal = 8.dp,
+                            horizontal = ComicSpacingSm,
                             vertical = 10.dp
                         ),
                 fontSize = 14.sp,

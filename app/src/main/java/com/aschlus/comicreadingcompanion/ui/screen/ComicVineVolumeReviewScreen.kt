@@ -65,6 +65,10 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicMutedInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingXs
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineIssueTypeInference
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineVolumeReviewViewModel
 import com.aschlus.comicreadingcompanion.util.formatPublicationDate
@@ -106,7 +110,7 @@ fun ComicVineVolumeReviewScreen(
                         onClick = onBackClick
                     )
 
-                    Spacer(Modifier.width(16.dp))
+                    Spacer(Modifier.width(ComicSpacingLg))
 
                     ComicPrimaryHeaderTitle(
                         text = "SERIES REVIEW"
@@ -119,8 +123,8 @@ fun ComicVineVolumeReviewScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(innerPadding),
-            contentPadding = PaddingValues(16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            contentPadding = PaddingValues(ComicSpacingLg),
+            verticalArrangement = Arrangement.spacedBy(ComicSpacingMd)
         ) {
             if (uiState.isLoading && uiState.volume == null) {
                 item {
@@ -143,7 +147,7 @@ fun ComicVineVolumeReviewScreen(
                                 color = ComicRed,
                                 shape = RoundedCornerShape(6.dp)
                             )
-                            .padding(horizontal = 12.dp, vertical = 10.dp)
+                            .padding(horizontal = ComicSpacingMd, vertical = 10.dp)
                     ) {
                         Text(
                             text = error,
@@ -186,7 +190,7 @@ fun ComicVineVolumeReviewScreen(
                                         color = ComicInk,
                                         shape = titleFieldShape
                                     )
-                                    .padding(horizontal = 12.dp, vertical = 12.dp)
+                                    .padding(horizontal = ComicSpacingMd, vertical = ComicSpacingMd)
                             ) {
                                 BasicTextField(
                                     value = uiState.editedTitle,
@@ -203,11 +207,11 @@ fun ComicVineVolumeReviewScreen(
                         }
 
                         Column(
-                            verticalArrangement = Arrangement.spacedBy(12.dp)
+                            verticalArrangement = Arrangement.spacedBy(ComicSpacingMd)
                         ) {
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                                horizontalArrangement = Arrangement.spacedBy(ComicSpacingMd)
                             ) {
                                 ReviewEditableMetadataField(
                                     label = "PUBLISHER",
@@ -227,7 +231,7 @@ fun ComicVineVolumeReviewScreen(
 
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                                horizontalArrangement = Arrangement.spacedBy(ComicSpacingMd)
                             ) {
                                 ReviewEditableMetadataField(
                                     label = "START YEAR",
@@ -248,7 +252,7 @@ fun ComicVineVolumeReviewScreen(
 
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                                horizontalArrangement = Arrangement.spacedBy(ComicSpacingMd)
                             ) {
                                 ReviewMetadataItem(
                                     label = "REPORTED ISSUES",
@@ -340,7 +344,7 @@ fun ComicVineVolumeReviewScreen(
                         }
 
                         Column(
-                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                            verticalArrangement = Arrangement.spacedBy(ComicSpacingSm)
                         ) {
                             ComicWideActionButton(
                                 text = if (uiState.isImporting) {
@@ -367,7 +371,7 @@ fun ComicVineVolumeReviewScreen(
                             if (uiState.isImporting) {
                                 Row(
                                     verticalAlignment = Alignment.CenterVertically,
-                                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                    horizontalArrangement = Arrangement.spacedBy(ComicSpacingSm)
                                 ) {
                                     CircularProgressIndicator(
                                         modifier = Modifier.size(18.dp),
@@ -411,7 +415,7 @@ fun ComicVineVolumeReviewScreen(
 
                 item {
                     Column(
-                        verticalArrangement = Arrangement.spacedBy(4.dp)
+                        verticalArrangement = Arrangement.spacedBy(ComicSpacingXs)
                     ) {
                         Box(
                             modifier = Modifier
@@ -423,7 +427,7 @@ fun ComicVineVolumeReviewScreen(
                                     color = ComicInk,
                                     shape = RoundedCornerShape(6.dp)
                                 )
-                                .padding(horizontal = 10.dp, vertical = 8.dp)
+                                .padding(horizontal = 10.dp, vertical = ComicSpacingSm)
                         ) {
                             Text(
                                 text = "Loaded ${uiState.issues.size} of ${
@@ -490,7 +494,7 @@ fun ComicVineVolumeReviewScreen(
                                     color = ComicInk,
                                     shape = RoundedCornerShape(6.dp)
                                 )
-                                .padding(horizontal = 12.dp, vertical = 12.dp)
+                                .padding(horizontal = ComicSpacingMd, vertical = ComicSpacingMd)
                         ) {
                             Text(
                                 text = "No issues records were retrieved",
@@ -567,7 +571,7 @@ private fun ReviewInfoCard(
                     shape = shape
                 )
                 .padding(14.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(ComicSpacingSm)
         ) {
             content()
         }
@@ -584,7 +588,7 @@ private fun ReviewEditableMetadataField(
 ) {
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(4.dp)
+        verticalArrangement = Arrangement.spacedBy(ComicSpacingXs)
     ) {
         Text(
             text = label,
@@ -813,7 +817,7 @@ private fun ReviewIssueTypeSelector(
                     expanded = !expanded
                 }
                 .testTag("issue-type-selector-$issueId")
-                .padding(horizontal = 8.dp),
+                .padding(horizontal = ComicSpacingSm),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(

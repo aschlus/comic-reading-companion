@@ -22,6 +22,7 @@ import coil3.request.ImageRequest
 import coil3.request.crossfade
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
 
 @Composable
 fun ComicCoverImage(
@@ -104,7 +105,7 @@ private fun CoverPlaceholder(
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center,
-            modifier = Modifier.padding(8.dp)
+            modifier = Modifier.padding(ComicSpacingSm)
         )
     }
 }

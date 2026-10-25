@@ -28,6 +28,8 @@ import com.aschlus.comicreadingcompanion.data.database.models.RecentReadIssue
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShape
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicMutedInk
@@ -73,7 +75,7 @@ fun ComicReadingHistoryRow(
                     .clickable(
                         onClick = onClick
                     )
-                    .padding(8.dp),
+                    .padding(ComicSpacingSm),
             verticalAlignment =
                 Alignment.CenterVertically
         ) {
@@ -88,7 +90,7 @@ fun ComicReadingHistoryRow(
                 borderColor = ComicInk
             )
 
-            Spacer(modifier = Modifier.width(12.dp))
+            Spacer(modifier = Modifier.width(ComicSpacingMd))
 
             Column(
                 modifier =
@@ -140,7 +142,7 @@ fun ComicReadingHistoryRow(
                 )
             }
 
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(ComicSpacingSm))
 
             Text(
                 text = "›",

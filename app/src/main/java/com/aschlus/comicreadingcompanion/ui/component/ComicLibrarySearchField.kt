@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingXs
 import com.aschlus.comicreadingcompanion.ui.theme.ComicMutedInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 
@@ -72,7 +73,7 @@ fun ComicLibrarySearchField(
                         .fillMaxHeight()
                         .padding(
                             start = 14.dp,
-                            end = 4.dp
+                            end = ComicSpacingXs
                         ),
                 verticalAlignment =
                     Alignment.CenterVertically

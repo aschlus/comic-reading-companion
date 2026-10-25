@@ -27,6 +27,7 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShape
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
 
 @Composable
 fun ComicCreateReadingListHeader(
@@ -52,7 +53,7 @@ fun ComicCreateReadingListHeader(
                 onClick = onBackClick
             )
 
-            Spacer(modifier = Modifier.width(16.dp))
+            Spacer(modifier = Modifier.width(ComicSpacingLg))
 
             ComicPrimaryHeaderTitle(
                 text = "NEW LIST"

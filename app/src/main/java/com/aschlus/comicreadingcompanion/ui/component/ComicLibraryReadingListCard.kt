@@ -36,6 +36,7 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
 import kotlin.math.roundToInt
 
 @Composable
@@ -94,7 +95,7 @@ fun ComicLibraryReadingListCard(
                     )
                     .padding(
                         horizontal = 9.dp,
-                        vertical = 8.dp
+                        vertical = ComicSpacingSm
                     ),
             verticalAlignment =
                 Alignment.CenterVertically

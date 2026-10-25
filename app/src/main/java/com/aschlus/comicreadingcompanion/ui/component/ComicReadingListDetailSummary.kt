@@ -32,6 +32,7 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicBlue
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
 
 @Composable
 fun ComicReadingListDetailHero(
@@ -268,7 +269,7 @@ private fun ComicJumpToCurrentButton(
                     onClick = onClick
                 )
                 .padding(
-                    horizontal = 12.dp
+                    horizontal = ComicSpacingMd
                 ),
         contentAlignment =
             Alignment.Center

@@ -59,6 +59,9 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicMutedInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPurple
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineVolumeSearchViewModel
 
 @Composable
@@ -91,7 +94,7 @@ fun ComicVineVolumeSearchScreen(
                         onClick = onBackClick
                     )
 
-                    Spacer(Modifier.width(16.dp))
+                    Spacer(Modifier.width(ComicSpacingLg))
 
                     ComicPrimaryHeaderTitle(
                         text = "SEARCH"
@@ -104,8 +107,8 @@ fun ComicVineVolumeSearchScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(innerPadding),
-            contentPadding = PaddingValues(16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            contentPadding = PaddingValues(ComicSpacingLg),
+            verticalArrangement = Arrangement.spacedBy(ComicSpacingMd)
         ) {
             item {
                 ComicHomeSectionHeader(
@@ -135,7 +138,7 @@ fun ComicVineVolumeSearchScreen(
 
             item {
                 Column(
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                    verticalArrangement = Arrangement.spacedBy(ComicSpacingMd)
                 ) {
                     Box(
                         modifier = Modifier.height(44.dp)
@@ -175,7 +178,7 @@ fun ComicVineVolumeSearchScreen(
                                 modifier = Modifier.size(18.dp)
                             )
 
-                            Spacer(Modifier.width(8.dp))
+                            Spacer(Modifier.width(ComicSpacingSm))
 
                             Text(
                                 text = if (matchingOptionsExpanded) {
@@ -191,7 +194,7 @@ fun ComicVineVolumeSearchScreen(
 
                     if (matchingOptionsExpanded) {
                         Column(
-                            verticalArrangement = Arrangement.spacedBy(12.dp)
+                            verticalArrangement = Arrangement.spacedBy(ComicSpacingMd)
                         ) {
                             MatchingOptionField(
                                 label = "Publisher",
@@ -293,7 +296,7 @@ fun ComicVineVolumeSearchScreen(
                 item {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                        horizontalArrangement = Arrangement.spacedBy(ComicSpacingMd)
                     ) {
                         CircularProgressIndicator(
                             modifier = Modifier.size(24.dp),
@@ -388,7 +391,7 @@ private fun MatchingOptionField(
                     color = ComicInk,
                     shape = fieldShape
                 )
-                .padding(horizontal = 12.dp),
+                .padding(horizontal = ComicSpacingMd),
             contentAlignment = Alignment.CenterStart
         ) {
             BasicTextField(

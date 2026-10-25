@@ -48,6 +48,8 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
 import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
 
 internal val ReadingListDetailHeaderContentHeight = 86.dp
@@ -114,7 +116,7 @@ fun ComicReadingListDetailHeader(
                             ReadingListDetailHeaderContentHeight
                         )
                         .padding(
-                            horizontal = 16.dp
+                            horizontal = ComicSpacingLg
                         ),
                 verticalAlignment =
                     Alignment.CenterVertically
@@ -140,7 +142,7 @@ fun ComicReadingListDetailHeader(
                     onClick = onSearchClick
                 )
 
-                Spacer(modifier = Modifier.size(8.dp))
+                Spacer(modifier = Modifier.size(ComicSpacingSm))
 
                 Box {
                     ComicReadingListDetailHeaderButton(

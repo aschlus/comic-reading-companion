@@ -41,6 +41,9 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShape
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
 
 @Composable
 fun ComicReadingListSearchHeader(
@@ -103,7 +106,7 @@ fun ComicReadingListSearchHeader(
                             ReadingListDetailHeaderContentHeight
                         )
                         .padding(
-                            horizontal = 16.dp
+                            horizontal = ComicSpacingLg
                         ),
                 verticalAlignment =
                     Alignment.CenterVertically
@@ -114,7 +117,7 @@ fun ComicReadingListSearchHeader(
                     onClick = onCloseClick
                 )
 
-                Spacer(modifier = Modifier.size(12.dp))
+                Spacer(modifier = Modifier.size(ComicSpacingMd))
 
                 ComicReadingListSearchField(
                     query = query,
@@ -168,7 +171,7 @@ private fun ComicReadingListSearchField(
                         shape = shape
                     )
                     .padding(
-                        start = 12.dp,
+                        start = ComicSpacingMd,
                         end = 6.dp
                     ),
             verticalAlignment =
@@ -182,7 +185,7 @@ private fun ComicReadingListSearchField(
             )
 
             Spacer(
-                modifier = Modifier.size(8.dp)
+                modifier = Modifier.size(ComicSpacingSm)
             )
 
             BasicTextField(

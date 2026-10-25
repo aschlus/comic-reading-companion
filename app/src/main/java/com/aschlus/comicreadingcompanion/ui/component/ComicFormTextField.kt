@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicMutedInk
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
 
 @Composable
 fun ComicFormTextField(
@@ -78,7 +79,7 @@ fun ComicFormTextField(
                 modifier =
                     Modifier
                         .fillMaxWidth()
-                        .padding(12.dp),
+                        .padding(ComicSpacingMd),
                 singleLine = singleLine,
                 maxLines =
                     if (singleLine) {
