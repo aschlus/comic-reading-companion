@@ -32,6 +32,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -50,6 +51,7 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacing2Xl
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingXl
+import java.sql.RowId
 
 data class ComicReadingListFilterSeriesOption(
     val key: String,
@@ -340,13 +342,21 @@ private fun ComicFilterChoice(
     val shape = RoundedCornerShape(9.dp)
 
     Box(
-        modifier =
-            modifier.height(44.dp)
+        modifier = modifier
+            .height(48.dp)
+            .clickable(
+                role = Role.Button,
+                onClick = onClick
+            )
     ) {
-        if (selected) {
-            Box(
-                modifier =
-                    Modifier
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(44.dp)
+        ) {
+            if (selected) {
+                Box(
+                    modifier = Modifier
                         .matchParentSize()
                         .offset(
                             x = 2.dp,
@@ -356,12 +366,12 @@ private fun ComicFilterChoice(
                             color = ComicInk,
                             shape = shape
                         )
-            )
-        }
+                )
+            }
 
-        Box(
-            modifier =
-                modifier
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
                     .height(42.dp)
                     .clip(shape)
                     .background(
@@ -376,28 +386,23 @@ private fun ComicFilterChoice(
                         color = ComicInk,
                         shape = shape
                     )
-                    .clickable(
-                        onClick = onClick
-                    )
-                    .padding(
-                        horizontal = 14.dp
-                    ),
-            contentAlignment =
-                Alignment.Center
-        ) {
-            Text(
-                text = text,
-                style = MaterialTheme.typography.labelLarge
-                    .copy(
-                        fontWeight =
-                            if (selected) {
-                                FontWeight.ExtraBold
-                            } else {
-                                FontWeight.SemiBold
-                            }
-                    ),
-                color = ComicInk
-            )
+                    .padding(horizontal = 14.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = text,
+                    style = MaterialTheme.typography.labelLarge
+                        .copy(
+                            fontWeight =
+                                if (selected) {
+                                    FontWeight.ExtraBold
+                                } else {
+                                    FontWeight.SemiBold
+                                }
+                        ),
+                    color = ComicInk
+                )
+            }
         }
     }
 }
@@ -416,8 +421,16 @@ private fun ComicSeriesFilterSelector(
     val shape = RoundedCornerShape(9.dp)
 
     Box(
-        modifier =
-            Modifier.fillMaxWidth()
+        modifier = modifier
+            .fillMaxWidth()
+            .height(48.dp)
+            .clickable(
+                role = Role.Button,
+                onClick = {
+                    menuExpanded = true
+                }
+            ),
+        contentAlignment = Alignment.Center
     ) {
         Row(
             modifier =
@@ -431,9 +444,6 @@ private fun ComicSeriesFilterSelector(
                         color = ComicInk,
                         shape = shape
                     )
-                    .clickable {
-                        menuExpanded = true
-                    }
                     .padding(
                         start = 14.dp,
                         end = ComicSpacingSm
@@ -496,8 +506,17 @@ fun ComicFilterSecondaryButton(
     val shape = RoundedCornerShape(9.dp)
 
     Box(
-        modifier =
-            modifier
+        modifier = modifier
+            .fillMaxWidth()
+            .height(48.dp)
+            .clickable(
+                role = Role.Button,
+                onClick = onClick
+            ),
+        contentAlignment = Alignment.Center
+    ) {
+        Box(
+            modifier = Modifier
                 .fillMaxWidth()
                 .height(44.dp)
                 .clip(shape)
@@ -506,21 +525,18 @@ fun ComicFilterSecondaryButton(
                     width = ComicCardBorderWidth,
                     color = ComicInk,
                     shape = shape
-                )
-                .clickable(
-                    onClick = onClick
                 ),
-        contentAlignment =
-            Alignment.Center
-    ) {
-        Text(
-            text = text,
-            style = MaterialTheme.typography.labelLarge
-                .copy(
-                    fontWeight = FontWeight.Bold
-                ),
-            color = ComicInk
-        )
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = text,
+                style = MaterialTheme.typography.labelLarge
+                    .copy(
+                        fontWeight = FontWeight.Bold
+                    ),
+                color = ComicInk
+            )
+        }
     }
 }
 

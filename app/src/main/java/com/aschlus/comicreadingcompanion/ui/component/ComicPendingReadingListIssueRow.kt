@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -184,12 +185,20 @@ private fun ComicPendingIssueActionButton(
         }
 
     Box(
-        modifier =
-            modifier.size(34.dp)
+        modifier = modifier
+            .size(48.dp)
+            .clickable(
+                enabled = enabled,
+                role = Role.Button,
+                onClick = onClick
+            ),
+        contentAlignment = Alignment.Center
     ) {
         Box(
-            modifier =
-                Modifier
+            modifier = Modifier.size(34.dp)
+        ) {
+            Box(
+                modifier = Modifier
                     .size(30.dp)
                     .offset(
                         x = 2.dp,
@@ -199,34 +208,31 @@ private fun ComicPendingIssueActionButton(
                         color = ComicInk.copy(alpha = alpha),
                         shape = shape
                     )
-        )
-
-        Box(
-            modifier =
-                Modifier
-                    .size(30.dp)
-                    .clip(shape)
-                    .background(
-                        color = ComicPaper.copy(alpha = alpha)
-                    )
-                    .border(
-                        width = 2.dp,
-                        color = ComicInk.copy(alpha = alpha),
-                        shape = shape
-                    )
-                    .clickable(
-                        enabled = enabled,
-                        onClick = onClick
-                    ),
-            contentAlignment =
-                Alignment.Center
-        ) {
-            Icon(
-                imageVector = icon,
-                contentDescription = contentDescription,
-                tint = ComicInk.copy(alpha = alpha),
-                modifier = Modifier.size(20.dp)
             )
+
+            Box(
+                modifier =
+                    Modifier
+                        .size(30.dp)
+                        .clip(shape)
+                        .background(
+                            color = ComicPaper.copy(alpha = alpha)
+                        )
+                        .border(
+                            width = 2.dp,
+                            color = ComicInk.copy(alpha = alpha),
+                            shape = shape
+                        ),
+                contentAlignment =
+                    Alignment.Center
+            ) {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = contentDescription,
+                    tint = ComicInk.copy(alpha = alpha),
+                    modifier = Modifier.size(20.dp)
+                )
+            }
         }
     }
 }

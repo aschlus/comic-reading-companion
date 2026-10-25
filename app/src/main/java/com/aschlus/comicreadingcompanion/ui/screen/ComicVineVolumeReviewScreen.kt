@@ -38,6 +38,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -802,54 +803,64 @@ private fun ReviewIssueTypeSelector(
             fontWeight = FontWeight.Bold
         )
 
-        Row(
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(36.dp)
-                .clip(RoundedCornerShape(6.dp))
-                .background(Color.White)
-                .border(
-                    width = ComicCardBorderWidth,
-                    color = ComicInk,
-                    shape = RoundedCornerShape(6.dp)
-                )
-                .clickable(enabled = enabled) {
+                .height(48.dp)
+                .clickable(
+                    enabled = enabled,
+                    role = Role.Button
+                ) {
                     expanded = !expanded
                 }
-                .testTag("issue-type-selector-$issueId")
-                .padding(horizontal = ComicSpacingSm),
-            verticalAlignment = Alignment.CenterVertically
+                .testTag("issue-type-selector-$issueId"),
+            contentAlignment = Alignment.Center
         ) {
-            Text(
-                text = issueType.displayLabel(),
-                modifier = Modifier.weight(1f),
-                color = ComicInk,
-                fontSize = 12.sp,
-                fontWeight = FontWeight.SemiBold,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-
-            Icon(
-                imageVector = Icons.Default.ArrowDropDown,
-                contentDescription = null,
-                tint = ComicInk,
-                modifier = Modifier.size(22.dp)
-            )
-        }
-
-        if (expanded) {
-            ComicFormDropdownOptions(
-                modifier = Modifier.padding(top = 2.dp)
-            ) {
-                IssueType.values().forEach { option ->
-                    ComicFormDropdownOption(
-                        text = option.displayLabel(),
-                        onClick = {
-                            onIssueTypeSelected(option)
-                            expanded = false
-                        }
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(36.dp)
+                    .clip(RoundedCornerShape(6.dp))
+                    .background(Color.White)
+                    .border(
+                        width = ComicCardBorderWidth,
+                        color = ComicInk,
+                        shape = RoundedCornerShape(6.dp)
                     )
+                    .padding(horizontal = ComicSpacingSm),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = issueType.displayLabel(),
+                    modifier = Modifier.weight(1f),
+                    color = ComicInk,
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+
+                Icon(
+                    imageVector = Icons.Default.ArrowDropDown,
+                    contentDescription = null,
+                    tint = ComicInk,
+                    modifier = Modifier.size(22.dp)
+                )
+            }
+
+            if (expanded) {
+                ComicFormDropdownOptions(
+                    modifier = Modifier.padding(top = 2.dp)
+                ) {
+                    IssueType.values().forEach { option ->
+                        ComicFormDropdownOption(
+                            text = option.displayLabel(),
+                            onClick = {
+                                onIssueTypeSelected(option)
+                                expanded = false
+                            }
+                        )
+                    }
                 }
             }
         }

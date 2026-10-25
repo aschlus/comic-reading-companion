@@ -21,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
@@ -163,9 +164,19 @@ private fun ComicSectionPickerRow(
 ) {
     val shape = RoundedCornerShape(9.dp)
 
-    Row(
-        modifier =
-            modifier
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(48.dp)
+            .clickable(
+                enabled = !selected,
+                role = Role.Button,
+                onClick = onClick
+            ),
+        contentAlignment = Alignment.Center
+    ) {
+        Row(
+            modifier = Modifier
                 .fillMaxWidth()
                 .height(46.dp)
                 .background(
@@ -182,42 +193,39 @@ private fun ComicSectionPickerRow(
                     color = ComicInk,
                     shape = shape
                 )
-                .clickable(
-                    enabled = !selected,
-                    onClick = onClick
-                )
                 .padding(
                     horizontal = 14.dp
                 ),
-        verticalAlignment =
-            Alignment.CenterVertically
-    ) {
-        Text(
-            text = text,
-            modifier = Modifier.weight(1f),
-            style = MaterialTheme.typography.bodyMedium
-                .copy(
-                    fontWeight =
-                        if (selected) {
-                            FontWeight.Bold
-                        } else {
-                            FontWeight.Medium
-                        }
-                ),
-            color = ComicInk,
-            maxLines = 1
-        )
-
-        if (selected) {
+            verticalAlignment =
+                Alignment.CenterVertically
+        ) {
             Text(
-                text = "CURRENT",
-                style =
-                    MaterialTheme.typography.labelSmall
-                        .copy(
-                            fontWeight = FontWeight.ExtraBold
-                        ),
-                color = ComicInk
+                text = text,
+                modifier = Modifier.weight(1f),
+                style = MaterialTheme.typography.bodyMedium
+                    .copy(
+                        fontWeight =
+                            if (selected) {
+                                FontWeight.Bold
+                            } else {
+                                FontWeight.Medium
+                            }
+                    ),
+                color = ComicInk,
+                maxLines = 1
             )
+
+            if (selected) {
+                Text(
+                    text = "CURRENT",
+                    style =
+                        MaterialTheme.typography.labelSmall
+                            .copy(
+                                fontWeight = FontWeight.ExtraBold
+                            ),
+                    color = ComicInk
+                )
+            }
         }
     }
 }
