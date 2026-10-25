@@ -16,10 +16,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlue
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
@@ -71,13 +75,21 @@ private fun ComicAddToListFilterButton(
     val shape = RoundedCornerShape(9.dp)
 
     Box(
-        modifier =
-            modifier.height(44.dp)
+        modifier = modifier
+            .height(48.dp)
+            .clickable(
+                role = Role.Button,
+                onClick = onClick
+            )
     ) {
-        if (selected) {
-            Box(
-                modifier =
-                    Modifier
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(44.dp)
+        ) {
+            if (selected) {
+                Box(
+                    modifier = Modifier
                         .matchParentSize()
                         .offset(
                             x = 2.dp,
@@ -87,12 +99,11 @@ private fun ComicAddToListFilterButton(
                             color = ComicInk,
                             shape = shape
                         )
-            )
-        }
+                )
+            }
 
-        Box(
-            modifier =
-                Modifier
+            Box(
+                modifier = Modifier
                     .fillMaxWidth()
                     .height(43.dp)
                     .clip(shape)
@@ -107,26 +118,23 @@ private fun ComicAddToListFilterButton(
                         width = ComicCardBorderWidth,
                         color = ComicInk,
                         shape = shape
-                    )
-                    .clickable(
-                        onClick = onClick
                     ),
-            contentAlignment =
-                Alignment.Center
-        ) {
-            Text(
-                text = text,
-                style = MaterialTheme.typography.labelLarge
-                    .copy(
-                        fontWeight =
-                            if (selected) {
-                                FontWeight.ExtraBold
-                            } else {
-                                FontWeight.SemiBold
-                            }
-                    ),
-                color = ComicInk
-            )
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = text,
+                    style = MaterialTheme.typography.labelLarge
+                        .copy(
+                            fontWeight =
+                                if (selected) {
+                                    FontWeight.ExtraBold
+                                } else {
+                                    FontWeight.SemiBold
+                                }
+                        ),
+                    color = ComicInk
+                )
+            }
         }
     }
 }

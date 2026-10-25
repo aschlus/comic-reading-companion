@@ -14,13 +14,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
-import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.role
-import androidx.compose.ui.semantics.semantics
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
+import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 
 @Composable
 fun ComicWideActionButton(
@@ -42,12 +40,12 @@ fun ComicWideActionButton(
     Box(
         modifier =
             modifier
-                .height(46.dp)
-                .semantics(
-                    mergeDescendants = true
-                ) {
-                    role = Role.Button
-                }
+                .height(48.dp)
+                .clickable(
+                    enabled = enabled,
+                    role = Role.Button,
+                    onClick = onClick
+                )
     ) {
         Box(
             modifier =
@@ -80,10 +78,6 @@ fun ComicWideActionButton(
                         width = ComicCardBorderWidth,
                         color = ComicInk.copy(alpha = alpha),
                         shape = shape
-                    )
-                    .clickable(
-                        enabled = enabled,
-                        onClick = onClick
                     ),
             contentAlignment =
                 Alignment.Center
