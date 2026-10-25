@@ -32,6 +32,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlue
@@ -223,22 +224,28 @@ private fun ComicReadingListSearchField(
 
             if (query.isNotEmpty()) {
                 Box(
-                    modifier =
-                        Modifier
-                            .size(36.dp)
-                            .clip(RoundedCornerShape(8.dp))
-                            .clickable {
-                                onQueryChange("")
-                            },
-                    contentAlignment =
-                        Alignment.Center
+                    modifier = Modifier
+                        .size(48.dp)
+                        .clickable(
+                            role = Role.Button
+                        ) {
+                            onQueryChange("")
+                        },
+                    contentAlignment = Alignment.Center
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.Close,
-                        contentDescription = "Clear search",
-                        tint = ComicInk,
-                        modifier = Modifier.size(20.dp)
-                    )
+                    Box(
+                        modifier = Modifier
+                            .size(36.dp)
+                            .clip(RoundedCornerShape(8.dp)),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Close,
+                            contentDescription = "Clear search",
+                            tint = ComicInk,
+                            modifier = Modifier.size(20.dp)
+                        )
+                    }
                 }
             }
         }

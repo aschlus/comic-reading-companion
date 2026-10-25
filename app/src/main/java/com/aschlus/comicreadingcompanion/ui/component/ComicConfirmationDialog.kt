@@ -18,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -143,89 +144,66 @@ internal fun ComicDialogButton(
 ) {
     val shape = RoundedCornerShape(9.dp)
 
+    val alpha =
+        if (enabled) {
+            1f
+        } else {
+            0.35f
+        }
+
     Box(
-        modifier =
-            modifier
-                .height(42.dp)
+        modifier = modifier
+            .height(48.dp)
+            .clickable(
+                enabled = enabled,
+                role = Role.Button
+            ) {
+                if (enabled) {
+                    onClick()
+                }
+            },
+        contentAlignment = Alignment.Center
     ) {
         Box(
-            modifier =
-                Modifier
+            modifier = Modifier.height(42.dp)
+        ) {
+            Box(
+                modifier = Modifier
                     .matchParentSize()
                     .offset(
                         x = 2.dp,
                         y = 3.dp
                     )
                     .background(
-                        color =
-                            ComicInk.copy(
-                                alpha =
-                                    if (enabled) {
-                                        1f
-                                    } else {
-                                        0.35f
-                                    }
-                            ),
+                        color = ComicInk.copy(alpha = alpha),
                         shape = shape
                     )
-        )
+            )
 
-        Box(
-            modifier =
-                Modifier
+            Box(
+                modifier = Modifier
                     .height(41.dp)
                     .background(
-                        color = backgroundColor.copy(
-                            alpha =
-                                if (enabled) {
-                                    1f
-                                } else {
-                                    0.35f
-                                }
-                        ),
+                        color = backgroundColor.copy(alpha = alpha),
                         shape = shape
                     )
                     .border(
                         width = ComicCardBorderWidth,
-                        color = ComicInk.copy(
-                            alpha =
-                                if (enabled) {
-                                    1f
-                                } else {
-                                    0.35f
-                                }
-                        ),
+                        color = ComicInk.copy(alpha = alpha),
                         shape = shape
                     )
-                    .clickable(
-                        enabled = enabled,
-                        onClick = {
-                            if (enabled) {
-                                onClick()
-                            }
-                        }
-                    )
-                    .padding(
-                        horizontal = 18.dp
-                    ),
-            contentAlignment =
-                Alignment.Center
-        ) {
-            Text(
-                text = text,
-                style = MaterialTheme.typography.labelLarge
-                    .copy(
-                        fontWeight = FontWeight.ExtraBold
-                    ),
-                color = textColor.copy(
-                    alpha =
-                        if (enabled) {
-                            1f
-                        } else {
-                            0.35f
-                        }
+                    .padding(horizontal = 18.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = text,
+                    style = MaterialTheme.typography.labelLarge
+                        .copy(
+                            fontWeight = FontWeight.ExtraBold
+                        ),
+                    color = textColor.copy(alpha = alpha)
                 )
-            )
+            }
         }
     }
 }

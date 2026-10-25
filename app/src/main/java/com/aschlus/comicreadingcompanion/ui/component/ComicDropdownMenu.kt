@@ -76,7 +76,7 @@ fun ComicDropdownMenuItem(
         onClick = onClick,
         modifier =
             modifier.heightIn(
-                min = 44.dp
+                min = 48.dp
             ),
         enabled = enabled,
         contentPadding =

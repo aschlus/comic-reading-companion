@@ -28,6 +28,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -202,7 +203,15 @@ private fun <T> ComicBrowseFilterSelector(
     val shape = RoundedCornerShape(9.dp)
 
     Box(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(48.dp)
+            .clickable(
+                role = Role.Button
+            ) {
+                expanded = true
+            },
+        contentAlignment = Alignment.Center
     ) {
         Row(
             modifier = Modifier
@@ -215,9 +224,6 @@ private fun <T> ComicBrowseFilterSelector(
                     color = ComicInk,
                     shape = shape
                 )
-                .clickable {
-                    expanded = true
-                }
                 .padding(
                     start = 14.dp,
                     end = ComicSpacingSm
