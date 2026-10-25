@@ -4,6 +4,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Shapes
 import androidx.compose.ui.unit.dp
 
+val ComicCardShape = RoundedCornerShape(10.dp)
+
 val ComicShapes =
     Shapes(
         extraSmall =

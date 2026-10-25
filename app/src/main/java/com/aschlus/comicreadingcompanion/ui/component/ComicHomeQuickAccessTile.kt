@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,6 +29,9 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aschlus.comicreadingcompanion.ui.theme.ComicAccentTextTransform
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShape
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.LilitaOneFontFamily
 
@@ -45,7 +47,7 @@ fun ComicHomeQuickAccessTile(
     textLineHeight: TextUnit = 16.sp,
     drawCustomPlus: Boolean = false
 ) {
-    val shape = RoundedCornerShape(10.dp)
+    val shape = ComicCardShape
 
     Box(
         modifier =
@@ -57,8 +59,8 @@ fun ComicHomeQuickAccessTile(
                 Modifier
                     .matchParentSize()
                     .offset(
-                        x = 3.dp,
-                        y = 4.dp
+                        x = ComicCardShadowOffsetX,
+                        y = ComicCardShadowOffsetY
                     )
                     .background(
                         color = ComicInk,
