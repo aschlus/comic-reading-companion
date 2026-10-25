@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.ui.semantics.Role
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
@@ -210,6 +211,7 @@ private fun ComicAddIssueReadingListRow(
             modifier =
                 Modifier
                     .fillMaxWidth()
+                    .heightIn(min = 48.dp)
                     .clip(shape)
                     .background(
                         ComicPaper.copy(
@@ -236,6 +238,7 @@ private fun ComicAddIssueReadingListRow(
                     )
                     .clickable(
                         enabled = enabled,
+                        role = Role.Button,
                         onClick = onClick
                     )
                     .padding(

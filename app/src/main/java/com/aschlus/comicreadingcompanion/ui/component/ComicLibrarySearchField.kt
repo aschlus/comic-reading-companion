@@ -63,7 +63,7 @@ fun ComicLibrarySearchField(
                     shape = shape
                 )
                 .semantics {
-                    contentDescription = "Serach reading lists"
+                    contentDescription = "Search reading lists"
                 },
         decorationBox = { innerTextField ->
             Row(
