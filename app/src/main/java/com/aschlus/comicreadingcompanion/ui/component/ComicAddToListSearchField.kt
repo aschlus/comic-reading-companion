@@ -25,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
@@ -135,22 +136,28 @@ fun ComicAddToListSearchField(
 
             if (query.isNotEmpty()) {
                 Box(
-                    modifier =
-                        Modifier
-                            .size(36.dp)
-                            .clip(RoundedCornerShape(8.dp))
-                            .clickable {
-                                onQueryChange("")
-                            },
-                    contentAlignment =
-                        Alignment.Center
+                    modifier = Modifier
+                        .size(48.dp)
+                        .clickable(
+                            role = Role.Button
+                        ) {
+                            onQueryChange("")
+                        },
+                    contentAlignment = Alignment.Center
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.Close,
-                        contentDescription = "Clear search",
-                        tint = ComicInk,
-                        modifier = Modifier.size(20.dp)
-                    )
+                    Box(
+                        modifier = Modifier
+                            .size(36.dp)
+                            .clip(RoundedCornerShape(8.dp)),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Close,
+                            contentDescription = "Clear search",
+                            tint = ComicInk,
+                            modifier = Modifier.size(20.dp)
+                        )
+                    }
                 }
             }
         }

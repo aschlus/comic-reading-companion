@@ -52,7 +52,7 @@ fun ComicLibrarySearchField(
         cursorBrush = SolidColor(ComicInk),
         modifier =
             modifier
-                .height(42.dp)
+                .height(48.dp)
                 .background(
                     color = ComicPaper,
                     shape = shape
@@ -111,7 +111,7 @@ fun ComicLibrarySearchField(
                 if (value.isNotEmpty()) {
                     IconButton(
                         onClick = onClearClick,
-                        modifier = Modifier.size(42.dp)
+                        modifier = Modifier.size(48.dp)
                     ) {
                         Icon(
                             imageVector = Icons.Default.Close,
