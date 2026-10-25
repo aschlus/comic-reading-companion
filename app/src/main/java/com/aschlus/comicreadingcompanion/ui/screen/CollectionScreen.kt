@@ -48,6 +48,10 @@ import com.aschlus.comicreadingcompanion.ui.component.ComicHomeSectionHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicPrimaryHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicPrimaryHeaderTitle
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlueLight
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShape
 import com.aschlus.comicreadingcompanion.ui.theme.ComicGreen
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicOrange
@@ -131,7 +135,7 @@ fun CollectionScreen(
                                     shape = RoundedCornerShape(10.dp)
                                 )
                                 .border(
-                                    width = 2.dp,
+                                    width = ComicCardBorderWidth,
                                     color = ComicInk,
                                     shape = RoundedCornerShape(10.dp)
                                 )
@@ -311,7 +315,7 @@ private fun CollectionStatCard(
     cardColor: Color,
     modifier: Modifier = Modifier
 ) {
-    val shape = RoundedCornerShape(10.dp)
+    val shape = ComicCardShape
 
     Box(
         modifier = modifier
@@ -319,7 +323,10 @@ private fun CollectionStatCard(
         Box(
             modifier = Modifier
                 .matchParentSize()
-                .offset(x = 3.dp, y = 4.dp)
+                .offset(
+                    x = ComicCardShadowOffsetX,
+                    y = ComicCardShadowOffsetY
+                )
                 .background(ComicInk, shape)
         )
 
@@ -327,7 +334,7 @@ private fun CollectionStatCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(cardColor, shape)
-                .border(2.dp, ComicInk, shape)
+                .border(ComicCardBorderWidth, ComicInk, shape)
                 .padding(
                     horizontal = 12.dp,
                     vertical = 11.dp
@@ -357,7 +364,7 @@ private fun CollectionReadingStatusCard(
     stats: CollectionStats,
     modifier: Modifier = Modifier
 ) {
-    val shape = RoundedCornerShape(10.dp)
+    val shape = ComicCardShape
 
     Box(
         modifier = modifier
@@ -365,7 +372,10 @@ private fun CollectionReadingStatusCard(
          Box(
              modifier = Modifier
                  .matchParentSize()
-                 .offset(x = 3.dp, y = 4.dp)
+                 .offset(
+                     x = ComicCardShadowOffsetX,
+                     y = ComicCardShadowOffsetY
+                 )
                  .background(ComicInk, shape)
          )
 
@@ -373,7 +383,7 @@ private fun CollectionReadingStatusCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(ComicPaper, shape)
-                .border(2.dp, ComicInk, shape)
+                .border(ComicCardBorderWidth, ComicInk, shape)
                 .padding(
                     horizontal = 10.dp,
                     vertical = 9.dp
@@ -458,7 +468,7 @@ private fun OwnedIssueCard(
     issue: OwnedIssueResult,
     onClick: () -> Unit
 ) {
-    val shape = RoundedCornerShape(10.dp)
+    val shape = ComicCardShape
 
     val readingStatus =
         issue.readingStatus ?: ReadingStatus.UNREAD
@@ -475,7 +485,10 @@ private fun OwnedIssueCard(
         Box(
             modifier = Modifier
                 .matchParentSize()
-                .offset(x = 3.dp, y = 4.dp)
+                .offset(
+                    x = ComicCardShadowOffsetX,
+                    y = ComicCardShadowOffsetY
+                )
                 .background(ComicInk, shape)
         )
 
@@ -483,7 +496,7 @@ private fun OwnedIssueCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(ComicPaper, shape)
-                .border(2.dp, ComicInk, shape)
+                .border(ComicCardBorderWidth, ComicInk, shape)
                 .clickable(onClick = onClick)
                 .padding(10.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp),

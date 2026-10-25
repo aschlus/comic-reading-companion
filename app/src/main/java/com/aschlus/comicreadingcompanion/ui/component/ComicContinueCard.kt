@@ -27,6 +27,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListContinueItem
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShape
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 
 @Composable
@@ -52,8 +54,7 @@ fun ComicContinueCard(
             (readCount * 100) / totalCount
         }
 
-    val shape =
-        RoundedCornerShape(10.dp)
+    val shape = ComicCardShape
 
     val outlineColor =
         MaterialTheme.colorScheme.outline
@@ -84,7 +85,7 @@ fun ComicContinueCard(
             shape = shape,
             border =
                 BorderStroke(
-                    width = 2.dp,
+                    width = ComicCardBorderWidth,
                     color = outlineColor
                 ),
             colors =

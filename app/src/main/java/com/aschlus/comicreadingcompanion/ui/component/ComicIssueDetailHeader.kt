@@ -24,6 +24,10 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShape
 import com.aschlus.comicreadingcompanion.ui.theme.ComicHeaderTextTransform
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
@@ -66,15 +70,15 @@ fun ComicIssueDetailHeader(
                     )
                     .size(58.dp)
         ) {
-            val shape = RoundedCornerShape(10.dp)
+            val shape = ComicCardShape
 
             Box(
                 modifier =
                     Modifier
                         .size(54.dp)
                         .offset(
-                            x = 3.dp,
-                            y = 4.dp
+                            x = ComicCardShadowOffsetX,
+                            y = ComicCardShadowOffsetY
                         )
                         .background(
                             color = ComicInk,
@@ -91,7 +95,7 @@ fun ComicIssueDetailHeader(
                             ComicPaper
                         )
                         .border(
-                            width = 2.dp,
+                            width = ComicCardBorderWidth,
                             color = ComicInk,
                             shape = shape
                         )

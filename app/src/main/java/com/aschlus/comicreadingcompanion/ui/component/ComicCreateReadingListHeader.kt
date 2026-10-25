@@ -21,6 +21,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShape
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
@@ -93,7 +94,7 @@ internal fun ComicPrimaryHeaderBackButton(
                         color = ComicYellow
                     )
                     .border(
-                        width = 2.dp,
+                        width = ComicCardBorderWidth,
                         color = ComicInk,
                         shape = shape
                     )

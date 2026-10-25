@@ -54,6 +54,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import com.aschlus.comicreadingcompanion.ui.component.ComicBrowseFilterSheetContent
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -354,7 +355,7 @@ private fun ComicBrowseFiltersButton(
                 .clip(shape)
                 .background(ComicPaper)
                 .border(
-                    width = 2.dp,
+                    width = ComicCardBorderWidth,
                     color = ComicInk,
                     shape = shape
                 )

@@ -29,6 +29,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicAccentTextTransform
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.LilitaOneFontFamily
 
 @Composable
@@ -62,8 +65,8 @@ fun ComicLibraryActionButton(
                     .fillMaxWidth()
                     .height(52.dp)
                     .offset(
-                        x = 3.dp,
-                        y = 4.dp
+                        x = ComicCardShadowOffsetX,
+                        y = ComicCardShadowOffsetY
                     )
                     .background(
                         color = ComicInk,
@@ -79,7 +82,7 @@ fun ComicLibraryActionButton(
                     .clip(shape)
                     .background(backgroundColor)
                     .border(
-                        width = 2.dp,
+                        width = ComicCardBorderWidth,
                         color = ComicInk,
                         shape = shape
                     )

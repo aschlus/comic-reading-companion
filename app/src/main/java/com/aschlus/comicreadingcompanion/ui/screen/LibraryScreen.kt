@@ -44,6 +44,7 @@ import com.aschlus.comicreadingcompanion.ui.component.ComicLibraryHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicLibraryReadingListCard
 import com.aschlus.comicreadingcompanion.ui.component.ComicLibrarySearchField
 import com.aschlus.comicreadingcompanion.ui.component.ComicLibrarySectionHeader
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.viewmodel.HomeReadingListSort
@@ -186,7 +187,7 @@ fun LibraryScreen(
                                             shape = RoundedCornerShape(12.dp)
                                         )
                                         .border(
-                                            width = 2.dp,
+                                            width = ComicCardBorderWidth,
                                             color = ComicInk,
                                             shape = RoundedCornerShape(12.dp)
                                         )

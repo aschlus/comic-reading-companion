@@ -26,6 +26,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aschlus.comicreadingcompanion.ui.theme.ComicAccentTextTransform
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
 import com.aschlus.comicreadingcompanion.ui.theme.LilitaOneFontFamily
@@ -69,8 +72,8 @@ fun ComicHomeSectionHeader(
                     Modifier
                         .matchParentSize()
                         .offset(
-                            x = 3.dp,
-                            y = 4.dp
+                            x = ComicCardShadowOffsetX,
+                            y = ComicCardShadowOffsetY
                         )
                         .background(
                             color = ComicInk,
@@ -87,7 +90,7 @@ fun ComicHomeSectionHeader(
                             shape = ComicSlantedShape
                         )
                         .border(
-                            width = 2.dp,
+                            width = ComicCardBorderWidth,
                             color = ComicInk,
                             shape = ComicSlantedShape
                         )

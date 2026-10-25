@@ -44,6 +44,10 @@ import com.aschlus.comicreadingcompanion.ui.component.ComicIssueReadingListRow
 import com.aschlus.comicreadingcompanion.ui.component.ComicIssueStatusSelector
 import com.aschlus.comicreadingcompanion.ui.component.ComicWideActionButton
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlue
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShape
 import com.aschlus.comicreadingcompanion.ui.theme.ComicGreen
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicMutedInk
@@ -423,7 +427,7 @@ private fun ReadingProgressDates(
     completedAt: Long?,
     modifier: Modifier = Modifier
 ) {
-    val shape = RoundedCornerShape(10.dp)
+    val shape = ComicCardShape
 
     Box(
         modifier =
@@ -434,8 +438,8 @@ private fun ReadingProgressDates(
                 Modifier
                     .matchParentSize()
                     .offset(
-                        x = 3.dp,
-                        y = 4.dp
+                        x = ComicCardShadowOffsetX,
+                        y = ComicCardShadowOffsetY
                     )
                     .background(
                         color = ComicInk,
@@ -452,7 +456,7 @@ private fun ReadingProgressDates(
                         shape = shape
                     )
                     .border(
-                        width = 2.dp,
+                        width = ComicCardBorderWidth,
                         color = ComicInk,
                         shape = shape
                     )

@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 
 @Composable
@@ -55,7 +56,7 @@ fun ComicActionPanel(
                         shape = ComicSlantedShape
                     )
                     .border(
-                        width = 2.dp,
+                        width = ComicCardBorderWidth,
                         color = ComicInk,
                         shape = ComicSlantedShape
                     )

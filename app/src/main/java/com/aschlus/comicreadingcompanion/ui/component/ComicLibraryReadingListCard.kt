@@ -31,6 +31,9 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListStyle
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import kotlin.math.roundToInt
@@ -63,8 +66,8 @@ fun ComicLibraryReadingListCard(
                 Modifier
                     .matchParentSize()
                     .offset(
-                        x = 3.dp,
-                        y = 4.dp
+                        x = ComicCardShadowOffsetX,
+                        y = ComicCardShadowOffsetY
                     )
                     .background(
                         color = ComicInk,
@@ -82,7 +85,7 @@ fun ComicLibraryReadingListCard(
                     .clip(shape)
                     .background(ComicPaper)
                     .border(
-                        width = 2.dp,
+                        width = ComicCardBorderWidth,
                         color = ComicInk,
                         shape = shape
                     )

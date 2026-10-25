@@ -33,6 +33,8 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
+import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShape
 
 @Composable
 fun ComicBrowsePublisherRow(
@@ -40,7 +42,7 @@ fun ComicBrowsePublisherRow(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val shape = RoundedCornerShape(10.dp)
+    val shape = ComicCardShape
 
     val initials =
         publisher.name
@@ -56,12 +58,11 @@ fun ComicBrowsePublisherRow(
             }
 
     val coverUrls =
-        listOf(
+        listOfNotNull(
             publisher.coverUrl1,
             publisher.coverUrl2,
             publisher.coverUrl3
         )
-            .filterNotNull()
             .filter { it.isNotBlank() }
 
     Box(
@@ -89,7 +90,7 @@ fun ComicBrowsePublisherRow(
                     .clip(shape)
                     .background(ComicPaper)
                     .border(
-                        width = 2.dp,
+                        width = ComicCardBorderWidth,
                         color = ComicInk,
                         shape = shape
                     )
