@@ -46,12 +46,11 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
-import com.aschlus.comicreadingcompanion.ui.theme.LilitaOneFontFamily
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacing2Xl
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingXl
-import java.sql.RowId
+import com.aschlus.comicreadingcompanion.ui.theme.LilitaOneFontFamily
 
 data class ComicReadingListFilterSeriesOption(
     val key: String,

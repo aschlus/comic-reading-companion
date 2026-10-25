@@ -847,20 +847,20 @@ private fun ReviewIssueTypeSelector(
                     modifier = Modifier.size(22.dp)
                 )
             }
+        }
 
-            if (expanded) {
-                ComicFormDropdownOptions(
-                    modifier = Modifier.padding(top = 2.dp)
-                ) {
-                    IssueType.values().forEach { option ->
-                        ComicFormDropdownOption(
-                            text = option.displayLabel(),
-                            onClick = {
-                                onIssueTypeSelected(option)
-                                expanded = false
-                            }
-                        )
-                    }
+        if (expanded) {
+            ComicFormDropdownOptions(
+                modifier = Modifier.padding(top = 2.dp)
+            ) {
+                IssueType.values().forEach { option ->
+                    ComicFormDropdownOption(
+                        text = option.displayLabel(),
+                        onClick = {
+                            onIssueTypeSelected(option)
+                            expanded = false
+                        }
+                    )
                 }
             }
         }
