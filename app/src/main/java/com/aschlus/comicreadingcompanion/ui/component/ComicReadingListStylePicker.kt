@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListStyle
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlue
@@ -85,8 +86,12 @@ private fun ComicReadingListStyleOption(
         }
 
     Box(
-        modifier =
-            modifier.size(50.dp)
+        modifier = modifier
+            .size(50.dp)
+            .clickable(
+                role = Role.Button,
+                onClick = onClick
+            )
     ) {
         Box(
             modifier =
@@ -119,9 +124,6 @@ private fun ComicReadingListStyleOption(
                             },
                         color = ComicInk,
                         shape = shape
-                    )
-                    .clickable(
-                        onClick = onClick
                     ),
             contentAlignment =
                 Alignment.Center
