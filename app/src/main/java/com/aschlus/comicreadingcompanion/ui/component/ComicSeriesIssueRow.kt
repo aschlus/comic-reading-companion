@@ -133,6 +133,7 @@ fun ComicSeriesIssueRow(
                     }
 
                 issue.publicationDate
+                    ?.takeIf { it.isNotBlank() }
                     ?.let { publicationDate ->
                         Text(
                             text = formatPublicationDate(publicationDate),

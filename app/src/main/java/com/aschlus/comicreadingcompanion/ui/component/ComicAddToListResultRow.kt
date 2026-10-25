@@ -71,9 +71,15 @@ fun ComicAddToListIssueResult(
 ) {
     val metadata =
         buildList {
-            result.publicationDate?.let {
-                add(formatPublicationDate(it))
+            result.seriesVolume?.let {
+                add("Volume $it")
             }
+
+            result.publicationDate
+                ?.takeIf { it.isNotBlank() }
+                ?.let {
+                    add(formatPublicationDate(it))
+                }
 
             add(result.publisherName)
         }.joinToString(" • ")

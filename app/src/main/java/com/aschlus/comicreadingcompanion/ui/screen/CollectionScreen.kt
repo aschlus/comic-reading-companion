@@ -57,6 +57,7 @@ import com.aschlus.comicreadingcompanion.ui.viewmodel.CollectionSort
 import com.aschlus.comicreadingcompanion.ui.viewmodel.CollectionStats
 import com.aschlus.comicreadingcompanion.ui.viewmodel.CollectionViewModel
 import com.aschlus.comicreadingcompanion.util.formatPublicationDate
+import kotlin.collections.buildList
 
 
 @Composable
@@ -522,16 +523,19 @@ private fun OwnedIssueCard(
                 )
 
                 Text(
-                    text = buildString {
-                        append(issue.publisherName)
+                    text = buildList {
+                        issue.seriesVolume?.let {
+                            add("Volume $it")
+                        }
 
                         issue.publicationDate
                             ?.takeIf { it.isNotBlank() }
                             ?.let {
-                                append(" · ")
-                                append(formatPublicationDate(it))
+                                add(formatPublicationDate(it))
                             }
-                    },
+
+                        add(issue.publisherName)
+                    }.joinToString(" • "),
                     style = MaterialTheme.typography.bodySmall,
                     color = ComicInk.copy(alpha = 0.7f)
                 )

@@ -87,7 +87,6 @@ private fun CoverPlaceholder(
     shape: Shape,
     borderColor: Color
 ) {
-    val shape = RoundedCornerShape(12.dp)
 
     Box(
         modifier = modifier

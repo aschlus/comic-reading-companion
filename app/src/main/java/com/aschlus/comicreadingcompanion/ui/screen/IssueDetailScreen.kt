@@ -203,6 +203,7 @@ fun IssueDetailScreen(
 
                         currentIssue
                             .publicationDate
+                            ?.takeIf { it.isNotBlank() }
                             ?.let { publicationDate ->
                                 IssueMetadataRow(
                                     label = "Publication Date",

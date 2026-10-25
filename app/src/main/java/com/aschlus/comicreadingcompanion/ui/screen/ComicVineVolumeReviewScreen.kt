@@ -727,21 +727,21 @@ private fun ReviewIssueRow(
                     overflow = TextOverflow.Ellipsis
                 )
 
-                (issue.coverDate ?: issue.storeDate)
-                    ?.takeIf { it.isNotBlank() }
-                    ?.let { date ->
-                        Text(
-                            text = "Publication date: ${formatPublicationDate(date)}",
-                            color = ComicInk.copy(alpha = 0.8f),
-                            style = androidx.compose.material3.MaterialTheme
-                                .typography.bodySmall.copy(
-                                    fontSize = 12.sp,
-                                    lineHeight = 15.sp
-                                ),
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                    }
+                (issue.coverDate?.takeIf { it.isNotBlank() }
+                    ?: issue.storeDate?.takeIf { it.isNotBlank() }
+                )?.let { date ->
+                    Text(
+                        text = "Publication date: ${formatPublicationDate(date)}",
+                        color = ComicInk.copy(alpha = 0.8f),
+                        style = androidx.compose.material3.MaterialTheme
+                            .typography.bodySmall.copy(
+                                fontSize = 12.sp,
+                                lineHeight = 15.sp
+                            ),
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
 
                 Text(
                     text = "Source ID: ${issue.id}",

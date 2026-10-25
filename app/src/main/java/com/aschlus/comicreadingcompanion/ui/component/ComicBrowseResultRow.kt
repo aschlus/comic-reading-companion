@@ -89,9 +89,11 @@ fun ComicBrowseIssueResult(
                 add("Volume $it")
             }
 
-            result.publicationDate?.let {
-                add(formatPublicationDate(it))
-            }
+            result.publicationDate
+                ?.takeIf { it.isNotBlank() }
+                ?.let {
+                    add(formatPublicationDate(it))
+                }
 
             add(result.publisherName)
         }.joinToString( " • ")

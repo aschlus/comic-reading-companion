@@ -118,6 +118,7 @@ fun ComicPendingReadingListIssueRow(
                     }
 
                 issue.publicationDate
+                    ?.takeIf { it.isNotBlank() }
                     ?.let { date ->
                         Text(
                             text = formatPublicationDate(date),
