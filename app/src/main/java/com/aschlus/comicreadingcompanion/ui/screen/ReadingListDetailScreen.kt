@@ -24,6 +24,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingXs
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.foundation.verticalScroll
@@ -1045,11 +1047,11 @@ fun ReadingListDetailScreen(
                                             if (index == 0) {
                                                 2.dp
                                             } else {
-                                                8.dp
+                                                ComicSpacingSm
                                             },
                                         bottom =
                                             if (isSectionCollapsed) {
-                                                4.dp
+                                                ComicSpacingXs
                                             } else {
                                                 2.dp
                                             }

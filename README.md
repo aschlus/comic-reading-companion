@@ -173,7 +173,7 @@ building, following, and tracking comic-book reading orders.
 - [x] Replace starter Material palette with the Comic Print color system
 - [x] Use app-controlled colors instead of dynamic system colors by default
 - [x] Establish comic-inspired display typography and readable body typography
-- [ ] Define reusable spacing, border, shadow, and corner-shape design tokens
+- [x] Define reusable spacing, border, shadow, and corner-shape design tokens
 - [x] Add reusable comic-style section headers and banners
 - [x] Add reusable comic-style action panels and cards
 - [x] Add reusable progress indicators that fit the Comic Print style
