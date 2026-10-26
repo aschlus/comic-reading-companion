@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
@@ -63,7 +64,8 @@ fun ComicFormDropdownField(
                         shape = shape
                     )
                     .clickable(
-                        enabled = enabled
+                        enabled = enabled,
+                        role = Role.Button
                     ) {
                         onExpandedChange(!expanded)
                     }

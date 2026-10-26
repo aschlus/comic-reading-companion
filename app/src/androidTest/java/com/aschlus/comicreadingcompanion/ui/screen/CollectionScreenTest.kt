@@ -2,9 +2,14 @@
 package com.aschlus.comicreadingcompanion.ui.screen
 
 import android.content.Context
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithText
+import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.lifecycle.viewModelScope
@@ -201,5 +206,33 @@ class CollectionScreenTest {
                 clickedIssueId
             )
         }
+    }
+
+    @Test
+    fun collectionScreen_sortControlExposesButtonRoleAndOpensMenu() {
+        val buttonRole = SemanticsMatcher.expectValue(
+            SemanticsProperties.Role,
+            Role.Button
+        )
+
+        composeRule.setContent {
+            ComicReadingCompanionTheme(
+                dynamicColor = false
+            ) {
+                CollectionScreen(
+                    viewModel = viewModel,
+                    onIssueClick = {}
+                )
+            }
+        }
+
+        composeRule
+            .onNodeWithContentDescription("Change sort order")
+            .assert(buttonRole)
+            .performClick()
+
+        composeRule
+            .onNodeWithText("Publication: Newest")
+            .assertIsDisplayed()
     }
 }

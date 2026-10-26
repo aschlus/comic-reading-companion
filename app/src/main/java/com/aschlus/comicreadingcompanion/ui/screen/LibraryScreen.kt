@@ -36,6 +36,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.aschlus.comicreadingcompanion.ui.component.ComicDropdownMenu
 import com.aschlus.comicreadingcompanion.ui.component.ComicDropdownMenuItem
@@ -193,10 +194,13 @@ fun LibraryScreen(
                                             color = ComicInk,
                                             shape = RoundedCornerShape(12.dp)
                                         )
-                                        .clickable {
-                                            focusManager.clearFocus()
-                                            sortMenuExpanded = true
-                                        }
+                                        .clickable(
+                                            role = Role.Button,
+                                            onClick = {
+                                                focusManager.clearFocus()
+                                                sortMenuExpanded = true
+                                            }
+                                        )
                                         .padding(
                                             start = ComicSpacingMd,
                                             end = 7.dp
@@ -224,7 +228,7 @@ fun LibraryScreen(
 
                                 Icon(
                                     imageVector = Icons.Default.ArrowDropDown,
-                                    contentDescription = null,
+                                    contentDescription = "Change reading list sort order",
                                     tint = MaterialTheme.colorScheme.onSurface,
                                     modifier = Modifier.size(20.dp)
                                 )

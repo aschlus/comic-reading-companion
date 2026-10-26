@@ -60,6 +60,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -1424,6 +1425,7 @@ private fun ReadingListSectionHeader(
                 .height(48.dp)
                 .clickable(
                     enabled = canCollapse,
+                    role = Role.Button,
                     onClick = onToggleCollapsed
                 ),
         verticalAlignment =
@@ -1612,6 +1614,7 @@ private fun ReadingListIssueRow(
             modifier = Modifier
                 .weight(1f)
                 .combinedClickable(
+                    role = Role.Button,
                     onClick = {
                         if (isSelectionMode) {
                             onSelectionToggle()

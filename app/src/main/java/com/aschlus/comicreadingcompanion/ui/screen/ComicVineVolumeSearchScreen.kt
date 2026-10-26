@@ -39,6 +39,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
@@ -163,9 +164,12 @@ fun ComicVineVolumeSearchScreen(
                                     color = ComicInk,
                                     shape = shape
                                 )
-                                .clickable {
-                                    matchingOptionsExpanded = !matchingOptionsExpanded
-                                }
+                                .clickable(
+                                    role = Role.Button,
+                                    onClick = {
+                                        matchingOptionsExpanded = !matchingOptionsExpanded
+                                    }
+                                )
                                 .padding(horizontal = 14.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {

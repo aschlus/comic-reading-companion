@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
@@ -99,6 +100,7 @@ private fun SettingsButton(
                         shape = shape
                     )
                     .clickable(
+                        role = Role.Button,
                         onClick = onClick
                     )
                     .semantics {

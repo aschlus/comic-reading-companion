@@ -57,7 +57,7 @@ fun ComicReadingListSearchHeader(
         modifier =
             modifier
                 .fillMaxWidth()
-                .background(ComicBlue)
+                .background(MaterialTheme.colorScheme.primaryContainer)
                 .drawBehind {
                     val strokeWidth = 2.dp.toPx()
 

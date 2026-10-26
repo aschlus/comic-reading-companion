@@ -1,6 +1,10 @@
 package com.aschlus.comicreadingcompanion.ui.screen
 
 import android.content.Context
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -861,5 +865,63 @@ class LibraryScreenTest {
                 )
             }
         }
+    }
+
+    @Test
+    fun libraryScreen_sortControlExposesButtonRoleAndOpensMenu() {
+        val buttonRole = SemanticsMatcher.expectValue(
+            SemanticsProperties.Role,
+            Role.Button
+        )
+
+        runBlocking {
+            val publisherId = comicDao.insertPublisher(
+                Publisher(name = "Marvel")
+            )
+
+            comicDao.insertReadingList(
+                ReadingList(
+                    title = "Sort Control Test List",
+                    description = null,
+                    publisherId = publisherId,
+                    universeId = null,
+                    createdAt = 1000L,
+                    updatedAt = 1000L
+                )
+            )
+        }
+
+        composeRule.setContent {
+            ComicReadingCompanionTheme(
+                dynamicColor = false
+            ) {
+                LibraryScreen(
+                    viewModel = viewModel,
+                    onCreateReadingListClick = {},
+                    onImportReadingListClick = {},
+                    onReadingListClick = { _, _ -> }
+                )
+            }
+        }
+
+        composeRule.waitUntil(
+            timeoutMillis = 5000L
+        ) {
+            composeRule
+                .onAllNodesWithText("Sort Control Test List")
+                .fetchSemanticsNodes()
+                .isNotEmpty()
+        }
+
+        composeRule
+            .onNodeWithContentDescription(
+                "Change reading list sort order"
+            )
+            .assert(buttonRole)
+            .performClick()
+
+        composeRule
+            .onNodeWithText("Title Z-A")
+            .assertIsDisplayed()
     }
 }

@@ -1,6 +1,10 @@
 package com.aschlus.comicreadingcompanion.ui.screen
 
 import android.content.Context
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithText
@@ -211,6 +215,11 @@ class SeriesDetailScreenTest {
 
             var clickedPublisherId: Long? = null
 
+            val buttonRole = SemanticsMatcher.expectValue(
+                SemanticsProperties.Role,
+                Role.Button
+            )
+
             composeRule.setContent {
                 ComicReadingCompanionTheme(
                     dynamicColor = false
@@ -232,7 +241,9 @@ class SeriesDetailScreenTest {
                     .fetchSemanticsNodes()
                     .isNotEmpty()
             }
-            composeRule.onNodeWithText("Marvel").performClick()
+            composeRule.onNodeWithText("Marvel")
+                .assert(buttonRole)
+                .performClick()
             composeRule.runOnIdle {
                 assertEquals(publisherId, clickedPublisherId)
             }

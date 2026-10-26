@@ -1,6 +1,10 @@
 package com.aschlus.comicreadingcompanion.ui.screen
 
 import android.content.Context
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -225,6 +229,11 @@ class ComicVineVolumeSearchScreenTest {
     fun searchScreen_matchingOptionsAreCollapsedByDefaultAndEditable() {
         launchScreen()
 
+        val buttonRole = SemanticsMatcher.expectValue(
+            SemanticsProperties.Role,
+            Role.Button
+        )
+
         composeRule
             .onNodeWithContentDescription("Publisher filter")
             .assertDoesNotExist()
@@ -239,6 +248,7 @@ class ComicVineVolumeSearchScreenTest {
 
         composeRule
             .onNodeWithText("ADDITIONAL MATCHING OPTIONS")
+            .assert(buttonRole)
             .performClick()
 
         composeRule
@@ -269,6 +279,7 @@ class ComicVineVolumeSearchScreenTest {
 
         composeRule
             .onNodeWithText("HIDE MATCHING OPTIONS")
+            .assert(buttonRole)
             .performClick()
 
         composeRule

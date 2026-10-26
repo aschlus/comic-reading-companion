@@ -35,6 +35,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontStyle
@@ -67,7 +68,7 @@ fun ComicReadingListDetailHeader(
         modifier =
             modifier
                 .fillMaxWidth()
-                .background(ComicBlue)
+                .background(MaterialTheme.colorScheme.primaryContainer)
                 .drawBehind {
                     val strokeWidth = 2.dp.toPx()
 
@@ -199,6 +200,7 @@ internal fun ComicReadingListDetailHeaderButton(
                         shape = shape
                     )
                     .clickable(
+                        role = Role.Button,
                         onClick = onClick
                     )
                     .semantics {

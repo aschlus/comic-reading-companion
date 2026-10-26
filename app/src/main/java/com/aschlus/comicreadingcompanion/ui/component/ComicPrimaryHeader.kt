@@ -24,7 +24,6 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.aschlus.comicreadingcompanion.ui.theme.ComicBlue
 import com.aschlus.comicreadingcompanion.ui.theme.ComicHeaderTextTransform
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
@@ -41,7 +40,7 @@ fun ComicPrimaryHeader(
         modifier =
             modifier
                 .fillMaxWidth()
-                .background(ComicBlue)
+                .background(MaterialTheme.colorScheme.primaryContainer)
                 .drawBehind {
                     val strokeWidth = 2.dp.toPx()
 

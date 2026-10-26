@@ -2,6 +2,10 @@ package com.aschlus.comicreadingcompanion.ui.screen
 
 import android.content.Context
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
@@ -297,6 +301,11 @@ class ReadingListDetailScreenTest {
 
             var clickedIssueId: Long? = null
 
+            val buttonRole = SemanticsMatcher.expectValue(
+                SemanticsProperties.Role,
+                Role.Button
+            )
+
             composeRule.setContent {
                 ComicReadingCompanionTheme(
                     dynamicColor = false
@@ -318,7 +327,9 @@ class ReadingListDetailScreenTest {
                     .fetchSemanticsNodes()
                     .isNotEmpty()
             }
-            composeRule.onNodeWithText("Amazing Spider-Man #30").performClick()
+            composeRule.onNodeWithText("Amazing Spider-Man #30")
+                .assert(buttonRole)
+                .performClick()
             composeRule.runOnIdle {
                 assertEquals(issueId, clickedIssueId)
             }

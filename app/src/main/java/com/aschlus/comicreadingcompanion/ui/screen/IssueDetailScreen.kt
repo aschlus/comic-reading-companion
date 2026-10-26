@@ -31,6 +31,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
@@ -151,10 +152,12 @@ fun IssueDetailScreen(
                     ) {
                         Text(
                             text = currentIssue.seriesTitle,
-                            modifier =
-                                Modifier.clickable {
+                            modifier = Modifier.clickable(
+                                role = Role.Button,
+                                onClick = {
                                     onSeriesClick(currentIssue.seriesId)
-                                },
+                                }
+                            ),
                             style =
                                 MaterialTheme.typography.titleLarge
                                     .copy(

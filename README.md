@@ -298,6 +298,7 @@ building, following, and tracking comic-book reading orders.
 - [x] Progress-tracking tests
 - [x] ViewModel tests
 - [x] Compose UI tests
+- [x] Add accessible semantic roles to interactive controls with UI regression tests
 - [x] App navigation integration tests
 - [x] Test database migrations
 - [x] Handle malformed reading-list files gracefully

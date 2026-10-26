@@ -34,6 +34,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -139,9 +140,12 @@ fun CollectionScreen(
                                     color = ComicInk,
                                     shape = RoundedCornerShape(10.dp)
                                 )
-                                .clickable {
-                                    sortMenuExpanded = true
-                                }
+                                .clickable(
+                                    role = Role.Button,
+                                    onClick = {
+                                        sortMenuExpanded = true
+                                    }
+                                )
                                 .padding(horizontal = 10.dp),
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.SpaceBetween
@@ -497,7 +501,10 @@ private fun OwnedIssueCard(
                 .fillMaxWidth()
                 .background(MaterialTheme.colorScheme.surface, shape)
                 .border(ComicCardBorderWidth, ComicInk, shape)
-                .clickable(onClick = onClick)
+                .clickable(
+                    role = Role.Button,
+                    onClick = onClick
+                )
                 .padding(10.dp),
             horizontalArrangement = Arrangement.spacedBy(ComicSpacingMd),
             verticalAlignment = Alignment.Top

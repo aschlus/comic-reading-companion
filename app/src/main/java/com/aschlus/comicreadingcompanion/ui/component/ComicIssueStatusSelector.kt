@@ -19,7 +19,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -28,7 +27,6 @@ import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlueLight
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
 
 @Composable
@@ -81,18 +79,6 @@ private fun ComicIssueStatusButton(
         modifier =
             modifier
                 .height(54.dp)
-                .semantics(
-                    mergeDescendants = true
-                ) {
-                    contentDescription =
-                        if (selected) {
-                            "$label reading status selected"
-                        } else {
-                            "$label reading status"
-                        }
-
-                    role = Role.Button
-                }
     ) {
         Box(
             modifier =
@@ -127,8 +113,17 @@ private fun ComicIssueStatusButton(
                     )
                     .clickable(
                         enabled = !selected,
+                        role = Role.Button,
                         onClick = onClick
-                    ),
+                    )
+                    .semantics {
+                        contentDescription =
+                            if (selected) {
+                                "$label reading status selected"
+                            } else {
+                                "$label reading status"
+                            }
+                    },
             contentAlignment =
                 Alignment.Center
         ) {

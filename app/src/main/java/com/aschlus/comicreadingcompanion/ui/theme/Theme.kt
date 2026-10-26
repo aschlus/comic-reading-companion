@@ -14,7 +14,7 @@ private val ComicLightColorScheme =
     lightColorScheme(
         primary = ComicBlue,
         onPrimary = ComicInk,
-        primaryContainer = ComicBlueLight,
+        primaryContainer = ComicBlue,
         onPrimaryContainer = ComicInk,
 
         secondary = ComicYellow,
@@ -47,7 +47,7 @@ private val ComicDarkColorScheme =
     darkColorScheme(
         primary = ComicBlueLight,
         onPrimary = ComicInk,
-        primaryContainer = ComicBlueDark,
+        primaryContainer = ComicPurple,
         onPrimaryContainer = ComicInk,
 
         secondary = ComicYellow,

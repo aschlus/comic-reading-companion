@@ -30,6 +30,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
@@ -198,10 +199,12 @@ fun SeriesDetailScreen(
                     Text(
                         text =
                             currentSeries.publisherName,
-                        modifier =
-                            Modifier.clickable {
+                        modifier = Modifier.clickable(
+                            role = Role.Button,
+                            onClick = {
                                 onPublisherClick(currentSeries.publisherId)
-                            },
+                            }
+                        ),
                         style =
                             MaterialTheme.typography.titleMedium
                                 .copy(
