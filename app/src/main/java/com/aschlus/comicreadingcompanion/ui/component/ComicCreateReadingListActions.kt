@@ -3,10 +3,10 @@ package com.aschlus.comicreadingcompanion.ui.component
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
 
 @Composable
@@ -24,7 +24,7 @@ fun ComicCreateReadingListActions(
     ) {
         ComicWideActionButton(
             text = "CANCEL",
-            backgroundColor = ComicPaper,
+            backgroundColor = MaterialTheme.colorScheme.surface,
             onClick = onCancelClick,
             modifier = Modifier.weight(1f)
         )
@@ -32,6 +32,7 @@ fun ComicCreateReadingListActions(
         ComicWideActionButton(
             text = "SAVE LIST",
             backgroundColor = ComicYellow,
+            contentColor = MaterialTheme.colorScheme.onSurface,
             onClick = onSaveClick,
             modifier = Modifier.weight(1f),
             enabled = canSave

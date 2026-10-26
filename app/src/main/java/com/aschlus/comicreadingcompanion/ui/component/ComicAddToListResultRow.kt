@@ -145,7 +145,7 @@ private fun ComicAddToListResultRow(
                         if (selected) {
                             ComicBlueLight
                         } else {
-                            ComicPaper
+                            MaterialTheme.colorScheme.surface
                         }
                     )
                     .border(
@@ -177,7 +177,7 @@ private fun ComicAddToListResultRow(
                             lineHeight = 18.sp,
                             fontWeight = FontWeight.Bold
                         ),
-                    color = ComicInk,
+                    color = if (selected) ComicInk else MaterialTheme.colorScheme.onSurface,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -190,7 +190,7 @@ private fun ComicAddToListResultRow(
                                 fontSize = 12.sp,
                                 lineHeight = 15.sp
                             ),
-                        color = ComicInk.copy(alpha = 0.8f),
+                        color = if (selected) ComicInk.copy(alpha = 0.8f) else MaterialTheme.colorScheme.onSurfaceVariant,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -205,7 +205,7 @@ private fun ComicAddToListResultRow(
                                 lineHeight = 14.sp,
                                 fontWeight = FontWeight.SemiBold
                             ),
-                        color = ComicInk.copy(alpha = 0.7f),
+                        color = if (selected) ComicInk.copy(alpha = 0.7f) else MaterialTheme.colorScheme.onSurfaceVariant,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -221,7 +221,7 @@ private fun ComicAddToListResultRow(
                             if (selected) {
                                 ComicPaper
                             } else {
-                                ComicPaper.copy(alpha = 0.45f)
+                                MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.45f)
                             }
                         )
                         .border(

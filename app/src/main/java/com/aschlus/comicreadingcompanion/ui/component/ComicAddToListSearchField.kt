@@ -36,7 +36,6 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 
 @Composable
 fun ComicAddToListSearchField(
@@ -76,7 +75,7 @@ fun ComicAddToListSearchField(
                     .height(50.dp)
                     .clip(shape)
                     .background(
-                        ComicPaper
+                        MaterialTheme.colorScheme.surface
                     )
                     .border(
                         width = ComicCardBorderWidth,
@@ -93,7 +92,7 @@ fun ComicAddToListSearchField(
             Icon(
                 imageVector = Icons.Default.Search,
                 contentDescription = null,
-                tint = ComicInk,
+                tint = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.size(24.dp)
             )
 
@@ -112,10 +111,10 @@ fun ComicAddToListSearchField(
                 singleLine = true,
                 textStyle = MaterialTheme.typography.bodyLarge
                     .copy(
-                        color = ComicInk,
+                        color = MaterialTheme.colorScheme.onSurface,
                         fontWeight = FontWeight.Medium
                     ),
-                cursorBrush = SolidColor(ComicInk),
+                cursorBrush = SolidColor(MaterialTheme.colorScheme.onSurface),
                 decorationBox = { innerTextField ->
                     Box(
                         contentAlignment =
@@ -125,7 +124,7 @@ fun ComicAddToListSearchField(
                             Text(
                                 text = placeholder,
                                 style = MaterialTheme.typography.bodyLarge,
-                                color = ComicInk.copy(alpha = 0.55f)
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                         }
 
@@ -154,7 +153,7 @@ fun ComicAddToListSearchField(
                         Icon(
                             imageVector = Icons.Default.Close,
                             contentDescription = "Clear search",
-                            tint = ComicInk,
+                            tint = MaterialTheme.colorScheme.onSurface,
                             modifier = Modifier.size(20.dp)
                         )
                     }

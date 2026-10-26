@@ -6,15 +6,18 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,11 +33,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicMutedInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
-import androidx.compose.foundation.layout.offset
-import androidx.compose.material.icons.filled.Bookmark
 
 @Composable
 fun ComicBottomNavigation(
@@ -66,7 +65,7 @@ fun ComicBottomNavigation(
                         strokeWidth = strokeWidth
                     )
                 },
-        containerColor = ComicPaper,
+        containerColor = MaterialTheme.colorScheme.surface,
         tonalElevation = 0.dp
     ) {
         ComicBottomNavDestination(
@@ -115,7 +114,7 @@ private fun RowScope.ComicBottomNavDestination(
         if (selected) {
             ComicInk
         } else {
-            ComicMutedInk
+            MaterialTheme.colorScheme.onSurfaceVariant
         }
 
     Box(

@@ -84,7 +84,7 @@ fun ComicLibraryReadingListCard(
                         min = 120.dp
                     )
                     .clip(shape)
-                    .background(ComicPaper)
+                    .background(MaterialTheme.colorScheme.surface)
                     .border(
                         width = ComicCardBorderWidth,
                         color = ComicInk,
@@ -128,6 +128,7 @@ fun ComicLibraryReadingListCard(
                         fontSize = 17.sp,
                         lineHeight = 20.sp
                     ),
+                    color = MaterialTheme.colorScheme.onSurface,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -139,6 +140,7 @@ fun ComicLibraryReadingListCard(
                             fontSize = 12.sp,
                             lineHeight = 15.sp
                         ),
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         maxLines = 2,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -148,6 +150,7 @@ fun ComicLibraryReadingListCard(
                     text =
                         "$readCount of $totalCount read • " +
                         "$completionPercent% complete",
+                    color = MaterialTheme.colorScheme.onSurface,
                     fontSize = 12.sp,
                     lineHeight = 15.sp,
                     fontWeight = FontWeight.SemiBold
@@ -174,6 +177,7 @@ fun ComicLibraryReadingListCard(
 
                                 append(continueText)
                             },
+                        color = MaterialTheme.colorScheme.onSurface,
                         fontSize = 13.sp,
                         lineHeight = 16.sp,
                         maxLines = 1,

@@ -20,8 +20,6 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShape
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicMutedInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 
 @Composable
 fun ComicEmptyState(
@@ -53,7 +51,7 @@ fun ComicEmptyState(
                 Modifier
                     .fillMaxWidth()
                     .background(
-                        color = ComicPaper,
+                        color = MaterialTheme.colorScheme.surface,
                         shape = shape
                     )
                     .border(
@@ -77,7 +75,7 @@ fun ComicEmptyState(
                             lineHeight = 18.sp,
                             fontWeight = FontWeight.SemiBold
                         ),
-                color = ComicMutedInk,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center
             )
         }

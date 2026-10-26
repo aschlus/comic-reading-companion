@@ -66,7 +66,7 @@ fun ComicReadingHistoryRow(
                 Modifier
                     .fillMaxWidth()
                     .clip(shape)
-                    .background(ComicPaper)
+                    .background(MaterialTheme.colorScheme.surface)
                     .border(
                         width = ComicCardBorderWidth,
                         color = ComicInk,
@@ -107,7 +107,7 @@ fun ComicReadingHistoryRow(
                                 lineHeight = 20.sp,
                                 fontWeight = FontWeight.Bold
                             ),
-                    color = ComicInk,
+                    color = MaterialTheme.colorScheme.onSurface,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -123,7 +123,7 @@ fun ComicReadingHistoryRow(
                                         fontSize = 14.sp,
                                         lineHeight = 17.sp
                                     ),
-                            color = ComicInk,
+                            color = MaterialTheme.colorScheme.onSurface,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis
                         )
@@ -138,7 +138,7 @@ fun ComicReadingHistoryRow(
                                 lineHeight = 15.sp,
                                 fontWeight = FontWeight.Medium
                             ),
-                    color = ComicMutedInk
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
 
@@ -149,7 +149,7 @@ fun ComicReadingHistoryRow(
                 fontSize = 30.sp,
                 lineHeight = 30.sp,
                 fontWeight = FontWeight.Bold,
-                color = ComicInk
+                color = MaterialTheme.colorScheme.onSurface
             )
         }
     }

@@ -24,6 +24,7 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 fun ComicWideActionButton(
     text: String,
     backgroundColor: Color,
+    contentColor: Color = ComicInk,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true
@@ -91,7 +92,7 @@ fun ComicWideActionButton(
                             fontWeight = FontWeight.ExtraBold
                         ),
                 color =
-                    ComicInk.copy(alpha = alpha)
+                    contentColor.copy(alpha = alpha)
             )
         }
     }

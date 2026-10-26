@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -35,7 +36,6 @@ import com.aschlus.comicreadingcompanion.ui.component.ComicHomeSectionHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicIssueDetailHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicWideActionButton
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
@@ -93,7 +93,7 @@ fun EditSeriesScreen(
     }
 
     Scaffold(
-        containerColor = ComicPaper,
+        containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             ComicIssueDetailHeader(
                 onBackClick = onBackClick,
@@ -108,7 +108,7 @@ fun EditSeriesScreen(
                 modifier = Modifier
                     .padding(innerPadding)
                     .padding(18.dp),
-                color = ComicInk
+                color = MaterialTheme.colorScheme.onBackground
             )
         } else {
             Column(
@@ -255,7 +255,8 @@ fun EditSeriesScreen(
                 ) {
                     ComicWideActionButton(
                         text = "CANCEL",
-                        backgroundColor = ComicPaper,
+                        backgroundColor = MaterialTheme.colorScheme.surface,
+                        contentColor = MaterialTheme.colorScheme.onSurface,
                         onClick = onBackClick,
                         modifier = Modifier.weight(1f),
                         enabled = !isSaving

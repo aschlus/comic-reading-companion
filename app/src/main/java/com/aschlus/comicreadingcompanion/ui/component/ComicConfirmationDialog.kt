@@ -69,7 +69,7 @@ fun ComicConfirmationDialog(
                     Modifier
                         .fillMaxWidth()
                         .background(
-                            color = ComicPaper,
+                            color = MaterialTheme.colorScheme.surface,
                             shape = shape
                         )
                         .border(
@@ -93,7 +93,7 @@ fun ComicConfirmationDialog(
                             fontSize = 15.sp,
                             lineHeight = 21.sp
                         ),
-                    color = ComicInk
+                    color = MaterialTheme.colorScheme.onSurface
                 )
 
                 Row(
@@ -107,7 +107,8 @@ fun ComicConfirmationDialog(
                 ) {
                     ComicDialogButton(
                         text = "Cancel",
-                        backgroundColor = ComicPaper,
+                        backgroundColor = MaterialTheme.colorScheme.surface,
+                        textColor = MaterialTheme.colorScheme.onSurface,
                         onClick = onDismiss
                     )
 

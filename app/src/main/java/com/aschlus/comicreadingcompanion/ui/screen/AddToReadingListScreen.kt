@@ -81,7 +81,7 @@ fun AddToReadingListScreen(
     val selectedIssueIds = draftIssues.map { issue -> issue.issueId }.toSet()
 
     Scaffold(
-        containerColor = ComicPaper,
+        containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             ComicAddToListHeader(
                 onBackClick = onBackClick
@@ -125,7 +125,7 @@ fun AddToReadingListScreen(
                 Text(
                     text = "Search for a series or issue to add to this reading list.",
                     style = MaterialTheme.typography.bodyMedium,
-                    color = ComicInk.copy(alpha = 0.7f)
+                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
                 )
             } else {
                 LazyColumn(
@@ -253,6 +253,6 @@ private fun AddToListResultHeading(
                 .copy(
                     fontWeight = FontWeight.ExtraBold
                 ),
-        color = ComicInk
+        color = MaterialTheme.colorScheme.onBackground
     )
 }

@@ -36,7 +36,6 @@ import com.aschlus.comicreadingcompanion.data.database.entities.Universe
 import com.aschlus.comicreadingcompanion.data.database.models.PublisherBrowseResult
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacing2Xl
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingXl
@@ -218,7 +217,7 @@ private fun <T> ComicBrowseFilterSelector(
                 .fillMaxWidth()
                 .height(46.dp)
                 .clip(shape)
-                .background(ComicPaper)
+                .background(MaterialTheme.colorScheme.surface)
                 .border(
                     width = ComicCardBorderWidth,
                     color = ComicInk,
@@ -236,7 +235,7 @@ private fun <T> ComicBrowseFilterSelector(
                 style = MaterialTheme.typography.bodyMedium.copy(
                     fontWeight = FontWeight.SemiBold
                 ),
-                color = ComicInk,
+                color = MaterialTheme.colorScheme.onSurface,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
@@ -244,7 +243,7 @@ private fun <T> ComicBrowseFilterSelector(
             Icon(
                 imageVector = Icons.Default.ArrowDropDown,
                 contentDescription = "Choose filter",
-                tint = ComicInk,
+                tint = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.size(26.dp)
             )
         }

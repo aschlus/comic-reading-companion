@@ -83,7 +83,7 @@ fun ComicIssueReadingListRow(
                     .fillMaxWidth()
                     .height(72.dp)
                     .clip(shape)
-                    .background(ComicPaper)
+                    .background(MaterialTheme.colorScheme.surface)
                     .border(
                         width = ComicCardBorderWidth,
                         color = ComicInk,
@@ -119,7 +119,7 @@ fun ComicIssueReadingListRow(
                                 lineHeight = 19.sp,
                                 fontWeight = FontWeight.Bold
                             ),
-                    color = ComicInk,
+                    color = MaterialTheme.colorScheme.onSurface,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -136,7 +136,7 @@ fun ComicIssueReadingListRow(
                                 fontSize = 12.sp,
                                 lineHeight = 15.sp
                             ),
-                    color = ComicInk.copy(alpha = 0.7f)
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
 
@@ -145,7 +145,7 @@ fun ComicIssueReadingListRow(
                 fontSize = 30.sp,
                 lineHeight = 30.sp,
                 fontWeight = FontWeight.Bold,
-                color = ComicInk
+                color = MaterialTheme.colorScheme.onSurface
             )
         }
     }

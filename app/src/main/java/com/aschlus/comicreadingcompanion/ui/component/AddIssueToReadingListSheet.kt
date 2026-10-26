@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LinearProgressIndicator
@@ -26,21 +28,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.ui.semantics.Role
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShape
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPaperDeep
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacing2Xl
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
@@ -78,7 +76,7 @@ fun AddIssueToReadingListSheet(
             onDismissRequest()
         },
         sheetState = sheetState,
-        containerColor = ComicPaper,
+        containerColor = MaterialTheme.colorScheme.surface,
         dragHandle = null
     ) {
         Column(
@@ -129,7 +127,7 @@ fun AddIssueToReadingListSheet(
                                 shape = RoundedCornerShape(percent = 50)
                             ),
                     color = ComicYellow,
-                    trackColor = ComicPaperDeep
+                    trackColor = MaterialTheme.colorScheme.surfaceVariant
                 )
             }
 
@@ -214,7 +212,7 @@ private fun ComicAddIssueReadingListRow(
                     .heightIn(min = 48.dp)
                     .clip(shape)
                     .background(
-                        ComicPaper.copy(
+                        MaterialTheme.colorScheme.surface.copy(
                             alpha =
                                 if (enabled) {
                                     1f
@@ -263,7 +261,7 @@ private fun ComicAddIssueReadingListRow(
                                 lineHeight = 19.sp,
                                 fontWeight = FontWeight.Bold
                             ),
-                    color = ComicInk,
+                    color = MaterialTheme.colorScheme.onSurface,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -279,7 +277,7 @@ private fun ComicAddIssueReadingListRow(
                                         fontSize = 13.sp,
                                         lineHeight = 17.sp
                                     ),
-                            color = ComicInk.copy(alpha = 0.72f),
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
                             maxLines = 2,
                             overflow = TextOverflow.Ellipsis
                         )
@@ -295,7 +293,7 @@ private fun ComicAddIssueReadingListRow(
                 fontSize = 30.sp,
                 lineHeight = 30.sp,
                 fontWeight = FontWeight.Bold,
-                color = ComicInk
+                color = MaterialTheme.colorScheme.onSurface
             )
         }
     }
@@ -318,7 +316,7 @@ private fun ComicSheetMessage(
                         if (error) {
                             ComicRed.copy(alpha = 0.12f)
                         } else {
-                            ComicPaper
+                            MaterialTheme.colorScheme.surface
                         },
                     shape = shape
                 )
@@ -344,7 +342,7 @@ private fun ComicSheetMessage(
                     .copy(
                         fontWeight = FontWeight.SemiBold
                     ),
-            color = ComicInk
+            color = MaterialTheme.colorScheme.onSurface
         )
     }
 }

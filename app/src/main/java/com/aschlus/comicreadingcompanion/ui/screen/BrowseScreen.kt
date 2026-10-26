@@ -52,7 +52,6 @@ import com.aschlus.comicreadingcompanion.ui.component.ComicEmptyState
 import com.aschlus.comicreadingcompanion.ui.component.ComicHomeSectionHeader
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
@@ -125,7 +124,7 @@ fun BrowseScreen(
     }
 
     Scaffold(
-        containerColor = ComicPaper,
+        containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             ComicBrowseHeader()
         }
@@ -287,7 +286,7 @@ fun BrowseScreen(
                 showFilterSheet = false
             },
             sheetState = filterSheetState,
-            containerColor = ComicPaper,
+            containerColor = MaterialTheme.colorScheme.surface,
             dragHandle = null
         ) {
             ComicBrowseFilterSheetContent(
@@ -363,7 +362,7 @@ private fun ComicBrowseFiltersButton(
                 modifier = Modifier
                     .height(41.dp)
                     .clip(shape)
-                    .background(ComicPaper)
+                    .background(MaterialTheme.colorScheme.surface)
                     .border(
                         width = ComicCardBorderWidth,
                         color = ComicInk,
@@ -378,7 +377,7 @@ private fun ComicBrowseFiltersButton(
                     Icon(
                         imageVector = Icons.Default.FilterList,
                         contentDescription = null,
-                        tint = ComicInk,
+                        tint = MaterialTheme.colorScheme.onSurface,
                         modifier = Modifier.size(18.dp)
                     )
 
@@ -393,7 +392,7 @@ private fun ComicBrowseFiltersButton(
                         style = MaterialTheme.typography.labelLarge.copy(
                             fontWeight = FontWeight.ExtraBold
                         ),
-                        color = ComicInk
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                 }
             }

@@ -13,6 +13,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,7 +29,6 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicGray
 import com.aschlus.comicreadingcompanion.ui.theme.ComicGreen
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicOrange
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPurple
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
 
@@ -144,7 +144,7 @@ private fun ComicReadingListStyleOption(
                         Modifier
                             .size(25.dp)
                             .clip(RoundedCornerShape(7.dp))
-                            .background(ComicPaper)
+                            .background(MaterialTheme.colorScheme.surface)
                             .border(
                                 width = 2.dp,
                                 color = ComicInk,
@@ -156,7 +156,7 @@ private fun ComicReadingListStyleOption(
                     Icon(
                         imageVector = Icons.Default.Check,
                         contentDescription = null,
-                        tint = ComicInk,
+                        tint = MaterialTheme.colorScheme.onSurface,
                         modifier = Modifier.size(18.dp)
                     )
                 }

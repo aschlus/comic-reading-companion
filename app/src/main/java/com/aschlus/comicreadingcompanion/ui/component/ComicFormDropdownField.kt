@@ -20,7 +20,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -55,7 +54,7 @@ fun ComicFormDropdownField(
                         }
                     )
                     .background(
-                        color = Color.White,
+                        color = MaterialTheme.colorScheme.surfaceVariant,
                         shape = shape
                     )
                     .border(
@@ -82,14 +81,14 @@ fun ComicFormDropdownField(
                     .copy(
                         fontWeight = FontWeight.Medium
                     ),
-                color = ComicInk,
+                color = MaterialTheme.colorScheme.onSurface,
                 maxLines = 1
             )
 
             Icon(
                 imageVector = Icons.Default.ArrowDropDown,
                 contentDescription = null,
-                tint = ComicInk,
+                tint = MaterialTheme.colorScheme.onSurface,
                 modifier =
                     Modifier
                         .size(26.dp)

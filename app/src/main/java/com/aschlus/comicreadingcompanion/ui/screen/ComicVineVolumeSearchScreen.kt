@@ -25,6 +25,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FilterList
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -37,7 +38,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -55,8 +55,6 @@ import com.aschlus.comicreadingcompanion.ui.component.ComicWideActionButton
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlue
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicMutedInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPurple
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
@@ -81,7 +79,7 @@ fun ComicVineVolumeSearchScreen(
     }
 
     Scaffold(
-        containerColor = ComicPaper,
+        containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             ComicPrimaryHeader {
                 Row(
@@ -120,7 +118,7 @@ fun ComicVineVolumeSearchScreen(
                 Text(
                     text = "Search for comic-book series." +
                         "Searching doesn't add anything to your catalog.",
-                    color = ComicMutedInk
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
 
@@ -159,7 +157,7 @@ fun ComicVineVolumeSearchScreen(
                             modifier = Modifier
                                 .height(41.dp)
                                 .clip(shape)
-                                .background(ComicPaper)
+                                .background(MaterialTheme.colorScheme.surface)
                                 .border(
                                     width = ComicCardBorderWidth,
                                     color = ComicInk,
@@ -174,7 +172,7 @@ fun ComicVineVolumeSearchScreen(
                             Icon(
                                 imageVector = Icons.Default.FilterList,
                                 contentDescription = null,
-                                tint = ComicInk,
+                                tint = MaterialTheme.colorScheme.onSurface,
                                 modifier = Modifier.size(18.dp)
                             )
 
@@ -186,7 +184,7 @@ fun ComicVineVolumeSearchScreen(
                                 } else {
                                     "ADDITIONAL MATCHING OPTIONS"
                                 },
-                                color = ComicInk,
+                                color = MaterialTheme.colorScheme.onSurface,
                                 fontWeight = FontWeight.ExtraBold
                             )
                         }
@@ -270,7 +268,7 @@ fun ComicVineVolumeSearchScreen(
                 item {
                     CircularProgressIndicator(
                         modifier = Modifier.size(28.dp),
-                        color = ComicInk
+                        color = MaterialTheme.colorScheme.primary
                     )
                 }
             } else if (!uiState.hasApiKey) {
@@ -278,7 +276,7 @@ fun ComicVineVolumeSearchScreen(
                     Text(
                         text = "Configure your API key " +
                             "in Settings before searching.",
-                        color = ComicMutedInk
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
             }
@@ -300,12 +298,12 @@ fun ComicVineVolumeSearchScreen(
                     ) {
                         CircularProgressIndicator(
                             modifier = Modifier.size(24.dp),
-                            color = ComicInk
+                            color = MaterialTheme.colorScheme.primary
                         )
 
                         Text(
                             text = "Contacting Source...",
-                            color = ComicMutedInk
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
                 }
@@ -316,7 +314,7 @@ fun ComicVineVolumeSearchScreen(
                     Text(
                         text = "${uiState.results.size} of " +
                                 "${uiState.totalResults} results",
-                        color = ComicMutedInk,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         fontWeight = FontWeight.Bold
                     )
                 }
@@ -341,7 +339,7 @@ fun ComicVineVolumeSearchScreen(
                 item {
                     Text(
                         text = "No volumes found.",
-                        color = ComicInk
+                        color = MaterialTheme.colorScheme.onBackground
                     )
                 }
             }
@@ -377,7 +375,7 @@ private fun MatchingOptionField(
     ) {
         Text(
             text = label.uppercase(),
-            color = ComicMutedInk,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             fontWeight = FontWeight.Bold
         )
 
@@ -385,7 +383,7 @@ private fun MatchingOptionField(
             modifier = Modifier
                 .fillMaxWidth()
                 .heightIn(min = 56.dp)
-                .background(Color.White, fieldShape)
+                .background(MaterialTheme.colorScheme.surfaceVariant, fieldShape)
                 .border(
                     width = ComicCardBorderWidth,
                     color = ComicInk,
@@ -403,9 +401,8 @@ private fun MatchingOptionField(
                         this.contentDescription = contentDescription
                     },
                 singleLine = true,
-                textStyle = androidx.compose.material3.MaterialTheme
-                    .typography.bodyLarge
-                    .copy(color = ComicInk),
+                textStyle = MaterialTheme.typography.bodyLarge
+                    .copy(color = MaterialTheme.colorScheme.onSurface),
                 cursorBrush = SolidColor(ComicInk),
                 keyboardOptions = KeyboardOptions(
                     keyboardType = keyboardType,
@@ -416,7 +413,7 @@ private fun MatchingOptionField(
                         if (value.isEmpty()) {
                             Text(
                                 text = placeholder,
-                                color = ComicMutedInk
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                         }
 

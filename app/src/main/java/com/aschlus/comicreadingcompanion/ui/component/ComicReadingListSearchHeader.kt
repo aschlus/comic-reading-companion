@@ -41,7 +41,6 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShape
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
@@ -164,7 +163,7 @@ private fun ComicReadingListSearchField(
                     .matchParentSize()
                     .clip(shape)
                     .background(
-                        ComicPaper
+                        MaterialTheme.colorScheme.surface
                     )
                     .border(
                         width = ComicCardBorderWidth,
@@ -181,7 +180,7 @@ private fun ComicReadingListSearchField(
             Icon(
                 imageVector = Icons.Default.Search,
                 contentDescription = null,
-                tint = ComicInk,
+                tint = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.size(24.dp)
             )
 
@@ -200,10 +199,10 @@ private fun ComicReadingListSearchField(
                 textStyle =
                     MaterialTheme.typography.bodyLarge
                         .copy(
-                            color = ComicInk,
+                            color = MaterialTheme.colorScheme.onSurface,
                             fontWeight = FontWeight.Medium
                         ),
-                cursorBrush = SolidColor(ComicInk),
+                cursorBrush = SolidColor(MaterialTheme.colorScheme.onSurface),
                 decorationBox = { innerTextField ->
                     Box(
                         contentAlignment =
@@ -213,7 +212,7 @@ private fun ComicReadingListSearchField(
                             Text(
                                 text = "Search reading list",
                                 style = MaterialTheme.typography.bodyLarge,
-                                color = ComicInk.copy(alpha = 0.55f)
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                         }
 
@@ -242,7 +241,7 @@ private fun ComicReadingListSearchField(
                         Icon(
                             imageVector = Icons.Default.Close,
                             contentDescription = "Clear search",
-                            tint = ComicInk,
+                            tint = MaterialTheme.colorScheme.onSurface,
                             modifier = Modifier.size(20.dp)
                         )
                     }

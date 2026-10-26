@@ -17,7 +17,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
@@ -35,7 +34,7 @@ fun ComicAddToListActionBar(
             modifier
                 .fillMaxWidth()
                 .background(
-                    ComicPaper
+                    MaterialTheme.colorScheme.surface
                 )
                 .border(
                     width = ComicCardBorderWidth,
@@ -58,7 +57,7 @@ fun ComicAddToListActionBar(
                 .copy(
                     fontWeight = FontWeight.ExtraBold
                 ),
-            color = ComicInk
+            color = MaterialTheme.colorScheme.onSurface
         )
 
         Row(
@@ -75,7 +74,8 @@ fun ComicAddToListActionBar(
         ) {
             ComicWideActionButton(
                 text = "BACK",
-                backgroundColor = ComicPaper,
+                backgroundColor = MaterialTheme.colorScheme.surface,
+                contentColor = MaterialTheme.colorScheme.onSurface,
                 onClick = onBackClick,
                 modifier = Modifier.weight(1f)
             )

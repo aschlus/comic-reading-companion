@@ -25,6 +25,7 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -87,7 +88,7 @@ fun SettingsScreen(
     }
 
     Scaffold(
-        containerColor = ComicPaper,
+        containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             ComicPrimaryHeader {
                 Row(
@@ -123,14 +124,14 @@ fun SettingsScreen(
 
             Text(
                 text = "Configure the key used by series search and import features.",
-                color = ComicMutedInk
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
 
             when {
                 uiState.isLoading -> {
                     CircularProgressIndicator(
                         modifier = Modifier.size(28.dp),
-                        color = ComicInk
+                        color = MaterialTheme.colorScheme.primary
                     )
                 }
 
@@ -143,21 +144,22 @@ fun SettingsScreen(
                     Text(
                         text = "A key is saved securely on the device. " +
                             "For security, the saved key itself is never shown.",
-                        color = ComicMutedInk
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
 
                 else -> {
                     Text(
                         text = "NO API KEY CONFIGURED",
-                        color = ComicMutedInk
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
             }
 
             ComicWideActionButton(
                 text = "SEARCH SERIES",
-                backgroundColor = ComicPaper,
+                backgroundColor = MaterialTheme.colorScheme.surface,
+                contentColor = MaterialTheme.colorScheme.onSurface,
                 onClick = onSearchSeriesClick,
                 enabled = !uiState.isLoading && !uiState.isSaving,
                 modifier = Modifier.width(180.dp)
@@ -169,7 +171,7 @@ fun SettingsScreen(
                 } else {
                     "Enter your API key below."
                 },
-                color = ComicInk
+                color = MaterialTheme.colorScheme.onBackground
             )
 
             val fieldShape = RoundedCornerShape(9.dp)
@@ -179,7 +181,7 @@ fun SettingsScreen(
                     .fillMaxWidth()
                     .heightIn(min = 56.dp)
                     .clip(fieldShape)
-                    .background(Color.White)
+                    .background(MaterialTheme.colorScheme.surfaceVariant)
                     .border(
                         width = 2.dp,
                         color = ComicInk,
@@ -205,7 +207,7 @@ fun SettingsScreen(
                         singleLine = true,
                         textStyle = androidx.compose.material3.MaterialTheme
                             .typography.bodyLarge
-                            .copy(color = ComicInk),
+                            .copy(color = MaterialTheme.colorScheme.onSurface),
                         cursorBrush = SolidColor(ComicInk),
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Password,
@@ -221,7 +223,7 @@ fun SettingsScreen(
                                 if (apiKeyInput.isEmpty()) {
                                     Text(
                                         text = "Enter API key",
-                                        color = ComicMutedInk
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
                                     )
                                 }
 
@@ -248,7 +250,7 @@ fun SettingsScreen(
                                 Icons.Default.Visibility
                             },
                             contentDescription = null,
-                            tint = ComicInk
+                            tint = MaterialTheme.colorScheme.onSurface
                         )
                     }
                 }
@@ -271,7 +273,8 @@ fun SettingsScreen(
             if (uiState.hasSavedApiKey) {
                 ComicWideActionButton(
                     text = "REMOVE API KEY",
-                    backgroundColor = ComicPaper,
+                    backgroundColor = MaterialTheme.colorScheme.surface,
+                    contentColor = MaterialTheme.colorScheme.onSurface,
                     onClick = {
                         viewModel.clearFeedback()
                         showRemoveConfirmation = true
@@ -284,7 +287,7 @@ fun SettingsScreen(
             if (uiState.isSaving) {
                 CircularProgressIndicator(
                     modifier = Modifier.size(24.dp),
-                    color = ComicInk
+                    color = MaterialTheme.colorScheme.primary
                 )
             }
 
@@ -310,7 +313,7 @@ fun SettingsScreen(
                 text = "Save a portable JSON backup of your comic catalog, " +
                     "reading lists, reading progress, and collection ownership. " +
                     "Your Comic Vine API key is not included.",
-                color = ComicMutedInk
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
 
             ComicWideActionButton(
@@ -323,7 +326,7 @@ fun SettingsScreen(
             Text(
                 text = "Check a saved backup before restoring it. " +
                     "Validation does not modify your catalog.",
-                color = ComicMutedInk
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
 
             ComicWideActionButton(
@@ -337,7 +340,7 @@ fun SettingsScreen(
                 text = "Restore a saved backup by replacing your current " +
                     "catalog, reading lists, reading progress, and ownership. " +
                     "You'll be asked to confirm before anything is changed.",
-                color = ComicMutedInk
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
 
             ComicWideActionButton(

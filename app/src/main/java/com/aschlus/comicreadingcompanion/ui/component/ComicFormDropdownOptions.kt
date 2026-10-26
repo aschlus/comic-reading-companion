@@ -54,7 +54,7 @@ fun ComicFormDropdownOptions(
                 Modifier
                     .fillMaxWidth()
                     .background(
-                        color = ComicPaper,
+                        color = MaterialTheme.colorScheme.surface,
                         shape = shape
                     )
                     .border(
@@ -91,6 +91,6 @@ fun ComicFormDropdownOption(
                 fontSize = 14.sp,
                 fontWeight = FontWeight.SemiBold
             ),
-        color = ComicInk
+        color = MaterialTheme.colorScheme.onSurface
     )
 }

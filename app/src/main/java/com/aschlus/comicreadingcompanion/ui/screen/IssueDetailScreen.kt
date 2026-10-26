@@ -90,7 +90,7 @@ fun IssueDetailScreen(
     }
 
     Scaffold(
-        containerColor = ComicPaper,
+        containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             ComicIssueDetailHeader(
                 onBackClick = onBackClick
@@ -106,7 +106,7 @@ fun IssueDetailScreen(
                 modifier = Modifier
                     .padding(innerPadding)
                     .padding(18.dp),
-                color = ComicInk
+                color = MaterialTheme.colorScheme.onBackground
             )
         } else {
             Column(
@@ -182,7 +182,7 @@ fun IssueDetailScreen(
                                         lineHeight = 36.sp,
                                         fontWeight = FontWeight.Black
                                     ),
-                            color = ComicInk
+                            color = MaterialTheme.colorScheme.onBackground
                         )
 
                         currentIssue
@@ -198,7 +198,7 @@ fun IssueDetailScreen(
                                                 lineHeight = 21.sp,
                                                 fontWeight = FontWeight.Bold
                                             ),
-                                    color = ComicInk
+                                    color = MaterialTheme.colorScheme.onBackground
                                 )
                             }
 
@@ -408,7 +408,7 @@ private fun IssueMetadataRow(
                         fontSize = 11.sp,
                         lineHeight = 13.sp
                     ),
-            color = ComicInk.copy(alpha = 0.6f)
+            color = MaterialTheme.colorScheme.onSurfaceVariant
         )
 
         Text(
@@ -420,7 +420,7 @@ private fun IssueMetadataRow(
                         lineHeight = 16.sp,
                         fontWeight = FontWeight.SemiBold
                     ),
-            color = ComicInk
+            color = MaterialTheme.colorScheme.onSurface
         )
     }
 }
@@ -456,7 +456,7 @@ private fun ReadingProgressDates(
                 Modifier
                     .fillMaxWidth()
                     .background(
-                        color = ComicPaper,
+                        color = MaterialTheme.colorScheme.surface,
                         shape = shape
                     )
                     .border(
@@ -506,7 +506,7 @@ private fun ReadingProgressDateRow(
             fontSize = 13.sp,
             lineHeight = 16.sp,
             fontWeight = FontWeight.Bold,
-            color = ComicMutedInk
+            color = MaterialTheme.colorScheme.onSurfaceVariant
         )
 
         Text(
@@ -514,7 +514,7 @@ private fun ReadingProgressDateRow(
             fontSize = 13.sp,
             lineHeight = 16.sp,
             fontWeight = FontWeight.SemiBold,
-            color = ComicInk
+            color = MaterialTheme.colorScheme.onSurface
         )
     }
 }

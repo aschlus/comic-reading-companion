@@ -15,13 +15,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicMutedInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
 
 @Composable
@@ -49,7 +47,7 @@ fun ComicFormTextField(
                     fontSize = 12.sp,
                     fontWeight = FontWeight.ExtraBold
                 ),
-            color = ComicInk
+            color = MaterialTheme.colorScheme.onSurface
         )
 
         Box(
@@ -58,7 +56,7 @@ fun ComicFormTextField(
                     .fillMaxWidth()
                     .heightIn(min = minHeight.dp)
                     .background(
-                        color = Color.White,
+                        color = MaterialTheme.colorScheme.surfaceVariant,
                         shape = shape
                     )
                     .border(
@@ -89,10 +87,10 @@ fun ComicFormTextField(
                     },
                 textStyle = MaterialTheme.typography.bodyLarge
                     .copy(
-                        color = ComicInk
+                        color = MaterialTheme.colorScheme.onSurface
                     ),
                 cursorBrush =
-                    SolidColor(ComicInk),
+                    SolidColor(MaterialTheme.colorScheme.onSurface),
                 decorationBox = { innerTextField ->
                     Box{
                         if (
@@ -102,7 +100,7 @@ fun ComicFormTextField(
                             Text(
                                 text = placeholder,
                                 style = MaterialTheme.typography.bodyLarge,
-                                color = ComicMutedInk
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                         }
 

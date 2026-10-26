@@ -18,7 +18,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -28,7 +27,6 @@ import androidx.compose.ui.window.Dialog
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlue
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
@@ -79,7 +77,7 @@ fun ComicFormDialog(
                     Modifier
                         .fillMaxWidth()
                         .background(
-                            color = ComicPaper,
+                            color = MaterialTheme.colorScheme.surface,
                             shape = shape
                         )
                         .border(
@@ -124,7 +122,8 @@ fun ComicFormDialog(
                 ) {
                     ComicDialogButton(
                         text = "Cancel",
-                        backgroundColor = ComicPaper,
+                        backgroundColor = MaterialTheme.colorScheme.surface,
+                        textColor = MaterialTheme.colorScheme.onSurface,
                         onClick = onDismiss
                     )
 
@@ -168,7 +167,7 @@ private fun ComicDialogTextField(
                     fontSize = 12.sp,
                     fontWeight = FontWeight.ExtraBold
                 ),
-            color = ComicInk
+            color = MaterialTheme.colorScheme.onSurface
         )
 
         Box(
@@ -184,12 +183,12 @@ private fun ComicDialogTextField(
                             }
                     )
                     .background(
-                        color = Color.White,
+                        color = MaterialTheme.colorScheme.surfaceVariant,
                         shape = shape
                     )
                     .border(
                         width = ComicCardBorderWidth,
-                        color = ComicInk,
+                        color = MaterialTheme.colorScheme.onSurface,
                         shape = shape
                     ),
             contentAlignment =
@@ -218,7 +217,7 @@ private fun ComicDialogTextField(
                         color = ComicInk
                     ),
                 cursorBrush =
-                    SolidColor(ComicInk),
+                    SolidColor(MaterialTheme.colorScheme.onSurface),
                 keyboardOptions = KeyboardOptions(keyboardType = keyboardType)
             )
         }

@@ -13,6 +13,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.History
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,8 +33,6 @@ import com.aschlus.comicreadingcompanion.ui.component.ComicHomeSectionHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicLibraryReadingListCard
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlueLight
 import com.aschlus.comicreadingcompanion.ui.theme.ComicGreen
-import com.aschlus.comicreadingcompanion.ui.theme.ComicMutedInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingXs
@@ -76,7 +75,7 @@ fun HomeScreen(
                 right = 0,
                 bottom = 0
             ),
-        containerColor = ComicPaper,
+        containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             ComicHomeHeader(
                 onSettingsClick = onSettingsClick
@@ -175,7 +174,7 @@ fun HomeScreen(
                         lineHeight = 20.sp,
                         fontWeight = FontWeight.SemiBold,
                         fontStyle = FontStyle.Italic,
-                        color = ComicMutedInk,
+                        color = MaterialTheme.colorScheme.onBackground,
                         textAlign = TextAlign.Center
                     )
                 }

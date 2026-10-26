@@ -75,7 +75,7 @@ fun ComicSectionPickerDialog(
                     Modifier
                         .fillMaxWidth()
                         .background(
-                            color = ComicPaper,
+                            color = MaterialTheme.colorScheme.surface,
                             shape = shape
                         )
                         .border(
@@ -95,7 +95,7 @@ fun ComicSectionPickerDialog(
                 Text(
                     text = issueLabel,
                     style = MaterialTheme.typography.bodyMedium,
-                    color = ComicInk
+                    color = MaterialTheme.colorScheme.onSurface
                 )
 
                 LazyColumn(
@@ -146,7 +146,8 @@ fun ComicSectionPickerDialog(
                 ) {
                     ComicDialogButton(
                         text = "Cancel",
-                        backgroundColor = ComicPaper,
+                        backgroundColor = MaterialTheme.colorScheme.surface,
+                        textColor = MaterialTheme.colorScheme.onSurface,
                         onClick = onDismiss
                     )
                 }
@@ -184,7 +185,7 @@ private fun ComicSectionPickerRow(
                         if (selected) {
                             ComicBlue
                         } else {
-                            Color.White
+                            MaterialTheme.colorScheme.surfaceVariant
                         },
                     shape = shape
                 )
@@ -211,7 +212,7 @@ private fun ComicSectionPickerRow(
                                 FontWeight.Medium
                             }
                     ),
-                color = ComicInk,
+                color = if (selected) ComicInk else MaterialTheme.colorScheme.onSurface,
                 maxLines = 1
             )
 

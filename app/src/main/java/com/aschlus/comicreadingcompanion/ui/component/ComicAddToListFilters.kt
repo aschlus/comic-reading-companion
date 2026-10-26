@@ -108,7 +108,7 @@ private fun ComicAddToListFilterButton(
                         if (selected) {
                             ComicBlue
                         } else {
-                            ComicPaper
+                            MaterialTheme.colorScheme.surface
                         }
                     )
                     .border(
@@ -129,7 +129,7 @@ private fun ComicAddToListFilterButton(
                                     FontWeight.SemiBold
                                 }
                         ),
-                    color = ComicInk
+                    color = if (selected) ComicInk else MaterialTheme.colorScheme.onSurface
                 )
             }
         }

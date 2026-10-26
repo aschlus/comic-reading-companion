@@ -23,8 +23,6 @@ import com.aschlus.comicreadingcompanion.ui.component.ComicEmptyState
 import com.aschlus.comicreadingcompanion.ui.component.ComicHomeSectionHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicIssueDetailHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicPublisherSeriesRow
-import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacing2Xl
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
 import com.aschlus.comicreadingcompanion.ui.viewmodel.PublisherDetailViewModel
@@ -47,7 +45,7 @@ fun PublisherDetailScreen(
     }
 
     Scaffold(
-        containerColor = ComicPaper,
+        containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             ComicIssueDetailHeader(
                 onBackClick = onBackClick,
@@ -64,7 +62,7 @@ fun PublisherDetailScreen(
                 modifier = Modifier
                     .padding(innerPadding)
                     .padding(18.dp),
-                color = ComicInk
+                color = MaterialTheme.colorScheme.onBackground
             )
         } else {
             LazyColumn(
@@ -97,7 +95,7 @@ fun PublisherDetailScreen(
                                         fontWeight = FontWeight.Black,
                                         fontStyle = FontStyle.Normal
                                     ),
-                            color = ComicInk
+                            color = MaterialTheme.colorScheme.onBackground
                         )
 
                         Text(
@@ -109,7 +107,7 @@ fun PublisherDetailScreen(
                                         lineHeight = 19.sp,
                                         fontWeight = FontWeight.Bold
                                     ),
-                            color = ComicInk.copy(alpha = 0.76f)
+                            color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.76f)
                         )
                     }
                 }

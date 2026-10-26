@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -74,7 +75,7 @@ fun ComicHomeRecentReadCard(
                 Modifier
                     .fillMaxWidth()
                     .clip(shape)
-                    .background(ComicPaper)
+                    .background(MaterialTheme.colorScheme.surface)
                     .border(
                         width = ComicCardBorderWidth,
                         color = ComicInk,
@@ -103,6 +104,7 @@ fun ComicHomeRecentReadCard(
                 fontSize = 13.sp,
                 lineHeight = 15.sp,
                 fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onSurface,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis
             )
@@ -111,7 +113,7 @@ fun ComicHomeRecentReadCard(
                 text = "Issue #$issueNumber",
                 fontSize = 12.sp,
                 lineHeight = 14.sp,
-                color = ComicInk
+                color = MaterialTheme.colorScheme.onSurface
             )
 
             Text(
@@ -123,9 +125,7 @@ fun ComicHomeRecentReadCard(
                     ),
                 fontSize = 11.sp,
                 lineHeight = 14.sp,
-                color = ComicInk.copy(
-                    alpha = 0.72f
-                ),
+                color = MaterialTheme.colorScheme.onSurface,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )

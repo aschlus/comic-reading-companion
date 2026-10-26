@@ -26,7 +26,6 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 
 @Composable
 fun ComicAddIssuesTrigger(
@@ -63,7 +62,7 @@ fun ComicAddIssuesTrigger(
                     .height(50.dp)
                     .clip(shape)
                     .background(
-                        color = ComicPaper
+                        color = MaterialTheme.colorScheme.surface
                     )
                     .border(
                         width = ComicCardBorderWidth,
@@ -82,7 +81,7 @@ fun ComicAddIssuesTrigger(
             Icon(
                 imageVector = Icons.Default.Search,
                 contentDescription = null,
-                tint = ComicInk,
+                tint = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.size(25.dp)
             )
 
@@ -93,7 +92,7 @@ fun ComicAddIssuesTrigger(
                     .copy(
                         fontWeight = FontWeight.Medium
                     ),
-                color = ComicInk
+                color = MaterialTheme.colorScheme.onSurface
             )
         }
     }

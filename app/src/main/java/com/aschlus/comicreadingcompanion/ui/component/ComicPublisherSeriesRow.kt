@@ -98,7 +98,7 @@ fun ComicPublisherSeriesRow(
                 Modifier
                     .fillMaxWidth()
                     .clip(shape)
-                    .background(ComicPaper)
+                    .background(MaterialTheme.colorScheme.surface)
                     .border(
                         width = ComicCardBorderWidth,
                         color = ComicInk,
@@ -144,7 +144,7 @@ fun ComicPublisherSeriesRow(
                                 lineHeight = 19.sp,
                                 fontWeight = FontWeight.Bold
                             ),
-                    color = ComicInk,
+                    color = MaterialTheme.colorScheme.onSurface,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -158,7 +158,7 @@ fun ComicPublisherSeriesRow(
                                     fontSize = 12.sp,
                                     lineHeight = 14.sp
                                 ),
-                        color = ComicInk.copy(alpha = 0.76f),
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -174,7 +174,7 @@ fun ComicPublisherSeriesRow(
                                 lineHeight = 14.sp,
                                 fontWeight = FontWeight.SemiBold
                             ),
-                    color = ComicInk
+                    color = MaterialTheme.colorScheme.onSurface
                 )
 
                 ComicProgressBar(
@@ -184,7 +184,7 @@ fun ComicPublisherSeriesRow(
                             .fillMaxWidth()
                             .padding(top = 2.dp),
                     progressColor = ComicYellow,
-                    trackColor = ComicPaperDeep,
+                    trackColor = MaterialTheme.colorScheme.surfaceVariant,
                     borderColor = ComicInk,
                     height = 11.dp,
                     shape = RoundedCornerShape(percent = 50)
@@ -198,7 +198,7 @@ fun ComicPublisherSeriesRow(
                 fontSize = 30.sp,
                 lineHeight = 30.sp,
                 fontWeight = FontWeight.Bold,
-                color = ComicInk
+                color = MaterialTheme.colorScheme.onSurface
             )
         }
     }

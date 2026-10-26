@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
@@ -21,6 +22,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
@@ -28,14 +31,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aschlus.comicreadingcompanion.data.database.models.PublisherBrowseResult
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlueLight
-import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
-import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.semantics
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShape
+import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
 
 @Composable
 fun ComicBrowsePublisherRow(
@@ -89,7 +88,7 @@ fun ComicBrowsePublisherRow(
                 Modifier
                     .fillMaxWidth()
                     .clip(shape)
-                    .background(ComicPaper)
+                    .background(MaterialTheme.colorScheme.surface)
                     .border(
                         width = ComicCardBorderWidth,
                         color = ComicInk,
@@ -135,7 +134,7 @@ fun ComicBrowsePublisherRow(
                                 lineHeight = 19.sp,
                                 fontWeight = FontWeight.Bold
                             ),
-                    color = ComicInk,
+                    color = MaterialTheme.colorScheme.onSurface,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -149,7 +148,7 @@ fun ComicBrowsePublisherRow(
                                 fontSize = 12.sp,
                                 lineHeight = 14.sp
                             ),
-                    color = ComicInk.copy(alpha = 0.7f)
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
 
@@ -158,7 +157,7 @@ fun ComicBrowsePublisherRow(
                 fontSize = 30.sp,
                 lineHeight = 30.sp,
                 fontWeight = FontWeight.Bold,
-                color = ComicInk
+                color = MaterialTheme.colorScheme.onSurface
             )
         }
     }
@@ -192,7 +191,7 @@ private fun PublisherCoverCollage(
                     Modifier
                         .fillMaxSize()
                         .clip(fallbackShape)
-                        .background(ComicPaper)
+                        .background(MaterialTheme.colorScheme.surface)
                         .border(
                             width = 2.dp,
                             color = ComicInk,

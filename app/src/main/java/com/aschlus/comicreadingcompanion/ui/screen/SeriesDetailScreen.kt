@@ -45,7 +45,6 @@ import com.aschlus.comicreadingcompanion.ui.component.ComicSeriesIssueRow
 import com.aschlus.comicreadingcompanion.ui.component.ComicWideActionButton
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlue
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacing2Xl
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
@@ -76,7 +75,7 @@ fun SeriesDetailScreen(
     }
 
     Scaffold(
-        containerColor = ComicPaper,
+        containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             ComicIssueDetailHeader(
                 onBackClick = onBackClick,
@@ -93,7 +92,7 @@ fun SeriesDetailScreen(
                 modifier = Modifier
                     .padding(innerPadding)
                     .padding(18.dp),
-                color = ComicInk
+                color = MaterialTheme.colorScheme.onBackground
             )
         } else {
             val readCount =
@@ -172,7 +171,7 @@ fun SeriesDetailScreen(
                                     fontWeight = FontWeight.Black,
                                     fontStyle = FontStyle.Normal
                                 ),
-                        color = ComicInk
+                        color = MaterialTheme.colorScheme.onBackground
                     )
                 }
 
@@ -190,7 +189,7 @@ fun SeriesDetailScreen(
                                         lineHeight = 21.sp,
                                         fontWeight = FontWeight.Bold
                                     ),
-                            color = ComicInk
+                            color = MaterialTheme.colorScheme.onBackground
                         )
                     }
                 }
@@ -266,7 +265,7 @@ fun SeriesDetailScreen(
                                     lineHeight = 19.sp,
                                     fontWeight = FontWeight.Bold
                                 ),
-                        color = ComicInk
+                        color = MaterialTheme.colorScheme.onBackground
                     )
                 }
 
@@ -275,7 +274,7 @@ fun SeriesDetailScreen(
                         progress = progress,
                         modifier = Modifier.fillMaxWidth(),
                         progressColor = ComicYellow,
-                        trackColor = ComicPaper,
+                        trackColor = MaterialTheme.colorScheme.surfaceVariant,
                         borderColor = ComicInk,
                         height = 16.dp,
                         shape = RoundedCornerShape(percent = 50)
@@ -351,7 +350,7 @@ private fun ComicVineSeriesRefreshDialog(
         title = {
             Text(
                 text = "REVIEW COMIC VINE REFRESH",
-                color = ComicInk,
+                color = MaterialTheme.colorScheme.onSurface,
                 fontWeight = FontWeight.Bold
             )
         },
@@ -403,7 +402,7 @@ private fun ComicVineSeriesRefreshDialog(
                     Text(
                         text = preview.refreshedTitle,
                         fontWeight = FontWeight.Bold,
-                        color = ComicInk
+                        color = MaterialTheme.colorScheme.onSurface
                     )
 
                     preview.refreshedStartYear?.let { year ->
@@ -424,7 +423,7 @@ private fun ComicVineSeriesRefreshDialog(
                     Text(
                         text = "ISSUE-BY-ISSUE CHANGES",
                         fontWeight = FontWeight.Bold,
-                        color = ComicInk,
+                        color = MaterialTheme.colorScheme.onSurface,
                         modifier = Modifier.padding(top = 6.dp)
                     )
 
@@ -450,7 +449,7 @@ private fun ComicVineSeriesRefreshDialog(
 
                         Text(
                             text = "$status  #${change.issueNumber}$title",
-                            color = ComicInk,
+                            color = MaterialTheme.colorScheme.onSurface,
                             style = MaterialTheme.typography.bodySmall
                         )
                     }
@@ -461,7 +460,7 @@ private fun ComicVineSeriesRefreshDialog(
                         } else {
                             "No database changes will be made unless you confirm."
                         },
-                        color = ComicInk,
+                        color = MaterialTheme.colorScheme.onSurface,
                         fontWeight = FontWeight.Medium,
                         modifier = Modifier.padding(top = 6.dp)
                     )

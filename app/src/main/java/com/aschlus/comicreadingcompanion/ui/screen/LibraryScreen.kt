@@ -119,7 +119,7 @@ fun LibraryScreen(
     }
 
     Scaffold(
-        containerColor = ComicPaper,
+        containerColor = MaterialTheme.colorScheme.background,
         contentWindowInsets =
             WindowInsets(
                 left = 0,
@@ -185,7 +185,7 @@ fun LibraryScreen(
                                         .width(142.dp)
                                         .height(42.dp)
                                         .background(
-                                            color = ComicPaper,
+                                            color = MaterialTheme.colorScheme.surface,
                                             shape = RoundedCornerShape(12.dp)
                                         )
                                         .border(
@@ -218,14 +218,14 @@ fun LibraryScreen(
                                             "Title Z-A"
                                     },
                                     style = MaterialTheme.typography.labelLarge,
-                                    color = ComicInk,
+                                    color = MaterialTheme.colorScheme.onSurface,
                                     maxLines = 1
                                 )
 
                                 Icon(
                                     imageVector = Icons.Default.ArrowDropDown,
                                     contentDescription = null,
-                                    tint = ComicInk,
+                                    tint = MaterialTheme.colorScheme.onSurface,
                                     modifier = Modifier.size(20.dp)
                                 )
                              }

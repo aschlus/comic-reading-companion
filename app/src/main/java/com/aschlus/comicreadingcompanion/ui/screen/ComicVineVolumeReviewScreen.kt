@@ -25,6 +25,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,7 +37,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.TextStyle
@@ -98,7 +98,7 @@ fun ComicVineVolumeReviewScreen(
     }
 
     Scaffold(
-        containerColor = ComicPaper,
+        containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             ComicPrimaryHeader {
                 Row(
@@ -131,7 +131,7 @@ fun ComicVineVolumeReviewScreen(
                 item {
                     CircularProgressIndicator(
                         modifier = Modifier.size(28.dp),
-                        color = ComicInk
+                        color = MaterialTheme.colorScheme.primary
                     )
                 }
             }
@@ -174,7 +174,7 @@ fun ComicVineVolumeReviewScreen(
                         ) {
                             Text(
                                 text = "SERIES TITLE",
-                                color = ComicInk,
+                                color = MaterialTheme.colorScheme.onSurface,
                                 fontSize = 12.sp,
                                 fontWeight = FontWeight.Bold
                             )
@@ -185,7 +185,7 @@ fun ComicVineVolumeReviewScreen(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .clip(titleFieldShape)
-                                    .background(ComicPaper)
+                                    .background(MaterialTheme.colorScheme.surfaceVariant)
                                     .border(
                                         width = ComicCardBorderWidth,
                                         color = ComicInk,
@@ -198,7 +198,7 @@ fun ComicVineVolumeReviewScreen(
                                     onValueChange = viewModel::updateEditedTitle,
                                     singleLine = true,
                                     textStyle = TextStyle(
-                                        color = ComicInk,
+                                        color = MaterialTheme.colorScheme.onSurface,
                                         fontSize = 16.sp,
                                         fontWeight = FontWeight.Medium
                                     ),
@@ -273,7 +273,7 @@ fun ComicVineVolumeReviewScreen(
                         ) {
                             Text(
                                 text = "UNIVERSE / CONTINUITY",
-                                color = ComicInk,
+                                color = MaterialTheme.colorScheme.onSurface,
                                 fontSize = 12.sp,
                                 fontWeight = FontWeight.Bold
                             )
@@ -329,7 +329,7 @@ fun ComicVineVolumeReviewScreen(
                             if (uiState.isCreatingUniverse) {
                                 Text(
                                     text = "Creating universe...",
-                                    color = ComicMutedInk,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                                     fontSize = 12.sp
                                 )
                             }
@@ -376,12 +376,12 @@ fun ComicVineVolumeReviewScreen(
                                 ) {
                                     CircularProgressIndicator(
                                         modifier = Modifier.size(18.dp),
-                                        color = ComicInk
+                                        color = MaterialTheme.colorScheme.primary
                                     )
 
                                     Text(
                                         text = "Importing series and issues...",
-                                        color = ComicMutedInk,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                                         fontSize = 12.sp
                                     )
                                 }
@@ -399,7 +399,7 @@ fun ComicVineVolumeReviewScreen(
                             uiState.importSuccessMessage?.let { message ->
                                 Text(
                                     text = message,
-                                    color = ComicInk,
+                                    color = MaterialTheme.colorScheme.onSurface,
                                     fontSize = 12.sp,
                                     fontWeight = FontWeight.SemiBold
                                 )
@@ -448,12 +448,12 @@ fun ComicVineVolumeReviewScreen(
                             ) {
                                 CircularProgressIndicator(
                                     modifier = Modifier.size(20.dp),
-                                    color = ComicInk
+                                    color = MaterialTheme.colorScheme.primary
                                 )
 
                                 Text(
                                     text = "Loading issues...",
-                                    color = ComicMutedInk
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                             }
                         }
@@ -489,7 +489,7 @@ fun ComicVineVolumeReviewScreen(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .clip(RoundedCornerShape(6.dp))
-                                .background(ComicPaper)
+                                .background(MaterialTheme.colorScheme.surface)
                                 .border(
                                     width = ComicCardBorderWidth,
                                     color = ComicInk,
@@ -499,7 +499,7 @@ fun ComicVineVolumeReviewScreen(
                         ) {
                             Text(
                                 text = "No issues records were retrieved",
-                                color = ComicMutedInk,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 fontSize = 13.sp
                             )
                         }
@@ -565,7 +565,7 @@ private fun ReviewInfoCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .clip(shape)
-                .background(ComicPaper)
+                .background(MaterialTheme.colorScheme.surface)
                 .border(
                     width = ComicCardBorderWidth,
                     color = ComicInk,
@@ -593,7 +593,7 @@ private fun ReviewEditableMetadataField(
     ) {
         Text(
             text = label,
-            color = ComicMutedInk,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             fontSize = 11.sp,
             fontWeight = FontWeight.Bold,
             maxLines = 1,
@@ -606,7 +606,7 @@ private fun ReviewEditableMetadataField(
             modifier = Modifier
                 .fillMaxWidth()
                 .clip(fieldShape)
-                .background(ComicPaper)
+                .background(MaterialTheme.colorScheme.surfaceVariant)
                 .border(
                     width = ComicCardBorderWidth,
                     color = ComicInk,
@@ -625,7 +625,7 @@ private fun ReviewEditableMetadataField(
                     keyboardType = keyboardType
                 ),
                 textStyle = TextStyle(
-                    color = ComicInk,
+                    color = MaterialTheme.colorScheme.onSurface,
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Medium
                 ),
@@ -647,7 +647,7 @@ private fun ReviewMetadataItem(
     ) {
         Text(
             text = label,
-            color = ComicMutedInk,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             fontSize = 11.sp,
             fontWeight = FontWeight.Bold,
             maxLines = 1,
@@ -656,7 +656,7 @@ private fun ReviewMetadataItem(
 
         Text(
             text = value,
-            color = ComicInk,
+            color = MaterialTheme.colorScheme.onSurface,
             fontSize = 14.sp,
             fontWeight = FontWeight.SemiBold,
             maxLines = 2,
@@ -694,7 +694,7 @@ private fun ReviewIssueRow(
             modifier = Modifier
                 .fillMaxWidth()
                 .clip(shape)
-                .background(ComicPaper)
+                .background(MaterialTheme.colorScheme.surface)
                 .border(
                     width = ComicCardBorderWidth,
                     color = ComicInk,
@@ -731,7 +731,7 @@ private fun ReviewIssueRow(
                     text = issue.name
                         ?.takeIf { it.isNotBlank() }
                         ?: "Untitled issue",
-                    color = ComicInk,
+                    color = MaterialTheme.colorScheme.onSurface,
                     style = androidx.compose.material3.MaterialTheme
                         .typography.titleMedium.copy(
                             fontSize = 15.sp,
@@ -747,8 +747,8 @@ private fun ReviewIssueRow(
                 )?.let { date ->
                     Text(
                         text = "Publication date: ${formatPublicationDate(date)}",
-                        color = ComicInk.copy(alpha = 0.8f),
-                        style = androidx.compose.material3.MaterialTheme
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        style = MaterialTheme
                             .typography.bodySmall.copy(
                                 fontSize = 12.sp,
                                 lineHeight = 15.sp
@@ -760,8 +760,8 @@ private fun ReviewIssueRow(
 
                 Text(
                     text = "Source ID: ${issue.id}",
-                    color = ComicInk.copy(alpha = 0.7f),
-                    style = androidx.compose.material3.MaterialTheme
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    style = MaterialTheme
                         .typography.bodySmall.copy(
                             fontSize = 11.sp,
                             lineHeight = 14.sp
@@ -798,7 +798,7 @@ private fun ReviewIssueTypeSelector(
     ) {
         Text(
             text = "ISSUE TYPE",
-            color = ComicMutedInk,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             fontSize = 10.sp,
             fontWeight = FontWeight.Bold
         )
@@ -821,7 +821,7 @@ private fun ReviewIssueTypeSelector(
                     .fillMaxWidth()
                     .height(36.dp)
                     .clip(RoundedCornerShape(6.dp))
-                    .background(Color.White)
+                    .background(MaterialTheme.colorScheme.surfaceVariant)
                     .border(
                         width = ComicCardBorderWidth,
                         color = ComicInk,
@@ -833,7 +833,7 @@ private fun ReviewIssueTypeSelector(
                 Text(
                     text = issueType.displayLabel(),
                     modifier = Modifier.weight(1f),
-                    color = ComicInk,
+                    color = MaterialTheme.colorScheme.onSurface,
                     fontSize = 12.sp,
                     fontWeight = FontWeight.SemiBold,
                     maxLines = 1,
@@ -843,7 +843,7 @@ private fun ReviewIssueTypeSelector(
                 Icon(
                     imageVector = Icons.Default.ArrowDropDown,
                     contentDescription = null,
-                    tint = ComicInk,
+                    tint = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.size(22.dp)
                 )
             }

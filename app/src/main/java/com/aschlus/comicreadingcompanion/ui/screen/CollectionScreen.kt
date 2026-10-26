@@ -55,7 +55,6 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShape
 import com.aschlus.comicreadingcompanion.ui.theme.ComicGreen
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicOrange
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingXl
 import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
@@ -82,7 +81,7 @@ fun CollectionScreen(
     }
 
     Scaffold(
-        containerColor = ComicPaper,
+        containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             ComicPrimaryHeader {
                 ComicPrimaryHeaderTitle(
@@ -132,7 +131,7 @@ fun CollectionScreen(
                                 .width(190.dp)
                                 .height(42.dp)
                                 .background(
-                                    color = ComicPaper,
+                                    color = MaterialTheme.colorScheme.surface,
                                     shape = RoundedCornerShape(10.dp)
                                 )
                                 .border(
@@ -159,14 +158,14 @@ fun CollectionScreen(
                                         "Publication: Oldest"
                                 },
                                 style = MaterialTheme.typography.labelLarge,
-                                color = ComicInk,
+                                color = MaterialTheme.colorScheme.onSurface,
                                 maxLines = 1
                             )
 
                             Icon(
                                 imageVector = Icons.Default.ArrowDropDown,
                                 contentDescription = "Change sort order",
-                                tint = ComicInk,
+                                tint = MaterialTheme.colorScheme.onSurface,
                                 modifier = Modifier.size(22.dp)
                             )
                         }
@@ -227,7 +226,7 @@ fun CollectionScreen(
                         bottom = 2.dp
                     ),
                     style = MaterialTheme.typography.bodySmall,
-                    color = ComicInk.copy(alpha = 0.7f)
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
 
@@ -383,7 +382,7 @@ private fun CollectionReadingStatusCard(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(ComicPaper, shape)
+                .background(MaterialTheme.colorScheme.surface, shape)
                 .border(ComicCardBorderWidth, ComicInk, shape)
                 .padding(
                     horizontal = 10.dp,
@@ -395,7 +394,7 @@ private fun CollectionReadingStatusCard(
                 text = "READING STATUS",
                 style = MaterialTheme.typography.labelMedium,
                 fontWeight = FontWeight.Black,
-                color = ComicInk
+                color = MaterialTheme.colorScheme.onSurface
             )
 
             CollectionStatusCount(
@@ -451,7 +450,7 @@ private fun CollectionStatusCount(
             Text(
                 text = label,
                 style = MaterialTheme.typography.bodySmall,
-                color = ComicInk
+                color = MaterialTheme.colorScheme.onSurface
             )
         }
 
@@ -459,7 +458,7 @@ private fun CollectionStatusCount(
             text = count.toString(),
             style = MaterialTheme.typography.bodySmall,
             fontWeight = FontWeight.Bold,
-            color = ComicInk
+            color = MaterialTheme.colorScheme.onSurface
         )
     }
 }
@@ -496,7 +495,7 @@ private fun OwnedIssueCard(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(ComicPaper, shape)
+                .background(MaterialTheme.colorScheme.surface, shape)
                 .border(ComicCardBorderWidth, ComicInk, shape)
                 .clickable(onClick = onClick)
                 .padding(10.dp),
@@ -522,7 +521,7 @@ private fun OwnedIssueCard(
                     issue.seriesTitle,
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Black,
-                    color = ComicInk
+                    color = MaterialTheme.colorScheme.onSurface
                 )
 
                 Text(
@@ -533,7 +532,7 @@ private fun OwnedIssueCard(
                     },
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.SemiBold,
-                    color = ComicInk
+                    color = MaterialTheme.colorScheme.onSurface
                 )
 
                 Text(
@@ -551,7 +550,7 @@ private fun OwnedIssueCard(
                         add(issue.publisherName)
                     }.joinToString(" • "),
                     style = MaterialTheme.typography.bodySmall,
-                    color = ComicInk.copy(alpha = 0.7f)
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
 
                 Text(

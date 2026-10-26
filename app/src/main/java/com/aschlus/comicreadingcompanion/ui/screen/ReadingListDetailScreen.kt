@@ -24,8 +24,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
-import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
-import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingXs
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.foundation.verticalScroll
@@ -102,11 +100,11 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingXs
 import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
 import com.aschlus.comicreadingcompanion.ui.theme.LilitaOneFontFamily
 import com.aschlus.comicreadingcompanion.ui.viewmodel.PendingReadingListIssue
@@ -1869,7 +1867,7 @@ private fun EditReadingListContent(
     onAddIssuesClick: () -> Unit
 ) {
     Scaffold(
-        containerColor = ComicPaper,
+        containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             ComicEditReadingListHeader(
                 onBackClick = onBackClick
@@ -1974,7 +1972,8 @@ private fun EditReadingListContent(
             ) {
                 ComicWideActionButton(
                     text = "CANCEL",
-                    backgroundColor = ComicPaper,
+                    backgroundColor = MaterialTheme.colorScheme.surface,
+                    contentColor = MaterialTheme.colorScheme.onSurface,
                     onClick = onCancelClick,
                     modifier = Modifier.weight(1f)
                 )

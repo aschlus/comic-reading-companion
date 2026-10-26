@@ -29,14 +29,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
-import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShape
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
 import com.aschlus.comicreadingcompanion.ui.viewmodel.PendingReadingListIssue
 import com.aschlus.comicreadingcompanion.util.formatPublicationDate
 
@@ -75,7 +74,7 @@ fun ComicPendingReadingListIssueRow(
                 Modifier
                     .fillMaxWidth()
                     .background(
-                        color = ComicPaper,
+                        color = MaterialTheme.colorScheme.surface,
                         shape = shape
                     )
                     .border(
@@ -107,7 +106,7 @@ fun ComicPendingReadingListIssueRow(
                             lineHeight = 18.sp,
                             fontWeight = FontWeight.Bold
                         ),
-                    color = ComicInk,
+                    color = MaterialTheme.colorScheme.onSurface,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -118,7 +117,7 @@ fun ComicPendingReadingListIssueRow(
                         Text(
                             text = title,
                             style = MaterialTheme.typography.bodySmall,
-                            color = ComicInk.copy(alpha = 0.75f),
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis
                         )
@@ -133,7 +132,7 @@ fun ComicPendingReadingListIssueRow(
                                 .copy(
                                     fontSize = 11.sp
                                 ),
-                            color = ComicInk.copy(alpha = 0.6f)
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
             }
@@ -216,7 +215,7 @@ private fun ComicPendingIssueActionButton(
                         .size(30.dp)
                         .clip(shape)
                         .background(
-                            color = ComicPaper.copy(alpha = alpha)
+                            color = MaterialTheme.colorScheme.surface.copy(alpha = alpha)
                         )
                         .border(
                             width = 2.dp,
@@ -229,7 +228,7 @@ private fun ComicPendingIssueActionButton(
                 Icon(
                     imageVector = icon,
                     contentDescription = contentDescription,
-                    tint = ComicInk.copy(alpha = alpha),
+                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = alpha),
                     modifier = Modifier.size(20.dp)
                 )
             }

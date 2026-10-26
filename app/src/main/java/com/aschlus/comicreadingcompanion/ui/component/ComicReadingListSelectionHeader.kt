@@ -37,7 +37,6 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
@@ -161,7 +160,7 @@ private fun ComicSelectionActionButton(
     contentDescription: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    backgroundColor: Color = ComicPaper
+    backgroundColor: Color? = null
 ) {
     val shape = RoundedCornerShape(9.dp)
 
@@ -193,7 +192,7 @@ private fun ComicSelectionActionButton(
                     .height(48.dp)
                     .clip(shape)
                     .background(
-                        backgroundColor
+                        backgroundColor?: MaterialTheme.colorScheme.surface
                     )
                     .border(
                         width = ComicCardBorderWidth,
@@ -214,7 +213,7 @@ private fun ComicSelectionActionButton(
                             fontSize = 12.sp,
                             fontWeight = FontWeight.ExtraBold
                         ),
-                color = ComicInk,
+                color = if (backgroundColor == null) MaterialTheme.colorScheme.onSurface else ComicInk,
                 maxLines = 1
             )
         }

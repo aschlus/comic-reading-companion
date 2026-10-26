@@ -7,10 +7,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -30,10 +30,9 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShape
 import com.aschlus.comicreadingcompanion.ui.theme.ComicHeaderTextTransform
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
+import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
 import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
 import com.aschlus.comicreadingcompanion.ui.theme.LilitaOneFontFamily
-import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
 
 @Composable
 fun ComicIssueDetailHeader(
@@ -93,7 +92,7 @@ fun ComicIssueDetailHeader(
                         .size(54.dp)
                         .clip(shape)
                         .background(
-                            ComicPaper
+                            MaterialTheme.colorScheme.surface
                         )
                         .border(
                             width = ComicCardBorderWidth,
@@ -110,7 +109,7 @@ fun ComicIssueDetailHeader(
                     imageVector =
                         Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = "Back",
-                    tint = ComicInk,
+                    tint = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.size(30.dp)
                 )
             }

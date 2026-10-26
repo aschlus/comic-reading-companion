@@ -16,7 +16,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
 
 @Composable
@@ -31,7 +30,7 @@ fun ComicDropdownMenu(
         onDismissRequest = onDismissRequest,
         modifier = modifier,
         shape = RoundedCornerShape(10.dp),
-        containerColor = ComicPaper,
+        containerColor = MaterialTheme.colorScheme.surface,
         tonalElevation = 0.dp,
         shadowElevation = 4.dp,
         border =
@@ -63,13 +62,13 @@ fun ComicDropdownMenuItem(
                 color =
                     when {
                         !enabled ->
-                            ComicInk.copy(alpha = 0.38f)
+                            MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
 
                         destructive ->
                             ComicRed
 
                         else ->
-                            ComicInk
+                            MaterialTheme.colorScheme.onSurface
                     }
             )
         },

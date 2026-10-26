@@ -117,7 +117,7 @@ private fun ComicIssueStatusButton(
                         if (selected) {
                             ComicBlueLight
                         } else {
-                             ComicPaper
+                            MaterialTheme.colorScheme.surface
                         }
                     )
                     .border(
@@ -140,7 +140,7 @@ private fun ComicIssueStatusButton(
                             fontSize = 13.sp,
                             fontWeight = FontWeight.ExtraBold
                         ),
-                color = ComicInk
+                color = if (selected) ComicInk else MaterialTheme.colorScheme.onSurface
             )
         }
     }

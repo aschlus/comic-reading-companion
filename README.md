@@ -180,8 +180,8 @@ building, following, and tracking comic-book reading orders.
 - [x] Add subtle halftone / ink-texture decoration without reducing readability
 - [x] Add original app-owned placeholder / decorative artwork
 - [ ] Maintain accessible contrast and touch targets beneath stylized visuals
-- [ ] Create a coordinated dark-theme treatment
-- [ ] Apply the design system consistently across all screens
+- [x] Create a coordinated dark-theme treatment
+- [x] Apply the design system consistently across all screens
 
 ### App Navigation and Screen Structure
 

@@ -47,14 +47,14 @@ fun ComicLibrarySearchField(
         singleLine = true,
         textStyle = MaterialTheme.typography.bodyLarge.copy(
             fontSize = 15.sp,
-            color = ComicInk
+            color = MaterialTheme.colorScheme.onSurface
         ),
-        cursorBrush = SolidColor(ComicInk),
+        cursorBrush = SolidColor(MaterialTheme.colorScheme.onSurface),
         modifier =
             modifier
                 .height(48.dp)
                 .background(
-                    color = ComicPaper,
+                    color = MaterialTheme.colorScheme.surface,
                     shape = shape
                 )
                 .border(
@@ -81,7 +81,7 @@ fun ComicLibrarySearchField(
                 Icon(
                     imageVector = Icons.Default.Search,
                     contentDescription = null,
-                    tint = ComicInk,
+                    tint = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.size(25.dp)
                 )
 
@@ -101,7 +101,7 @@ fun ComicLibrarySearchField(
                             style = MaterialTheme.typography.bodyLarge.copy(
                                 fontSize = 15.sp
                             ),
-                            color = ComicMutedInk
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
 
@@ -116,7 +116,7 @@ fun ComicLibrarySearchField(
                         Icon(
                             imageVector = Icons.Default.Close,
                             contentDescription = "Clear reading list search",
-                            tint = ComicInk
+                            tint = MaterialTheme.colorScheme.onSurface
                         )
                     }
                 }
