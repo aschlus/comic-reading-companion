@@ -12,6 +12,7 @@ import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewModelScope
 import androidx.room3.Room
 import androidx.test.core.app.ApplicationProvider
@@ -31,6 +32,7 @@ import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -225,7 +227,24 @@ class CollectionScreenTest {
                 )
             }
         }
+        val minimumTouchTargetPx = with(composeRule.density) {
+            48.dp.toPx()
+        }
 
+        val sortControlBounds = composeRule
+            .onNodeWithContentDescription("Change sort order")
+            .fetchSemanticsNode()
+            .boundsInRoot
+
+        assertTrue(
+            "Collection sort control must be at least 48dp tall",
+            sortControlBounds.height >= minimumTouchTargetPx
+        )
+
+        assertTrue(
+            "Collection sort control must be at least 48dp wide",
+            sortControlBounds.width >= minimumTouchTargetPx
+        )
         composeRule
             .onNodeWithContentDescription("Change sort order")
             .assert(buttonRole)

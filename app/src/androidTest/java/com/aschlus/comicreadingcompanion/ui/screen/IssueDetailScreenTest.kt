@@ -36,7 +36,9 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import androidx.compose.ui.test.onAllNodesWithContentDescription
+import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.flow.first
+import org.junit.Assert.assertTrue
 
 @RunWith(AndroidJUnit4::class)
 class IssueDetailScreenTest {
@@ -331,6 +333,25 @@ class IssueDetailScreenTest {
                     .fetchSemanticsNodes()
                     .isNotEmpty()
             }
+            val minimumTouchTargetPx = with(composeRule.density) {
+                48.dp.toPx()
+            }
+
+            val seriesLinkBounds = composeRule
+                .onNodeWithText("Amazing Spider-Man")
+                .performScrollTo()
+                .fetchSemanticsNode()
+                .boundsInRoot
+
+            assertTrue(
+                "Series link must be at least 48dp tall",
+                seriesLinkBounds.height >= minimumTouchTargetPx
+            )
+
+            assertTrue(
+                "Series link must be at least 48dp wide",
+                seriesLinkBounds.width >= minimumTouchTargetPx
+            )
             composeRule.onNodeWithText("Amazing Spider-Man")
                 .performScrollTo()
                 .assert(buttonRole)

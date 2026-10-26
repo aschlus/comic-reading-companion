@@ -164,7 +164,7 @@ private fun RecentReadCover(
                     .clip(shape)
                     .border(
                         width = 2.dp,
-                        color = MaterialTheme.colorScheme.outline,
+                        color = ComicInk,
                         shape = shape
                     ),
             loading = {
@@ -232,7 +232,7 @@ private fun RecentReadPlaceholder(
                 )
                 .border(
                     width = 2.dp,
-                    color = MaterialTheme.colorScheme.outline,
+                    color = ComicInk,
                     shape = RoundedCornerShape(5.dp)
                 ),
         contentAlignment =

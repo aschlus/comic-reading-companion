@@ -145,14 +145,14 @@ fun ComicVineVolumeReviewScreen(
                             .background(ComicRed.copy(alpha = 0.12f))
                             .border(
                                 width = ComicCardBorderWidth,
-                                color = ComicRed,
+                                color = MaterialTheme.colorScheme.error,
                                 shape = RoundedCornerShape(6.dp)
                             )
                             .padding(horizontal = ComicSpacingMd, vertical = 10.dp)
                     ) {
                         Text(
                             text = error,
-                            color = ComicRed,
+                            color = MaterialTheme.colorScheme.error,
                             fontSize = 13.sp,
                             fontWeight = FontWeight.SemiBold
                         )

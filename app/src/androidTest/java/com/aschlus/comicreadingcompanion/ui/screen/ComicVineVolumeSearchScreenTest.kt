@@ -13,6 +13,7 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewModelScope
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -26,6 +27,7 @@ import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -245,6 +247,24 @@ class ComicVineVolumeSearchScreenTest {
         composeRule
             .onNodeWithContentDescription("Expected issue count filter")
             .assertDoesNotExist()
+        val minimumTouchTargetPx = with(composeRule.density) {
+            48.dp.toPx()
+        }
+
+        val matchingOptionsBounds = composeRule
+            .onNodeWithText("ADDITIONAL MATCHING OPTIONS")
+            .fetchSemanticsNode()
+            .boundsInRoot
+
+        assertTrue(
+            "Matching options control must be at least 48dp tall",
+            matchingOptionsBounds.height >= minimumTouchTargetPx
+        )
+
+        assertTrue(
+            "Matching options control must be at least 48dp wide",
+            matchingOptionsBounds.width >= minimumTouchTargetPx
+        )
 
         composeRule
             .onNodeWithText("ADDITIONAL MATCHING OPTIONS")

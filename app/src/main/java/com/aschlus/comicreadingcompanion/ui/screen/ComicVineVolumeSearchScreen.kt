@@ -139,58 +139,68 @@ fun ComicVineVolumeSearchScreen(
                 Column(
                     verticalArrangement = Arrangement.spacedBy(ComicSpacingMd)
                 ) {
+                    val shape = RoundedCornerShape(9.dp)
+
                     Box(
-                        modifier = Modifier.height(44.dp)
+                        modifier = Modifier
+                            .height(48.dp)
+                            .clickable(
+                                role = Role.Button,
+                                onClick = {
+                                    matchingOptionsExpanded = !matchingOptionsExpanded
+                                }
+                            )
                     ) {
-                        val shape = RoundedCornerShape(9.dp)
-
                         Box(
-                            modifier = Modifier
-                                .matchParentSize()
-                                .offset(x = 2.dp,y = 3.dp)
-                                .background(
-                                    color = ComicInk,
-                                    shape = shape
-                                )
-                        )
-
-                        Row(
-                            modifier = Modifier
-                                .height(41.dp)
-                                .clip(shape)
-                                .background(MaterialTheme.colorScheme.surface)
-                                .border(
-                                    width = ComicCardBorderWidth,
-                                    color = MaterialTheme.colorScheme.outline,
-                                    shape = shape
-                                )
-                                .clickable(
-                                    role = Role.Button,
-                                    onClick = {
-                                        matchingOptionsExpanded = !matchingOptionsExpanded
-                                    }
-                                )
-                                .padding(horizontal = 14.dp),
-                            verticalAlignment = Alignment.CenterVertically
+                            modifier = Modifier.height(44.dp)
                         ) {
-                            Icon(
-                                imageVector = Icons.Default.FilterList,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.onSurface,
-                                modifier = Modifier.size(18.dp)
+                            Box(
+                                modifier = Modifier
+                                    .matchParentSize()
+                                    .offset(
+                                        x = 2.dp,
+                                        y = 3.dp
+                                    )
+                                    .background(
+                                        color = ComicInk,
+                                        shape = shape
+                                    )
                             )
 
-                            Spacer(Modifier.width(ComicSpacingSm))
+                            Row(
+                                modifier = Modifier
+                                    .height(41.dp)
+                                    .clip(shape)
+                                    .background(MaterialTheme.colorScheme.surface)
+                                    .border(
+                                        width = ComicCardBorderWidth,
+                                        color = MaterialTheme.colorScheme.outline,
+                                        shape = shape
+                                    )
+                                    .padding(horizontal = 14.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.FilterList,
+                                    contentDescription = null,
+                                    tint = MaterialTheme.colorScheme.onSurface,
+                                    modifier = Modifier.size(18.dp)
+                                )
 
-                            Text(
-                                text = if (matchingOptionsExpanded) {
-                                    "HIDE MATCHING OPTIONS"
-                                } else {
-                                    "ADDITIONAL MATCHING OPTIONS"
-                                },
-                                color = MaterialTheme.colorScheme.onSurface,
-                                fontWeight = FontWeight.ExtraBold
-                            )
+                                Spacer(
+                                    modifier = Modifier.width(ComicSpacingSm)
+                                )
+
+                                Text(
+                                    text = if (matchingOptionsExpanded) {
+                                        "HIDE MATCHING OPTIONS"
+                                    } else {
+                                        "ADDITIONAL MATCHING OPTIONS"
+                                    },
+                                    color = MaterialTheme.colorScheme.onSurface,
+                                    fontWeight = FontWeight.ExtraBold
+                                )
+                            }
                         }
                     }
 

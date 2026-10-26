@@ -152,7 +152,11 @@ private fun ComicAddToListResultRow(
                     )
                     .border(
                         width = ComicCardBorderWidth,
-                        color = MaterialTheme.colorScheme.outline,
+                        color = if (selected) {
+                            ComicInk
+                        } else {
+                            MaterialTheme.colorScheme.outline
+                        },
                         shape = shape
                     )
                     .toggleable(
@@ -232,7 +236,11 @@ private fun ComicAddToListResultRow(
                         )
                         .border(
                             width = 2.dp,
-                            color = MaterialTheme.colorScheme.outline,
+                            color = if (selected) {
+                                ComicInk
+                            } else {
+                                MaterialTheme.colorScheme.outline
+                            },
                             shape = RoundedCornerShape(7.dp)
                         ),
                 contentAlignment =

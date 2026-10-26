@@ -127,51 +127,58 @@ fun CollectionScreen(
                     horizontalArrangement = Arrangement.End
                 ) {
                     Box {
-                        Row(
+                        Box(
                             modifier = Modifier
                                 .width(190.dp)
-                                .height(42.dp)
-                                .background(
-                                    color = MaterialTheme.colorScheme.surface,
-                                    shape = RoundedCornerShape(10.dp)
-                                )
-                                .border(
-                                    width = ComicCardBorderWidth,
-                                    color = MaterialTheme.colorScheme.outline,
-                                    shape = RoundedCornerShape(10.dp)
-                                )
+                                .height(48.dp)
                                 .clickable(
                                     role = Role.Button,
                                     onClick = {
                                         sortMenuExpanded = true
                                     }
-                                )
-                                .padding(horizontal = 10.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceBetween
+                                ),
+                            contentAlignment = Alignment.Center
                         ) {
-                            Text(
-                                text = when (sort) {
-                                    CollectionSort.TITLE_ASCENDING ->
-                                        "Title A-Z"
+                            Row(
+                                modifier = Modifier
+                                    .width(190.dp)
+                                    .height(42.dp)
+                                    .background(
+                                        color = MaterialTheme.colorScheme.surface,
+                                        shape = RoundedCornerShape(10.dp)
+                                    )
+                                    .border(
+                                        width = ComicCardBorderWidth,
+                                        color = MaterialTheme.colorScheme.outline,
+                                        shape = RoundedCornerShape(10.dp)
+                                    )
+                                    .padding(horizontal = 10.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                Text(
+                                    text = when (sort) {
+                                        CollectionSort.TITLE_ASCENDING ->
+                                            "Title A-Z"
 
-                                    CollectionSort.PUBLICATION_NEWEST ->
-                                        "Publication: Newest"
+                                        CollectionSort.PUBLICATION_NEWEST ->
+                                            "Publication: Newest"
 
-                                    CollectionSort.PUBLICATION_OLDEST ->
-                                        "Publication: Oldest"
-                                },
-                                style = MaterialTheme.typography.labelLarge,
-                                color = MaterialTheme.colorScheme.onSurface,
-                                maxLines = 1
-                            )
+                                        CollectionSort.PUBLICATION_OLDEST ->
+                                            "Publication: Oldest"
+                                    },
+                                    style = MaterialTheme.typography.labelLarge,
+                                    color = MaterialTheme.colorScheme.onSurface,
+                                    maxLines = 1
+                                )
 
-                            Icon(
-                                imageVector = Icons.Default.ArrowDropDown,
-                                contentDescription = "Change sort order",
-                                tint = MaterialTheme.colorScheme.onSurface,
-                                modifier = Modifier.size(22.dp)
-                            )
+                                Icon(
+                                    imageVector = Icons.Default.ArrowDropDown,
+                                    contentDescription = "Change sort order",
+                                    tint = MaterialTheme.colorScheme.onSurface,
+                                    modifier = Modifier.size(22.dp)
+                                )
+                            }
                         }
 
                         ComicDropdownMenu(

@@ -74,7 +74,7 @@ fun ComicConfirmationDialog(
                         )
                         .border(
                             width = ComicCardBorderWidth,
-                            color = ComicInk,
+                            color = MaterialTheme.colorScheme.outline,
                             shape = shape
                         )
                         .padding(ComicSpacingXl),
@@ -152,6 +152,16 @@ internal fun ComicDialogButton(
             0.35f
         }
 
+    val borderColor =
+        if (
+            backgroundColor == MaterialTheme.colorScheme.surface ||
+            backgroundColor == MaterialTheme.colorScheme.surfaceVariant
+        ) {
+            MaterialTheme.colorScheme.outline
+        } else {
+            ComicInk
+        }
+
     Box(
         modifier = modifier
             .height(48.dp)
@@ -190,7 +200,7 @@ internal fun ComicDialogButton(
                     )
                     .border(
                         width = ComicCardBorderWidth,
-                        color = ComicInk.copy(alpha = alpha),
+                        color = borderColor.copy(alpha = alpha),
                         shape = shape
                     )
                     .padding(horizontal = 18.dp),

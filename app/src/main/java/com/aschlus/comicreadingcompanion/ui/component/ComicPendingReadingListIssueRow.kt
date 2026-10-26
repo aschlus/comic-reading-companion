@@ -79,7 +79,7 @@ fun ComicPendingReadingListIssueRow(
                     )
                     .border(
                         width = ComicCardBorderWidth,
-                        color = ComicInk,
+                        color = MaterialTheme.colorScheme.outline,
                         shape = shape
                     )
                     .padding(
@@ -219,7 +219,7 @@ private fun ComicPendingIssueActionButton(
                         )
                         .border(
                             width = 2.dp,
-                            color = ComicInk.copy(alpha = alpha),
+                            color = MaterialTheme.colorScheme.outline.copy(alpha = alpha),
                             shape = shape
                         ),
                 contentAlignment =

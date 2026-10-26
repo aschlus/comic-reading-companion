@@ -113,7 +113,11 @@ private fun ComicAddToListFilterButton(
                     )
                     .border(
                         width = ComicCardBorderWidth,
-                        color = MaterialTheme.colorScheme.outline,
+                        color = if (selected) {
+                            ComicInk
+                        } else {
+                            MaterialTheme.colorScheme.outline
+                        },
                         shape = shape
                     ),
                 contentAlignment = Alignment.Center

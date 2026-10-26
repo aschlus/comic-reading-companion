@@ -13,6 +13,7 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
+import androidx.compose.ui.unit.dp
 import androidx.room3.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -34,6 +35,7 @@ import com.aschlus.comicreadingcompanion.ui.viewmodel.ImportReadingListState
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -912,7 +914,24 @@ class LibraryScreenTest {
                 .fetchSemanticsNodes()
                 .isNotEmpty()
         }
+        val minimumTouchTargetPx = with(composeRule.density) {
+            48.dp.toPx()
+        }
 
+        val sortControlBounds = composeRule
+            .onNodeWithContentDescription("Change reading list sort order")
+            .fetchSemanticsNode()
+            .boundsInRoot
+
+        assertTrue(
+            "Reading list sort control must be at least 48dp tall",
+            sortControlBounds.height >= minimumTouchTargetPx
+        )
+
+        assertTrue(
+            "Reading list sort control must be at least 48dp wide",
+            sortControlBounds.width >= minimumTouchTargetPx
+        )
         composeRule
             .onNodeWithContentDescription(
                 "Change reading list sort order"

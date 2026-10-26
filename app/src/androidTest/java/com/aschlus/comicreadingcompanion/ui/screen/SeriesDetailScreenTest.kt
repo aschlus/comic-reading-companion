@@ -12,6 +12,7 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewModelScope
 import androidx.room3.Room
 import androidx.test.core.app.ApplicationProvider
@@ -30,6 +31,7 @@ import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -241,6 +243,24 @@ class SeriesDetailScreenTest {
                     .fetchSemanticsNodes()
                     .isNotEmpty()
             }
+            val minimumTouchTargetPx = with(composeRule.density) {
+                48.dp.toPx()
+            }
+
+            val publisherBounds = composeRule
+                .onNodeWithText("Marvel")
+                .fetchSemanticsNode()
+                .boundsInRoot
+
+            assertTrue(
+                "Publisher link must be at least 48dp tall",
+                publisherBounds.height >= minimumTouchTargetPx
+            )
+
+            assertTrue(
+                "Publisher link must be at least 48dp wide",
+                publisherBounds.width >= minimumTouchTargetPx
+            )
             composeRule.onNodeWithText("Marvel")
                 .assert(buttonRole)
                 .performClick()

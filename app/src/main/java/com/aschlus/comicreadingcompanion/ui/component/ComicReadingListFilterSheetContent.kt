@@ -386,7 +386,11 @@ private fun ComicFilterChoice(
                     )
                     .border(
                         width = ComicCardBorderWidth,
-                        color = MaterialTheme.colorScheme.outline,
+                        color = if (selected) {
+                            ComicInk
+                        } else {
+                            MaterialTheme.colorScheme.outline
+                        },
                         shape = shape
                     )
                     .padding(horizontal = 14.dp),

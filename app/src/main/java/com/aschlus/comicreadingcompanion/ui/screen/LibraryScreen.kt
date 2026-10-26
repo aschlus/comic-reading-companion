@@ -180,59 +180,66 @@ fun LibraryScreen(
                         )
 
                         Box {
-                            Row(
-                                modifier =
-                                    Modifier
-                                        .width(142.dp)
-                                        .height(42.dp)
-                                        .background(
-                                            color = MaterialTheme.colorScheme.surface,
-                                            shape = RoundedCornerShape(12.dp)
-                                        )
-                                        .border(
-                                            width = ComicCardBorderWidth,
-                                            color = MaterialTheme.colorScheme.outline,
-                                            shape = RoundedCornerShape(12.dp)
-                                        )
-                                        .clickable(
-                                            role = Role.Button,
-                                            onClick = {
-                                                focusManager.clearFocus()
-                                                sortMenuExpanded = true
-                                            }
-                                        )
-                                        .padding(
-                                            start = ComicSpacingMd,
-                                            end = 7.dp
-                                        ),
-                                verticalAlignment =
-                                    Alignment.CenterVertically,
-                                horizontalArrangement =
-                                    Arrangement.SpaceBetween
+                            Box(
+                                modifier = Modifier
+                                    .width(142.dp)
+                                    .height(48.dp)
+                                    .clickable(
+                                        role = Role.Button,
+                                        onClick = {
+                                            focusManager.clearFocus()
+                                            sortMenuExpanded = true
+                                        }
+                                    ),
+                                contentAlignment = Alignment.Center
                             ) {
-                                Text(
-                                    when (sort) {
-                                        HomeReadingListSort.RECENTLY_UPDATED ->
-                                            "Recently updated"
+                                Row(
+                                    modifier =
+                                        Modifier
+                                            .width(142.dp)
+                                            .height(42.dp)
+                                            .background(
+                                                color = MaterialTheme.colorScheme.surface,
+                                                shape = RoundedCornerShape(12.dp)
+                                            )
+                                            .border(
+                                                width = ComicCardBorderWidth,
+                                                color = MaterialTheme.colorScheme.outline,
+                                                shape = RoundedCornerShape(12.dp)
+                                            )
+                                            .padding(
+                                                start = ComicSpacingMd,
+                                                end = 7.dp
+                                            ),
+                                    verticalAlignment =
+                                        Alignment.CenterVertically,
+                                    horizontalArrangement =
+                                        Arrangement.SpaceBetween
+                                ) {
+                                    Text(
+                                        when (sort) {
+                                            HomeReadingListSort.RECENTLY_UPDATED ->
+                                                "Recently updated"
 
-                                        HomeReadingListSort.TITLE_ASCENDING ->
-                                            "Title A-Z"
+                                            HomeReadingListSort.TITLE_ASCENDING ->
+                                                "Title A-Z"
 
-                                        HomeReadingListSort.TITLE_DESCENDING ->
-                                            "Title Z-A"
-                                    },
-                                    style = MaterialTheme.typography.labelLarge,
-                                    color = MaterialTheme.colorScheme.onSurface,
-                                    maxLines = 1
-                                )
+                                            HomeReadingListSort.TITLE_DESCENDING ->
+                                                "Title Z-A"
+                                        },
+                                        style = MaterialTheme.typography.labelLarge,
+                                        color = MaterialTheme.colorScheme.onSurface,
+                                        maxLines = 1
+                                    )
 
-                                Icon(
-                                    imageVector = Icons.Default.ArrowDropDown,
-                                    contentDescription = "Change reading list sort order",
-                                    tint = MaterialTheme.colorScheme.onSurface,
-                                    modifier = Modifier.size(20.dp)
-                                )
-                             }
+                                    Icon(
+                                        imageVector = Icons.Default.ArrowDropDown,
+                                        contentDescription = "Change reading list sort order",
+                                        tint = MaterialTheme.colorScheme.onSurface,
+                                        modifier = Modifier.size(20.dp)
+                                    )
+                                }
+                            }
 
                             ComicDropdownMenu(
                                 expanded = sortMenuExpanded,

@@ -199,7 +199,11 @@ private fun ComicSelectionActionButton(
                     )
                     .border(
                         width = ComicCardBorderWidth,
-                        color = ComicInk,
+                        color = if (backgroundColor == null) {
+                            MaterialTheme.colorScheme.outline
+                        } else {
+                            ComicInk
+                        },
                         shape = shape
                     )
                     .clickable(

@@ -108,7 +108,11 @@ private fun ComicIssueStatusButton(
                     )
                     .border(
                         width = ComicCardBorderWidth,
-                        color = ComicInk,
+                        color = if (selected) {
+                            ComicInk
+                        } else {
+                            MaterialTheme.colorScheme.outline
+                        },
                         shape = shape
                     )
                     .clickable(

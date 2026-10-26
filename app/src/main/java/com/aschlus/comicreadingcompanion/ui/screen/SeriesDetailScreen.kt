@@ -2,6 +2,7 @@ package com.aschlus.comicreadingcompanion.ui.screen
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -196,25 +197,30 @@ fun SeriesDetailScreen(
                 }
 
                 item {
-                    Text(
-                        text =
-                            currentSeries.publisherName,
-                        modifier = Modifier.clickable(
-                            role = Role.Button,
-                            onClick = {
-                                onPublisherClick(currentSeries.publisherId)
-                            }
-                        ),
-                        style =
-                            MaterialTheme.typography.titleMedium
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .heightIn(min = 48.dp)
+                            .clickable(
+                                role = Role.Button,
+                                onClick = {
+                                    onPublisherClick(currentSeries.publisherId)
+                                }
+                            ),
+                        contentAlignment = Alignment.CenterStart
+                    ) {
+                        Text(
+                            text = currentSeries.publisherName,
+                            style = MaterialTheme.typography.titleMedium
                                 .copy(
                                     fontSize = 17.sp,
                                     lineHeight = 20.sp,
                                     fontWeight = FontWeight.Bold,
                                     textDecoration = TextDecoration.Underline
                                 ),
-                        color = ComicBlue
-                    )
+                            color = ComicBlue
+                        )
+                    }
                 }
 
                 item {

@@ -38,7 +38,7 @@ fun ComicAddToListActionBar(
                 )
                 .border(
                     width = ComicCardBorderWidth,
-                    color = ComicInk
+                    color = MaterialTheme.colorScheme.outline
                 )
                 .navigationBarsPadding()
                 .padding(

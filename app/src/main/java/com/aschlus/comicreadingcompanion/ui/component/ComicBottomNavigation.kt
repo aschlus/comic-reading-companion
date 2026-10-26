@@ -44,6 +44,8 @@ fun ComicBottomNavigation(
     onCollectionClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val topBorderColor = MaterialTheme.colorScheme.outline
+
     NavigationBar(
         modifier =
             modifier
@@ -53,7 +55,7 @@ fun ComicBottomNavigation(
                     val strokeWidth = 2.dp.toPx()
 
                     drawLine(
-                        color = ComicInk,
+                        color = topBorderColor,
                         start = Offset(
                             x = 0f,
                             y = strokeWidth / 2f

@@ -217,7 +217,7 @@ fun ComicBrowseResultRow(
                         .background(badgeColor)
                         .border(
                             width = 2.dp,
-                            color = MaterialTheme.colorScheme.outline,
+                            color = ComicInk,
                             shape = RoundedCornerShape(6.dp)
                         ),
                     contentAlignment = Alignment.Center

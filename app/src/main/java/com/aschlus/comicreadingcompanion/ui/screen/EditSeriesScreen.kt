@@ -232,7 +232,7 @@ fun EditSeriesScreen(
                             .background(ComicRed.copy(alpha = 0.12f))
                             .border(
                                 width = 2.dp,
-                                color = ComicInk,
+                                color = MaterialTheme.colorScheme.error,
                                 shape = errorShape
                             )
                             .padding(
@@ -242,7 +242,7 @@ fun EditSeriesScreen(
                     ) {
                         Text(
                             text = errorMessage.orEmpty(),
-                            color = ComicRed,
+                            color = MaterialTheme.colorScheme.error,
                             fontSize = 13.sp,
                             fontWeight = FontWeight.SemiBold
                         )

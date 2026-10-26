@@ -13,8 +13,10 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -150,26 +152,30 @@ fun IssueDetailScreen(
                         verticalArrangement =
                             Arrangement.spacedBy(7.dp)
                     ) {
-                        Text(
-                            text = currentIssue.seriesTitle,
-                            modifier = Modifier.clickable(
-                                role = Role.Button,
-                                onClick = {
-                                    onSeriesClick(currentIssue.seriesId)
-                                }
-                            ),
-                            style =
-                                MaterialTheme.typography.titleLarge
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .heightIn(min = 48.dp)
+                                .clickable(
+                                    role = Role.Button,
+                                    onClick = {
+                                        onSeriesClick(currentIssue.seriesId)
+                                    }
+                                ),
+                            contentAlignment = Alignment.CenterStart
+                        ) {
+                            Text(
+                                text = currentIssue.seriesTitle,
+                                style = MaterialTheme.typography.titleLarge
                                     .copy(
                                         fontSize = 21.sp,
                                         lineHeight = 24.sp,
                                         fontWeight = FontWeight.Bold,
                                         textDecoration = TextDecoration.Underline
                                     ),
-                            color = ComicBlue,
-                            maxLines = 2,
-                            overflow = TextOverflow.Ellipsis
-                        )
+                                color = ComicBlue
+                            )
+                        }
 
                         Text(
                             text =

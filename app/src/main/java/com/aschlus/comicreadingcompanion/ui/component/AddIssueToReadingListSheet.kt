@@ -322,12 +322,11 @@ private fun ComicSheetMessage(
                 )
                 .border(
                     width = ComicCardBorderWidth,
-                    color =
-                        if (error) {
-                            ComicRed
-                        } else {
-                            ComicInk
-                        },
+                    color = if (error) {
+                                MaterialTheme.colorScheme.error
+                            } else {
+                                MaterialTheme.colorScheme.outline
+                            },
                     shape = shape
                 )
                 .padding(

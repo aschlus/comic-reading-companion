@@ -147,7 +147,7 @@ private fun ComicReadingListStyleOption(
                             .background(MaterialTheme.colorScheme.surface)
                             .border(
                                 width = 2.dp,
-                                color = ComicInk,
+                                color = MaterialTheme.colorScheme.outline,
                                 shape = RoundedCornerShape(7.dp)
                             ),
                     contentAlignment =

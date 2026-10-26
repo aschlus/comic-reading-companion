@@ -246,7 +246,7 @@ private fun PublisherCoverCollage(
                                 ),
                         placeholderText = "",
                         shape = coverShape,
-                        borderColor = MaterialTheme.colorScheme.outline,
+                        borderColor = ComicInk,
                         contentScale = ContentScale.Fit
                     )
                 }

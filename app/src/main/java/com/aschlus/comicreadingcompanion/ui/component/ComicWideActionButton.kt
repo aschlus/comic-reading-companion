@@ -38,6 +38,16 @@ fun ComicWideActionButton(
             0.35f
         }
 
+    val borderColor =
+        if (
+            backgroundColor == MaterialTheme.colorScheme.surface ||
+            backgroundColor == MaterialTheme.colorScheme.surfaceVariant
+        ) {
+            MaterialTheme.colorScheme.outline
+        } else {
+            ComicInk
+        }
+
     Box(
         modifier =
             modifier
@@ -77,7 +87,7 @@ fun ComicWideActionButton(
                     )
                     .border(
                         width = ComicCardBorderWidth,
-                        color = ComicInk.copy(alpha = alpha),
+                        color = borderColor.copy(alpha = alpha),
                         shape = shape
                     ),
             contentAlignment =
