@@ -44,7 +44,6 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacing2Xl
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
@@ -125,7 +124,8 @@ fun ComicReadingListFilterSheetContent(
                             "UNREAD"
                         }
                     )
-                }
+                },
+                modifier = Modifier.weight(1f)
             )
 
             ComicFilterChoice(
@@ -139,7 +139,8 @@ fun ComicReadingListFilterSheetContent(
                             "READING"
                         }
                     )
-                }
+                },
+                modifier = Modifier.weight(1f)
             )
 
             ComicFilterChoice(
@@ -153,7 +154,8 @@ fun ComicReadingListFilterSheetContent(
                             "READ"
                         }
                     )
-                }
+                },
+                modifier = Modifier.weight(1f)
             )
         }
 
@@ -176,7 +178,8 @@ fun ComicReadingListFilterSheetContent(
                             "REQUIRED"
                         }
                     )
-                }
+                },
+                modifier = Modifier.weight(1f)
             )
 
             ComicFilterChoice(
@@ -190,7 +193,8 @@ fun ComicReadingListFilterSheetContent(
                             "OPTIONAL"
                         }
                     )
-                }
+                },
+                modifier = Modifier.weight(1f)
             )
         }
 
@@ -327,7 +331,7 @@ fun ComicFilterSectionLabel(
                 fontSize = 13.sp,
                 fontWeight = FontWeight.ExtraBold
             ),
-        color = ComicInk
+        color = MaterialTheme.colorScheme.onSurface
     )
 }
 
@@ -377,7 +381,7 @@ private fun ComicFilterChoice(
                         if (selected) {
                             ComicBlue
                         } else {
-                            ComicPaper
+                            MaterialTheme.colorScheme.surface
                         }
                     )
                     .border(
@@ -399,7 +403,7 @@ private fun ComicFilterChoice(
                                     FontWeight.SemiBold
                                 }
                         ),
-                    color = ComicInk
+                    color = MaterialTheme.colorScheme.onSurface
                 )
             }
         }
@@ -437,7 +441,7 @@ private fun ComicSeriesFilterSelector(
                     .fillMaxWidth()
                     .height(46.dp)
                     .clip(shape)
-                    .background(ComicPaper)
+                    .background(MaterialTheme.colorScheme.surface)
                     .border(
                         width = ComicCardBorderWidth,
                         color = ComicInk,
@@ -457,14 +461,14 @@ private fun ComicSeriesFilterSelector(
                     .copy(
                         fontWeight = FontWeight.SemiBold
                     ),
-                color = ComicInk,
+                color = MaterialTheme.colorScheme.onSurface,
                 maxLines = 1
             )
 
             Icon(
                 imageVector = Icons.Default.ArrowDropDown,
                 contentDescription = "Choose series",
-                tint = ComicInk,
+                tint = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.size(26.dp)
             )
         }
@@ -519,7 +523,7 @@ fun ComicFilterSecondaryButton(
                 .fillMaxWidth()
                 .height(44.dp)
                 .clip(shape)
-                .background(ComicPaper)
+                .background(MaterialTheme.colorScheme.surface)
                 .border(
                     width = ComicCardBorderWidth,
                     color = ComicInk,
@@ -533,7 +537,7 @@ fun ComicFilterSecondaryButton(
                     .copy(
                         fontWeight = FontWeight.Bold
                     ),
-                color = ComicInk
+                color = MaterialTheme.colorScheme.onSurface
             )
         }
     }

@@ -1187,7 +1187,7 @@ fun ReadingListDetailScreen(
                 showFilterSheet = false
             },
             sheetState = filterSheetState,
-            containerColor = ComicPaper,
+            containerColor = MaterialTheme.colorScheme.surface,
             dragHandle = null
         ) {
             ComicReadingListFilterSheetContent(
@@ -1533,7 +1533,7 @@ private fun ReadingListSectionHeader(
                 ),
             style = MaterialTheme.typography.bodySmall
                 .copy(fontWeight = FontWeight.SemiBold),
-            color = ComicInk
+            color = MaterialTheme.colorScheme.onBackground
         )
 
         if (canCollapse) {
@@ -1554,7 +1554,7 @@ private fun ReadingListSectionHeader(
                         } else {
                             "Collapse section"
                         },
-                    tint = ComicInk,
+                    tint = MaterialTheme.colorScheme.onBackground,
                     modifier = Modifier.size(22.dp)
                 )
             }
