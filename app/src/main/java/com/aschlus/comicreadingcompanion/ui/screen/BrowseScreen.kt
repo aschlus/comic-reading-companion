@@ -365,7 +365,7 @@ private fun ComicBrowseFiltersButton(
                     .background(MaterialTheme.colorScheme.surface)
                     .border(
                         width = ComicCardBorderWidth,
-                        color = ComicInk,
+                        color = MaterialTheme.colorScheme.outline,
                         shape = shape
                     )
                     .padding(horizontal = 14.dp),

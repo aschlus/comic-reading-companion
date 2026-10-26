@@ -70,7 +70,7 @@ fun ComicReadingHistoryRow(
                     .background(MaterialTheme.colorScheme.surface)
                     .border(
                         width = ComicCardBorderWidth,
-                        color = ComicInk,
+                        color = MaterialTheme.colorScheme.outline,
                         shape = shape
                     )
                     .clickable(

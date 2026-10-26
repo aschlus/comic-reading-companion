@@ -82,7 +82,7 @@ fun ComicFormDialog(
                         )
                         .border(
                             width = ComicCardBorderWidth,
-                            color = ComicInk,
+                            color = MaterialTheme.colorScheme.outline,
                             shape = shape
                         )
                         .padding(ComicSpacingXl),
@@ -188,7 +188,7 @@ private fun ComicDialogTextField(
                     )
                     .border(
                         width = ComicCardBorderWidth,
-                        color = MaterialTheme.colorScheme.onSurface,
+                        color = MaterialTheme.colorScheme.outline,
                         shape = shape
                     ),
             contentAlignment =

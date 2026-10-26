@@ -167,7 +167,7 @@ private fun ComicReadingListSearchField(
                     )
                     .border(
                         width = ComicCardBorderWidth,
-                        color = ComicInk,
+                        color = MaterialTheme.colorScheme.outline,
                         shape = shape
                     )
                     .padding(

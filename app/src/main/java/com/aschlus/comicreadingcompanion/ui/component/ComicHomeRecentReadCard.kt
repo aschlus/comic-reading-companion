@@ -79,7 +79,7 @@ fun ComicHomeRecentReadCard(
                     .background(MaterialTheme.colorScheme.surface)
                     .border(
                         width = ComicCardBorderWidth,
-                        color = ComicInk,
+                        color = MaterialTheme.colorScheme.outline,
                         shape = shape
                     )
                     .clickable(
@@ -164,7 +164,7 @@ private fun RecentReadCover(
                     .clip(shape)
                     .border(
                         width = 2.dp,
-                        color = ComicInk,
+                        color = MaterialTheme.colorScheme.outline,
                         shape = shape
                     ),
             loading = {
@@ -232,7 +232,7 @@ private fun RecentReadPlaceholder(
                 )
                 .border(
                     width = 2.dp,
-                    color = ComicInk,
+                    color = MaterialTheme.colorScheme.outline,
                     shape = RoundedCornerShape(5.dp)
                 ),
         contentAlignment =

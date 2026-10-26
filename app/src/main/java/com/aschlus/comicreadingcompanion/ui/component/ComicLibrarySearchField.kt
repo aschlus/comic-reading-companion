@@ -59,7 +59,7 @@ fun ComicLibrarySearchField(
                 )
                 .border(
                     width = ComicCardBorderWidth,
-                    color = ComicInk,
+                    color = MaterialTheme.colorScheme.outline,
                     shape = shape
                 )
                 .semantics {

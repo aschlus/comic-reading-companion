@@ -60,7 +60,7 @@ fun ComicFormDropdownField(
                     )
                     .border(
                         width = 2.dp,
-                        color = ComicInk,
+                        color = MaterialTheme.colorScheme.outline,
                         shape = shape
                     )
                     .clickable(

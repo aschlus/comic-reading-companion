@@ -61,7 +61,7 @@ fun ComicFormTextField(
                     )
                     .border(
                         width = 2.dp,
-                        color = ComicInk,
+                        color = MaterialTheme.colorScheme.outline,
                         shape = shape
                     ),
             contentAlignment =

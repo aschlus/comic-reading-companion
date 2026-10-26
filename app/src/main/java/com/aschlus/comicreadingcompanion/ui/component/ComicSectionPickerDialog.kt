@@ -80,7 +80,7 @@ fun ComicSectionPickerDialog(
                         )
                         .border(
                             width = ComicCardBorderWidth,
-                            color = ComicInk,
+                            color = MaterialTheme.colorScheme.outline,
                             shape = shape
                         )
                         .padding(ComicSpacingXl),
@@ -191,7 +191,7 @@ private fun ComicSectionPickerRow(
                 )
                 .border(
                     width = ComicCardBorderWidth,
-                    color = ComicInk,
+                    color = MaterialTheme.colorScheme.outline,
                     shape = shape
                 )
                 .padding(

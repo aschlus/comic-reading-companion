@@ -137,7 +137,7 @@ fun CollectionScreen(
                                 )
                                 .border(
                                     width = ComicCardBorderWidth,
-                                    color = ComicInk,
+                                    color = MaterialTheme.colorScheme.outline,
                                     shape = RoundedCornerShape(10.dp)
                                 )
                                 .clickable(
@@ -338,7 +338,11 @@ private fun CollectionStatCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(cardColor, shape)
-                .border(ComicCardBorderWidth, ComicInk, shape)
+                .border(
+                    ComicCardBorderWidth,
+                    ComicInk,
+                    shape
+                )
                 .padding(
                     horizontal = ComicSpacingMd,
                     vertical = 11.dp
@@ -387,7 +391,7 @@ private fun CollectionReadingStatusCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(MaterialTheme.colorScheme.surface, shape)
-                .border(ComicCardBorderWidth, ComicInk, shape)
+                .border(ComicCardBorderWidth, MaterialTheme.colorScheme.outline, shape)
                 .padding(
                     horizontal = 10.dp,
                     vertical = 9.dp
@@ -500,7 +504,7 @@ private fun OwnedIssueCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(MaterialTheme.colorScheme.surface, shape)
-                .border(ComicCardBorderWidth, ComicInk, shape)
+                .border(ComicCardBorderWidth, MaterialTheme.colorScheme.outline, shape)
                 .clickable(
                     role = Role.Button,
                     onClick = onClick

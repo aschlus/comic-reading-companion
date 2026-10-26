@@ -188,7 +188,7 @@ fun ComicVineVolumeReviewScreen(
                                     .background(MaterialTheme.colorScheme.surfaceVariant)
                                     .border(
                                         width = ComicCardBorderWidth,
-                                        color = ComicInk,
+                                        color = MaterialTheme.colorScheme.outline,
                                         shape = titleFieldShape
                                     )
                                     .padding(horizontal = ComicSpacingMd, vertical = ComicSpacingMd)
@@ -492,7 +492,7 @@ fun ComicVineVolumeReviewScreen(
                                 .background(MaterialTheme.colorScheme.surface)
                                 .border(
                                     width = ComicCardBorderWidth,
-                                    color = ComicInk,
+                                    color = MaterialTheme.colorScheme.outline,
                                     shape = RoundedCornerShape(6.dp)
                                 )
                                 .padding(horizontal = ComicSpacingMd, vertical = ComicSpacingMd)
@@ -568,7 +568,7 @@ private fun ReviewInfoCard(
                 .background(MaterialTheme.colorScheme.surface)
                 .border(
                     width = ComicCardBorderWidth,
-                    color = ComicInk,
+                    color = MaterialTheme.colorScheme.outline,
                     shape = shape
                 )
                 .padding(14.dp),
@@ -609,7 +609,7 @@ private fun ReviewEditableMetadataField(
                 .background(MaterialTheme.colorScheme.surfaceVariant)
                 .border(
                     width = ComicCardBorderWidth,
-                    color = ComicInk,
+                    color = MaterialTheme.colorScheme.outline,
                     shape = fieldShape
                 )
                 .padding(
@@ -697,7 +697,7 @@ private fun ReviewIssueRow(
                 .background(MaterialTheme.colorScheme.surface)
                 .border(
                     width = ComicCardBorderWidth,
-                    color = ComicInk,
+                    color = MaterialTheme.colorScheme.outline,
                     shape = shape
                 )
                 .padding(
@@ -824,7 +824,7 @@ private fun ReviewIssueTypeSelector(
                     .background(MaterialTheme.colorScheme.surfaceVariant)
                     .border(
                         width = ComicCardBorderWidth,
-                        color = ComicInk,
+                        color = MaterialTheme.colorScheme.outline,
                         shape = RoundedCornerShape(6.dp)
                     )
                     .padding(horizontal = ComicSpacingSm),

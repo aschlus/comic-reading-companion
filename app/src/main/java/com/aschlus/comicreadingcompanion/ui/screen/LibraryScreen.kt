@@ -191,7 +191,7 @@ fun LibraryScreen(
                                         )
                                         .border(
                                             width = ComicCardBorderWidth,
-                                            color = ComicInk,
+                                            color = MaterialTheme.colorScheme.outline,
                                             shape = RoundedCornerShape(12.dp)
                                         )
                                         .clickable(

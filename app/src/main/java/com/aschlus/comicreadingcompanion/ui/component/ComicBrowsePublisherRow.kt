@@ -92,7 +92,7 @@ fun ComicBrowsePublisherRow(
                     .background(MaterialTheme.colorScheme.surface)
                     .border(
                         width = ComicCardBorderWidth,
-                        color = ComicInk,
+                        color = MaterialTheme.colorScheme.outline,
                         shape = shape
                     )
                     .clickable(
@@ -196,7 +196,7 @@ private fun PublisherCoverCollage(
                         .background(MaterialTheme.colorScheme.surface)
                         .border(
                             width = 2.dp,
-                            color = ComicInk,
+                            color = MaterialTheme.colorScheme.outline,
                             shape = fallbackShape
                         ),
                 contentAlignment = Alignment.Center
@@ -246,7 +246,7 @@ private fun PublisherCoverCollage(
                                 ),
                         placeholderText = "",
                         shape = coverShape,
-                        borderColor = ComicInk,
+                        borderColor = MaterialTheme.colorScheme.outline,
                         contentScale = ContentScale.Fit
                     )
                 }

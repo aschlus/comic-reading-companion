@@ -123,7 +123,7 @@ fun AddIssueToReadingListSheet(
                             .clip(RoundedCornerShape(percent = 50))
                             .border(
                                 width = 1.dp,
-                                color = ComicInk,
+                                color = MaterialTheme.colorScheme.outline,
                                 shape = RoundedCornerShape(percent = 50)
                             ),
                     color = ComicYellow,

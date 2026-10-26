@@ -161,7 +161,7 @@ fun ComicVineVolumeSearchScreen(
                                 .background(MaterialTheme.colorScheme.surface)
                                 .border(
                                     width = ComicCardBorderWidth,
-                                    color = ComicInk,
+                                    color = MaterialTheme.colorScheme.outline,
                                     shape = shape
                                 )
                                 .clickable(
@@ -390,7 +390,7 @@ private fun MatchingOptionField(
                 .background(MaterialTheme.colorScheme.surfaceVariant, fieldShape)
                 .border(
                     width = ComicCardBorderWidth,
-                    color = ComicInk,
+                    color = MaterialTheme.colorScheme.outline,
                     shape = fieldShape
                 )
                 .padding(horizontal = ComicSpacingMd),

@@ -178,7 +178,7 @@ fun ComicBrowseResultRow(
                     .background(MaterialTheme.colorScheme.surface)
                     .border(
                         width = ComicCardBorderWidth,
-                        color = ComicInk,
+                        color = MaterialTheme.colorScheme.outline,
                         shape = shape
                     )
                     .semantics {
@@ -217,7 +217,7 @@ fun ComicBrowseResultRow(
                         .background(badgeColor)
                         .border(
                             width = 2.dp,
-                            color = ComicInk,
+                            color = MaterialTheme.colorScheme.outline,
                             shape = RoundedCornerShape(6.dp)
                         ),
                     contentAlignment = Alignment.Center

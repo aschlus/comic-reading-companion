@@ -184,7 +184,7 @@ fun SettingsScreen(
                     .background(MaterialTheme.colorScheme.surfaceVariant)
                     .border(
                         width = 2.dp,
-                        color = ComicInk,
+                        color = MaterialTheme.colorScheme.outline,
                         shape = fieldShape
                     )
                     .padding(start = ComicSpacingMd, end = ComicSpacingXs),
