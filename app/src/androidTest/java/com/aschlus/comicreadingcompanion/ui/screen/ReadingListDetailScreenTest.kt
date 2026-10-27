@@ -56,6 +56,8 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import androidx.compose.ui.test.hasText
+import androidx.compose.ui.unit.dp
+import org.junit.Assert.assertTrue
 
 @RunWith(AndroidJUnit4::class)
 class ReadingListDetailScreenTest {
@@ -2105,6 +2107,12 @@ class ReadingListDetailScreenTest {
 
             repository.markIssueAsRead(firstIssueId)
 
+            readingListUiPreferences.setSectionCollapsed(
+                readingListId = readingListId,
+                sectionId = sectionId,
+                collapsed = false
+            )
+
             composeRule.setContent {
                 ComicReadingCompanionTheme(
                     dynamicColor = false
@@ -2149,6 +2157,24 @@ class ReadingListDetailScreenTest {
             }
             composeRule.onNodeWithText("Target Story").assertIsDisplayed()
             composeRule.onNodeWithContentDescription("Collapse section").assertIsDisplayed()
+            val minimumTouchTargetPx = with(composeRule.density) {
+                48.dp.toPx()
+            }
+
+            val collapseButtonBounds = composeRule
+                .onNodeWithContentDescription("Collapse section")
+                .fetchSemanticsNode()
+                .boundsInRoot
+
+            assertTrue(
+                "Section collapse button must be at least 48dp tall",
+                collapseButtonBounds.height >= minimumTouchTargetPx
+            )
+
+            assertTrue(
+                "Section collapse button must be at least 48dp wide",
+                collapseButtonBounds.width >= minimumTouchTargetPx
+            )
         }
     }
 

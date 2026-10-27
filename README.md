@@ -179,7 +179,7 @@ building, following, and tracking comic-book reading orders.
 - [x] Add reusable progress indicators that fit the Comic Print style
 - [x] Add subtle halftone / ink-texture decoration without reducing readability
 - [x] Add original app-owned placeholder / decorative artwork
-- [ ] Maintain accessible contrast and touch targets beneath stylized visuals
+- [x] Maintain accessible contrast and touch targets beneath stylized visuals
 - [x] Create a coordinated dark-theme treatment
 - [x] Apply the design system consistently across all screens
 

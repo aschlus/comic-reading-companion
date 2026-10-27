@@ -1539,7 +1539,7 @@ private fun ReadingListSectionHeader(
         if (canCollapse) {
             IconButton(
                 onClick = onToggleCollapsed,
-                modifier = Modifier.size(40.dp)
+                modifier = Modifier.size(48.dp)
             ) {
                 Icon(
                     imageVector =
@@ -1559,7 +1559,7 @@ private fun ReadingListSectionHeader(
                 )
             }
         } else {
-            Spacer(modifier = Modifier.size(40.dp))
+            Spacer(modifier = Modifier.size(48.dp))
         }
     }
 }
