@@ -15,8 +15,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
-import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
 
 @Composable
 fun ComicDropdownMenu(
@@ -36,7 +34,7 @@ fun ComicDropdownMenu(
         border =
             BorderStroke(
                 width = ComicCardBorderWidth,
-                color = ComicInk
+                color = MaterialTheme.colorScheme.outline
             ),
         content = content
     )
@@ -65,7 +63,7 @@ fun ComicDropdownMenuItem(
                             MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
 
                         destructive ->
-                            ComicRed
+                            MaterialTheme.colorScheme.error
 
                         else ->
                             MaterialTheme.colorScheme.onSurface

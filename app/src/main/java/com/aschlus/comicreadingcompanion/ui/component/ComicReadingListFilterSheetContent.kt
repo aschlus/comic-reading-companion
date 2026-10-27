@@ -407,7 +407,7 @@ private fun ComicFilterChoice(
                                     FontWeight.SemiBold
                                 }
                         ),
-                    color = MaterialTheme.colorScheme.onSurface
+                    color = if (selected) ComicInk else MaterialTheme.colorScheme.onSurface
                 )
             }
         }

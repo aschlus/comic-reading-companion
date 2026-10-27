@@ -45,8 +45,9 @@ import com.aschlus.comicreadingcompanion.ui.component.ComicIssueDetailHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicProgressBar
 import com.aschlus.comicreadingcompanion.ui.component.ComicSeriesIssueRow
 import com.aschlus.comicreadingcompanion.ui.component.ComicWideActionButton
-import com.aschlus.comicreadingcompanion.ui.theme.ComicBlue
-import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
+import com.aschlus.comicreadingcompanion.ui.theme.ComicBlueDark
+import com.aschlus.comicreadingcompanion.ui.theme.ComicBlueLight
+import com.aschlus.comicreadingcompanion.ui.theme.ComicDarkBackground
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacing2Xl
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
@@ -71,6 +72,13 @@ fun SeriesDetailScreen(
     val comicVineVolumeId by viewModel.comicVineVolumeId.collectAsState()
     val refreshUiState = refreshViewModel?.uiState?.collectAsState()?.value
     var showRefreshDialog by remember(seriesId) { mutableStateOf(false) }
+
+    val linkColor =
+        if (MaterialTheme.colorScheme.background == ComicDarkBackground) {
+            ComicBlueLight
+        } else {
+            ComicBlueDark
+        }
 
     LaunchedEffect(seriesId) {
         viewModel.loadSeries(seriesId)
@@ -218,7 +226,7 @@ fun SeriesDetailScreen(
                                     fontWeight = FontWeight.Bold,
                                     textDecoration = TextDecoration.Underline
                                 ),
-                            color = ComicBlue
+                            color = linkColor
                         )
                     }
                 }
@@ -284,7 +292,7 @@ fun SeriesDetailScreen(
                         modifier = Modifier.fillMaxWidth(),
                         progressColor = ComicYellow,
                         trackColor = MaterialTheme.colorScheme.surfaceVariant,
-                        borderColor = ComicInk,
+                        borderColor = MaterialTheme.colorScheme.outline,
                         height = 16.dp,
                         shape = RoundedCornerShape(percent = 50)
                     )

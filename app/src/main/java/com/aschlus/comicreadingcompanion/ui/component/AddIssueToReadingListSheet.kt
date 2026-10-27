@@ -39,7 +39,6 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShape
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacing2Xl
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
@@ -314,7 +313,7 @@ private fun ComicSheetMessage(
                 .background(
                     color =
                         if (error) {
-                            ComicRed.copy(alpha = 0.12f)
+                            MaterialTheme.colorScheme.error.copy(alpha = 0.12f)
                         } else {
                             MaterialTheme.colorScheme.surface
                         },

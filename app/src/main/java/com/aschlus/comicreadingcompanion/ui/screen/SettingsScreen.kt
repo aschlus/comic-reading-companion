@@ -39,7 +39,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -53,13 +52,12 @@ import com.aschlus.comicreadingcompanion.ui.component.ComicPrimaryHeaderBackButt
 import com.aschlus.comicreadingcompanion.ui.component.ComicPrimaryHeaderTitle
 import com.aschlus.comicreadingcompanion.ui.component.ComicWideActionButton
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlue
+import com.aschlus.comicreadingcompanion.ui.theme.ComicDarkBackground
 import com.aschlus.comicreadingcompanion.ui.theme.ComicGreen
 import com.aschlus.comicreadingcompanion.ui.theme.ComicGreenDark
-import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicMutedInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRedDark
+import com.aschlus.comicreadingcompanion.ui.theme.ComicRedLight
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingXs
@@ -75,6 +73,19 @@ fun SettingsScreen(
     onRestoreBackupClick: () -> Unit = {}
 ) {
     val uiState by viewModel.uiState.collectAsState()
+
+    val isDarkTheme = MaterialTheme.colorScheme.background == ComicDarkBackground
+    val statusSuccessColor = if (isDarkTheme) {
+        ComicGreen
+    } else {
+        ComicGreenDark
+    }
+
+    val statusErrorColor = if (isDarkTheme) {
+        ComicRedLight
+    } else {
+        ComicRedDark
+    }
 
     var apiKeyInput by remember { mutableStateOf("") }
     var keyVisible by remember { mutableStateOf(false) }
@@ -138,7 +149,7 @@ fun SettingsScreen(
                 uiState.hasSavedApiKey -> {
                     Text(
                         text = "API KEY CONFIGURED",
-                        color = ComicGreenDark
+                        color = statusSuccessColor
                     )
 
                     Text(
@@ -208,7 +219,7 @@ fun SettingsScreen(
                         textStyle = androidx.compose.material3.MaterialTheme
                             .typography.bodyLarge
                             .copy(color = MaterialTheme.colorScheme.onSurface),
-                        cursorBrush = SolidColor(ComicInk),
+                        cursorBrush = SolidColor(MaterialTheme.colorScheme.onSurface),
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Password,
                             autoCorrectEnabled = false
@@ -294,14 +305,14 @@ fun SettingsScreen(
             uiState.message?.let { message ->
                 Text(
                     text = message,
-                    color = ComicGreenDark
+                    color = statusSuccessColor
                 )
             }
 
             uiState.error?.let { error ->
                 Text(
                     text = error,
-                    color = ComicRedDark
+                    color = statusErrorColor
                 )
             }
 

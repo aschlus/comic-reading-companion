@@ -187,7 +187,7 @@ fun ComicPublisherSeriesRow(
                             .padding(top = 2.dp),
                     progressColor = ComicYellow,
                     trackColor = MaterialTheme.colorScheme.surfaceVariant,
-                    borderColor = ComicInk,
+                    borderColor = MaterialTheme.colorScheme.outline,
                     height = 11.dp,
                     shape = RoundedCornerShape(percent = 50)
                 )

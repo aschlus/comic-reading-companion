@@ -77,9 +77,10 @@ class SettingsScreenTest {
             }
         )
 
-    private fun launchScreen() {
+    private fun launchScreen(darkTheme: Boolean = false) {
         composeRule.setContent {
             ComicReadingCompanionTheme(
+                darkTheme = darkTheme,
                 dynamicColor = false
             ) {
                 SettingsScreen(
@@ -141,6 +142,42 @@ class SettingsScreenTest {
 
         composeRule
             .onNodeWithContentDescription("Show API key")
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun settingsScreen_displaysStatusFeedbackInDarkTheme() {
+        launchScreen(darkTheme = true)
+
+        composeRule
+            .onNodeWithText("SAVE API KEY")
+            .performClick()
+
+        composeRule
+            .onNodeWithText("Enter a Comic Vine API Key.")
+            .assertIsDisplayed()
+
+        composeRule
+            .onNodeWithContentDescription("API key")
+            .performTextInput("test-comic-vine-key")
+
+        composeRule
+            .onNodeWithText("SAVE API KEY")
+            .performClick()
+
+        composeRule.waitUntil(timeoutMillis = 5000L) {
+            viewModel.uiState.value.hasSavedApiKey &&
+                    !viewModel.uiState.value.isSaving
+        }
+
+        composeRule
+            .onNodeWithText("API KEY CONFIGURED")
+            .assertIsDisplayed()
+
+        composeRule
+            .onNodeWithText(
+                "Comic Vine API key validated and saved securely."
+            )
             .assertIsDisplayed()
     }
 

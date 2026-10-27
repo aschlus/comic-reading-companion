@@ -120,12 +120,7 @@ fun ComicConfirmationDialog(
                             } else {
                                 ComicBlue
                             },
-                        textColor =
-                            if (destructive) {
-                                Color.White
-                            } else {
-                                ComicInk
-                            },
+                        textColor = ComicInk,
                         onClick = onConfirm
                     )
                 }

@@ -47,10 +47,13 @@ import com.aschlus.comicreadingcompanion.ui.component.ComicIssueReadingListRow
 import com.aschlus.comicreadingcompanion.ui.component.ComicIssueStatusSelector
 import com.aschlus.comicreadingcompanion.ui.component.ComicWideActionButton
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlue
+import com.aschlus.comicreadingcompanion.ui.theme.ComicBlueDark
+import com.aschlus.comicreadingcompanion.ui.theme.ComicBlueLight
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShape
+import com.aschlus.comicreadingcompanion.ui.theme.ComicDarkBackground
 import com.aschlus.comicreadingcompanion.ui.theme.ComicGreen
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicMutedInk
@@ -87,6 +90,13 @@ fun IssueDetailScreen(
     var showAddToReadingListSheet by remember(issueId) {
         mutableStateOf(false)
     }
+
+    val linkColor =
+        if (MaterialTheme.colorScheme.background == ComicDarkBackground) {
+            ComicBlueLight
+        } else {
+            ComicBlueDark
+        }
 
     LaunchedEffect(issueId) {
         viewModel.loadIssue(issueId)
@@ -173,7 +183,7 @@ fun IssueDetailScreen(
                                         fontWeight = FontWeight.Bold,
                                         textDecoration = TextDecoration.Underline
                                     ),
-                                color = ComicBlue
+                                color = linkColor
                             )
                         }
 

@@ -298,7 +298,7 @@ fun ComicReadingListArtwork(
                                     width = 5f
                                 )
                         ),
-                    color = ComicInk
+                    color = ComicPaper
                 )
 
                 Text(
@@ -307,7 +307,7 @@ fun ComicReadingListArtwork(
                         Modifier.align(Alignment.Center),
                     fontSize = 27.sp,
                     fontWeight = FontWeight.Black,
-                    color = ComicPaper
+                    color = ComicInk
                 )
             }
 

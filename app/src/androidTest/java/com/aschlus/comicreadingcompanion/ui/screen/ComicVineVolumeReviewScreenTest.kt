@@ -192,6 +192,58 @@ class ComicVineVolumeReviewScreenTest {
     }
 
     @Test
+    fun reviewScreen_displaysServiceErrorInDarkTheme() {
+        transport = FakeTransport(
+            responses = listOf(
+                """
+                {
+                    "error": "API limit exceeded",
+                    "status_code": 5,
+                    "results": {}
+                }
+            """.trimIndent()
+            )
+        )
+
+        viewModel = ComicVineVolumeReviewViewModel(
+            apiKeyStore = apiKeyStore,
+            apiClient = ComicVineApiClient(
+                transport = transport
+            )
+        )
+
+        composeRule.setContent {
+            ComicReadingCompanionTheme(
+                darkTheme = true,
+                dynamicColor = false
+            ) {
+                ComicVineVolumeReviewScreen(
+                    viewModel = viewModel,
+                    onBackClick = {}
+                )
+            }
+        }
+
+        viewModel.load(123L)
+
+        composeRule.waitUntil(timeoutMillis = 5000L) {
+            !viewModel.uiState.value.isLoading &&
+                    viewModel.uiState.value.error != null
+        }
+
+        composeRule
+            .onNodeWithText(
+                "Could not retrieve the selected series details."
+            )
+            .assertIsDisplayed()
+
+        assertEquals(
+            1,
+            transport.requestedUrls.size
+        )
+    }
+
+    @Test
     fun reviewScreen_allowsChangingIssueType() {
         composeRule.setContent {
             ComicReadingCompanionTheme(

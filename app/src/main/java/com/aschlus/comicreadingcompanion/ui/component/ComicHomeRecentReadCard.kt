@@ -38,7 +38,6 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShape
 import com.aschlus.comicreadingcompanion.ui.theme.ComicGreen
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPurple
 import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
 import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
@@ -275,7 +274,7 @@ private fun RecentReadPlaceholder(
             text = initials,
             fontSize = 24.sp,
             fontWeight = FontWeight.Black,
-            color = ComicPaper
+            color = ComicInk
         )
     }
 }

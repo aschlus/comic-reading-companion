@@ -63,9 +63,6 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShape
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicMutedInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
-import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
@@ -142,7 +139,7 @@ fun ComicVineVolumeReviewScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clip(RoundedCornerShape(6.dp))
-                            .background(ComicRed.copy(alpha = 0.12f))
+                            .background(MaterialTheme.colorScheme.error.copy(alpha = 0.12f))
                             .border(
                                 width = ComicCardBorderWidth,
                                 color = MaterialTheme.colorScheme.error,
@@ -337,7 +334,7 @@ fun ComicVineVolumeReviewScreen(
                             uiState.universeCreationError?.let { error ->
                                 Text(
                                     text = error,
-                                    color = ComicRed,
+                                    color = MaterialTheme.colorScheme.error,
                                     fontSize = 12.sp,
                                     fontWeight = FontWeight.SemiBold
                                 )
@@ -390,7 +387,7 @@ fun ComicVineVolumeReviewScreen(
                             uiState.importError?.let { error ->
                                 Text(
                                     text = error,
-                                    color = ComicRed,
+                                    color = MaterialTheme.colorScheme.error,
                                     fontSize = 12.sp,
                                     fontWeight = FontWeight.SemiBold
                                 )

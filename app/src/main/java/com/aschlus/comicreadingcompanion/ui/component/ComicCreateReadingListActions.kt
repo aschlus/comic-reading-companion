@@ -25,6 +25,7 @@ fun ComicCreateReadingListActions(
         ComicWideActionButton(
             text = "CANCEL",
             backgroundColor = MaterialTheme.colorScheme.surface,
+            contentColor = MaterialTheme.colorScheme.onSurface,
             onClick = onCancelClick,
             modifier = Modifier.weight(1f)
         )

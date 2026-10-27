@@ -188,6 +188,8 @@ fun ComicLibraryReadingListCard(
                 }
             }
 
+            val chevronColor = MaterialTheme.colorScheme.onSurface
+
             Canvas(
                 modifier =
                     Modifier.size(
@@ -198,7 +200,7 @@ fun ComicLibraryReadingListCard(
                 val strokeWidth = 3.dp.toPx()
 
                 drawLine(
-                    color = ComicInk,
+                    color = chevronColor,
                     start =
                         Offset(
                             x = size.width * 0.25f,
@@ -213,7 +215,7 @@ fun ComicLibraryReadingListCard(
                 )
 
                 drawLine(
-                    color = ComicInk,
+                    color = chevronColor,
                     start =
                         Offset(
                             x = size.width * 0.72f,

@@ -39,8 +39,8 @@ private val ComicLightColorScheme =
         outline = ComicInk,
         outlineVariant = ComicMutedInk,
 
-        error = ComicRed,
-        onError = ComicInk
+        error = ComicRedDark,
+        onError = ComicPaper
     )
 
 private val ComicDarkColorScheme =

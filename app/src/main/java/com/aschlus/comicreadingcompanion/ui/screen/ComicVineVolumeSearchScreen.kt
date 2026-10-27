@@ -57,7 +57,6 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicBlue
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPurple
-import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
@@ -299,7 +298,7 @@ fun ComicVineVolumeSearchScreen(
                 item {
                     Text(
                         text = errorMessage,
-                        color = ComicRed
+                        color = MaterialTheme.colorScheme.error
                     )
                 }
             }

@@ -214,7 +214,7 @@ private fun ComicDialogTextField(
                     },
                 textStyle = MaterialTheme.typography.bodyLarge
                     .copy(
-                        color = ComicInk
+                        color = MaterialTheme.colorScheme.onSurface
                     ),
                 cursorBrush =
                     SolidColor(MaterialTheme.colorScheme.onSurface),

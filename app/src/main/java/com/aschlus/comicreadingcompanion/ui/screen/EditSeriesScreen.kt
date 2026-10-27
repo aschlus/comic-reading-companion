@@ -35,8 +35,6 @@ import com.aschlus.comicreadingcompanion.ui.component.ComicFormTextField
 import com.aschlus.comicreadingcompanion.ui.component.ComicHomeSectionHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicIssueDetailHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicWideActionButton
-import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicRed
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
 import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
@@ -229,7 +227,7 @@ fun EditSeriesScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clip(errorShape)
-                            .background(ComicRed.copy(alpha = 0.12f))
+                            .background(MaterialTheme.colorScheme.error.copy(alpha = 0.12f))
                             .border(
                                 width = 2.dp,
                                 color = MaterialTheme.colorScheme.error,

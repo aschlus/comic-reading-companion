@@ -72,7 +72,8 @@ class ComicVineVolumeSearchScreenTest {
         apiKey: String? = null,
         responseBody: String? = null,
         responseBodies: List<String>? = null,
-        onVolumeSelected: (Long) -> Unit = {}
+        onVolumeSelected: (Long) -> Unit = {},
+        darkTheme: Boolean = false
     ) {
         runBlocking {
             apiKeyStore.clear()
@@ -99,6 +100,7 @@ class ComicVineVolumeSearchScreenTest {
 
         composeRule.setContent {
             ComicReadingCompanionTheme(
+                darkTheme = darkTheme,
                 dynamicColor = false
             ) {
                 ComicVineVolumeSearchScreen(
@@ -139,6 +141,27 @@ class ComicVineVolumeSearchScreenTest {
                 "Configure your API key " +
                         "in Settings before searching."
             )
+            .assertIsDisplayed()
+
+        assertEquals(
+            0,
+            transport.requestedUrls.size
+        )
+    }
+
+    @Test
+    fun searchScreen_displaysValidationErrorInDarkTheme() {
+        launchScreen(
+            apiKey = "test-api-key",
+            darkTheme = true
+        )
+
+        composeRule
+            .onNodeWithText("SEARCH VOLUMES")
+            .performClick()
+
+        composeRule
+            .onNodeWithText("Enter a series title to search.")
             .assertIsDisplayed()
 
         assertEquals(
