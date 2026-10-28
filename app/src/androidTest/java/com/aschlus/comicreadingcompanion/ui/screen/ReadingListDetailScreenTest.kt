@@ -2745,6 +2745,18 @@ class ReadingListDetailScreenTest {
             val item = comicDao.getItemsForReadingList(readingListId).single()
             assertEquals(sectionId, item.sectionId)
             composeRule.onNodeWithText("Destination Arc", ignoreCase = true).assertIsDisplayed()
+
+            composeRule
+                .onNodeWithContentDescription("Section options")
+                .performClick()
+
+            composeRule
+                .onNodeWithText("Move section up")
+                .assertIsDisplayed()
+
+            composeRule
+                .onNodeWithText("Move section down")
+                .assertIsDisplayed()
         }
     }
 

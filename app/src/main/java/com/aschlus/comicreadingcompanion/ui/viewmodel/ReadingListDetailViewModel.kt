@@ -329,6 +329,46 @@ class ReadingListDetailViewModel(
         }
     }
 
+    fun moveSectionUp(
+        sectionId: Long
+    ) {
+        moveSection(
+            sectionId = sectionId,
+            offset = -1
+        )
+    }
+
+    fun moveSectionDown(
+        sectionId: Long
+    ) {
+        moveSection(
+            sectionId = sectionId,
+            offset = 1
+        )
+    }
+
+    private fun moveSection(
+        sectionId: Long,
+        offset: Int
+    ) {
+        val readingList = _readingList.value
+            ?: return
+
+        if (readingList.source != ReadingListSource.USER) {
+            return
+        }
+
+        viewModelScope.launch {
+            repository.moveUserReadingListSection(
+                readingListId = readingList.id,
+                sectionId = sectionId,
+                offset = offset
+            )
+
+            _sections.value = repository.getSectionsForReadingList(readingList.id)
+        }
+    }
+
     fun moveIssueUp(
         issue: ReadingListIssue
     ) {
@@ -415,6 +455,10 @@ class ReadingListDetailViewModel(
         issue: ReadingListIssue,
         offset: Int
     ) {
+        if (offset != -1 && offset != 1) {
+            return
+        }
+
         val readingList = _readingList.value
             ?: return
 
@@ -433,33 +477,91 @@ class ReadingListDetailViewModel(
             return
         }
 
-
+        val currentIssue = currentIssues[currentIndex]
         val targetIndex = currentIndex + offset
 
         if (targetIndex !in currentIssues.indices) {
             return
         }
 
-        val targetIssue = currentIssues[targetIndex]
+        val adjacentIssue = currentIssues[targetIndex]
 
-        if (targetIssue.sectionId != issue.sectionId) {
-            return
-        }
+        val reorderedIssues =
+            currentIssues.toMutableList().apply {
+                removeAt(currentIndex)
+            }
 
-        val orderedItemIds = currentIssues.map { currentIssue ->
+        val targetSectionId = adjacentIssue.sectionId
+        val movingSectionId = currentIssue.sectionId
+
+        val mustDetachFromSection =
+            movingSectionId != null &&
+                movingSectionId != targetSectionId
+
+        val insertionIndex =
+            when {
+                movingSectionId == targetSectionId -> targetIndex
+
+                movingSectionId == null && targetSectionId != null -> {
+                    val firstTargetIndex =
+                        reorderedIssues.indexOfFirst { candidate ->
+                            candidate.sectionId == targetSectionId
+                        }
+
+                    val lastTargetIndex =
+                        reorderedIssues.indexOfLast { candidate ->
+                            candidate.sectionId == targetSectionId
+                        }
+
+                    if (offset < 0) {
+                        firstTargetIndex
+                    } else {
+                        lastTargetIndex + 1
+                    }
+                }
+
+                movingSectionId != null && targetSectionId == null -> targetIndex
+
+                else -> {
+                    val firstTargetIndex =
+                        reorderedIssues.indexOfFirst { candidate ->
+                            candidate.sectionId == targetSectionId
+                        }
+
+                    val lastTargetIndex =
+                        reorderedIssues.indexOfLast { candidate ->
+                            candidate.sectionId == targetSectionId
+                        }
+
+                    if (offset < 0) {
+                        firstTargetIndex
+                    } else {
+                        lastTargetIndex + 1
+                    }
+                }
+            }
+
+        val orderedItemIds =
+            reorderedIssues.map { it.readingListItemId }.toMutableList()
+
+        orderedItemIds.add(
+            insertionIndex,
             currentIssue.readingListItemId
-        }.toMutableList()
+        )
 
-        val movedItemId = orderedItemIds.removeAt(currentIndex)
-
-        orderedItemIds.add(targetIndex, movedItemId)
+        val detachedItemIds =
+            if (mustDetachFromSection) {
+                setOf(currentIssue.readingListItemId)
+            } else {
+                emptySet()
+            }
 
         viewModelScope.launch {
-            repository
-                .reorderUserReadingListItems(
-                    readingListId = readingList.id,
-                    orderedItemIds = orderedItemIds
-                )
+            repository.reorderUserReadingListItems(
+                readingListId = readingList.id,
+                orderedItemIds = orderedItemIds,
+                detachedItemIds = detachedItemIds
+            )
         }
     }
 

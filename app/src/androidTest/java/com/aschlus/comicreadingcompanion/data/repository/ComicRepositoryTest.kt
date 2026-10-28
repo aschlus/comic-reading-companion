@@ -1312,8 +1312,100 @@ class ComicRepositoryTest {
             )
         }
 
+
     @Test
-    fun reorderUserReadingListItems_rejectsMovingItemsBetweenSections() =
+    fun moveUserReadingListSection_movesSectionAsAContiguousBlock() =
+        runBlocking {
+            val firstIssueId = createIssue("1")
+            val secondIssueId = createIssue("2")
+            val thirdIssueId = createIssue("3")
+
+            val publisher = comicDao.getPublisherByName("Marvel")!!
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Move Section Block Test",
+                    description = null,
+                    publisherId = publisher.id,
+                    universeId = null
+                )
+
+            val sectionId =
+                repository.createUserReadingListSection(
+                    readingListId,
+                    "Bad Seeds",
+                    null
+                )
+
+            repository.addReadingListItem(
+                ReadingListItem(
+                    readingListId = readingListId,
+                    sectionId = sectionId,
+                    issueId = firstIssueId,
+                    position = 1,
+                    required = true,
+                    notes = null
+                )
+            )
+
+            repository.addReadingListItem(
+                ReadingListItem(
+                    readingListId = readingListId,
+                    sectionId = sectionId,
+                    issueId = secondIssueId,
+                    position = 2,
+                    required = true,
+                    notes = null
+                )
+            )
+
+            repository.addReadingListItem(
+                ReadingListItem(
+                    readingListId = readingListId,
+                    sectionId = null,
+                    issueId = thirdIssueId,
+                    position = 3,
+                    required = true,
+                    notes = null
+                )
+            )
+
+            repository.moveUserReadingListSection(
+                readingListId = readingListId,
+                sectionId = sectionId,
+                offset = 1
+            )
+
+            var items = comicDao.getItemsForReadingList(readingListId)
+
+            assertEquals(
+                listOf(thirdIssueId, firstIssueId, secondIssueId),
+                items.map { it.issueId }
+            )
+            assertEquals(
+                listOf(null, sectionId, sectionId),
+                items.map { it.sectionId }
+            )
+            assertEquals(listOf(1, 2, 3), items.map { it.position })
+
+            repository.moveUserReadingListSection(
+                readingListId = readingListId,
+                sectionId = sectionId,
+                offset = -1
+            )
+
+            items = comicDao.getItemsForReadingList(readingListId)
+
+            assertEquals(
+                listOf(firstIssueId, secondIssueId, thirdIssueId),
+                items.map { it.issueId }
+            )
+            assertEquals(listOf(1, 2, 3), items.map { it.position })
+        }
+
+
+    @Test
+    fun reorderUserReadingListItems_rejectsSplittingSectionAcrossOtherItems() =
         runBlocking {
             val firstIssueId = createIssue("1")
             val secondIssueId = createIssue("2")
@@ -1393,7 +1485,7 @@ class ComicRepositoryTest {
             assertNotNull(exception)
 
             assertEquals(
-                "Items cannot move between sections while reordering",
+                "Items from a section must remain contiguous",
                 exception?.message
             )
 
@@ -1749,7 +1841,7 @@ class ComicRepositoryTest {
         }
 
     @Test
-    fun moveUserReadingListItemToSection_placesItemInEmptySectionOrder() =
+    fun moveUserReadingListItemToSection_preservesPositionInEmptySection() =
         runBlocking {
             val firstIssueId = createIssue("1")
             val secondIssueId = createIssue("2")
@@ -1829,12 +1921,12 @@ class ComicRepositoryTest {
             val items = comicDao.getItemsForReadingList(readingListId)
 
             assertEquals(
-                listOf(firstIssueId, movedIssueId, secondIssueId),
+                listOf(firstIssueId, secondIssueId, movedIssueId),
                 items.map { it.issueId }
             )
 
             assertEquals(
-                listOf(firstSectionId, emptySectionId, thirdSectionId),
+                listOf(firstSectionId, thirdSectionId, emptySectionId),
                 items.map { it.sectionId }
             )
 

@@ -1001,6 +1001,16 @@ fun ReadingListDetailScreen(
                         val sectionId =
                             issue.sectionId
 
+                        val nextIssue = visibleIssues.getOrNull(index + 1)
+
+                        val isLastIssueInSection =
+                            sectionId != null &&
+                                nextIssue?.sectionId != sectionId
+
+                        val shouldShowSectionBottomDivider =
+                            isLastIssueInSection &&
+                                (nextIssue?.sectionId == null)
+
                         val isFirstIssueInSection =
                             sectionId != null &&
                                     sectionId !=
@@ -1026,6 +1036,25 @@ fun ReadingListDetailScreen(
                                             sectionId
                                 }
 
+                            val sectionFirstIssueIndex =
+                                issues.indexOfFirst { it.sectionId == sectionId }
+
+                            val sectionLastIssueIndex =
+                                issues.indexOfLast { it.sectionId == sectionId }
+
+                            val canReorderSection =
+                                readingList?.source == ReadingListSource.USER &&
+                                    !isSearching &&
+                                    !hasActiveFilters
+
+                            val canMoveSectionUp =
+                                canReorderSection && sectionFirstIssueIndex > 0
+
+                            val canMoveSectionDown =
+                                canReorderSection &&
+                                    sectionLastIssueIndex >= 0 &&
+                                    sectionLastIssueIndex < issues.lastIndex
+
                             ReadingListSectionHeader(
                                 title =
                                     issue.sectionTitle
@@ -1035,6 +1064,15 @@ fun ReadingListDetailScreen(
                                 isCollapsed =
                                     isSectionCollapsed,
                                 canCollapse = !isSearching && !hasActiveFilters,
+                                isSelectionMode = isSelectionMode,
+                                canMoveSectionUp = canMoveSectionUp,
+                                canMoveSectionDown = canMoveSectionDown,
+                                onMoveSectionUp = {
+                                    sectionId?.let(viewModel::moveSectionUp)
+                                },
+                                onMoveSectionDown = {
+                                    sectionId?.let(viewModel::moveSectionDown)
+                                },
                                 onToggleCollapsed = {
                                     viewModel
                                         .toggleSectionCollapsed(
@@ -1073,23 +1111,12 @@ fun ReadingListDetailScreen(
                                 readingList?.source ==
                                         ReadingListSource.USER
 
-                            val canMoveUp =
-                                canReorder &&
-                                        fullIssueIndex > 0 &&
-                                        issues[
-                                            fullIssueIndex - 1
-                                        ].sectionId ==
-                                        issue.sectionId
+                            val canMoveUp = canReorder && fullIssueIndex > 0
 
                             val canMoveDown =
                                 canReorder &&
-                                        fullIssueIndex >= 0 &&
-                                        fullIssueIndex <
-                                        issues.lastIndex &&
-                                        issues[
-                                            fullIssueIndex + 1
-                                        ].sectionId ==
-                                        issue.sectionId
+                                    fullIssueIndex >= 0 &&
+                                    fullIssueIndex < issues.lastIndex
 
                             ReadingListIssueRow(
                                 issue =
@@ -1172,6 +1199,21 @@ fun ReadingListDetailScreen(
                                     issuePendingRemoval =
                                         issue
                                 }
+                            )
+                        }
+
+                        if (shouldShowSectionBottomDivider) {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(
+                                        horizontal = ComicSpacingSm,
+                                        vertical = ComicSpacingXs
+                                    )
+                                    .height(1.dp)
+                                    .background(
+                                        MaterialTheme.colorScheme.outlineVariant
+                                    )
                             )
                         }
                     }
@@ -1399,6 +1441,11 @@ private fun ReadingListSectionHeader(
     issueCount: Int,
     isCollapsed: Boolean,
     canCollapse: Boolean,
+    isSelectionMode: Boolean,
+    canMoveSectionUp: Boolean,
+    canMoveSectionDown: Boolean,
+    onMoveSectionUp: () -> Unit,
+    onMoveSectionDown: () -> Unit,
     onToggleCollapsed: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -1417,6 +1464,10 @@ private fun ReadingListSectionHeader(
             textGeometricTransform =
                 ComicAccentTextTransform
         )
+
+    var sectionMenuExpanded by remember {
+        mutableStateOf(false)
+    }
 
     Row(
         modifier =
@@ -1560,6 +1611,48 @@ private fun ReadingListSectionHeader(
             }
         } else {
             Spacer(modifier = Modifier.size(48.dp))
+        }
+
+        if (!isSelectionMode) {
+            Box {
+                IconButton(
+                    onClick = {
+                        sectionMenuExpanded = true
+                    },
+                    modifier = Modifier.size(48.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.MoreVert,
+                        contentDescription = "Section options",
+                        tint = MaterialTheme.colorScheme.onBackground
+                    )
+                }
+
+                ComicDropdownMenu(
+                    expanded = sectionMenuExpanded,
+                    onDismissRequest = {
+                        sectionMenuExpanded = false
+                    }
+                ) {
+                    ComicDropdownMenuItem(
+                        text = "Move section up",
+                        enabled = canMoveSectionUp,
+                        onClick = {
+                            sectionMenuExpanded = false
+                            onMoveSectionUp()
+                        }
+                    )
+
+                    ComicDropdownMenuItem(
+                        text = "Move section down",
+                        enabled = canMoveSectionDown,
+                        onClick = {
+                            sectionMenuExpanded = false
+                            onMoveSectionDown()
+                        }
+                    )
+                }
+            }
         }
     }
 }

@@ -1102,6 +1102,46 @@ class ComicRepository(
         return comicDao.getSectionsForReadingList(readingListId)
     }
 
+    private suspend fun normalizeReadingListSectionPositions(
+        readingListId: Long,
+        orderedItems: List<ReadingListItem>
+    ) {
+        val sections = comicDao.getSectionsForReadingList(readingListId)
+
+        if (sections.isEmpty()) {
+            return
+        }
+
+        val sectionsWithIssues = orderedItems
+            .mapNotNull { item -> item.sectionId }
+            .distinct()
+
+        val emptySectionIds = sections
+            .filter { section -> section.id !in sectionsWithIssues }
+            .sortedBy { section -> section.position }
+            .map { section -> section.id }
+
+        val orderedSectionIds = sectionsWithIssues + emptySectionIds
+
+        val sectionsById = sections.associateBy { section -> section.id }
+
+        orderedSectionIds.forEachIndexed { index, sectionId ->
+            val section = checkNotNull(sectionsById[sectionId])
+
+            comicDao.updateReadingListSection(
+                section.copy(position = -(index + 1))
+            )
+        }
+
+        orderedSectionIds.forEachIndexed { index, sectionId ->
+            val section = checkNotNull(sectionsById[sectionId])
+
+            comicDao.updateReadingListSection(
+                section.copy(position = index + 1)
+            )
+        }
+    }
+
     suspend fun updateReadingListSection(
         section: ReadingListSection
     ) {
@@ -1294,15 +1334,18 @@ class ComicRepository(
             }
 
             val currentItems = comicDao.getItemsForReadingList(readingListId)
-            val movedItem = currentItems.firstOrNull { item ->
+            val currentIndex = currentItems.indexOfFirst { item ->
                 item.id == readingListItemId
             }
-                ?: throw IllegalArgumentException(
-                    "Reading-list item $readingListItemId does " +
-                    "not exist in reading list $readingListId"
-                )
 
+            require(currentIndex >= 0) {
+                "Reading-list item $readingListItemId does " +
+                "not exist in reading list $readingListId"
+            }
+
+            val movedItem = currentItems[currentIndex]
             val sections = comicDao.getSectionsForReadingList(readingListId)
+
             val targetSection =
                 if (targetSectionId == null) {
                     null
@@ -1323,51 +1366,29 @@ class ComicRepository(
 
             val remainingItems = currentItems.filter { item -> item.id != readingListItemId }
             val insertionIndex =
-                if (targetSection == null) {
-                    remainingItems.size
-                } else {
-                    val lastTargetIndex = remainingItems.indexOfLast { item ->
+                when {
+                    targetSection == null -> remainingItems.size
+
+                    else -> {
+                        val lastTargetIndex = remainingItems.indexOfLast { item ->
                             item.sectionId == targetSection.id
                         }
 
-                    if (lastTargetIndex >= 0) {
-                        lastTargetIndex + 1
-                    } else {
-                        val targetSectionIndex =
-                            sections.indexOfFirst { section ->
-                                section.id == targetSection.id
-                            }
-
-                        check(targetSectionIndex >= 0)
-
-                        val earlierSectionIds =
-                            sections.take(targetSectionIndex).map { section -> section.id }
-                                .toSet()
-
-                        val firstItemNotInEarlierSection =
-                            remainingItems.indexOfFirst { item ->
-                                item.sectionId == null || item.sectionId !in earlierSectionIds
-                            }
-
-                        if (
-                            firstItemNotInEarlierSection >= 0
-                        ) {
-                            firstItemNotInEarlierSection
+                        if (lastTargetIndex >= 0) {
+                            lastTargetIndex + 1
                         } else {
-                            remainingItems.size
+                            currentIndex.coerceAtMost(remainingItems.size)
                         }
                     }
                 }
 
-            val reorderedItems = remainingItems.toMutableList()
+            val reorderedItems = remainingItems.toMutableList().apply {
+                add(
+                    insertionIndex,
+                    movedItem.copy(sectionId = targetSectionId)
+                )
+            }
 
-            reorderedItems.add(
-                insertionIndex,
-                movedItem.copy(sectionId = targetSectionId)
-            )
-
-            // Temporarily vacate all positive positions to avoid the unique
-            // (readingListId, position) constraint.
             currentItems.forEachIndexed { index, item ->
                 comicDao.updateReadingListItem(
                     item.copy(position = -(index + 1))
@@ -1380,14 +1401,121 @@ class ComicRepository(
                 )
             }
 
+            normalizeReadingListSectionPositions(
+                readingListId = readingListId,
+                orderedItems = reorderedItems
+            )
+
             val updatedAt = maxOf(System.currentTimeMillis(), readingList.updatedAt + 1)
             comicDao.updateReadingList(readingList.copy(updatedAt = updatedAt))
         }
     }
 
+    suspend fun moveUserReadingListSection(
+        readingListId: Long,
+        sectionId: Long,
+        offset: Int
+    ) {
+        require(offset == -1 || offset == 1) {
+            "Section move offset must be -1 or 1"
+        }
+
+        database.withWriteTransaction {
+            val readingList = comicDao.getReadingListById(readingListId)
+                ?: throw IllegalArgumentException(
+                    "Reading list $readingListId does not exist"
+                )
+
+            require(readingList.source == ReadingListSource.USER) {
+                "Reading list $readingListId is not user-owned"
+            }
+
+            val sections = comicDao.getSectionsForReadingList(readingListId)
+
+            require(sections.any { it.id == sectionId }) {
+                "Section $sectionId does not belong to reading list $readingListId"
+            }
+
+            val currentItems = comicDao.getItemsForReadingList(readingListId)
+
+            val groups = mutableListOf<List<ReadingListItem>>()
+
+            var index = 0
+
+            while (index < currentItems.size) {
+                val item = currentItems[index]
+
+                if (item.sectionId == null) {
+                    groups.add(listOf(item))
+                    index++
+                } else {
+                    val groupSectionId = item.sectionId
+                    val groupStart = index
+
+                    while (
+                        index < currentItems.size &&
+                        currentItems[index].sectionId == groupSectionId
+                    ) {
+                        index++
+                    }
+
+                    groups.add(
+                        currentItems.subList(groupStart, index)
+                    )
+                }
+            }
+
+            val currentGroupIndex =
+                groups.indexOfFirst { group ->
+                    group.any { item -> item.sectionId == sectionId }
+                }
+
+            if (currentGroupIndex < 0) {
+                return@withWriteTransaction
+            }
+
+            val targetGroupIndex = currentGroupIndex + offset
+
+            if (targetGroupIndex !in groups.indices) {
+                return@withWriteTransaction
+            }
+
+            val reorderedGroups = groups.toMutableList()
+            val movedGroup = reorderedGroups.removeAt(currentGroupIndex)
+
+            reorderedGroups.add(targetGroupIndex, movedGroup)
+
+            val reorderedItems = reorderedGroups.flatten()
+
+            currentItems.forEachIndexed { itemIndex, item ->
+                comicDao.updateReadingListItem(
+                    item.copy(position = -(itemIndex + 1))
+                )
+            }
+
+            reorderedItems.forEachIndexed { itemIndex, item ->
+                comicDao.updateReadingListItem(
+                    item.copy(position = itemIndex + 1)
+                )
+            }
+
+            normalizeReadingListSectionPositions(
+                readingListId = readingListId,
+                orderedItems = reorderedItems
+            )
+
+            val updatedAt = maxOf(System.currentTimeMillis(), readingList.updatedAt + 1)
+
+            comicDao.updateReadingList(
+                readingList.copy(updatedAt = updatedAt)
+            )
+        }
+    }
+
     suspend fun reorderUserReadingListItems(
         readingListId: Long,
-        orderedItemIds: List<Long>
+        orderedItemIds: List<Long>,
+        detachedItemIds: Set<Long> = emptySet()
     ) {
         database.withWriteTransaction {
             val readingList = comicDao.getReadingListById(readingListId)
@@ -1415,20 +1543,38 @@ class ComicRepository(
                 "Reordered item IDs do not match reading list"
             }
 
-            val reorderedItems =
-                orderedItemIds.map { itemId -> checkNotNull(currentItemsById[itemId]) }
-
-            val currentSectionPattern =
-                currentItems.map { item -> item.sectionId }
-
-            val reorderedSectionPattern =
-                reorderedItems.map { item -> item.sectionId }
-
-            require(reorderedSectionPattern == currentSectionPattern) {
-                "Items cannot move between sections while reordering"
+            require(detachedItemIds.all { it in currentItemsById.keys }) {
+                "Detached item IDs do not match reading list"
             }
 
-            if (currentItems.map { item -> item.id } == orderedItemIds) {
+            val reorderedItems =
+                orderedItemIds.map { itemId ->
+                    val item = checkNotNull(currentItemsById[itemId])
+
+                    if (itemId in detachedItemIds) {
+                        item.copy(sectionId = null)
+                    } else {
+                        item
+                    }
+                }
+
+            val sectionIds = reorderedItems.mapNotNull { item -> item.sectionId }.distinct()
+
+            sectionIds.forEach { sectionId ->
+                val indices =
+                    reorderedItems.indices.filter { index ->
+                        reorderedItems[index].sectionId == sectionId
+                    }
+
+                require(indices.last() - indices.first() + 1 == indices.size) {
+                    "Items from a section must remain contiguous"
+                }
+            }
+
+            if (
+                currentItems.map { it.id } == orderedItemIds &&
+                detachedItemIds.isEmpty()
+            ) {
                 return@withWriteTransaction
             }
 
@@ -1447,6 +1593,11 @@ class ComicRepository(
                     )
                 )
             }
+
+            normalizeReadingListSectionPositions(
+                readingListId = readingListId,
+                orderedItems = reorderedItems
+            )
 
             val updatedAt = maxOf(System.currentTimeMillis(), readingList.updatedAt + 1)
 

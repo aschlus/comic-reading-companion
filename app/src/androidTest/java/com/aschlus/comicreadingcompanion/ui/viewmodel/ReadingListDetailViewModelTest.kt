@@ -1205,6 +1205,137 @@ class ReadingListDetailViewModelTest {
             )
         }
 
+
+    @Test
+    fun moveIssueDown_crossesSectionBoundariesWithoutSplittingSections() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(Publisher(name = "Marvel"))
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Section Boundary Test",
+                        volume = 1,
+                        startYear = 2000,
+                        endYear = 2000
+                    )
+                )
+
+            val issueIds =
+                (1..3).map { number ->
+                    comicDao.insertIssue(
+                        Issue(
+                            seriesId = seriesId,
+                            universeId = null,
+                            issueNumber = number.toString(),
+                            title = "Issue $number",
+                            publicationDate = "2000-0$number",
+                            coverUrl = null,
+                            description = null,
+                            issueType = IssueType.REGULAR
+                        )
+                    )
+                }
+
+            val readingListId =
+                repository.createUserReadingList(
+                    title = "Section Boundary Test",
+                    description = null,
+                    publisherId = publisherId,
+                    universeId = null
+                )
+
+            val sectionId =
+                repository.createUserReadingListSection(
+                    readingListId,
+                    "Bad Seeds",
+                    null
+                )
+
+            repository.addIssueToUserReadingList(
+                readingListId,
+                issueIds[0]
+            )
+
+            repository.addReadingListItem(
+                ReadingListItem(
+                    readingListId = readingListId,
+                    sectionId = sectionId,
+                    issueId = issueIds[1],
+                    position = 2,
+                    required = true,
+                    notes = null
+                )
+            )
+
+            repository.addReadingListItem(
+                ReadingListItem(
+                    readingListId = readingListId,
+                    sectionId = sectionId,
+                    issueId = issueIds[2],
+                    position = 3,
+                    required = true,
+                    notes = null
+                )
+            )
+
+            viewModel.loadReadingList(readingListId)
+
+            withTimeout(5000L.milliseconds) {
+                viewModel.readingList.first {
+                    it?.id == readingListId
+                }
+            }
+
+            val initialIssues =
+                withTimeout(5000L.milliseconds) {
+                    viewModel.issues.first { it.size == 3 }
+                }
+
+            // Moving the unsectioned first issue down crosses the
+            // entire section instead of inserting into it.
+            viewModel.moveIssueDown(initialIssues[0])
+
+            val afterCrossingSection =
+                withTimeout(5000L.milliseconds) {
+                    viewModel.issues.first { issues ->
+                        issues.map { it.issueNumber } ==
+                                listOf("2", "3", "1")
+                    }
+                }
+
+            assertEquals(
+                listOf(sectionId, sectionId, null),
+                afterCrossingSection.map { it.sectionId }
+            )
+
+            // Moving the last issue of the section down detaches it,
+            // leaving the remaining section contiguous.
+            viewModel.moveIssueDown(afterCrossingSection[1])
+
+            val afterLeavingSection =
+                withTimeout(5000L.milliseconds) {
+                    viewModel.issues.first { issues ->
+                        issues.map { it.issueNumber } ==
+                                listOf("2", "1", "3") &&
+                                issues.map { it.sectionId } ==
+                                listOf(sectionId, null, null)
+                    }
+                }
+
+            assertEquals(
+                listOf("2", "1", "3"),
+                afterLeavingSection.map { it.issueNumber }
+            )
+            assertEquals(
+                listOf(1, 2, 3),
+                afterLeavingSection.map { it.position }
+            )
+        }
+
+
     @Test
     fun moveIssueToPosition_movesIssueForwardAndBackwardWithinSection() =
         runBlocking {
