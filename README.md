@@ -97,7 +97,7 @@ building, following, and tracking comic-book reading orders.
 - [x] Filter by publisher
 - [x] Filter by universe / continuity
 - [x] Filter by publication year
-- [ ] Show an issue's appearances across multiple reading lists
+- [x] Show an issue's appearances across multiple reading lists
 
 ### Reading-List Import System
 
