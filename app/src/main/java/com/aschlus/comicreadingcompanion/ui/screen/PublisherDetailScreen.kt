@@ -19,6 +19,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.aschlus.comicreadingcompanion.ui.component.ComicDataSectionHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicEmptyState
 import com.aschlus.comicreadingcompanion.ui.component.ComicHomeSectionHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicIssueDetailHeader
@@ -113,7 +114,7 @@ fun PublisherDetailScreen(
                 }
 
                 item {
-                    ComicHomeSectionHeader(
+                    ComicDataSectionHeader(
                         text = "SERIES",
                         modifier =
                             Modifier.padding(

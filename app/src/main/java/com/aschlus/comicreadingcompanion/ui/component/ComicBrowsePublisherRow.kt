@@ -34,6 +34,8 @@ import com.aschlus.comicreadingcompanion.data.database.models.PublisherBrowseRes
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlueLight
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShape
+import com.aschlus.comicreadingcompanion.ui.theme.ComicDataRowShadowOffsetX
+import com.aschlus.comicreadingcompanion.ui.theme.ComicDataRowShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
 
@@ -75,8 +77,8 @@ fun ComicBrowsePublisherRow(
                 Modifier
                     .matchParentSize()
                     .offset(
-                        x = 2.dp,
-                        y = 4.dp
+                        x = ComicDataRowShadowOffsetX,
+                        y = ComicDataRowShadowOffsetY
                     )
                     .background(
                         color = ComicInk,

@@ -41,6 +41,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aschlus.comicreadingcompanion.ui.component.AddIssueToReadingListSheet
 import com.aschlus.comicreadingcompanion.ui.component.ComicCoverImage
+import com.aschlus.comicreadingcompanion.ui.component.ComicDataSectionHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicHomeSectionHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicIssueDetailHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicIssueReadingListRow
@@ -261,7 +262,7 @@ fun IssueDetailScreen(
                     color = ComicInk
                 )
 
-                ComicHomeSectionHeader(
+                ComicDataSectionHeader(
                     text = "READING STATUS"
                 )
 
@@ -272,12 +273,9 @@ fun IssueDetailScreen(
                     onReadClick = { viewModel.markAsRead() }
                 )
 
-                HorizontalDivider(
-                    thickness = 2.dp,
-                    color = ComicInk
-                )
+                Spacer(modifier = Modifier.height(ComicSpacingXs))
 
-                ComicHomeSectionHeader(
+                ComicDataSectionHeader(
                     text = "PHYSICAL COLLECTION"
                 )
 
@@ -313,13 +311,10 @@ fun IssueDetailScreen(
                 }
 
                 if (addToReadingListViewModel != null) {
-                    HorizontalDivider(
-                        modifier = Modifier.padding(top = ComicSpacingXs),
-                        thickness = 2.dp,
-                        color = ComicInk
-                    )
 
-                    ComicHomeSectionHeader(
+                    Spacer(modifier = Modifier.height(ComicSpacingXs))
+
+                    ComicDataSectionHeader(
                         text = "READING LIST ACTIONS"
                     )
 
@@ -334,16 +329,10 @@ fun IssueDetailScreen(
                 }
 
                 if (readingLists.isNotEmpty()) {
-                    HorizontalDivider(
-                        modifier =
-                            Modifier.padding(
-                                top = ComicSpacingXs
-                            ),
-                        thickness = 2.dp,
-                        color = ComicInk
-                    )
 
-                    ComicHomeSectionHeader(
+                    Spacer(modifier = Modifier.height(ComicSpacingXs))
+
+                    ComicDataSectionHeader(
                         text = "IN READING LISTS"
                     )
 

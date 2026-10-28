@@ -48,6 +48,7 @@ import com.aschlus.comicreadingcompanion.ui.component.ComicBrowseHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicBrowseIssueResult
 import com.aschlus.comicreadingcompanion.ui.component.ComicBrowsePublisherRow
 import com.aschlus.comicreadingcompanion.ui.component.ComicBrowseSeriesResult
+import com.aschlus.comicreadingcompanion.ui.component.ComicDataSectionHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicEmptyState
 import com.aschlus.comicreadingcompanion.ui.component.ComicHomeSectionHeader
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
@@ -167,27 +168,30 @@ fun BrowseScreen(
                 )
             }
 
+
             if (
                 searchQuery.isBlank() &&
                 activeFilterCount == 0
             ) {
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f),
+                    verticalArrangement = Arrangement.spacedBy(9.dp)
+                ) {
+                    item {
+                        ComicDataSectionHeader(
+                            text = "PUBLISHERS"
+                        )
+                    }
 
-                ComicHomeSectionHeader(
-                    text = "PUBLISHERS"
-                )
-
-                if (publishers.isEmpty()) {
-                    ComicEmptyState(
-                        message = "No publishers found"
-                    )
-                } else {
-                    LazyColumn(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .weight(1f),
-                        verticalArrangement =
-                            Arrangement.spacedBy(9.dp)
-                    ) {
+                    if (publishers.isEmpty()) {
+                        item {
+                            ComicEmptyState(
+                                message = "No publishers found"
+                            )
+                        }
+                    } else {
                         items(
                             items = publishers,
                             key = { publisher ->
@@ -233,7 +237,7 @@ fun BrowseScreen(
 
                         if (showSeries) {
                             item {
-                                ComicHomeSectionHeader(
+                                ComicDataSectionHeader(
                                     text = "SERIES"
                                 )
                             }
@@ -255,7 +259,7 @@ fun BrowseScreen(
 
                         if (showIssues) {
                             item {
-                                ComicHomeSectionHeader(
+                                ComicDataSectionHeader(
                                     text = "ISSUES"
                                 )
                             }

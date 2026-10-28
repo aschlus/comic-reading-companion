@@ -28,12 +28,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aschlus.comicreadingcompanion.data.database.models.PublisherSeries
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
-import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
-import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShape
+import com.aschlus.comicreadingcompanion.ui.theme.ComicDataRowShadowOffsetX
+import com.aschlus.comicreadingcompanion.ui.theme.ComicDataRowShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPaper
-import com.aschlus.comicreadingcompanion.ui.theme.ComicPaperDeep
 import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
 
 @Composable
@@ -85,8 +83,8 @@ fun ComicPublisherSeriesRow(
                 Modifier
                     .matchParentSize()
                     .offset(
-                        x = ComicCardShadowOffsetX,
-                        y = ComicCardShadowOffsetY
+                        x = ComicDataRowShadowOffsetX,
+                        y = ComicDataRowShadowOffsetY
                     )
                     .background(
                         color = ComicInk,

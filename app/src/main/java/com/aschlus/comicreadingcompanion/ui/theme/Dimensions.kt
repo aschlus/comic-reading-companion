@@ -13,3 +13,6 @@ val ComicSpacing3Xl = 32.dp
 val ComicCardBorderWidth = 2.dp
 val ComicCardShadowOffsetX = 3.dp
 val ComicCardShadowOffsetY = 4.dp
+
+val ComicDataRowShadowOffsetX = 1.dp
+val ComicDataRowShadowOffsetY = 2.dp

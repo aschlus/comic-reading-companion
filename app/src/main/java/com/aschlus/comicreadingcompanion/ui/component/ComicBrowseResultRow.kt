@@ -32,9 +32,9 @@ import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.database.models.IssueSearchResult
 import com.aschlus.comicreadingcompanion.data.database.models.SeriesSearchResult
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardBorderWidth
-import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetX
-import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicCardShape
+import com.aschlus.comicreadingcompanion.ui.theme.ComicDataRowShadowOffsetX
+import com.aschlus.comicreadingcompanion.ui.theme.ComicDataRowShadowOffsetY
 import com.aschlus.comicreadingcompanion.ui.theme.ComicGreen
 import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import com.aschlus.comicreadingcompanion.ui.theme.ComicPurple
@@ -161,8 +161,8 @@ fun ComicBrowseResultRow(
                 Modifier
                     .matchParentSize()
                     .offset(
-                        x = ComicCardShadowOffsetX,
-                        y = ComicCardShadowOffsetY
+                        x = ComicDataRowShadowOffsetX,
+                        y = ComicDataRowShadowOffsetY
                     )
                     .background(
                         color = ComicInk,

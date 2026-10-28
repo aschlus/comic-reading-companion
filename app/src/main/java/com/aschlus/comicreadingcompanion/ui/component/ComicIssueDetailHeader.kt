@@ -4,6 +4,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -39,7 +41,8 @@ import com.aschlus.comicreadingcompanion.ui.theme.LilitaOneFontFamily
 fun ComicIssueDetailHeader(
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
-    title: String = "ISSUE DETAIL"
+    title: String = "ISSUE DETAIL",
+    trailingContent: (@Composable BoxScope.() -> Unit)? = null
 ) {
     val density = LocalDensity.current
 
@@ -125,7 +128,7 @@ fun ComicIssueDetailHeader(
                     )
                     .padding(
                         start = 96.dp,
-                        end = ComicSpacingMd
+                        end = if (trailingContent != null) 80.dp else ComicSpacingMd
                     )
         ) {
             Text(
@@ -150,6 +153,13 @@ fun ComicIssueDetailHeader(
                 style = titleStyle,
                 color = ComicYellow,
                 maxLines = 1
+            )
+        }
+
+        trailingContent?.let { content ->
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                content = content
             )
         }
     }

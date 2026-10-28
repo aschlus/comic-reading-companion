@@ -16,6 +16,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -39,19 +41,20 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingStatus
 import com.aschlus.comicreadingcompanion.data.repository.ComicVineRefreshIssueChange
+import com.aschlus.comicreadingcompanion.ui.component.ComicDataSectionHeader
+import com.aschlus.comicreadingcompanion.ui.component.ComicDropdownMenu
+import com.aschlus.comicreadingcompanion.ui.component.ComicDropdownMenuItem
 import com.aschlus.comicreadingcompanion.ui.component.ComicEmptyState
-import com.aschlus.comicreadingcompanion.ui.component.ComicHomeSectionHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicIssueDetailHeader
 import com.aschlus.comicreadingcompanion.ui.component.ComicProgressBar
+import com.aschlus.comicreadingcompanion.ui.component.ComicReadingListDetailHeaderButton
 import com.aschlus.comicreadingcompanion.ui.component.ComicSeriesIssueRow
-import com.aschlus.comicreadingcompanion.ui.component.ComicWideActionButton
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlueDark
 import com.aschlus.comicreadingcompanion.ui.theme.ComicBlueLight
 import com.aschlus.comicreadingcompanion.ui.theme.ComicDarkBackground
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacing2Xl
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingSm
-import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingXs
 import com.aschlus.comicreadingcompanion.ui.theme.ComicYellow
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineSeriesRefreshUiState
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineSeriesRefreshViewModel
@@ -72,6 +75,7 @@ fun SeriesDetailScreen(
     val comicVineVolumeId by viewModel.comicVineVolumeId.collectAsState()
     val refreshUiState = refreshViewModel?.uiState?.collectAsState()?.value
     var showRefreshDialog by remember(seriesId) { mutableStateOf(false) }
+    var seriesMenuExpanded by remember(seriesId) { mutableStateOf(false) }
 
     val linkColor =
         if (MaterialTheme.colorScheme.background == ComicDarkBackground) {
@@ -89,7 +93,58 @@ fun SeriesDetailScreen(
         topBar = {
             ComicIssueDetailHeader(
                 onBackClick = onBackClick,
-                title = "SERIES DETAIL"
+                title = "SERIES DETAIL",
+                trailingContent = {
+                    Box(
+                        modifier = Modifier
+                            .align(Alignment.CenterEnd)
+                            .padding(end = 18.dp)
+                    ) {
+                        Box{
+                            ComicReadingListDetailHeaderButton(
+                                icon = Icons.Default.MoreVert,
+                                contentDescription = "Series options",
+                                onClick = {
+                                    seriesMenuExpanded = true
+                                }
+                            )
+
+                            ComicDropdownMenu(
+                                expanded = seriesMenuExpanded,
+                                onDismissRequest = {
+                                    seriesMenuExpanded = false
+                                }
+                            ) {
+                                ComicDropdownMenuItem(
+                                    text = "Edit series details",
+                                    onClick = {
+                                        seriesMenuExpanded = false
+                                        onEditClick()
+                                    }
+                                )
+
+                                if (
+                                    comicVineVolumeId != null &&
+                                    refreshViewModel != null
+                                ) {
+                                    ComicDropdownMenuItem(
+                                        text = "Refresh from Comic Vine",
+                                        onClick = {
+                                            seriesMenuExpanded = false
+                                            showRefreshDialog = true
+
+                                            refreshViewModel.loadPreview(
+                                                seriesId = seriesId,
+                                                comicVineVolumeId = comicVineVolumeId
+                                                    ?: return@ComicDropdownMenuItem
+                                            )
+                                        }
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
             )
         }
     ) { innerPadding: PaddingValues ->
@@ -232,42 +287,6 @@ fun SeriesDetailScreen(
                 }
 
                 item {
-                    ComicWideActionButton(
-                        text = "EDIT SERIES DETAILS",
-                        backgroundColor = ComicYellow,
-                        onClick = onEditClick,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = ComicSpacingXs)
-                    )
-                }
-
-                val linkedVolumeId = comicVineVolumeId
-
-                if (
-                    linkedVolumeId != null &&
-                    refreshViewModel != null
-                ) {
-                    item {
-                        ComicWideActionButton(
-                            text = "REFRESH FROM COMIC VINE",
-                            backgroundColor = ComicYellow,
-                            onClick = {
-                                showRefreshDialog = true
-
-                                refreshViewModel.loadPreview(
-                                    seriesId = seriesId,
-                                    comicVineVolumeId = linkedVolumeId
-                                )
-                            },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(top = ComicSpacingXs)
-                        )
-                    }
-                }
-
-                item {
                     Text(
                         text =
                             "$readCount of " +
@@ -299,7 +318,7 @@ fun SeriesDetailScreen(
                 }
 
                 item {
-                    ComicHomeSectionHeader(
+                    ComicDataSectionHeader(
                         text = "ISSUES",
                         modifier =
                             Modifier.padding(top = ComicSpacingSm)
