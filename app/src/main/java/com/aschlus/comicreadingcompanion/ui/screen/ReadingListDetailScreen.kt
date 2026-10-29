@@ -804,6 +804,21 @@ fun ReadingListDetailScreen(
                                 )
 
                                 ComicDropdownMenuItem(
+                                    text = "Scroll to top",
+                                    enabled = listState.firstVisibleItemIndex > 0 ||
+                                        listState.firstVisibleItemScrollOffset > 0,
+                                    onClick = {
+                                        listMenuExpanded = false
+
+                                        coroutineScope.launch {
+                                            listState.animateScrollToItem(
+                                                index = 0
+                                            )
+                                        }
+                                    }
+                                )
+
+                                ComicDropdownMenuItem(
                                     text = "Mark all as read",
                                     enabled = hasUnreadIssues,
                                     onClick = {
