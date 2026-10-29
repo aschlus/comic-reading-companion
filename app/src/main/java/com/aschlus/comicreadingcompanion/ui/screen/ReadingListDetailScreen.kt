@@ -192,6 +192,14 @@ fun ReadingListDetailScreen(
         mutableStateOf(false)
     }
 
+    var showJumpToPositionDialog by remember(readingListId) {
+        mutableStateOf(false)
+    }
+
+    var jumpToPositionInput by remember(readingListId) {
+        mutableStateOf("")
+    }
+
     var editMode by remember(
         readingListId
     ) {
@@ -786,6 +794,16 @@ fun ReadingListDetailScreen(
                                 }
 
                                 ComicDropdownMenuItem(
+                                    text = "Jump to position",
+                                    enabled = issues.isNotEmpty() && collapsedSectionsLoaded,
+                                    onClick = {
+                                        listMenuExpanded = false
+                                        jumpToPositionInput = ""
+                                        showJumpToPositionDialog = true
+                                    }
+                                )
+
+                                ComicDropdownMenuItem(
                                     text = "Mark all as read",
                                     enabled = hasUnreadIssues,
                                     onClick = {
@@ -1378,6 +1396,70 @@ fun ReadingListDetailScreen(
             onDismiss = {
                 issuePendingPositionMove = null
                 positionMoveInput = ""
+            },
+            showSecondaryField = false,
+            primaryKeyboardType = KeyboardType.Number
+        )
+    }
+
+    if (showJumpToPositionDialog) {
+        val targetPosition = jumpToPositionInput.toIntOrNull()
+
+        ComicFormDialog(
+            title = "Jump to Position",
+            primaryLabel = "Reading-order position (1-${issues.size})",
+            primaryValue = jumpToPositionInput,
+            onPrimaryValueChange = { value ->
+                if (value.all { it.isDigit() }) {
+                    jumpToPositionInput = value
+                }
+            },
+            secondaryLabel = "",
+            secondaryValue = "",
+            onSecondaryValueChange = {},
+            confirmText = "Jump",
+            confirmEnabled = targetPosition != null &&
+                targetPosition in 1..issues.size,
+            onConfirm = {
+                targetPosition?.let { requestedPosition ->
+                    val targetIndex = requestedPosition - 1
+                    val targetIssue = issues.getOrNull(targetIndex)
+
+                    if (targetIssue != null) {
+                        showJumpToPositionDialog = false
+                        jumpToPositionInput = ""
+
+                        searchQuery = ""
+                        isSearchActive = false
+                        keyboardController?.hide()
+                        readingStatusFilter = "ALL"
+                        requiredFilter = "ALL"
+                        selectedSeriesKey = null
+
+                        coroutineScope.launch {
+                            withFrameNanos {  }
+
+                            val targetSectionId = targetIssue.sectionId
+
+                            if (
+                                targetSectionId != null &&
+                                collapsedSectionIds.contains(targetSectionId)
+                            ) {
+                                viewModel.expandSection(targetSectionId)
+                                withFrameNanos {  }
+                            }
+
+                            listState.animateScrollToItem(
+                                index = targetIndex + 2,
+                                scrollOffset =  -stickyControlsHeightPx
+                            )
+                        }
+                    }
+                }
+            },
+            onDismiss = {
+                showJumpToPositionDialog = false
+                jumpToPositionInput = ""
             },
             showSecondaryField = false,
             primaryKeyboardType = KeyboardType.Number

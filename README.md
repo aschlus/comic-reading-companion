@@ -251,7 +251,7 @@ building, following, and tracking comic-book reading orders.
 - [x] Tap issue to open issue details
 - [x] Persistent reading-progress header
 - [ ] Scroll-to-top action
-- [ ] Jump to a specific issue / reading-order number
+- [x] Jump to a specific issue / reading-order number
 - [x] Apply Comic Print visual treatment to headers, progress, sections, and rows
 - [x] Search issues within a reading list
 - [x] Filter issues by reading status, list status, and series

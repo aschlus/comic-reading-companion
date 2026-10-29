@@ -2179,6 +2179,172 @@ class ReadingListDetailScreenTest {
     }
 
     @Test
+    fun readingListDetailScreen_jumpToPositionExpandsSectionAndShowsTarget() {
+        val (readingListId, sectionId) = runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Amazing Spider-Man",
+                        volume = 2,
+                        startYear = 1999,
+                        endYear = 2003
+                    )
+                )
+
+            val firstIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "1",
+                        title = "First Story",
+                        publicationDate = "2001-01",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val secondIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "2",
+                        title = "Middle Story",
+                        publicationDate = "2001-02",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val targetIssueId =
+                comicDao.insertIssue(
+                    Issue(
+                        seriesId = seriesId,
+                        universeId = null,
+                        issueNumber = "3",
+                        title = "Target Story",
+                        publicationDate = "2001-03",
+                        coverUrl = null,
+                        description = null,
+                        issueType = IssueType.REGULAR
+                    )
+                )
+
+            val newReadingListId =
+                comicDao.insertReadingList(
+                    ReadingList(
+                        title = "Jump Test Reading Order",
+                        description = null,
+                        publisherId = publisherId,
+                        universeId = null,
+                        createdAt = 1000L,
+                        updatedAt = 1000L
+                    )
+                )
+
+            val newSectionId =
+                comicDao.insertReadingListSection(
+                    ReadingListSection(
+                        readingListId = newReadingListId,
+                        title = "Test Arc",
+                        description = null,
+                        position = 1
+                    )
+                )
+
+            listOf(
+                firstIssueId,
+                secondIssueId,
+                targetIssueId
+            ).forEachIndexed { index, issueId ->
+                comicDao.insertReadingListItem(
+                    ReadingListItem(
+                        readingListId = newReadingListId,
+                        sectionId = newSectionId,
+                        issueId = issueId,
+                        position = index + 1,
+                        required = true,
+                        notes = null
+                    )
+                )
+            }
+
+            readingListUiPreferences.setSectionCollapsed(
+                readingListId = newReadingListId,
+                sectionId = newSectionId,
+                collapsed = true
+            )
+
+            newReadingListId to newSectionId
+        }
+
+        composeRule.setContent {
+            ComicReadingCompanionTheme(
+                dynamicColor = false
+            ) {
+                ReadingListDetailScreen(
+                    readingListId = readingListId,
+                    startPosition = -1,
+                    viewModel = viewModel,
+                    onIssueClick = {},
+                    onBackClick = {}
+                )
+            }
+        }
+
+        composeRule.waitUntil(timeoutMillis = 5000L) {
+            composeRule
+                .onAllNodesWithText("Test Arc", ignoreCase = true)
+                .fetchSemanticsNodes()
+                .isNotEmpty()
+        }
+
+        composeRule
+            .onNodeWithContentDescription("Expand section")
+            .assertIsDisplayed()
+
+        composeRule
+            .onNodeWithContentDescription("Reading list options")
+            .performClick()
+
+        composeRule
+            .onNodeWithText("Jump to position")
+            .performClick()
+
+        composeRule
+            .onNode(hasSetTextAction())
+            .performTextInput("3")
+
+        composeRule
+            .onNodeWithText("Jump")
+            .performClick()
+
+        composeRule.waitUntil(timeoutMillis = 5000L) {
+            composeRule
+                .onAllNodesWithText("Target Story")
+                .fetchSemanticsNodes()
+                .isNotEmpty()
+        }
+
+        composeRule
+            .onNodeWithText("Target Story")
+            .assertIsDisplayed()
+
+        composeRule
+            .onNodeWithContentDescription("Collapse section")
+            .assertIsDisplayed()
+    }
+
+    @Test
     fun readingListDetailScreen_userListCanRemoveIssue() {
         runBlocking {
             val publisherId =
