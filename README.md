@@ -182,7 +182,7 @@ building, following, and tracking comic-book reading orders.
 - [x] Match upcoming releases to existing catalog records using external identifiers first
 - [x] Support upcoming releases that do not yet have a local Comic Vine issue record
 - [ ] Handle ambiguous matches, changed dates, delayed releases, and canceled releases
-- [ ] Preserve source attribution and comply with provider data licenses and terms
+- [x] Preserve source attribution and comply with provider data licenses and terms
 
 **Milestone 2 — Personal Pull List and Upcoming Releases**
 

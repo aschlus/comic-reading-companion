@@ -3,9 +3,21 @@ package com.aschlus.comicreadingcompanion.data.remote
 import java.time.LocalDate
 import java.time.Instant
 
+data class ReleaseProviderAttribution(
+    val providerName: String,
+    val sourceUrl: String,
+    val licenseName: String,
+    val licenseUrl: String,
+    val changesNotice: String,
+    val additionalNotice: String? = null
+)
+
 interface ReleaseDataProvider {
 
     val providerId: String
+
+    val attribution: ReleaseProviderAttribution?
+        get() = null
 
     suspend fun validateConnection(
         accessToken: String

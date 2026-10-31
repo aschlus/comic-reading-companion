@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
@@ -413,6 +414,9 @@ private fun MetronSettingsSection(
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
+    val uriHandler = LocalUriHandler.current
+    val attribution = viewModel.sourceAttribution
+
     var tokenInput by remember { mutableStateOf("") }
     var tokenVisible by remember { mutableStateOf(false) }
     var showRemoveConfirmation by remember {
@@ -769,6 +773,49 @@ private fun MetronSettingsSection(
                         )
                     }
                 }
+            }
+        }
+
+        ComicHomeSectionHeader(
+            text = "DATA ATTRIBUTION"
+        )
+
+        Text(
+            text = "Comic release data from ${attribution.providerName}, " +
+                "licensed under ${attribution.licenseName}.",
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+
+        Text(
+            text = attribution.changesNotice,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+
+        attribution.additionalNotice?.let { notice ->
+            Text(
+                text = notice,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(ComicSpacingMd),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            TextButton(
+                onClick = {
+                    uriHandler.openUri(attribution.sourceUrl)
+                }
+            ) {
+                Text("${attribution.providerName.uppercase()} SOURCE")
+            }
+
+            TextButton(
+                onClick = {
+                    uriHandler.openUri(attribution.licenseUrl)
+                }
+            ) {
+                Text("CC BY-SA 4.0 LICENSE")
             }
         }
     }

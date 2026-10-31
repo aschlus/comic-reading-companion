@@ -37,6 +37,8 @@ class MetronSettingsViewModel(
     private val _uiState =
         MutableStateFlow(MetronSettingsUiState())
 
+    val sourceAttribution = apiClient.attribution
+
     val uiState: StateFlow<MetronSettingsUiState> =
         _uiState.asStateFlow()
 

@@ -99,6 +99,24 @@ class MetronApiClient(
 
     override val providerId: String = "METRON"
 
+    override val attribution =
+        ReleaseProviderAttribution(
+            providerName = "Metron",
+            sourceUrl = "https://metron.cloud/",
+            licenseName =
+                "Creative Commons Attribution-ShareAlike 4.0 International " +
+                    "(CC BY-SA 4.0)",
+            licenseUrl =
+                "https://creativecommons.org/licenses/by-sa/4.0/",
+            changesNotice =
+                "Changes: Metron release fields are normalized into the " +
+                    "app's local data model. Store-date and FOC-date updates " +
+                    "reported by Metron are retained in release-change history.",
+            additionalNotice =
+                "Metron cover images are not imported; their rights are " +
+                    "separate from the CC BY-SA 4.0 catalog-data license."
+        )
+
     override suspend fun validateConnection(
         accessToken: String
     ): ReleaseProviderResult<Unit> {
