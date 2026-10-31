@@ -17,8 +17,8 @@ class SeriesDetailViewModel(
 
     private var seriesJob: Job? = null
     private var issuesJob: Job? = null
-
     private var comicVineVolumeIdJob: Job? = null
+    private var pullListJob: Job? = null
 
     private val _comicVineVolumeId =
         MutableStateFlow<Long?>(null)
@@ -38,14 +38,22 @@ class SeriesDetailViewModel(
     val issues: StateFlow<List<SeriesIssue>> =
         _issues.asStateFlow()
 
+    private val _isOnPullList =
+        MutableStateFlow(false)
+
+    val isOnPullList: StateFlow<Boolean> =
+        _isOnPullList.asStateFlow()
+
     fun loadSeries(
         seriesId: Long
     ) {
         seriesJob?.cancel()
         issuesJob?.cancel()
-
         comicVineVolumeIdJob?.cancel()
+        pullListJob?.cancel()
+
         _comicVineVolumeId.value = null
+        _isOnPullList.value = false
 
         comicVineVolumeIdJob = viewModelScope.launch {
             _comicVineVolumeId.value =
@@ -66,6 +74,30 @@ class SeriesDetailViewModel(
                 .collect { updatedIssues ->
                     _issues.value = updatedIssues
                 }
+        }
+
+        pullListJob = viewModelScope.launch {
+            repository
+                .isSeriesOnPullList(seriesId)
+                .collect { isTracked ->
+                    _isOnPullList.value = isTracked
+                }
+        }
+    }
+
+    fun addSeriesToPullList(
+        seriesId: Long
+    ) {
+        viewModelScope.launch {
+            repository.addSeriesToPullList(seriesId)
+        }
+    }
+
+    fun removeSeriesFromPullList(
+        seriesId: Long
+    ) {
+        viewModelScope.launch {
+            repository.removeSeriesFromPullList(seriesId)
         }
     }
 }

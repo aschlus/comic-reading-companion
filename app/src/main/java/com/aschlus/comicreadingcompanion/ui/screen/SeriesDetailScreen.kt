@@ -21,6 +21,8 @@ import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import com.aschlus.comicreadingcompanion.ui.component.ComicWideActionButton
+import com.aschlus.comicreadingcompanion.ui.theme.ComicInk
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -74,6 +76,7 @@ fun SeriesDetailScreen(
     val issues by viewModel.issues.collectAsState()
     val comicVineVolumeId by viewModel.comicVineVolumeId.collectAsState()
     val refreshUiState = refreshViewModel?.uiState?.collectAsState()?.value
+    val isOnPullList by viewModel.isOnPullList.collectAsState()
     var showRefreshDialog by remember(seriesId) { mutableStateOf(false) }
     var seriesMenuExpanded by remember(seriesId) { mutableStateOf(false) }
 
@@ -284,6 +287,34 @@ fun SeriesDetailScreen(
                             color = linkColor
                         )
                     }
+                }
+
+                item {
+                    ComicWideActionButton(
+                        text = if (isOnPullList) {
+                            "REMOVE FROM PULL LIST"
+                        } else {
+                            "ADD TO PULL LIST"
+                        },
+                        backgroundColor = if (isOnPullList) {
+                            MaterialTheme.colorScheme.surfaceVariant
+                        } else {
+                            ComicYellow
+                        },
+                        contentColor = if (isOnPullList) {
+                            MaterialTheme.colorScheme.onSurfaceVariant
+                        } else {
+                            ComicInk
+                        },
+                        onClick = {
+                            if (isOnPullList) {
+                                viewModel.removeSeriesFromPullList(seriesId)
+                            } else {
+                                viewModel.addSeriesToPullList(seriesId)
+                            }
+                        },
+                        modifier = Modifier.fillMaxWidth()
+                    )
                 }
 
                 item {

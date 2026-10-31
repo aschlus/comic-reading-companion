@@ -49,6 +49,7 @@ import com.aschlus.comicreadingcompanion.ui.screen.HomeScreen
 import com.aschlus.comicreadingcompanion.ui.screen.IssueDetailScreen
 import com.aschlus.comicreadingcompanion.ui.screen.LibraryScreen
 import com.aschlus.comicreadingcompanion.ui.screen.PublisherDetailScreen
+import com.aschlus.comicreadingcompanion.ui.screen.PullListScreen
 import com.aschlus.comicreadingcompanion.ui.screen.ReadingHistoryScreen
 import com.aschlus.comicreadingcompanion.ui.screen.ReadingListDetailScreen
 import com.aschlus.comicreadingcompanion.ui.screen.SeriesDetailScreen
@@ -484,6 +485,9 @@ class MainActivity : ComponentActivity() {
                                 },
                                 onCollectionClick = {
                                     navigateTopLevel("collection")
+                                },
+                                onPullListClick = {
+                                    navigateTopLevel("pullList")
                                 }
                             )
                         }
@@ -1030,6 +1034,14 @@ class MainActivity : ComponentActivity() {
                                     )
                                 },
                                 onBackClick = safeNavigateBack
+                            )
+                        }
+
+                        composable("pullList") {
+                            PullListScreen(
+                                onBrowseClick = {
+                                    navigateTopLevel("browse")
+                                }
                             )
                         }
                     }

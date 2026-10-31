@@ -8,6 +8,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.ExternalId
 import com.aschlus.comicreadingcompanion.data.database.entities.Issue
 import com.aschlus.comicreadingcompanion.data.database.entities.IssueOwnership
 import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
+import com.aschlus.comicreadingcompanion.data.database.entities.PullListSeriesEntity
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListItem
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSection
@@ -36,9 +37,10 @@ import com.aschlus.comicreadingcompanion.data.database.entities.Universe
         ScheduledReleaseEntity::class,
         ReleaseSeriesMetadataEntity::class,
         ScheduledReleaseSyncStateEntity::class,
-        ScheduledReleaseChangeEntity::class
+        ScheduledReleaseChangeEntity::class,
+        PullListSeriesEntity::class
     ],
-    version = 11,
+    version = 13,
     exportSchema = true
 )
 abstract class ComicDatabase : RoomDatabase() {
@@ -66,7 +68,9 @@ abstract class ComicDatabase : RoomDatabase() {
                         MIGRATION_7_8,
                         MIGRATION_8_9,
                         MIGRATION_9_10,
-                        MIGRATION_10_11
+                        MIGRATION_10_11,
+                        MIGRATION_11_12,
+                        MIGRATION_12_13
                     )
                     .build()
 

@@ -28,7 +28,9 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicReadingCompanionTheme
 import com.aschlus.comicreadingcompanion.ui.viewmodel.SeriesDetailViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancelAndJoin
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withTimeout
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -395,4 +397,96 @@ class SeriesDetailScreenTest {
             composeRule.onNodeWithText("READ").performScrollTo().assertIsDisplayed()
         }
     }
+
+    @Test
+    fun seriesDetailScreen_addsAndRemovesSeriesFromPullList() =
+        runBlocking {
+            val publisherId =
+                comicDao.insertPublisher(
+                    Publisher(name = "Marvel")
+                )
+
+            val seriesId =
+                comicDao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Amazing Spider-Man",
+                        volume = 2,
+                        startYear = 1999,
+                        endYear = 2003
+                    )
+                )
+
+            composeRule.setContent {
+                ComicReadingCompanionTheme(
+                    dynamicColor = false
+                ) {
+                    SeriesDetailScreen(
+                        seriesId = seriesId,
+                        viewModel = viewModel,
+                        onPublisherClick = {},
+                        onIssueClick = {},
+                        onBackClick = {}
+                    )
+                }
+            }
+
+            composeRule.waitUntil(timeoutMillis = 5000L) {
+                composeRule
+                    .onAllNodesWithText("ADD TO PULL LIST")
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            composeRule
+                .onNodeWithText("ADD TO PULL LIST")
+                .performScrollTo()
+                .assertIsDisplayed()
+                .performClick()
+
+            composeRule.waitUntil(timeoutMillis = 5000L) {
+                composeRule
+                    .onAllNodesWithText("REMOVE FROM PULL LIST")
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            val trackedSeries =
+                withTimeout(5000L) {
+                    repository.getPullListSeries().first {
+                            entries ->
+                        entries.any {
+                            it.seriesId == seriesId
+                        }
+                    }
+                }
+
+            assertEquals(1, trackedSeries.size)
+            assertEquals(
+                seriesId,
+                trackedSeries.first().seriesId
+            )
+
+            composeRule
+                .onNodeWithText("REMOVE FROM PULL LIST")
+                .performScrollTo()
+                .assertIsDisplayed()
+                .performClick()
+
+            composeRule.waitUntil(timeoutMillis = 5000L) {
+                composeRule
+                    .onAllNodesWithText("ADD TO PULL LIST")
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+
+            val remainingSeries =
+                withTimeout(5000L) {
+                    repository.getPullListSeries().first {
+                        it.isEmpty()
+                    }
+                }
+
+            assertEquals(0, remainingSeries.size)
+        }
 }

@@ -393,3 +393,66 @@ val MIGRATION_10_11 =
             )
         }
     }
+
+val MIGRATION_11_12 =
+    object : Migration(
+        startVersion = 11,
+        endVersion = 12
+    ) {
+        override suspend fun migrate(
+            connection: SQLiteConnection
+        ) {
+            connection.execSQL(
+                """
+                ALTER TABLE scheduled_releases
+                ADD COLUMN manuallyCanceledAt INTEGER
+                """.trimIndent()
+            )
+
+            connection.execSQL(
+                """
+                ALTER TABLE scheduled_release_changes
+                ADD COLUMN previousManuallyCanceledAt INTEGER
+                """.trimIndent()
+            )
+
+            connection.execSQL(
+                """
+                ALTER TABLE scheduled_release_changes
+                ADD COLUMN newManuallyCanceledAt INTEGER
+                """.trimIndent()
+            )
+        }
+    }
+
+val MIGRATION_12_13 =
+    object : Migration(
+        startVersion = 12,
+        endVersion = 13
+    ) {
+        override suspend fun migrate(
+            connection: SQLiteConnection
+        ) {
+            connection.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS pull_list_series (
+                    seriesId INTEGER NOT NULL,
+                    addedAt INTEGER NOT NULL,
+                    PRIMARY KEY(seriesId),
+                    FOREIGN KEY(seriesId)
+                        REFERENCES series(id)
+                        ON UPDATE NO ACTION
+                        ON DELETE CASCADE
+                )
+                """.trimIndent()
+            )
+
+            connection.execSQL(
+                """
+                CREATE INDEX IF NOT EXISTS
+                index_pull_list_series_addedAt
+                ON pull_list_series(addedAt)
+                """.trimIndent()
+            )
+        }
+    }

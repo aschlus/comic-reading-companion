@@ -8,6 +8,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.Issue
 import com.aschlus.comicreadingcompanion.data.database.entities.IssueOwnership
 import com.aschlus.comicreadingcompanion.data.database.entities.IssueType
 import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
+import com.aschlus.comicreadingcompanion.data.database.entities.PullListSeriesEntity
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListItem
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSection
@@ -24,6 +25,7 @@ import com.aschlus.comicreadingcompanion.data.database.models.IssueSearchResult
 import com.aschlus.comicreadingcompanion.data.database.models.OwnedIssueResult
 import com.aschlus.comicreadingcompanion.data.database.models.PublisherBrowseResult
 import com.aschlus.comicreadingcompanion.data.database.models.PublisherSeries
+import com.aschlus.comicreadingcompanion.data.database.models.PullListSeriesResult
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListArtworkCover
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListContinueItem
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListIssue
@@ -194,6 +196,41 @@ class ComicRepository(
         return comicDao.getSeriesDetail(
             seriesId = seriesId
         )
+    }
+
+    fun getPullListSeries():
+        Flow<List<PullListSeriesResult>> {
+        return comicDao.getPullListSeries()
+    }
+
+    fun isSeriesOnPullList(
+        seriesId: Long
+    ): Flow<Boolean> {
+        return comicDao.isSeriesOnPullList(seriesId)
+    }
+
+    suspend fun addSeriesToPullList(
+        seriesId: Long
+    ): Boolean {
+
+        val series =
+            comicDao.getSeriesById(seriesId)
+                ?: return false
+
+        comicDao.insertPullListSeries(
+            PullListSeriesEntity(
+                seriesId = series.id,
+                addedAt = System.currentTimeMillis()
+            )
+        )
+
+        return true
+    }
+
+    suspend fun removeSeriesFromPullList(
+        seriesId: Long
+    ) {
+        comicDao.deletePullListSeries(seriesId)
     }
 
     fun getSeriesIssues(

@@ -11,6 +11,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.ExternalId
 import com.aschlus.comicreadingcompanion.data.database.entities.Issue
 import com.aschlus.comicreadingcompanion.data.database.entities.IssueOwnership
 import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
+import com.aschlus.comicreadingcompanion.data.database.entities.PullListSeriesEntity
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListItem
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSection
@@ -29,6 +30,7 @@ import com.aschlus.comicreadingcompanion.data.database.models.ManualIssueTypeOve
 import com.aschlus.comicreadingcompanion.data.database.models.OwnedIssueResult
 import com.aschlus.comicreadingcompanion.data.database.models.PublisherBrowseResult
 import com.aschlus.comicreadingcompanion.data.database.models.PublisherSeries
+import com.aschlus.comicreadingcompanion.data.database.models.PullListSeriesResult
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListArtworkCover
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListContinueItem
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListIssue
@@ -484,6 +486,57 @@ interface ComicDao {
     suspend fun getSeriesById(
         seriesId: Long
     ): Series?
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertPullListSeries(
+        entry: PullListSeriesEntity
+    ): Long
+
+    @Query("""
+    DELETE FROM pull_list_series
+    WHERE seriesId = :seriesId
+""")
+    suspend fun deletePullListSeries(
+        seriesId: Long
+    )
+
+    @Query("""
+    SELECT EXISTS (
+        SELECT 1
+        FROM pull_list_series
+        WHERE seriesId = :seriesId
+    )
+""")
+    fun isSeriesOnPullList(
+        seriesId: Long
+    ): Flow<Boolean>
+
+    @Query("""
+    SELECT
+        series.id AS seriesId,
+        series.title AS title,
+        series.volume AS volume,
+        series.startYear AS startYear,
+        series.endYear AS endYear,
+        publishers.name AS publisherName,
+        COUNT(issues.id) AS totalCount
+    FROM pull_list_series
+    INNER JOIN series
+        ON pull_list_series.seriesId = series.id
+    INNER JOIN publishers
+        ON series.publisherId = publishers.id
+    LEFT JOIN issues
+        ON series.id = issues.seriesId
+    GROUP BY
+        series.id,
+        publishers.name,
+        pull_list_series.addedAt
+    ORDER BY
+        pull_list_series.addedAt DESC,
+        series.title COLLATE NOCASE ASC
+""")
+    fun getPullListSeries():
+        Flow<List<PullListSeriesResult>>
 
 
     // Series external IDs
@@ -1263,6 +1316,18 @@ interface ComicDao {
         providerId: String,
         externalIssueId: String
     ): List<ScheduledReleaseChangeEntity>
+
+    @Query("""
+    UPDATE scheduled_releases
+    SET manuallyCanceledAt = :manuallyCanceledAt
+    WHERE providerId = :providerId
+        AND externalIssueId = :externalIssueId
+""")
+    suspend fun updateScheduledReleaseManualCancellation(
+        providerId: String,
+        externalIssueId: String,
+        manuallyCanceledAt: Long?
+    ): Int
 
 
     // Scheduled release sync state

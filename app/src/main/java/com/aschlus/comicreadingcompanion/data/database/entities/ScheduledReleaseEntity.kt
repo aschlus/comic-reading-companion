@@ -46,5 +46,6 @@ data class ScheduledReleaseEntity(
 
     val sourceUrl: String?,
     val sourceModifiedAt: String?,
-    val lastSyncedAt: Long
+    val lastSyncedAt: Long,
+    val manuallyCanceledAt: Long? = null
 )

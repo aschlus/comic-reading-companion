@@ -2130,4 +2130,196 @@ class ComicDatabaseMigrationTest {
             migrated.close()
         }
 
+    @Test
+    fun migration11To12_addsManualCancellationFieldsAndPreservesData() =
+        runBlocking {
+
+            val original =
+                migrationHelper.createDatabase(11)
+
+            original.execSQL(
+                """
+            INSERT INTO scheduled_releases (
+                providerId,
+                externalIssueId,
+                externalSeriesId,
+                seriesTitleSnapshot,
+                lastSyncedAt
+            )
+            VALUES (
+                'METRON',
+                '300',
+                '45',
+                'Amazing Spider-Man',
+                1000
+            )
+            """.trimIndent()
+            )
+
+            original.execSQL(
+                """
+            INSERT INTO scheduled_release_changes (
+                providerId,
+                externalIssueId,
+                externalSeriesId,
+                seriesTitleSnapshot,
+                previousStoreReleaseDate,
+                newStoreReleaseDate,
+                detectedAt
+            )
+            VALUES (
+                'METRON',
+                '300',
+                '45',
+                'Amazing Spider-Man',
+                '2026-10-21',
+                '2026-11-11',
+                2000
+            )
+            """.trimIndent()
+            )
+
+            original.close()
+
+            val migrated =
+                migrationHelper.runMigrationsAndValidate(
+                    version = 12,
+                    migrations = listOf(
+                        MIGRATION_11_12
+                    )
+                )
+
+            assertEquals(
+                1L,
+                queryLong(
+                    migrated,
+                    """
+                SELECT COUNT(*)
+                FROM scheduled_releases
+                WHERE providerId = 'METRON'
+                    AND externalIssueId = '300'
+                    AND manuallyCanceledAt IS NULL
+                """.trimIndent()
+                )
+            )
+
+            assertEquals(
+                1L,
+                queryLong(
+                    migrated,
+                    """
+                SELECT COUNT(*)
+                FROM scheduled_release_changes
+                WHERE providerId = 'METRON'
+                    AND externalIssueId = '300'
+                    AND previousManuallyCanceledAt IS NULL
+                    AND newManuallyCanceledAt IS NULL
+                """.trimIndent()
+                )
+            )
+
+            migrated.close()
+        }
+
+    @Test
+    fun migration12To13_createsPullListAndEnforcesSeriesCascade() =
+        runBlocking {
+
+            val original =
+                migrationHelper.createDatabase(12)
+
+            original.execSQL(
+                """
+            INSERT INTO publishers (
+                id,
+                name
+            )
+            VALUES (
+                1,
+                'Marvel Comics'
+            )
+            """.trimIndent()
+            )
+
+            original.execSQL(
+                """
+            INSERT INTO series (
+                id,
+                publisherId,
+                title,
+                volume,
+                startYear,
+                endYear,
+                universeId
+            )
+            VALUES (
+                1,
+                1,
+                'Amazing Spider-Man',
+                2,
+                1999,
+                2003,
+                NULL
+            )
+            """.trimIndent()
+            )
+
+            original.close()
+
+            val migrated =
+                migrationHelper.runMigrationsAndValidate(
+                    version = 13,
+                    migrations = listOf(
+                        MIGRATION_12_13
+                    )
+                )
+
+            migrated.execSQL("PRAGMA foreign_keys = ON")
+
+            migrated.execSQL(
+                """
+            INSERT INTO pull_list_series (
+                seriesId,
+                addedAt
+            )
+            VALUES (
+                1,
+                1000
+            )
+            """.trimIndent()
+            )
+
+            migrated.prepare(
+                """
+            SELECT COUNT(*)
+            FROM pull_list_series
+            WHERE seriesId = 1
+            """.trimIndent()
+            ).use { statement ->
+                assertTrue(statement.step())
+                assertEquals(1L, statement.getLong(0))
+            }
+
+            // Deleting the local series must remove its pull-list entry.
+            migrated.execSQL(
+                """
+            DELETE FROM series
+            WHERE id = 1
+            """.trimIndent()
+            )
+
+            migrated.prepare(
+                """
+            SELECT COUNT(*)
+            FROM pull_list_series
+            WHERE seriesId = 1
+            """.trimIndent()
+            ).use { statement ->
+                assertTrue(statement.step())
+                assertEquals(0L, statement.getLong(0))
+            }
+
+            migrated.close()
+        }
+
 }

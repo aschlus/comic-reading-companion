@@ -13,6 +13,7 @@ import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Bookmark
+import androidx.compose.material.icons.filled.EventNote
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Search
@@ -42,6 +43,7 @@ fun ComicBottomNavigation(
     onBrowseClick: () -> Unit,
     onLibraryClick: () -> Unit,
     onCollectionClick: () -> Unit,
+    onPullListClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val topBorderColor = MaterialTheme.colorScheme.outline
@@ -84,6 +86,14 @@ fun ComicBottomNavigation(
             selected = currentRoute == "library",
             contentDescription = "Library tab",
             onClick = onLibraryClick
+        )
+
+        ComicBottomNavDestination(
+            label = "Pull List",
+            icon = Icons.Default.EventNote,
+            selected = currentRoute == "pullList",
+            contentDescription = "Pull List tab",
+            onClick = onPullListClick
         )
 
         ComicBottomNavDestination(

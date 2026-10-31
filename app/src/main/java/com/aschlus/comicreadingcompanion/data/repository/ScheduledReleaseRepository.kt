@@ -189,7 +189,24 @@ class ScheduledReleaseRepository(
                 )
             }
 
-            comicDao.upsertScheduledReleases(entities)
+            val currentStoredById =
+                comicDao.getAllScheduledReleasesForProvider(
+                    providerId = releaseDataProvider.providerId
+                ).associateBy {
+                    it.externalIssueId
+                }
+
+            val entitiesToUpsert =
+                releasesToPersist.map { release ->
+                    release.toEntity(
+                        lastSyncedAt = syncedAt,
+                        manuallyCanceledAt =
+                            currentStoredById[release.externalIssueId]
+                                ?.manuallyCanceledAt
+                    )
+                }
+
+            comicDao.upsertScheduledReleases(entitiesToUpsert)
 
             outcomes = releasesToReconcile.map { release ->
                 reconcileRelease(
@@ -278,6 +295,81 @@ class ScheduledReleaseRepository(
             providerId = providerId,
             externalIssueId = externalIssueId
         )
+    }
+
+    suspend fun setScheduledReleaseManuallyCanceled(
+        providerId: String,
+        externalIssueId: String,
+        isCanceled: Boolean
+    ): Boolean {
+
+        var found = false
+
+        database.withWriteTransaction {
+
+            val release =
+                comicDao.getScheduledRelease(
+                    providerId = providerId,
+                    externalIssueId = externalIssueId
+                )
+
+            if (release != null) {
+                found = true
+
+                val newManuallyCanceledAt =
+                    if (isCanceled) {
+                        release.manuallyCanceledAt ?: currentTimeMillis()
+                    } else {
+                        null
+                    }
+
+                // Do not create duplicate history entries for
+                // repeated requests to set the same status.
+                if (
+                    newManuallyCanceledAt !=
+                    release.manuallyCanceledAt
+                ) {
+                    val detectedAt = currentTimeMillis()
+
+                    comicDao.insertScheduledReleaseChanges(
+                        listOf(
+                            ScheduledReleaseChangeEntity(
+                                providerId = release.providerId,
+                                externalIssueId = release.externalIssueId,
+                                externalSeriesId = release.externalSeriesId,
+                                seriesTitleSnapshot =
+                                    release.seriesTitleSnapshot,
+                                issueNumberSnapshot =
+                                    release.issueNumberSnapshot,
+                                previousStoreReleaseDate =
+                                    release.storeReleaseDate,
+                                newStoreReleaseDate =
+                                    release.storeReleaseDate,
+                                previousFocDate =
+                                    release.focDate,
+                                newFocDate =
+                                    release.focDate,
+                                sourceModifiedAt =
+                                    release.sourceModifiedAt,
+                                detectedAt = detectedAt,
+                                previousManuallyCanceledAt =
+                                    release.manuallyCanceledAt,
+                                newManuallyCanceledAt =
+                                    newManuallyCanceledAt
+                            )
+                        )
+                    )
+
+                    comicDao.updateScheduledReleaseManualCancellation(
+                        providerId = providerId,
+                        externalIssueId = externalIssueId,
+                        manuallyCanceledAt = newManuallyCanceledAt
+                    )
+                }
+            }
+        }
+
+        return found
     }
 
     suspend fun getScheduledReleaseCount(
@@ -580,7 +672,8 @@ class ScheduledReleaseRepository(
     }
 
     private fun ScheduledReleaseData.toEntity(
-        lastSyncedAt: Long
+        lastSyncedAt: Long,
+        manuallyCanceledAt: Long? = null
     ): ScheduledReleaseEntity {
         return ScheduledReleaseEntity(
             providerId = providerId,
@@ -603,7 +696,8 @@ class ScheduledReleaseRepository(
             gcdId = gcdId,
             sourceUrl = sourceUrl,
             sourceModifiedAt = sourceModifiedAt,
-            lastSyncedAt = lastSyncedAt
+            lastSyncedAt = lastSyncedAt,
+            manuallyCanceledAt = manuallyCanceledAt
         )
     }
 

@@ -35,5 +35,8 @@ data class ScheduledReleaseChangeEntity(
     val newFocDate: String?,
 
     val sourceModifiedAt: String?,
-    val detectedAt: Long
+    val detectedAt: Long,
+
+    val previousManuallyCanceledAt: Long? = null,
+    val newManuallyCanceledAt: Long? = null
 )

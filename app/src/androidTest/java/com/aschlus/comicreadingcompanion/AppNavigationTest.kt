@@ -1032,6 +1032,10 @@ class AppNavigationTest {
             .assertDoesNotExist()
 
         composeRule
+            .onNodeWithContentDescription("Pull List tab")
+            .assertDoesNotExist()
+
+        composeRule
             .onNodeWithContentDescription(
                 "Back"
             )
@@ -1150,6 +1154,10 @@ class AppNavigationTest {
                 )
                 .assertDoesNotExist()
 
+            composeRule
+                .onNodeWithContentDescription("Pull List tab")
+                .assertDoesNotExist()
+
             composeRule.waitUntil(
                 timeoutMillis = 5000L
             ) {
@@ -1236,6 +1244,10 @@ class AppNavigationTest {
             .onNodeWithContentDescription("Physical collection tab")
             .assertDoesNotExist()
 
+        composeRule
+            .onNodeWithContentDescription("Pull List tab")
+            .assertDoesNotExist()
+
         // Return to Home using the Settings back button.
         composeRule
             .onNodeWithContentDescription("Back")
@@ -1288,6 +1300,10 @@ class AppNavigationTest {
         // The search screen is not a top-level navigation destination.
         composeRule
             .onNodeWithContentDescription("Home tab")
+            .assertDoesNotExist()
+
+        composeRule
+            .onNodeWithContentDescription("Pull List tab")
             .assertDoesNotExist()
 
         composeRule
@@ -1471,6 +1487,47 @@ class AppNavigationTest {
                 }
             }
         }
+    }
+
+    @Test
+    fun appNavigation_bottomNavigationOpensPullList() {
+        composeRule
+            .onNodeWithContentDescription("Pull List tab")
+            .performClick()
+
+        composeRule.waitUntil(
+            timeoutMillis = 5000L
+        ) {
+            composeRule
+                .onAllNodesWithText("PULL LIST")
+                .fetchSemanticsNodes()
+                .isNotEmpty()
+        }
+
+        composeRule
+            .onNodeWithText("PULL LIST")
+            .assertIsDisplayed()
+
+        composeRule
+            .onNodeWithText("TRACKED SERIES")
+            .assertIsDisplayed()
+
+        composeRule
+            .onNodeWithText("BROWSE SERIES")
+            .performClick()
+
+        composeRule.waitUntil(
+            timeoutMillis = 5000L
+        ) {
+            composeRule
+                .onAllNodesWithText("PUBLISHERS")
+                .fetchSemanticsNodes()
+                .isNotEmpty()
+        }
+
+        composeRule
+            .onNodeWithText("PUBLISHERS")
+            .assertIsDisplayed()
     }
 
 }
