@@ -159,20 +159,20 @@ class MetronApiClient(
             )
         }
 
-        val modifiedFilter =
+        val query =
             modifiedAfter?.let {
-                "&modified_gt=" +
+                "modified_gt=" +
                     URLEncoder.encode(
                         it.toString(),
                         StandardCharsets.UTF_8.name()
                     )
-            }.orEmpty()
+            } ?: run {
+                "store_date_range_after=$fromDate" +
+                    "&store_date_range_before=$toDate"
+            }
 
         var nextUrl: String? =
-            "$API_BASE_URL/issue/" +
-                "?store_date_range_after=$fromDate" +
-                "&store_date_range_before=$toDate" +
-                modifiedFilter
+            "$API_BASE_URL/issue/?$query"
 
         val visitedUrls = mutableSetOf<String>()
         val releases = mutableListOf<ScheduledReleaseData>()

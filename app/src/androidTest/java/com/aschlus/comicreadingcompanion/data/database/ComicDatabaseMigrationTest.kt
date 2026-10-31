@@ -2037,4 +2037,97 @@ class ComicDatabaseMigrationTest {
             migrated.close()
         }
 
+    @Test
+    fun migration10To11_createsScheduledReleaseChangeHistory() =
+        runBlocking {
+
+            val original =
+                migrationHelper.createDatabase(10)
+
+            original.close()
+
+            val migrated =
+                migrationHelper.runMigrationsAndValidate(
+                    version = 11,
+                    migrations = listOf(
+                        MIGRATION_10_11
+                    )
+                )
+
+            assertEquals(
+                1L,
+                queryLong(
+                    migrated,
+                    """
+                SELECT COUNT(*)
+                FROM sqlite_master
+                WHERE type = 'table'
+                    AND name = 'scheduled_release_changes'
+                """.trimIndent()
+                )
+            )
+
+            assertEquals(
+                1L,
+                queryLong(
+                    migrated,
+                    """
+                SELECT COUNT(*)
+                FROM sqlite_master
+                WHERE type = 'index'
+                    AND name =
+                        'index_scheduled_release_changes_providerId_externalIssueId_detectedAt'
+                """.trimIndent()
+                )
+            )
+
+            migrated.execSQL(
+                """
+            INSERT INTO scheduled_release_changes (
+                providerId,
+                externalIssueId,
+                externalSeriesId,
+                seriesTitleSnapshot,
+                issueNumberSnapshot,
+                previousStoreReleaseDate,
+                newStoreReleaseDate,
+                previousFocDate,
+                newFocDate,
+                sourceModifiedAt,
+                detectedAt
+            )
+            VALUES (
+                'METRON',
+                '300',
+                '45',
+                'Amazing Spider-Man',
+                '30',
+                '2026-10-21',
+                '2026-11-11',
+                '2026-10-06',
+                '2026-10-27',
+                '2026-10-25T12:00:00Z',
+                2000
+            )
+            """.trimIndent()
+            )
+
+            assertEquals(
+                1L,
+                queryLong(
+                    migrated,
+                    """
+                SELECT COUNT(*)
+                FROM scheduled_release_changes
+                WHERE providerId = 'METRON'
+                    AND externalIssueId = '300'
+                    AND previousStoreReleaseDate = '2026-10-21'
+                    AND newStoreReleaseDate = '2026-11-11'
+                """.trimIndent()
+                )
+            )
+
+            migrated.close()
+        }
+
 }

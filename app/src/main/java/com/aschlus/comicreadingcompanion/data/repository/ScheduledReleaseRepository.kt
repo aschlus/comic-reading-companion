@@ -10,6 +10,7 @@ import com.aschlus.comicreadingcompanion.data.remote.ReleaseProviderResult
 import com.aschlus.comicreadingcompanion.data.remote.ScheduledReleaseData
 import java.time.LocalDate
 import com.aschlus.comicreadingcompanion.data.database.entities.ReleaseSeriesMetadataEntity
+import com.aschlus.comicreadingcompanion.data.database.entities.ScheduledReleaseChangeEntity
 import com.aschlus.comicreadingcompanion.data.database.entities.SeriesExternalId
 import com.aschlus.comicreadingcompanion.data.database.entities.ScheduledReleaseSyncStateEntity
 import java.time.Instant
@@ -72,6 +73,36 @@ class ScheduledReleaseRepository(
             )
         }
 
+        val allStoredReleases =
+            comicDao.getAllScheduledReleasesForProvider(
+                providerId = releaseDataProvider.providerId
+            )
+
+        val storedReleasesById =
+            allStoredReleases.associateBy {
+                it.externalIssueId
+            }
+
+        val releasesToPersist =
+            fetchedReleases.filter { release ->
+                val alreadyTracked =
+                    storedReleasesById.containsKey(
+                        release.externalIssueId
+                    )
+
+                alreadyTracked ||
+                    release.storeReleaseDate
+                        ?.let { date ->
+                            runCatching {
+                                LocalDate.parse(date)
+                            }.getOrNull()
+                        }
+                        ?.let { date ->
+                            !date.isBefore(fromDate) &&
+                                !date.isAfter(toDate)
+                        } == true
+            }
+
         val previouslyStoredReleases =
             comicDao.getScheduledReleasesInRange(
                 providerId = releaseDataProvider.providerId,
@@ -87,7 +118,7 @@ class ScheduledReleaseRepository(
                 entity.toScheduledReleaseData()
         }
 
-        fetchedReleases.forEach { release ->
+        releasesToPersist.forEach { release ->
             releasesToReconcileById[release.externalIssueId] =
                 release
         }
@@ -103,15 +134,60 @@ class ScheduledReleaseRepository(
 
         val syncedAt = currentTimeMillis()
 
-        val entities = fetchedReleases.map { release ->
-            release.toEntity(
-                lastSyncedAt = syncedAt
-            )
-        }
+        val entities =
+            releasesToPersist.map { release ->
+                release.toEntity(
+                    lastSyncedAt = syncedAt
+                )
+            }
+
+        val dateChanges =
+            releasesToPersist.mapNotNull { release ->
+
+                val previous =
+                    storedReleasesById[release.externalIssueId]
+                        ?: return@mapNotNull null
+
+                val storeDateChanged =
+                    previous.storeReleaseDate !=
+                        release.storeReleaseDate
+
+                val focDateChanged =
+                    previous.focDate != release.focDate
+
+                if (!storeDateChanged && !focDateChanged) {
+                    return@mapNotNull null
+                }
+
+                ScheduledReleaseChangeEntity(
+                    providerId = release.providerId,
+                    externalIssueId = release.externalIssueId,
+                    externalSeriesId = release.externalSeriesId,
+                    seriesTitleSnapshot = release.seriesTitle,
+                    issueNumberSnapshot = release.issueNumber,
+                    previousStoreReleaseDate =
+                        previous.storeReleaseDate,
+                    newStoreReleaseDate =
+                        release.storeReleaseDate,
+                    previousFocDate =
+                        previous.focDate,
+                    newFocDate =
+                        release.focDate,
+                    sourceModifiedAt =
+                        release.sourceModifiedAt,
+                    detectedAt = syncedAt
+                )
+            }
 
         var outcomes = emptyList<ReconciliationOutcome>()
 
         database.withWriteTransaction {
+
+            if (dateChanges.isNotEmpty()) {
+                comicDao.insertScheduledReleaseChanges(
+                    dateChanges
+                )
+            }
 
             comicDao.upsertScheduledReleases(entities)
 
@@ -148,7 +224,7 @@ class ScheduledReleaseRepository(
 
         return ReleaseProviderResult.Success(
             ScheduledReleaseSyncSummary(
-                fetchedCount = fetchedReleases.size,
+                fetchedCount = releasesToPersist.size,
                 linkedCount = outcomes.count {
                     it == ReconciliationOutcome.LINKED
                 },

@@ -22,9 +22,7 @@ class MetronIncrementalSyncApiTest {
 
             val firstUrl =
                 "https://metron.cloud/api/issue/" +
-                    "?store_date_range_after=2026-11-01" +
-                    "&store_date_range_before=2026-11-30" +
-                    "&modified_gt=2026-10-31T03%3A00%3A00Z"
+                    "?modified_gt=2026-10-31T03%3A00%3A00Z"
 
             val secondUrl =
                 "https://metron.cloud/api/issue/?page=2"

@@ -350,3 +350,46 @@ val MIGRATION_9_10 =
             )
         }
     }
+
+val MIGRATION_10_11 =
+    object : Migration(
+        startVersion = 10,
+        endVersion = 11
+    ) {
+        override suspend fun migrate(
+            connection: SQLiteConnection
+        ) {
+            connection.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS
+                scheduled_release_changes (
+                    id INTEGER PRIMARY KEY
+                        AUTOINCREMENT NOT NULL,
+                    providerId TEXT NOT NULL,
+                    externalIssueId TEXT NOT NULL,
+                    externalSeriesId TEXT NOT NULL,
+                    seriesTitleSnapshot TEXT NOT NULL,
+                    issueNumberSnapshot TEXT,
+                    previousStoreReleaseDate TEXT,
+                    newStoreReleaseDate TEXT,
+                    previousFocDate TEXT,
+                    newFocDate TEXT,
+                    sourceModifiedAt TEXT,
+                    detectedAt INTEGER NOT NULL
+                )
+                """.trimIndent()
+            )
+
+            connection.execSQL(
+                """
+                CREATE INDEX IF NOT EXISTS
+                index_scheduled_release_changes_providerId_externalIssueId_detectedAt
+                ON scheduled_release_changes (
+                    providerId,
+                    externalIssueId,
+                    detectedAt
+                )
+                """.trimIndent()
+            )
+        }
+    }

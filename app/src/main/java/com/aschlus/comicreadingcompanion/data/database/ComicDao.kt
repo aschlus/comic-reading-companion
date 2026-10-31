@@ -16,6 +16,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListItem
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSection
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingProgress
 import com.aschlus.comicreadingcompanion.data.database.entities.ReleaseSeriesMetadataEntity
+import com.aschlus.comicreadingcompanion.data.database.entities.ScheduledReleaseChangeEntity
 import com.aschlus.comicreadingcompanion.data.database.entities.Series
 import com.aschlus.comicreadingcompanion.data.database.entities.SeriesExternalId
 import com.aschlus.comicreadingcompanion.data.database.entities.Universe
@@ -1184,6 +1185,14 @@ interface ComicDao {
         releases: List<ScheduledReleaseEntity>
     )
 
+    @Query("""
+    SELECT *
+    FROM scheduled_releases
+    WHERE providerId = :providerId
+""")
+    suspend fun getAllScheduledReleasesForProvider(
+        providerId: String
+    ): List<ScheduledReleaseEntity>
 
     @Query("""
         SELECT *
@@ -1217,7 +1226,6 @@ interface ComicDao {
         externalSeriesId: String
     ): List<ScheduledReleaseEntity>
 
-
     @Query("""
         SELECT *
         FROM scheduled_releases
@@ -1238,6 +1246,23 @@ interface ComicDao {
     suspend fun getScheduledReleaseCount(
         providerId: String
     ): Int
+
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    suspend fun insertScheduledReleaseChanges(
+        changes: List<ScheduledReleaseChangeEntity>
+    )
+
+    @Query("""
+    SELECT *
+    FROM scheduled_release_changes
+    WHERE providerId = :providerId
+        AND externalIssueId = :externalIssueId
+    ORDER BY detectedAt DESC, id DESC
+""")
+    suspend fun getScheduledReleaseChangesForIssue(
+        providerId: String,
+        externalIssueId: String
+    ): List<ScheduledReleaseChangeEntity>
 
 
     // Scheduled release sync state
