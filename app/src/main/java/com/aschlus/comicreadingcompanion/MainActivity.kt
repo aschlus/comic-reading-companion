@@ -1048,7 +1048,9 @@ class MainActivity : ComponentActivity() {
                             val pullListViewModel: PullListViewModel =
                                 viewModel(
                                     factory = PullListViewModelFactory(
-                                        repository = container.comicRepository
+                                        repository = container.comicRepository,
+                                        scheduledReleaseRepository = container.scheduledReleaseRepository,
+                                        metronApiTokenStore = container.metronApiTokenStore
                                     )
                                 )
 
@@ -1058,9 +1060,10 @@ class MainActivity : ComponentActivity() {
                                     navigateTopLevel("browse")
                                 },
                                 onSeriesClick = { seriesId ->
-                                    navController.navigate(
-                                        "series/$seriesId"
-                                    )
+                                    navController.navigate("series/$seriesId")
+                                },
+                                onMetronSettingsClick = {
+                                    navController.navigate("settings")
                                 }
                             )
                         }

@@ -19,6 +19,7 @@ import com.aschlus.comicreadingcompanion.data.preferences.ReadingListUiPreferenc
 import com.aschlus.comicreadingcompanion.data.remote.ComicVineApiClient
 import com.aschlus.comicreadingcompanion.data.remote.MetronApiClient
 import com.aschlus.comicreadingcompanion.data.repository.ComicRepository
+import com.aschlus.comicreadingcompanion.data.repository.ScheduledReleaseRepository
 
 class AppContainer(context: Context) {
 
@@ -49,6 +50,13 @@ class AppContainer(context: Context) {
 
     val metronApiClient =
         MetronApiClient()
+
+    val scheduledReleaseRepository =
+        ScheduledReleaseRepository(
+            comicDao = database.comicDao(),
+            database = database,
+            releaseDataProvider = metronApiClient
+        )
 
     val databaseSeeder = DatabaseSeeder(
         comicDao = database.comicDao()

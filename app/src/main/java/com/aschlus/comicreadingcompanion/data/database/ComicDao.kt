@@ -30,6 +30,7 @@ import com.aschlus.comicreadingcompanion.data.database.models.ManualIssueTypeOve
 import com.aschlus.comicreadingcompanion.data.database.models.OwnedIssueResult
 import com.aschlus.comicreadingcompanion.data.database.models.PublisherBrowseResult
 import com.aschlus.comicreadingcompanion.data.database.models.PublisherSeries
+import com.aschlus.comicreadingcompanion.data.database.models.PullListScheduledReleaseResult
 import com.aschlus.comicreadingcompanion.data.database.models.PullListSeriesResult
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListArtworkCover
 import com.aschlus.comicreadingcompanion.data.database.models.ReadingListContinueItem
@@ -1264,6 +1265,66 @@ interface ComicDao {
         fromDate: String,
         toDate: String
     ): List<ScheduledReleaseEntity>
+
+    @Query("""
+    SELECT
+        series.id AS seriesId,
+        scheduled_releases.providerId AS providerId,
+        scheduled_releases.externalIssueId AS externalIssueId,
+        scheduled_releases.externalSeriesId AS externalSeriesId,
+        series.title AS seriesTitle,
+        publishers.name AS publisherName,
+        scheduled_releases.issueNumberSnapshot AS issueNumber,
+        scheduled_releases.displayTitleSnapshot AS displayTitle,
+        scheduled_releases.coverDate AS coverDate,
+        scheduled_releases.storeReleaseDate AS storeReleaseDate,
+        scheduled_releases.focDate AS focDate,
+        scheduled_releases.price AS price,
+        scheduled_releases.priceCurrency AS priceCurrency,
+        scheduled_releases.sourceUrl AS sourceUrl,
+        scheduled_releases.lastSyncedAt AS lastSyncedAt,
+        scheduled_releases.manuallyCanceledAt AS manuallyCanceledAt
+    FROM scheduled_releases
+    INNER JOIN series_external_ids
+        ON scheduled_releases.providerId =
+            series_external_ids.source
+        AND scheduled_releases.externalSeriesId =
+            series_external_ids.externalId
+    INNER JOIN pull_list_series
+        ON series_external_ids.seriesId =
+            pull_list_series.seriesId
+    INNER JOIN series
+        ON pull_list_series.seriesId = series.id
+    INNER JOIN publishers
+        ON series.publisherId = publishers.id
+    WHERE scheduled_releases.providerId = :providerId
+        AND scheduled_releases.manuallyCanceledAt IS NULL
+        AND (
+            (
+                scheduled_releases.storeReleaseDate IS NOT NULL
+                AND scheduled_releases.storeReleaseDate >= :fromDate
+                AND scheduled_releases.storeReleaseDate <= :toDate
+            )
+            OR
+            (
+                scheduled_releases.focDate IS NOT NULL
+                AND scheduled_releases.focDate >= :fromDate
+                AND scheduled_releases.focDate <= :toDate
+            )
+        )
+    ORDER BY
+        COALESCE(
+            scheduled_releases.storeReleaseDate,
+            '9999-12-31'
+        ) ASC,
+        series.title COLLATE NOCASE ASC,
+        scheduled_releases.issueNumberSnapshot ASC
+""")
+    fun getPullListScheduledReleasesInRange(
+        providerId: String,
+        fromDate: String,
+        toDate: String
+    ): Flow<List<PullListScheduledReleaseResult>>
 
     @Query("""
         SELECT *

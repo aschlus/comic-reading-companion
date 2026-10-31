@@ -4,16 +4,18 @@ import androidx.room3.withWriteTransaction
 import com.aschlus.comicreadingcompanion.data.database.ComicDao
 import com.aschlus.comicreadingcompanion.data.database.ComicDatabase
 import com.aschlus.comicreadingcompanion.data.database.entities.ExternalId
+import com.aschlus.comicreadingcompanion.data.database.entities.ReleaseSeriesMetadataEntity
+import com.aschlus.comicreadingcompanion.data.database.entities.ScheduledReleaseChangeEntity
 import com.aschlus.comicreadingcompanion.data.database.entities.ScheduledReleaseEntity
+import com.aschlus.comicreadingcompanion.data.database.entities.ScheduledReleaseSyncStateEntity
+import com.aschlus.comicreadingcompanion.data.database.entities.SeriesExternalId
+import com.aschlus.comicreadingcompanion.data.database.models.PullListScheduledReleaseResult
 import com.aschlus.comicreadingcompanion.data.remote.ReleaseDataProvider
 import com.aschlus.comicreadingcompanion.data.remote.ReleaseProviderResult
 import com.aschlus.comicreadingcompanion.data.remote.ScheduledReleaseData
-import java.time.LocalDate
-import com.aschlus.comicreadingcompanion.data.database.entities.ReleaseSeriesMetadataEntity
-import com.aschlus.comicreadingcompanion.data.database.entities.ScheduledReleaseChangeEntity
-import com.aschlus.comicreadingcompanion.data.database.entities.SeriesExternalId
-import com.aschlus.comicreadingcompanion.data.database.entities.ScheduledReleaseSyncStateEntity
+import kotlinx.coroutines.flow.Flow
 import java.time.Instant
+import java.time.LocalDate
 
 data class ScheduledReleaseSyncSummary(
     val fetchedCount: Int,
@@ -271,6 +273,22 @@ class ScheduledReleaseRepository(
         }
 
         return comicDao.getScheduledReleasesInRange(
+            providerId = providerId,
+            fromDate = fromDate.toString(),
+            toDate = toDate.toString()
+        )
+    }
+
+    fun getPullListScheduledReleasesInRange(
+        providerId: String,
+        fromDate: LocalDate,
+        toDate: LocalDate
+    ): Flow<List<PullListScheduledReleaseResult>> {
+        require(!fromDate.isAfter(toDate)) {
+            "The start date must be on or before the end date."
+        }
+
+        return comicDao.getPullListScheduledReleasesInRange(
             providerId = providerId,
             fromDate = fromDate.toString(),
             toDate = toDate.toString()

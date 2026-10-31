@@ -1,11 +1,14 @@
+
 package com.aschlus.comicreadingcompanion.ui.screen
 
 import android.content.Context
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithText
+import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
 import androidx.lifecycle.viewModelScope
 import androidx.room3.Room
 import androidx.test.core.app.ApplicationProvider
@@ -15,15 +18,18 @@ import com.aschlus.comicreadingcompanion.data.database.ComicDatabase
 import com.aschlus.comicreadingcompanion.data.database.entities.Issue
 import com.aschlus.comicreadingcompanion.data.database.entities.IssueType
 import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
+import com.aschlus.comicreadingcompanion.data.database.entities.ScheduledReleaseEntity
 import com.aschlus.comicreadingcompanion.data.database.entities.Series
+import com.aschlus.comicreadingcompanion.data.database.entities.SeriesExternalId
+import com.aschlus.comicreadingcompanion.data.preferences.MetronApiTokenStore
+import com.aschlus.comicreadingcompanion.data.remote.MetronApiClient
 import com.aschlus.comicreadingcompanion.data.repository.ComicRepository
+import com.aschlus.comicreadingcompanion.data.repository.ScheduledReleaseRepository
 import com.aschlus.comicreadingcompanion.ui.theme.ComicReadingCompanionTheme
 import com.aschlus.comicreadingcompanion.ui.viewmodel.PullListViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.withTimeout
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -31,6 +37,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.time.LocalDate
 
 @RunWith(AndroidJUnit4::class)
 class PullListScreenTest {
@@ -41,6 +48,8 @@ class PullListScreenTest {
     private lateinit var database: ComicDatabase
     private lateinit var comicDao: ComicDao
     private lateinit var repository: ComicRepository
+    private lateinit var scheduledReleaseRepository: ScheduledReleaseRepository
+    private lateinit var metronApiTokenStore: MetronApiTokenStore
     private lateinit var viewModel: PullListViewModel
 
     @Before
@@ -64,9 +73,24 @@ class PullListScreenTest {
                 database = database
             )
 
+        scheduledReleaseRepository =
+            ScheduledReleaseRepository(
+                comicDao = comicDao,
+                database = database,
+                releaseDataProvider = MetronApiClient()
+            )
+
+        metronApiTokenStore =
+            MetronApiTokenStore(context)
+
         viewModel =
             PullListViewModel(
-                repository = repository
+                repository = repository,
+                scheduledReleaseRepository = scheduledReleaseRepository,
+                metronApiTokenStore = metronApiTokenStore,
+                currentDate = {
+                    LocalDate.parse("2026-10-31")
+                }
             )
     }
 
@@ -83,7 +107,7 @@ class PullListScreenTest {
     }
 
     @Test
-    fun pullListScreen_displaysEmptyStatesAndBrowseAction() {
+    fun pullListScreen_displaysEmptyStatesAndActions() {
         composeRule.setContent {
             ComicReadingCompanionTheme(
                 dynamicColor = false
@@ -91,7 +115,8 @@ class PullListScreenTest {
                 PullListScreen(
                     viewModel = viewModel,
                     onBrowseClick = {},
-                    onSeriesClick = {}
+                    onSeriesClick = {},
+                    onMetronSettingsClick = {}
                 )
             }
         }
@@ -128,14 +153,32 @@ class PullListScreenTest {
             .assertIsDisplayed()
 
         composeRule
-            .onNodeWithText("UPCOMING RELEASES")
+            .onNodeWithText("REFRESH RELEASES")
+            .assertIsDisplayed()
+
+        composeRule
+            .onNodeWithText("METRON SETTINGS")
+            .assertIsDisplayed()
+
+        composeRule
+            .onNodeWithText("UPCOMING STORE RELEASES")
             .assertIsDisplayed()
 
         composeRule
             .onNodeWithText(
-                "Upcoming store-release dates and " +
-                    "Final Order Cutoff deadlines will " +
-                    "appear here for the series you follow."
+                "No upcoming store releases are cached " +
+                    "for your tracked series. Refresh to check Metron."
+            )
+            .assertIsDisplayed()
+
+        composeRule
+            .onNodeWithText("FINAL ORDER CUTOFFS")
+            .assertIsDisplayed()
+
+        composeRule
+            .onNodeWithText(
+                "No upcoming FOC deadlines are cached " +
+                    "for your tracked series."
             )
             .assertIsDisplayed()
     }
@@ -153,7 +196,8 @@ class PullListScreenTest {
                     onBrowseClick = {
                         clicked = true
                     },
-                    onSeriesClick = {}
+                    onSeriesClick = {},
+                    onMetronSettingsClick = {}
                 )
             }
         }
@@ -168,7 +212,35 @@ class PullListScreenTest {
     }
 
     @Test
-    fun pullListScreen_displaysTrackedSeriesAndNavigatesToDetails() =
+    fun pullListScreen_metronSettingsActionInvokesCallback() {
+        var clicked = false
+
+        composeRule.setContent {
+            ComicReadingCompanionTheme(
+                dynamicColor = false
+            ) {
+                PullListScreen(
+                    viewModel = viewModel,
+                    onBrowseClick = {},
+                    onSeriesClick = {},
+                    onMetronSettingsClick = {
+                        clicked = true
+                    }
+                )
+            }
+        }
+
+        composeRule
+            .onNodeWithText("METRON SETTINGS")
+            .performClick()
+
+        composeRule.runOnIdle {
+            assertTrue(clicked)
+        }
+    }
+
+    @Test
+    fun pullListScreen_displaysTrackedSeriesAndScheduledReleases() =
         runBlocking {
 
             val publisherId =
@@ -215,6 +287,43 @@ class PullListScreenTest {
 
             repository.addSeriesToPullList(seriesId)
 
+            comicDao.insertSeriesExternalId(
+                SeriesExternalId(
+                    seriesId = seriesId,
+                    source = "METRON",
+                    externalId = "500",
+                    url = null
+                )
+            )
+
+            comicDao.upsertScheduledReleases(
+                listOf(
+                    ScheduledReleaseEntity(
+                        providerId = "METRON",
+                        externalIssueId = "201",
+                        externalSeriesId = "500",
+                        seriesTitleSnapshot = "Amazing Spider-Man",
+                        seriesVolumeSnapshot = 2,
+                        seriesStartYearSnapshot = 1999,
+                        publisherNameSnapshot = "Marvel Comics",
+                        issueNumberSnapshot = "1",
+                        displayTitleSnapshot = "A New Beginning",
+                        coverDate = "2026-11-01",
+                        storeReleaseDate = "2026-11-05",
+                        focDate = "2026-11-03",
+                        price = "4.99",
+                        priceCurrency = "USD",
+                        distributorSku = null,
+                        upc = null,
+                        comicVineId = null,
+                        gcdId = null,
+                        sourceUrl = null,
+                        sourceModifiedAt = null,
+                        lastSyncedAt = 1000L
+                    )
+                )
+            )
+
             var clickedSeriesId: Long? = null
 
             composeRule.setContent {
@@ -226,7 +335,8 @@ class PullListScreenTest {
                         onBrowseClick = {},
                         onSeriesClick = { id ->
                             clickedSeriesId = id
-                        }
+                        },
+                        onMetronSettingsClick = {}
                     )
                 }
             }
@@ -243,7 +353,8 @@ class PullListScreenTest {
                 .assertIsDisplayed()
 
             composeRule
-                .onNodeWithText("Marvel Comics")
+                .onAllNodesWithText("Marvel Comics")
+                .onFirst()
                 .assertIsDisplayed()
 
             composeRule
@@ -252,6 +363,53 @@ class PullListScreenTest {
 
             composeRule
                 .onNodeWithText("2 ISSUES")
+                .assertIsDisplayed()
+
+            composeRule
+                .onNodeWithText("UPCOMING STORE RELEASES")
+                .assertIsDisplayed()
+
+            composeRule.waitUntil(timeoutMillis = 5000L) {
+                viewModel.storeReleaseGroups.value.any {
+                    it.date == LocalDate.parse("2026-11-05")
+                } &&
+                viewModel.focDeadlineGroups.value.any {
+                    it.date == LocalDate.parse("2026-11-03")
+                }
+            }
+            composeRule
+                .onNodeWithText("Nov 5, 2026")
+                .performScrollTo()
+                .assertIsDisplayed()
+
+            composeRule
+                .onAllNodesWithText("Amazing Spider-Man #1")
+                .onFirst()
+                .assertIsDisplayed()
+
+            composeRule
+                .onAllNodesWithText("A New Beginning")
+                .onFirst()
+                .assertIsDisplayed()
+
+            composeRule
+                .onNodeWithText("FOC Nov 3, 2026")
+                .performScrollTo()
+                .assertIsDisplayed()
+
+            composeRule
+                .onNodeWithText("FINAL ORDER CUTOFFS")
+                .performScrollTo()
+                .assertIsDisplayed()
+
+            composeRule
+                .onNodeWithText("Nov 3, 2026")
+                .performScrollTo()
+                .assertIsDisplayed()
+
+            composeRule
+                .onNodeWithText("STORE DATE Nov 5, 2026")
+                .performScrollTo()
                 .assertIsDisplayed()
 
             composeRule
@@ -291,7 +449,8 @@ class PullListScreenTest {
                     PullListScreen(
                         viewModel = viewModel,
                         onBrowseClick = {},
-                        onSeriesClick = {}
+                        onSeriesClick = {},
+                        onMetronSettingsClick = {}
                     )
                 }
             }

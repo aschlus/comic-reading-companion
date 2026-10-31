@@ -5,12 +5,18 @@ import android.content.Context
 import androidx.room3.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
+import com.aschlus.comicreadingcompanion.data.database.entities.PullListSeriesEntity
 import com.aschlus.comicreadingcompanion.data.database.entities.ScheduledReleaseEntity
+import com.aschlus.comicreadingcompanion.data.database.entities.Series
+import com.aschlus.comicreadingcompanion.data.database.entities.SeriesExternalId
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -240,6 +246,153 @@ class ScheduledReleaseDaoTest {
             assertEquals(
                 2,
                 results.size
+            )
+        }
+
+    @Test
+    fun getPullListScheduledReleasesInRange_returnsOnlyTrackedUpcomingReleases() =
+        runBlocking {
+            val publisherId =
+                dao.insertPublisher(
+                    Publisher(name = "Marvel Comics")
+                )
+
+            val trackedSeriesId =
+                dao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Amazing Spider-Man",
+                        volume = 2,
+                        startYear = 1999,
+                        endYear = 2003
+                    )
+                )
+
+            val untrackedSeriesId =
+                dao.insertSeries(
+                    Series(
+                        publisherId = publisherId,
+                        title = "Spectacular Spider-Man",
+                        volume = 1,
+                        startYear = 1976,
+                        endYear = 1998
+                    )
+                )
+
+            dao.insertPullListSeries(
+                PullListSeriesEntity(
+                    seriesId = trackedSeriesId,
+                    addedAt = 1000L
+                )
+            )
+
+            dao.insertSeriesExternalId(
+                SeriesExternalId(
+                    seriesId = trackedSeriesId,
+                    source = "METRON",
+                    externalId = "500",
+                    url = null
+                )
+            )
+
+            dao.insertSeriesExternalId(
+                SeriesExternalId(
+                    seriesId = untrackedSeriesId,
+                    source = "METRON",
+                    externalId = "600",
+                    url = null
+                )
+            )
+
+            dao.upsertScheduledReleases(
+                listOf(
+                    release(
+                        externalIssueId = "201",
+                        externalSeriesId = "500",
+                        issueNumberSnapshot = "1",
+                        storeReleaseDate = "2026-11-05",
+                        focDate = "2026-10-27"
+                    ),
+                    release(
+                        externalIssueId = "202",
+                        externalSeriesId = "500",
+                        issueNumberSnapshot = "2",
+                        storeReleaseDate = "2026-11-20",
+                        focDate = "2026-11-04"
+                    ),
+                    release(
+                        externalIssueId = "203",
+                        externalSeriesId = "600",
+                        storeReleaseDate = "2026-11-06"
+                    ),
+                    release(
+                        externalIssueId = "204",
+                        externalSeriesId = "500",
+                        storeReleaseDate = "2026-11-07"
+                    ).copy(
+                        manuallyCanceledAt = 5000L
+                    ),
+                    release(
+                        externalIssueId = "205",
+                        externalSeriesId = "500",
+                        storeReleaseDate = "2026-11-20",
+                        focDate = null
+                    )
+                )
+            )
+
+            val results =
+                dao.getPullListScheduledReleasesInRange(
+                    providerId = "METRON",
+                    fromDate = "2026-10-31",
+                    toDate = "2026-11-14"
+                ).first()
+
+            assertEquals(
+                listOf("201", "202"),
+                results.map { it.externalIssueId }
+            )
+
+            val storeRelease =
+                results.first()
+
+            assertEquals(
+                trackedSeriesId,
+                storeRelease.seriesId
+            )
+
+            assertEquals(
+                "Amazing Spider-Man",
+                storeRelease.seriesTitle
+            )
+
+            assertEquals(
+                "Marvel Comics",
+                storeRelease.publisherName
+            )
+
+            assertEquals(
+                "2026-11-05",
+                storeRelease.storeReleaseDate
+            )
+
+            val focRelease =
+                results.last()
+
+            assertEquals(
+                "2026-11-04",
+                focRelease.focDate
+            )
+
+            assertEquals(
+                "2026-11-20",
+                focRelease.storeReleaseDate
+            )
+
+            assertTrue(
+                results.none {
+                    it.manuallyCanceledAt != null
+                }
             )
         }
 
