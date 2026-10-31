@@ -83,6 +83,8 @@ import com.aschlus.comicreadingcompanion.ui.viewmodel.MetronSettingsViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.MetronSettingsViewModelFactory
 import com.aschlus.comicreadingcompanion.ui.viewmodel.PublisherDetailViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.PublisherDetailViewModelFactory
+import com.aschlus.comicreadingcompanion.ui.viewmodel.PullListViewModel
+import com.aschlus.comicreadingcompanion.ui.viewmodel.PullListViewModelFactory
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ReadingListDetailViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ReadingListDetailViewModelFactory
 import com.aschlus.comicreadingcompanion.ui.viewmodel.SeriesDetailViewModel
@@ -446,7 +448,8 @@ class MainActivity : ComponentActivity() {
                         "home",
                         "browse",
                         "library",
-                        "collection"
+                        "collection",
+                        "pullList"
                     )
 
                 val navigateTopLevel:
@@ -1038,9 +1041,26 @@ class MainActivity : ComponentActivity() {
                         }
 
                         composable("pullList") {
+                            val container =
+                                (application as ComicReadingCompanionApplication)
+                                    .container
+
+                            val pullListViewModel: PullListViewModel =
+                                viewModel(
+                                    factory = PullListViewModelFactory(
+                                        repository = container.comicRepository
+                                    )
+                                )
+
                             PullListScreen(
+                                viewModel = pullListViewModel,
                                 onBrowseClick = {
                                     navigateTopLevel("browse")
+                                },
+                                onSeriesClick = { seriesId ->
+                                    navController.navigate(
+                                        "series/$seriesId"
+                                    )
                                 }
                             )
                         }

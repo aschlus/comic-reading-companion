@@ -186,8 +186,8 @@ building, following, and tracking comic-book reading orders.
 
 **Milestone 2 — Personal Pull List and Upcoming Releases**
 
-- [ ] Create a dedicated Pull List screen
-- [ ] Add and remove ongoing series from the personal pull list
+- [x] Create a dedicated Pull List screen
+- [x] Add and remove ongoing series from the personal pull list
 - [ ] Support explicitly tracking individual issues, one-shots, and special releases
 - [ ] Display upcoming releases grouped by scheduled store-release date
 - [ ] Display scheduled FOC deadlines separately from store-release dates
