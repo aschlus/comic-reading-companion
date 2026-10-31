@@ -11,6 +11,8 @@ import com.aschlus.comicreadingcompanion.data.remote.ScheduledReleaseData
 import java.time.LocalDate
 import com.aschlus.comicreadingcompanion.data.database.entities.ReleaseSeriesMetadataEntity
 import com.aschlus.comicreadingcompanion.data.database.entities.SeriesExternalId
+import com.aschlus.comicreadingcompanion.data.database.entities.ScheduledReleaseSyncStateEntity
+import java.time.Instant
 
 data class ScheduledReleaseSyncSummary(
     val fetchedCount: Int,
@@ -34,20 +36,35 @@ class ScheduledReleaseRepository(
         toDate: LocalDate,
     ): ReleaseProviderResult<ScheduledReleaseSyncSummary> {
 
+        val syncStartedAt = currentTimeMillis()
+
+        val previousSyncState =
+            comicDao.getScheduledReleaseSyncState(
+                providerId = releaseDataProvider.providerId,
+                fromDate = fromDate.toString(),
+                toDate = toDate.toString()
+            )
+
+        val modifiedAfter =
+            previousSyncState?.lastSuccessfulSyncAt?.let { timestamp ->
+                Instant.ofEpochMilli(timestamp).minusSeconds(1)
+            }
+
         val providerResult =
             releaseDataProvider.getScheduledReleases(
                 accessToken = accessToken,
                 fromDate = fromDate,
-                toDate = toDate
+                toDate = toDate,
+                modifiedAfter = modifiedAfter
             )
 
         if (providerResult !is ReleaseProviderResult.Success) {
             return providerResult.failureAs()
         }
 
-        val releases = providerResult.value
+        val fetchedReleases = providerResult.value
 
-        val validationError = validateReleases(releases)
+        val validationError = validateReleases(fetchedReleases)
 
         if (validationError != null) {
             return ReleaseProviderResult.ServiceError(
@@ -55,15 +72,38 @@ class ScheduledReleaseRepository(
             )
         }
 
+        val previouslyStoredReleases =
+            comicDao.getScheduledReleasesInRange(
+                providerId = releaseDataProvider.providerId,
+                fromDate = fromDate.toString(),
+                toDate = toDate.toString()
+            )
+
+        val releasesToReconcileById =
+            linkedMapOf<String, ScheduledReleaseData>()
+
+        previouslyStoredReleases.forEach { entity ->
+            releasesToReconcileById[entity.externalIssueId] =
+                entity.toScheduledReleaseData()
+        }
+
+        fetchedReleases.forEach { release ->
+            releasesToReconcileById[release.externalIssueId] =
+                release
+        }
+
+        val releasesToReconcile =
+            releasesToReconcileById.values.toList()
+
         val seriesMetadataByExternalId =
             loadSeriesMetadata(
                 accessToken = accessToken,
-                releases = releases
+                releases = releasesToReconcile
             )
 
         val syncedAt = currentTimeMillis()
 
-        val entities = releases.map { release ->
+        val entities = fetchedReleases.map { release ->
             release.toEntity(
                 lastSyncedAt = syncedAt
             )
@@ -72,9 +112,10 @@ class ScheduledReleaseRepository(
         var outcomes = emptyList<ReconciliationOutcome>()
 
         database.withWriteTransaction {
+
             comicDao.upsertScheduledReleases(entities)
 
-            outcomes = releases.map { release ->
+            outcomes = releasesToReconcile.map { release ->
                 reconcileRelease(
                     release = release,
                     seriesMetadata = seriesMetadataByExternalId[
@@ -82,11 +123,32 @@ class ScheduledReleaseRepository(
                     ]
                 )
             }
+
+            val currentSyncState =
+                comicDao.getScheduledReleaseSyncState(
+                    providerId = releaseDataProvider.providerId,
+                    fromDate = fromDate.toString(),
+                    toDate = toDate.toString()
+                )
+
+            val lastSuccessfulSyncAt =
+                currentSyncState?.lastSuccessfulSyncAt
+                    ?.let { maxOf(syncStartedAt, it) }
+                    ?: syncStartedAt
+
+            comicDao.upsertScheduledReleaseSyncState(
+                ScheduledReleaseSyncStateEntity(
+                    providerId = releaseDataProvider.providerId,
+                    fromDate = fromDate.toString(),
+                    toDate = toDate.toString(),
+                    lastSuccessfulSyncAt = lastSuccessfulSyncAt
+                )
+            )
         }
 
         return ReleaseProviderResult.Success(
             ScheduledReleaseSyncSummary(
-                fetchedCount = releases.size,
+                fetchedCount = fetchedReleases.size,
                 linkedCount = outcomes.count {
                     it == ReconciliationOutcome.LINKED
                 },
@@ -466,6 +528,32 @@ class ScheduledReleaseRepository(
             sourceUrl = sourceUrl,
             sourceModifiedAt = sourceModifiedAt,
             lastSyncedAt = lastSyncedAt
+        )
+    }
+
+    private fun ScheduledReleaseEntity.toScheduledReleaseData():
+        ScheduledReleaseData {
+        return ScheduledReleaseData(
+            providerId = providerId,
+            externalIssueId = externalIssueId,
+            externalSeriesId = externalSeriesId,
+            seriesTitle = seriesTitleSnapshot,
+            seriesVolume = seriesVolumeSnapshot,
+            seriesStartYear = seriesStartYearSnapshot,
+            publisherName = publisherNameSnapshot,
+            issueNumber = issueNumberSnapshot,
+            displayTitle = displayTitleSnapshot,
+            coverDate = coverDate,
+            storeReleaseDate = storeReleaseDate,
+            focDate = focDate,
+            price = price,
+            priceCurrency = priceCurrency,
+            distributorSku = distributorSku,
+            upc = upc,
+            comicVineId = comicVineId,
+            gcdId = gcdId,
+            sourceUrl = sourceUrl,
+            sourceModifiedAt = sourceModifiedAt
         )
     }
 

@@ -14,6 +14,7 @@ import java.net.URI
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 import java.time.LocalDate
+import java.time.Instant
 
 data class MetronHttpResponse(
     val statusCode: Int,
@@ -137,16 +138,41 @@ class MetronApiClient(
         fromDate: LocalDate,
         toDate: LocalDate
     ): ReleaseProviderResult<List<ScheduledReleaseData>> {
+        return getScheduledReleases(
+            accessToken = accessToken,
+            fromDate = fromDate,
+            toDate = toDate,
+            modifiedAfter = null
+        )
+    }
+
+    override suspend fun getScheduledReleases(
+        accessToken: String,
+        fromDate: LocalDate,
+        toDate: LocalDate,
+        modifiedAfter: Instant?
+    ): ReleaseProviderResult<List<ScheduledReleaseData>> {
+
         if (fromDate.isAfter(toDate)) {
             return ReleaseProviderResult.ServiceError(
                 "The start date must be on or before the end date."
             )
         }
 
+        val modifiedFilter =
+            modifiedAfter?.let {
+                "&modified_gt=" +
+                    URLEncoder.encode(
+                        it.toString(),
+                        StandardCharsets.UTF_8.name()
+                    )
+            }.orEmpty()
+
         var nextUrl: String? =
             "$API_BASE_URL/issue/" +
                 "?store_date_range_after=$fromDate" +
-                "&store_date_range_before=$toDate"
+                "&store_date_range_before=$toDate" +
+                modifiedFilter
 
         val visitedUrls = mutableSetOf<String>()
         val releases = mutableListOf<ScheduledReleaseData>()

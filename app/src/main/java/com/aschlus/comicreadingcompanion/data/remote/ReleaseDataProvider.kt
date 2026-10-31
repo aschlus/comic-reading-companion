@@ -1,6 +1,7 @@
 package com.aschlus.comicreadingcompanion.data.remote
 
 import java.time.LocalDate
+import java.time.Instant
 
 interface ReleaseDataProvider {
 
@@ -15,6 +16,19 @@ interface ReleaseDataProvider {
         fromDate: LocalDate,
         toDate: LocalDate
     ): ReleaseProviderResult<List<ScheduledReleaseData>>
+
+    suspend fun getScheduledReleases(
+        accessToken: String,
+        fromDate: LocalDate,
+        toDate: LocalDate,
+        modifiedAfter: Instant?
+    ): ReleaseProviderResult<List<ScheduledReleaseData>> {
+        return getScheduledReleases(
+            accessToken = accessToken,
+            fromDate = fromDate,
+            toDate = toDate
+        )
+    }
 
     suspend fun getReleaseDetails(
         accessToken: String,

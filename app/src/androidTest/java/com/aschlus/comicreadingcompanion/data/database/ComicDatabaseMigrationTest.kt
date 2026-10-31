@@ -1954,4 +1954,87 @@ class ComicDatabaseMigrationTest {
             migrated.close()
         }
 
+    @Test
+    fun migration9To10_createsScheduledReleaseSyncState() =
+        runBlocking {
+
+            val connection =
+                migrationHelper.createDatabase(9)
+
+            connection.close()
+
+            val migrated =
+                migrationHelper.runMigrationsAndValidate(
+                    version = 10,
+                    migrations = listOf(
+                        MIGRATION_9_10
+                    )
+                )
+
+            migrated.execSQL(
+                """
+            INSERT INTO scheduled_release_sync_state (
+                providerId,
+                fromDate,
+                toDate,
+                lastSuccessfulSyncAt
+            )
+            VALUES (
+                'METRON',
+                '2026-11-01',
+                '2026-11-14',
+                123456
+            )
+            """.trimIndent()
+            )
+
+            assertEquals(
+                1L,
+                queryLong(
+                    migrated,
+                    """
+                SELECT COUNT(*)
+                FROM scheduled_release_sync_state
+                """.trimIndent()
+                )
+            )
+
+            migrated.prepare(
+                """
+            SELECT providerId,
+                   fromDate,
+                   toDate,
+                   lastSuccessfulSyncAt
+            FROM scheduled_release_sync_state
+            WHERE providerId = 'METRON'
+            """.trimIndent()
+            )
+                .use { statement ->
+
+                    assertTrue(statement.step())
+
+                    assertEquals(
+                        "METRON",
+                        statement.getText(0)
+                    )
+
+                    assertEquals(
+                        "2026-11-01",
+                        statement.getText(1)
+                    )
+
+                    assertEquals(
+                        "2026-11-14",
+                        statement.getText(2)
+                    )
+
+                    assertEquals(
+                        123456L,
+                        statement.getLong(3)
+                    )
+                }
+
+            migrated.close()
+        }
+
 }

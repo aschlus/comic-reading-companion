@@ -323,3 +323,30 @@ val MIGRATION_8_9 =
             )
         }
     }
+
+val MIGRATION_9_10 =
+    object : Migration(
+        startVersion = 9,
+        endVersion = 10
+    ) {
+        override suspend fun migrate(
+            connection: SQLiteConnection
+        ) {
+            connection.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS
+                scheduled_release_sync_state (
+                    providerId TEXT NOT NULL,
+                    fromDate TEXT NOT NULL,
+                    toDate TEXT NOT NULL,
+                    lastSuccessfulSyncAt INTEGER NOT NULL,
+                    PRIMARY KEY (
+                        providerId,
+                        fromDate,
+                        toDate
+                    )
+                )
+                """.trimIndent()
+            )
+        }
+    }
