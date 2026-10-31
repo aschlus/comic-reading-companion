@@ -294,3 +294,32 @@ val MIGRATION_7_8 =
             )
         }
     }
+
+val MIGRATION_8_9 =
+    object : Migration(
+        startVersion = 8,
+        endVersion = 9
+    ) {
+        override suspend fun migrate(
+            connection: SQLiteConnection
+        ) {
+            connection.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS
+                release_series_metadata (
+                    providerId TEXT NOT NULL,
+                    externalSeriesId TEXT NOT NULL,
+                    comicVineId TEXT,
+                    gcdId TEXT,
+                    sourceUrl TEXT,
+                    sourceModifiedAt TEXT,
+                    lastFetchedAt INTEGER NOT NULL,
+                    PRIMARY KEY (
+                        providerId,
+                        externalSeriesId
+                    )
+                )
+                """.trimIndent()
+            )
+        }
+    }

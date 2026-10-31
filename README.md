@@ -179,7 +179,7 @@ building, following, and tracking comic-book reading orders.
 - [x] Exclude release-provider credentials from app backups
 - [x] Define local data models for scheduled releases, including store-release date, FOC date, source identifiers, and last-verified timestamp
 - [ ] Cache release data locally and support incremental refreshes
-- [ ] Match upcoming releases to existing catalog records using external identifiers first
+- [x] Match upcoming releases to existing catalog records using external identifiers first
 - [x] Support upcoming releases that do not yet have a local Comic Vine issue record
 - [ ] Handle ambiguous matches, changed dates, delayed releases, and canceled releases
 - [ ] Preserve source attribution and comply with provider data licenses and terms

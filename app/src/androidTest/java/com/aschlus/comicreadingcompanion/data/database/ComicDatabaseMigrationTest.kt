@@ -1870,4 +1870,88 @@ class ComicDatabaseMigrationTest {
         }
     }
 
+    @Test
+    fun migration8To9_createsReleaseSeriesMetadataCache() =
+        runBlocking {
+
+            val connection =
+                migrationHelper.createDatabase(8)
+
+            connection.close()
+
+            val migrated =
+                migrationHelper.runMigrationsAndValidate(
+                    version = 9,
+                    migrations = listOf(
+                        MIGRATION_8_9
+                    )
+                )
+
+            migrated.execSQL(
+                """
+            INSERT INTO release_series_metadata (
+                providerId,
+                externalSeriesId,
+                comicVineId,
+                gcdId,
+                sourceUrl,
+                sourceModifiedAt,
+                lastFetchedAt
+            )
+            VALUES (
+                'METRON',
+                '45',
+                '18693',
+                '621',
+                'https://metron.cloud/series/45/',
+                '2026-10-20T08:00:00Z',
+                123456
+            )
+            """.trimIndent()
+            )
+
+            assertEquals(
+                1L,
+                queryCount(
+                    migrated,
+                    """
+                SELECT COUNT(*)
+                FROM release_series_metadata
+                """.trimIndent()
+                )
+            )
+
+            migrated.prepare(
+                """
+            SELECT comicVineId,
+                   gcdId,
+                   lastFetchedAt
+            FROM release_series_metadata
+            WHERE providerId = 'METRON'
+                AND externalSeriesId = '45'
+            """.trimIndent()
+            )
+                .use { statement ->
+
+                    assertTrue(statement.step())
+
+                    assertEquals(
+                        "18693",
+                        statement.getText(0)
+                    )
+
+                    assertEquals(
+                        "621",
+                        statement.getText(1)
+                    )
+
+                    assertEquals(
+                        123456L,
+                        statement.getLong(2)
+                    )
+                }
+
+            migrated.close()
+        }
+
 }

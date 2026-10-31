@@ -12,6 +12,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListItem
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSection
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingProgress
+import com.aschlus.comicreadingcompanion.data.database.entities.ReleaseSeriesMetadataEntity
 import com.aschlus.comicreadingcompanion.data.database.entities.ScheduledReleaseEntity
 import com.aschlus.comicreadingcompanion.data.database.entities.Series
 import com.aschlus.comicreadingcompanion.data.database.entities.SeriesExternalId
@@ -30,9 +31,10 @@ import com.aschlus.comicreadingcompanion.data.database.entities.Universe
         ReadingListItem::class,
         ReadingProgress::class,
         IssueOwnership::class,
-        ScheduledReleaseEntity::class
+        ScheduledReleaseEntity::class,
+        ReleaseSeriesMetadataEntity::class
     ],
-    version = 8,
+    version = 9,
     exportSchema = true
 )
 abstract class ComicDatabase : RoomDatabase() {
@@ -57,7 +59,8 @@ abstract class ComicDatabase : RoomDatabase() {
                         MIGRATION_4_5,
                         MIGRATION_5_6,
                         MIGRATION_6_7,
-                        MIGRATION_7_8
+                        MIGRATION_7_8,
+                        MIGRATION_8_9
                     )
                     .build()
 

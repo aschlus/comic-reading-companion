@@ -15,6 +15,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.ReadingList
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListItem
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingListSection
 import com.aschlus.comicreadingcompanion.data.database.entities.ReadingProgress
+import com.aschlus.comicreadingcompanion.data.database.entities.ReleaseSeriesMetadataEntity
 import com.aschlus.comicreadingcompanion.data.database.entities.Series
 import com.aschlus.comicreadingcompanion.data.database.entities.SeriesExternalId
 import com.aschlus.comicreadingcompanion.data.database.entities.Universe
@@ -1236,4 +1237,24 @@ interface ComicDao {
     suspend fun getScheduledReleaseCount(
         providerId: String
     ): Int
+
+
+    // Release series metadata
+
+    @Upsert
+    suspend fun upsertReleaseSeriesMetadata(
+        metadata: List<ReleaseSeriesMetadataEntity>
+    )
+
+    @Query("""
+    SELECT *
+    FROM release_series_metadata
+    WHERE providerId = :providerId
+        AND externalSeriesId = :externalSeriesId
+    LIMIT 1
+""")
+    suspend fun getReleaseSeriesMetadata(
+        providerId: String,
+        externalSeriesId: String
+    ): ReleaseSeriesMetadataEntity?
 }
