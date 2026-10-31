@@ -62,10 +62,12 @@ import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingLg
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingMd
 import com.aschlus.comicreadingcompanion.ui.theme.ComicSpacingXs
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ComicVineSettingsViewModel
+import com.aschlus.comicreadingcompanion.ui.viewmodel.MetronSettingsViewModel
 
 @Composable
 fun SettingsScreen(
     viewModel: ComicVineSettingsViewModel,
+    metronViewModel: MetronSettingsViewModel? = null,
     onBackClick: () -> Unit,
     onSearchSeriesClick: () -> Unit = {},
     onExportBackupClick: () -> Unit = {},
@@ -216,8 +218,7 @@ fun SettingsScreen(
                                 contentDescription = "API key"
                             },
                         singleLine = true,
-                        textStyle = androidx.compose.material3.MaterialTheme
-                            .typography.bodyLarge
+                        textStyle = MaterialTheme.typography.bodyLarge
                             .copy(color = MaterialTheme.colorScheme.onSurface),
                         cursorBrush = SolidColor(MaterialTheme.colorScheme.onSurface),
                         keyboardOptions = KeyboardOptions(
@@ -316,6 +317,12 @@ fun SettingsScreen(
                 )
             }
 
+            metronViewModel?.let { releaseViewModel ->
+                MetronSettingsSection(
+                    viewModel = releaseViewModel
+                )
+            }
+
             ComicHomeSectionHeader(
                 text = "DATA BACKUP"
             )
@@ -385,6 +392,409 @@ fun SettingsScreen(
                     }
                 ) {
                     Text("Remove key")
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = {
+                        showRemoveConfirmation = false
+                    }
+                ) {
+                    Text("Cancel")
+                }
+            }
+        )
+    }
+}
+
+@Composable
+private fun MetronSettingsSection(
+    viewModel: MetronSettingsViewModel
+) {
+    val uiState by viewModel.uiState.collectAsState()
+
+    var tokenInput by remember { mutableStateOf("") }
+    var tokenVisible by remember { mutableStateOf(false) }
+    var showRemoveConfirmation by remember {
+        mutableStateOf(false)
+    }
+
+    val isDarkTheme =
+        MaterialTheme.colorScheme.background == ComicDarkBackground
+
+    val successColor =
+        if (isDarkTheme) ComicGreen else ComicGreenDark
+
+    val errorColor =
+        if (isDarkTheme) ComicRedLight else ComicRedDark
+
+    LaunchedEffect(uiState.message) {
+        if (
+            uiState.message ==
+            "Metron API token validated and saved securely."
+        ) {
+            tokenInput = ""
+            tokenVisible = false
+        }
+    }
+
+    Column(
+        verticalArrangement = Arrangement.spacedBy(ComicSpacingMd)
+    ) {
+        ComicHomeSectionHeader(
+            text = "RELEASE DATA"
+        )
+
+        Text(
+            text = "Connect your own Metron account to retrieve " +
+                    "scheduled comic releases and FOC dates. " +
+                    "Create an API token in your Metron account's " +
+                    "API Tokens section. The token is checked before " +
+                    "saving and is never included in app backups.",
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+
+        when {
+            uiState.isLoading -> {
+                CircularProgressIndicator(
+                    modifier = Modifier.size(28.dp)
+                )
+            }
+
+            uiState.hasSavedToken -> {
+                Text(
+                    text = "METRON TOKEN CONFIGURED",
+                    color = successColor
+                )
+
+                Text(
+                    text = "A token is saved securely on this device. " +
+                            "For security, the saved token is never shown.",
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+
+            else -> {
+                Text(
+                    text = "NO METRON TOKEN CONFIGURED",
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
+
+        val fieldShape = RoundedCornerShape(9.dp)
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(min = 56.dp)
+                .clip(fieldShape)
+                .background(MaterialTheme.colorScheme.surfaceVariant)
+                .border(
+                    width = 2.dp,
+                    color = MaterialTheme.colorScheme.outline,
+                    shape = fieldShape
+                )
+                .padding(
+                    start = ComicSpacingMd,
+                    end = ComicSpacingXs
+                ),
+            contentAlignment = Alignment.CenterStart
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                BasicTextField(
+                    value = tokenInput,
+                    onValueChange = {
+                        tokenInput = it
+                        viewModel.clearFeedback()
+                    },
+                    modifier = Modifier
+                        .weight(1f)
+                        .semantics {
+                            contentDescription = "Metron API token"
+                        },
+                    singleLine = true,
+                    enabled = !uiState.isLoading && !uiState.isSaving,
+                    textStyle = MaterialTheme.typography.bodyLarge
+                        .copy(
+                            color = MaterialTheme.colorScheme.onSurface
+                        ),
+                    cursorBrush = SolidColor(
+                        MaterialTheme.colorScheme.onSurface
+                    ),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Password,
+                        autoCorrectEnabled = false
+                    ),
+                    visualTransformation =
+                        if (tokenVisible) {
+                            VisualTransformation.None
+                        } else {
+                            PasswordVisualTransformation()
+                        },
+                    decorationBox = { innerTextField ->
+                        Box {
+                            if (tokenInput.isEmpty()) {
+                                Text(
+                                    text = "Paste Metron API token",
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+
+                            innerTextField()
+                        }
+                    }
+                )
+
+                IconButton(
+                    onClick = {
+                        tokenVisible = !tokenVisible
+                    },
+                    enabled = tokenInput.isNotEmpty(),
+                    modifier = Modifier.semantics {
+                        contentDescription =
+                            if (tokenVisible) {
+                                "Hide Metron token"
+                            } else {
+                                "Show Metron token"
+                            }
+                    }
+                ) {
+                    Icon(
+                        imageVector =
+                            if (tokenVisible) {
+                                Icons.Default.VisibilityOff
+                            } else {
+                                Icons.Default.Visibility
+                            },
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onSurface
+                    )
+                }
+            }
+        }
+
+        ComicWideActionButton(
+            text = when {
+                uiState.isSaving -> "CHECKING METRON TOKEN..."
+                uiState.hasSavedToken -> "REPLACE METRON TOKEN"
+                else -> "SAVE METRON TOKEN"
+            },
+            backgroundColor = ComicBlue,
+            onClick = {
+                viewModel.saveToken(tokenInput)
+            },
+            enabled = !uiState.isLoading && !uiState.isSaving,
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        if (uiState.hasSavedToken) {
+            ComicWideActionButton(
+                text = if (uiState.isCheckingReleases) {
+                    "FETCHING RELEASES..."
+                } else {
+                    "PREVIEW NEXT 14 DAYS"
+                },
+                backgroundColor = ComicBlue,
+                onClick = {
+                    viewModel.previewUpcomingReleases()
+                },
+                enabled = !uiState.isLoading &&
+                    !uiState.isSaving &&
+                    !uiState.isCheckingReleases,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+
+        if (uiState.hasSavedToken) {
+            ComicWideActionButton(
+                text = "REMOVE METRON TOKEN",
+                backgroundColor = MaterialTheme.colorScheme.surface,
+                contentColor = MaterialTheme.colorScheme.onSurface,
+                onClick = {
+                    viewModel.clearFeedback()
+                    showRemoveConfirmation = true
+                },
+                enabled = !uiState.isSaving,
+                modifier = Modifier.width(220.dp)
+            )
+        }
+
+        if (uiState.isSaving) {
+            CircularProgressIndicator(
+                modifier = Modifier.size(24.dp)
+            )
+        }
+
+        uiState.message?.let { message ->
+            Text(
+                text = message,
+                color = successColor
+            )
+        }
+
+        uiState.error?.let { error ->
+            Text(
+                text = error,
+                color = errorColor
+            )
+        }
+
+        if (uiState.isCheckingReleases) {
+            CircularProgressIndicator(
+                modifier = Modifier.size(24.dp)
+            )
+        }
+
+        uiState.releasePreviewError?.let { error ->
+            Text(
+                text = error,
+                color = errorColor
+            )
+        }
+
+        uiState.releasePreviewCount?.let { count ->
+            Text(
+                text = "Found $count scheduled issues.",
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+
+            uiState.releasePreviewRange?.let { range ->
+                Text(
+                    text = "Store-date range: $range",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+
+            Text(
+                text = if (count == 0) {
+                    "No scheduled releases were returned for this period."
+                } else {
+                    "Showing ${uiState.releasePreview.size} sample " +
+                        "release(s), ordered by store date."
+                },
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+
+            uiState.releasePreview.forEach { release ->
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(2.dp)
+                ) {
+                    Text(
+                        text = "${release.seriesTitle} " +
+                            "#${release.issueNumber ?: "?"}",
+                        style = MaterialTheme.typography.titleSmall,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+
+                    Text(
+                        text = "Store date: " +
+                                (release.storeReleaseDate ?: "Not provided") +
+                                " · Cover date: " +
+                                (release.coverDate ?: "Not provided"),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+
+                    Text(
+                        text = "Metron ID: ${release.externalIssueId}" +
+                                " · Comic Vine ID: " +
+                                (release.comicVineId ?: "Not linked"),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+
+                    TextButton(
+                        onClick = {
+                            viewModel.inspectReleaseDetails(
+                                release.externalIssueId
+                            )
+                        },
+                        enabled = !uiState.isLoadingReleaseDetail
+                    ) {
+                        Text(
+                            text = if (
+                                uiState.isLoadingReleaseDetail &&
+                                uiState.releaseDetailRequestId == release.externalIssueId
+                            ) {
+                                "LOADING DETAILS..."
+                            } else {
+                                "LOAD FULL DETAILS"
+                            }
+                        )
+                    }
+
+                    val inspected = uiState.inspectedReleaseDetail
+
+                    if (
+                        inspected != null &&
+                        inspected.externalIssueId == release.externalIssueId
+                    ) {
+                        Text(
+                            text = "FOC: ${inspected.focDate ?: "Not provided"}" +
+                                " · Price: ${inspected.price ?: "Not provided"}" +
+                                " ${inspected.priceCurrency.orEmpty()}",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+
+                        Text(
+                            text = "SKU: ${inspected.distributorSku ?: "Not provided"}" +
+                                " · UPC: ${inspected.upc ?: "Not provided"}",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+
+                        Text(
+                            text = "Comic Vine ID: ${inspected.comicVineId ?: "Not linked"}" +
+                                " · GCD ID: ${inspected.gcdId ?: "Not linked"}",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+
+                    if (
+                        uiState.releaseDetailRequestId == release.externalIssueId &&
+                        uiState.releaseDetailError != null
+                    ) {
+                        Text(
+                            text = uiState.releaseDetailError!!,
+                            color = errorColor
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    if (showRemoveConfirmation) {
+        AlertDialog(
+            onDismissRequest = {
+                showRemoveConfirmation = false
+            },
+            title = {
+                Text("Remove Metron token?")
+            },
+            text = {
+                Text(
+                    "The saved token will be removed from this device. " +
+                    "You can enter a new token later."
+                )
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        showRemoveConfirmation = false
+                        viewModel.clearToken()
+                    }
+                ) {
+                    Text("Remove token")
                 }
             },
             dismissButton = {

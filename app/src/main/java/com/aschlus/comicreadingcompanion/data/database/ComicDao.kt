@@ -19,6 +19,7 @@ import com.aschlus.comicreadingcompanion.data.database.entities.Series
 import com.aschlus.comicreadingcompanion.data.database.entities.SeriesExternalId
 import com.aschlus.comicreadingcompanion.data.database.entities.Universe
 import com.aschlus.comicreadingcompanion.data.database.models.IssueDetail
+import com.aschlus.comicreadingcompanion.data.database.entities.ScheduledReleaseEntity
 import com.aschlus.comicreadingcompanion.data.database.models.IssueReadingListResult
 import com.aschlus.comicreadingcompanion.data.database.models.IssueSearchResult
 import com.aschlus.comicreadingcompanion.data.database.models.ManualIssueTypeOverride
@@ -1172,4 +1173,67 @@ interface ComicDao {
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insertIssueOwnershipForRestore(items: List<IssueOwnership>)
+
+
+    // Scheduled releases
+
+    @Upsert
+    suspend fun upsertScheduledReleases(
+        releases: List<ScheduledReleaseEntity>
+    )
+
+
+    @Query("""
+        SELECT *
+        FROM scheduled_releases
+        WHERE providerId = :providerId
+            AND storeReleaseDate IS NOT NULL
+            AND storeReleaseDate >= :fromDate
+            AND storeReleaseDate <= :toDate
+        ORDER BY
+            storeReleaseDate ASC,
+            seriesTitleSnapshot COLLATE NOCASE ASC,
+            issueNumberSnapshot ASC
+    """)
+    suspend fun getScheduledReleasesInRange(
+        providerId: String,
+        fromDate: String,
+        toDate: String
+    ): List<ScheduledReleaseEntity>
+
+    @Query("""
+        SELECT *
+        FROM scheduled_releases
+        WHERE providerId = :providerId
+            AND externalSeriesId = :externalSeriesId
+        ORDER BY
+            storeReleaseDate ASC,
+            issueNumberSnapshot ASC
+    """)
+    suspend fun getScheduledReleasesForExternalSeries(
+        providerId: String,
+        externalSeriesId: String
+    ): List<ScheduledReleaseEntity>
+
+
+    @Query("""
+        SELECT *
+        FROM scheduled_releases
+        WHERE providerId = :providerId
+            AND externalIssueId = :externalIssueId
+        LIMIT 1
+    """)
+    suspend fun getScheduledRelease(
+        providerId: String,
+        externalIssueId: String
+    ): ScheduledReleaseEntity?
+
+    @Query("""
+        SELECT COUNT(*)
+        FROM scheduled_releases
+        WHERE providerId = :providerId
+    """)
+    suspend fun getScheduledReleaseCount(
+        providerId: String
+    ): Int
 }

@@ -78,6 +78,8 @@ import com.aschlus.comicreadingcompanion.ui.viewmodel.ImportReadingListViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ImportReadingListViewModelFactory
 import com.aschlus.comicreadingcompanion.ui.viewmodel.IssueDetailViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.IssueDetailViewModelFactory
+import com.aschlus.comicreadingcompanion.ui.viewmodel.MetronSettingsViewModel
+import com.aschlus.comicreadingcompanion.ui.viewmodel.MetronSettingsViewModelFactory
 import com.aschlus.comicreadingcompanion.ui.viewmodel.PublisherDetailViewModel
 import com.aschlus.comicreadingcompanion.ui.viewmodel.PublisherDetailViewModelFactory
 import com.aschlus.comicreadingcompanion.ui.viewmodel.ReadingListDetailViewModel
@@ -547,8 +549,17 @@ class MainActivity : ComponentActivity() {
                                     )
                                 )
 
+                            val metronSettingsViewModel: MetronSettingsViewModel =
+                                viewModel(
+                                    factory = MetronSettingsViewModelFactory(
+                                        tokenStore = container.metronApiTokenStore,
+                                        apiClient = container.metronApiClient
+                                    )
+                                )
+
                             SettingsScreen(
                                 viewModel = settingsViewModel,
+                                metronViewModel = metronSettingsViewModel,
                                 onBackClick = safeNavigateBack,
                                 onSearchSeriesClick = {
                                     navController.navigate("comicVineVolumeSearch")

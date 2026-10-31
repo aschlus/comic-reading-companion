@@ -169,6 +169,51 @@ building, following, and tracking comic-book reading orders.
 > third-party reading-history synchronization. The app should not depend on
 > scraping or private Marvel APIs.
 
+### Pull List and Release Planning
+
+**Milestone 1 — Release-Data Foundation**
+
+- [x] Evaluate Metron as the primary release-data provider
+- [x] Define a provider interface so additional release sources can be added later
+- [x] Securely store user-provided release-provider credentials using Android Keystore-backed encryption
+- [x] Exclude release-provider credentials from app backups
+- [x] Define local data models for scheduled releases, including store-release date, FOC date, source identifiers, and last-verified timestamp
+- [ ] Cache release data locally and support incremental refreshes
+- [ ] Match upcoming releases to existing catalog records using external identifiers first
+- [x] Support upcoming releases that do not yet have a local Comic Vine issue record
+- [ ] Handle ambiguous matches, changed dates, delayed releases, and canceled releases
+- [ ] Preserve source attribution and comply with provider data licenses and terms
+
+**Milestone 2 — Personal Pull List and Upcoming Releases**
+
+- [ ] Create a dedicated Pull List screen
+- [ ] Add and remove ongoing series from the personal pull list
+- [ ] Support explicitly tracking individual issues, one-shots, and special releases
+- [ ] Display upcoming releases grouped by scheduled store-release date
+- [ ] Display scheduled FOC deadlines separately from store-release dates
+- [ ] Show issue details, publisher, scheduled date, and price when available
+- [ ] Highlight upcoming releases associated with the personal pull list
+- [ ] Show release-data freshness and the source of scheduled dates
+
+**Milestone 3 — Store-Pickup Workflow**
+
+- [ ] Add a "Since Your Last Pickup" view
+- [ ] Record a pickup checkpoint to identify newly due releases
+- [ ] Track pickup status: To Collect, Picked Up, Not Available, and Skipped
+- [ ] Carry outstanding and unavailable releases forward to subsequent trips
+- [ ] Preserve pickup status when release dates change
+- [ ] Mark matched issues as owned when picked up
+- [ ] Keep release scheduling, pickup status, reading progress, and collection ownership distinct
+- [ ] Test pickup checkpoints, outstanding items, and ownership updates
+
+**Milestone 4 — Release-Data Coverage and Corrections**
+
+- [ ] Support importing distributor release data from CSV or Excel files
+- [ ] Allow manual creation and correction of release records
+- [ ] Allow review and resolution of conflicting release dates
+- [ ] Support supplemental release providers without coupling the UI to a specific service
+- [ ] Test release imports, matching, refreshes, date changes, and duplicate detection
+
 ### Comic Print Visual Design System
 
 - [x] Replace starter Material palette with the Comic Print color system
