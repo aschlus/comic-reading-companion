@@ -529,6 +529,93 @@ class ComicRepository(
                         )
                     }
             }
+
+            reconcileScheduledReleasesForSeries(
+                seriesId = seriesId
+            )
+        }
+    }
+
+    private suspend fun reconcileScheduledReleasesForSeries(
+        seriesId: Long
+    ) {
+        val metronSeriesLink =
+            comicDao.getSeriesExternalIdsForSeries(seriesId)
+                .firstOrNull { it.source == "METRON" }
+                ?: return
+
+        val scheduledReleases =
+            comicDao.getScheduledReleasesForExternalSeries(
+                providerId = metronSeriesLink.source,
+                externalSeriesId = metronSeriesLink.externalId
+            )
+
+        if (scheduledReleases.isEmpty()) {
+            return
+        }
+
+        val localIssues =
+            comicDao.getIssuesForSeries(seriesId)
+
+        val localIssueIds =
+            localIssues.map { it.id }.toSet()
+
+        scheduledReleases.forEach { release ->
+
+            val existingExternalId =
+                comicDao.getExternalId(
+                    source = metronSeriesLink.source,
+                    externalId = release.externalIssueId
+                )
+
+            if (existingExternalId != null) {
+
+                if (existingExternalId.issueId in localIssueIds) {
+                    val updatedUrl =
+                        release.sourceUrl
+                            ?.takeIf { it.isNotBlank() }
+
+                    if (
+                        updatedUrl != null &&
+                        updatedUrl != existingExternalId.url
+                    ) {
+                        comicDao.updateExternalId(
+                            existingExternalId.copy(
+                                url = updatedUrl
+                            )
+                        )
+                    }
+                }
+
+                return@forEach
+            }
+
+            val releaseIssueNumber =
+                release.issueNumberSnapshot
+                    ?.trim()
+                    ?.takeIf { it.isNotEmpty() }
+                    ?: return@forEach
+
+            val matchingIssues =
+                localIssues.filter { issue ->
+                    issue.issueNumber.trim().equals(
+                        releaseIssueNumber,
+                        ignoreCase = true
+                    )
+                }
+
+            if (matchingIssues.size != 1) {
+                return@forEach
+            }
+
+            comicDao.insertExternalId(
+                ExternalId(
+                    issueId = matchingIssues.single().id,
+                    source = metronSeriesLink.source,
+                    externalId = release.externalIssueId,
+                    url = release.sourceUrl
+                )
+            )
         }
     }
 

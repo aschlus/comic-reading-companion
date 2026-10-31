@@ -3,4 +3,7 @@
     <exclude
         domain="file"
         path="datastore/comic_vine_api_key.preferences_pb" />
+    <exclude
+        domain="file"
+        path="datastore/metron_api_token.preferences_pb" />
 </full-backup-content>

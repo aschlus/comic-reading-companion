@@ -1696,4 +1696,178 @@ class ComicDatabaseMigrationTest {
             migrated.close()
         }
 
+    @Test
+    fun migration7To8_createsScheduledReleaseStorageAndPreservesData() =
+        runBlocking {
+            val original = migrationHelper.createDatabase(7)
+
+            original.execSQL(
+                """
+            INSERT INTO publishers (
+                id,
+                name
+            )
+            VALUES (
+                1,
+                'Marvel Comics'
+            )
+            """.trimIndent()
+            )
+
+            original.close()
+
+            val migrated =
+                migrationHelper.runMigrationsAndValidate(
+                    version = 8,
+                    migrations = listOf(
+                        MIGRATION_7_8
+                    )
+                )
+
+            assertEquals(
+                1L,
+                queryLong(
+                    migrated,
+                    """
+                SELECT COUNT(*)
+                FROM publishers
+                WHERE id = 1
+                    AND name = 'Marvel Comics'
+                """.trimIndent()
+                )
+            )
+
+            assertEquals(
+                1L,
+                queryLong(
+                    migrated,
+                    """
+                SELECT COUNT(*)
+                FROM sqlite_master
+                WHERE type = 'table'
+                    AND name = 'scheduled_releases'
+                """.trimIndent()
+                )
+            )
+
+            assertEquals(
+                1L,
+                queryLong(
+                    migrated,
+                    """
+                SELECT COUNT(*)
+                FROM sqlite_master
+                WHERE type = 'index'
+                    AND name =
+                        'index_scheduled_releases_storeReleaseDate'
+                """.trimIndent()
+                )
+            )
+
+            assertEquals(
+                1L,
+                queryLong(
+                    migrated,
+                    """
+                SELECT COUNT(*)
+                FROM sqlite_master
+                WHERE type = 'index'
+                    AND name =
+                        'index_scheduled_releases_focDate'
+                """.trimIndent()
+                )
+            )
+
+            assertEquals(
+                1L,
+                queryLong(
+                    migrated,
+                    """
+                SELECT COUNT(*)
+                FROM sqlite_master
+                WHERE type = 'index'
+                    AND name =
+                        'index_scheduled_releases_seriesTitleSnapshot'
+                """.trimIndent()
+                )
+            )
+
+            assertEquals(
+                1L,
+                queryLong(
+                    migrated,
+                    """
+                SELECT COUNT(*)
+                FROM sqlite_master
+                WHERE type = 'index'
+                    AND name =
+                        'index_scheduled_releases_externalSeriesId'
+                """.trimIndent()
+                )
+            )
+
+            migrated.execSQL(
+                """
+            INSERT INTO scheduled_releases (
+                providerId,
+                externalIssueId,
+                externalSeriesId,
+                seriesTitleSnapshot,
+                lastSyncedAt
+            )
+            VALUES (
+                'METRON',
+                '123',
+                '500',
+                'Amazing Spider-Man',
+                1000
+            )
+            """.trimIndent()
+            )
+
+            migrated.execSQL(
+                """
+            INSERT OR IGNORE INTO scheduled_releases (
+                providerId,
+                externalIssueId,
+                externalSeriesId,
+                seriesTitleSnapshot,
+                lastSyncedAt
+            )
+            VALUES (
+                'METRON',
+                '123',
+                '500',
+                'Duplicate Release',
+                2000
+            )
+            """.trimIndent()
+            )
+
+            assertEquals(
+                1L,
+                queryLong(
+                    migrated,
+                    """
+                SELECT COUNT(*)
+                FROM scheduled_releases
+                WHERE providerId = 'METRON'
+                    AND externalIssueId = '123'
+                """.trimIndent()
+                )
+            )
+
+            migrated.close()
+        }
+
+    private fun queryLong(
+        connection: SQLiteConnection,
+        sql: String
+    ): Long {
+        return connection.prepare(sql).use { statement ->
+            assertTrue(statement.step())
+            statement.getLong(0)
+        }
+    }
+
 }

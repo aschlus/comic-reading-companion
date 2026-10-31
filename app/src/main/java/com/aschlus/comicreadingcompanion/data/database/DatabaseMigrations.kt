@@ -222,3 +222,75 @@ val MIGRATION_6_7 =
             )
         }
     }
+
+
+val MIGRATION_7_8 =
+    object : Migration(
+        startVersion = 7,
+        endVersion = 8
+    ) {
+        override suspend fun migrate(
+            connection: SQLiteConnection
+        ) {
+            connection.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS scheduled_releases (
+                    providerId TEXT NOT NULL,
+                    externalIssueId TEXT NOT NULL,
+                    externalSeriesId TEXT NOT NULL,
+                    seriesTitleSnapshot TEXT NOT NULL,
+                    seriesVolumeSnapshot INTEGER,
+                    seriesStartYearSnapshot INTEGER,
+                    publisherNameSnapshot TEXT,
+                    issueNumberSnapshot TEXT,
+                    displayTitleSnapshot TEXT,
+                    coverDate TEXT,
+                    storeReleaseDate TEXT,
+                    focDate TEXT,
+                    price TEXT,
+                    priceCurrency TEXT,
+                    distributorSku TEXT,
+                    upc TEXT,
+                    comicVineId TEXT,
+                    gcdId TEXT,
+                    sourceUrl TEXT,
+                    sourceModifiedAt TEXT,
+                    lastSyncedAt INTEGER NOT NULL,
+                    PRIMARY KEY(providerId, externalIssueId)
+                )
+                """.trimIndent()
+            )
+
+            connection.execSQL(
+                """
+                CREATE INDEX IF NOT EXISTS
+                    index_scheduled_releases_externalSeriesId
+                ON scheduled_releases(externalSeriesId)
+                """.trimIndent()
+            )
+
+            connection.execSQL(
+                """
+                CREATE INDEX IF NOT EXISTS
+                    index_scheduled_releases_storeReleaseDate
+                ON scheduled_releases(storeReleaseDate)
+                """.trimIndent()
+            )
+
+            connection.execSQL(
+                """
+                CREATE INDEX IF NOT EXISTS
+                    index_scheduled_releases_focDate
+                ON scheduled_releases(focDate)
+                """.trimIndent()
+            )
+
+            connection.execSQL(
+                """
+                CREATE INDEX IF NOT EXISTS
+                    index_scheduled_releases_seriesTitleSnapshot
+                ON scheduled_releases(seriesTitleSnapshot)
+                """.trimIndent()
+            )
+        }
+    }
