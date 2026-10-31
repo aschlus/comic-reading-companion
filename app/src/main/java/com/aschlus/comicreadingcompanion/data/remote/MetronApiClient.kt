@@ -311,6 +311,65 @@ class MetronApiClient(
         }
     }
 
+    override suspend fun getSeriesDetails(
+        accessToken: String,
+        externalSeriesId: String
+    ): ReleaseProviderResult<ReleaseSeriesData> {
+
+        val id = externalSeriesId.toLongOrNull()
+
+        if (id == null || id <= 0L) {
+            return ReleaseProviderResult.ServiceError(
+                "The Metron series ID is invalid."
+            )
+        }
+
+        val url = "$API_BASE_URL/series/$id/"
+
+        return when (val result = request(url, accessToken)) {
+
+            is ReleaseProviderResult.Success -> {
+
+                val series = try {
+                    json.decodeFromString<MetronSeriesDetailDto>(
+                        result.value.body
+                    )
+                } catch (_: SerializationException) {
+                    return ReleaseProviderResult.ServiceError(
+                        "Metron returned an unexpected series-detail response."
+                    )
+                } catch (_: IllegalArgumentException) {
+                    return ReleaseProviderResult.ServiceError(
+                        "Metron returned an unexpected series-detail response."
+                    )
+                }
+
+                if (series.id != id) {
+                    return ReleaseProviderResult.ServiceError(
+                        "Metron returned a different series than requested."
+                    )
+                }
+
+                ReleaseProviderResult.Success(
+                    ReleaseSeriesData(
+                        providerId = providerId,
+                        externalSeriesId = id.toString(),
+                        comicVineId = series.comicVineId
+                            ?.takeIf { it > 0L }
+                            ?.toString(),
+                        gcdId = series.gcdId
+                            ?.takeIf { it > 0L }
+                            ?.toString(),
+                        sourceUrl = series.resourceUrl,
+                        sourceModifiedAt = series.modified
+                    )
+                )
+            }
+
+            else -> result.failureAs()
+        }
+    }
+
     private suspend fun request(
         url: String,
         accessToken: String
@@ -499,6 +558,22 @@ private data class MetronSeriesDto(
     val yearBegan: Int? = null,
 
     val publisher: MetronPublisherDto? = null
+)
+
+@Serializable
+private data class MetronSeriesDetailDto(
+    val id: Long? = null,
+
+    @SerialName("cv_id")
+    val comicVineId: Long? = null,
+
+    @SerialName("gcd_id")
+    val gcdId: Long? = null,
+
+    @SerialName("resource_url")
+    val resourceUrl: String? = null,
+
+    val modified: String? = null
 )
 
 @Serializable

@@ -20,6 +20,15 @@ interface ReleaseDataProvider {
         accessToken: String,
         externalIssueId: String
     ): ReleaseProviderResult<ScheduledReleaseData>
+
+    suspend fun getSeriesDetails(
+        accessToken: String,
+        externalSeriesId: String
+    ): ReleaseProviderResult<ReleaseSeriesData> {
+        return ReleaseProviderResult.ServiceError(
+            "This provider does not support series metadata lookup."
+        )
+    }
 }
 
 data class ScheduledReleaseData(
@@ -39,6 +48,15 @@ data class ScheduledReleaseData(
     val priceCurrency: String?,
     val distributorSku: String?,
     val upc: String?,
+    val comicVineId: String?,
+    val gcdId: String?,
+    val sourceUrl: String?,
+    val sourceModifiedAt: String?
+)
+
+data class ReleaseSeriesData(
+    val providerId: String,
+    val externalSeriesId: String,
     val comicVineId: String?,
     val gcdId: String?,
     val sourceUrl: String?,
