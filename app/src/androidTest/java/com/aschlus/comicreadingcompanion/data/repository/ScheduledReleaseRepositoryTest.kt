@@ -1,4 +1,3 @@
-
 package com.aschlus.comicreadingcompanion.data.repository
 
 import android.content.Context
@@ -6,15 +5,19 @@ import androidx.room3.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.aschlus.comicreadingcompanion.data.database.ComicDatabase
+import com.aschlus.comicreadingcompanion.data.database.ComicDao
 import com.aschlus.comicreadingcompanion.data.database.entities.ExternalId
 import com.aschlus.comicreadingcompanion.data.database.entities.Issue
 import com.aschlus.comicreadingcompanion.data.database.entities.IssueType
 import com.aschlus.comicreadingcompanion.data.database.entities.Publisher
+import com.aschlus.comicreadingcompanion.data.database.entities.PullListSeriesEntity
 import com.aschlus.comicreadingcompanion.data.database.entities.Series
 import com.aschlus.comicreadingcompanion.data.database.entities.SeriesExternalId
 import com.aschlus.comicreadingcompanion.data.remote.ReleaseDataProvider
 import com.aschlus.comicreadingcompanion.data.remote.ReleaseProviderResult
+import com.aschlus.comicreadingcompanion.data.remote.ReleaseSeriesData
 import com.aschlus.comicreadingcompanion.data.remote.ScheduledReleaseData
+import java.time.Instant
 import java.time.LocalDate
 import kotlinx.coroutines.runBlocking
 import org.junit.After
@@ -30,9 +33,7 @@ import org.junit.runner.RunWith
 class ScheduledReleaseRepositoryTest {
 
     private lateinit var database: ComicDatabase
-
-    private lateinit var comicDao:
-        com.aschlus.comicreadingcompanion.data.database.ComicDao
+    private lateinit var comicDao: ComicDao
 
     @Before
     fun setUp() {
@@ -56,123 +57,138 @@ class ScheduledReleaseRepositoryTest {
     }
 
     @Test
-    fun syncScheduledReleases_persistsProviderSnapshots() = runBlocking {
-        val release =
-            createRelease(
-                externalIssueId = "metron-100",
-                externalSeriesId = "metron-series-10",
-                seriesTitle = "Amazing Spider-Man",
-                issueNumber = "1"
-            )
+    fun syncScheduledReleases_persistsProviderSnapshots() =
+        runBlocking {
 
-        val repository =
-            createRepository(
-                result = ReleaseProviderResult.Success(
-                    listOf(release)
+            val seriesId =
+                createLocalSeries(
+                    title = "Amazing Spider-Man",
+                    volume = 2,
+                    startYear = 1999
                 )
+
+            trackSeries(
+                seriesId = seriesId,
+                externalSeriesId = "metron-series-10"
             )
 
-        val result =
-            repository.syncScheduledReleases(
-                accessToken = "test-token",
-                fromDate = LocalDate.parse("2026-10-01"),
-                toDate = LocalDate.parse("2026-10-31")
+            val release =
+                createRelease(
+                    externalIssueId = "metron-100",
+                    externalSeriesId = "metron-series-10",
+                    seriesTitle = "Amazing Spider-Man",
+                    issueNumber = "1"
+                )
+
+            val repository =
+                createRepository(
+                    result = ReleaseProviderResult.Success(
+                        listOf(release)
+                    )
+                )
+
+            val result =
+                repository.syncScheduledReleases(
+                    accessToken = "test-token",
+                    fromDate = LocalDate.parse("2026-10-01"),
+                    toDate = LocalDate.parse("2026-10-31")
+                )
+
+            assertTrue(result is ReleaseProviderResult.Success)
+
+            val summary =
+                (result as ReleaseProviderResult.Success).value
+
+            assertEquals(1, summary.fetchedCount)
+            assertEquals(0, summary.linkedCount)
+            assertEquals(0, summary.alreadyLinkedCount)
+            assertEquals(1, summary.unmatchedCount)
+            assertEquals(0, summary.ambiguousMatchCount)
+            assertEquals(0, summary.conflictingExternalIdCount)
+
+            val savedRelease =
+                comicDao.getScheduledRelease(
+                    providerId = "METRON",
+                    externalIssueId = "metron-100"
+                )
+
+            assertNotNull(savedRelease)
+
+            assertEquals(
+                "metron-series-10",
+                savedRelease?.externalSeriesId
             )
 
-        assertTrue(result is ReleaseProviderResult.Success)
-
-        val summary =
-            (result as ReleaseProviderResult.Success).value
-
-        assertEquals(1, summary.fetchedCount)
-        assertEquals(0, summary.linkedCount)
-        assertEquals(0, summary.alreadyLinkedCount)
-        assertEquals(1, summary.unmatchedCount)
-        assertEquals(0, summary.ambiguousMatchCount)
-        assertEquals(0, summary.conflictingExternalIdCount)
-
-        val savedRelease =
-            comicDao.getScheduledRelease(
-                providerId = "METRON",
-                externalIssueId = "metron-100"
+            assertEquals(
+                "Amazing Spider-Man",
+                savedRelease?.seriesTitleSnapshot
             )
 
-        assertNotNull(savedRelease)
+            assertEquals(
+                2,
+                savedRelease?.seriesVolumeSnapshot
+            )
 
-        assertEquals(
-            "metron-series-10",
-            savedRelease?.externalSeriesId
-        )
+            assertEquals(
+                1999,
+                savedRelease?.seriesStartYearSnapshot
+            )
 
-        assertEquals(
-            "Amazing Spider-Man",
-            savedRelease?.seriesTitleSnapshot
-        )
+            assertEquals(
+                "Marvel",
+                savedRelease?.publisherNameSnapshot
+            )
 
-        assertEquals(
-            2,
-            savedRelease?.seriesVolumeSnapshot
-        )
+            assertEquals(
+                "1",
+                savedRelease?.issueNumberSnapshot
+            )
 
-        assertEquals(
-            1999,
-            savedRelease?.seriesStartYearSnapshot
-        )
+            assertEquals(
+                "Coming Home",
+                savedRelease?.displayTitleSnapshot
+            )
 
-        assertEquals(
-            "Marvel",
-            savedRelease?.publisherNameSnapshot
-        )
+            assertEquals(
+                "2026-10-21",
+                savedRelease?.storeReleaseDate
+            )
 
-        assertEquals(
-            "1",
-            savedRelease?.issueNumberSnapshot
-        )
+            assertEquals(
+                "2026-10-06",
+                savedRelease?.focDate
+            )
 
-        assertEquals(
-            "Coming Home",
-            savedRelease?.displayTitleSnapshot
-        )
+            assertEquals(
+                "4.99",
+                savedRelease?.price
+            )
 
-        assertEquals(
-            "2026-10-21",
-            savedRelease?.storeReleaseDate
-        )
+            assertEquals(
+                "USD",
+                savedRelease?.priceCurrency
+            )
 
-        assertEquals(
-            "2026-10-06",
-            savedRelease?.focDate
-        )
+            assertEquals(
+                "METRON-SKU-100",
+                savedRelease?.distributorSku
+            )
 
-        assertEquals(
-            "4.99",
-            savedRelease?.price
-        )
+            assertEquals(
+                "1234567890123",
+                savedRelease?.upc
+            )
 
-        assertEquals(
-            "USD",
-            savedRelease?.priceCurrency
-        )
-
-        assertEquals(
-            "METRON-SKU-100",
-            savedRelease?.distributorSku
-        )
-
-        assertEquals(
-            "1234567890123",
-            savedRelease?.upc
-        )
-
-        assertEquals(
-            123456L,
-            savedRelease?.lastSyncedAt
-        )
-    }
+            assertEquals(
+                123456L,
+                savedRelease?.lastSyncedAt
+            )
+        }
 
     @Test
     fun syncScheduledReleases_linksUniqueIssueNumberToMappedSeries() =
         runBlocking {
+
             val seriesId =
                 createLocalSeries(
                     title = "Amazing Spider-Man",
@@ -187,13 +203,9 @@ class ScheduledReleaseRepositoryTest {
                     title = "Coming Home"
                 )
 
-            comicDao.insertSeriesExternalId(
-                SeriesExternalId(
-                    seriesId = seriesId,
-                    source = "METRON",
-                    externalId = "metron-series-10",
-                    url = "https://metron.cloud/series/10/"
-                )
+            trackSeries(
+                seriesId = seriesId,
+                externalSeriesId = "metron-series-10"
             )
 
             val repository =
@@ -245,6 +257,7 @@ class ScheduledReleaseRepositoryTest {
     @Test
     fun syncScheduledReleases_doesNotLinkAmbiguousIssueNumbers() =
         runBlocking {
+
             val seriesId =
                 createLocalSeries(
                     title = "Amazing Spider-Man",
@@ -264,13 +277,9 @@ class ScheduledReleaseRepositoryTest {
                 title = "Variant edition"
             )
 
-            comicDao.insertSeriesExternalId(
-                SeriesExternalId(
-                    seriesId = seriesId,
-                    source = "METRON",
-                    externalId = "metron-series-10",
-                    url = null
-                )
+            trackSeries(
+                seriesId = seriesId,
+                externalSeriesId = "metron-series-10"
             )
 
             val repository =
@@ -313,6 +322,7 @@ class ScheduledReleaseRepositoryTest {
     @Test
     fun syncScheduledReleases_doesNotOverwriteConflictingExternalId() =
         runBlocking {
+
             val mappedSeriesId =
                 createLocalSeries(
                     title = "Amazing Spider-Man",
@@ -340,13 +350,9 @@ class ScheduledReleaseRepositoryTest {
                     title = "Already linked elsewhere"
                 )
 
-            comicDao.insertSeriesExternalId(
-                SeriesExternalId(
-                    seriesId = mappedSeriesId,
-                    source = "METRON",
-                    externalId = "metron-series-10",
-                    url = null
-                )
+            trackSeries(
+                seriesId = mappedSeriesId,
+                externalSeriesId = "metron-series-10"
             )
 
             comicDao.insertExternalId(
@@ -400,6 +406,7 @@ class ScheduledReleaseRepositoryTest {
     @Test
     fun syncScheduledReleases_recognizesExistingLinkAndUpdatesUrl() =
         runBlocking {
+
             val seriesId =
                 createLocalSeries(
                     title = "Amazing Spider-Man",
@@ -414,13 +421,9 @@ class ScheduledReleaseRepositoryTest {
                     title = "Coming Home"
                 )
 
-            comicDao.insertSeriesExternalId(
-                SeriesExternalId(
-                    seriesId = seriesId,
-                    source = "METRON",
-                    externalId = "metron-series-10",
-                    url = null
-                )
+            trackSeries(
+                seriesId = seriesId,
+                externalSeriesId = "metron-series-10"
             )
 
             comicDao.insertExternalId(
@@ -440,7 +443,8 @@ class ScheduledReleaseRepositoryTest {
                                 externalIssueId = "metron-issue-30",
                                 externalSeriesId = "metron-series-10",
                                 issueNumber = "30",
-                                sourceUrl = "https://metron.cloud/issue/30/"
+                                sourceUrl =
+                                    "https://metron.cloud/issue/30/"
                             )
                         )
                     )
@@ -465,6 +469,7 @@ class ScheduledReleaseRepositoryTest {
                 comicDao.getExternalIdsForIssue(issueId)
 
             assertEquals(1, externalIds.size)
+
             assertEquals(
                 "https://metron.cloud/issue/30/",
                 externalIds.single().url
@@ -474,6 +479,19 @@ class ScheduledReleaseRepositoryTest {
     @Test
     fun syncScheduledReleases_doesNotWriteWhenProviderFails() =
         runBlocking {
+
+            val seriesId =
+                createLocalSeries(
+                    title = "Amazing Spider-Man",
+                    volume = 2,
+                    startYear = 1999
+                )
+
+            trackSeries(
+                seriesId = seriesId,
+                externalSeriesId = "metron-series-10"
+            )
+
             val repository =
                 createRepository(
                     result = ReleaseProviderResult.RateLimited(
@@ -498,13 +516,282 @@ class ScheduledReleaseRepositoryTest {
             )
         }
 
+    @Test
+    fun syncScheduledReleases_resolvesAndCachesMetronSeriesByComicVineId() =
+        runBlocking {
+
+            val seriesId =
+                createLocalSeries(
+                    title = "Amazing Spider-Man",
+                    volume = 2,
+                    startYear = 1999
+                )
+
+            val issueId =
+                createLocalIssue(
+                    seriesId = seriesId,
+                    issueNumber = "30",
+                    title = "Coming Home"
+                )
+
+            comicDao.insertSeriesExternalId(
+                SeriesExternalId(
+                    seriesId = seriesId,
+                    source = "COMIC_VINE",
+                    externalId = "18693",
+                    url = null
+                )
+            )
+
+            comicDao.insertPullListSeries(
+                PullListSeriesEntity(
+                    seriesId = seriesId,
+                    addedAt = 100L
+                )
+            )
+
+            val requestedMetronSeriesIds =
+                mutableListOf<String>()
+
+            val repository =
+                createRepository(
+                    result = ReleaseProviderResult.Success(
+                        listOf(
+                            createRelease(
+                                externalIssueId = "metron-issue-123",
+                                externalSeriesId = "45",
+                                issueNumber = "30"
+                            )
+                        )
+                    ),
+                    comicVineLookupResult =
+                        ReleaseProviderResult.Success(
+                            listOf(
+                                ReleaseSeriesData(
+                                    providerId = "METRON",
+                                    externalSeriesId = "45",
+                                    comicVineId = "18693",
+                                    gcdId = "621",
+                                    sourceUrl =
+                                        "https://metron.cloud/series/45/",
+                                    sourceModifiedAt =
+                                        "2026-10-30T12:00:00Z",
+                                    seriesTitle =
+                                        "Amazing Spider-Man (1999)",
+                                    seriesVolume = 2,
+                                    seriesStartYear = 1999,
+                                    publisherName = "Marvel Comics"
+                                )
+                            )
+                        ),
+                    requestedSeriesIds = requestedMetronSeriesIds
+                )
+
+            val result =
+                repository.syncScheduledReleases(
+                    accessToken = "test-token",
+                    fromDate = LocalDate.parse("2026-10-01"),
+                    toDate = LocalDate.parse("2026-10-31")
+                )
+
+            assertTrue(result is ReleaseProviderResult.Success)
+
+            val summary =
+                (result as ReleaseProviderResult.Success).value
+
+            assertEquals(1, summary.fetchedCount)
+            assertEquals(1, summary.linkedCount)
+            assertEquals(0, summary.alreadyLinkedCount)
+            assertEquals(0, summary.unmatchedCount)
+
+            assertEquals(
+                listOf("45"),
+                requestedMetronSeriesIds
+            )
+
+            val metronLink =
+                comicDao.getSeriesExternalId(
+                    source = "METRON",
+                    externalId = "45"
+                )
+
+            assertNotNull(metronLink)
+
+            assertEquals(
+                seriesId,
+                metronLink?.seriesId
+            )
+
+            assertEquals(
+                issueId,
+                comicDao.getExternalId(
+                    source = "METRON",
+                    externalId = "metron-issue-123"
+                )?.issueId
+            )
+
+            val metadata =
+                comicDao.getReleaseSeriesMetadata(
+                    providerId = "METRON",
+                    externalSeriesId = "45"
+                )
+
+            assertNotNull(metadata)
+
+            assertEquals(
+                "18693",
+                metadata?.comicVineId
+            )
+
+            assertEquals(
+                "621",
+                metadata?.gcdId
+            )
+        }
+
+    @Test
+    fun syncScheduledReleases_resolvesSeriesByNameWhenComicVineIdIsMissing() =
+        runBlocking {
+
+            val seriesId =
+                createLocalSeries(
+                    title = "Amazing Spider-Man",
+                    volume = 2,
+                    startYear = 1999
+                )
+
+            val issueId =
+                createLocalIssue(
+                    seriesId = seriesId,
+                    issueNumber = "30",
+                    title = "Coming Home"
+                )
+
+            comicDao.insertPullListSeries(
+                PullListSeriesEntity(
+                    seriesId = seriesId,
+                    addedAt = 100L
+                )
+            )
+
+            val requestedMetronSeriesIds =
+                mutableListOf<String>()
+
+            val repository =
+                createRepository(
+                    result = ReleaseProviderResult.Success(
+                        listOf(
+                            createRelease(
+                                externalIssueId = "metron-issue-456",
+                                externalSeriesId = "45",
+                                issueNumber = "30"
+                            )
+                        )
+                    ),
+                    seriesNameLookupResult =
+                        ReleaseProviderResult.Success(
+                            listOf(
+                                ReleaseSeriesData(
+                                    providerId = "METRON",
+                                    externalSeriesId = "45",
+                                    comicVineId = null,
+                                    gcdId = "621",
+                                    sourceUrl =
+                                        "https://metron.cloud/series/45/",
+                                    sourceModifiedAt = null,
+                                    seriesTitle =
+                                        "Amazing Spider-Man (1999)",
+                                    seriesVolume = 2,
+                                    seriesStartYear = 1999,
+                                    publisherName = "Marvel Comics"
+                                )
+                            )
+                        ),
+                    requestedSeriesIds = requestedMetronSeriesIds
+                )
+
+            val result =
+                repository.syncScheduledReleases(
+                    accessToken = "test-token",
+                    fromDate = LocalDate.parse("2026-10-01"),
+                    toDate = LocalDate.parse("2026-10-31")
+                )
+
+            assertTrue(result is ReleaseProviderResult.Success)
+
+            val summary =
+                (result as ReleaseProviderResult.Success).value
+
+            assertEquals(1, summary.linkedCount)
+
+            assertEquals(
+                listOf("45"),
+                requestedMetronSeriesIds
+            )
+
+            val metronLink =
+                comicDao.getSeriesExternalId(
+                    source = "METRON",
+                    externalId = "45"
+                )
+
+            assertNotNull(metronLink)
+
+            assertEquals(
+                seriesId,
+                metronLink?.seriesId
+            )
+
+            assertEquals(
+                issueId,
+                comicDao.getExternalId(
+                    source = "METRON",
+                    externalId = "metron-issue-456"
+                )?.issueId
+            )
+        }
+
+    private suspend fun trackSeries(
+        seriesId: Long,
+        externalSeriesId: String
+    ) {
+        comicDao.insertPullListSeries(
+            PullListSeriesEntity(
+                seriesId = seriesId,
+                addedAt = 100L
+            )
+        )
+
+        comicDao.insertSeriesExternalId(
+            SeriesExternalId(
+                seriesId = seriesId,
+                source = "METRON",
+                externalId = externalSeriesId,
+                url = null
+            )
+        )
+    }
+
     private fun createRepository(
-        result: ReleaseProviderResult<List<ScheduledReleaseData>>
+        result: ReleaseProviderResult<List<ScheduledReleaseData>>,
+        comicVineLookupResult:
+        ReleaseProviderResult<List<ReleaseSeriesData>> =
+            ReleaseProviderResult.Success(emptyList()),
+        seriesNameLookupResult:
+        ReleaseProviderResult<List<ReleaseSeriesData>> =
+            ReleaseProviderResult.Success(emptyList()),
+        requestedSeriesIds: MutableList<String> = mutableListOf()
     ): ScheduledReleaseRepository {
         return ScheduledReleaseRepository(
             comicDao = comicDao,
             database = database,
-            releaseDataProvider = FakeReleaseDataProvider(result),
+            releaseDataProvider =
+                FakeReleaseDataProvider(
+                    scheduledReleasesResult = result,
+                    comicVineLookupResult = comicVineLookupResult,
+                    seriesNameLookupResult = seriesNameLookupResult,
+                    requestedSeriesIds = requestedSeriesIds
+                ),
             currentTimeMillis = { 123456L }
         )
     }
@@ -559,16 +846,19 @@ class ScheduledReleaseRepositoryTest {
         externalSeriesId: String = "metron-series-10",
         seriesTitle: String = "Amazing Spider-Man",
         issueNumber: String? = "30",
-        sourceUrl: String? = "https://metron.cloud/issue/100/"
+        sourceUrl: String? = "https://metron.cloud/issue/100/",
+        seriesVolume: Int? = 2,
+        seriesStartYear: Int? = 1999,
+        publisherName: String? = "Marvel"
     ): ScheduledReleaseData {
         return ScheduledReleaseData(
             providerId = "METRON",
             externalIssueId = externalIssueId,
             externalSeriesId = externalSeriesId,
             seriesTitle = seriesTitle,
-            seriesVolume = 2,
-            seriesStartYear = 1999,
-            publisherName = "Marvel",
+            seriesVolume = seriesVolume,
+            seriesStartYear = seriesStartYear,
+            publisherName = publisherName,
             issueNumber = issueNumber,
             displayTitle = "Coming Home",
             coverDate = "2026-10",
@@ -587,7 +877,12 @@ class ScheduledReleaseRepositoryTest {
 
     private class FakeReleaseDataProvider(
         private val scheduledReleasesResult:
-        ReleaseProviderResult<List<ScheduledReleaseData>>
+        ReleaseProviderResult<List<ScheduledReleaseData>>,
+        private val comicVineLookupResult:
+        ReleaseProviderResult<List<ReleaseSeriesData>>,
+        private val seriesNameLookupResult:
+        ReleaseProviderResult<List<ReleaseSeriesData>>,
+        private val requestedSeriesIds: MutableList<String>
     ) : ReleaseDataProvider {
 
         override val providerId: String = "METRON"
@@ -603,6 +898,33 @@ class ScheduledReleaseRepositoryTest {
             fromDate: LocalDate,
             toDate: LocalDate
         ): ReleaseProviderResult<List<ScheduledReleaseData>> {
+            return scheduledReleasesResult
+        }
+
+        override suspend fun findSeriesByComicVineId(
+            accessToken: String,
+            comicVineId: String
+        ): ReleaseProviderResult<List<ReleaseSeriesData>> {
+            return comicVineLookupResult
+        }
+
+        override suspend fun findSeriesByName(
+            accessToken: String,
+            seriesName: String
+        ): ReleaseProviderResult<List<ReleaseSeriesData>> {
+            return seriesNameLookupResult
+        }
+
+        override suspend fun getScheduledReleasesForSeries(
+            accessToken: String,
+            externalSeriesId: String,
+            fromDate: LocalDate,
+            toDate: LocalDate,
+            modifiedAfter: Instant?
+        ): ReleaseProviderResult<List<ScheduledReleaseData>> {
+
+            requestedSeriesIds += externalSeriesId
+
             return scheduledReleasesResult
         }
 

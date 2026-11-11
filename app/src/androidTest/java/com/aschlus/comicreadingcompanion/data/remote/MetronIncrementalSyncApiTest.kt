@@ -137,6 +137,78 @@ class MetronIncrementalSyncApiTest {
             )
         }
 
+    @Test
+    fun getScheduledReleases_stopsWhenPageLimitIsExceeded() =
+        runBlocking {
+
+            val firstUrl =
+                "https://metron.cloud/api/issue/" +
+                    "?store_date_range_after=2026-11-01" +
+                    "&store_date_range_before=2026-11-30"
+
+            val pageUrls =
+                (1..51).map { pageNumber ->
+                    if (pageNumber == 1) {
+                        firstUrl
+                    } else {
+                        "https://metron.cloud/api/issue/?page=$pageNumber"
+                    }
+                }
+
+            val responses =
+                pageUrls
+                    .take(50)
+                    .mapIndexed { index, url ->
+                        val nextUrl = pageUrls[index + 1]
+
+                        url to response(
+                            body = """
+                                {
+                                    "count": 51,
+                                    "next": "$nextUrl",
+                                    "previous": null,
+                                    "results": []
+                                }
+                            """.trimIndent()
+                        )
+                    }
+                    .toMap()
+
+            val transport =
+                FakeTransport(responses)
+
+            val result =
+                MetronApiClient(transport)
+                    .getScheduledReleases(
+                        accessToken = "test-token",
+                        fromDate = LocalDate.parse("2026-11-01"),
+                        toDate = LocalDate.parse("2026-11-30")
+                    )
+
+            assertTrue(
+                result is ReleaseProviderResult.ServiceError
+            )
+
+            val serviceError =
+                result as ReleaseProviderResult.ServiceError
+
+            assertEquals(
+                "Metron returned more than 50 issue-list pages. " +
+                    "Sync was stopped to prevent an unbounded request loop.",
+                serviceError.message
+            )
+
+            assertEquals(
+                50,
+                transport.requests.size
+            )
+
+            assertEquals(
+                pageUrls.take(50),
+                transport.requests.map { it.url }
+            )
+        }
+
     private fun response(
         statusCode: Int = 200,
         body: String

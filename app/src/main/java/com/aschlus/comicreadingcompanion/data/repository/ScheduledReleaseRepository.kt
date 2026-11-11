@@ -10,12 +10,16 @@ import com.aschlus.comicreadingcompanion.data.database.entities.ScheduledRelease
 import com.aschlus.comicreadingcompanion.data.database.entities.ScheduledReleaseSyncStateEntity
 import com.aschlus.comicreadingcompanion.data.database.entities.SeriesExternalId
 import com.aschlus.comicreadingcompanion.data.database.models.PullListScheduledReleaseResult
+import com.aschlus.comicreadingcompanion.data.database.models.PullListSeriesResult
 import com.aschlus.comicreadingcompanion.data.remote.ReleaseDataProvider
 import com.aschlus.comicreadingcompanion.data.remote.ReleaseProviderResult
+import com.aschlus.comicreadingcompanion.data.remote.ReleaseSeriesData
 import com.aschlus.comicreadingcompanion.data.remote.ScheduledReleaseData
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import java.time.Instant
 import java.time.LocalDate
+import java.util.Locale
 
 data class ScheduledReleaseSyncSummary(
     val fetchedCount: Int,
@@ -53,21 +57,146 @@ class ScheduledReleaseRepository(
                 Instant.ofEpochMilli(timestamp).minusSeconds(1)
             }
 
-        val providerResult =
-            releaseDataProvider.getScheduledReleases(
-                accessToken = accessToken,
-                fromDate = fromDate,
-                toDate = toDate,
-                modifiedAfter = modifiedAfter
-            )
+        val trackedSeries =
+            comicDao.getPullListSeries().first()
 
-        if (providerResult !is ReleaseProviderResult.Success) {
-            return providerResult.failureAs()
+        val fetchedReleases =
+            mutableListOf<ScheduledReleaseData>()
+
+        val resolvedMetronSeriesIds =
+            mutableSetOf<String>()
+
+        var syncFailure: ReleaseProviderResult<*>? = null
+
+        for (tracked in trackedSeries) {
+
+            val existingLinks =
+                comicDao.getSeriesExternalIdsForSeries(
+                    tracked.seriesId
+                )
+
+            val existingMetronLink =
+                existingLinks.firstOrNull {
+                    it.source == releaseDataProvider.providerId
+                }
+
+            var metronSeriesId =
+                existingMetronLink?.externalId
+
+            if (metronSeriesId == null) {
+
+                val comicVineId =
+                    existingLinks.firstOrNull {
+                        it.source == "COMIC_VINE"
+                    }?.externalId
+                        ?.trim()
+                        ?.takeIf { it.isNotEmpty() }
+
+                val lookupResult =
+                    if (comicVineId != null) {
+                        releaseDataProvider.findSeriesByComicVineId(
+                            accessToken = accessToken,
+                            comicVineId = comicVineId
+                        )
+                    } else {
+                        releaseDataProvider.findSeriesByName(
+                            accessToken = accessToken,
+                            seriesName = tracked.title
+                        )
+                    }
+
+                val candidates =
+                    when (lookupResult) {
+                        is ReleaseProviderResult.Success ->
+                            lookupResult.value
+
+                        else -> {
+                            syncFailure = lookupResult
+                            break
+                        }
+                    }
+
+                val matchingSeries =
+                    findMatchingMetronSeries(
+                        trackedSeries = tracked,
+                        candidates = candidates,
+                        comicVineId = comicVineId
+                    ) ?: continue
+
+                val existingMetronMapping =
+                    comicDao.getSeriesExternalId(
+                        source = releaseDataProvider.providerId,
+                        externalId = matchingSeries.externalSeriesId
+                    )
+
+                // Never attach a Metron series that is already assigned
+                // to a different local series.
+                if (
+                    existingMetronMapping != null &&
+                    existingMetronMapping.seriesId != tracked.seriesId
+                ) {
+                    continue
+                }
+
+                if (existingMetronMapping == null) {
+                    comicDao.insertSeriesExternalId(
+                        SeriesExternalId(
+                            seriesId = tracked.seriesId,
+                            source = releaseDataProvider.providerId,
+                            externalId = matchingSeries.externalSeriesId,
+                            url = matchingSeries.sourceUrl
+                        )
+                    )
+                }
+
+                // Retain the external metadata returned by the series lookup.
+                comicDao.upsertReleaseSeriesMetadata(
+                    listOf(
+                        ReleaseSeriesMetadataEntity(
+                            providerId = matchingSeries.providerId,
+                            externalSeriesId =
+                                matchingSeries.externalSeriesId,
+                            comicVineId = matchingSeries.comicVineId,
+                            gcdId = matchingSeries.gcdId,
+                            sourceUrl = matchingSeries.sourceUrl,
+                            sourceModifiedAt =
+                                matchingSeries.sourceModifiedAt,
+                            lastFetchedAt = currentTimeMillis()
+                        )
+                    )
+                )
+
+                metronSeriesId =
+                    matchingSeries.externalSeriesId
+            }
+
+            val resolvedSeriesId =
+                metronSeriesId ?: continue
+
+            resolvedMetronSeriesIds += resolvedSeriesId
+
+            val providerResult =
+                releaseDataProvider.getScheduledReleasesForSeries(
+                    accessToken = accessToken,
+                    externalSeriesId = resolvedSeriesId,
+                    fromDate = fromDate,
+                    toDate = toDate,
+                    modifiedAfter = modifiedAfter
+                )
+
+            when (providerResult) {
+                is ReleaseProviderResult.Success ->
+                    fetchedReleases += providerResult.value
+
+                else -> {
+                    syncFailure = providerResult
+                    break
+                }
+            }
         }
 
-        val fetchedReleases = providerResult.value
-
-        val validationError = validateReleases(fetchedReleases)
+        val validationError =
+            validateReleases(fetchedReleases)
 
         if (validationError != null) {
             return ReleaseProviderResult.ServiceError(
@@ -105,12 +234,16 @@ class ScheduledReleaseRepository(
                         } == true
             }
 
+        // Reconcile the previously cached calendar records, but only for
+        // Metron series that are actually on the user's Pull List.
         val previouslyStoredReleases =
             comicDao.getScheduledReleasesInRange(
                 providerId = releaseDataProvider.providerId,
                 fromDate = fromDate.toString(),
                 toDate = toDate.toString()
-            )
+            ).filter {
+                it.externalSeriesId in resolvedMetronSeriesIds
+            }
 
         val releasesToReconcileById =
             linkedMapOf<String, ScheduledReleaseData>()
@@ -128,20 +261,7 @@ class ScheduledReleaseRepository(
         val releasesToReconcile =
             releasesToReconcileById.values.toList()
 
-        val seriesMetadataByExternalId =
-            loadSeriesMetadata(
-                accessToken = accessToken,
-                releases = releasesToReconcile
-            )
-
         val syncedAt = currentTimeMillis()
-
-        val entities =
-            releasesToPersist.map { release ->
-                release.toEntity(
-                    lastSyncedAt = syncedAt
-                )
-            }
 
         val dateChanges =
             releasesToPersist.mapNotNull { release ->
@@ -181,7 +301,8 @@ class ScheduledReleaseRepository(
                 )
             }
 
-        var outcomes = emptyList<ReconciliationOutcome>()
+        var outcomes =
+            emptyList<ReconciliationOutcome>()
 
         database.withWriteTransaction {
 
@@ -210,35 +331,42 @@ class ScheduledReleaseRepository(
 
             comicDao.upsertScheduledReleases(entitiesToUpsert)
 
-            outcomes = releasesToReconcile.map { release ->
-                reconcileRelease(
-                    release = release,
-                    seriesMetadata = seriesMetadataByExternalId[
-                        release.externalSeriesId
-                    ]
+            outcomes =
+                releasesToReconcile.map { release ->
+                    reconcileRelease(
+                        release = release,
+                        seriesMetadata = null
+                    )
+                }
+
+            // A partial refresh may save the releases already fetched, but
+            // must not advance the cursor past series that were not checked.
+            if (syncFailure == null) {
+                val currentSyncState =
+                    comicDao.getScheduledReleaseSyncState(
+                        providerId = releaseDataProvider.providerId,
+                        fromDate = fromDate.toString(),
+                        toDate = toDate.toString()
+                    )
+
+                val lastSuccessfulSyncAt =
+                    currentSyncState?.lastSuccessfulSyncAt
+                        ?.let { maxOf(syncStartedAt, it) }
+                        ?: syncStartedAt
+
+                comicDao.upsertScheduledReleaseSyncState(
+                    ScheduledReleaseSyncStateEntity(
+                        providerId = releaseDataProvider.providerId,
+                        fromDate = fromDate.toString(),
+                        toDate = toDate.toString(),
+                        lastSuccessfulSyncAt = lastSuccessfulSyncAt
+                    )
                 )
             }
+        }
 
-            val currentSyncState =
-                comicDao.getScheduledReleaseSyncState(
-                    providerId = releaseDataProvider.providerId,
-                    fromDate = fromDate.toString(),
-                    toDate = toDate.toString()
-                )
-
-            val lastSuccessfulSyncAt =
-                currentSyncState?.lastSuccessfulSyncAt
-                    ?.let { maxOf(syncStartedAt, it) }
-                    ?: syncStartedAt
-
-            comicDao.upsertScheduledReleaseSyncState(
-                ScheduledReleaseSyncStateEntity(
-                    providerId = releaseDataProvider.providerId,
-                    fromDate = fromDate.toString(),
-                    toDate = toDate.toString(),
-                    lastSuccessfulSyncAt = lastSuccessfulSyncAt
-                )
-            )
+        if (syncFailure != null) {
+            return syncFailure.failureAs()
         }
 
         return ReleaseProviderResult.Success(
@@ -261,6 +389,87 @@ class ScheduledReleaseRepository(
                 }
             )
         )
+    }
+
+    private fun findMatchingMetronSeries(
+        trackedSeries: PullListSeriesResult,
+        candidates: List<ReleaseSeriesData>,
+        comicVineId: String?
+    ): ReleaseSeriesData? {
+
+        val distinctCandidates =
+            candidates.distinctBy {
+                it.externalSeriesId
+            }
+
+        // Comic Vine IDs are authoritative. Do not silently fall back
+        // to a title match when a local Comic Vine ID exists.
+        if (comicVineId != null) {
+            return distinctCandidates
+                .filter {
+                    it.comicVineId?.trim() == comicVineId
+                }
+                .singleOrNull()
+        }
+
+        var matches =
+            distinctCandidates.filter { candidate ->
+
+                normalizeSeriesName(candidate.seriesTitle.orEmpty()) ==
+                    normalizeSeriesName(trackedSeries.title) &&
+
+                    (
+                        trackedSeries.volume == null ||
+                            candidate.seriesVolume == null ||
+                            trackedSeries.volume == candidate.seriesVolume
+                        ) &&
+
+                    (
+                        trackedSeries.startYear == null ||
+                            candidate.seriesStartYear == null ||
+                            trackedSeries.startYear ==
+                            candidate.seriesStartYear
+                        )
+            }
+
+        if (
+            matches.size > 1 &&
+            trackedSeries.publisherName.isNotBlank()
+        ) {
+            val publisherMatches =
+                matches.filter { candidate ->
+                    normalizeSeriesName(
+                        candidate.publisherName.orEmpty()
+                    ) == normalizeSeriesName(
+                        trackedSeries.publisherName
+                    )
+                }
+
+            if (publisherMatches.isNotEmpty()) {
+                matches = publisherMatches
+            }
+        }
+
+        // Only accept an unambiguous result.
+        return matches.singleOrNull()
+    }
+
+    private fun normalizeSeriesName(value: String): String {
+        return value
+            .replace(
+                Regex("""\s*\((?:18|19|20)\d{2}\)\s*"""),
+                " "
+            )
+            .lowercase(Locale.ROOT)
+            .replace(
+                Regex("""[^\p{L}\p{N}]+"""),
+                " "
+            )
+            .trim()
+            .replace(
+                Regex("""\s+"""),
+                " "
+            )
     }
 
     suspend fun getScheduledReleasesInRange(
@@ -408,8 +617,48 @@ class ScheduledReleaseRepository(
 
         val seriesIdsToFetch = mutableListOf<String>()
 
+        // The issue endpoint returns the broad release calendar.
+// Detailed series lookups are only needed for potential matches
+// to series the user is actually tracking.
+        val pullListSeries =
+            comicDao.getPullListSeries().first()
+
         val distinctSeriesIds =
             releases
+                .filter { release ->
+                    pullListSeries.any { trackedSeries ->
+
+                        val titleMatches =
+                            release.seriesTitle.trim().equals(
+                                trackedSeries.title.trim(),
+                                ignoreCase = true
+                            )
+
+                        val publisherMatches =
+                            release.publisherName
+                                ?.trim()
+                                ?.equals(
+                                    trackedSeries.publisherName.trim(),
+                                    ignoreCase = true
+                                ) == true
+
+                        val volumeMatches =
+                            release.seriesVolume == null ||
+                                trackedSeries.volume == null ||
+                                release.seriesVolume == trackedSeries.volume
+
+                        val yearMatches =
+                            release.seriesStartYear == null ||
+                                trackedSeries.startYear == null ||
+                                release.seriesStartYear ==
+                                trackedSeries.startYear
+
+                        titleMatches &&
+                            publisherMatches &&
+                            volumeMatches &&
+                            yearMatches
+                    }
+                }
                 .map { it.externalSeriesId }
                 .distinct()
 
@@ -449,6 +698,12 @@ class ScheduledReleaseRepository(
                     accessToken = accessToken,
                     externalSeriesId = externalSeriesId
                 )
+
+            if (providerResult is ReleaseProviderResult.RateLimited) {
+                // Metadata enrichment is optional. Preserve the releases already
+                // retrieved, and stop making detail requests for this sync.
+                break
+            }
 
             if (providerResult !is ReleaseProviderResult.Success) {
                 continue
@@ -628,65 +883,9 @@ class ScheduledReleaseRepository(
                 externalId = release.externalSeriesId
             )
 
-        val comicVineLink =
-            seriesMetadata
-                ?.comicVineId
-                ?.takeIf { it.isNotBlank() }
-                ?.let { comicVineId ->
-                    comicDao.getSeriesExternalId(
-                        source = "COMIC_VINE",
-                        externalId = comicVineId
-                    )
-                }
-
-        if (existingMetronLink != null) {
-
-            if (
-                comicVineLink != null &&
-                existingMetronLink.seriesId != comicVineLink.seriesId
-            ) {
-                // Two authoritative identifiers disagree.
-                // Never silently move an existing mapping.
-                return SeriesResolution.Conflict
-            }
-
-            val updatedUrl =
-                seriesMetadata
-                    ?.sourceUrl
-                    ?.takeIf { it.isNotBlank() }
-
-            if (
-                updatedUrl != null &&
-                updatedUrl != existingMetronLink.url
-            ) {
-                comicDao.updateSeriesExternalId(
-                    existingMetronLink.copy(
-                        url = updatedUrl
-                    )
-                )
-            }
-
-            return SeriesResolution.Mapped(
-                existingMetronLink.seriesId
-            )
-        }
-
-        if (comicVineLink == null) {
-            return SeriesResolution.Unmatched
-        }
-
-        comicDao.insertSeriesExternalId(
-            SeriesExternalId(
-                seriesId = comicVineLink.seriesId,
-                source = release.providerId,
-                externalId = release.externalSeriesId,
-                url = seriesMetadata.sourceUrl
-            )
-        )
-
-        return SeriesResolution.Mapped(
-            comicVineLink.seriesId
-        )
+        return existingMetronLink?.let {
+            SeriesResolution.Mapped(it.seriesId)
+        } ?: SeriesResolution.Unmatched
     }
 
     private fun ScheduledReleaseData.toEntity(

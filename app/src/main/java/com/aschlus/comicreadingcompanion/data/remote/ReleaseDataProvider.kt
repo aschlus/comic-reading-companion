@@ -42,6 +42,39 @@ interface ReleaseDataProvider {
         )
     }
 
+    suspend fun findSeriesByComicVineId(
+        accessToken: String,
+        comicVineId: String
+    ): ReleaseProviderResult<List<ReleaseSeriesData>> {
+        return ReleaseProviderResult.ServiceError(
+            "This provider does not support Comic Vine series lookup."
+        )
+    }
+
+    suspend fun findSeriesByName(
+        accessToken: String,
+        seriesName: String
+    ): ReleaseProviderResult<List<ReleaseSeriesData>> {
+        return ReleaseProviderResult.ServiceError(
+            "This provider does not support series-name lookup."
+        )
+    }
+
+    suspend fun getScheduledReleasesForSeries(
+        accessToken: String,
+        externalSeriesId: String,
+        fromDate: LocalDate,
+        toDate: LocalDate,
+        modifiedAfter: Instant?
+    ): ReleaseProviderResult<List<ScheduledReleaseData>> {
+        return getScheduledReleases(
+            accessToken = accessToken,
+            fromDate = fromDate,
+            toDate = toDate,
+            modifiedAfter = modifiedAfter
+        )
+    }
+
     suspend fun getReleaseDetails(
         accessToken: String,
         externalIssueId: String
@@ -86,7 +119,11 @@ data class ReleaseSeriesData(
     val comicVineId: String?,
     val gcdId: String?,
     val sourceUrl: String?,
-    val sourceModifiedAt: String?
+    val sourceModifiedAt: String?,
+    val seriesTitle: String? = null,
+    val seriesVolume: Int? = null,
+    val seriesStartYear: Int? = null,
+    val publisherName: String? = null
 )
 
 data class ScheduledReleasePreview(
